@@ -1,16 +1,390 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>My New Hugo Site</title>
+    <title>Lucius&#39;s PKM</title>
     <link>https://luciuschen.github.io/</link>
-    <description>Recent content on My New Hugo Site</description>
+    <description>Recent content on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Jun 2022 17:23:12 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Jun 2022 20:05:18 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Org-roam</title>
+      <link>https://luciuschen.github.io/posts/20220505220832-org_roam/</link>
+      <pubDate>Sat, 04 Jun 2022 20:05:18 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/20220505220832-org_roam/</guid>
+      <description>Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。</p>
+<p>Org-roam 是基于 Emacs 平台，对于直接触过 Vim 的我来讲，是个全新的东西，官方是这么形容它的。</p>
+<blockquote>
+<p>Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.</p>
+<p>– Neal Stephenson, In the Beginning was the Command Line (1998)</p>
+</blockquote>
+<h2 id="install-emacs-with-homebrew">Install Emacs With Homebrew</h2>
+<p>First, Doom’s dependencies:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>brew install git ripgrep
+</span></span><span style="display:flex;"><span>brew install coreutils fd
+</span></span><span style="display:flex;"><span>xcode-selected --install
+</span></span></code></pre></div><p><a href="https://bitbucket.org/mituharu/emacs-mac/src">emacs-mac</a>. It offers good integration with macOS, native emojis and better childframe support.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>brew tap railwaycat/emacsmacport
+</span></span><span style="display:flex;"><span>brew install emacs-mac --with-modules
+</span></span><span style="display:flex;"><span>ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications/Emacs.app
+</span></span></code></pre></div><h3 id="doom-doctor-问题"><code>Doom Doctor</code> 问题</h3>
+<ol>
+<li>
+<p>Warning: unable to detect fonts because fontconfig isn&rsquo;t installed</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    brew install fontconfig
+</span></span></code></pre></div></li>
+<li>
+<p>! Couldn&rsquo;t find shellcheck. Shell script linting will not work</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    brew install shellcheck
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="doom-emacs">Doom Emacs</h2>
+<p>With Emacs and Doom&rsquo;s dependencies installed, next is to install Doom Emacs itself:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+</span></span><span style="display:flex;"><span>~/.emacs.d/bin/doom install
+</span></span></code></pre></div><p>如果提示 <code>.emacs.d</code> 已存在，删除重新执行上述命令即可。</p>
+<p><code>.zshrc</code> 中需要添加 <code>export PATH=&quot;$HOME/.emacs.d/bin:$PATH</code> ，这样就可以直接使用 <code>doom</code> 命令了。</p>
+<h2 id="org-roam">Org-roam</h2>
+<p>具体的配置文件在 <code>.doom.d/</code> 下，参见 <a href="https://github.com/LuciusChen/dotfiles/tree/master/.doom.d">.doom.d</a>。</p>
+<h2 id="shortcuts">Shortcuts</h2>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-RET</code></td>
+<td>在当前 headline 所属的内容后建立一个同级 headline</td>
+<td>无 headline 时创建一个一级 headline</td>
+</tr>
+<tr>
+<td><code>M-RET</code></td>
+<td>在当前 headline 后建立一个同级 headline</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-right</code></td>
+<td>降低当前 headline 的层级</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-left</code></td>
+<td>提高当前 headline 的层级</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-up</code></td>
+<td>将当前 headline 及其内容作为整体向上移动</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-down</code></td>
+<td>将当前 headline 及其内容作为整体向下移动</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-return</code></td>
+<td>在当前列表项的内容后建立一个同级列表项</td>
+<td>光标在列表项同一行时有效</td>
+</tr>
+<tr>
+<td><code>M-RET</code></td>
+<td>在当前列表项后建立一个同级列表项</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-right</code></td>
+<td>降低当前列表项的层级</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-left</code></td>
+<td>提高当前列表项的层级</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-up</code></td>
+<td>将当前列表项及其内容作为整体向上移动</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-down</code></td>
+<td>将当前列表项及其内容作为整体向下移动</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>C-x-o</code></td>
+<td>切换窗口</td>
+<td>C-x 中有很多操作，可以看提示。</td>
+</tr>
+<tr>
+<td><code>C-c C-c</code></td>
+<td>在创建 node 编写完毕后快速保存</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-g</code></td>
+<td>取消操作</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-x-d</code></td>
+<td>进入 dired 模式</td>
+<td></td>
+</tr>
+<tr>
+<td><code>SPC f r</code></td>
+<td>查找最近文件</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-v</code></td>
+<td>显示图片</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-c C-s</code></td>
+<td></td>
+<td>设置任务开始时间</td>
+</tr>
+<tr>
+<td><code>C-c C-d</code></td>
+<td>设置任务截止时间</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-t</code></td>
+<td>改变任务状态</td>
+<td></td>
+</tr>
+<tr>
+<td><code>S-Up/Down</code></td>
+<td>设置任务优先级 [#A], [#B], [#C]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-i</code></td>
+<td>开始任务计时</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-o</code></td>
+<td>终止任务计时</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c [</code></td>
+<td>将当前文件加入 Org-Agenda</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c ]</code></td>
+<td>将当前文件从 Org-Agenda 移除</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t</code></td>
+<td>在 Org-Agenda 的任务条目上， 修改任务状态。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-a</code></td>
+<td>归档</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-w</code></td>
+<td>activate refile</td>
+<td></td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>在 Org-Agenda 的任务条目上， 开始计时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td>在 Org-Agenda 的任务条目上， 终止计时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>在任务上添加 note</td>
+<td></td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>clock mode, 显示耗时。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="org-grammar">Org grammar</h2>
+<p>This is almost anything you need to know about Org mode syntax:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span> <span style="color:#66d9ef">* </span>This Is A Heading
+</span></span><span style="display:flex;"><span> ** This Is A Sub-Heading
+</span></span><span style="display:flex;"><span> *** And A Sub-Sub-Heading
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Paragraphs are separated by at least one empty line. <span style="font-weight:bold">*bold*</span> <span style="font-style:italic">/italic/</span> _underlined_ <span style="color:#f92672">+strikethrough+</span> <span style="color:#a6e22e">=monospaced=</span>
+</span></span><span style="display:flex;"><span> [[<span style="color:#a6e22e">http://Karl-Voit.at</span>][<span style="color:#f92672">Link description</span>]]
+</span></span><span style="display:flex;"><span> http://Karl-Voit.at → link without description
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- </span>list item
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- </span>another item
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">- </span>sub-item
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">1.</span> also enumerated
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">2.</span> if you like
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- [ ]</span> yet to be done
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- [X]</span> item which is done
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> : Simple pre-formatted text such as for source code.
+</span></span><span style="display:flex;"><span> : This also respects the line breaks. <span style="font-weight:bold">*bold*</span> is not bold here.
+</span></span></code></pre></div><p>code block</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>myresult <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;Hello Europe! &#39;</span> <span style="color:#f92672">+</span> str(myresult))
+</span></span></code></pre></div><p>table</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span> <span style="color:#e6db74">| My Column 1 | My Column 2 | Last Column |</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|-------------+-------------+-------------|</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|          42 | foo         | bar         |</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|          23 | baz         | abcdefg     |</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|-------------+-------------+-------------|</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|          65 |             |             |</span>
+</span></span></code></pre></div><h2 id="export-to-markdown">Export to Markdown</h2>
+<p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>， ~M-x org-pandoc-export-as-gfm~算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Figma</title>
+      <link>https://luciuschen.github.io/posts/20220503154744-figma/</link>
+      <pubDate>Sat, 04 Jun 2022 20:05:05 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/20220503154744-figma/</guid>
+      <description>Plugin Scale Scale any frame, it’s contents, and all effects to any defined width or height. Sankey Connect Sankey Diagram Connect. </description>
+      <content:encoded><![CDATA[<h2 id="plugin">Plugin</h2>
+<ul>
+<li><a href="https://www.figma.com/community/plugin/836326694968364056/Scale">Scale</a> Scale any frame, it’s contents, and all effects to any defined width or height.</li>
+<li><a href="https://www.figma.com/community/plugin/991975059967102509/Sankey-Connect">Sankey Connect</a> Sankey Diagram Connect.</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Build Diagram</title>
+      <link>https://luciuschen.github.io/posts/20220503145636-build_diagram/</link>
+      <pubDate>Sat, 04 Jun 2022 20:03:34 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/20220503145636-build_diagram/</guid>
+      <description>Sankey diagram 使用软件：Figma Plugin: Sankey Connect 展现数据流动的利器 案例：工作流描述 初始的思路是按照流程图来画，用 Excalidraw 插件画起来很快，但不够明晰。工作流也是处理数</description>
+      <content:encoded><![CDATA[<h2 id="sankey-diagram">Sankey diagram</h2>
+<ul>
+<li>使用软件：<a href="/posts/20220503154744-figma/">Figma</a>
+<ul>
+<li>Plugin: Sankey Connect</li>
+</ul>
+</li>
+<li>展现数据流动的利器</li>
+<li>案例：工作流描述
+<ul>
+<li>
+<p>初始的思路是按照流程图来画，用 Excalidraw 插件画起来很快，但不够明晰。工作流也是处理数据流动的过程，适合用 Sankey diagram 来展示。</p>
+</li>
+<li>
+<p>对比</p>
+<figure>
+            <img loading="lazy" src="/ox-hugo/take-notes-draft.png"
+                 alt="Figure 1: take-notes-draft"/> <figcaption>
+                    <p><!-- raw HTML omitted -->Figure 1: <!-- raw HTML omitted -->take-notes-draft</p>
+                </figcaption>
+        </figure>
+
+<figure>
+            <img loading="lazy" src="/ox-hugo/take-notes-draft_1.png"
+                 alt="Figure 2: take-notes-draft_1"/> <figcaption>
+                    <p><!-- raw HTML omitted -->Figure 2: <!-- raw HTML omitted -->take-notes-draft_1</p>
+                </figcaption>
+        </figure>
+
+<figure>
+            <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
+                 alt="Figure 3: take-notes-sankey"/> <figcaption>
+                    <p><!-- raw HTML omitted -->Figure 3: <!-- raw HTML omitted -->take-notes-sankey</p>
+                </figcaption>
+        </figure>
+
+</li>
+<li>
+<p>技巧</p>
+<ul>
+<li>Connect 的渐变色是将颜色从 Solid 改为 Linear，然后把两端的色块拖动到 Node 处并改为对应 Node 的颜色。</li>
+<li>Connect 要尽量弧度舒缓，有美感；留白要均匀。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="heat-map">Heat Map</h2>
+<ul>
+<li>
+<p>使用软件：Figma</p>
+</li>
+<li>
+<p>展现过程中频次高低</p>
+</li>
+<li>
+<p>案例：描述 GTD 和 Note-Taking 过程中思考频次高低。</p>
+<figure>
+        <img loading="lazy" src="/ox-hugo/gtd_note_taking_dark.png"
+             alt="Figure 4: gtd_note_taking_dark"/> <figcaption>
+                <p><!-- raw HTML omitted -->Figure 4: <!-- raw HTML omitted -->gtd_note_taking_dark</p>
+            </figcaption>
+    </figure>
+
+<figure>
+        <img loading="lazy" src="/ox-hugo/gtd_note_taking_light.png"
+             alt="Figure 5: gtd_note_taking_light"/> <figcaption>
+                <p><!-- raw HTML omitted -->Figure 5: <!-- raw HTML omitted -->gtd_note_taking_light</p>
+            </figcaption>
+    </figure>
+
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>How I Take Notes</title>
       <link>https://luciuschen.github.io/posts/20220505162419-how_i_take_notes/</link>
-      <pubDate>Sat, 04 Jun 2022 17:23:12 +0800</pubDate>
+      <pubDate>Sat, 04 Jun 2022 19:52:40 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/20220505162419-how_i_take_notes/</guid>
       <description>Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、</description>
@@ -30,7 +404,7 @@
 </ul>
 <p>上面两种情况完全可以用 Journals 记录解决问题前的工作思路，记录解决问题后的思路，来避免上述两种情况发生。</p>
 <figure>
-    <img loading="lazy" src="/Users/luciuschen/Dropbox/PKM/assets/take-notes-sankey.png"
+    <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
          alt="Figure 1: take-notes-sankey"/> <figcaption>
             <p><!-- raw HTML omitted -->Figure 1: <!-- raw HTML omitted -->take-notes-sankey</p>
         </figcaption>
@@ -47,10 +421,10 @@
 </li>
 <li>
 <p>对信息源处理时，可以用 Excalidraw 进行流程图、思维图等图的草稿绘制。后续有时间的时候再用 Figma 重新绘制，视觉和逻辑上的重新设计，使得阐述的内容更加直观。</p>
-<p>对于产品来说，通过设计降低理解门槛和使用门槛，是一件挺重要的事情。输出文章同样如此。</p>
+<p>对于产品来说，通过<a href="/posts/20220503145636-build_diagram/">设计降低理解门槛和使用门槛</a>，是一件挺重要的事情。输出文章同样如此。</p>
 </li>
 <li>
-<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 Org-roam 中做了一些设置。</p>
+<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 <a href="/posts/20220505220832-org_roam/">Org-roam</a> 中做了一些设置。</p>
 </li>
 <li>
 <p>Org-roam-ui 非常优秀，不管是 UI 还是操作性，可以明晰的查看笔记之间的关联，知识是否形成闭环，哪些知识还需要进行拓展阅读。</p>

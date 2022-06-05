@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Newsletter on My New Hugo Site</title>
+    <title>Newsletter on Lucius&#39;s PKM</title>
     <link>https://luciuschen.github.io/tags/newsletter/</link>
-    <description>Recent content in Newsletter on My New Hugo Site</description>
+    <description>Recent content in Newsletter on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Jun 2022 17:23:12 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/newsletter/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Jun 2022 19:52:40 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/newsletter/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How I Take Notes</title>
       <link>https://luciuschen.github.io/posts/20220505162419-how_i_take_notes/</link>
-      <pubDate>Sat, 04 Jun 2022 17:23:12 +0800</pubDate>
+      <pubDate>Sat, 04 Jun 2022 19:52:40 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/20220505162419-how_i_take_notes/</guid>
       <description>Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、</description>
@@ -30,7 +30,7 @@
 </ul>
 <p>上面两种情况完全可以用 Journals 记录解决问题前的工作思路，记录解决问题后的思路，来避免上述两种情况发生。</p>
 <figure>
-    <img loading="lazy" src="/Users/luciuschen/Dropbox/PKM/assets/take-notes-sankey.png"
+    <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
          alt="Figure 1: take-notes-sankey"/> <figcaption>
             <p><!-- raw HTML omitted -->Figure 1: <!-- raw HTML omitted -->take-notes-sankey</p>
         </figcaption>
@@ -47,10 +47,10 @@
 </li>
 <li>
 <p>对信息源处理时，可以用 Excalidraw 进行流程图、思维图等图的草稿绘制。后续有时间的时候再用 Figma 重新绘制，视觉和逻辑上的重新设计，使得阐述的内容更加直观。</p>
-<p>对于产品来说，通过设计降低理解门槛和使用门槛，是一件挺重要的事情。输出文章同样如此。</p>
+<p>对于产品来说，通过<a href="/posts/20220503145636-build_diagram/">设计降低理解门槛和使用门槛</a>，是一件挺重要的事情。输出文章同样如此。</p>
 </li>
 <li>
-<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 Org-roam 中做了一些设置。</p>
+<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 <a href="/posts/20220505220832-org_roam/">Org-roam</a> 中做了一些设置。</p>
 </li>
 <li>
 <p>Org-roam-ui 非常优秀，不管是 UI 还是操作性，可以明晰的查看笔记之间的关联，知识是否形成闭环，哪些知识还需要进行拓展阅读。</p>
