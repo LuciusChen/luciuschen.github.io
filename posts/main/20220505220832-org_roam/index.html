@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Org-roam | Lucius&#39;s PKM</title>
+<meta name="keywords" content="">
+<meta name="description" content="Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也">
+<meta name="author" content="Lucius Chen">
+<link rel="canonical" href="https://luciuschen.github.io/posts/main/20220505220832-org_roam/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.1a604fedec25e03e9fbf0fa84dfc2a185356369a0f7842f05d48cbb4e27cb258.css" integrity="sha256-GmBP7ewl4D6fvw&#43;oTfwqGFNWNpoPeELwXUjLtOJ8slg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://luciuschen.github.io/favicon.ico">
+<link rel="apple-touch-icon" href="https://luciuschen.github.io/apple-touch-icon.png">
+
+<meta name="twitter:title" content="Org-roam | Lucius&#39;s PKM" />
+<meta name="twitter:description" content="Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也" />
+<meta name="twitter:site" content="@novoreorx" />
+<meta name="twitter:creator" content="@novoreorx" />
+<meta property="og:title" content="Org-roam | Lucius&#39;s PKM" />
+<meta property="og:description" content="Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://luciuschen.github.io/posts/main/20220505220832-org_roam/" />
+<meta property="article:section" content="posts" />
+  
+  <meta property="article:modified_time" content="2022-06-06T15:31:13&#43;08:00" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://luciuschen.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Org-roam",
+      "item": "https://luciuschen.github.io/posts/main/20220505220832-org_roam/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Org-roam | Lucius's PKM",
+  "name": "Org-roam",
+  "description": "Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也",
+  "keywords": [
+    
+  ],
+  "wordCount" : "1004",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "2022-06-06T15:31:13+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "Lucius Chen"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://luciuschen.github.io/posts/main/20220505220832-org_roam/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lucius's PKM",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://luciuschen.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary-bg: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+</head>
+
+<body class="" id="top"><script data-no-instant>
+function switchTheme(theme) {
+  switch (theme) {
+    case 'light':
+      document.body.classList.remove('dark');
+      break;
+    case 'dark':
+      document.body.classList.add('dark');
+      break;
+    
+    default:
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+      }
+  }
+}
+
+function isDarkTheme() {
+  return document.body.className.includes("dark");
+}
+
+function getPrefTheme() {
+  return localStorage.getItem("pref-theme");
+}
+
+function setPrefTheme(theme) {
+  switchTheme(theme)
+  localStorage.setItem("pref-theme", theme);
+}
+
+const toggleThemeCallbacks = {}
+toggleThemeCallbacks['main'] = (isDark) => {
+  
+  if (isDark) {
+    setPrefTheme('light');
+  } else {
+    setPrefTheme('dark');
+  }
+}
+
+
+
+
+window.addEventListener('toggle-theme', function() {
+  
+  const isDark = isDarkTheme()
+  for (const key in toggleThemeCallbacks) {
+    toggleThemeCallbacks[key](isDark)
+  }
+});
+
+
+function toggleThemeListener() {
+  
+  window.dispatchEvent(new CustomEvent('toggle-theme'));
+}
+
+</script>
+<script>
+  
+  (function() {
+    const defaultTheme = 'light';
+    const prefTheme = getPrefTheme();
+    const theme = prefTheme ? prefTheme : defaultTheme;
+
+    switchTheme(theme);
+  })();
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://luciuschen.github.io/" accesskey="h" title="Lucius&#39;s PKM (Alt + H)">Lucius&#39;s PKM</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main post">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Org-roam
+    </h1>
+    <div class="post-meta"><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
+  <span>June 6, 2022</span></span>
+
+      
+      
+    </div>
+  </header> 
+  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">¶</a></h2>
+<p>说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。</p>
+<p>Org-roam 是基于 Emacs 平台，对于直接触过 Vim 的我来讲，是个全新的东西，官方是这么形容它的。</p>
+<blockquote>
+<p>Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.</p>
+<p>– Neal Stephenson, In the Beginning was the Command Line (1998)</p>
+</blockquote>
+<h2 id="install-emacs-with-homebrew">Install Emacs With Homebrew<a hidden class="anchor" aria-hidden="true" href="#install-emacs-with-homebrew">¶</a></h2>
+<p>First, Doom’s dependencies:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>brew install git ripgrep
+</span></span><span style="display:flex;"><span>brew install coreutils fd
+</span></span><span style="display:flex;"><span>xcode-selected --install
+</span></span></code></pre></div><p><a href="https://bitbucket.org/mituharu/emacs-mac/src">emacs-mac</a>. It offers good integration with macOS, native emojis and better childframe support.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>brew tap railwaycat/emacsmacport
+</span></span><span style="display:flex;"><span>brew install emacs-mac --with-modules
+</span></span><span style="display:flex;"><span>ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications/Emacs.app
+</span></span></code></pre></div><h3 id="doom-doctor-问题"><code>Doom Doctor</code> 问题<a hidden class="anchor" aria-hidden="true" href="#doom-doctor-问题">¶</a></h3>
+<ol>
+<li>
+<p>Warning: unable to detect fonts because fontconfig isn&rsquo;t installed</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    brew install fontconfig
+</span></span></code></pre></div></li>
+<li>
+<p>! Couldn&rsquo;t find shellcheck. Shell script linting will not work</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    brew install shellcheck
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="doom-emacs">Doom Emacs<a hidden class="anchor" aria-hidden="true" href="#doom-emacs">¶</a></h2>
+<p>With Emacs and Doom&rsquo;s dependencies installed, next is to install Doom Emacs itself:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+</span></span><span style="display:flex;"><span>~/.emacs.d/bin/doom install
+</span></span></code></pre></div><p>如果提示 <code>.emacs.d</code> 已存在，删除重新执行上述命令即可。</p>
+<p><code>.zshrc</code> 中需要添加 <code>export PATH=&quot;$HOME/.emacs.d/bin:$PATH</code> ，这样就可以直接使用 <code>doom</code> 命令了。</p>
+<h2 id="org-roam">Org-roam<a hidden class="anchor" aria-hidden="true" href="#org-roam">¶</a></h2>
+<p>具体的配置文件在 <code>.doom.d/</code> 下，参见 <a href="https://github.com/LuciusChen/dotfiles/tree/master/.doom.d">.doom.d</a>。</p>
+<h2 id="shortcuts">Shortcuts<a hidden class="anchor" aria-hidden="true" href="#shortcuts">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-RET</code></td>
+<td>在当前 headline 所属的内容后建立一个同级 headline</td>
+<td>无 headline 时创建一个一级 headline</td>
+</tr>
+<tr>
+<td><code>M-RET</code></td>
+<td>在当前 headline 后建立一个同级 headline</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-right</code></td>
+<td>降低当前 headline 的层级</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-left</code></td>
+<td>提高当前 headline 的层级</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-up</code></td>
+<td>将当前 headline 及其内容作为整体向上移动</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-down</code></td>
+<td>将当前 headline 及其内容作为整体向下移动</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-return</code></td>
+<td>在当前列表项的内容后建立一个同级列表项</td>
+<td>光标在列表项同一行时有效</td>
+</tr>
+<tr>
+<td><code>M-RET</code></td>
+<td>在当前列表项后建立一个同级列表项</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-right</code></td>
+<td>降低当前列表项的层级</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-left</code></td>
+<td>提高当前列表项的层级</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-up</code></td>
+<td>将当前列表项及其内容作为整体向上移动</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-down</code></td>
+<td>将当前列表项及其内容作为整体向下移动</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>C-x-o</code></td>
+<td>切换窗口</td>
+<td>C-x 中有很多操作，可以看提示。</td>
+</tr>
+<tr>
+<td><code>C-c C-c</code></td>
+<td>在创建 node 编写完毕后快速保存</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-g</code></td>
+<td>取消操作</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-x-d</code></td>
+<td>进入 dired 模式</td>
+<td></td>
+</tr>
+<tr>
+<td><code>SPC f r</code></td>
+<td>查找最近文件</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-v</code></td>
+<td>显示图片</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-c C-s</code></td>
+<td></td>
+<td>设置任务开始时间</td>
+</tr>
+<tr>
+<td><code>C-c C-d</code></td>
+<td>设置任务截止时间</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-t</code></td>
+<td>改变任务状态</td>
+<td></td>
+</tr>
+<tr>
+<td><code>S-Up/Down</code></td>
+<td>设置任务优先级 [#A], [#B], [#C]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-i</code></td>
+<td>开始任务计时</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-o</code></td>
+<td>终止任务计时</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c [</code></td>
+<td>将当前文件加入 Org-Agenda</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c ]</code></td>
+<td>将当前文件从 Org-Agenda 移除</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t</code></td>
+<td>在 Org-Agenda 的任务条目上， 修改任务状态。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-a</code></td>
+<td>归档</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-w</code></td>
+<td>activate refile</td>
+<td></td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>在 Org-Agenda 的任务条目上， 开始计时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td>在 Org-Agenda 的任务条目上， 终止计时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>在任务上添加 note</td>
+<td></td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>clock mode, 显示耗时。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="org-grammar">Org grammar<a hidden class="anchor" aria-hidden="true" href="#org-grammar">¶</a></h2>
+<p>This is almost anything you need to know about Org mode syntax:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span> <span style="color:#66d9ef">* </span>This Is A Heading
+</span></span><span style="display:flex;"><span> ** This Is A Sub-Heading
+</span></span><span style="display:flex;"><span> *** And A Sub-Sub-Heading
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Paragraphs are separated by at least one empty line. <span style="font-weight:bold">*bold*</span> <span style="font-style:italic">/italic/</span> _underlined_ <span style="color:#f92672">+strikethrough+</span> <span style="color:#a6e22e">=monospaced=</span>
+</span></span><span style="display:flex;"><span> [[<span style="color:#a6e22e">http://Karl-Voit.at</span>][<span style="color:#f92672">Link description</span>]]
+</span></span><span style="display:flex;"><span> http://Karl-Voit.at → link without description
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- </span>list item
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- </span>another item
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">- </span>sub-item
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">1.</span> also enumerated
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">2.</span> if you like
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- [ ]</span> yet to be done
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- [X]</span> item which is done
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> : Simple pre-formatted text such as for source code.
+</span></span><span style="display:flex;"><span> : This also respects the line breaks. <span style="font-weight:bold">*bold*</span> is not bold here.
+</span></span></code></pre></div><p>code block</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>myresult <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;Hello Europe! &#39;</span> <span style="color:#f92672">+</span> str(myresult))
+</span></span></code></pre></div><p>table</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span> <span style="color:#e6db74">| My Column 1 | My Column 2 | Last Column |</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|-------------+-------------+-------------|</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|          42 | foo         | bar         |</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|          23 | baz         | abcdefg     |</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|-------------+-------------+-------------|</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|          65 |             |             |</span>
+</span></span></code></pre></div><h2 id="export-to-markdown">Export to Markdown<a hidden class="anchor" aria-hidden="true" href="#export-to-markdown">¶</a></h2>
+<p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>， ~M-x org-pandoc-export-as-gfm~算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+  <span>&copy; 2022 <a href="https://luciuschen.github.io/">Lucius&#39;s PKM</a></span><span style="display: inline-block; margin-left: 1em;">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
+  </span>
+  <span style="display: inline-block; margin-left: 1em;">
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
+  </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+    <path d="M12 6H0l6-6z" />
+  </svg>
+</a>
+
+<script>
+  (function() {
+     
+    const disableThemeToggle = '' == '1';
+    if (disableThemeToggle) {
+      return;
+    }
+
+    let button = document.getElementById("theme-toggle")
+    
+    button.removeEventListener('click', toggleThemeListener)
+    
+    button.addEventListener('click', toggleThemeListener)
+  })();
+</script>
+
+<script>
+  (function () {
+    let menu = document.getElementById('menu')
+    if (menu) {
+      menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+      menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+      }
+    }
+
+    const disableSmoothScroll = '' == '1';
+    const enableInstantClick = '' == '1';
+    
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || disableSmoothScroll || enableInstantClick) {
+      return;
+    }
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        var id = this.getAttribute("href").substr(1);
+        document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+          behavior: "smooth"
+        });
+        if (id === "top") {
+          history.replaceState(null, null, " ");
+        } else {
+          history.pushState(null, null, `#${id}`);
+        }
+      });
+    });
+  })();
+</script>
+<script>
+  var mybutton = document.getElementById("top-link");
+  window.onscroll = function () {
+    if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+      mybutton.style.visibility = "visible";
+      mybutton.style.opacity = "1";
+    } else {
+      mybutton.style.visibility = "hidden";
+      mybutton.style.opacity = "0";
+    }
+  };
+</script>
+<script>
+  if (window.scrollListeners) {
+    
+    for (const listener of scrollListeners) {
+      window.removeEventListener('scroll', listener)
+    }
+  }
+  window.scrollListeners = []
+</script>
+
+
+
+<script src="/js/medium-zoom.min.js" data-no-instant
+></script>
+
+
+
+
+<script>
+  
+  
+  (function() {
+    const enableTocScroll = '' == '1'
+    if (!enableTocScroll) {
+      return
+    }
+    if (!document.querySelector('.toc')) {
+      console.log('no toc found, ignore toc scroll')
+      return
+    }
+    
+
+    
+    const scrollListeners = window.scrollListeners
+    const headings = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id]');
+    const activeClass = 'active';
+
+    
+    let activeHeading = headings[0];
+    getLinkByHeading(activeHeading).classList.add(activeClass);
+
+    const onScroll = () => {
+      const passedHeadings = [];
+      for (const h of headings) {
+        
+        if (getOffsetTop(h) < 5) {
+          passedHeadings.push(h)
+        } else {
+          break;
+        }
+      }
+      if (passedHeadings.length > 0) {
+        newActiveHeading = passedHeadings[passedHeadings.length - 1];
+      } else {
+        newActiveHeading = headings[0];
+      }
+      if (activeHeading != newActiveHeading) {
+        getLinkByHeading(activeHeading).classList.remove(activeClass);
+        activeHeading = newActiveHeading;
+        getLinkByHeading(activeHeading).classList.add(activeClass);
+      }
+    }
+
+    let timer = null;
+    const scrollListener = () => {
+      if (timer !== null) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(onScroll, 50)
+    }
+    window.addEventListener('scroll', scrollListener, false);
+    scrollListeners.push(scrollListener)
+
+    function getLinkByHeading(heading) {
+      const id = encodeURI(heading.getAttribute('id')).toLowerCase();
+      return document.querySelector(`.toc ul li a[href="#${id}"]`);
+    }
+
+    function getOffsetTop(heading) {
+      if (!heading.getClientRects().length) {
+        return 0;
+      }
+      let rect = heading.getBoundingClientRect();
+      return rect.top
+    }
+  })();
+  </script>
+
+</body>
+
+</html>

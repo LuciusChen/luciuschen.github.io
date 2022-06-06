@@ -10,8 +10,9 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="https://luciuschen.github.io/tags/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.3f0de516ecd0d764759b656ec357581f8cca37675b66d8dca8acdf2974bcb2c9.css" integrity="sha256-Pw3lFuzQ12R1m2Vuw1dYH4zKN2dbZtjcqKzfKXS8ssk=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.1a604fedec25e03e9fbf0fa84dfc2a185356369a0f7842f05d48cbb4e27cb258.css" integrity="sha256-GmBP7ewl4D6fvw&#43;oTfwqGFNWNpoPeELwXUjLtOJ8slg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://luciuschen.github.io/favicon.ico">
+<link rel="apple-touch-icon" href="https://luciuschen.github.io/apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" href="https://luciuschen.github.io/tags/index.xml">
 
 <meta name="twitter:title" content="Tags | Lucius&#39;s PKM" />
@@ -63,16 +64,73 @@
 
 </head>
 
-<body class="list" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
+<body class="list" id="top"><script data-no-instant>
+function switchTheme(theme) {
+  switch (theme) {
+    case 'light':
+      document.body.classList.remove('dark');
+      break;
+    case 'dark':
+      document.body.classList.add('dark');
+      break;
+    
+    default:
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
+      }
+  }
+}
 
+function isDarkTheme() {
+  return document.body.className.includes("dark");
+}
+
+function getPrefTheme() {
+  return localStorage.getItem("pref-theme");
+}
+
+function setPrefTheme(theme) {
+  switchTheme(theme)
+  localStorage.setItem("pref-theme", theme);
+}
+
+const toggleThemeCallbacks = {}
+toggleThemeCallbacks['main'] = (isDark) => {
+  
+  if (isDark) {
+    setPrefTheme('light');
+  } else {
+    setPrefTheme('dark');
+  }
+}
+
+
+
+
+window.addEventListener('toggle-theme', function() {
+  
+  const isDark = isDarkTheme()
+  for (const key in toggleThemeCallbacks) {
+    toggleThemeCallbacks[key](isDark)
+  }
+});
+
+
+function toggleThemeListener() {
+  
+  window.dispatchEvent(new CustomEvent('toggle-theme'));
+}
+
+</script>
+<script>
+  
+  (function() {
+    const defaultTheme = 'light';
+    const prefTheme = getPrefTheme();
+    const theme = prefTheme ? prefTheme : defaultTheme;
+
+    switchTheme(theme);
+  })();
 </script>
 
 <header class="header">
@@ -113,7 +171,7 @@
 
 <ul class="terms-tags">
     <li>
-        <a href="https://luciuschen.github.io/tags/newsletter/">Newsletter <sup><strong><sup>2</sup></strong></sup> </a>
+        <a href="https://luciuschen.github.io/tags/newsletter/">Newsletter <sup><strong><sup>1</sup></strong></sup> </a>
     </li>
 </ul>
     </main>
@@ -125,7 +183,7 @@
   <span style="display: inline-block; margin-left: 1em;">
     Powered by
     <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://github.com/reorx/hugo-PaperModX" rel="noopener" target="_blank">PaperModX</a>
+    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
   </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -133,6 +191,22 @@
     <path d="M12 6H0l6-6z" />
   </svg>
 </a>
+
+<script>
+  (function() {
+     
+    const disableThemeToggle = '' == '1';
+    if (disableThemeToggle) {
+      return;
+    }
+
+    let button = document.getElementById("theme-toggle")
+    
+    button.removeEventListener('click', toggleThemeListener)
+    
+    button.addEventListener('click', toggleThemeListener)
+  })();
+</script>
 
 <script>
   (function () {
@@ -178,17 +252,6 @@
       mybutton.style.opacity = "0";
     }
   };
-</script>
-<script>
-  document.getElementById("theme-toggle").addEventListener("click", () => {
-    if (document.body.className.includes("dark")) {
-      document.body.classList.remove('dark');
-      localStorage.setItem("pref-theme", 'light');
-    } else {
-      document.body.classList.add('dark');
-      localStorage.setItem("pref-theme", 'dark');
-    }
-  })
 </script>
 <script>
   if (window.scrollListeners) {

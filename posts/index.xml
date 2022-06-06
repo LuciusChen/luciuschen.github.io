@@ -6,13 +6,28 @@
     <description>Recent content in Posts on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Jun 2022 20:05:18 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Jun 2022 15:31:34 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Figma</title>
+      <link>https://luciuschen.github.io/posts/main/20220503154744-figma/</link>
+      <pubDate>Mon, 06 Jun 2022 15:31:34 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220503154744-figma/</guid>
+      <description>Plugin Scale Scale any frame, it’s contents, and all effects to any defined width or height. Sankey Connect Sankey Diagram Connect. </description>
+      <content:encoded><![CDATA[<h2 id="plugin">Plugin</h2>
+<ul>
+<li><a href="https://www.figma.com/community/plugin/836326694968364056/Scale">Scale</a> Scale any frame, it’s contents, and all effects to any defined width or height.</li>
+<li><a href="https://www.figma.com/community/plugin/991975059967102509/Sankey-Connect">Sankey Connect</a> Sankey Diagram Connect.</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Org-roam</title>
-      <link>https://luciuschen.github.io/posts/20220505220832-org_roam/</link>
-      <pubDate>Sat, 04 Jun 2022 20:05:18 +0800</pubDate>
+      <link>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</link>
+      <pubDate>Mon, 06 Jun 2022 15:31:13 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/20220505220832-org_roam/</guid>
+      <guid>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</guid>
       <description>Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。</p>
@@ -284,30 +299,15 @@
     </item>
     
     <item>
-      <title>Figma</title>
-      <link>https://luciuschen.github.io/posts/20220503154744-figma/</link>
-      <pubDate>Sat, 04 Jun 2022 20:05:05 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/20220503154744-figma/</guid>
-      <description>Plugin Scale Scale any frame, it’s contents, and all effects to any defined width or height. Sankey Connect Sankey Diagram Connect. </description>
-      <content:encoded><![CDATA[<h2 id="plugin">Plugin</h2>
-<ul>
-<li><a href="https://www.figma.com/community/plugin/836326694968364056/Scale">Scale</a> Scale any frame, it’s contents, and all effects to any defined width or height.</li>
-<li><a href="https://www.figma.com/community/plugin/991975059967102509/Sankey-Connect">Sankey Connect</a> Sankey Diagram Connect.</li>
-</ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Build Diagram</title>
-      <link>https://luciuschen.github.io/posts/20220503145636-build_diagram/</link>
-      <pubDate>Sat, 04 Jun 2022 20:03:34 +0800</pubDate>
+      <link>https://luciuschen.github.io/posts/main/20220503145636-build_diagram/</link>
+      <pubDate>Mon, 06 Jun 2022 15:30:51 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/20220503145636-build_diagram/</guid>
+      <guid>https://luciuschen.github.io/posts/main/20220503145636-build_diagram/</guid>
       <description>Sankey diagram 使用软件：Figma Plugin: Sankey Connect 展现数据流动的利器 案例：工作流描述 初始的思路是按照流程图来画，用 Excalidraw 插件画起来很快，但不够明晰。工作流也是处理数</description>
       <content:encoded><![CDATA[<h2 id="sankey-diagram">Sankey diagram</h2>
 <ul>
-<li>使用软件：<a href="/posts/20220503154744-figma/">Figma</a>
+<li>使用软件：<a href="/posts/main/20220503154744-figma/">Figma</a>
 <ul>
 <li>Plugin: Sankey Connect</li>
 </ul>
@@ -383,10 +383,10 @@
     
     <item>
       <title>How I Take Notes</title>
-      <link>https://luciuschen.github.io/posts/20220505162419-how_i_take_notes/</link>
-      <pubDate>Sat, 04 Jun 2022 19:52:40 +0800</pubDate>
+      <link>https://luciuschen.github.io/posts/article/20220505162419-how_i_take_notes/</link>
+      <pubDate>Mon, 06 Jun 2022 15:30:16 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/20220505162419-how_i_take_notes/</guid>
+      <guid>https://luciuschen.github.io/posts/article/20220505162419-how_i_take_notes/</guid>
       <description>Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>最先接触到 <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettlekasten</a> (German: &ldquo;slip box&rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、Notion、Obsidian（当时还不知道 Backlinks），都觉得不太合适，尤其是第一步文件夹的分类就让我头疼，很多内容是互相交叉的，并不是简单的可以归在一个分类下面，若是细分的分类过多，又会过于混乱，最后的结果就是“垃圾场”。</p>
@@ -421,10 +421,10 @@
 </li>
 <li>
 <p>对信息源处理时，可以用 Excalidraw 进行流程图、思维图等图的草稿绘制。后续有时间的时候再用 Figma 重新绘制，视觉和逻辑上的重新设计，使得阐述的内容更加直观。</p>
-<p>对于产品来说，通过<a href="/posts/20220503145636-build_diagram/">设计降低理解门槛和使用门槛</a>，是一件挺重要的事情。输出文章同样如此。</p>
+<p>对于产品来说，通过<a href="/posts/main/20220503145636-build_diagram/">设计降低理解门槛和使用门槛</a>，是一件挺重要的事情。输出文章同样如此。</p>
 </li>
 <li>
-<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 <a href="/posts/20220505220832-org_roam/">Org-roam</a> 中做了一些设置。</p>
+<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 <a href="/posts/main/20220505220832-org_roam/">Org-roam</a> 中做了一些设置。</p>
 </li>
 <li>
 <p>Org-roam-ui 非常优秀，不管是 UI 还是操作性，可以明晰的查看笔记之间的关联，知识是否形成闭环，哪些知识还需要进行拓展阅读。</p>
@@ -460,81 +460,6 @@
 <p>太复杂的笔记流程。复杂的工作流通常需要自动化，但自动化不利于笔记的整理，形成最重笔记时应该慎重考虑哪些是需要保留的，否则知识库就会变成垃圾场。</p>
 </li>
 </ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Implementation Intention GTD</title>
-      <link>https://luciuschen.github.io/posts/20220503143427-gtd/</link>
-      <pubDate>Sat, 04 Jun 2022 17:20:48 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/20220503143427-gtd/</guid>
-      <description>f* Introduction 2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omn</description>
-      <content:encoded><![CDATA[<p>f* Introduction</p>
-<p>2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omnifocus、Things 等等。</p>
-<p>一直不明白问题出在哪里，一天下来不管是 Today 还是 Inbox 当中的 To-Do 不仅没有变少，甚至更多了。自我怀疑、自我谴责让自己觉得是拖延症、懒造成了 To-Do 积压。</p>
-<p>回顾过去几年中，除了 Things 以外，我还使用了 Due 和 Fantastical 这两款软件。前者是吃药的时候，循环提醒该吃药了；后者是今天或者未来某天必须要做的事情，为了不让我忘记这个事情，哪怕我不确定这个事情在当天的哪个时间段做，都会给它加一个提醒，这样即便是过了时间，只要没有 checked 就会一直在锁屏或者下拉通知内，这样我就可以*不断地被提醒，找到合适的时间段去完成这件事情*​。</p>
-<p>至于 Things 时常被我厌恶，因为我有太多的 To-Do 积压在里面。每次打开它都有种翻开垃圾桶的感觉，没错，它就是垃圾桶。我再次捡起 Things 用的时候，基本都是我把“过期了的”、“没有意义的” To-Do 清空了才可以。这是一个循环往复的过程，过程中不断地伤害着我自己的自信心，并让我感到焦虑，永远做不完的事情，越积越多。</p>
-<p>在这样的情况下我了解到了 <a href="https://en.wikipedia.org/wiki/Implementation_intention">Implementation Intention</a>。</p>
-<h2 id="implementation-intention">Implementation Intention</h2>
-<blockquote>
-<p>执行意图由心理学家 Peter M.Gollitzer 提出，是个体为实现某一目标制定的一种计划，表现为“如果－那么”形式，例如“如果我遇到突发情况，那么我将保持冷静”。</p>
-<p>普通人思考目标的时候，使用的是目标意图，即：我要做什么、我要成为什么。目标意图有个最大的缺点：建立目标容易，执行目标很难。而执行意图更多思考的是要怎么做的问
-题。</p>
-<p>执行意图明确了个体在何时何地，以什么方式来实现目标，从而让个体更加容易地提取具体情景线索的心理表征，并通过这些线索建立起与目标所指行为的联系。在建立起线索和目标行为的联系之后，个体在随后遇到线索所指向的情景时（如考场），便可以用一种自动化的方式执行事先形成的计划，达成预设的目标。重要的是，执行意图的这种过程是自动化进行的，并不需要个体有意识地进行控制。</p>
-</blockquote>
-<p>再结合成功实行 GTD 的案例「<a href="https://www.calnewport.com/blog/2013/12/21/deep-habits-the-importance-of-planning-every-minute-of-your-work-day/">Deep Habits: The Importance of Planning Every Minute of Your Work Day</a>」和「<a href="https://www.nirandfar.com/todo-vs-schedule-builder/">Be a Schedule Builder, Not a To-Do List Maker</a>」，发现他们都会去在前一天花费一些时间去细化第二天的任务列表，甚至精确到分钟，这其实就是上面提到的 Implementation Intention 的实际操作，When Where and How。</p>
-<p>案例1当中是通过日历来安排一天的工作，细致到分钟。若发生变故需要变更，则在右侧重新记录变更后的安排。</p>
-<figure>
-    <img loading="lazy" src="/Users/luciuschen/Dropbox/PKM/assets/gtd_dark.png"
-         alt="Figure 1: gtd_dark"/> <figcaption>
-            <p><!-- raw HTML omitted -->Figure 1: <!-- raw HTML omitted -->gtd_dark</p>
-        </figcaption>
-</figure>
-
-<p>案例2中则从容很多，不仅仅是安排了工作的内容，休闲娱乐的内容也会排在日历当中。(下图来自于案例2)</p>
-<figure>
-    <img loading="lazy" src="/Users/luciuschen/Dropbox/PKM/assets/gtd_schedule_builder.png"
-         alt="Figure 2: gtd_schedule_builder"/> <figcaption>
-            <p><!-- raw HTML omitted -->Figure 2: <!-- raw HTML omitted -->gtd_schedule_builder</p>
-        </figcaption>
-</figure>
-
-<p>其实回顾到上面我提到使用 Due 和 Fantastical 的经历，当中已经包含了执行意图的概念，任务都非常明晰，是今天必须要做的，是今天有非常合适的情景去做的，只不过是我没有意识到。</p>
-<h3 id="执行意图-会让人主动思考-避免囤积过多的任务">「执行意图」会让人主动思考，避免囤积过多的任务。</h3>
-<p>举个例子，按照执行意图的方法。如果我买了一本书，那么我就要在最近的闲暇时间都去读它，并在读完后写读后感总结一下。那么当我买书或者安排任务的时候就会想到买书不仅仅是一个完结，后续意味着我要去读它，并写读后感等一大堆的操作，这样就不会去在自己当前书还没有读完的情况下，就去安排下一本书。</p>
-<p>例子中的场景和平时从 Inbox 中安排任务很类似，造成任务完不成，积压，是因为没有安排好任务的情景关系，何时、何地、如何去做这件事情，仅仅就是目标意图，我要做这些事情。</p>
-<p>没有对每个任务细致的思考前，无法把握任务的工作量，适合完成的场景，也就无法把控今天安排的任务是否都能完成。但刚刚开始接触这套方法的人，难免会因为对工作细节不熟悉导致工作量评估不准确的情况。</p>
-<h3 id="执行意图-消除了在何时何地做某事的模糊性">「执行意图」消除了在何时何地做某事的模糊性。</h3>
-<p>例如，询问选民如何前往投票站等简单的问题，已经被证明可以提高当天的投票率。</p>
-<p>在这个例子当中，被问的选民其实受到了引导，增加去投票这件事情的确定性。我们也可以利用同样的方法，明确任务，顺着 <code>if...then...</code> 的顺序去完成任务。</p>
-<h2 id="回顾">回顾</h2>
-<p><a href="https://twitter.com/mikhails5v/status/1521406633548697603">@mikhails5v</a> 在 tweet thread 中提到了他在使用 Things 的 1.5 年中，对于没有完成的任务，在每晚回顾时，手动的去把今天的任务清空，已完成的任务会让他很有成就感；未完成的任务则在思考后移到后面适合的时候，或者重新放回 Inbox，甚至删掉它们。确保了每日的任务都是清空的状态，没有负罪感。即便是没有完成的任务，在每晚也会重新回顾，思考后续是否有合适的情景去完成它，或者干脆觉得没有执行的必要删除掉。</p>
-<h2 id="阶段性思考">阶段性思考</h2>
-<blockquote>
-<p>note-taking and knowledge creation will always require large amounts of brain work. On the other hand, GTD makes task management a simple, effortless process.</p>
-</blockquote>
-<p>对比我在 <a href="/posts/20220505162419-how_i_take_notes/">How I Take Notes</a> 中写的笔记的工作流，To-Do 和 Note-Taking 确实存在区别。</p>
-<p>GTD 中 Capture 是最不需要思考的，有什么东西直接记录到 Inbox 当中，清空当前的灵感，专注眼前的事情。例如，Things 中快速呼出 Inbox 的输入框；Org-roam 中写在 <code>.org</code> 文件中的 To-Do 都会集中在 Agenda 中；Logseq 中写在 Journals 中的 To-Do 也可以在 Pages 中按照自己的需求定制查询（复杂的查询有些门槛）。后续处理，按照执行意图的方法去评估 To-Do 适合的情景；较大的任务需要进行拆分成若干小任务，甚至形成一个专门的项目分为不同阶段去完成。</p>
-<p>Note-Taking 相反，从阅读就开始思考，随后各种灵感迸发，记录下来进行整理，去芜存菁后继续扩展，定期回顾后形成自己的知识并输出，这个时候的写作反而是最不需要动脑的部分了。以下的 Heat Map 表示不同阶段思考的程度。</p>
-<figure>
-    <img loading="lazy" src="/Users/luciuschen/Dropbox/PKM/assets/gtd_note_taking_dark.png"
-         alt="Figure 3: gtd_note_taking_dark"/> <figcaption>
-            <p><!-- raw HTML omitted -->Figure 3: <!-- raw HTML omitted -->gtd_note_taking_dark</p>
-        </figcaption>
-</figure>
-
-<h2 id="to-do-是否需要独立管理">To-Do 是否需要独立管理</h2>
-<p>至于 To-Do 和 Note-Taking 是否分开，我的看法是逻辑上分开，物理上并不一定分开。</p>
-<p>一天 24 小时是由不同阶段组成的，工作、生活、娱乐等等，都会产生 To-Do。那么管理 To-Do 也可以分为不同的场景。</p>
-<h3 id="工作">工作</h3>
-<p>工作上做好日志记录，是个好习惯，可以方便查阅当时的想法，解决问题的思路，以及相关人员是谁，就跟航海日志一样。这个时候产生的 To-Do 就是与日志息息相关的，上下文联系紧密。加上 Capture 的原则是尽快记录，并且不打断现有的思路，最好的方法就是记录在笔记当中（比如Logseq 的 Journals）。</p>
-<p>汇总的话就更加简单了，Logseq 通过 Clojure 的查询语句就可以完成汇总，不会这门语言也没有关系，Discord 中有专门的 Channel 可以提问或讨论。每天上班的第一件事情就是回顾汇总，结合工作进度安排今天的工作。</p>
-<h3 id="生活">生活</h3>
-<p>生活中琐事居多，场景也非常繁杂，这个时候完全可以用单独的 App 来进行管理。Things 来收集拆分任务，Fantastical 来进行一天时间的分配以及未来几天需要提醒的任务，Due 来提醒重复任务。</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>警惕 All-In-One 的想法，并不是所有场景都有统一的解决方案。工作和生活分开管理 To-Do 还有个好处，休假的时候你完全可以屏蔽掉工作的内容。</p>
-<p>另外不管工作和生活中，长期计划用甘特图来管理还是非常不错的，确立里程碑，控制进度，把握长期计划的走向。</p>
 ]]></content:encoded>
     </item>
     

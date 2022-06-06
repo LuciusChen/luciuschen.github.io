@@ -10,8 +10,9 @@
 <meta name="description" content="Posts - Lucius&#39;s PKM">
 <meta name="author" content="">
 <link rel="canonical" href="https://luciuschen.github.io/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.3f0de516ecd0d764759b656ec357581f8cca37675b66d8dca8acdf2974bcb2c9.css" integrity="sha256-Pw3lFuzQ12R1m2Vuw1dYH4zKN2dbZtjcqKzfKXS8ssk=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.1a604fedec25e03e9fbf0fa84dfc2a185356369a0f7842f05d48cbb4e27cb258.css" integrity="sha256-GmBP7ewl4D6fvw&#43;oTfwqGFNWNpoPeELwXUjLtOJ8slg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://luciuschen.github.io/favicon.ico">
+<link rel="apple-touch-icon" href="https://luciuschen.github.io/apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" href="https://luciuschen.github.io/posts/index.xml">
 
 <meta name="twitter:title" content="Posts | Lucius&#39;s PKM" />
@@ -78,16 +79,73 @@
 
 </head>
 
-<body class="list" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
+<body class="list" id="top"><script data-no-instant>
+function switchTheme(theme) {
+  switch (theme) {
+    case 'light':
+      document.body.classList.remove('dark');
+      break;
+    case 'dark':
+      document.body.classList.add('dark');
+      break;
+    
+    default:
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
+      }
+  }
+}
 
+function isDarkTheme() {
+  return document.body.className.includes("dark");
+}
+
+function getPrefTheme() {
+  return localStorage.getItem("pref-theme");
+}
+
+function setPrefTheme(theme) {
+  switchTheme(theme)
+  localStorage.setItem("pref-theme", theme);
+}
+
+const toggleThemeCallbacks = {}
+toggleThemeCallbacks['main'] = (isDark) => {
+  
+  if (isDark) {
+    setPrefTheme('light');
+  } else {
+    setPrefTheme('dark');
+  }
+}
+
+
+
+
+window.addEventListener('toggle-theme', function() {
+  
+  const isDark = isDarkTheme()
+  for (const key in toggleThemeCallbacks) {
+    toggleThemeCallbacks[key](isDark)
+  }
+});
+
+
+function toggleThemeListener() {
+  
+  window.dispatchEvent(new CustomEvent('toggle-theme'));
+}
+
+</script>
+<script>
+  
+  (function() {
+    const defaultTheme = 'light';
+    const prefTheme = getPrefTheme();
+    const theme = prefTheme ? prefTheme : defaultTheme;
+
+    switchTheme(theme);
+  })();
 </script>
 
 <header class="header">
@@ -133,23 +191,6 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Org-roam
-    </h2>
-  </header>
-  <section class="entry-content">
-    
-      <p>Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也...</p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>June 4, 2022</span></span>
-</footer>
-  <a class="entry-link" aria-label="post link to Org-roam" href="https://luciuschen.github.io/posts/20220505220832-org_roam/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2>Figma
     </h2>
   </header>
@@ -160,9 +201,26 @@
   </section>
   <footer class="entry-footer"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>June 4, 2022</span></span>
+  <span>June 6, 2022</span></span>
 </footer>
-  <a class="entry-link" aria-label="post link to Figma" href="https://luciuschen.github.io/posts/20220503154744-figma/"></a>
+  <a class="entry-link" aria-label="post link to Figma" href="https://luciuschen.github.io/posts/main/20220503154744-figma/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Org-roam
+    </h2>
+  </header>
+  <section class="entry-content">
+    
+      <p>Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也...</p>
+    
+  </section>
+  <footer class="entry-footer"><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
+  <span>June 6, 2022</span></span>
+</footer>
+  <a class="entry-link" aria-label="post link to Org-roam" href="https://luciuschen.github.io/posts/main/20220505220832-org_roam/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -177,9 +235,9 @@
   </section>
   <footer class="entry-footer"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>June 4, 2022</span></span>
+  <span>June 6, 2022</span></span>
 </footer>
-  <a class="entry-link" aria-label="post link to Build Diagram" href="https://luciuschen.github.io/posts/20220503145636-build_diagram/"></a>
+  <a class="entry-link" aria-label="post link to Build Diagram" href="https://luciuschen.github.io/posts/main/20220503145636-build_diagram/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -194,30 +252,11 @@
   </section>
   <footer class="entry-footer"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>June 4, 2022</span></span><span class="meta-item">
+  <span>June 6, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
   <span class="post-tags"><a href="https://luciuschen.github.io/tags/newsletter/">Newsletter</a></span></span>
 </footer>
-  <a class="entry-link" aria-label="post link to How I Take Notes" href="https://luciuschen.github.io/posts/20220505162419-how_i_take_notes/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Implementation Intention GTD
-    </h2>
-  </header>
-  <section class="entry-content">
-    
-      <p>f* Introduction 2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omn...</p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>June 4, 2022</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
-  <span class="post-tags"><a href="https://luciuschen.github.io/tags/newsletter/">Newsletter</a></span></span>
-</footer>
-  <a class="entry-link" aria-label="post link to Implementation Intention GTD" href="https://luciuschen.github.io/posts/20220503143427-gtd/"></a>
+  <a class="entry-link" aria-label="post link to How I Take Notes" href="https://luciuschen.github.io/posts/article/20220505162419-how_i_take_notes/"></a>
 </article>
     </main>
     
@@ -228,7 +267,7 @@
   <span style="display: inline-block; margin-left: 1em;">
     Powered by
     <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://github.com/reorx/hugo-PaperModX" rel="noopener" target="_blank">PaperModX</a>
+    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
   </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -236,6 +275,22 @@
     <path d="M12 6H0l6-6z" />
   </svg>
 </a>
+
+<script>
+  (function() {
+     
+    const disableThemeToggle = '' == '1';
+    if (disableThemeToggle) {
+      return;
+    }
+
+    let button = document.getElementById("theme-toggle")
+    
+    button.removeEventListener('click', toggleThemeListener)
+    
+    button.addEventListener('click', toggleThemeListener)
+  })();
+</script>
 
 <script>
   (function () {
@@ -281,17 +336,6 @@
       mybutton.style.opacity = "0";
     }
   };
-</script>
-<script>
-  document.getElementById("theme-toggle").addEventListener("click", () => {
-    if (document.body.className.includes("dark")) {
-      document.body.classList.remove('dark');
-      localStorage.setItem("pref-theme", 'light');
-    } else {
-      document.body.classList.add('dark');
-      localStorage.setItem("pref-theme", 'dark');
-    }
-  })
 </script>
 <script>
   if (window.scrollListeners) {
