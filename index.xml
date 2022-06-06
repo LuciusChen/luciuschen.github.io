@@ -6,7 +6,134 @@
     <description>Recent content on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Jun 2022 15:31:34 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Jun 2022 21:14:28 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Stub</title>
+      <link>https://luciuschen.github.io/posts/main/20220604180341-stub/</link>
+      <pubDate>Mon, 06 Jun 2022 21:14:28 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220604180341-stub/</guid>
+      <description>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。 在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端</description>
+      <content:encoded><![CDATA[<ol>
+<li>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。</li>
+<li>在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端和服务端之间传递参数的一段代码。</li>
+</ol>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>The Byzantine generals problem</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</link>
+      <pubDate>Mon, 06 Jun 2022 21:14:14 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</guid>
+      <description>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同</description>
+      <content:encoded><![CDATA[<p>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。</p>
+<p>在分布式计算中，不同的计算机通过通讯交换信息达成共识而按照同一套协作策略行动。但有时候，系统中的成员计算机可能出错而发送错误的信息，用于传递信息的通讯网络也可能导致信息损坏，使得网络中不同的成员关于全体协作的策略得出不同结论，从而破坏系统一致性。拜占庭将军问题被认为是容错性问题中最难的问题类型之一。</p>
+<p>容错率：Theorem: need 3ƒ+1 generals in total to tolerate ƒ malicious generals.</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>The two generals problem</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</link>
+      <pubDate>Mon, 06 Jun 2022 21:14:06 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</guid>
+      <description>两军问题（英语：Two Generals&amp;rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该</description>
+      <content:encoded><![CDATA[<p>两军问题（英语：Two Generals&rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该问题中，两支军队的将军只能通过派遣信使穿越敌方领土来互相通信，以此约定在同一时间点共同进攻。该问题希望求解如何在两位将军派出的任何信使都可能被俘虏的情况下，就发动攻击的时间点达成一致。</p>
+<p>两军问题是拜占庭将军问题的一个特例，常被编入与计算机网络相关的入门课程中。在传输控制协议（TCP）相关的课程中，该问题可用作解释 TCP 协议无法保证通信双方之间的状态一致性的原因。该问题也适用于其他存在信息丢失的双方通信的情况。作为认识逻辑的一个重要概念，该问题突出了共识（英语：Common_knowledge_(logic)）的重要性。一些学者也将此问题称作两军悖论（英语：Two Generals Paradox）或协同进攻问题（英语：Coordinated Attack Problem）。两军问题是第一个被证明无解的计算机通信问题。该证明的重要意义在于，其显示了对于存在通信错误的更广泛的问题（如拜占庭将军问题），同样是无解的。这也为所有分布式一致性协议的实现提供了一个符合现实的预期。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Remote Procedure Call (RPC)</title>
+      <link>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</link>
+      <pubDate>Mon, 06 Jun 2022 21:13:56 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</guid>
+      <description>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样</description>
+      <content:encoded><![CDATA[<p>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样调用远程系统上的其他进程。</p>
+<p>RPC 是通过 Interface Definition Language (IDL) 来描述接口，使得在不同的平台上运行的不同程序编写的程序可以相互通信。(IDL 是不以任何一种特定编程语言的方式指定类型签名或者函数调用的语言。)</p>
+<p>基本上，你可以用 IDL 定义客户端和服务端之间的接口，这样 RPC 机制就可以创建跨网络调用功能所需要的代码存根（Code <a href="/posts/main/20220604180341-stub/">Stub</a>）。</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">+----------------+
+| Client         |
+|  +----------+  |         +---------------+
+|  |   main   |  |         | Server        |
+|  |----------|  |         |  +----------+ |
+|  | stub_cli |----(comms)---&gt;| stub_svr | |
+|  +----------+  |         |  |----------| |
++----------------+         |  | function | |
+                           |  +----------+ |
+                           +---------------+
+</code></pre><p>在这个例子中，~main~ 没有在同一个程序中调用函数，而是调用了一个客户端存根函数（与函数的原型相同），该函数负责将信息打包，并通过通讯通道将其传送给另一个进程。</p>
+<p>这里可以是同一台机器或者不同机器，RPC 的优势之一就是能够随意移动服务器。</p>
+<p>在服务器中，有个「监听者」进程，它将接收这些信息并将其传递给服务器。服务器的存根接收信息，解包并将其传递给真正执行的函数。</p>
+<p>真正的函数运行后返回结果给到服务器存根，服务器存根可以将返回的信息打包，并将其传回给客户端存根。客户端存根再将其解包并传回给 ~main~。</p>
+<p>实际上的 IDL 大概像下面这样：</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">[   uuid(f9f6be21-fd32-5577-8f2d-0800132bd567),
+    version(0),
+    endpoint(&#34;ncadg_ip_udp:[1234]&#34;, &#34;dds:[19]&#34;)
+] interface function_iface {
+    [idempotent] void function(
+        [in] int handle,
+        [out] int *status
+    );
+}
+</code></pre><p>头部是一些用于链接客户端和服务端的网络信息，RPC 发生在「会话层」中。接口部分才是 IDL 编译器建立客户端和服务器端存根的地方，以便客户端和服务端能够进行通讯，使得 RPC 正常工作。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Distribution System</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
+      <pubDate>Mon, 06 Jun 2022 21:13:15 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
+      <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
+      <content:encoded><![CDATA[<h2 id="remote-procedure-call">Remote Procedure Call</h2>
+<p><a href="/posts/main/20220603220847-remote_procedure_call_rpc/">Remote Procedure Call (RPC)</a> 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎么办？</p>
+<ol>
+<li>如果在函数调用过程中，服务挂了？</li>
+<li>如果消息丢失了？</li>
+<li>如果消息延迟了？</li>
+<li>如果出了问题，回复消息是否安全？</li>
+</ol>
+<p>要解决这些问题，就需要将网络以及节点之间的情况抽象出来，以及时序的问题。在设计分布式算法时，我们需要更加抽象一点，以便我们更好的推理整个过程。</p>
+<h2 id="网络行为">网络行为</h2>
+<p><a href="/posts/main/20220602202247-the_two_generals_problem/">
+The two generals problem</a> 描述了网络通信丢失的场景。</p>
+<p>我们假设两个节点之是间双向的点对点的通信。</p>
+<h3 id="reliable-links">Reliable links</h3>
+<p>一条消息只会在被一个节点发送的时候才会收到，并且消息是可以重新排序的。</p>
+<p>中间没有伪造消息等行为，发送了就一定会被收到。</p>
+<h3 id="fair-loss-links">Fair-loss links</h3>
+<p>消息可能会丢失、重复或重新排序，如果你一直重新发送，消息终将会传递过去。</p>
+<p>每次发送消息成功的概率都是非零，这个时候只要一直重试，我们就假设消息一定会传递到另外一个节点。</p>
+<p><code>Fair-losl links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</code></p>
+<h3 id="arbitrary-links">Arbitrary links</h3>
+<p>可能传递过程中会有恶意的第三方对消息进行干预。</p>
+<p>比如公共场合的公共 WiFi 就会出现这种情况。</p>
+<p><code>Arbitrary links 通过 TLS 的加持，就可以达到 Fair-loss links 的效果。</code></p>
+<h2 id="节点行为">节点行为</h2>
+<p><a href="/posts/main/20220602202317-the_byzantine_generals_problem/">The Byzantine generals problem</a> 描述了节点出错，导致全体协作策略失败以及容错率的问题。</p>
+<p>我们假设每个节点都执行指定的算法，假设有以下情况。</p>
+<h3 id="crash-stop--fail-stop">Crash-stop (fail-stop)</h3>
+<p>如果一个节点出现问题挂了，并且在这之后永远停机。</p>
+<h3 id="crash-recovery--fail-recovery">Crash-recovery (fail-recovery)</h3>
+<p>一个节点挂了，并丢失了内存状态，但会在过段时间后恢复。</p>
+<h3 id="byzantine-fail-arbitrary">Byzantine （fail-arbitrary)</h3>
+<p>节点偏离了原本的算法，可能会发生任何事情，包括崩溃或者恶意的行为。</p>
+<h2 id="同步-时序-假定">同步（时序）假定</h2>
+<h3 id="synchronous">Synchronous</h3>
+<p>消息延迟不超过已知的上限。到达这个上限后，消息要么被传递，要么丢失。节点以已知的速度执行算法。每一步代码的执行都有执行时间的上限。</p>
+<h3 id="partically-synchronous">Partically synchronous</h3>
+<p>系统中一部分时间内是异步的，另一部分是同步的。</p>
+<h3 id="asynchronous">Asynchronous</h3>
+<p>消息可以任意地被延迟，节点可以任意地暂停，并没有时序上的保证。</p>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Figma</title>
       <link>https://luciuschen.github.io/posts/main/20220503154744-figma/</link>
