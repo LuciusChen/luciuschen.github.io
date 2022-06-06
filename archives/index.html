@@ -205,6 +205,21 @@ function toggleThemeListener() {
             </span>
         </div>
         <ul id="menu">
+            <li>
+                <a href="https://luciuschen.github.io/" title="Home"
+                >Home
+                </a>
+            </li>
+            <li>
+                <a href="https://luciuschen.github.io/posts/" title="Archives"
+                >Archives
+                </a>
+            </li>
+            <li>
+                <a href="https://luciuschen.github.io/tags/" title="Tags"
+                >Tags
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -258,7 +273,7 @@ function toggleThemeListener() {
     }
 
     const disableSmoothScroll = '' == '1';
-    const enableInstantClick = '' == '1';
+    const enableInstantClick = '1' == '1';
     
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || disableSmoothScroll || enableInstantClick) {
       return;
@@ -380,6 +395,17 @@ function toggleThemeListener() {
   })();
   </script>
 
+<script src="/js/instantclick.min.js" data-no-instant
+></script>
+<script data-no-instant>
+  
+  
+  
+  
+  
+  
+  InstantClick.init();
+</script>
 </body>
 
 </html>
