@@ -14,6 +14,7 @@
 <link rel="icon" href="https://luciuschen.github.io/favicon.ico">
 <link rel="apple-touch-icon" href="https://luciuschen.github.io/apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" href="https://luciuschen.github.io/categories/index.xml">
+<script async defer data-website-id="f4e3ad0a-7fc1-4f18-b08c-9be77b60cdd5" src="https://oishii.reorx.com/oishii.js"></script>
 
 <meta name="twitter:title" content="Categories | Lucius&#39;s PKM" />
 <meta name="twitter:description" content="" />
@@ -23,6 +24,32 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://luciuschen.github.io/categories/" />
+
+<style>
+  #icons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2em;
+  }
+  #icons .item {
+    width: 80px;
+    height: 50px;
+    margin: 10px;
+  }
+  #icons .item .name {
+    font-size: 12px;
+    user-select: all;
+    text-align: center;
+  }
+  #icons .item .icon {
+    display: flex;
+    justify-content: center;
+  }
+  #icons .item svg {
+    width: 30px;
+    height: 30px;
+  }
+</style>
 
 
 <noscript>
@@ -125,7 +152,7 @@ function toggleThemeListener() {
 <script>
   
   (function() {
-    const defaultTheme = 'light';
+    const defaultTheme = 'auto';
     const prefTheme = getPrefTheme();
     const theme = prefTheme ? prefTheme : defaultTheme;
 
