@@ -5,27 +5,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>The Byzantine generals problem | Lucius&#39;s PKM</title>
+<title>Refactoring Promise chains with async/await | Lucius&#39;s PKM</title>
 <meta name="keywords" content="">
-<meta name="description" content="拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同">
+<meta name="description" content="const setDelay = (millisecond) =&gt; { return new Promise((resolve, reject) =&gt; { if (typeof millisecond != &#34;number&#34;) reject(new Error(&#34;参数必须是number类型&#34;)); setTimeout(() =&gt; { resolve(`我延迟了${mi">
 <meta name="author" content="Lucius Chen">
-<link rel="canonical" href="https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/">
+<link rel="canonical" href="https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.1a604fedec25e03e9fbf0fa84dfc2a185356369a0f7842f05d48cbb4e27cb258.css" integrity="sha256-GmBP7ewl4D6fvw&#43;oTfwqGFNWNpoPeELwXUjLtOJ8slg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://luciuschen.github.io/favicon.ico">
 <link rel="apple-touch-icon" href="https://luciuschen.github.io/apple-touch-icon.png">
 <script async defer data-website-id="f4e3ad0a-7fc1-4f18-b08c-9be77b60cdd5" src="https://oishii.reorx.com/oishii.js"></script>
 
-<meta name="twitter:title" content="The Byzantine generals problem | Lucius&#39;s PKM" />
-<meta name="twitter:description" content="拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同" />
+<meta name="twitter:title" content="Refactoring Promise chains with async/await | Lucius&#39;s PKM" />
+<meta name="twitter:description" content="const setDelay = (millisecond) =&gt; { return new Promise((resolve, reject) =&gt; { if (typeof millisecond != &#34;number&#34;) reject(new Error(&#34;参数必须是number类型&#34;)); setTimeout(() =&gt; { resolve(`我延迟了${mi" />
 <meta name="twitter:site" content="@novoreorx" />
 <meta name="twitter:creator" content="@novoreorx" />
-<meta property="og:title" content="The Byzantine generals problem | Lucius&#39;s PKM" />
-<meta property="og:description" content="拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同" />
+<meta property="og:title" content="Refactoring Promise chains with async/await | Lucius&#39;s PKM" />
+<meta property="og:description" content="const setDelay = (millisecond) =&gt; { return new Promise((resolve, reject) =&gt; { if (typeof millisecond != &#34;number&#34;) reject(new Error(&#34;参数必须是number类型&#34;)); setTimeout(() =&gt; { resolve(`我延迟了${mi" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/" />
+<meta property="og:url" content="https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-06-06T21:14:14&#43;08:00" />
+  <meta property="article:modified_time" content="2022-06-07T16:28:52&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -42,8 +42,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "The Byzantine generals problem",
-      "item": "https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/"
+      "name": "Refactoring Promise chains with async/await",
+      "item": "https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/"
     }
   ]
 }
@@ -52,23 +52,23 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "The Byzantine generals problem | Lucius's PKM",
-  "name": "The Byzantine generals problem",
-  "description": "拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同",
+  "headline": "Refactoring Promise chains with async/await | Lucius's PKM",
+  "name": "Refactoring Promise chains with async\/await",
+  "description": "const setDelay = (millisecond) =\u0026gt; { return new Promise((resolve, reject) =\u0026gt; { if (typeof millisecond != \u0026#34;number\u0026#34;) reject(new Error(\u0026#34;参数必须是number类型\u0026#34;)); setTimeout(() =\u0026gt; { resolve(`我延迟了${mi",
   "keywords": [
     
   ],
-  "wordCount" : "235",
+  "wordCount" : "427",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-06-06T21:14:14+08:00",
+  "dateModified": "2022-06-07T16:28:52+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
   }],
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/"
+    "@id": "https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/"
   },
   "publisher": {
     "@type": "Organization",
@@ -266,13 +266,13 @@ function toggleThemeListener() {
   <header class="post-header">
     <div class="breadcrumbs"><a href="https://luciuschen.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://luciuschen.github.io/posts/">Posts</a></div>
     <h1 class="post-title">
-      The Byzantine generals problem
+      Refactoring Promise chains with async/await
     </h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>June 6, 2022</span></span><span class="meta-item">
+  <span>June 7, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>235 words</span></span><span class="meta-item">
+  <span>427 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
   <span>1 min</span></span>
 
@@ -281,37 +281,57 @@ function toggleThemeListener() {
     </div>
   </header> 
 
-  <div class="post-content"><p>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。</p>
-<p>在分布式计算中，不同的计算机通过通讯交换信息达成共识而按照同一套协作策略行动。但有时候，系统中的成员计算机可能出错而发送错误的信息，用于传递信息的通讯网络也可能导致信息损坏，使得网络中不同的成员关于全体协作的策略得出不同结论，从而破坏系统一致性。拜占庭将军问题被认为是容错性问题中最难的问题类型之一。</p>
-<p>容错率：Theorem: need 3ƒ+1 generals in total to tolerate ƒ malicious generals.</p>
+  <div class="post-content"><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">setDelay</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">millisecond</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">millisecond</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;number&#34;</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">reject</span>(<span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;参数必须是number类型&#34;</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">`我延迟了</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">millisecond</span><span style="color:#e6db74">}</span><span style="color:#e6db74">毫秒后输出的`</span>);
+</span></span><span style="display:flex;"><span>    }, <span style="color:#a6e22e">millisecond</span>);
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">setDelaySecond</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">seconds</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">seconds</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;number&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">seconds</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">reject</span>(<span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;参数必须是number类型，并且小于等于10&#34;</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">`我延迟了</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">seconds</span><span style="color:#e6db74">}</span><span style="color:#e6db74">秒后输出的，注意单位是秒`</span>);
+</span></span><span style="display:flex;"><span>    }, <span style="color:#a6e22e">seconds</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Promise chains
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">setDelay</span>(<span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">setDelaySecond</span>(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">setDelay</span>(<span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;完成&#34;</span>);
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">err</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>);
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// async/await
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>(<span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">setDelay</span>(<span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">setDelaySecond</span>(<span style="color:#ae81ff">2</span>));
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">setDelay</span>(<span style="color:#ae81ff">1000</span>));
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;完成了&#34;</span>);
+</span></span><span style="display:flex;"><span>})();
+</span></span></code></pre></div><p><code>await</code> 是个运算符，用于组成表达式，~await~ 表达式的运算结果取决于它等的东西。</p>
+<p>如果等到的不是个 <code>Promise</code> 对象，那么 <code>await</code> 表达式的运算结果就等于它等到的东西。</p>
+<p>如果等到的是个 <code>Promise</code> 对象，那么 <code>await</code> 就会阻塞后面的代码，等着 <code>Promise</code> 对象的 <code>resolved</code> 状态，然后得到 <code>resolve</code> 的值，作为 <code>await</code> 表达式的运算结果。</p>
 
 
     
 
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
 
    
 
@@ -335,6 +355,30 @@ function toggleThemeListener() {
 
    
 
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
 
 
   <div class="bl-section">
@@ -342,7 +386,7 @@ function toggleThemeListener() {
 	<div class="backlinks">
 	  <ul>
 	   
-		  <li><a href="/posts/main/20220602202933-distribution_system/">Distribution System</a></li>
+		  <li><a href="/posts/main/20220506193054-refactoring_code/">Refactoring Code</a></li>
 	   
 	 </ul>
 	</div>
@@ -353,17 +397,17 @@ function toggleThemeListener() {
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://luciuschen.github.io/posts/main/20220604180341-stub/">
+  <a class="prev" href="https://luciuschen.github.io/posts/main/20220506193520-refactoring_condition_statements/">
     <span class="title">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;Prev Page</span>
     <br>
-    <span>Stub</span>
+    <span>Refactoring Condition statements</span>
   </a>
-  <a class="next" href="https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/">
+  <a class="next" href="https://luciuschen.github.io/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">
     <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
     </span>
     <br>
-    <span>The two generals problem</span>
+    <span>How To Find Time Complexity Of An Algorithm</span>
   </a>
 </nav>
 
