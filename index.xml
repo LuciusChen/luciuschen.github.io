@@ -6,86 +6,11 @@
     <description>Recent content on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Jun 2022 23:13:43 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Network Time Protocol (NTP)</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
-      <pubDate>Wed, 08 Jun 2022 23:13:43 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
-      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
-      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
-<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
-         alt="Figure 1: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/NTP.png"
-         alt="Figure 2: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<ol>
-<li>
-<p>Round-trip network delay: δ = (t4 - t1) - (t3 - t2)</p>
-</li>
-<li>
-<p>Estimated server time when client receives response: t3 + ½δ（客户端收到响应时的服务器的时间）</p>
-</li>
-<li>
-<p>Estimated clock skew: θ = t3 + ½δ - t4 = ½(t2 - t1 + t3 - t4)（计算预估的服务器时间和当前客户端时间的偏差）</p>
-</li>
-</ol>
-<h2 id="correcting-clock-skew">Correcting clock skew</h2>
-<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
-<ul>
-<li>
-<p>if θ &lt; 125 ms, <strong>slew</strong> the clock:</p>
-<p>slightly speed it up or slow it down by up to 500 ppm<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
-</li>
-<li>
-<p>if 125 ms ≤ θ &lt; 1000 s, <strong>step</strong> the clock:</p>
-<p>suddenly reset client clock to estimated server timestamp</p>
-</li>
-<li>
-<p>if θ ≥ 1000 s, <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
-</li>
-</ul>
-<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
-<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
-<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
-<h2 id="ordering-of-messages">Ordering of messages</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/ordering-of-messages.png"
-         alt="Figure 3: ordering-of-messages"/> <figcaption>
-            <p><span class="figure-number">Figure 3: </span>ordering-of-messages</p>
-        </figcaption>
-</figure>
-
-<p>m1 = &ldquo;A says: The moon is made of cheese!&rdquo;</p>
-<p>m2 = &ldquo;B says: Oh no it isn&rsquo;t!&rdquo;</p>
-<p>User C sees m2 first, m1 second, even though logically m1 <strong>happened before</strong> m2.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
+    <lastBuildDate>Wed, 08 Jun 2022 23:19:12 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Wed, 08 Jun 2022 16:49:17 +0800</pubDate>
+      <pubDate>Wed, 08 Jun 2022 23:19:12 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -142,10 +67,84 @@
 <li>physical clocks: count number of seconds elapsed</li>
 <li>logical clocks: count events, e.g. messages sent</li>
 </ul>
-<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)</p>
 <h3 id="clock-synchronisation">Clock synchronisation</h3>
 <p>物理时钟会有时间上的偏移，通常是通过和电脑、手机、电视等相对准确的地方来校准物理时钟的时间，比如手表，老式的钟摆。</p>
 <p>电脑上的时间同样会有偏移，是通过 <a href="/posts/main/20220602202411-network_time_protocol_ntp/">Network Time Protocol(NTP)</a> 来校准电脑的时间。</p>
+<h2 id="ordering-of-messages">Ordering of messages</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ordering-of-messages.png"
+         alt="Figure 1: ordering-of-messages"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>ordering-of-messages</p>
+        </figcaption>
+</figure>
+
+<p>m1 = &ldquo;A says: The moon is made of cheese!&rdquo;</p>
+<p>m2 = &ldquo;B says: Oh no it isn&rsquo;t!&rdquo;</p>
+<p>User C sees m2 first, m1 second, even though logically m1 <strong>happened before</strong> m2.</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Network Time Protocol (NTP)</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
+      <pubDate>Wed, 08 Jun 2022 23:19:07 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
+      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
+      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
+<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
+         alt="Figure 1: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>NTP</p>
+        </figcaption>
+</figure>
+
+<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/NTP.png"
+         alt="Figure 2: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>NTP</p>
+        </figcaption>
+</figure>
+
+<ol>
+<li>
+<p>Round-trip network delay: δ = (t4 - t1) - (t3 - t2)</p>
+</li>
+<li>
+<p>Estimated server time when client receives response: t3 + ½δ（客户端收到响应时的服务器的时间）</p>
+</li>
+<li>
+<p>Estimated clock skew: θ = t3 + ½δ - t4 = ½(t2 - t1 + t3 - t4)（计算预估的服务器时间和当前客户端时间的偏差）</p>
+</li>
+</ol>
+<h2 id="correcting-clock-skew">Correcting clock skew</h2>
+<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
+<ul>
+<li>
+<p>if θ &lt; 125 ms, <strong>slew</strong> the clock:</p>
+<p>slightly speed it up or slow it down by up to 500 ppm<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
+</li>
+<li>
+<p>if 125 ms ≤ θ &lt; 1000 s, <strong>step</strong> the clock:</p>
+<p>suddenly reset client clock to estimated server timestamp</p>
+</li>
+<li>
+<p>if θ ≥ 1000 s, <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
+</li>
+</ul>
+<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
+<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
+<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
 ]]></content:encoded>
     </item>
     
