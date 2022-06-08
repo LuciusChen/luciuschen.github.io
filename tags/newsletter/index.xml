@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Newsletter on Lucius&#39;s PKM</title>
+    <title>newsletter on Lucius&#39;s PKM</title>
     <link>https://luciuschen.github.io/tags/newsletter/</link>
-    <description>Recent content in Newsletter on Lucius&#39;s PKM</description>
+    <description>Recent content in newsletter on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Jun 2022 16:27:12 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/newsletter/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Jun 2022 23:26:58 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/newsletter/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Implementation Intention GTD</title>
       <link>https://luciuschen.github.io/posts/article/20220503143427-gtd/</link>
-      <pubDate>Tue, 07 Jun 2022 16:27:12 +0800</pubDate>
+      <pubDate>Wed, 08 Jun 2022 23:26:58 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/article/20220503143427-gtd/</guid>
       <description>Introduction 2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omni</description>

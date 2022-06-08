@@ -2,13 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</loc>
-    <lastmod>2022-06-08T23:19:12+08:00</lastmod>
+    <loc>https://luciuschen.github.io/posts/article/20220503143427-gtd/</loc>
+    <lastmod>2022-06-08T23:26:58+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/</loc>
-    <lastmod>2022-06-08T23:19:12+08:00</lastmod>
+    <lastmod>2022-06-08T23:26:58+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/tags/newsletter/</loc>
+    <lastmod>2022-06-08T23:26:58+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/</loc>
+    <lastmod>2022-06-08T23:26:58+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/tags/</loc>
+    <lastmod>2022-06-08T23:26:58+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</loc>
     <lastmod>2022-06-08T23:19:12+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</loc>
@@ -31,15 +40,6 @@
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220506193545-converting_callbacks_to_promises/</loc>
     <lastmod>2022-06-07T16:28:22+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/posts/article/20220503143427-gtd/</loc>
-    <lastmod>2022-06-07T16:27:12+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/tags/newsletter/</loc>
-    <lastmod>2022-06-07T16:27:12+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/tags/</loc>
-    <lastmod>2022-06-07T16:27:12+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220604180341-stub/</loc>
     <lastmod>2022-06-06T21:14:28+08:00</lastmod>
