@@ -6,7 +6,85 @@
     <description>Recent content on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Jun 2022 23:26:58 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Jun 2022 23:44:49 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Distribution System</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
+      <pubDate>Wed, 08 Jun 2022 23:44:49 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
+      <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
+      <content:encoded><![CDATA[<h2 id="remote-procedure-call">Remote Procedure Call</h2>
+<p><a href="/posts/main/20220603220847-remote_procedure_call_rpc/">Remote Procedure Call (RPC)</a> 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎么办？</p>
+<ol>
+<li>如果在函数调用过程中，服务挂了？</li>
+<li>如果消息丢失了？</li>
+<li>如果消息延迟了？</li>
+<li>如果出了问题，回复消息是否安全？</li>
+</ol>
+<p>要解决这些问题，就需要将网络以及节点之间的情况抽象出来，以及时序的问题。在设计分布式算法时，需要更加抽象一点，以便更好的推理整个过程。</p>
+<h2 id="网络行为">网络行为</h2>
+<p><a href="/posts/main/20220602202247-the_two_generals_problem/">The two generals problem</a> 描述了网络通信丢失的场景。</p>
+<p>假设两个节点之是间双向的点对点的通信。</p>
+<h3 id="reliable-links">Reliable links</h3>
+<p>一条消息只会在被一个节点发送的时候才会收到，并且消息是可以重新排序的。</p>
+<p>中间没有伪造消息等行为，发送了就一定会被收到。</p>
+<h3 id="fair-loss-links">Fair-loss links</h3>
+<p>消息可能会丢失、重复或重新排序，如果你一直重新发送，消息终将会传递过去。</p>
+<p>每次发送消息成功的概率都是非零，这个时候只要一直重试，我们就假设消息一定会传递到另外一个节点。</p>
+<p><code>Fair-losl links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</code></p>
+<h3 id="arbitrary-links">Arbitrary links</h3>
+<p>可能传递过程中会有恶意的第三方对消息进行干预。</p>
+<p>比如公共场合的公共 WiFi 就会出现这种情况。</p>
+<p><code>Arbitrary links 通过 TLS 的加持，就可以达到 Fair-loss links 的效果。</code></p>
+<h2 id="节点行为">节点行为</h2>
+<p><a href="/posts/main/20220602202317-the_byzantine_generals_problem/">The Byzantine generals problem</a> 描述了节点出错，导致全体协作策略失败以及容错率的问题。</p>
+<p>假设每个节点都执行指定的算法，假设有以下情况。</p>
+<h3 id="crash-stop--fail-stop">Crash-stop (fail-stop)</h3>
+<p>如果一个节点出现问题挂了，并且在这之后永远停机。</p>
+<h3 id="crash-recovery--fail-recovery">Crash-recovery (fail-recovery)</h3>
+<p>一个节点挂了，并丢失了内存状态，但会在过段时间后恢复。</p>
+<h3 id="byzantine-fail-arbitrary">Byzantine （fail-arbitrary)</h3>
+<p>节点偏离了原本的算法，可能会发生任何事情，包括崩溃或者恶意的行为。</p>
+<h2 id="同步-时序-假定">同步（时序）假定</h2>
+<h3 id="synchronous">Synchronous</h3>
+<p>消息延迟不超过已知的上限。到达这个上限后，消息要么被传递，要么丢失。节点以已知的速度执行算法。每一步代码的执行都有执行时间的上限。</p>
+<h3 id="partically-synchronous">Partically synchronous</h3>
+<p>系统中一部分时间内是异步的，另一部分是同步的。</p>
+<h3 id="asynchronous">Asynchronous</h3>
+<p>消息可以任意地被延迟，节点可以任意地暂停，并没有时序上的保证。</p>
+<h2 id="clocks-and-time-in-distributed-systems">Clocks and time in distributed systems</h2>
+<p>分布式系统中经常涉及到需要测量时间，比如：</p>
+<ul>
+<li>Schedulers, timeouts, failure detectors, retry timers</li>
+<li>Performance measurements, statistics, profiling (performance analysis也称为profiling)</li>
+<li>Log files &amp; databases: record when an event occurred</li>
+<li>Data with time-limited validity (e.g. cache entries)</li>
+<li><code>Determining order of events across several nodes</code></li>
+</ul>
+<p>分布式系统中会遇到两种类型的时钟：</p>
+<ul>
+<li>physical clocks: count number of seconds elapsed</li>
+<li>logical clocks: count events, e.g. messages sent</li>
+</ul>
+<h3 id="clock-synchronisation">Clock synchronisation</h3>
+<p>物理时钟会有时间上的偏移，通常是通过和电脑、手机、电视等相对准确的地方来校准物理时钟的时间，比如手表，老式的钟摆。</p>
+<p>电脑上的时间同样会有偏移，是通过 <a href="/posts/main/20220602202411-network_time_protocol_ntp/">Network Time Protocol(NTP)</a> 来校准电脑的时间。</p>
+<h2 id="ordering-of-messages">Ordering of messages</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ordering-of-messages.png"
+         alt="Figure 1: ordering-of-messages"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>ordering-of-messages</p>
+        </figcaption>
+</figure>
+
+<p>m1 = &ldquo;A says: The moon is made of cheese!&rdquo;</p>
+<p>m2 = &ldquo;B says: Oh no it isn&rsquo;t!&rdquo;</p>
+<p>User C sees m2 first, m1 second, even though logically m1 <strong>happened before</strong> m2.
+s</p>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Implementation Intention GTD</title>
       <link>https://luciuschen.github.io/posts/article/20220503143427-gtd/</link>
@@ -79,83 +157,6 @@
 <h2 id="conclusion">Conclusion</h2>
 <p>警惕 All-In-One 的想法，并不是所有场景都有统一的解决方案。工作和生活分开管理 To-Do 还有个好处，休假的时候你完全可以屏蔽掉工作的内容。</p>
 <p>另外不管工作和生活中，长期计划用甘特图来管理还是非常不错的，确立里程碑，控制进度，把握长期计划的走向。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Distribution System</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Wed, 08 Jun 2022 23:19:12 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
-      <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
-      <content:encoded><![CDATA[<h2 id="remote-procedure-call">Remote Procedure Call</h2>
-<p><a href="/posts/main/20220603220847-remote_procedure_call_rpc/">Remote Procedure Call (RPC)</a> 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎么办？</p>
-<ol>
-<li>如果在函数调用过程中，服务挂了？</li>
-<li>如果消息丢失了？</li>
-<li>如果消息延迟了？</li>
-<li>如果出了问题，回复消息是否安全？</li>
-</ol>
-<p>要解决这些问题，就需要将网络以及节点之间的情况抽象出来，以及时序的问题。在设计分布式算法时，需要更加抽象一点，以便更好的推理整个过程。</p>
-<h2 id="网络行为">网络行为</h2>
-<p><a href="/posts/main/20220602202247-the_two_generals_problem/">The two generals problem</a> 描述了网络通信丢失的场景。</p>
-<p>假设两个节点之是间双向的点对点的通信。</p>
-<h3 id="reliable-links">Reliable links</h3>
-<p>一条消息只会在被一个节点发送的时候才会收到，并且消息是可以重新排序的。</p>
-<p>中间没有伪造消息等行为，发送了就一定会被收到。</p>
-<h3 id="fair-loss-links">Fair-loss links</h3>
-<p>消息可能会丢失、重复或重新排序，如果你一直重新发送，消息终将会传递过去。</p>
-<p>每次发送消息成功的概率都是非零，这个时候只要一直重试，我们就假设消息一定会传递到另外一个节点。</p>
-<p><code>Fair-losl links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</code></p>
-<h3 id="arbitrary-links">Arbitrary links</h3>
-<p>可能传递过程中会有恶意的第三方对消息进行干预。</p>
-<p>比如公共场合的公共 WiFi 就会出现这种情况。</p>
-<p><code>Arbitrary links 通过 TLS 的加持，就可以达到 Fair-loss links 的效果。</code></p>
-<h2 id="节点行为">节点行为</h2>
-<p><a href="/posts/main/20220602202317-the_byzantine_generals_problem/">The Byzantine generals problem</a> 描述了节点出错，导致全体协作策略失败以及容错率的问题。</p>
-<p>假设每个节点都执行指定的算法，假设有以下情况。</p>
-<h3 id="crash-stop--fail-stop">Crash-stop (fail-stop)</h3>
-<p>如果一个节点出现问题挂了，并且在这之后永远停机。</p>
-<h3 id="crash-recovery--fail-recovery">Crash-recovery (fail-recovery)</h3>
-<p>一个节点挂了，并丢失了内存状态，但会在过段时间后恢复。</p>
-<h3 id="byzantine-fail-arbitrary">Byzantine （fail-arbitrary)</h3>
-<p>节点偏离了原本的算法，可能会发生任何事情，包括崩溃或者恶意的行为。</p>
-<h2 id="同步-时序-假定">同步（时序）假定</h2>
-<h3 id="synchronous">Synchronous</h3>
-<p>消息延迟不超过已知的上限。到达这个上限后，消息要么被传递，要么丢失。节点以已知的速度执行算法。每一步代码的执行都有执行时间的上限。</p>
-<h3 id="partically-synchronous">Partically synchronous</h3>
-<p>系统中一部分时间内是异步的，另一部分是同步的。</p>
-<h3 id="asynchronous">Asynchronous</h3>
-<p>消息可以任意地被延迟，节点可以任意地暂停，并没有时序上的保证。</p>
-<h2 id="clocks-and-time-in-distributed-systems">Clocks and time in distributed systems</h2>
-<p>分布式系统中经常涉及到需要测量时间，比如：</p>
-<ul>
-<li>Schedulers, timeouts, failure detectors, retry timers</li>
-<li>Performance measurements, statistics, profiling (performance analysis也称为profiling)</li>
-<li>Log files &amp; databases: record when an event occurred</li>
-<li>Data with time-limited validity (e.g. cache entries)</li>
-<li><code>Determining order of events across several nodes</code></li>
-</ul>
-<p>分布式系统中会遇到两种类型的时钟：</p>
-<ul>
-<li>physical clocks: count number of seconds elapsed</li>
-<li>logical clocks: count events, e.g. messages sent</li>
-</ul>
-<h3 id="clock-synchronisation">Clock synchronisation</h3>
-<p>物理时钟会有时间上的偏移，通常是通过和电脑、手机、电视等相对准确的地方来校准物理时钟的时间，比如手表，老式的钟摆。</p>
-<p>电脑上的时间同样会有偏移，是通过 <a href="/posts/main/20220602202411-network_time_protocol_ntp/">Network Time Protocol(NTP)</a> 来校准电脑的时间。</p>
-<h2 id="ordering-of-messages">Ordering of messages</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/ordering-of-messages.png"
-         alt="Figure 1: ordering-of-messages"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>ordering-of-messages</p>
-        </figcaption>
-</figure>
-
-<p>m1 = &ldquo;A says: The moon is made of cheese!&rdquo;</p>
-<p>m2 = &ldquo;B says: Oh no it isn&rsquo;t!&rdquo;</p>
-<p>User C sees m2 first, m1 second, even though logically m1 <strong>happened before</strong> m2.</p>
 ]]></content:encoded>
     </item>
     
