@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Jun 2022 23:44:49 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Jun 2022 07:26:15 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Wed, 08 Jun 2022 23:44:49 +0800</pubDate>
+      <pubDate>Thu, 09 Jun 2022 07:26:15 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -80,8 +80,10 @@
 
 <p>m1 = &ldquo;A says: The moon is made of cheese!&rdquo;</p>
 <p>m2 = &ldquo;B says: Oh no it isn&rsquo;t!&rdquo;</p>
-<p>User C sees m2 first, m1 second, even though logically m1 <strong>happened before</strong> m2.
-s</p>
+<p>User C sees m2 first, m1 second, even though logically m1 <strong>happened before</strong> m2.</p>
+<p><strong>Problem</strong>: even with synced clocks, t2 &lt; t1 is possible. Timestamp order is inconsistent with expected order!</p>
+<h2 id="the-happens-before-relation">The Happens-before relation</h2>
+<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
 ]]></content:encoded>
     </item>
     
