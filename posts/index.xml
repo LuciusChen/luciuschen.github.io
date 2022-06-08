@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Jun 2022 23:04:09 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Jun 2022 16:49:17 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Tue, 07 Jun 2022 23:04:09 +0800</pubDate>
+      <pubDate>Wed, 08 Jun 2022 16:49:17 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -24,8 +24,7 @@
 </ol>
 <p>要解决这些问题，就需要将网络以及节点之间的情况抽象出来，以及时序的问题。在设计分布式算法时，需要更加抽象一点，以便更好的推理整个过程。</p>
 <h2 id="网络行为">网络行为</h2>
-<p><a href="/posts/main/20220602202247-the_two_generals_problem/">
-The two generals problem</a> 描述了网络通信丢失的场景。</p>
+<p><a href="/posts/main/20220602202247-the_two_generals_problem/">The two generals problem</a> 描述了网络通信丢失的场景。</p>
 <p>假设两个节点之是间双向的点对点的通信。</p>
 <h3 id="reliable-links">Reliable links</h3>
 <p>一条消息只会在被一个节点发送的时候才会收到，并且消息是可以重新排序的。</p>
@@ -68,463 +67,45 @@ The two generals problem</a> 描述了网络通信丢失的场景。</p>
 <li>physical clocks: count number of seconds elapsed</li>
 <li>logical clocks: count events, e.g. messages sent</li>
 </ul>
+<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)</p>
+<h3 id="clock-synchronisation">Clock synchronisation</h3>
+<p>物理时钟会有时间上的偏移，通常是通过和电脑、手机、电视等相对准确的地方来校准物理时钟的时间，比如手表，老式的钟摆。</p>
+<p>电脑上的时间同样会有偏移，是通过 <a href="/posts/main/20220602202411-network_time_protocol_ntp/">Network Time Protocol(NTP)</a> 来校准电脑的时间。</p>
 ]]></content:encoded>
     </item>
     
     <item>
-      <title>Refactoring Code</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</link>
-      <pubDate>Tue, 07 Jun 2022 16:29:27 +0800</pubDate>
+      <title>Network Time Protocol(NTP)</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
+      <pubDate>Wed, 08 Jun 2022 16:49:13 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</guid>
-      <description>Refactoring Code How To Find Time Complexity Of An Algorithm
-JavaScript Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await </description>
-      <content:encoded><![CDATA[<h2 id="refactoring-code">Refactoring Code</h2>
-<p><a href="/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">How To Find Time Complexity Of An Algorithm</a></p>
-<h3 id="javascript">JavaScript</h3>
-<h4 id="refactoring-tips">Refactoring Tips</h4>
-<ol>
-<li><a href="/posts/main/20220506193520-refactoring_condition_statements/">Refactoring Condition statements</a></li>
-<li><a href="/posts/main/20220506193545-converting_callbacks_to_promises/">Converting callbacks to promises</a></li>
-<li><a href="/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">Refactoring Promise chains with async/await</a></li>
-</ol>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Refactoring Condition statements</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193520-refactoring_condition_statements/</link>
-      <pubDate>Tue, 07 Jun 2022 16:29:13 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220506193520-refactoring_condition_statements/</guid>
-      <description>前端网络请求回调中经常会根据后端返回的不同 code 进行不同的业务处理。 if (res.data.code === &amp;#34;0000&amp;#34;) { //do something } else if (res.data.code === &amp;#34;0001&amp;#34;) { //do something } else if (res.data.code === &amp;#34;0002&amp;#34;) { //do something } else { //do something } 简单应用 const statusCode =</description>
-      <content:encoded><![CDATA[<p>前端网络请求回调中经常会根据后端返回的不同 code 进行不同的业务处理。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">code</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;0000&#34;</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//do something
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">code</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;0001&#34;</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//do something
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">code</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;0002&#34;</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//do something
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//do something
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><p>简单应用</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">statusCode</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Map</span>([
-</span></span><span style="display:flex;"><span>  [<span style="color:#e6db74">&#34;0000&#34;</span>, <span style="color:#e6db74">&#34;请求成功&#34;</span>],
-</span></span><span style="display:flex;"><span>  [<span style="color:#e6db74">&#34;0001&#34;</span>, <span style="color:#e6db74">&#34;未授权&#34;</span>],
-</span></span><span style="display:flex;"><span>  [<span style="color:#e6db74">&#34;0002&#34;</span>, <span style="color:#e6db74">&#34;拒绝访问&#34;</span>],
-</span></span><span style="display:flex;"><span>]);
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">statusCode</span>.<span style="color:#a6e22e">get</span>(<span style="color:#ae81ff">0001</span>);
-</span></span></code></pre></div><p>复杂业务函数处理</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getRequest</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">params</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;请求打印&#34;</span>);
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">statusCode</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Map</span>([
-</span></span><span style="display:flex;"><span>  [
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;0000&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">params</span>) =&gt; {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">getRequest</span>(<span style="color:#a6e22e">params</span>));
-</span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>  ],
-</span></span><span style="display:flex;"><span>  [
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;0001&#34;</span>,
-</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">params</span>) =&gt; {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;未授权&#34;</span>);
-</span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>  ],
-</span></span><span style="display:flex;"><span>  [
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;0002&#34;</span>,
-</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">params</span>) =&gt; {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;拒绝访问&#34;</span>);
-</span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>  ],
-</span></span><span style="display:flex;"><span>]);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">params</span> <span style="color:#f92672">=</span> {};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">showMessage</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">code</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Map 对象转数组
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  [...<span style="color:#a6e22e">statusCode</span>].<span style="color:#a6e22e">forEach</span>(([<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>]) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">key</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">code</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">call</span>(<span style="color:#a6e22e">params</span>) <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>  });
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">showMessage</span>(<span style="color:#e6db74">&#34;0000&#34;</span>); <span style="color:#75715e">// 未授权
-</span></span></span></code></pre></div><p><code>forEach()</code> 和 <code>map()</code> 的区别：</p>
-<ul>
-<li><code>forEach()</code> 会修改原来的数组，而 <code>map()</code> 会得到一个新的数组并返回。所以需要生成新数组的时候，就用后者, 否则就用前者。</li>
-</ul>
-<p>Map vs Object</p>
-<ul>
-<li>
-<p>According to MDN:</p>
-<blockquote>
-<p>A Map object can iterate its elements in insertion order - a for..of loop will return an array of [key, value] for each iteration.</p>
-</blockquote>
-<!-- raw HTML omitted -->
-<blockquote>
-<p>Objects are similar to Maps in that both let you set keys to values, retrieve those values, delete keys, and detect whether something is stored at a key. Because of this, Objects have been used as Maps historically; however, there are important differences between Objects and Maps that make using a Map better.</p>
-<p>An Object has a prototype, so there are default keys in the map. However, this can be bypassed using map = Object.create(null). The keys of an Object are Strings, where they can be any value for a Map. You can get the size of a Map easily while you have to manually keep track of size for an Object.</p>
-</blockquote>
-</li>
-</ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Refactoring Promise chains with async/await</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</link>
-      <pubDate>Tue, 07 Jun 2022 16:28:52 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</guid>
-      <description>const setDelay = (millisecond) =&amp;gt; { return new Promise((resolve, reject) =&amp;gt; { if (typeof millisecond != &amp;#34;number&amp;#34;) reject(new Error(&amp;#34;参数必须是number类型&amp;#34;)); setTimeout(() =&amp;gt; { resolve(`我延迟了${mi</description>
-      <content:encoded><![CDATA[<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">setDelay</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">millisecond</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">millisecond</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;number&#34;</span>)
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">reject</span>(<span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;参数必须是number类型&#34;</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">`我延迟了</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">millisecond</span><span style="color:#e6db74">}</span><span style="color:#e6db74">毫秒后输出的`</span>);
-</span></span><span style="display:flex;"><span>    }, <span style="color:#a6e22e">millisecond</span>);
-</span></span><span style="display:flex;"><span>  });
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">setDelaySecond</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">seconds</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">seconds</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;number&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">seconds</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>)
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">reject</span>(<span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;参数必须是number类型，并且小于等于10&#34;</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">`我延迟了</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">seconds</span><span style="color:#e6db74">}</span><span style="color:#e6db74">秒后输出的，注意单位是秒`</span>);
-</span></span><span style="display:flex;"><span>    }, <span style="color:#a6e22e">seconds</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>);
-</span></span><span style="display:flex;"><span>  });
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Promise chains
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">setDelay</span>(<span style="color:#ae81ff">1000</span>)
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">setDelaySecond</span>(<span style="color:#ae81ff">2</span>);
-</span></span><span style="display:flex;"><span>  })
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">setDelay</span>(<span style="color:#ae81ff">1000</span>);
-</span></span><span style="display:flex;"><span>  })
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;完成&#34;</span>);
-</span></span><span style="display:flex;"><span>  })
-</span></span><span style="display:flex;"><span>  .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">err</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>);
-</span></span><span style="display:flex;"><span>  });
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// async/await
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>(<span style="color:#66d9ef">async</span> () =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">setDelay</span>(<span style="color:#ae81ff">1000</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">setDelaySecond</span>(<span style="color:#ae81ff">2</span>));
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">setDelay</span>(<span style="color:#ae81ff">1000</span>));
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;完成了&#34;</span>);
-</span></span><span style="display:flex;"><span>})();
-</span></span></code></pre></div><p><code>await</code> 是个运算符，用于组成表达式，~await~ 表达式的运算结果取决于它等的东西。</p>
-<p>如果等到的不是个 <code>Promise</code> 对象，那么 <code>await</code> 表达式的运算结果就等于它等到的东西。</p>
-<p>如果等到的是个 <code>Promise</code> 对象，那么 <code>await</code> 就会阻塞后面的代码，等着 <code>Promise</code> 对象的 <code>resolved</code> 状态，然后得到 <code>resolve</code> 的值，作为 <code>await</code> 表达式的运算结果。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>How To Find Time Complexity Of An Algorithm</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</link>
-      <pubDate>Tue, 07 Jun 2022 16:28:37 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</guid>
-      <description>The most common metric for calculating time complexity is Big O notation. This removes all constant factors so that the running time can be estimated in relation to N as N approaches infinity. In general you can think of it like this:
-statement; Is constant. The running time of the statement will not change in relation to N.
-for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loop is directly proportional to N.</description>
-      <content:encoded><![CDATA[<p>The most common metric for calculating time complexity is Big O notation. This removes all constant factors so that the running time can be estimated in relation to N as N approaches infinity. In general you can think of it like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">statement</span>;
-</span></span></code></pre></div><p>Is constant. The running time of the statement will not change in relation to N.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">N</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) <span style="color:#a6e22e">statement</span>;
-</span></span></code></pre></div><p>Is linear. The running time of the loop is directly proportional to N. When N doubles, so does the running time.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">N</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">j</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">j</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">N</span>; <span style="color:#a6e22e">j</span><span style="color:#f92672">++</span>) <span style="color:#a6e22e">statement</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Is quadratic. The running time of the two loops is proportional to the square of N. When N doubles, the running time increases by N * N.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">low</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">high</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mid</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">low</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">high</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">target</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">list</span>[<span style="color:#a6e22e">mid</span>]) <span style="color:#a6e22e">high</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">mid</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">target</span> <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">list</span>[<span style="color:#a6e22e">mid</span>]) <span style="color:#a6e22e">low</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">mid</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">break</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Is logarithmic. The running time of the algorithm is proportional to the number of times N can be divided by 2. This is because the algorithm divides the working area in half with each iteration.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">quicksort</span> ( <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">list</span>[], <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">left</span>, <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">right</span> ){
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pivot</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">partition</span> ( <span style="color:#a6e22e">list</span>, <span style="color:#a6e22e">left</span>, <span style="color:#a6e22e">right</span> );
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">quicksort</span> ( <span style="color:#a6e22e">list</span>, <span style="color:#a6e22e">left</span>, <span style="color:#a6e22e">pivot</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> );
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">quicksort</span> ( <span style="color:#a6e22e">list</span>, <span style="color:#a6e22e">pivot</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">right</span> );
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Is N * log ( N ). The running time consists of N loops (iterative or recursive) that are logarithmic, thus the algorithm is a combination of linear and logarithmic.</p>
-<p>In general, doing something with every item in one dimension is linear, doing something with every item in two dimensions is quadratic, and dividing the working area in half is logarithmic. There are other Big O measures such as cubic, exponential, and square root, but they&rsquo;re not nearly as common. Big O notation is described as O ( ) where is the measure. The quicksort algorithm would be described as O ( N * log ( N ) ).</p>
-<p>Note that none of this has taken into account best, average, and worst case measures. Each would have its own Big O notation. Also note that this is a VERY simplistic explanation. Big O is the most common, but it&rsquo;s also more complex that I&rsquo;ve shown. There are also other notations such as big omega, little o, and big theta. You probably won&rsquo;t encounter them outside of an algorithm analysis course. ;)</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Converting callbacks to promises</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193545-converting_callbacks_to_promises/</link>
-      <pubDate>Tue, 07 Jun 2022 16:28:22 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220506193545-converting_callbacks_to_promises/</guid>
-      <description>这里用 setTimeout() 模仿异步请求。 const callbackFn = (firstName, callback) =&amp;gt; { setTimeout(() =&amp;gt; { if (!firstName) return callback(new Error(&amp;#34;no first name passed in!&amp;#34;)); // failed const fullName = `${firstName} Doe`; return callback(fullName); // succeed }, 2000); }; callbackFn(&amp;#34;John&amp;#34;, console.log); callbackFn(null, console.log); Promise 实现如下 const promiseFn = (firstName) =&amp;gt; { return new Promise((resolve, reject) =&amp;gt; { setTimeout(() =&amp;gt; { if (!firstName)</description>
-      <content:encoded><![CDATA[<p>这里用 <code>setTimeout()</code> 模仿异步请求。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">callbackFn</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">firstName</span>, <span style="color:#a6e22e">callback</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">firstName</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">callback</span>(<span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;no first name passed in!&#34;</span>)); <span style="color:#75715e">// failed
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fullName</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">firstName</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> Doe`</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">callback</span>(<span style="color:#a6e22e">fullName</span>); <span style="color:#75715e">// succeed
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }, <span style="color:#ae81ff">2000</span>);
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">callbackFn</span>(<span style="color:#e6db74">&#34;John&#34;</span>, <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>);
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">callbackFn</span>(<span style="color:#66d9ef">null</span>, <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>);
-</span></span></code></pre></div><p>Promise 实现如下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promiseFn</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">firstName</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">firstName</span>) <span style="color:#a6e22e">reject</span>(<span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;no first name passed in!&#34;</span>)); <span style="color:#75715e">// failed
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fullName</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">firstName</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> Doe`</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">fullName</span>); <span style="color:#75715e">// succeed
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }, <span style="color:#ae81ff">2000</span>);
-</span></span><span style="display:flex;"><span>  });
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">promiseFn</span>(<span style="color:#e6db74">&#34;Jane&#34;</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>);
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">promiseFn</span>().<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>);
-</span></span></code></pre></div><p>这里是 Promise 一些需要注意的点</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">setDelay</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">millisecond</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">millisecond</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;number&#34;</span>)
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">reject</span>(<span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;参数必须是number类型&#34;</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">`我延迟了</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">millisecond</span><span style="color:#e6db74">}</span><span style="color:#e6db74">毫秒后输出的`</span>);
-</span></span><span style="display:flex;"><span>    }, <span style="color:#a6e22e">millisecond</span>);
-</span></span><span style="display:flex;"><span>  });
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">setDelaySecond</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">seconds</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">seconds</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;number&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">seconds</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>)
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">reject</span>(<span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;参数必须是number类型，并且小于等于10&#34;</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">`我延迟了</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">seconds</span><span style="color:#e6db74">}</span><span style="color:#e6db74">秒后输出的，是第二个函数`</span>);
-</span></span><span style="display:flex;"><span>    }, <span style="color:#a6e22e">seconds</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>);
-</span></span><span style="display:flex;"><span>  });
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Promise chains
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// then 式链式写法的本质其实是一直往下传递返回一个新的 Promise，也就是说 then 在下一步接收的是上一步返回的 Promise。
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 处理错误只需要在链式末尾 catch 进行处理就可以。
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">setDelay</span>(<span style="color:#ae81ff">2000</span>)
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;我进行到第一步的&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">setDelaySecond</span>(<span style="color:#ae81ff">3</span>);
-</span></span><span style="display:flex;"><span>  })
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;我进行到第二步的&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
-</span></span><span style="display:flex;"><span>  })
-</span></span><span style="display:flex;"><span>  .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">err</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>);
-</span></span><span style="display:flex;"><span>  });
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Promise 中间返回自定义的值只需要用 `retunPromise.resolve()` 处理就可以。
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">setDelay</span>(<span style="color:#ae81ff">2000</span>)
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;第一步完成了&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;这是我自己想处理的值&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Promise.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">message</span>); <span style="color:#75715e">// 这里返回我想在下一阶段处理的值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  })
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;第二步完成了&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>); <span style="color:#75715e">// 这里拿到上一阶段的返回值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//return Promise.resolve(&#39;这里可以继续返回&#39;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  })
-</span></span><span style="display:flex;"><span>  .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">err</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>);
-</span></span><span style="display:flex;"><span>  });
-</span></span></code></pre></div>]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Implementation Intention GTD</title>
-      <link>https://luciuschen.github.io/posts/article/20220503143427-gtd/</link>
-      <pubDate>Tue, 07 Jun 2022 16:27:12 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/article/20220503143427-gtd/</guid>
-      <description>Introduction 2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omni</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omnifocus、Things 等等。</p>
-<p>一直不明白问题出在哪里，一天下来不管是 Today 还是 Inbox 当中的 To-Do 不仅没有变少，甚至更多了。自我怀疑、自我谴责让自己觉得是拖延症、懒造成了 To-Do 积压。</p>
-<p>回顾过去几年中，除了 Things 以外，我还使用了 Due 和 Fantastical 这两款软件。前者是吃药的时候，循环提醒该吃药了；后者是今天或者未来某天必须要做的事情，为了不让我忘记这个事情，哪怕我不确定这个事情在当天的哪个时间段做，都会给它加一个提醒，这样即便是过了时间，只要没有 checked 就会一直在锁屏或者下拉通知内，这样我就可以*不断地被提醒，找到合适的时间段去完成这件事情*​。</p>
-<p>至于 Things 时常被我厌恶，因为我有太多的 To-Do 积压在里面。每次打开它都有种翻开垃圾桶的感觉，没错，它就是垃圾桶。我再次捡起 Things 用的时候，基本都是我把“过期了的”、“没有意义的” To-Do 清空了才可以。这是一个循环往复的过程，过程中不断地伤害着我自己的自信心，并让我感到焦虑，永远做不完的事情，越积越多。</p>
-<p>在这样的情况下我了解到了 <a href="https://en.wikipedia.org/wiki/Implementation_intention">Implementation Intention</a>。</p>
-<h2 id="implementation-intention">Implementation Intention</h2>
-<blockquote>
-<p>执行意图由心理学家 Peter M.Gollitzer 提出，是个体为实现某一目标制定的一种计划，表现为“如果－那么”形式，例如“如果我遇到突发情况，那么我将保持冷静”。</p>
-<p>普通人思考目标的时候，使用的是目标意图，即：我要做什么、我要成为什么。目标意图有个最大的缺点：建立目标容易，执行目标很难。而执行意图更多思考的是要怎么做的问
-题。</p>
-<p>执行意图明确了个体在何时何地，以什么方式来实现目标，从而让个体更加容易地提取具体情景线索的心理表征，并通过这些线索建立起与目标所指行为的联系。在建立起线索和目标行为的联系之后，个体在随后遇到线索所指向的情景时（如考场），便可以用一种自动化的方式执行事先形成的计划，达成预设的目标。重要的是，执行意图的这种过程是自动化进行的，并不需要个体有意识地进行控制。</p>
-</blockquote>
-<p>再结合成功实行 GTD 的案例「<a href="https://www.calnewport.com/blog/2013/12/21/deep-habits-the-importance-of-planning-every-minute-of-your-work-day/">Deep Habits: The Importance of Planning Every Minute of Your Work Day</a>」和「<a href="https://www.nirandfar.com/todo-vs-schedule-builder/">Be a Schedule Builder, Not a To-Do List Maker</a>」，发现他们都会去在前一天花费一些时间去细化第二天的任务列表，甚至精确到分钟，这其实就是上面提到的 Implementation Intention 的实际操作，When Where and How。</p>
-<p>案例1当中是通过日历来安排一天的工作，细致到分钟。若发生变故需要变更，则在右侧重新记录变更后的安排。</p>
+      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
+      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Figure 1: NTP Mac 中可以在设置中找到 NTP 服务器的地址，</description>
+      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
 <figure>
-    <img loading="lazy" src="/ox-hugo/gtd_dark.png"
-         alt="Figure 1: gtd_dark"/> <figcaption>
-            <p><!-- raw HTML omitted -->Figure 1: <!-- raw HTML omitted -->gtd_dark</p>
+    <img loading="lazy" src="/ox-hugo/NTP.png"
+         alt="Figure 1: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>NTP</p>
         </figcaption>
 </figure>
 
-<p>案例2中则从容很多，不仅仅是安排了工作的内容，休闲娱乐的内容也会排在日历当中。(下图来自于案例2)</p>
+<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 ~time.apple.com~。</p>
 <figure>
-    <img loading="lazy" src="/ox-hugo/gtd_schedule_builder.png"
-         alt="Figure 2: gtd_schedule_builder"/> <figcaption>
-            <p><!-- raw HTML omitted -->Figure 2: <!-- raw HTML omitted -->gtd_schedule_builder</p>
+    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
+         alt="Figure 2: ntp-in-mac"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>ntp-in-mac</p>
         </figcaption>
 </figure>
 
-<p>其实回顾到上面我提到使用 Due 和 Fantastical 的经历，当中已经包含了执行意图的概念，任务都非常明晰，是今天必须要做的，是今天有非常合适的情景去做的，只不过是我没有意识到。</p>
-<h3 id="执行意图-会让人主动思考-避免囤积过多的任务">「执行意图」会让人主动思考，避免囤积过多的任务。</h3>
-<p>举个例子，按照执行意图的方法。如果我买了一本书，那么我就要在最近的闲暇时间都去读它，并在读完后写读后感总结一下。那么当我买书或者安排任务的时候就会想到买书不仅仅是一个完结，后续意味着我要去读它，并写读后感等一大堆的操作，这样就不会去在自己当前书还没有读完的情况下，就去安排下一本书。</p>
-<p>例子中的场景和平时从 Inbox 中安排任务很类似，造成任务完不成，积压，是因为没有安排好任务的情景关系，何时、何地、如何去做这件事情，仅仅就是目标意图，我要做这些事情。</p>
-<p>没有对每个任务细致的思考前，无法把握任务的工作量，适合完成的场景，也就无法把控今天安排的任务是否都能完成。但刚刚开始接触这套方法的人，难免会因为对工作细节不熟悉导致工作量评估不准确的情况。</p>
-<h3 id="执行意图-消除了在何时何地做某事的模糊性">「执行意图」消除了在何时何地做某事的模糊性。</h3>
-<p>例如，询问选民如何前往投票站等简单的问题，已经被证明可以提高当天的投票率。</p>
-<p>在这个例子当中，被问的选民其实受到了引导，增加去投票这件事情的确定性。我们也可以利用同样的方法，明确任务，顺着 <code>if...then...</code> 的顺序去完成任务。</p>
-<h2 id="回顾">回顾</h2>
-<p><a href="https://twitter.com/mikhails5v/status/1521406633548697603">@mikhails5v</a> 在 tweet thread 中提到了他在使用 Things 的 1.5 年中，对于没有完成的任务，在每晚回顾时，手动的去把今天的任务清空，已完成的任务会让他很有成就感；未完成的任务则在思考后移到后面适合的时候，或者重新放回 Inbox，甚至删掉它们。确保了每日的任务都是清空的状态，没有负罪感。即便是没有完成的任务，在每晚也会重新回顾，思考后续是否有合适的情景去完成它，或者干脆觉得没有执行的必要删除掉。</p>
-<h2 id="阶段性思考">阶段性思考</h2>
-<blockquote>
-<p>note-taking and knowledge creation will always require large amounts of brain work. On the other hand, GTD makes task management a simple, effortless process.</p>
-</blockquote>
-<p>对比我在 <a href="/posts/article/20220505162419-how_i_take_notes/">How I Take Notes</a> 中写的笔记的工作流，To-Do 和 Note-Taking 确实存在区别。</p>
-<p>GTD 中 Capture 是最不需要思考的，有什么东西直接记录到 Inbox 当中，清空当前的灵感，专注眼前的事情。例如，Things 中快速呼出 Inbox 的输入框；Org-roam 中写在 <code>.org</code> 文件中的 To-Do 都会集中在 Agenda 中；Logseq 中写在 Journals 中的 To-Do 也可以在 Pages 中按照自己的需求定制查询（复杂的查询有些门槛）。后续处理，按照执行意图的方法去评估 To-Do 适合的情景；较大的任务需要进行拆分成若干小任务，甚至形成一个专门的项目分为不同阶段去完成。</p>
-<p>Note-Taking 相反，从阅读就开始思考，随后各种灵感迸发，记录下来进行整理，去芜存菁后继续扩展，定期回顾后形成自己的知识并输出，这个时候的写作反而是最不需要动脑的部分了。以下的 Heat Map 表示不同阶段思考的程度。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/gtd_note_taking_dark.png"
-         alt="Figure 3: gtd_note_taking_dark"/> <figcaption>
-            <p><!-- raw HTML omitted -->Figure 3: <!-- raw HTML omitted -->gtd_note_taking_dark</p>
-        </figcaption>
-</figure>
-
-<h2 id="to-do-是否需要独立管理">To-Do 是否需要独立管理</h2>
-<p>至于 To-Do 和 Note-Taking 是否分开，我的看法是逻辑上分开，物理上并不一定分开。</p>
-<p>一天 24 小时是由不同阶段组成的，工作、生活、娱乐等等，都会产生 To-Do。那么管理 To-Do 也可以分为不同的场景。</p>
-<h3 id="工作">工作</h3>
-<p>工作上做好日志记录，是个好习惯，可以方便查阅当时的想法，解决问题的思路，以及相关人员是谁，就跟航海日志一样。这个时候产生的 To-Do 就是与日志息息相关的，上下文联系紧密。加上 Capture 的原则是尽快记录，并且不打断现有的思路，最好的方法就是记录在笔记当中（比如Logseq 的 Journals）。</p>
-<p>汇总的话就更加简单了，Logseq 通过 Clojure 的查询语句就可以完成汇总，不会这门语言也没有关系，Discord 中有专门的 Channel 可以提问或讨论。每天上班的第一件事情就是回顾汇总，结合工作进度安排今天的工作。</p>
-<h3 id="生活">生活</h3>
-<p>生活中琐事居多，场景也非常繁杂，这个时候完全可以用单独的 App 来进行管理。Things 来收集拆分任务，Fantastical 来进行一天时间的分配以及未来几天需要提醒的任务，Due 来提醒重复任务。</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>警惕 All-In-One 的想法，并不是所有场景都有统一的解决方案。工作和生活分开管理 To-Do 还有个好处，休假的时候你完全可以屏蔽掉工作的内容。</p>
-<p>另外不管工作和生活中，长期计划用甘特图来管理还是非常不错的，确立里程碑，控制进度，把握长期计划的走向。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Stub</title>
-      <link>https://luciuschen.github.io/posts/main/20220604180341-stub/</link>
-      <pubDate>Mon, 06 Jun 2022 21:14:28 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220604180341-stub/</guid>
-      <description>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。 在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端</description>
-      <content:encoded><![CDATA[<ol>
-<li>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。</li>
-<li>在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端和服务端之间传递参数的一段代码。</li>
-</ol>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>The Byzantine generals problem</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</link>
-      <pubDate>Mon, 06 Jun 2022 21:14:14 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</guid>
-      <description>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同</description>
-      <content:encoded><![CDATA[<p>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。</p>
-<p>在分布式计算中，不同的计算机通过通讯交换信息达成共识而按照同一套协作策略行动。但有时候，系统中的成员计算机可能出错而发送错误的信息，用于传递信息的通讯网络也可能导致信息损坏，使得网络中不同的成员关于全体协作的策略得出不同结论，从而破坏系统一致性。拜占庭将军问题被认为是容错性问题中最难的问题类型之一。</p>
-<p>容错率：Theorem: need 3ƒ+1 generals in total to tolerate ƒ malicious generals.</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>The two generals problem</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</link>
-      <pubDate>Mon, 06 Jun 2022 21:14:06 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</guid>
-      <description>两军问题（英语：Two Generals&amp;rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该</description>
-      <content:encoded><![CDATA[<p>两军问题（英语：Two Generals&rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该问题中，两支军队的将军只能通过派遣信使穿越敌方领土来互相通信，以此约定在同一时间点共同进攻。该问题希望求解如何在两位将军派出的任何信使都可能被俘虏的情况下，就发动攻击的时间点达成一致。</p>
-<p>两军问题是拜占庭将军问题的一个特例，常被编入与计算机网络相关的入门课程中。在传输控制协议（TCP）相关的课程中，该问题可用作解释 TCP 协议无法保证通信双方之间的状态一致性的原因。该问题也适用于其他存在信息丢失的双方通信的情况。作为认识逻辑的一个重要概念，该问题突出了共识（英语：Common_knowledge_(logic)）的重要性。一些学者也将此问题称作两军悖论（英语：Two Generals Paradox）或协同进攻问题（英语：Coordinated Attack Problem）。两军问题是第一个被证明无解的计算机通信问题。该证明的重要意义在于，其显示了对于存在通信错误的更广泛的问题（如拜占庭将军问题），同样是无解的。这也为所有分布式一致性协议的实现提供了一个符合现实的预期。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Remote Procedure Call (RPC)</title>
-      <link>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</link>
-      <pubDate>Mon, 06 Jun 2022 21:13:56 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</guid>
-      <description>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样</description>
-      <content:encoded><![CDATA[<p>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样调用远程系统上的其他进程。</p>
-<p>RPC 是通过 Interface Definition Language (IDL) 来描述接口，使得在不同的平台上运行的不同程序编写的程序可以相互通信。(IDL 是不以任何一种特定编程语言的方式指定类型签名或者函数调用的语言。)</p>
-<p>基本上，你可以用 IDL 定义客户端和服务端之间的接口，这样 RPC 机制就可以创建跨网络调用功能所需要的代码存根（Code <a href="/posts/main/20220604180341-stub/">Stub</a>）。</p>
-<pre tabindex="0"><code class="language-nil" data-lang="nil">+----------------+
-| Client         |
-|  +----------+  |         +---------------+
-|  |   main   |  |         | Server        |
-|  |----------|  |         |  +----------+ |
-|  | stub_cli |----(comms)---&gt;| stub_svr | |
-|  +----------+  |         |  |----------| |
-+----------------+         |  | function | |
-                           |  +----------+ |
-                           +---------------+
-</code></pre><p>在这个例子中，~main~ 没有在同一个程序中调用函数，而是调用了一个客户端存根函数（与函数的原型相同），该函数负责将信息打包，并通过通讯通道将其传送给另一个进程。</p>
-<p>这里可以是同一台机器或者不同机器，RPC 的优势之一就是能够随意移动服务器。</p>
-<p>在服务器中，有个「监听者」进程，它将接收这些信息并将其传递给服务器。服务器的存根接收信息，解包并将其传递给真正执行的函数。</p>
-<p>真正的函数运行后返回结果给到服务器存根，服务器存根可以将返回的信息打包，并将其传回给客户端存根。客户端存根再将其解包并传回给 ~main~。</p>
-<p>实际上的 IDL 大概像下面这样：</p>
-<pre tabindex="0"><code class="language-nil" data-lang="nil">[   uuid(f9f6be21-fd32-5577-8f2d-0800132bd567),
-    version(0),
-    endpoint(&#34;ncadg_ip_udp:[1234]&#34;, &#34;dds:[19]&#34;)
-] interface function_iface {
-    [idempotent] void function(
-        [in] int handle,
-        [out] int *status
-    );
-}
-</code></pre><p>头部是一些用于链接客户端和服务端的网络信息，RPC 发生在「会话层」中。接口部分才是 IDL 编译器建立客户端和服务器端存根的地方，以便客户端和服务端能够进行通讯，使得 RPC 正常工作。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Figma</title>
-      <link>https://luciuschen.github.io/posts/main/20220503154744-figma/</link>
-      <pubDate>Mon, 06 Jun 2022 15:31:34 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220503154744-figma/</guid>
-      <description>Plugin Scale Scale any frame, it’s contents, and all effects to any defined width or height. Sankey Connect Sankey Diagram Connect. </description>
-      <content:encoded><![CDATA[<h2 id="plugin">Plugin</h2>
-<ul>
-<li><a href="https://www.figma.com/community/plugin/836326694968364056/Scale">Scale</a> Scale any frame, it’s contents, and all effects to any defined width or height.</li>
-<li><a href="https://www.figma.com/community/plugin/991975059967102509/Sankey-Connect">Sankey Connect</a> Sankey Diagram Connect.</li>
-</ul>
+<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
+<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会收到 NTP 的影响。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
 ]]></content:encoded>
     </item>
     
     <item>
       <title>Org-roam</title>
       <link>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</link>
-      <pubDate>Mon, 06 Jun 2022 15:31:13 +0800</pubDate>
+      <pubDate>Wed, 08 Jun 2022 09:34:47 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</guid>
       <description>Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也</description>
@@ -537,28 +118,28 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
 </blockquote>
 <h2 id="install-emacs-with-homebrew">Install Emacs With Homebrew</h2>
 <p>First, Doom’s dependencies:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>brew install git ripgrep
-</span></span><span style="display:flex;"><span>brew install coreutils fd
-</span></span><span style="display:flex;"><span>xcode-selected --install
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install git ripgrep
+</span></span><span class="line"><span class="cl">brew install coreutils fd
+</span></span><span class="line"><span class="cl">xcode-selected --install
 </span></span></code></pre></div><p><a href="https://bitbucket.org/mituharu/emacs-mac/src">emacs-mac</a>. It offers good integration with macOS, native emojis and better childframe support.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>brew tap railwaycat/emacsmacport
-</span></span><span style="display:flex;"><span>brew install emacs-mac --with-modules
-</span></span><span style="display:flex;"><span>ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications/Emacs.app
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap railwaycat/emacsmacport
+</span></span><span class="line"><span class="cl">brew install emacs-mac --with-modules
+</span></span><span class="line"><span class="cl">ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications/Emacs.app
 </span></span></code></pre></div><h3 id="doom-doctor-问题"><code>Doom Doctor</code> 问题</h3>
 <ol>
 <li>
 <p>Warning: unable to detect fonts because fontconfig isn&rsquo;t installed</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    brew install fontconfig
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install fontconfig
 </span></span></code></pre></div></li>
 <li>
 <p>! Couldn&rsquo;t find shellcheck. Shell script linting will not work</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    brew install shellcheck
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install shellcheck
 </span></span></code></pre></div></li>
 </ol>
 <h2 id="doom-emacs">Doom Emacs</h2>
 <p>With Emacs and Doom&rsquo;s dependencies installed, next is to install Doom Emacs itself:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-</span></span><span style="display:flex;"><span>~/.emacs.d/bin/doom install
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+</span></span><span class="line"><span class="cl">~/.emacs.d/bin/doom install
 </span></span></code></pre></div><p>如果提示 <code>.emacs.d</code> 已存在，删除重新执行上述命令即可。</p>
 <p><code>.zshrc</code> 中需要添加 <code>export PATH=&quot;$HOME/.emacs.d/bin:$PATH</code> ，这样就可以直接使用 <code>doom</code> 命令了。</p>
 <h2 id="org-roam">Org-roam</h2>
@@ -764,36 +345,486 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
 </table>
 <h2 id="org-grammar">Org grammar</h2>
 <p>This is almost anything you need to know about Org mode syntax:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span> <span style="color:#66d9ef">* </span>This Is A Heading
-</span></span><span style="display:flex;"><span> ** This Is A Sub-Heading
-</span></span><span style="display:flex;"><span> *** And A Sub-Sub-Heading
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span> Paragraphs are separated by at least one empty line. <span style="font-weight:bold">*bold*</span> <span style="font-style:italic">/italic/</span> _underlined_ <span style="color:#f92672">+strikethrough+</span> <span style="color:#a6e22e">=monospaced=</span>
-</span></span><span style="display:flex;"><span> [[<span style="color:#a6e22e">http://Karl-Voit.at</span>][<span style="color:#f92672">Link description</span>]]
-</span></span><span style="display:flex;"><span> http://Karl-Voit.at → link without description
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- </span>list item
-</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- </span>another item
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">- </span>sub-item
-</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">1.</span> also enumerated
-</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">2.</span> if you like
-</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- [ ]</span> yet to be done
-</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- [X]</span> item which is done
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span> : Simple pre-formatted text such as for source code.
-</span></span><span style="display:flex;"><span> : This also respects the line breaks. <span style="font-weight:bold">*bold*</span> is not bold here.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"> <span class="k">* </span>This Is A Heading
+</span></span><span class="line"><span class="cl"> ** This Is A Sub-Heading
+</span></span><span class="line"><span class="cl"> *** And A Sub-Sub-Heading
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> Paragraphs are separated by at least one empty line. <span class="gs">*bold*</span> <span class="ge">/italic/</span> <span class="gl">_underlined_</span> <span class="gd">+strikethrough+</span> <span class="nc">=monospaced=</span>
+</span></span><span class="line"><span class="cl"> [[<span class="na">http://Karl-Voit.at</span>][<span class="nt">Link description</span>]]
+</span></span><span class="line"><span class="cl"> http://Karl-Voit.at → link without description
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="k">- </span>list item
+</span></span><span class="line"><span class="cl"> <span class="k">- </span>another item
+</span></span><span class="line"><span class="cl">   <span class="k">- </span>sub-item
+</span></span><span class="line"><span class="cl">     <span class="k">1.</span> also enumerated
+</span></span><span class="line"><span class="cl">     <span class="k">2.</span> if you like
+</span></span><span class="line"><span class="cl"> <span class="k">- [ ]</span> yet to be done
+</span></span><span class="line"><span class="cl"> <span class="k">- [X]</span> item which is done
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> : Simple pre-formatted text such as for source code.
+</span></span><span class="line"><span class="cl"> : This also respects the line breaks. <span class="gs">*bold*</span> is not bold here.
 </span></span></code></pre></div><p>code block</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>myresult <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">23</span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;Hello Europe! &#39;</span> <span style="color:#f92672">+</span> str(myresult))
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">myresult</span> <span class="o">=</span> <span class="mi">42</span> <span class="o">*</span> <span class="mi">23</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello Europe! &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">myresult</span><span class="p">))</span>
 </span></span></code></pre></div><p>table</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span> <span style="color:#e6db74">| My Column 1 | My Column 2 | Last Column |</span>
-</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|-------------+-------------+-------------|</span>
-</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|          42 | foo         | bar         |</span>
-</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|          23 | baz         | abcdefg     |</span>
-</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|-------------+-------------+-------------|</span>
-</span></span><span style="display:flex;"><span> <span style="color:#e6db74">|          65 |             |             |</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"> <span class="s">| My Column 1 | My Column 2 | Last Column |</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|-------------+-------------+-------------|</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|          42 | foo         | bar         |</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|          23 | baz         | abcdefg     |</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|-------------+-------------+-------------|</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|          65 |             |             |</span>
 </span></span></code></pre></div><h2 id="export-to-markdown">Export to Markdown</h2>
 <p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>， ~M-x org-pandoc-export-as-gfm~算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Refactoring Code</title>
+      <link>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</link>
+      <pubDate>Tue, 07 Jun 2022 16:29:27 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</guid>
+      <description>Refactoring Code How To Find Time Complexity Of An Algorithm
+JavaScript Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await </description>
+      <content:encoded><![CDATA[<h2 id="refactoring-code">Refactoring Code</h2>
+<p><a href="/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">How To Find Time Complexity Of An Algorithm</a></p>
+<h3 id="javascript">JavaScript</h3>
+<h4 id="refactoring-tips">Refactoring Tips</h4>
+<ol>
+<li><a href="/posts/main/20220506193520-refactoring_condition_statements/">Refactoring Condition statements</a></li>
+<li><a href="/posts/main/20220506193545-converting_callbacks_to_promises/">Converting callbacks to promises</a></li>
+<li><a href="/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">Refactoring Promise chains with async/await</a></li>
+</ol>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Refactoring Condition statements</title>
+      <link>https://luciuschen.github.io/posts/main/20220506193520-refactoring_condition_statements/</link>
+      <pubDate>Tue, 07 Jun 2022 16:29:13 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220506193520-refactoring_condition_statements/</guid>
+      <description>前端网络请求回调中经常会根据后端返回的不同 code 进行不同的业务处理。 if (res.data.code === &amp;#34;0000&amp;#34;) { //do something } else if (res.data.code === &amp;#34;0001&amp;#34;) { //do something } else if (res.data.code === &amp;#34;0002&amp;#34;) { //do something } else { //do something } 简单应用 const statusCode =</description>
+      <content:encoded><![CDATA[<p>前端网络请求回调中经常会根据后端返回的不同 code 进行不同的业务处理。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s2">&#34;0000&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s2">&#34;0001&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s2">&#34;0002&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>简单应用</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">statusCode</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="s2">&#34;0000&#34;</span><span class="p">,</span> <span class="s2">&#34;请求成功&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="s2">&#34;0001&#34;</span><span class="p">,</span> <span class="s2">&#34;未授权&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="s2">&#34;0002&#34;</span><span class="p">,</span> <span class="s2">&#34;拒绝访问&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">statusCode</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">0001</span><span class="p">);</span>
+</span></span></code></pre></div><p>复杂业务函数处理</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">getRequest</span> <span class="o">=</span> <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;请求打印&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">statusCode</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;0000&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">async</span> <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getRequest</span><span class="p">(</span><span class="nx">params</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;0001&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;未授权&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;0002&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;拒绝访问&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">showMessage</span> <span class="o">=</span> <span class="p">(</span><span class="nx">code</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Map 对象转数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">[...</span><span class="nx">statusCode</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(([</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">])</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">key</span> <span class="o">===</span> <span class="nx">code</span> <span class="o">?</span> <span class="nx">value</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="o">:</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="nx">showMessage</span><span class="p">(</span><span class="s2">&#34;0000&#34;</span><span class="p">);</span> <span class="c1">// 未授权
+</span></span></span></code></pre></div><p><code>forEach()</code> 和 <code>map()</code> 的区别：</p>
+<ul>
+<li><code>forEach()</code> 会修改原来的数组，而 <code>map()</code> 会得到一个新的数组并返回。所以需要生成新数组的时候，就用后者, 否则就用前者。</li>
+</ul>
+<p>Map vs Object</p>
+<ul>
+<li>
+<p>According to MDN:</p>
+<blockquote>
+<p>A Map object can iterate its elements in insertion order - a for..of loop will return an array of [key, value] for each iteration.</p>
+</blockquote>
+<!--quoteend-->
+<blockquote>
+<p>Objects are similar to Maps in that both let you set keys to values, retrieve those values, delete keys, and detect whether something is stored at a key. Because of this, Objects have been used as Maps historically; however, there are important differences between Objects and Maps that make using a Map better.</p>
+<p>An Object has a prototype, so there are default keys in the map. However, this can be bypassed using map = Object.create(null). The keys of an Object are Strings, where they can be any value for a Map. You can get the size of a Map easily while you have to manually keep track of size for an Object.</p>
+</blockquote>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Refactoring Promise chains with async/await</title>
+      <link>https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</link>
+      <pubDate>Tue, 07 Jun 2022 16:28:52 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</guid>
+      <description>const setDelay = (millisecond) =&amp;gt; { return new Promise((resolve, reject) =&amp;gt; { if (typeof millisecond != &amp;#34;number&amp;#34;) reject(new Error(&amp;#34;参数必须是number类型&amp;#34;)); setTimeout(() =&amp;gt; { resolve(`我延迟了${mi</description>
+      <content:encoded><![CDATA[<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">setDelay</span> <span class="o">=</span> <span class="p">(</span><span class="nx">millisecond</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">millisecond</span> <span class="o">!=</span> <span class="s2">&#34;number&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;参数必须是number类型&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`我延迟了</span><span class="si">${</span><span class="nx">millisecond</span><span class="si">}</span><span class="sb">毫秒后输出的`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="nx">millisecond</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">setDelaySecond</span> <span class="o">=</span> <span class="p">(</span><span class="nx">seconds</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">seconds</span> <span class="o">!=</span> <span class="s2">&#34;number&#34;</span> <span class="o">||</span> <span class="nx">seconds</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;参数必须是number类型，并且小于等于10&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`我延迟了</span><span class="si">${</span><span class="nx">seconds</span><span class="si">}</span><span class="sb">秒后输出的，注意单位是秒`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="nx">seconds</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Promise chains
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">setDelaySecond</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;完成&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// async/await
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="kr">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kr">await</span> <span class="nx">setDelaySecond</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kr">await</span> <span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;完成了&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">})();</span>
+</span></span></code></pre></div><p><code>await</code> 是个运算符，用于组成表达式，~await~ 表达式的运算结果取决于它等的东西。</p>
+<p>如果等到的不是个 <code>Promise</code> 对象，那么 <code>await</code> 表达式的运算结果就等于它等到的东西。</p>
+<p>如果等到的是个 <code>Promise</code> 对象，那么 <code>await</code> 就会阻塞后面的代码，等着 <code>Promise</code> 对象的 <code>resolved</code> 状态，然后得到 <code>resolve</code> 的值，作为 <code>await</code> 表达式的运算结果。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>How To Find Time Complexity Of An Algorithm</title>
+      <link>https://luciuschen.github.io/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</link>
+      <pubDate>Tue, 07 Jun 2022 16:28:37 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</guid>
+      <description>The most common metric for calculating time complexity is Big O notation. This removes all constant factors so that the running time can be estimated in relation to N as N approaches infinity. In general you can think of it like this:
+statement; Is constant. The running time of the statement will not change in relation to N.
+for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loop is directly proportional to N.</description>
+      <content:encoded><![CDATA[<p>The most common metric for calculating time complexity is Big O notation. This removes all constant factors so that the running time can be estimated in relation to N as N approaches infinity. In general you can think of it like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">statement</span><span class="p">;</span>
+</span></span></code></pre></div><p>Is constant. The running time of the statement will not change in relation to N.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="nx">statement</span><span class="p">;</span>
+</span></span></code></pre></div><p>Is linear. The running time of the loop is directly proportional to N. When N doubles, so does the running time.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">N</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="nx">statement</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Is quadratic. The running time of the two loops is proportional to the square of N. When N doubles, the running time increases by N * N.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="nx">low</span> <span class="o">&lt;=</span> <span class="nx">high</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mid</span> <span class="o">=</span> <span class="p">(</span><span class="nx">low</span> <span class="o">+</span> <span class="nx">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">target</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">[</span><span class="nx">mid</span><span class="p">])</span> <span class="nx">high</span> <span class="o">=</span> <span class="nx">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">target</span> <span class="o">&gt;</span> <span class="nx">list</span><span class="p">[</span><span class="nx">mid</span><span class="p">])</span> <span class="nx">low</span> <span class="o">=</span> <span class="nx">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Is logarithmic. The running time of the algorithm is proportional to the number of times N can be divided by 2. This is because the algorithm divides the working area in half with each iteration.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">void</span> <span class="nx">quicksort</span> <span class="p">(</span> <span class="kr">int</span> <span class="nx">list</span><span class="p">[],</span> <span class="kr">int</span> <span class="nx">left</span><span class="p">,</span> <span class="kr">int</span> <span class="nx">right</span> <span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">int</span> <span class="nx">pivot</span> <span class="o">=</span> <span class="nx">partition</span> <span class="p">(</span> <span class="nx">list</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">right</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">quicksort</span> <span class="p">(</span> <span class="nx">list</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">pivot</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">quicksort</span> <span class="p">(</span> <span class="nx">list</span><span class="p">,</span> <span class="nx">pivot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">right</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Is N * log ( N ). The running time consists of N loops (iterative or recursive) that are logarithmic, thus the algorithm is a combination of linear and logarithmic.</p>
+<p>In general, doing something with every item in one dimension is linear, doing something with every item in two dimensions is quadratic, and dividing the working area in half is logarithmic. There are other Big O measures such as cubic, exponential, and square root, but they&rsquo;re not nearly as common. Big O notation is described as O ( ) where is the measure. The quicksort algorithm would be described as O ( N * log ( N ) ).</p>
+<p>Note that none of this has taken into account best, average, and worst case measures. Each would have its own Big O notation. Also note that this is a VERY simplistic explanation. Big O is the most common, but it&rsquo;s also more complex that I&rsquo;ve shown. There are also other notations such as big omega, little o, and big theta. You probably won&rsquo;t encounter them outside of an algorithm analysis course. ;)</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Converting callbacks to promises</title>
+      <link>https://luciuschen.github.io/posts/main/20220506193545-converting_callbacks_to_promises/</link>
+      <pubDate>Tue, 07 Jun 2022 16:28:22 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220506193545-converting_callbacks_to_promises/</guid>
+      <description>这里用 setTimeout() 模仿异步请求。 const callbackFn = (firstName, callback) =&amp;gt; { setTimeout(() =&amp;gt; { if (!firstName) return callback(new Error(&amp;#34;no first name passed in!&amp;#34;)); // failed const fullName = `${firstName} Doe`; return callback(fullName); // succeed }, 2000); }; callbackFn(&amp;#34;John&amp;#34;, console.log); callbackFn(null, console.log); Promise 实现如下 const promiseFn = (firstName) =&amp;gt; { return new Promise((resolve, reject) =&amp;gt; { setTimeout(() =&amp;gt; { if (!firstName)</description>
+      <content:encoded><![CDATA[<p>这里用 <code>setTimeout()</code> 模仿异步请求。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">callbackFn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">firstName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">firstName</span><span class="p">)</span> <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;no first name passed in!&#34;</span><span class="p">));</span> <span class="c1">// failed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">fullName</span> <span class="o">=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">firstName</span><span class="si">}</span><span class="sb"> Doe`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">fullName</span><span class="p">);</span> <span class="c1">// succeed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">callbackFn</span><span class="p">(</span><span class="s2">&#34;John&#34;</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">callbackFn</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+</span></span></code></pre></div><p>Promise 实现如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">promiseFn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">firstName</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">firstName</span><span class="p">)</span> <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;no first name passed in!&#34;</span><span class="p">));</span> <span class="c1">// failed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">fullName</span> <span class="o">=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">firstName</span><span class="si">}</span><span class="sb"> Doe`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nx">resolve</span><span class="p">(</span><span class="nx">fullName</span><span class="p">);</span> <span class="c1">// succeed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">promiseFn</span><span class="p">(</span><span class="s2">&#34;Jane&#34;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">promiseFn</span><span class="p">().</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+</span></span></code></pre></div><p>这里是 Promise 一些需要注意的点</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">setDelay</span> <span class="o">=</span> <span class="p">(</span><span class="nx">millisecond</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">millisecond</span> <span class="o">!=</span> <span class="s2">&#34;number&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;参数必须是number类型&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`我延迟了</span><span class="si">${</span><span class="nx">millisecond</span><span class="si">}</span><span class="sb">毫秒后输出的`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="nx">millisecond</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">setDelaySecond</span> <span class="o">=</span> <span class="p">(</span><span class="nx">seconds</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">seconds</span> <span class="o">!=</span> <span class="s2">&#34;number&#34;</span> <span class="o">||</span> <span class="nx">seconds</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;参数必须是number类型，并且小于等于10&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`我延迟了</span><span class="si">${</span><span class="nx">seconds</span><span class="si">}</span><span class="sb">秒后输出的，是第二个函数`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="nx">seconds</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Promise chains
+</span></span></span><span class="line"><span class="cl"><span class="c1">// then 式链式写法的本质其实是一直往下传递返回一个新的 Promise，也就是说 then 在下一步接收的是上一步返回的 Promise。
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 处理错误只需要在链式末尾 catch 进行处理就可以。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">setDelay</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;我进行到第一步的&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">setDelaySecond</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;我进行到第二步的&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Promise 中间返回自定义的值只需要用 `retunPromise.resolve()` 处理就可以。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">setDelay</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;第一步完成了&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">message</span> <span class="o">=</span> <span class="s2">&#34;这是我自己想处理的值&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span> <span class="c1">// 这里返回我想在下一阶段处理的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;第二步完成了&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="c1">// 这里拿到上一阶段的返回值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//return Promise.resolve(&#39;这里可以继续返回&#39;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span></code></pre></div>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Implementation Intention GTD</title>
+      <link>https://luciuschen.github.io/posts/article/20220503143427-gtd/</link>
+      <pubDate>Tue, 07 Jun 2022 16:27:12 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/article/20220503143427-gtd/</guid>
+      <description>Introduction 2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omni</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omnifocus、Things 等等。</p>
+<p>一直不明白问题出在哪里，一天下来不管是 Today 还是 Inbox 当中的 To-Do 不仅没有变少，甚至更多了。自我怀疑、自我谴责让自己觉得是拖延症、懒造成了 To-Do 积压。</p>
+<p>回顾过去几年中，除了 Things 以外，我还使用了 Due 和 Fantastical 这两款软件。前者是吃药的时候，循环提醒该吃药了；后者是今天或者未来某天必须要做的事情，为了不让我忘记这个事情，哪怕我不确定这个事情在当天的哪个时间段做，都会给它加一个提醒，这样即便是过了时间，只要没有 checked 就会一直在锁屏或者下拉通知内，这样我就可以*不断地被提醒，找到合适的时间段去完成这件事情*​。</p>
+<p>至于 Things 时常被我厌恶，因为我有太多的 To-Do 积压在里面。每次打开它都有种翻开垃圾桶的感觉，没错，它就是垃圾桶。我再次捡起 Things 用的时候，基本都是我把“过期了的”、“没有意义的” To-Do 清空了才可以。这是一个循环往复的过程，过程中不断地伤害着我自己的自信心，并让我感到焦虑，永远做不完的事情，越积越多。</p>
+<p>在这样的情况下我了解到了 <a href="https://en.wikipedia.org/wiki/Implementation_intention">Implementation Intention</a>。</p>
+<h2 id="implementation-intention">Implementation Intention</h2>
+<blockquote>
+<p>执行意图由心理学家 Peter M.Gollitzer 提出，是个体为实现某一目标制定的一种计划，表现为“如果－那么”形式，例如“如果我遇到突发情况，那么我将保持冷静”。</p>
+<p>普通人思考目标的时候，使用的是目标意图，即：我要做什么、我要成为什么。目标意图有个最大的缺点：建立目标容易，执行目标很难。而执行意图更多思考的是要怎么做的问
+题。</p>
+<p>执行意图明确了个体在何时何地，以什么方式来实现目标，从而让个体更加容易地提取具体情景线索的心理表征，并通过这些线索建立起与目标所指行为的联系。在建立起线索和目标行为的联系之后，个体在随后遇到线索所指向的情景时（如考场），便可以用一种自动化的方式执行事先形成的计划，达成预设的目标。重要的是，执行意图的这种过程是自动化进行的，并不需要个体有意识地进行控制。</p>
+</blockquote>
+<p>再结合成功实行 GTD 的案例「<a href="https://www.calnewport.com/blog/2013/12/21/deep-habits-the-importance-of-planning-every-minute-of-your-work-day/">Deep Habits: The Importance of Planning Every Minute of Your Work Day</a>」和「<a href="https://www.nirandfar.com/todo-vs-schedule-builder/">Be a Schedule Builder, Not a To-Do List Maker</a>」，发现他们都会去在前一天花费一些时间去细化第二天的任务列表，甚至精确到分钟，这其实就是上面提到的 Implementation Intention 的实际操作，When Where and How。</p>
+<p>案例1当中是通过日历来安排一天的工作，细致到分钟。若发生变故需要变更，则在右侧重新记录变更后的安排。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/gtd_dark.png"
+         alt="Figure 1: gtd_dark"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>gtd_dark</p>
+        </figcaption>
+</figure>
+
+<p>案例2中则从容很多，不仅仅是安排了工作的内容，休闲娱乐的内容也会排在日历当中。(下图来自于案例2)</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/gtd_schedule_builder.png"
+         alt="Figure 2: gtd_schedule_builder"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>gtd_schedule_builder</p>
+        </figcaption>
+</figure>
+
+<p>其实回顾到上面我提到使用 Due 和 Fantastical 的经历，当中已经包含了执行意图的概念，任务都非常明晰，是今天必须要做的，是今天有非常合适的情景去做的，只不过是我没有意识到。</p>
+<h3 id="执行意图-会让人主动思考-避免囤积过多的任务">「执行意图」会让人主动思考，避免囤积过多的任务。</h3>
+<p>举个例子，按照执行意图的方法。如果我买了一本书，那么我就要在最近的闲暇时间都去读它，并在读完后写读后感总结一下。那么当我买书或者安排任务的时候就会想到买书不仅仅是一个完结，后续意味着我要去读它，并写读后感等一大堆的操作，这样就不会去在自己当前书还没有读完的情况下，就去安排下一本书。</p>
+<p>例子中的场景和平时从 Inbox 中安排任务很类似，造成任务完不成，积压，是因为没有安排好任务的情景关系，何时、何地、如何去做这件事情，仅仅就是目标意图，我要做这些事情。</p>
+<p>没有对每个任务细致的思考前，无法把握任务的工作量，适合完成的场景，也就无法把控今天安排的任务是否都能完成。但刚刚开始接触这套方法的人，难免会因为对工作细节不熟悉导致工作量评估不准确的情况。</p>
+<h3 id="执行意图-消除了在何时何地做某事的模糊性">「执行意图」消除了在何时何地做某事的模糊性。</h3>
+<p>例如，询问选民如何前往投票站等简单的问题，已经被证明可以提高当天的投票率。</p>
+<p>在这个例子当中，被问的选民其实受到了引导，增加去投票这件事情的确定性。我们也可以利用同样的方法，明确任务，顺着 <code>if...then...</code> 的顺序去完成任务。</p>
+<h2 id="回顾">回顾</h2>
+<p><a href="https://twitter.com/mikhails5v/status/1521406633548697603">@mikhails5v</a> 在 tweet thread 中提到了他在使用 Things 的 1.5 年中，对于没有完成的任务，在每晚回顾时，手动的去把今天的任务清空，已完成的任务会让他很有成就感；未完成的任务则在思考后移到后面适合的时候，或者重新放回 Inbox，甚至删掉它们。确保了每日的任务都是清空的状态，没有负罪感。即便是没有完成的任务，在每晚也会重新回顾，思考后续是否有合适的情景去完成它，或者干脆觉得没有执行的必要删除掉。</p>
+<h2 id="阶段性思考">阶段性思考</h2>
+<blockquote>
+<p>note-taking and knowledge creation will always require large amounts of brain work. On the other hand, GTD makes task management a simple, effortless process.</p>
+</blockquote>
+<p>对比我在 <a href="/posts/article/20220505162419-how_i_take_notes/">How I Take Notes</a> 中写的笔记的工作流，To-Do 和 Note-Taking 确实存在区别。</p>
+<p>GTD 中 Capture 是最不需要思考的，有什么东西直接记录到 Inbox 当中，清空当前的灵感，专注眼前的事情。例如，Things 中快速呼出 Inbox 的输入框；Org-roam 中写在 <code>.org</code> 文件中的 To-Do 都会集中在 Agenda 中；Logseq 中写在 Journals 中的 To-Do 也可以在 Pages 中按照自己的需求定制查询（复杂的查询有些门槛）。后续处理，按照执行意图的方法去评估 To-Do 适合的情景；较大的任务需要进行拆分成若干小任务，甚至形成一个专门的项目分为不同阶段去完成。</p>
+<p>Note-Taking 相反，从阅读就开始思考，随后各种灵感迸发，记录下来进行整理，去芜存菁后继续扩展，定期回顾后形成自己的知识并输出，这个时候的写作反而是最不需要动脑的部分了。以下的 Heat Map 表示不同阶段思考的程度。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/gtd_note_taking_dark.png"
+         alt="Figure 3: gtd_note_taking_dark"/> <figcaption>
+            <p><span class="figure-number">Figure 3: </span>gtd_note_taking_dark</p>
+        </figcaption>
+</figure>
+
+<h2 id="to-do-是否需要独立管理">To-Do 是否需要独立管理</h2>
+<p>至于 To-Do 和 Note-Taking 是否分开，我的看法是逻辑上分开，物理上并不一定分开。</p>
+<p>一天 24 小时是由不同阶段组成的，工作、生活、娱乐等等，都会产生 To-Do。那么管理 To-Do 也可以分为不同的场景。</p>
+<h3 id="工作">工作</h3>
+<p>工作上做好日志记录，是个好习惯，可以方便查阅当时的想法，解决问题的思路，以及相关人员是谁，就跟航海日志一样。这个时候产生的 To-Do 就是与日志息息相关的，上下文联系紧密。加上 Capture 的原则是尽快记录，并且不打断现有的思路，最好的方法就是记录在笔记当中（比如Logseq 的 Journals）。</p>
+<p>汇总的话就更加简单了，Logseq 通过 Clojure 的查询语句就可以完成汇总，不会这门语言也没有关系，Discord 中有专门的 Channel 可以提问或讨论。每天上班的第一件事情就是回顾汇总，结合工作进度安排今天的工作。</p>
+<h3 id="生活">生活</h3>
+<p>生活中琐事居多，场景也非常繁杂，这个时候完全可以用单独的 App 来进行管理。Things 来收集拆分任务，Fantastical 来进行一天时间的分配以及未来几天需要提醒的任务，Due 来提醒重复任务。</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>警惕 All-In-One 的想法，并不是所有场景都有统一的解决方案。工作和生活分开管理 To-Do 还有个好处，休假的时候你完全可以屏蔽掉工作的内容。</p>
+<p>另外不管工作和生活中，长期计划用甘特图来管理还是非常不错的，确立里程碑，控制进度，把握长期计划的走向。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Stub</title>
+      <link>https://luciuschen.github.io/posts/main/20220604180341-stub/</link>
+      <pubDate>Mon, 06 Jun 2022 21:14:28 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220604180341-stub/</guid>
+      <description>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。 在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端</description>
+      <content:encoded><![CDATA[<ol>
+<li>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。</li>
+<li>在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端和服务端之间传递参数的一段代码。</li>
+</ol>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>The Byzantine generals problem</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</link>
+      <pubDate>Mon, 06 Jun 2022 21:14:14 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</guid>
+      <description>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同</description>
+      <content:encoded><![CDATA[<p>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。</p>
+<p>在分布式计算中，不同的计算机通过通讯交换信息达成共识而按照同一套协作策略行动。但有时候，系统中的成员计算机可能出错而发送错误的信息，用于传递信息的通讯网络也可能导致信息损坏，使得网络中不同的成员关于全体协作的策略得出不同结论，从而破坏系统一致性。拜占庭将军问题被认为是容错性问题中最难的问题类型之一。</p>
+<p>容错率：Theorem: need 3ƒ+1 generals in total to tolerate ƒ malicious generals.</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>The two generals problem</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</link>
+      <pubDate>Mon, 06 Jun 2022 21:14:06 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</guid>
+      <description>两军问题（英语：Two Generals&amp;rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该</description>
+      <content:encoded><![CDATA[<p>两军问题（英语：Two Generals&rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该问题中，两支军队的将军只能通过派遣信使穿越敌方领土来互相通信，以此约定在同一时间点共同进攻。该问题希望求解如何在两位将军派出的任何信使都可能被俘虏的情况下，就发动攻击的时间点达成一致。</p>
+<p>两军问题是拜占庭将军问题的一个特例，常被编入与计算机网络相关的入门课程中。在传输控制协议（TCP）相关的课程中，该问题可用作解释 TCP 协议无法保证通信双方之间的状态一致性的原因。该问题也适用于其他存在信息丢失的双方通信的情况。作为认识逻辑的一个重要概念，该问题突出了共识（英语：Common_knowledge_(logic)）的重要性。一些学者也将此问题称作两军悖论（英语：Two Generals Paradox）或协同进攻问题（英语：Coordinated Attack Problem）。两军问题是第一个被证明无解的计算机通信问题。该证明的重要意义在于，其显示了对于存在通信错误的更广泛的问题（如拜占庭将军问题），同样是无解的。这也为所有分布式一致性协议的实现提供了一个符合现实的预期。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Remote Procedure Call (RPC)</title>
+      <link>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</link>
+      <pubDate>Mon, 06 Jun 2022 21:13:56 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</guid>
+      <description>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样</description>
+      <content:encoded><![CDATA[<p>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样调用远程系统上的其他进程。</p>
+<p>RPC 是通过 Interface Definition Language (IDL) 来描述接口，使得在不同的平台上运行的不同程序编写的程序可以相互通信。(IDL 是不以任何一种特定编程语言的方式指定类型签名或者函数调用的语言。)</p>
+<p>基本上，你可以用 IDL 定义客户端和服务端之间的接口，这样 RPC 机制就可以创建跨网络调用功能所需要的代码存根（Code <a href="/posts/main/20220604180341-stub/">Stub</a>）。</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">+----------------+
+| Client         |
+|  +----------+  |         +---------------+
+|  |   main   |  |         | Server        |
+|  |----------|  |         |  +----------+ |
+|  | stub_cli |----(comms)---&gt;| stub_svr | |
+|  +----------+  |         |  |----------| |
++----------------+         |  | function | |
+                           |  +----------+ |
+                           +---------------+
+</code></pre><p>在这个例子中，~main~ 没有在同一个程序中调用函数，而是调用了一个客户端存根函数（与函数的原型相同），该函数负责将信息打包，并通过通讯通道将其传送给另一个进程。</p>
+<p>这里可以是同一台机器或者不同机器，RPC 的优势之一就是能够随意移动服务器。</p>
+<p>在服务器中，有个「监听者」进程，它将接收这些信息并将其传递给服务器。服务器的存根接收信息，解包并将其传递给真正执行的函数。</p>
+<p>真正的函数运行后返回结果给到服务器存根，服务器存根可以将返回的信息打包，并将其传回给客户端存根。客户端存根再将其解包并传回给 ~main~。</p>
+<p>实际上的 IDL 大概像下面这样：</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">[   uuid(f9f6be21-fd32-5577-8f2d-0800132bd567),
+    version(0),
+    endpoint(&#34;ncadg_ip_udp:[1234]&#34;, &#34;dds:[19]&#34;)
+] interface function_iface {
+    [idempotent] void function(
+        [in] int handle,
+        [out] int *status
+    );
+}
+</code></pre><p>头部是一些用于链接客户端和服务端的网络信息，RPC 发生在「会话层」中。接口部分才是 IDL 编译器建立客户端和服务器端存根的地方，以便客户端和服务端能够进行通讯，使得 RPC 正常工作。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Figma</title>
+      <link>https://luciuschen.github.io/posts/main/20220503154744-figma/</link>
+      <pubDate>Mon, 06 Jun 2022 15:31:34 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220503154744-figma/</guid>
+      <description>Plugin Scale Scale any frame, it’s contents, and all effects to any defined width or height. Sankey Connect Sankey Diagram Connect. </description>
+      <content:encoded><![CDATA[<h2 id="plugin">Plugin</h2>
+<ul>
+<li><a href="https://www.figma.com/community/plugin/836326694968364056/Scale">Scale</a> Scale any frame, it’s contents, and all effects to any defined width or height.</li>
+<li><a href="https://www.figma.com/community/plugin/991975059967102509/Sankey-Connect">Sankey Connect</a> Sankey Diagram Connect.</li>
+</ul>
 ]]></content:encoded>
     </item>
     
@@ -822,21 +853,21 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
 <figure>
             <img loading="lazy" src="/ox-hugo/take-notes-draft.png"
                  alt="Figure 1: take-notes-draft"/> <figcaption>
-                    <p><!-- raw HTML omitted -->Figure 1: <!-- raw HTML omitted -->take-notes-draft</p>
+                    <p><span class="figure-number">Figure 1: </span>take-notes-draft</p>
                 </figcaption>
         </figure>
 
 <figure>
             <img loading="lazy" src="/ox-hugo/take-notes-draft_1.png"
                  alt="Figure 2: take-notes-draft_1"/> <figcaption>
-                    <p><!-- raw HTML omitted -->Figure 2: <!-- raw HTML omitted -->take-notes-draft_1</p>
+                    <p><span class="figure-number">Figure 2: </span>take-notes-draft_1</p>
                 </figcaption>
         </figure>
 
 <figure>
             <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
                  alt="Figure 3: take-notes-sankey"/> <figcaption>
-                    <p><!-- raw HTML omitted -->Figure 3: <!-- raw HTML omitted -->take-notes-sankey</p>
+                    <p><span class="figure-number">Figure 3: </span>take-notes-sankey</p>
                 </figcaption>
         </figure>
 
@@ -864,14 +895,14 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
 <figure>
         <img loading="lazy" src="/ox-hugo/gtd_note_taking_dark.png"
              alt="Figure 4: gtd_note_taking_dark"/> <figcaption>
-                <p><!-- raw HTML omitted -->Figure 4: <!-- raw HTML omitted -->gtd_note_taking_dark</p>
+                <p><span class="figure-number">Figure 4: </span>gtd_note_taking_dark</p>
             </figcaption>
     </figure>
 
 <figure>
         <img loading="lazy" src="/ox-hugo/gtd_note_taking_light.png"
              alt="Figure 5: gtd_note_taking_light"/> <figcaption>
-                <p><!-- raw HTML omitted -->Figure 5: <!-- raw HTML omitted -->gtd_note_taking_light</p>
+                <p><span class="figure-number">Figure 5: </span>gtd_note_taking_light</p>
             </figcaption>
     </figure>
 
@@ -905,7 +936,7 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
 <figure>
     <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
          alt="Figure 1: take-notes-sankey"/> <figcaption>
-            <p><!-- raw HTML omitted -->Figure 1: <!-- raw HTML omitted -->take-notes-sankey</p>
+            <p><span class="figure-number">Figure 1: </span>take-notes-sankey</p>
         </figcaption>
 </figure>
 

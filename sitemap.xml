@@ -3,13 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</loc>
-    <lastmod>2022-06-07T23:04:09+08:00</lastmod>
+    <lastmod>2022-06-08T16:49:17+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/</loc>
-    <lastmod>2022-06-07T23:04:09+08:00</lastmod>
+    <lastmod>2022-06-08T16:49:17+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/</loc>
-    <lastmod>2022-06-07T23:04:09+08:00</lastmod>
+    <lastmod>2022-06-08T16:49:17+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</loc>
+    <lastmod>2022-06-08T16:49:13+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</loc>
+    <lastmod>2022-06-08T09:34:47+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</loc>
     <lastmod>2022-06-07T16:29:27+08:00</lastmod>
@@ -49,9 +55,6 @@
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220503154744-figma/</loc>
     <lastmod>2022-06-06T15:31:34+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</loc>
-    <lastmod>2022-06-06T15:31:13+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220503145636-build_diagram/</loc>
     <lastmod>2022-06-06T15:30:51+08:00</lastmod>
