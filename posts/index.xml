@@ -6,7 +6,37 @@
     <description>Recent content in Posts on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Jun 2022 16:49:17 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Jun 2022 17:27:39 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Network Time Protocol(NTP)</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
+      <pubDate>Wed, 08 Jun 2022 17:27:39 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
+      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Figure 1: NTP Round-trip network delay: δ = (t4-t1) - (t3-t2) Estimated server time when client receives response: t3 + ½</description>
+      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/NTP.png"
+         alt="Figure 1: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>NTP</p>
+        </figcaption>
+</figure>
+
+<p>Round-trip network delay: δ = (t4-t1) - (t3-t2)</p>
+<p>Estimated server time when client receives response: t3 + ½δ</p>
+<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
+         alt="Figure 2: ntp-in-mac"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>ntp-in-mac</p>
+        </figcaption>
+</figure>
+
+<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
+<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会收到 NTP 的影响。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
@@ -71,34 +101,6 @@
 <h3 id="clock-synchronisation">Clock synchronisation</h3>
 <p>物理时钟会有时间上的偏移，通常是通过和电脑、手机、电视等相对准确的地方来校准物理时钟的时间，比如手表，老式的钟摆。</p>
 <p>电脑上的时间同样会有偏移，是通过 <a href="/posts/main/20220602202411-network_time_protocol_ntp/">Network Time Protocol(NTP)</a> 来校准电脑的时间。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Network Time Protocol(NTP)</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
-      <pubDate>Wed, 08 Jun 2022 16:49:13 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
-      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Figure 1: NTP Mac 中可以在设置中找到 NTP 服务器的地址，</description>
-      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/NTP.png"
-         alt="Figure 1: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 ~time.apple.com~。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
-         alt="Figure 2: ntp-in-mac"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>ntp-in-mac</p>
-        </figcaption>
-</figure>
-
-<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
-<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会收到 NTP 的影响。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
 ]]></content:encoded>
     </item>
     
