@@ -5,27 +5,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Refactoring Promise chains with async/await | Lucius&#39;s PKM</title>
+<title>Causality and Happen-before relation | Lucius&#39;s PKM</title>
 <meta name="keywords" content="">
-<meta name="description" content="const setDelay = (millisecond) =&gt; { return new Promise((resolve, reject) =&gt; { if (typeof millisecond != &#34;number&#34;) reject(new Error(&#34;参数必须是number类型&#34;)); setTimeout(() =&gt; { resolve(`我延迟了${mi">
+<meta name="description" content="The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节">
 <meta name="author" content="Lucius Chen">
-<link rel="canonical" href="https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">
+<link rel="canonical" href="https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.1a604fedec25e03e9fbf0fa84dfc2a185356369a0f7842f05d48cbb4e27cb258.css" integrity="sha256-GmBP7ewl4D6fvw&#43;oTfwqGFNWNpoPeELwXUjLtOJ8slg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://luciuschen.github.io/favicon.ico">
 <link rel="apple-touch-icon" href="https://luciuschen.github.io/apple-touch-icon.png">
 <script async defer data-website-id="f4e3ad0a-7fc1-4f18-b08c-9be77b60cdd5" src="https://oishii.reorx.com/oishii.js"></script>
 
-<meta name="twitter:title" content="Refactoring Promise chains with async/await | Lucius&#39;s PKM" />
-<meta name="twitter:description" content="const setDelay = (millisecond) =&gt; { return new Promise((resolve, reject) =&gt; { if (typeof millisecond != &#34;number&#34;) reject(new Error(&#34;参数必须是number类型&#34;)); setTimeout(() =&gt; { resolve(`我延迟了${mi" />
+<meta name="twitter:title" content="Causality and Happen-before relation | Lucius&#39;s PKM" />
+<meta name="twitter:description" content="The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节" />
 <meta name="twitter:site" content="@novoreorx" />
 <meta name="twitter:creator" content="@novoreorx" />
-<meta property="og:title" content="Refactoring Promise chains with async/await | Lucius&#39;s PKM" />
-<meta property="og:description" content="const setDelay = (millisecond) =&gt; { return new Promise((resolve, reject) =&gt; { if (typeof millisecond != &#34;number&#34;) reject(new Error(&#34;参数必须是number类型&#34;)); setTimeout(() =&gt; { resolve(`我延迟了${mi" />
+<meta property="og:title" content="Causality and Happen-before relation | Lucius&#39;s PKM" />
+<meta property="og:description" content="The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/" />
+<meta property="og:url" content="https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-06-07T16:28:52&#43;08:00" />
+  <meta property="article:modified_time" content="2022-06-09T16:55:02&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -42,8 +42,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "Refactoring Promise chains with async/await",
-      "item": "https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/"
+      "name": "Causality and Happen-before relation",
+      "item": "https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/"
     }
   ]
 }
@@ -52,23 +52,23 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Refactoring Promise chains with async/await | Lucius's PKM",
-  "name": "Refactoring Promise chains with async\/await",
-  "description": "const setDelay = (millisecond) =\u0026gt; { return new Promise((resolve, reject) =\u0026gt; { if (typeof millisecond != \u0026#34;number\u0026#34;) reject(new Error(\u0026#34;参数必须是number类型\u0026#34;)); setTimeout(() =\u0026gt; { resolve(`我延迟了${mi",
+  "headline": "Causality and Happen-before relation | Lucius's PKM",
+  "name": "Causality and Happen-before relation",
+  "description": "The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节",
   "keywords": [
     
   ],
-  "wordCount" : "427",
+  "wordCount" : "544",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-06-07T16:28:52+08:00",
+  "dateModified": "2022-06-09T16:55:02+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
   }],
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/"
+    "@id": "https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/"
   },
   "publisher": {
     "@type": "Organization",
@@ -266,95 +266,114 @@ function toggleThemeListener() {
   <header class="post-header">
     
     <h1 class="post-title">
-      Refactoring Promise chains with async/await
+      Causality and Happen-before relation
     </h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>June 7, 2022</span></span><span class="meta-item">
+  <span>June 9, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>427 words</span></span><span class="meta-item">
+  <span>544 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>1 min</span></span>
+  <span>2 min</span></span>
 
       
       
     </div>
-  </header> 
+  </header> <div class="toc side right">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
 
-  <div class="post-content"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">setDelay</span> <span class="o">=</span> <span class="p">(</span><span class="nx">millisecond</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">millisecond</span> <span class="o">!=</span> <span class="s2">&#34;number&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;参数必须是number类型&#34;</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`我延迟了</span><span class="si">${</span><span class="nx">millisecond</span><span class="si">}</span><span class="sb">毫秒后输出的`</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="nx">millisecond</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">setDelaySecond</span> <span class="o">=</span> <span class="p">(</span><span class="nx">seconds</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">seconds</span> <span class="o">!=</span> <span class="s2">&#34;number&#34;</span> <span class="o">||</span> <span class="nx">seconds</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;参数必须是number类型，并且小于等于10&#34;</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`我延迟了</span><span class="si">${</span><span class="nx">seconds</span><span class="si">}</span><span class="sb">秒后输出的，注意单位是秒`</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="nx">seconds</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// Promise chains
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">setDelaySecond</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">})</span>
-</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">})</span>
-</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;完成&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">})</span>
-</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// async/await
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="kr">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kr">await</span> <span class="nx">setDelaySecond</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kr">await</span> <span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;完成了&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">})();</span>
-</span></span></code></pre></div><p><code>await</code> 是个运算符，用于组成表达式，~await~ 表达式的运算结果取决于它等的东西。</p>
-<p>如果等到的不是个 <code>Promise</code> 对象，那么 <code>await</code> 表达式的运算结果就等于它等到的东西。</p>
-<p>如果等到的是个 <code>Promise</code> 对象，那么 <code>await</code> 就会阻塞后面的代码，等着 <code>Promise</code> 对象的 <code>resolved</code> 状态，然后得到 <code>resolve</code> 的值，作为 <code>await</code> 表达式的运算结果。</p>
+        <div class="inner"><ul>
+                <li>
+                    <a href="#the-happens-before-relation" aria-label="The Happens-before relation">The Happens-before relation</a><ul>
+                        
+                <li>
+                    <a href="#happen-before-relation-example" aria-label="Happen-before relation example">Happen-before relation example</a></li></ul>
+                </li>
+                <li>
+                    <a href="#causality" aria-label="Causality">Causality</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="the-happens-before-relation">The Happens-before relation<a hidden class="anchor" aria-hidden="true" href="#the-happens-before-relation">¶</a></h2>
+<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
+<p>event a <strong>happens before</strong> event b, written a → b.</p>
+<p>那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前：</p>
+<ul>
+<li>
+<p>a 和 b 发生在相同节点，并且按照本地节点的执行顺序，a 发生在 b 之前。</p>
+</li>
+<li>
+<p>事件 a 是发送消息 m，事件 b 是接收相同的消息 m（假定发送的消息都是唯一的）。</p>
+</li>
+<li>
+<p>有这么一个时间 c 满足，a → c 且 c → b。</p>
+<p>happens-before relation 是局部的顺序：有可能存在既不满足 a → b 也不满足 b → a，这样 a 和 b 就是并行的，写作 a || b。</p>
+</li>
+</ul>
+<h3 id="happen-before-relation-example">Happen-before relation example<a hidden class="anchor" aria-hidden="true" href="#happen-before-relation-example">¶</a></h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
+         alt="Figure 1: happens-before-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>a → b, c → d, and e → f due to process order</li>
+<li>b → c and d → f due to messages m1 and m2</li>
+<li>a → c, a → d, a → f, b → d, b → f, and c → f due to transitivity</li>
+<li>a || e, b || e, c || e, and d || e</li>
+</ul>
+<h2 id="causality">Causality<a hidden class="anchor" aria-hidden="true" href="#causality">¶</a></h2>
+<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
+<ul>
+<li>当 a → b, 那么 a 可能是 b 的因。</li>
+<li>当 a || b, a 和 b 之间不存在因果关系。</li>
+</ul>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causality.png"
+         alt="Figure 2: causality"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>causality</p>
+        </figcaption>
+</figure>
+
+<p>Let ≺ be a strict total order on events.
+如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
+<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
+<p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
 
 
     
 
 
    
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
 	  
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
    
 
    
@@ -392,7 +411,7 @@ function toggleThemeListener() {
 	<div class="backlinks">
 	  <ul>
 	   
-		  <li><a href="/posts/main/20220506193054-refactoring_code/">Refactoring Code</a></li>
+		  <li><a href="/posts/main/20220602202933-distribution_system/">Distribution System</a></li>
 	   
 	 </ul>
 	</div>
@@ -403,17 +422,17 @@ function toggleThemeListener() {
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://luciuschen.github.io/posts/main/20220506193520-refactoring_condition_statements/">
+  <a class="prev" href="https://luciuschen.github.io/posts/main/20220602202933-distribution_system/">
     <span class="title">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;Prev Page</span>
     <br>
-    <span>Refactoring Condition statements</span>
+    <span>Distribution System</span>
   </a>
-  <a class="next" href="https://luciuschen.github.io/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">
+  <a class="next" href="https://luciuschen.github.io/posts/article/20220503143427-gtd/">
     <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
     </span>
     <br>
-    <span>How To Find Time Complexity Of An Algorithm</span>
+    <span>Implementation Intention GTD</span>
   </a>
 </nav>
 
