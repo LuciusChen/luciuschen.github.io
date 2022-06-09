@@ -6,11 +6,11 @@
     <description>Recent content on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Jun 2022 22:59:12 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Jun 2022 23:03:25 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Lamport Clocks</title>
       <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
-      <pubDate>Thu, 09 Jun 2022 22:59:12 +0800</pubDate>
+      <pubDate>Thu, 09 Jun 2022 23:03:25 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
       <description>Lamport clocks algorithm on initialisation do t := 0 ▻ each node has its own local variable t end on on any event occurring at the local node do t := t + 1 end on on request to send message m do t := t + 1; send (t, m) via the underlying network link end on on receiving (t ′ , m) via the underlying network link do</description>
@@ -64,7 +64,7 @@ end on
 <p>Then the pair (L(e), N(e)) uniquely identiﬁes event e.</p>
 <p>Deﬁne a total order ≺ using Lamport timestamps:</p>
 <p>(a ≺ b) ⇐⇒ (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b))) This order is causal: (a → b) ⇒ (a ≺ b) (∨ is logical or, ∧ is logical and.)</p>
-<p>This order is causal: (a → b) =⇒ (a ≺ b)</p>
+<p>This order is causal: (a → b) ⇒ (a ≺ b)</p>
 <p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
 <p>对于任何两个事件 a ≠ b，有 a ≺ b 或 b ≺ a。它是一个因果顺序：也就是说，只要 a → b，我们就有 a ≺ b。然而，如果 a ∥ b，我们可以有 a ≺ b 或 b ≺ a，所以这两个事件的顺序并不能确定。</p>
 ]]></content:encoded>
