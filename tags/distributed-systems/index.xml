@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>distributed-systems on Lucius&#39;s PKM</title>
+    <link>https://luciuschen.github.io/tags/distributed-systems/</link>
+    <description>Recent content in distributed-systems on Lucius&#39;s PKM</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Jun 2022 22:51:32 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/distributed-systems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vector Clocks</title>
+      <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
+      <pubDate>Thu, 09 Jun 2022 22:51:32 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</guid>
+      <description>V(a) ≤ V(b) iff ({a} ∪ {e|e → a}) ⊆ ({b} ∪ {e|e → b})</description>
+      <content:encoded><![CDATA[<p>V(a) ≤ V(b) iff ({a} ∪ {e|e → a}) ⊆ ({b} ∪ {e|e → b})</p>
+]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>
