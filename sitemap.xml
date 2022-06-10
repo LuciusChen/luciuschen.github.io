@@ -3,28 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</loc>
-    <lastmod>2022-06-09T23:03:25+08:00</lastmod>
+    <lastmod>2022-06-10T11:35:26+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/</loc>
-    <lastmod>2022-06-09T23:03:25+08:00</lastmod>
+    <lastmod>2022-06-10T11:35:26+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/</loc>
-    <lastmod>2022-06-09T23:03:25+08:00</lastmod>
+    <lastmod>2022-06-10T11:35:26+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</loc>
+    <lastmod>2022-06-10T11:31:29+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</loc>
+    <lastmod>2022-06-10T11:27:18+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/tags/</loc>
+    <lastmod>2022-06-10T11:27:18+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/tags/top-node/</loc>
+    <lastmod>2022-06-10T11:27:18+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/tags/distributed-systems/</loc>
     <lastmod>2022-06-09T22:51:32+08:00</lastmod>
   </url><url>
-    <loc>https://luciuschen.github.io/tags/</loc>
-    <lastmod>2022-06-09T22:51:32+08:00</lastmod>
-  </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</loc>
     <lastmod>2022-06-09T22:51:32+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</loc>
-    <lastmod>2022-06-09T22:51:05+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/tags/top-node/</loc>
-    <lastmod>2022-06-09T22:51:05+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</loc>
     <lastmod>2022-06-09T18:32:20+08:00</lastmod>
@@ -37,9 +40,6 @@
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</loc>
     <lastmod>2022-06-08T23:19:07+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</loc>
-    <lastmod>2022-06-08T09:34:47+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</loc>
     <lastmod>2022-06-07T16:29:27+08:00</lastmod>

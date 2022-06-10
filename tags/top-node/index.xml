@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Jun 2022 22:51:05 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Jun 2022 11:27:18 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Thu, 09 Jun 2022 22:51:05 +0800</pubDate>
+      <pubDate>Fri, 10 Jun 2022 11:27:18 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -32,11 +32,11 @@
 <h3 id="fair-loss-links">Fair-loss links</h3>
 <p>消息可能会丢失、重复或重新排序，如果你一直重新发送，消息终将会传递过去。</p>
 <p>每次发送消息成功的概率都是非零，这个时候只要一直重试，我们就假设消息一定会传递到另外一个节点。</p>
-<p><code>Fair-losl links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</code></p>
+<p><strong>Fair-losl links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</strong></p>
 <h3 id="arbitrary-links">Arbitrary links</h3>
 <p>可能传递过程中会有恶意的第三方对消息进行干预。</p>
 <p>比如公共场合的公共 WiFi 就会出现这种情况。</p>
-<p><code>Arbitrary links 通过 TLS 的加持，就可以达到 Fair-loss links 的效果。</code></p>
+<p><strong>Arbitrary links 通过 TLS 的加持，就可以达到 Fair-loss links 的效果。</strong></p>
 <h2 id="nodes-behaviour">Nodes behaviour</h2>
 <p><a href="/posts/main/20220602202317-the_byzantine_generals_problem/">The Byzantine generals problem</a> 描述了节点出错，导致全体协作策略失败以及容错率的问题。</p>
 <p>假设每个节点都执行指定的算法，假设有以下情况。</p>
