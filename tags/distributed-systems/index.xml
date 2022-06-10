@@ -6,15 +6,308 @@
     <description>Recent content in distributed-systems on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Jun 2022 22:51:32 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/distributed-systems/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Jun 2022 22:59:20 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/distributed-systems/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vector Clocks</title>
       <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Thu, 09 Jun 2022 22:51:32 +0800</pubDate>
+      <pubDate>Fri, 10 Jun 2022 22:59:20 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</guid>
-      <description>V(a) ≤ V(b) iff ({a} ∪ {e|e → a}) ⊆ ({b} ∪ {e|e → b})</description>
-      <content:encoded><![CDATA[<p>V(a) ≤ V(b) iff ({a} ∪ {e|e → a}) ⊆ ({b} ∪ {e|e → b})</p>
+      <description>Vector clocks Given Lamport timestamps L(a) and L(b) with L(a) &amp;lt; L(b)，我们推断不出 a → b 或者 a || b.1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 n 个节点，N = ⟨ N1, N2, &amp;hellip;, Nn ⟩ 事件 a</description>
+      <content:encoded><![CDATA[<h2 id="vector-clocks">Vector clocks</h2>
+<p>Given Lamport timestamps L(a) and L(b) with L(a) &lt; L(b)，我们推断不出 a → b 或者 a || b.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
+<ul>
+<li>假定分布式系统中有 n 个节点，N = ⟨ N<sub>1</sub>, N<sub>2</sub>, &hellip;, N<sub>n</sub> ⟩</li>
+<li><strong>事件 a</strong> 的矢量时间戳写成 V(a) = ⟨ t<sub>1</sub>, t<sub>2</sub>, &hellip;, t<sub>n</sub> ⟩</li>
+<li>t<sub>𝒊</sub> 是 N<sub>𝒊</sub> 节点发生时间的数量</li>
+<li>每个​​<strong>节点</strong>​都有一个当前的矢量时间戳 T</li>
+<li>节点 N<sub>𝒊</sub> 上的事件，矢量时间戳 T[𝒊] 递增。</li>
+<li>每个消息都附带上矢量时间戳</li>
+<li>接收者 &lt;mi&gt;i&lt;/mi&gt;</li>
+</ul>
+<p>除了标量和矢量之间的区别之外，矢量时钟算法与 Lamport 时钟非常相似。一个节点的矢量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 N<sub>𝒊</sub> 发生事件时，它就会增加其向量钟中的第 𝒊 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
+<p>V(a) ≤ V(b) iff ({a} ∪ {e|e → a}) ⊆ ({b} ∪ {e|e → b})</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Lamport Clocks</title>
+      <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
+      <pubDate>Fri, 10 Jun 2022 22:46:54 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
+      <description>Lamport clocks algorithm on initialisation do t := 0 ▻ each node has its own local variable t end on on any event occurring at the local node do t := t + 1 end on on request to send message m do t := t + 1; send (t, m) via the underlying network link end on on receiving (t′, m) via the underlying network link</description>
+      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">on initialisation do
+</span></span><span class="line"><span class="cl">t := 0                    ▻ each node has its own local variable t
+</span></span><span class="line"><span class="cl">end on
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">on any event occurring at the local node do
+</span></span><span class="line"><span class="cl">t := t + 1
+</span></span><span class="line"><span class="cl">end on
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">on request to send message m do
+</span></span><span class="line"><span class="cl">t := t + 1; send (t, m) via the underlying network link
+</span></span><span class="line"><span class="cl">end on
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">on receiving (t′, m) via the underlying network link do
+</span></span><span class="line"><span class="cl">t := max(t, t′) + 1
+</span></span><span class="line"><span class="cl">deliver m to the application
+</span></span><span class="line"><span class="cl">end on
+</span></span></code></pre></div><h3 id="lamport-clocks-in-words">Lamport clocks in words</h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
+         alt="Figure 1: lamport-example-simple"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>每个节点都维护一个计数器 <code>t</code> ，每一个当前节点事件 <code>e</code> 发生时，自增 1。</li>
+<li>增长后的值设为 <code>L(e)</code></li>
+<li>发送消息时附带上当前的计数 <code>t</code></li>
+<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
+</ul>
+<p>Properties of this scheme:</p>
+<ul>
+<li>if a → b then L(e) &lt; L(b)</li>
+<li>However, L(a) &lt; L(b) does not imply a → b</li>
+<li>Possible that L(a) = L(b) for a ≠ b ()</li>
+</ul>
+<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
+<h3 id="lamport-clocks-example">Lamport clocks example</h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example.png"
+         alt="Figure 2: lamport-example"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
+        </figcaption>
+</figure>
+
+<p>Let N(e) be the node at which event e occurred.</p>
+<p>Then the pair (L(e), N(e)) <strong>uniquely identiﬁes</strong> event e.</p>
+<p>Deﬁne a <strong>total order</strong> ≺ using Lamport timestamps:</p>
+<p>(a ≺ b) ⇔ (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b)))<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>This order is <strong>causal</strong>: (a → b) ⇒ (a ≺ b)</p>
+<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
+<p>对于任何两个事件 a ≠ b，那么既不是 a ≺ b 也不是 b ≺ a。只要 a → b，我们就有 a ≺ b，换句话说，≺ 是局部顺序 → 的线性扩展。然而，如果 a || b，我们可以有 a ≺ b 或 b ≺ a，所以两个事件的顺序是由算法任意决定的。 比如 (1, A) 和 (1, C) 两个事件是平行的，按照 Lamport 的算法，(1, A) 必然是在 (1, C) 之前的，但实际情况可能是 (1, C) 在前。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>⇔ is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>∨ is logical or, ∧ is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>The two generals problem</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</link>
+      <pubDate>Fri, 10 Jun 2022 15:18:34 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</guid>
+      <description>两军问题（英语：Two Generals&amp;rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该</description>
+      <content:encoded><![CDATA[<p>两军问题（英语：Two Generals&rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该问题中，两支军队的将军只能通过派遣信使穿越敌方领土来互相通信，以此约定在同一时间点共同进攻。该问题希望求解如何在两位将军派出的任何信使都可能被俘虏的情况下，就发动攻击的时间点达成一致。</p>
+<p>两军问题是拜占庭将军问题的一个特例，常被编入与计算机网络相关的入门课程中。在传输控制协议（TCP）相关的课程中，该问题可用作解释 TCP 协议无法保证通信双方之间的状态一致性的原因。该问题也适用于其他存在信息丢失的双方通信的情况。作为认识逻辑的一个重要概念，该问题突出了共识（英语：Common_knowledge_(logic)）的重要性。一些学者也将此问题称作两军悖论（英语：Two Generals Paradox）或协同进攻问题（英语：Coordinated Attack Problem）。两军问题是第一个被证明无解的计算机通信问题。该证明的重要意义在于，其显示了对于存在通信错误的更广泛的问题（如拜占庭将军问题），同样是无解的。这也为所有分布式一致性协议的实现提供了一个符合现实的预期。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>The Byzantine generals problem</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</link>
+      <pubDate>Fri, 10 Jun 2022 15:18:28 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</guid>
+      <description>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同</description>
+      <content:encoded><![CDATA[<p>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。</p>
+<p>在分布式计算中，不同的计算机通过通讯交换信息达成共识而按照同一套协作策略行动。但有时候，系统中的成员计算机可能出错而发送错误的信息，用于传递信息的通讯网络也可能导致信息损坏，使得网络中不同的成员关于全体协作的策略得出不同结论，从而破坏系统一致性。拜占庭将军问题被认为是容错性问题中最难的问题类型之一。</p>
+<p>容错率：Theorem: need 3ƒ+1 generals in total to tolerate ƒ malicious generals.</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Stub</title>
+      <link>https://luciuschen.github.io/posts/main/20220604180341-stub/</link>
+      <pubDate>Fri, 10 Jun 2022 15:18:21 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220604180341-stub/</guid>
+      <description>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。 在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端</description>
+      <content:encoded><![CDATA[<ol>
+<li>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。</li>
+<li>在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端和服务端之间传递参数的一段代码。</li>
+</ol>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Remote Procedure Call (RPC)</title>
+      <link>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</link>
+      <pubDate>Fri, 10 Jun 2022 15:18:14 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</guid>
+      <description>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样</description>
+      <content:encoded><![CDATA[<p>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样调用远程系统上的其他进程。</p>
+<p>RPC 是通过 Interface Definition Language (IDL) 来描述接口，使得在不同的平台上运行的不同程序编写的程序可以相互通信。(IDL 是不以任何一种特定编程语言的方式指定类型签名或者函数调用的语言。)</p>
+<p>基本上，你可以用 IDL 定义客户端和服务端之间的接口，这样 RPC 机制就可以创建跨网络调用功能所需要的代码存根（Code <a href="/posts/main/20220604180341-stub/">Stub</a>）。</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">+----------------+
+| Client         |
+|  +----------+  |         +---------------+
+|  |   main   |  |         | Server        |
+|  |----------|  |         |  +----------+ |
+|  | stub_cli |----(comms)---&gt;| stub_svr | |
+|  +----------+  |         |  |----------| |
++----------------+         |  | function | |
+                           |  +----------+ |
+                           +---------------+
+</code></pre><p>在这个例子中，~main~ 没有在同一个程序中调用函数，而是调用了一个客户端存根函数（与函数的原型相同），该函数负责将信息打包，并通过通讯通道将其传送给另一个进程。</p>
+<p>这里可以是同一台机器或者不同机器，RPC 的优势之一就是能够随意移动服务器。</p>
+<p>在服务器中，有个「监听者」进程，它将接收这些信息并将其传递给服务器。服务器的存根接收信息，解包并将其传递给真正执行的函数。</p>
+<p>真正的函数运行后返回结果给到服务器存根，服务器存根可以将返回的信息打包，并将其传回给客户端存根。客户端存根再将其解包并传回给 ~main~。</p>
+<p>实际上的 IDL 大概像下面这样：</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">[   uuid(f9f6be21-fd32-5577-8f2d-0800132bd567),
+    version(0),
+    endpoint(&#34;ncadg_ip_udp:[1234]&#34;, &#34;dds:[19]&#34;)
+] interface function_iface {
+    [idempotent] void function(
+        [in] int handle,
+        [out] int *status
+    );
+}
+</code></pre><p>头部是一些用于链接客户端和服务端的网络信息，RPC 发生在「会话层」中。接口部分才是 IDL 编译器建立客户端和服务器端存根的地方，以便客户端和服务端能够进行通讯，使得 RPC 正常工作。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Network Time Protocol (NTP)</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
+      <pubDate>Fri, 10 Jun 2022 15:18:04 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
+      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
+      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
+<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
+         alt="Figure 1: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>NTP</p>
+        </figcaption>
+</figure>
+
+<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/NTP.png"
+         alt="Figure 2: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>NTP</p>
+        </figcaption>
+</figure>
+
+<ol>
+<li>
+<p>Round-trip network delay: δ = (t4 - t1) - (t3 - t2)</p>
+</li>
+<li>
+<p>Estimated server time when client receives response: t3 + ½δ（客户端收到响应时的服务器的时间）</p>
+</li>
+<li>
+<p>Estimated clock skew: θ = t3 + ½δ - t4 = ½(t2 - t1 + t3 - t4)（计算预估的服务器时间和当前客户端时间的偏差）</p>
+</li>
+</ol>
+<h2 id="correcting-clock-skew">Correcting clock skew</h2>
+<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
+<ul>
+<li>
+<p>if θ &lt; 125 ms, <strong>slew</strong> the clock:</p>
+<p>slightly speed it up or slow it down by up to 500 ppm<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
+</li>
+<li>
+<p>if 125 ms ≤ θ &lt; 1000 s, <strong>step</strong> the clock:</p>
+<p>suddenly reset client clock to estimated server timestamp</p>
+</li>
+<li>
+<p>if θ ≥ 1000 s, <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
+</li>
+</ul>
+<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
+<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
+<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Causality and Happen-before relation</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</link>
+      <pubDate>Fri, 10 Jun 2022 15:17:50 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
+      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
+      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
+<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
+<p>event a <strong>happens before</strong> event b, written a → b.</p>
+<p>那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前：</p>
+<ul>
+<li>
+<p>a 和 b 发生在相同节点，并且按照本地节点的执行顺序，a 发生在 b 之前。</p>
+</li>
+<li>
+<p>事件 a 是发送消息 m，事件 b 是接收相同的消息 m（假定发送的消息都是唯一的）。</p>
+</li>
+<li>
+<p>有这么一个时间 c 满足，a → c 且 c → b。</p>
+<p>happens-before relation 是局部的顺序：有可能存在既不满足 a → b 也不满足 b → a，这样 a 和 b 就是并行的，写作 a || b。</p>
+</li>
+</ul>
+<h3 id="happen-before-relation-example">Happen-before relation example</h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
+         alt="Figure 1: happens-before-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>a → b, c → d, and e → f due to process order</li>
+<li>b → c and d → f due to messages m1 and m2</li>
+<li>a → c, a → d, a → f, b → d, b → f, and c → f due to transitivity</li>
+<li>a || e, b || e, c || e, and d || e</li>
+</ul>
+<h2 id="causality">Causality</h2>
+<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
+<ul>
+<li>当 a → b, 那么 a 可能是 b 的因。</li>
+<li>当 a || b, a 和 b 之间不存在因果关系。</li>
+</ul>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causality.png"
+         alt="Figure 2: causality"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>causality</p>
+        </figcaption>
+</figure>
+
+<p>Let ≺ be a strict total order on events.</p>
+<p>如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
+<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
+<p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
 ]]></content:encoded>
     </item>
     

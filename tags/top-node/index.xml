@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jun 2022 11:27:18 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Jun 2022 16:34:24 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Fri, 10 Jun 2022 11:27:18 +0800</pubDate>
+      <pubDate>Fri, 10 Jun 2022 16:34:24 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -90,14 +90,23 @@
 <p>当事件1发生在事件2之前，那么事件1的时间戳应该小于事件2的时间戳，这是逻辑时钟要保证的最基本的原则。</p>
 <p>下面将研究一下两种逻辑时钟：</p>
 <ul>
-<li><a href="/posts/main/20220609201658-lamport_clocks/">Lamprot Clocks</a></li>
-<li><a href="/posts/main/20220602235916-vector_clocks/">Vector Clocks</a></li>
+<li>
+<p><a href="/posts/main/20220609201658-lamport_clocks/">Lamprot Clocks</a> 是在分布式系统中的每个节点都维护一个计数器，每一个当前节点事件 <code>e</code> 发生时自增 ；发送消息时，也会附带上当前节点的计数 <code>t</code> ，消息接收者收到消息后，取出消息中的计数器与当前节点计数器比较，去最大值后自增 1。</p>
+<p>这样可以实现局部顺序，再加上节点名称，形成(时间戳，节点名称)的组合后，就可以扩展为全局顺序。</p>
+<p>但这样也有缺点，算法在时间戳相同，节点名称不同的平行事件的顺序判定时，会出现与实际情况不符的情况。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+</li>
+<li>
+<p><a href="/posts/main/20220602235916-vector_clocks/">Vector Clocks</a></p>
+</li>
 </ul>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1">
 <p><a href="/posts/main/20220602202832-causality_and_happen_before_relation/">Causality and Happen-before relation</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>if a || b we could have either a ≺ b or b ≺ a, so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
