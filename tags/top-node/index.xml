@@ -6,11 +6,44 @@
     <description>Recent content in top-node on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jun 2022 16:34:24 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jun 2022 11:51:16 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL</title>
+      <link>https://luciuschen.github.io/posts/main/20220530185321-mysql/</link>
+      <pubDate>Sat, 11 Jun 2022 11:51:16 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220530185321-mysql/</guid>
+      <description>Troubleshoot Issues in MySQL
+Sort Chinese text fields alphabetically by first letter</description>
+      <content:encoded><![CDATA[<p><a href="/posts/main/20220530180443-troubleshoot_issues_in_mysql/">Troubleshoot Issues in MySQL</a></p>
+<p><a href="/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/">Sort Chinese text fields alphabetically by first letter</a></p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Refactoring Code</title>
+      <link>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</link>
+      <pubDate>Sat, 11 Jun 2022 11:50:30 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</guid>
+      <description>Refactoring Code How To Find Time Complexity Of An Algorithm
+JavaScript Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await </description>
+      <content:encoded><![CDATA[<h2 id="refactoring-code">Refactoring Code</h2>
+<p><a href="/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">How To Find Time Complexity Of An Algorithm</a></p>
+<h3 id="javascript">JavaScript</h3>
+<h4 id="refactoring-tips">Refactoring Tips</h4>
+<ol>
+<li><a href="/posts/main/20220506193520-refactoring_condition_statements/">Refactoring Condition statements</a></li>
+<li><a href="/posts/main/20220506193545-converting_callbacks_to_promises/">Converting callbacks to promises</a></li>
+<li><a href="/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">Refactoring Promise chains with async/await</a></li>
+</ol>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Fri, 10 Jun 2022 16:34:24 +0800</pubDate>
+      <pubDate>Sat, 11 Jun 2022 11:41:58 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>

@@ -6,27 +6,26 @@
     <description>Recent content on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jun 2022 22:59:20 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jun 2022 13:22:09 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vector Clocks</title>
       <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Fri, 10 Jun 2022 22:59:20 +0800</pubDate>
+      <pubDate>Sat, 11 Jun 2022 13:22:09 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</guid>
-      <description>Vector clocks Given Lamport timestamps L(a) and L(b) with L(a) &amp;lt; L(b)，我们推断不出 a → b 或者 a || b.1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 n 个节点，N = ⟨ N1, N2, &amp;hellip;, Nn ⟩ 事件 a</description>
-      <content:encoded><![CDATA[<h2 id="vector-clocks">Vector clocks</h2>
-<p>Given Lamport timestamps L(a) and L(b) with L(a) &lt; L(b)，我们推断不出 a → b 或者 a || b.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+      <description>Given Lamport timestamps L(a) and L(b) with L(a) &amp;lt; L(b)，我们推断不出 a → b 或者 a || b.1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 n 个节点，N = ⟨ N1, N2, &amp;hellip;, Nn ⟩ 事件 a 的向</description>
+      <content:encoded><![CDATA[<p>Given Lamport timestamps L(a) and L(b) with L(a) &lt; L(b)，我们推断不出 a → b 或者 a || b.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 <p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
 <ul>
 <li>假定分布式系统中有 n 个节点，N = ⟨ N<sub>1</sub>, N<sub>2</sub>, &hellip;, N<sub>n</sub> ⟩</li>
-<li><strong>事件 a</strong> 的矢量时间戳写成 V(a) = ⟨ t<sub>1</sub>, t<sub>2</sub>, &hellip;, t<sub>n</sub> ⟩</li>
-<li>t<sub>𝒊</sub> 是 N<sub>𝒊</sub> 节点发生时间的数量</li>
-<li>每个​​<strong>节点</strong>​都有一个当前的矢量时间戳 T</li>
-<li>节点 N<sub>𝒊</sub> 上的事件，矢量时间戳 T[𝒊] 递增。</li>
-<li>每个消息都附带上矢量时间戳</li>
-<li>接收者 &lt;mi&gt;i&lt;/mi&gt;</li>
+<li><strong>事件 a</strong> 的向量时间戳写成 V(a) = ⟨ t<sub>1</sub>, t<sub>2</sub>, &hellip;, t<sub>n</sub> ⟩</li>
+<li>t<sub>i</sub> 是 N<sub>i</sub> 节点发生时间的数量</li>
+<li>每个节点都有一个当前的向量时间戳 T</li>
+<li>节点 N<sub>i</sub> 上的事件，向量时间戳 T[i] 递增。</li>
+<li>每个消息都附带上向量时间戳</li>
+<li>接收者将消息中的向量时间戳合并到本地</li>
 </ul>
-<p>除了标量和矢量之间的区别之外，矢量时钟算法与 Lamport 时钟非常相似。一个节点的矢量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 N<sub>𝒊</sub> 发生事件时，它就会增加其向量钟中的第 𝒊 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
+<p>除了标量和矢量之间的区别之外，矢量时钟算法与 Lamport 时钟非常相似。一个节点的矢量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 N<sub>i</sub> 发生事件时，它就会增加其向量钟中的第 i 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
 <p>V(a) ≤ V(b) iff ({a} ∪ {e|e → a}) ⊆ ({b} ∪ {e|e → b})</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
@@ -40,387 +39,9 @@
     </item>
     
     <item>
-      <title>Lamport Clocks</title>
-      <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
-      <pubDate>Fri, 10 Jun 2022 22:46:54 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
-      <description>Lamport clocks algorithm on initialisation do t := 0 ▻ each node has its own local variable t end on on any event occurring at the local node do t := t + 1 end on on request to send message m do t := t + 1; send (t, m) via the underlying network link end on on receiving (t′, m) via the underlying network link</description>
-      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">on initialisation do
-</span></span><span class="line"><span class="cl">t := 0                    ▻ each node has its own local variable t
-</span></span><span class="line"><span class="cl">end on
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">on any event occurring at the local node do
-</span></span><span class="line"><span class="cl">t := t + 1
-</span></span><span class="line"><span class="cl">end on
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">on request to send message m do
-</span></span><span class="line"><span class="cl">t := t + 1; send (t, m) via the underlying network link
-</span></span><span class="line"><span class="cl">end on
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">on receiving (t′, m) via the underlying network link do
-</span></span><span class="line"><span class="cl">t := max(t, t′) + 1
-</span></span><span class="line"><span class="cl">deliver m to the application
-</span></span><span class="line"><span class="cl">end on
-</span></span></code></pre></div><h3 id="lamport-clocks-in-words">Lamport clocks in words</h3>
-<figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
-         alt="Figure 1: lamport-example-simple"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
-        </figcaption>
-</figure>
-
-<ul>
-<li>每个节点都维护一个计数器 <code>t</code> ，每一个当前节点事件 <code>e</code> 发生时，自增 1。</li>
-<li>增长后的值设为 <code>L(e)</code></li>
-<li>发送消息时附带上当前的计数 <code>t</code></li>
-<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
-</ul>
-<p>Properties of this scheme:</p>
-<ul>
-<li>if a → b then L(e) &lt; L(b)</li>
-<li>However, L(a) &lt; L(b) does not imply a → b</li>
-<li>Possible that L(a) = L(b) for a ≠ b ()</li>
-</ul>
-<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
-<h3 id="lamport-clocks-example">Lamport clocks example</h3>
-<figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example.png"
-         alt="Figure 2: lamport-example"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
-        </figcaption>
-</figure>
-
-<p>Let N(e) be the node at which event e occurred.</p>
-<p>Then the pair (L(e), N(e)) <strong>uniquely identiﬁes</strong> event e.</p>
-<p>Deﬁne a <strong>total order</strong> ≺ using Lamport timestamps:</p>
-<p>(a ≺ b) ⇔ (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b)))<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<p>This order is <strong>causal</strong>: (a → b) ⇒ (a ≺ b)</p>
-<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
-<p>对于任何两个事件 a ≠ b，那么既不是 a ≺ b 也不是 b ≺ a。只要 a → b，我们就有 a ≺ b，换句话说，≺ 是局部顺序 → 的线性扩展。然而，如果 a || b，我们可以有 a ≺ b 或 b ≺ a，所以两个事件的顺序是由算法任意决定的。 比如 (1, A) 和 (1, C) 两个事件是平行的，按照 Lamport 的算法，(1, A) 必然是在 (1, C) 之前的，但实际情况可能是 (1, C) 在前。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>⇔ is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>∨ is logical or, ∧ is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Distribution System</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Fri, 10 Jun 2022 16:34:24 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
-      <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
-      <content:encoded><![CDATA[<h2 id="remote-procedure-call">Remote Procedure Call</h2>
-<p><a href="/posts/main/20220603220847-remote_procedure_call_rpc/">Remote Procedure Call (RPC)</a> 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎么办？</p>
-<ol>
-<li>如果在函数调用过程中，服务挂了？</li>
-<li>如果消息丢失了？</li>
-<li>如果消息延迟了？</li>
-<li>如果出了问题，回复消息是否安全？</li>
-</ol>
-<p>要解决这些问题，就需要将网络以及节点之间的情况抽象出来，以及时序的问题。在设计分布式算法时，需要更加抽象一点，以便更好的推理整个过程。</p>
-<h2 id="network-behaviour">Network behaviour</h2>
-<p><a href="/posts/main/20220602202247-the_two_generals_problem/">The two generals problem</a> 描述了网络通信丢失的场景。</p>
-<p>假设两个节点之是间双向的点对点的通信。</p>
-<h3 id="reliable-links">Reliable links</h3>
-<p>一条消息只会在被一个节点发送的时候才会收到，并且消息是可以重新排序的。</p>
-<p>中间没有伪造消息等行为，发送了就一定会被收到。</p>
-<h3 id="fair-loss-links">Fair-loss links</h3>
-<p>消息可能会丢失、重复或重新排序，如果你一直重新发送，消息终将会传递过去。</p>
-<p>每次发送消息成功的概率都是非零，这个时候只要一直重试，我们就假设消息一定会传递到另外一个节点。</p>
-<p><strong>Fair-losl links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</strong></p>
-<h3 id="arbitrary-links">Arbitrary links</h3>
-<p>可能传递过程中会有恶意的第三方对消息进行干预。</p>
-<p>比如公共场合的公共 WiFi 就会出现这种情况。</p>
-<p><strong>Arbitrary links 通过 TLS 的加持，就可以达到 Fair-loss links 的效果。</strong></p>
-<h2 id="nodes-behaviour">Nodes behaviour</h2>
-<p><a href="/posts/main/20220602202317-the_byzantine_generals_problem/">The Byzantine generals problem</a> 描述了节点出错，导致全体协作策略失败以及容错率的问题。</p>
-<p>假设每个节点都执行指定的算法，假设有以下情况。</p>
-<h3 id="crash-stop--fail-stop">Crash-stop (fail-stop)</h3>
-<p>如果一个节点出现问题挂了，并且在这之后永远停机。</p>
-<h3 id="crash-recovery--fail-recovery">Crash-recovery (fail-recovery)</h3>
-<p>一个节点挂了，并丢失了内存状态，但会在过段时间后恢复。</p>
-<h3 id="byzantine-fail-arbitrary">Byzantine （fail-arbitrary)</h3>
-<p>节点偏离了原本的算法，可能会发生任何事情，包括崩溃或者恶意的行为。</p>
-<h2 id="同步-时序-假定">同步（时序）假定</h2>
-<h3 id="synchronous">Synchronous</h3>
-<p>消息延迟不超过已知的上限。到达这个上限后，消息要么被传递，要么丢失。节点以已知的速度执行算法。每一步代码的执行都有执行时间的上限。</p>
-<h3 id="partically-synchronous">Partically synchronous</h3>
-<p>系统中一部分时间内是异步的，另一部分是同步的。</p>
-<h3 id="asynchronous">Asynchronous</h3>
-<p>消息可以任意地被延迟，节点可以任意地暂停，并没有时序上的保证。</p>
-<h2 id="clocks-and-time-in-distributed-systems">Clocks and time in distributed systems</h2>
-<p>分布式系统中经常涉及到需要测量时间，比如：</p>
-<ul>
-<li>Schedulers, timeouts, failure detectors, retry timers</li>
-<li>Performance measurements, statistics, profiling (performance analysis也称为profiling)</li>
-<li>Log files &amp; databases: record when an event occurred</li>
-<li>Data with time-limited validity (e.g. cache entries)</li>
-<li><code>Determining order of events across several nodes</code></li>
-</ul>
-<p>分布式系统中会遇到两种类型的时钟：</p>
-<ul>
-<li>physical clocks: count number of seconds elapsed</li>
-<li>logical clocks: count events, e.g. messages sent</li>
-</ul>
-<h3 id="clock-synchronisation">Clock synchronisation</h3>
-<p>物理时钟会有时间上的偏移，通常是通过和电脑、手机、电视等相对准确的地方来校准物理时钟的时间，比如手表，老式的钟摆。</p>
-<p>电脑上的时间同样会有偏移，是通过 <a href="/posts/main/20220602202411-network_time_protocol_ntp/">Network Time Protocol(NTP)</a> 来校准电脑的时间，也就是物理时钟的校准。</p>
-<h2 id="broadcast-protocols-and-logical-time">Broadcast protocols and logical time</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/ordering-of-messages.png"
-         alt="Figure 1: ordering-of-messages"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>ordering-of-messages</p>
-        </figcaption>
-</figure>
-
-<p>m1 = &ldquo;A says: The moon is made of cheese!&rdquo;</p>
-<p>m2 = &ldquo;B says: Oh no it isn&rsquo;t!&rdquo;</p>
-<p>User C sees m2 first, m1 second, even though logically m1 <strong>happened before</strong> m2.</p>
-<p><strong>Problem</strong>: even with synced clocks, t2 &lt; t1 is possible. Timestamp order is inconsistent with expected order!</p>
-<p>即便我们已经通过 NTP 尽量保证物理时钟上的同步，但这个时候依旧会发生因果关系不一致的情况，所以这个时候就需要逻辑时钟。</p>
-<p>逻辑时钟是在分布式系统中专门用于捕获系统中发生事件之间的因果关系，因此逻辑时钟其实就是一种计数器，每次事件发生的时候都会往前递增，所以随着事件的发生它会随着时间向前移动，但它和物理时间并没有实际的关系。</p>
-<h3 id="logical-time">Logical time</h3>
-<p>Logical clocks: designed to <strong>capture causal dependencies</strong>.</p>
-<p>(e<sub>1</sub> → e<sub>2</sub>) ⇒ (T(e<sub>1</sub>) &lt; T(e<sub>2</sub>))<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<p>当事件1发生在事件2之前，那么事件1的时间戳应该小于事件2的时间戳，这是逻辑时钟要保证的最基本的原则。</p>
-<p>下面将研究一下两种逻辑时钟：</p>
-<ul>
-<li>
-<p><a href="/posts/main/20220609201658-lamport_clocks/">Lamprot Clocks</a> 是在分布式系统中的每个节点都维护一个计数器，每一个当前节点事件 <code>e</code> 发生时自增 ；发送消息时，也会附带上当前节点的计数 <code>t</code> ，消息接收者收到消息后，取出消息中的计数器与当前节点计数器比较，去最大值后自增 1。</p>
-<p>这样可以实现局部顺序，再加上节点名称，形成(时间戳，节点名称)的组合后，就可以扩展为全局顺序。</p>
-<p>但这样也有缺点，算法在时间戳相同，节点名称不同的平行事件的顺序判定时，会出现与实际情况不符的情况。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-</li>
-<li>
-<p><a href="/posts/main/20220602235916-vector_clocks/">Vector Clocks</a></p>
-</li>
-</ul>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p><a href="/posts/main/20220602202832-causality_and_happen_before_relation/">Causality and Happen-before relation</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>if a || b we could have either a ≺ b or b ≺ a, so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>The two generals problem</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</link>
-      <pubDate>Fri, 10 Jun 2022 15:18:34 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</guid>
-      <description>两军问题（英语：Two Generals&amp;rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该</description>
-      <content:encoded><![CDATA[<p>两军问题（英语：Two Generals&rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该问题中，两支军队的将军只能通过派遣信使穿越敌方领土来互相通信，以此约定在同一时间点共同进攻。该问题希望求解如何在两位将军派出的任何信使都可能被俘虏的情况下，就发动攻击的时间点达成一致。</p>
-<p>两军问题是拜占庭将军问题的一个特例，常被编入与计算机网络相关的入门课程中。在传输控制协议（TCP）相关的课程中，该问题可用作解释 TCP 协议无法保证通信双方之间的状态一致性的原因。该问题也适用于其他存在信息丢失的双方通信的情况。作为认识逻辑的一个重要概念，该问题突出了共识（英语：Common_knowledge_(logic)）的重要性。一些学者也将此问题称作两军悖论（英语：Two Generals Paradox）或协同进攻问题（英语：Coordinated Attack Problem）。两军问题是第一个被证明无解的计算机通信问题。该证明的重要意义在于，其显示了对于存在通信错误的更广泛的问题（如拜占庭将军问题），同样是无解的。这也为所有分布式一致性协议的实现提供了一个符合现实的预期。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>The Byzantine generals problem</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</link>
-      <pubDate>Fri, 10 Jun 2022 15:18:28 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</guid>
-      <description>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同</description>
-      <content:encoded><![CDATA[<p>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。</p>
-<p>在分布式计算中，不同的计算机通过通讯交换信息达成共识而按照同一套协作策略行动。但有时候，系统中的成员计算机可能出错而发送错误的信息，用于传递信息的通讯网络也可能导致信息损坏，使得网络中不同的成员关于全体协作的策略得出不同结论，从而破坏系统一致性。拜占庭将军问题被认为是容错性问题中最难的问题类型之一。</p>
-<p>容错率：Theorem: need 3ƒ+1 generals in total to tolerate ƒ malicious generals.</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Stub</title>
-      <link>https://luciuschen.github.io/posts/main/20220604180341-stub/</link>
-      <pubDate>Fri, 10 Jun 2022 15:18:21 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220604180341-stub/</guid>
-      <description>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。 在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端</description>
-      <content:encoded><![CDATA[<ol>
-<li>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。</li>
-<li>在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端和服务端之间传递参数的一段代码。</li>
-</ol>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Remote Procedure Call (RPC)</title>
-      <link>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</link>
-      <pubDate>Fri, 10 Jun 2022 15:18:14 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</guid>
-      <description>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样</description>
-      <content:encoded><![CDATA[<p>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样调用远程系统上的其他进程。</p>
-<p>RPC 是通过 Interface Definition Language (IDL) 来描述接口，使得在不同的平台上运行的不同程序编写的程序可以相互通信。(IDL 是不以任何一种特定编程语言的方式指定类型签名或者函数调用的语言。)</p>
-<p>基本上，你可以用 IDL 定义客户端和服务端之间的接口，这样 RPC 机制就可以创建跨网络调用功能所需要的代码存根（Code <a href="/posts/main/20220604180341-stub/">Stub</a>）。</p>
-<pre tabindex="0"><code class="language-nil" data-lang="nil">+----------------+
-| Client         |
-|  +----------+  |         +---------------+
-|  |   main   |  |         | Server        |
-|  |----------|  |         |  +----------+ |
-|  | stub_cli |----(comms)---&gt;| stub_svr | |
-|  +----------+  |         |  |----------| |
-+----------------+         |  | function | |
-                           |  +----------+ |
-                           +---------------+
-</code></pre><p>在这个例子中，~main~ 没有在同一个程序中调用函数，而是调用了一个客户端存根函数（与函数的原型相同），该函数负责将信息打包，并通过通讯通道将其传送给另一个进程。</p>
-<p>这里可以是同一台机器或者不同机器，RPC 的优势之一就是能够随意移动服务器。</p>
-<p>在服务器中，有个「监听者」进程，它将接收这些信息并将其传递给服务器。服务器的存根接收信息，解包并将其传递给真正执行的函数。</p>
-<p>真正的函数运行后返回结果给到服务器存根，服务器存根可以将返回的信息打包，并将其传回给客户端存根。客户端存根再将其解包并传回给 ~main~。</p>
-<p>实际上的 IDL 大概像下面这样：</p>
-<pre tabindex="0"><code class="language-nil" data-lang="nil">[   uuid(f9f6be21-fd32-5577-8f2d-0800132bd567),
-    version(0),
-    endpoint(&#34;ncadg_ip_udp:[1234]&#34;, &#34;dds:[19]&#34;)
-] interface function_iface {
-    [idempotent] void function(
-        [in] int handle,
-        [out] int *status
-    );
-}
-</code></pre><p>头部是一些用于链接客户端和服务端的网络信息，RPC 发生在「会话层」中。接口部分才是 IDL 编译器建立客户端和服务器端存根的地方，以便客户端和服务端能够进行通讯，使得 RPC 正常工作。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Network Time Protocol (NTP)</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
-      <pubDate>Fri, 10 Jun 2022 15:18:04 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
-      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
-      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
-<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
-         alt="Figure 1: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/NTP.png"
-         alt="Figure 2: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<ol>
-<li>
-<p>Round-trip network delay: δ = (t4 - t1) - (t3 - t2)</p>
-</li>
-<li>
-<p>Estimated server time when client receives response: t3 + ½δ（客户端收到响应时的服务器的时间）</p>
-</li>
-<li>
-<p>Estimated clock skew: θ = t3 + ½δ - t4 = ½(t2 - t1 + t3 - t4)（计算预估的服务器时间和当前客户端时间的偏差）</p>
-</li>
-</ol>
-<h2 id="correcting-clock-skew">Correcting clock skew</h2>
-<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
-<ul>
-<li>
-<p>if θ &lt; 125 ms, <strong>slew</strong> the clock:</p>
-<p>slightly speed it up or slow it down by up to 500 ppm<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
-</li>
-<li>
-<p>if 125 ms ≤ θ &lt; 1000 s, <strong>step</strong> the clock:</p>
-<p>suddenly reset client clock to estimated server timestamp</p>
-</li>
-<li>
-<p>if θ ≥ 1000 s, <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
-</li>
-</ul>
-<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
-<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
-<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Causality and Happen-before relation</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</link>
-      <pubDate>Fri, 10 Jun 2022 15:17:50 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
-      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
-      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
-<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
-<p>event a <strong>happens before</strong> event b, written a → b.</p>
-<p>那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前：</p>
-<ul>
-<li>
-<p>a 和 b 发生在相同节点，并且按照本地节点的执行顺序，a 发生在 b 之前。</p>
-</li>
-<li>
-<p>事件 a 是发送消息 m，事件 b 是接收相同的消息 m（假定发送的消息都是唯一的）。</p>
-</li>
-<li>
-<p>有这么一个时间 c 满足，a → c 且 c → b。</p>
-<p>happens-before relation 是局部的顺序：有可能存在既不满足 a → b 也不满足 b → a，这样 a 和 b 就是并行的，写作 a || b。</p>
-</li>
-</ul>
-<h3 id="happen-before-relation-example">Happen-before relation example</h3>
-<figure>
-    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
-         alt="Figure 1: happens-before-example"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
-        </figcaption>
-</figure>
-
-<ul>
-<li>a → b, c → d, and e → f due to process order</li>
-<li>b → c and d → f due to messages m1 and m2</li>
-<li>a → c, a → d, a → f, b → d, b → f, and c → f due to transitivity</li>
-<li>a || e, b || e, c || e, and d || e</li>
-</ul>
-<h2 id="causality">Causality</h2>
-<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
-<ul>
-<li>当 a → b, 那么 a 可能是 b 的因。</li>
-<li>当 a || b, a 和 b 之间不存在因果关系。</li>
-</ul>
-<figure>
-    <img loading="lazy" src="/ox-hugo/causality.png"
-         alt="Figure 2: causality"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>causality</p>
-        </figcaption>
-</figure>
-
-<p>Let ≺ be a strict total order on events.</p>
-<p>如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
-<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
-<p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Org-roam</title>
       <link>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</link>
-      <pubDate>Fri, 10 Jun 2022 11:31:29 +0800</pubDate>
+      <pubDate>Sat, 11 Jun 2022 11:56:05 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</guid>
       <description>Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也</description>
@@ -707,7 +328,14 @@
 </span></span><span class="line"><span class="cl">#+begin_mark
 </span></span><span class="line"><span class="cl">marked text
 </span></span><span class="line"><span class="cl">#+end_mark
-</span></span></code></pre></div><div class="footnotes" role="doc-endnotes">
+</span></span></code></pre></div><h3 id="pdf">PDF</h3>
+<p>需要安装 texlive</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install texlive
+</span></span></code></pre></div><h4 id="导出报错">导出报错</h4>
+<ul>
+<li><code>Unicode character 考 (U+8003) not set up for use with LaTeX.</code> 是因为 Latex 本身不支持中文。</li>
+</ul>
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1">
@@ -719,84 +347,22 @@
     </item>
     
     <item>
-      <title>Implementation Intention GTD</title>
-      <link>https://luciuschen.github.io/posts/article/20220503143427-gtd/</link>
-      <pubDate>Wed, 08 Jun 2022 23:26:58 +0800</pubDate>
+      <title>MySQL</title>
+      <link>https://luciuschen.github.io/posts/main/20220530185321-mysql/</link>
+      <pubDate>Sat, 11 Jun 2022 11:51:16 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/article/20220503143427-gtd/</guid>
-      <description>Introduction 2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omni</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omnifocus、Things 等等。</p>
-<p>一直不明白问题出在哪里，一天下来不管是 Today 还是 Inbox 当中的 To-Do 不仅没有变少，甚至更多了。自我怀疑、自我谴责让自己觉得是拖延症、懒造成了 To-Do 积压。</p>
-<p>回顾过去几年中，除了 Things 以外，我还使用了 Due 和 Fantastical 这两款软件。前者是吃药的时候，循环提醒该吃药了；后者是今天或者未来某天必须要做的事情，为了不让我忘记这个事情，哪怕我不确定这个事情在当天的哪个时间段做，都会给它加一个提醒，这样即便是过了时间，只要没有 checked 就会一直在锁屏或者下拉通知内，这样我就可以*不断地被提醒，找到合适的时间段去完成这件事情*​。</p>
-<p>至于 Things 时常被我厌恶，因为我有太多的 To-Do 积压在里面。每次打开它都有种翻开垃圾桶的感觉，没错，它就是垃圾桶。我再次捡起 Things 用的时候，基本都是我把“过期了的”、“没有意义的” To-Do 清空了才可以。这是一个循环往复的过程，过程中不断地伤害着我自己的自信心，并让我感到焦虑，永远做不完的事情，越积越多。</p>
-<p>在这样的情况下我了解到了 <a href="https://en.wikipedia.org/wiki/Implementation_intention">Implementation Intention</a>。</p>
-<h2 id="implementation-intention">Implementation Intention</h2>
-<blockquote>
-<p>执行意图由心理学家 Peter M.Gollitzer 提出，是个体为实现某一目标制定的一种计划，表现为“如果－那么”形式，例如“如果我遇到突发情况，那么我将保持冷静”。</p>
-<p>普通人思考目标的时候，使用的是目标意图，即：我要做什么、我要成为什么。目标意图有个最大的缺点：建立目标容易，执行目标很难。而执行意图更多思考的是要怎么做的问
-题。</p>
-<p>执行意图明确了个体在何时何地，以什么方式来实现目标，从而让个体更加容易地提取具体情景线索的心理表征，并通过这些线索建立起与目标所指行为的联系。在建立起线索和目标行为的联系之后，个体在随后遇到线索所指向的情景时（如考场），便可以用一种自动化的方式执行事先形成的计划，达成预设的目标。重要的是，执行意图的这种过程是自动化进行的，并不需要个体有意识地进行控制。</p>
-</blockquote>
-<p>再结合成功实行 GTD 的案例「<a href="https://www.calnewport.com/blog/2013/12/21/deep-habits-the-importance-of-planning-every-minute-of-your-work-day/">Deep Habits: The Importance of Planning Every Minute of Your Work Day</a>」和「<a href="https://www.nirandfar.com/todo-vs-schedule-builder/">Be a Schedule Builder, Not a To-Do List Maker</a>」，发现他们都会去在前一天花费一些时间去细化第二天的任务列表，甚至精确到分钟，这其实就是上面提到的 Implementation Intention 的实际操作，When Where and How。</p>
-<p>案例1当中是通过日历来安排一天的工作，细致到分钟。若发生变故需要变更，则在右侧重新记录变更后的安排。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/gtd_dark.png"
-         alt="Figure 1: gtd_dark"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>gtd_dark</p>
-        </figcaption>
-</figure>
-
-<p>案例2中则从容很多，不仅仅是安排了工作的内容，休闲娱乐的内容也会排在日历当中。(下图来自于案例2)</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/gtd_schedule_builder.png"
-         alt="Figure 2: gtd_schedule_builder"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>gtd_schedule_builder</p>
-        </figcaption>
-</figure>
-
-<p>其实回顾到上面我提到使用 Due 和 Fantastical 的经历，当中已经包含了执行意图的概念，任务都非常明晰，是今天必须要做的，是今天有非常合适的情景去做的，只不过是我没有意识到。</p>
-<h3 id="执行意图-会让人主动思考-避免囤积过多的任务">「执行意图」会让人主动思考，避免囤积过多的任务。</h3>
-<p>举个例子，按照执行意图的方法。如果我买了一本书，那么我就要在最近的闲暇时间都去读它，并在读完后写读后感总结一下。那么当我买书或者安排任务的时候就会想到买书不仅仅是一个完结，后续意味着我要去读它，并写读后感等一大堆的操作，这样就不会去在自己当前书还没有读完的情况下，就去安排下一本书。</p>
-<p>例子中的场景和平时从 Inbox 中安排任务很类似，造成任务完不成，积压，是因为没有安排好任务的情景关系，何时、何地、如何去做这件事情，仅仅就是目标意图，我要做这些事情。</p>
-<p>没有对每个任务细致的思考前，无法把握任务的工作量，适合完成的场景，也就无法把控今天安排的任务是否都能完成。但刚刚开始接触这套方法的人，难免会因为对工作细节不熟悉导致工作量评估不准确的情况。</p>
-<h3 id="执行意图-消除了在何时何地做某事的模糊性">「执行意图」消除了在何时何地做某事的模糊性。</h3>
-<p>例如，询问选民如何前往投票站等简单的问题，已经被证明可以提高当天的投票率。</p>
-<p>在这个例子当中，被问的选民其实受到了引导，增加去投票这件事情的确定性。我们也可以利用同样的方法，明确任务，顺着 <code>if...then...</code> 的顺序去完成任务。</p>
-<h2 id="回顾">回顾</h2>
-<p><a href="https://twitter.com/mikhails5v/status/1521406633548697603">@mikhails5v</a> 在 tweet thread 中提到了他在使用 Things 的 1.5 年中，对于没有完成的任务，在每晚回顾时，手动的去把今天的任务清空，已完成的任务会让他很有成就感；未完成的任务则在思考后移到后面适合的时候，或者重新放回 Inbox，甚至删掉它们。确保了每日的任务都是清空的状态，没有负罪感。即便是没有完成的任务，在每晚也会重新回顾，思考后续是否有合适的情景去完成它，或者干脆觉得没有执行的必要删除掉。</p>
-<h2 id="阶段性思考">阶段性思考</h2>
-<blockquote>
-<p>note-taking and knowledge creation will always require large amounts of brain work. On the other hand, GTD makes task management a simple, effortless process.</p>
-</blockquote>
-<p>对比我在 <a href="/posts/article/20220505162419-how_i_take_notes/">How I Take Notes</a> 中写的笔记的工作流，To-Do 和 Note-Taking 确实存在区别。</p>
-<p>GTD 中 Capture 是最不需要思考的，有什么东西直接记录到 Inbox 当中，清空当前的灵感，专注眼前的事情。例如，Things 中快速呼出 Inbox 的输入框；Org-roam 中写在 <code>.org</code> 文件中的 To-Do 都会集中在 Agenda 中；Logseq 中写在 Journals 中的 To-Do 也可以在 Pages 中按照自己的需求定制查询（复杂的查询有些门槛）。后续处理，按照执行意图的方法去评估 To-Do 适合的情景；较大的任务需要进行拆分成若干小任务，甚至形成一个专门的项目分为不同阶段去完成。</p>
-<p>Note-Taking 相反，从阅读就开始思考，随后各种灵感迸发，记录下来进行整理，去芜存菁后继续扩展，定期回顾后形成自己的知识并输出，这个时候的写作反而是最不需要动脑的部分了。以下的 Heat Map 表示不同阶段思考的程度。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/gtd_note_taking_dark.png"
-         alt="Figure 3: gtd_note_taking_dark"/> <figcaption>
-            <p><span class="figure-number">Figure 3: </span>gtd_note_taking_dark</p>
-        </figcaption>
-</figure>
-
-<h2 id="to-do-是否需要独立管理">To-Do 是否需要独立管理</h2>
-<p>至于 To-Do 和 Note-Taking 是否分开，我的看法是逻辑上分开，物理上并不一定分开。</p>
-<p>一天 24 小时是由不同阶段组成的，工作、生活、娱乐等等，都会产生 To-Do。那么管理 To-Do 也可以分为不同的场景。</p>
-<h3 id="工作">工作</h3>
-<p>工作上做好日志记录，是个好习惯，可以方便查阅当时的想法，解决问题的思路，以及相关人员是谁，就跟航海日志一样。这个时候产生的 To-Do 就是与日志息息相关的，上下文联系紧密。加上 Capture 的原则是尽快记录，并且不打断现有的思路，最好的方法就是记录在笔记当中（比如Logseq 的 Journals）。</p>
-<p>汇总的话就更加简单了，Logseq 通过 Clojure 的查询语句就可以完成汇总，不会这门语言也没有关系，Discord 中有专门的 Channel 可以提问或讨论。每天上班的第一件事情就是回顾汇总，结合工作进度安排今天的工作。</p>
-<h3 id="生活">生活</h3>
-<p>生活中琐事居多，场景也非常繁杂，这个时候完全可以用单独的 App 来进行管理。Things 来收集拆分任务，Fantastical 来进行一天时间的分配以及未来几天需要提醒的任务，Due 来提醒重复任务。</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>警惕 All-In-One 的想法，并不是所有场景都有统一的解决方案。工作和生活分开管理 To-Do 还有个好处，休假的时候你完全可以屏蔽掉工作的内容。</p>
-<p>另外不管工作和生活中，长期计划用甘特图来管理还是非常不错的，确立里程碑，控制进度，把握长期计划的走向。</p>
+      <guid>https://luciuschen.github.io/posts/main/20220530185321-mysql/</guid>
+      <description>Troubleshoot Issues in MySQL
+Sort Chinese text fields alphabetically by first letter</description>
+      <content:encoded><![CDATA[<p><a href="/posts/main/20220530180443-troubleshoot_issues_in_mysql/">Troubleshoot Issues in MySQL</a></p>
+<p><a href="/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/">Sort Chinese text fields alphabetically by first letter</a></p>
 ]]></content:encoded>
     </item>
     
     <item>
       <title>Refactoring Code</title>
       <link>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</link>
-      <pubDate>Tue, 07 Jun 2022 16:29:27 +0800</pubDate>
+      <pubDate>Sat, 11 Jun 2022 11:50:30 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</guid>
       <description>Refactoring Code How To Find Time Complexity Of An Algorithm
@@ -814,181 +380,9 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
     </item>
     
     <item>
-      <title>Refactoring Condition statements</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193520-refactoring_condition_statements/</link>
-      <pubDate>Tue, 07 Jun 2022 16:29:13 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220506193520-refactoring_condition_statements/</guid>
-      <description>前端网络请求回调中经常会根据后端返回的不同 code 进行不同的业务处理。 if (res.data.code === &amp;#34;0000&amp;#34;) { //do something } else if (res.data.code === &amp;#34;0001&amp;#34;) { //do something } else if (res.data.code === &amp;#34;0002&amp;#34;) { //do something } else { //do something } 简单应用 const statusCode =</description>
-      <content:encoded><![CDATA[<p>前端网络请求回调中经常会根据后端返回的不同 code 进行不同的业务处理。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s2">&#34;0000&#34;</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">//do something
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s2">&#34;0001&#34;</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">//do something
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s2">&#34;0002&#34;</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">//do something
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">//do something
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span></code></pre></div><p>简单应用</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">statusCode</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([</span>
-</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="s2">&#34;0000&#34;</span><span class="p">,</span> <span class="s2">&#34;请求成功&#34;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="s2">&#34;0001&#34;</span><span class="p">,</span> <span class="s2">&#34;未授权&#34;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="s2">&#34;0002&#34;</span><span class="p">,</span> <span class="s2">&#34;拒绝访问&#34;</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl"><span class="p">]);</span>
-</span></span><span class="line"><span class="cl"><span class="nx">statusCode</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">0001</span><span class="p">);</span>
-</span></span></code></pre></div><p>复杂业务函数处理</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">getRequest</span> <span class="o">=</span> <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;请求打印&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">statusCode</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([</span>
-</span></span><span class="line"><span class="cl">  <span class="p">[</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;0000&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">async</span> <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getRequest</span><span class="p">(</span><span class="nx">params</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="p">],</span>
-</span></span><span class="line"><span class="cl">  <span class="p">[</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;0001&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;未授权&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="p">],</span>
-</span></span><span class="line"><span class="cl">  <span class="p">[</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;0002&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;拒绝访问&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="p">],</span>
-</span></span><span class="line"><span class="cl"><span class="p">]);</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{};</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">showMessage</span> <span class="o">=</span> <span class="p">(</span><span class="nx">code</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// Map 对象转数组
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">[...</span><span class="nx">statusCode</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(([</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">])</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">key</span> <span class="o">===</span> <span class="nx">code</span> <span class="o">?</span> <span class="nx">value</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="o">:</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl"><span class="nx">showMessage</span><span class="p">(</span><span class="s2">&#34;0000&#34;</span><span class="p">);</span> <span class="c1">// 未授权
-</span></span></span></code></pre></div><p><code>forEach()</code> 和 <code>map()</code> 的区别：</p>
-<ul>
-<li><code>forEach()</code> 会修改原来的数组，而 <code>map()</code> 会得到一个新的数组并返回。所以需要生成新数组的时候，就用后者, 否则就用前者。</li>
-</ul>
-<p>Map vs Object</p>
-<ul>
-<li>
-<p>According to MDN:</p>
-<blockquote>
-<p>A Map object can iterate its elements in insertion order - a for..of loop will return an array of [key, value] for each iteration.</p>
-</blockquote>
-<!--quoteend-->
-<blockquote>
-<p>Objects are similar to Maps in that both let you set keys to values, retrieve those values, delete keys, and detect whether something is stored at a key. Because of this, Objects have been used as Maps historically; however, there are important differences between Objects and Maps that make using a Map better.</p>
-<p>An Object has a prototype, so there are default keys in the map. However, this can be bypassed using map = Object.create(null). The keys of an Object are Strings, where they can be any value for a Map. You can get the size of a Map easily while you have to manually keep track of size for an Object.</p>
-</blockquote>
-</li>
-</ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Refactoring Promise chains with async/await</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</link>
-      <pubDate>Tue, 07 Jun 2022 16:28:52 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</guid>
-      <description>const setDelay = (millisecond) =&amp;gt; { return new Promise((resolve, reject) =&amp;gt; { if (typeof millisecond != &amp;#34;number&amp;#34;) reject(new Error(&amp;#34;参数必须是number类型&amp;#34;)); setTimeout(() =&amp;gt; { resolve(`我延迟了${mi</description>
-      <content:encoded><![CDATA[<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">setDelay</span> <span class="o">=</span> <span class="p">(</span><span class="nx">millisecond</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">millisecond</span> <span class="o">!=</span> <span class="s2">&#34;number&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;参数必须是number类型&#34;</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`我延迟了</span><span class="si">${</span><span class="nx">millisecond</span><span class="si">}</span><span class="sb">毫秒后输出的`</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="nx">millisecond</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">setDelaySecond</span> <span class="o">=</span> <span class="p">(</span><span class="nx">seconds</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">seconds</span> <span class="o">!=</span> <span class="s2">&#34;number&#34;</span> <span class="o">||</span> <span class="nx">seconds</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;参数必须是number类型，并且小于等于10&#34;</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`我延迟了</span><span class="si">${</span><span class="nx">seconds</span><span class="si">}</span><span class="sb">秒后输出的，注意单位是秒`</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="nx">seconds</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// Promise chains
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">setDelaySecond</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">})</span>
-</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">})</span>
-</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;完成&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">})</span>
-</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// async/await
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="kr">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kr">await</span> <span class="nx">setDelaySecond</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kr">await</span> <span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;完成了&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">})();</span>
-</span></span></code></pre></div><p><code>await</code> 是个运算符，用于组成表达式，~await~ 表达式的运算结果取决于它等的东西。</p>
-<p>如果等到的不是个 <code>Promise</code> 对象，那么 <code>await</code> 表达式的运算结果就等于它等到的东西。</p>
-<p>如果等到的是个 <code>Promise</code> 对象，那么 <code>await</code> 就会阻塞后面的代码，等着 <code>Promise</code> 对象的 <code>resolved</code> 状态，然后得到 <code>resolve</code> 的值，作为 <code>await</code> 表达式的运算结果。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>How To Find Time Complexity Of An Algorithm</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</link>
-      <pubDate>Tue, 07 Jun 2022 16:28:37 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</guid>
-      <description>The most common metric for calculating time complexity is Big O notation. This removes all constant factors so that the running time can be estimated in relation to N as N approaches infinity. In general you can think of it like this:
-statement; Is constant. The running time of the statement will not change in relation to N.
-for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loop is directly proportional to N.</description>
-      <content:encoded><![CDATA[<p>The most common metric for calculating time complexity is Big O notation. This removes all constant factors so that the running time can be estimated in relation to N as N approaches infinity. In general you can think of it like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">statement</span><span class="p">;</span>
-</span></span></code></pre></div><p>Is constant. The running time of the statement will not change in relation to N.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="nx">statement</span><span class="p">;</span>
-</span></span></code></pre></div><p>Is linear. The running time of the loop is directly proportional to N. When N doubles, so does the running time.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">N</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="nx">statement</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Is quadratic. The running time of the two loops is proportional to the square of N. When N doubles, the running time increases by N * N.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="nx">low</span> <span class="o">&lt;=</span> <span class="nx">high</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">mid</span> <span class="o">=</span> <span class="p">(</span><span class="nx">low</span> <span class="o">+</span> <span class="nx">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">target</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">[</span><span class="nx">mid</span><span class="p">])</span> <span class="nx">high</span> <span class="o">=</span> <span class="nx">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">target</span> <span class="o">&gt;</span> <span class="nx">list</span><span class="p">[</span><span class="nx">mid</span><span class="p">])</span> <span class="nx">low</span> <span class="o">=</span> <span class="nx">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Is logarithmic. The running time of the algorithm is proportional to the number of times N can be divided by 2. This is because the algorithm divides the working area in half with each iteration.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">void</span> <span class="nx">quicksort</span> <span class="p">(</span> <span class="kr">int</span> <span class="nx">list</span><span class="p">[],</span> <span class="kr">int</span> <span class="nx">left</span><span class="p">,</span> <span class="kr">int</span> <span class="nx">right</span> <span class="p">){</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">int</span> <span class="nx">pivot</span> <span class="o">=</span> <span class="nx">partition</span> <span class="p">(</span> <span class="nx">list</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">right</span> <span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">quicksort</span> <span class="p">(</span> <span class="nx">list</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">pivot</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">quicksort</span> <span class="p">(</span> <span class="nx">list</span><span class="p">,</span> <span class="nx">pivot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">right</span> <span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Is N * log ( N ). The running time consists of N loops (iterative or recursive) that are logarithmic, thus the algorithm is a combination of linear and logarithmic.</p>
-<p>In general, doing something with every item in one dimension is linear, doing something with every item in two dimensions is quadratic, and dividing the working area in half is logarithmic. There are other Big O measures such as cubic, exponential, and square root, but they&rsquo;re not nearly as common. Big O notation is described as O ( ) where is the measure. The quicksort algorithm would be described as O ( N * log ( N ) ).</p>
-<p>Note that none of this has taken into account best, average, and worst case measures. Each would have its own Big O notation. Also note that this is a VERY simplistic explanation. Big O is the most common, but it&rsquo;s also more complex that I&rsquo;ve shown. There are also other notations such as big omega, little o, and big theta. You probably won&rsquo;t encounter them outside of an algorithm analysis course. ;)</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Converting callbacks to promises</title>
       <link>https://luciuschen.github.io/posts/main/20220506193545-converting_callbacks_to_promises/</link>
-      <pubDate>Tue, 07 Jun 2022 16:28:22 +0800</pubDate>
+      <pubDate>Sat, 11 Jun 2022 11:49:29 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220506193545-converting_callbacks_to_promises/</guid>
       <description>这里用 setTimeout() 模仿异步请求。 const callbackFn = (firstName, callback) =&amp;gt; { setTimeout(() =&amp;gt; { if (!firstName) return callback(new Error(&amp;#34;no first name passed in!&amp;#34;)); // failed const fullName = `${firstName} Doe`; return callback(fullName); // succeed }, 2000); }; callbackFn(&amp;#34;John&amp;#34;, console.log); callbackFn(null, console.log); Promise 实现如下 const promiseFn = (firstName) =&amp;gt; { return new Promise((resolve, reject) =&amp;gt; { setTimeout(() =&amp;gt; { if (!firstName)</description>
@@ -1077,9 +471,658 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     </item>
     
     <item>
+      <title>Refactoring Promise chains with async/await</title>
+      <link>https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</link>
+      <pubDate>Sat, 11 Jun 2022 11:49:15 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</guid>
+      <description>const setDelay = (millisecond) =&amp;gt; { return new Promise((resolve, reject) =&amp;gt; { if (typeof millisecond != &amp;#34;number&amp;#34;) reject(new Error(&amp;#34;参数必须是number类型&amp;#34;)); setTimeout(() =&amp;gt; { resolve(`我延迟了${mi</description>
+      <content:encoded><![CDATA[<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">setDelay</span> <span class="o">=</span> <span class="p">(</span><span class="nx">millisecond</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">millisecond</span> <span class="o">!=</span> <span class="s2">&#34;number&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;参数必须是number类型&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`我延迟了</span><span class="si">${</span><span class="nx">millisecond</span><span class="si">}</span><span class="sb">毫秒后输出的`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="nx">millisecond</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">setDelaySecond</span> <span class="o">=</span> <span class="p">(</span><span class="nx">seconds</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">seconds</span> <span class="o">!=</span> <span class="s2">&#34;number&#34;</span> <span class="o">||</span> <span class="nx">seconds</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">reject</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;参数必须是number类型，并且小于等于10&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">resolve</span><span class="p">(</span><span class="sb">`我延迟了</span><span class="si">${</span><span class="nx">seconds</span><span class="si">}</span><span class="sb">秒后输出的，注意单位是秒`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="nx">seconds</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Promise chains
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">setDelaySecond</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;完成&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// async/await
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="kr">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kr">await</span> <span class="nx">setDelaySecond</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kr">await</span> <span class="nx">setDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;完成了&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">})();</span>
+</span></span></code></pre></div><p><code>await</code> 是个运算符，用于组成表达式，~await~ 表达式的运算结果取决于它等的东西。</p>
+<p>如果等到的不是个 <code>Promise</code> 对象，那么 <code>await</code> 表达式的运算结果就等于它等到的东西。</p>
+<p>如果等到的是个 <code>Promise</code> 对象，那么 <code>await</code> 就会阻塞后面的代码，等着 <code>Promise</code> 对象的 <code>resolved</code> 状态，然后得到 <code>resolve</code> 的值，作为 <code>await</code> 表达式的运算结果。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Refactoring Condition statements</title>
+      <link>https://luciuschen.github.io/posts/main/20220506193520-refactoring_condition_statements/</link>
+      <pubDate>Sat, 11 Jun 2022 11:48:48 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220506193520-refactoring_condition_statements/</guid>
+      <description>前端网络请求回调中经常会根据后端返回的不同 code 进行不同的业务处理。 if (res.data.code === &amp;#34;0000&amp;#34;) { //do something } else if (res.data.code === &amp;#34;0001&amp;#34;) { //do something } else if (res.data.code === &amp;#34;0002&amp;#34;) { //do something } else { //do something } 简单应用 const statusCode =</description>
+      <content:encoded><![CDATA[<p>前端网络请求回调中经常会根据后端返回的不同 code 进行不同的业务处理。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s2">&#34;0000&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s2">&#34;0001&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s2">&#34;0002&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>简单应用</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">statusCode</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="s2">&#34;0000&#34;</span><span class="p">,</span> <span class="s2">&#34;请求成功&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="s2">&#34;0001&#34;</span><span class="p">,</span> <span class="s2">&#34;未授权&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="s2">&#34;0002&#34;</span><span class="p">,</span> <span class="s2">&#34;拒绝访问&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">statusCode</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">0001</span><span class="p">);</span>
+</span></span></code></pre></div><p>复杂业务函数处理</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">getRequest</span> <span class="o">=</span> <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;请求打印&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">statusCode</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;0000&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">async</span> <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getRequest</span><span class="p">(</span><span class="nx">params</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;0001&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;未授权&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;0002&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;拒绝访问&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">showMessage</span> <span class="o">=</span> <span class="p">(</span><span class="nx">code</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Map 对象转数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">[...</span><span class="nx">statusCode</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(([</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">])</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">key</span> <span class="o">===</span> <span class="nx">code</span> <span class="o">?</span> <span class="nx">value</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="o">:</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="nx">showMessage</span><span class="p">(</span><span class="s2">&#34;0000&#34;</span><span class="p">);</span> <span class="c1">// 未授权
+</span></span></span></code></pre></div><p><code>forEach()</code> 和 <code>map()</code> 的区别：</p>
+<ul>
+<li><code>forEach()</code> 会修改原来的数组，而 <code>map()</code> 会得到一个新的数组并返回。所以需要生成新数组的时候，就用后者, 否则就用前者。</li>
+</ul>
+<p>Map vs Object</p>
+<ul>
+<li>
+<p>According to MDN:</p>
+<blockquote>
+<p>A Map object can iterate its elements in insertion order - a for..of loop will return an array of [key, value] for each iteration.</p>
+</blockquote>
+<!--quoteend-->
+<blockquote>
+<p>Objects are similar to Maps in that both let you set keys to values, retrieve those values, delete keys, and detect whether something is stored at a key. Because of this, Objects have been used as Maps historically; however, there are important differences between Objects and Maps that make using a Map better.</p>
+<p>An Object has a prototype, so there are default keys in the map. However, this can be bypassed using map = Object.create(null). The keys of an Object are Strings, where they can be any value for a Map. You can get the size of a Map easily while you have to manually keep track of size for an Object.</p>
+</blockquote>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>How To Find Time Complexity Of An Algorithm</title>
+      <link>https://luciuschen.github.io/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</link>
+      <pubDate>Sat, 11 Jun 2022 11:48:23 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</guid>
+      <description>The most common metric for calculating time complexity is Big O notation. This removes all constant factors so that the running time can be estimated in relation to N as N approaches infinity. In general you can think of it like this:
+statement; Is constant. The running time of the statement will not change in relation to N.
+for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loop is directly proportional to N.</description>
+      <content:encoded><![CDATA[<p>The most common metric for calculating time complexity is Big O notation. This removes all constant factors so that the running time can be estimated in relation to N as N approaches infinity. In general you can think of it like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">statement</span><span class="p">;</span>
+</span></span></code></pre></div><p>Is constant. The running time of the statement will not change in relation to N.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="nx">statement</span><span class="p">;</span>
+</span></span></code></pre></div><p>Is linear. The running time of the loop is directly proportional to N. When N doubles, so does the running time.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">N</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="nx">statement</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Is quadratic. The running time of the two loops is proportional to the square of N. When N doubles, the running time increases by N * N.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="nx">low</span> <span class="o">&lt;=</span> <span class="nx">high</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mid</span> <span class="o">=</span> <span class="p">(</span><span class="nx">low</span> <span class="o">+</span> <span class="nx">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">target</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">[</span><span class="nx">mid</span><span class="p">])</span> <span class="nx">high</span> <span class="o">=</span> <span class="nx">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">target</span> <span class="o">&gt;</span> <span class="nx">list</span><span class="p">[</span><span class="nx">mid</span><span class="p">])</span> <span class="nx">low</span> <span class="o">=</span> <span class="nx">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Is logarithmic. The running time of the algorithm is proportional to the number of times N can be divided by 2. This is because the algorithm divides the working area in half with each iteration.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">void</span> <span class="nx">quicksort</span> <span class="p">(</span> <span class="kr">int</span> <span class="nx">list</span><span class="p">[],</span> <span class="kr">int</span> <span class="nx">left</span><span class="p">,</span> <span class="kr">int</span> <span class="nx">right</span> <span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">int</span> <span class="nx">pivot</span> <span class="o">=</span> <span class="nx">partition</span> <span class="p">(</span> <span class="nx">list</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">right</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">quicksort</span> <span class="p">(</span> <span class="nx">list</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">pivot</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">quicksort</span> <span class="p">(</span> <span class="nx">list</span><span class="p">,</span> <span class="nx">pivot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">right</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Is N * log ( N ). The running time consists of N loops (iterative or recursive) that are logarithmic, thus the algorithm is a combination of linear and logarithmic.</p>
+<p>In general, doing something with every item in one dimension is linear, doing something with every item in two dimensions is quadratic, and dividing the working area in half is logarithmic. There are other Big O measures such as cubic, exponential, and square root, but they&rsquo;re not nearly as common. Big O notation is described as O ( ) where is the measure. The quicksort algorithm would be described as O ( N * log ( N ) ).</p>
+<p>Note that none of this has taken into account best, average, and worst case measures. Each would have its own Big O notation. Also note that this is a VERY simplistic explanation. Big O is the most common, but it&rsquo;s also more complex that I&rsquo;ve shown. There are also other notations such as big omega, little o, and big theta. You probably won&rsquo;t encounter them outside of an algorithm analysis course. ;)</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Sort Chinese text fields alphabetically by first letter</title>
+      <link>https://luciuschen.github.io/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/</link>
+      <pubDate>Sat, 11 Jun 2022 11:47:46 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/</guid>
+      <description>UTF8 default Proofing set is Utf8_general_ci, it is not in Chinese. You need to force MySQL to sort by Chinese. select * FROM MyTable ORDER by CONVERT (Chinesecolumnname USING GBK) COLLATE gbk_chinese_ci; 为了达到更快更效率的查询，需要另外再建立一个索引列，并在索引列中插入标签字第</description>
+      <content:encoded><![CDATA[<p>UTF8 default Proofing set is <code>Utf8_general_ci</code>, it is not in Chinese. You need to force MySQL to sort by Chinese.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">MyTable</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">CONVERT</span><span class="w"> </span><span class="p">(</span><span class="n">Chinesecolumnname</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">GBK</span><span class="p">)</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">gbk_chinese_ci</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>为了达到更快更效率的查询，需要另外再建立一个索引列，并在索引列中插入标签字第一个字母或者是拼音。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Troubleshoot Issues in MySQL</title>
+      <link>https://luciuschen.github.io/posts/main/20220530180443-troubleshoot_issues_in_mysql/</link>
+      <pubDate>Sat, 11 Jun 2022 11:47:23 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220530180443-troubleshoot_issues_in_mysql/</guid>
+      <description>Mysql 无法更新表 查询是否有锁表。 SHOW OPEN TABLES WHERE In_use &amp;gt; 0; 查询是否有正在执行的事务 SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX;</description>
+      <content:encoded><![CDATA[<h2 id="mysql-无法更新表">Mysql 无法更新表</h2>
+<ol>
+<li>
+<p>查询是否有锁表。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="w">    </span><span class="k">SHOW</span><span class="w"> </span><span class="k">OPEN</span><span class="w"> </span><span class="n">TABLES</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">In_use</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>
+<p>查询是否有正在执行的事务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">INNODB_TRX</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div></li>
+</ol>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Personal Knowledge Wiki</title>
+      <link>https://luciuschen.github.io/posts/main/20220508195206-personal_knowledge_wiki/</link>
+      <pubDate>Sat, 11 Jun 2022 11:46:23 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220508195206-personal_knowledge_wiki/</guid>
+      <description>Hardware HHKB Logitech MX Master 3 for Mac 17 MBP DELL U2417H Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency HammerSpoon Karabiner-Elements VSCode Squirrel</description>
+      <content:encoded><![CDATA[<h2 id="hardware">Hardware</h2>
+<ul>
+<li>HHKB</li>
+<li>Logitech MX Master 3 for Mac</li>
+<li>17 MBP</li>
+<li>DELL U2417H</li>
+<li>Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u</li>
+</ul>
+<h2 id="software">Software</h2>
+<h3 id="git">Git</h3>
+<ul>
+<li><a href="/posts/main/20220503160055-git-skills/">Git Skills</a></li>
+</ul>
+<h3 id="design-tools">Design Tools</h3>
+<ul>
+<li><a href="/posts/main/20220503154744-figma/">Figma</a></li>
+<li>Excalidraw</li>
+</ul>
+<h3 id="pinboard">Pinboard</h3>
+<ul>
+<li><a href="/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/">Tools to Increase Productivity and Efficiency</a></li>
+</ul>
+<h3 id="hammerspoon--20220520185239-hammerspoon-dot-md"><a href="/posts/main/20220520185239-hammerspoon/">HammerSpoon</a></h3>
+<h3 id="karabiner-elements">Karabiner-Elements</h3>
+<h3 id="vscode">VSCode</h3>
+<h3 id="squirrel">Squirrel</h3>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>HammerSpoon</title>
+      <link>https://luciuschen.github.io/posts/main/20220520185239-hammerspoon/</link>
+      <pubDate>Sat, 11 Jun 2022 11:46:14 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220520185239-hammerspoon/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Git Skills</title>
+      <link>https://luciuschen.github.io/posts/main/20220503160055-git-skills/</link>
+      <pubDate>Sat, 11 Jun 2022 11:45:53 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220503160055-git-skills/</guid>
+      <description>删除以往的提交记录 git checkout --orphan latest_branch git add -A git commit -am &amp;#34;commit message&amp;#34; git branch -D main git branch -m main git push -f origin main 发现上次提交的内容有误，需要再次修改，但不想重复提交，而是合并到上一次提</description>
+      <content:encoded><![CDATA[<p>删除以往的提交记录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout --orphan latest_branch
+</span></span><span class="line"><span class="cl">git add -A
+</span></span><span class="line"><span class="cl">git commit -am <span class="s2">&#34;commit message&#34;</span>
+</span></span><span class="line"><span class="cl">git branch -D main
+</span></span><span class="line"><span class="cl">git branch -m main
+</span></span><span class="line"><span class="cl">git push -f origin main
+</span></span></code></pre></div><p>发现上次提交的内容有误，需要再次修改，但不想重复提交，而是合并到上一次提交中，并且不更新提交 comment。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git commit --amend --no-edit
+</span></span></code></pre></div><ul>
+<li><code>--amend</code>: 修改最新的一次 commit，将这次的 stage change 直接添加到上一次 commit 中。</li>
+<li><code>--no-edit</code>: 不修改上一次 commit 的 comment，直接使用上一次的 comment。
+<ul>
+<li>如果需要修改的是最新一次 comment 的内容，则不需要该参数，就可以修改 comment。</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Tools to Increase Productivity and Efficiency</title>
+      <link>https://luciuschen.github.io/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</link>
+      <pubDate>Sat, 11 Jun 2022 11:45:30 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</guid>
+      <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Writing WeChat Markdown Editor 一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档</description>
+      <content:encoded><![CDATA[<h2 id="misc">Misc</h2>
+<ol>
+<li>
+<p><a href="https://www.templatemaker.nl/zh-cn/">Templatemaker</a></p>
+<p>制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。</p>
+</li>
+</ol>
+<h2 id="writing">Writing</h2>
+<ol>
+<li>
+<p><a href="https://github.com/doocs/md">WeChat Markdown Editor</a></p>
+<p>一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性。</p>
+</li>
+</ol>
+<h2 id="book">Book</h2>
+<ol>
+<li>
+<p><a href="http://libgen.rs/">Library Genesis</a></p>
+<p>电子书资源查找，中英文都有，英文相对较多。</p>
+</li>
+</ol>
+<h2 id="video">Video</h2>
+<ol>
+<li>
+<p><a href="https://sound-effects.bbcrewind.co.uk/">BBC Sound effects</a></p>
+<p>BBC 提供的免费下载的音效的网站。</p>
+</li>
+</ol>
+<h2 id="medicine">Medicine</h2>
+<ol>
+<li>
+<p><a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a></p>
+<p>顾名思义，权威的诊疗查询手册。</p>
+</li>
+</ol>
+<h2 id="design">Design</h2>
+<ol>
+<li>
+<p><a href="https://nipponcolors.com/">日本の伝統色</a></p>
+<p>日本的一个颜色拾取网站，很漂亮。</p>
+</li>
+</ol>
+<h2 id="chrome-extension">Chrome extension</h2>
+<ol>
+<li>
+<p><a href="https://www.languagereactor.com/">Language Reactor</a></p>
+<p>提供 NetFlix、Youtube、TurtleTube、Video File、Text 的翻译，以及 Flashcards。</p>
+</li>
+</ol>
+<h2 id="front-end">Front-End</h2>
+<ol>
+<li>
+<p><a href="https://codepen.io/">codepen</a></p>
+<p>The best place to build, test, and discover front-end code</p>
+</li>
+</ol>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Causality and Happen-before relation</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</link>
+      <pubDate>Sat, 11 Jun 2022 11:43:53 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
+      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
+      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
+<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
+<p>event a <strong>happens before</strong> event b, written a → b.</p>
+<p>那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前：</p>
+<ul>
+<li>
+<p>a 和 b 发生在相同节点，并且按照本地节点的执行顺序，a 发生在 b 之前。</p>
+</li>
+<li>
+<p>事件 a 是发送消息 m，事件 b 是接收相同的消息 m（假定发送的消息都是唯一的）。</p>
+</li>
+<li>
+<p>有这么一个时间 c 满足，a → c 且 c → b。</p>
+<p>happens-before relation 是局部的顺序：有可能存在既不满足 a → b 也不满足 b → a，这样 a 和 b 就是并行的，写作 a || b。</p>
+</li>
+</ul>
+<h3 id="happen-before-relation-example">Happen-before relation example</h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
+         alt="Figure 1: happens-before-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>a → b, c → d, and e → f due to process order</li>
+<li>b → c and d → f due to messages m1 and m2</li>
+<li>a → c, a → d, a → f, b → d, b → f, and c → f due to transitivity</li>
+<li>a || e, b || e, c || e, and d || e</li>
+</ul>
+<h2 id="causality">Causality</h2>
+<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
+<ul>
+<li>当 a → b, 那么 a 可能是 b 的因。</li>
+<li>当 a || b, a 和 b 之间不存在因果关系。</li>
+</ul>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causality.png"
+         alt="Figure 2: causality"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>causality</p>
+        </figcaption>
+</figure>
+
+<p>Let ≺ be a strict total order on events.</p>
+<p>如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
+<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
+<p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Network Time Protocol (NTP)</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
+      <pubDate>Sat, 11 Jun 2022 11:43:30 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
+      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
+      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
+<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
+         alt="Figure 1: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>NTP</p>
+        </figcaption>
+</figure>
+
+<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/NTP.png"
+         alt="Figure 2: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>NTP</p>
+        </figcaption>
+</figure>
+
+<ol>
+<li>
+<p>Round-trip network delay: δ = (t4 - t1) - (t3 - t2)</p>
+</li>
+<li>
+<p>Estimated server time when client receives response: t3 + ½δ（客户端收到响应时的服务器的时间）</p>
+</li>
+<li>
+<p>Estimated clock skew: θ = t3 + ½δ - t4 = ½(t2 - t1 + t3 - t4)（计算预估的服务器时间和当前客户端时间的偏差）</p>
+</li>
+</ol>
+<h2 id="correcting-clock-skew">Correcting clock skew</h2>
+<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
+<ul>
+<li>
+<p>if θ &lt; 125 ms, <strong>slew</strong> the clock:</p>
+<p>slightly speed it up or slow it down by up to 500 ppm<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
+</li>
+<li>
+<p>if 125 ms ≤ θ &lt; 1000 s, <strong>step</strong> the clock:</p>
+<p>suddenly reset client clock to estimated server timestamp</p>
+</li>
+<li>
+<p>if θ ≥ 1000 s, <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
+</li>
+</ul>
+<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
+<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
+<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Remote Procedure Call (RPC)</title>
+      <link>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</link>
+      <pubDate>Sat, 11 Jun 2022 11:43:15 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</guid>
+      <description>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样</description>
+      <content:encoded><![CDATA[<p>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样调用远程系统上的其他进程。</p>
+<p>RPC 是通过 Interface Definition Language (IDL) 来描述接口，使得在不同的平台上运行的不同程序编写的程序可以相互通信。(IDL 是不以任何一种特定编程语言的方式指定类型签名或者函数调用的语言。)</p>
+<p>基本上，你可以用 IDL 定义客户端和服务端之间的接口，这样 RPC 机制就可以创建跨网络调用功能所需要的代码存根（Code <a href="/posts/main/20220604180341-stub/">Stub</a>）。</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">+----------------+
+| Client         |
+|  +----------+  |         +---------------+
+|  |   main   |  |         | Server        |
+|  |----------|  |         |  +----------+ |
+|  | stub_cli |----(comms)---&gt;| stub_svr | |
+|  +----------+  |         |  |----------| |
++----------------+         |  | function | |
+                           |  +----------+ |
+                           +---------------+
+</code></pre><p>在这个例子中，~main~ 没有在同一个程序中调用函数，而是调用了一个客户端存根函数（与函数的原型相同），该函数负责将信息打包，并通过通讯通道将其传送给另一个进程。</p>
+<p>这里可以是同一台机器或者不同机器，RPC 的优势之一就是能够随意移动服务器。</p>
+<p>在服务器中，有个「监听者」进程，它将接收这些信息并将其传递给服务器。服务器的存根接收信息，解包并将其传递给真正执行的函数。</p>
+<p>真正的函数运行后返回结果给到服务器存根，服务器存根可以将返回的信息打包，并将其传回给客户端存根。客户端存根再将其解包并传回给 ~main~。</p>
+<p>实际上的 IDL 大概像下面这样：</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">[   uuid(f9f6be21-fd32-5577-8f2d-0800132bd567),
+    version(0),
+    endpoint(&#34;ncadg_ip_udp:[1234]&#34;, &#34;dds:[19]&#34;)
+] interface function_iface {
+    [idempotent] void function(
+        [in] int handle,
+        [out] int *status
+    );
+}
+</code></pre><p>头部是一些用于链接客户端和服务端的网络信息，RPC 发生在「会话层」中。接口部分才是 IDL 编译器建立客户端和服务器端存根的地方，以便客户端和服务端能够进行通讯，使得 RPC 正常工作。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Stub</title>
+      <link>https://luciuschen.github.io/posts/main/20220604180341-stub/</link>
+      <pubDate>Sat, 11 Jun 2022 11:42:56 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220604180341-stub/</guid>
+      <description>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。 在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端</description>
+      <content:encoded><![CDATA[<ol>
+<li>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。</li>
+<li>在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端和服务端之间传递参数的一段代码。</li>
+</ol>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>The Byzantine generals problem</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</link>
+      <pubDate>Sat, 11 Jun 2022 11:42:34 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</guid>
+      <description>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同</description>
+      <content:encoded><![CDATA[<p>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。</p>
+<p>在分布式计算中，不同的计算机通过通讯交换信息达成共识而按照同一套协作策略行动。但有时候，系统中的成员计算机可能出错而发送错误的信息，用于传递信息的通讯网络也可能导致信息损坏，使得网络中不同的成员关于全体协作的策略得出不同结论，从而破坏系统一致性。拜占庭将军问题被认为是容错性问题中最难的问题类型之一。</p>
+<p>容错率：Theorem: need 3ƒ+1 generals in total to tolerate ƒ malicious generals.</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>The two generals problem</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</link>
+      <pubDate>Sat, 11 Jun 2022 11:42:17 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</guid>
+      <description>两军问题（英语：Two Generals&amp;rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该</description>
+      <content:encoded><![CDATA[<p>两军问题（英语：Two Generals&rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该问题中，两支军队的将军只能通过派遣信使穿越敌方领土来互相通信，以此约定在同一时间点共同进攻。该问题希望求解如何在两位将军派出的任何信使都可能被俘虏的情况下，就发动攻击的时间点达成一致。</p>
+<p>两军问题是拜占庭将军问题的一个特例，常被编入与计算机网络相关的入门课程中。在传输控制协议（TCP）相关的课程中，该问题可用作解释 TCP 协议无法保证通信双方之间的状态一致性的原因。该问题也适用于其他存在信息丢失的双方通信的情况。作为认识逻辑的一个重要概念，该问题突出了共识（英语：Common_knowledge_(logic)）的重要性。一些学者也将此问题称作两军悖论（英语：Two Generals Paradox）或协同进攻问题（英语：Coordinated Attack Problem）。两军问题是第一个被证明无解的计算机通信问题。该证明的重要意义在于，其显示了对于存在通信错误的更广泛的问题（如拜占庭将军问题），同样是无解的。这也为所有分布式一致性协议的实现提供了一个符合现实的预期。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Distribution System</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
+      <pubDate>Sat, 11 Jun 2022 11:41:58 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
+      <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
+      <content:encoded><![CDATA[<h2 id="remote-procedure-call">Remote Procedure Call</h2>
+<p><a href="/posts/main/20220603220847-remote_procedure_call_rpc/">Remote Procedure Call (RPC)</a> 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎么办？</p>
+<ol>
+<li>如果在函数调用过程中，服务挂了？</li>
+<li>如果消息丢失了？</li>
+<li>如果消息延迟了？</li>
+<li>如果出了问题，回复消息是否安全？</li>
+</ol>
+<p>要解决这些问题，就需要将网络以及节点之间的情况抽象出来，以及时序的问题。在设计分布式算法时，需要更加抽象一点，以便更好的推理整个过程。</p>
+<h2 id="network-behaviour">Network behaviour</h2>
+<p><a href="/posts/main/20220602202247-the_two_generals_problem/">The two generals problem</a> 描述了网络通信丢失的场景。</p>
+<p>假设两个节点之是间双向的点对点的通信。</p>
+<h3 id="reliable-links">Reliable links</h3>
+<p>一条消息只会在被一个节点发送的时候才会收到，并且消息是可以重新排序的。</p>
+<p>中间没有伪造消息等行为，发送了就一定会被收到。</p>
+<h3 id="fair-loss-links">Fair-loss links</h3>
+<p>消息可能会丢失、重复或重新排序，如果你一直重新发送，消息终将会传递过去。</p>
+<p>每次发送消息成功的概率都是非零，这个时候只要一直重试，我们就假设消息一定会传递到另外一个节点。</p>
+<p><strong>Fair-losl links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</strong></p>
+<h3 id="arbitrary-links">Arbitrary links</h3>
+<p>可能传递过程中会有恶意的第三方对消息进行干预。</p>
+<p>比如公共场合的公共 WiFi 就会出现这种情况。</p>
+<p><strong>Arbitrary links 通过 TLS 的加持，就可以达到 Fair-loss links 的效果。</strong></p>
+<h2 id="nodes-behaviour">Nodes behaviour</h2>
+<p><a href="/posts/main/20220602202317-the_byzantine_generals_problem/">The Byzantine generals problem</a> 描述了节点出错，导致全体协作策略失败以及容错率的问题。</p>
+<p>假设每个节点都执行指定的算法，假设有以下情况。</p>
+<h3 id="crash-stop--fail-stop">Crash-stop (fail-stop)</h3>
+<p>如果一个节点出现问题挂了，并且在这之后永远停机。</p>
+<h3 id="crash-recovery--fail-recovery">Crash-recovery (fail-recovery)</h3>
+<p>一个节点挂了，并丢失了内存状态，但会在过段时间后恢复。</p>
+<h3 id="byzantine-fail-arbitrary">Byzantine （fail-arbitrary)</h3>
+<p>节点偏离了原本的算法，可能会发生任何事情，包括崩溃或者恶意的行为。</p>
+<h2 id="同步-时序-假定">同步（时序）假定</h2>
+<h3 id="synchronous">Synchronous</h3>
+<p>消息延迟不超过已知的上限。到达这个上限后，消息要么被传递，要么丢失。节点以已知的速度执行算法。每一步代码的执行都有执行时间的上限。</p>
+<h3 id="partically-synchronous">Partically synchronous</h3>
+<p>系统中一部分时间内是异步的，另一部分是同步的。</p>
+<h3 id="asynchronous">Asynchronous</h3>
+<p>消息可以任意地被延迟，节点可以任意地暂停，并没有时序上的保证。</p>
+<h2 id="clocks-and-time-in-distributed-systems">Clocks and time in distributed systems</h2>
+<p>分布式系统中经常涉及到需要测量时间，比如：</p>
+<ul>
+<li>Schedulers, timeouts, failure detectors, retry timers</li>
+<li>Performance measurements, statistics, profiling (performance analysis也称为profiling)</li>
+<li>Log files &amp; databases: record when an event occurred</li>
+<li>Data with time-limited validity (e.g. cache entries)</li>
+<li><code>Determining order of events across several nodes</code></li>
+</ul>
+<p>分布式系统中会遇到两种类型的时钟：</p>
+<ul>
+<li>physical clocks: count number of seconds elapsed</li>
+<li>logical clocks: count events, e.g. messages sent</li>
+</ul>
+<h3 id="clock-synchronisation">Clock synchronisation</h3>
+<p>物理时钟会有时间上的偏移，通常是通过和电脑、手机、电视等相对准确的地方来校准物理时钟的时间，比如手表，老式的钟摆。</p>
+<p>电脑上的时间同样会有偏移，是通过 <a href="/posts/main/20220602202411-network_time_protocol_ntp/">Network Time Protocol(NTP)</a> 来校准电脑的时间，也就是物理时钟的校准。</p>
+<h2 id="broadcast-protocols-and-logical-time">Broadcast protocols and logical time</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ordering-of-messages.png"
+         alt="Figure 1: ordering-of-messages"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>ordering-of-messages</p>
+        </figcaption>
+</figure>
+
+<p>m1 = &ldquo;A says: The moon is made of cheese!&rdquo;</p>
+<p>m2 = &ldquo;B says: Oh no it isn&rsquo;t!&rdquo;</p>
+<p>User C sees m2 first, m1 second, even though logically m1 <strong>happened before</strong> m2.</p>
+<p><strong>Problem</strong>: even with synced clocks, t2 &lt; t1 is possible. Timestamp order is inconsistent with expected order!</p>
+<p>即便我们已经通过 NTP 尽量保证物理时钟上的同步，但这个时候依旧会发生因果关系不一致的情况，所以这个时候就需要逻辑时钟。</p>
+<p>逻辑时钟是在分布式系统中专门用于捕获系统中发生事件之间的因果关系，因此逻辑时钟其实就是一种计数器，每次事件发生的时候都会往前递增，所以随着事件的发生它会随着时间向前移动，但它和物理时间并没有实际的关系。</p>
+<h3 id="logical-time">Logical time</h3>
+<p>Logical clocks: designed to <strong>capture causal dependencies</strong>.</p>
+<p>(e<sub>1</sub> → e<sub>2</sub>) ⇒ (T(e<sub>1</sub>) &lt; T(e<sub>2</sub>))<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>当事件1发生在事件2之前，那么事件1的时间戳应该小于事件2的时间戳，这是逻辑时钟要保证的最基本的原则。</p>
+<p>下面将研究一下两种逻辑时钟：</p>
+<ul>
+<li>
+<p><a href="/posts/main/20220609201658-lamport_clocks/">Lamprot Clocks</a> 是在分布式系统中的每个节点都维护一个计数器，每一个当前节点事件 <code>e</code> 发生时自增 ；发送消息时，也会附带上当前节点的计数 <code>t</code> ，消息接收者收到消息后，取出消息中的计数器与当前节点计数器比较，去最大值后自增 1。</p>
+<p>这样可以实现局部顺序，再加上节点名称，形成(时间戳，节点名称)的组合后，就可以扩展为全局顺序。</p>
+<p>但这样也有缺点，算法在时间戳相同，节点名称不同的平行事件的顺序判定时，会出现与实际情况不符的情况。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+</li>
+<li>
+<p><a href="/posts/main/20220602235916-vector_clocks/">Vector Clocks</a></p>
+</li>
+</ul>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="/posts/main/20220602202832-causality_and_happen_before_relation/">Causality and Happen-before relation</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>if a || b we could have either a ≺ b or b ≺ a, so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
       <title>Figma</title>
       <link>https://luciuschen.github.io/posts/main/20220503154744-figma/</link>
-      <pubDate>Mon, 06 Jun 2022 15:31:34 +0800</pubDate>
+      <pubDate>Sat, 11 Jun 2022 11:41:35 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220503154744-figma/</guid>
       <description>Plugin Scale Scale any frame, it’s contents, and all effects to any defined width or height. Sankey Connect Sankey Diagram Connect. </description>
@@ -1094,7 +1137,7 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     <item>
       <title>Build Diagram</title>
       <link>https://luciuschen.github.io/posts/main/20220503145636-build_diagram/</link>
-      <pubDate>Mon, 06 Jun 2022 15:30:51 +0800</pubDate>
+      <pubDate>Sat, 11 Jun 2022 11:41:12 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220503145636-build_diagram/</guid>
       <description>Sankey diagram 使用软件：Figma Plugin: Sankey Connect 展现数据流动的利器 案例：工作流描述 初始的思路是按照流程图来画，用 Excalidraw 插件画起来很快，但不够明晰。工作流也是处理数</description>
@@ -1177,7 +1220,7 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     <item>
       <title>How I Take Notes</title>
       <link>https://luciuschen.github.io/posts/article/20220505162419-how_i_take_notes/</link>
-      <pubDate>Mon, 06 Jun 2022 15:30:16 +0800</pubDate>
+      <pubDate>Sat, 11 Jun 2022 11:40:35 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/article/20220505162419-how_i_take_notes/</guid>
       <description>Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、</description>
@@ -1253,6 +1296,155 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
 <p>太复杂的笔记流程。复杂的工作流通常需要自动化，但自动化不利于笔记的整理，形成最重笔记时应该慎重考虑哪些是需要保留的，否则知识库就会变成垃圾场。</p>
 </li>
 </ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Implementation Intention GTD</title>
+      <link>https://luciuschen.github.io/posts/article/20220503143427-gtd/</link>
+      <pubDate>Sat, 11 Jun 2022 11:39:58 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/article/20220503143427-gtd/</guid>
+      <description>Introduction 2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omni</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omnifocus、Things 等等。</p>
+<p>一直不明白问题出在哪里，一天下来不管是 Today 还是 Inbox 当中的 To-Do 不仅没有变少，甚至更多了。自我怀疑、自我谴责让自己觉得是拖延症、懒造成了 To-Do 积压。</p>
+<p>回顾过去几年中，除了 Things 以外，我还使用了 Due 和 Fantastical 这两款软件。前者是吃药的时候，循环提醒该吃药了；后者是今天或者未来某天必须要做的事情，为了不让我忘记这个事情，哪怕我不确定这个事情在当天的哪个时间段做，都会给它加一个提醒，这样即便是过了时间，只要没有 checked 就会一直在锁屏或者下拉通知内，这样我就可以*不断地被提醒，找到合适的时间段去完成这件事情*​。</p>
+<p>至于 Things 时常被我厌恶，因为我有太多的 To-Do 积压在里面。每次打开它都有种翻开垃圾桶的感觉，没错，它就是垃圾桶。我再次捡起 Things 用的时候，基本都是我把“过期了的”、“没有意义的” To-Do 清空了才可以。这是一个循环往复的过程，过程中不断地伤害着我自己的自信心，并让我感到焦虑，永远做不完的事情，越积越多。</p>
+<p>在这样的情况下我了解到了 <a href="https://en.wikipedia.org/wiki/Implementation_intention">Implementation Intention</a>。</p>
+<h2 id="implementation-intention">Implementation Intention</h2>
+<blockquote>
+<p>执行意图由心理学家 Peter M.Gollitzer 提出，是个体为实现某一目标制定的一种计划，表现为“如果－那么”形式，例如“如果我遇到突发情况，那么我将保持冷静”。</p>
+<p>普通人思考目标的时候，使用的是目标意图，即：我要做什么、我要成为什么。目标意图有个最大的缺点：建立目标容易，执行目标很难。而执行意图更多思考的是要怎么做的问
+题。</p>
+<p>执行意图明确了个体在何时何地，以什么方式来实现目标，从而让个体更加容易地提取具体情景线索的心理表征，并通过这些线索建立起与目标所指行为的联系。在建立起线索和目标行为的联系之后，个体在随后遇到线索所指向的情景时（如考场），便可以用一种自动化的方式执行事先形成的计划，达成预设的目标。重要的是，执行意图的这种过程是自动化进行的，并不需要个体有意识地进行控制。</p>
+</blockquote>
+<p>再结合成功实行 GTD 的案例「<a href="https://www.calnewport.com/blog/2013/12/21/deep-habits-the-importance-of-planning-every-minute-of-your-work-day/">Deep Habits: The Importance of Planning Every Minute of Your Work Day</a>」和「<a href="https://www.nirandfar.com/todo-vs-schedule-builder/">Be a Schedule Builder, Not a To-Do List Maker</a>」，发现他们都会去在前一天花费一些时间去细化第二天的任务列表，甚至精确到分钟，这其实就是上面提到的 Implementation Intention 的实际操作，When Where and How。</p>
+<p>案例1当中是通过日历来安排一天的工作，细致到分钟。若发生变故需要变更，则在右侧重新记录变更后的安排。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/gtd_dark.png"
+         alt="Figure 1: gtd_dark"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>gtd_dark</p>
+        </figcaption>
+</figure>
+
+<p>案例2中则从容很多，不仅仅是安排了工作的内容，休闲娱乐的内容也会排在日历当中。(下图来自于案例2)</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/gtd_schedule_builder.png"
+         alt="Figure 2: gtd_schedule_builder"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>gtd_schedule_builder</p>
+        </figcaption>
+</figure>
+
+<p>其实回顾到上面我提到使用 Due 和 Fantastical 的经历，当中已经包含了执行意图的概念，任务都非常明晰，是今天必须要做的，是今天有非常合适的情景去做的，只不过是我没有意识到。</p>
+<h3 id="执行意图-会让人主动思考-避免囤积过多的任务">「执行意图」会让人主动思考，避免囤积过多的任务。</h3>
+<p>举个例子，按照执行意图的方法。如果我买了一本书，那么我就要在最近的闲暇时间都去读它，并在读完后写读后感总结一下。那么当我买书或者安排任务的时候就会想到买书不仅仅是一个完结，后续意味着我要去读它，并写读后感等一大堆的操作，这样就不会去在自己当前书还没有读完的情况下，就去安排下一本书。</p>
+<p>例子中的场景和平时从 Inbox 中安排任务很类似，造成任务完不成，积压，是因为没有安排好任务的情景关系，何时、何地、如何去做这件事情，仅仅就是目标意图，我要做这些事情。</p>
+<p>没有对每个任务细致的思考前，无法把握任务的工作量，适合完成的场景，也就无法把控今天安排的任务是否都能完成。但刚刚开始接触这套方法的人，难免会因为对工作细节不熟悉导致工作量评估不准确的情况。</p>
+<h3 id="执行意图-消除了在何时何地做某事的模糊性">「执行意图」消除了在何时何地做某事的模糊性。</h3>
+<p>例如，询问选民如何前往投票站等简单的问题，已经被证明可以提高当天的投票率。</p>
+<p>在这个例子当中，被问的选民其实受到了引导，增加去投票这件事情的确定性。我们也可以利用同样的方法，明确任务，顺着 <code>if...then...</code> 的顺序去完成任务。</p>
+<h2 id="回顾">回顾</h2>
+<p><a href="https://twitter.com/mikhails5v/status/1521406633548697603">@mikhails5v</a> 在 tweet thread 中提到了他在使用 Things 的 1.5 年中，对于没有完成的任务，在每晚回顾时，手动的去把今天的任务清空，已完成的任务会让他很有成就感；未完成的任务则在思考后移到后面适合的时候，或者重新放回 Inbox，甚至删掉它们。确保了每日的任务都是清空的状态，没有负罪感。即便是没有完成的任务，在每晚也会重新回顾，思考后续是否有合适的情景去完成它，或者干脆觉得没有执行的必要删除掉。</p>
+<h2 id="阶段性思考">阶段性思考</h2>
+<blockquote>
+<p>note-taking and knowledge creation will always require large amounts of brain work. On the other hand, GTD makes task management a simple, effortless process.</p>
+</blockquote>
+<p>对比我在 <a href="/posts/article/20220505162419-how_i_take_notes/">How I Take Notes</a> 中写的笔记的工作流，To-Do 和 Note-Taking 确实存在区别。</p>
+<p>GTD 中 Capture 是最不需要思考的，有什么东西直接记录到 Inbox 当中，清空当前的灵感，专注眼前的事情。例如，Things 中快速呼出 Inbox 的输入框；Org-roam 中写在 <code>.org</code> 文件中的 To-Do 都会集中在 Agenda 中；Logseq 中写在 Journals 中的 To-Do 也可以在 Pages 中按照自己的需求定制查询（复杂的查询有些门槛）。后续处理，按照执行意图的方法去评估 To-Do 适合的情景；较大的任务需要进行拆分成若干小任务，甚至形成一个专门的项目分为不同阶段去完成。</p>
+<p>Note-Taking 相反，从阅读就开始思考，随后各种灵感迸发，记录下来进行整理，去芜存菁后继续扩展，定期回顾后形成自己的知识并输出，这个时候的写作反而是最不需要动脑的部分了。以下的 Heat Map 表示不同阶段思考的程度。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/gtd_note_taking_dark.png"
+         alt="Figure 3: gtd_note_taking_dark"/> <figcaption>
+            <p><span class="figure-number">Figure 3: </span>gtd_note_taking_dark</p>
+        </figcaption>
+</figure>
+
+<h2 id="to-do-是否需要独立管理">To-Do 是否需要独立管理</h2>
+<p>至于 To-Do 和 Note-Taking 是否分开，我的看法是逻辑上分开，物理上并不一定分开。</p>
+<p>一天 24 小时是由不同阶段组成的，工作、生活、娱乐等等，都会产生 To-Do。那么管理 To-Do 也可以分为不同的场景。</p>
+<h3 id="工作">工作</h3>
+<p>工作上做好日志记录，是个好习惯，可以方便查阅当时的想法，解决问题的思路，以及相关人员是谁，就跟航海日志一样。这个时候产生的 To-Do 就是与日志息息相关的，上下文联系紧密。加上 Capture 的原则是尽快记录，并且不打断现有的思路，最好的方法就是记录在笔记当中（比如Logseq 的 Journals）。</p>
+<p>汇总的话就更加简单了，Logseq 通过 Clojure 的查询语句就可以完成汇总，不会这门语言也没有关系，Discord 中有专门的 Channel 可以提问或讨论。每天上班的第一件事情就是回顾汇总，结合工作进度安排今天的工作。</p>
+<h3 id="生活">生活</h3>
+<p>生活中琐事居多，场景也非常繁杂，这个时候完全可以用单独的 App 来进行管理。Things 来收集拆分任务，Fantastical 来进行一天时间的分配以及未来几天需要提醒的任务，Due 来提醒重复任务。</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>警惕 All-In-One 的想法，并不是所有场景都有统一的解决方案。工作和生活分开管理 To-Do 还有个好处，休假的时候你完全可以屏蔽掉工作的内容。</p>
+<p>另外不管工作和生活中，长期计划用甘特图来管理还是非常不错的，确立里程碑，控制进度，把握长期计划的走向。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Lamport Clocks</title>
+      <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
+      <pubDate>Sat, 11 Jun 2022 11:39:06 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
+      <description>Lamport clocks algorithm on initialisation do t := 0 ▻ each node has its own local variable t end on on any event occurring at the local node do t := t + 1 end on on request to send message m do t := t + 1; send (t, m) via the underlying network link end on on receiving (t′, m) via the underlying network link</description>
+      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">on initialisation do
+</span></span><span class="line"><span class="cl">t := 0                    ▻ each node has its own local variable t
+</span></span><span class="line"><span class="cl">end on
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">on any event occurring at the local node do
+</span></span><span class="line"><span class="cl">t := t + 1
+</span></span><span class="line"><span class="cl">end on
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">on request to send message m do
+</span></span><span class="line"><span class="cl">t := t + 1; send (t, m) via the underlying network link
+</span></span><span class="line"><span class="cl">end on
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">on receiving (t′, m) via the underlying network link do
+</span></span><span class="line"><span class="cl">t := max(t, t′) + 1
+</span></span><span class="line"><span class="cl">deliver m to the application
+</span></span><span class="line"><span class="cl">end on
+</span></span></code></pre></div><h3 id="lamport-clocks-in-words">Lamport clocks in words</h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
+         alt="Figure 1: lamport-example-simple"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>每个节点都维护一个计数器 <code>t</code> ，每一个当前节点事件 <code>e</code> 发生时，自增 1。</li>
+<li>增长后的值设为 <code>L(e)</code></li>
+<li>发送消息时附带上当前的计数 <code>t</code></li>
+<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
+</ul>
+<p>Properties of this scheme:</p>
+<ul>
+<li>if a → b then L(e) &lt; L(b)</li>
+<li>However, L(a) &lt; L(b) does not imply a → b</li>
+<li>Possible that L(a) = L(b) for a ≠ b ()</li>
+</ul>
+<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
+<h3 id="lamport-clocks-example">Lamport clocks example</h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example.png"
+         alt="Figure 2: lamport-example"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
+        </figcaption>
+</figure>
+
+<p>Let N(e) be the node at which event e occurred.</p>
+<p>Then the pair (L(e), N(e)) <strong>uniquely identiﬁes</strong> event e.</p>
+<p>Deﬁne a <strong>total order</strong> ≺ using Lamport timestamps:</p>
+<p>(a ≺ b) ⇔ (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b)))<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>This order is <strong>causal</strong>: (a → b) ⇒ (a ≺ b)</p>
+<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
+<p>对于任何两个事件 a ≠ b，那么既不是 a ≺ b 也不是 b ≺ a。只要 a → b，我们就有 a ≺ b，换句话说，≺ 是局部顺序 → 的线性扩展。然而，如果 a || b，我们可以有 a ≺ b 或 b ≺ a，所以两个事件的顺序是由算法任意决定的。 比如 (1, A) 和 (1, C) 两个事件是平行的，按照 Lamport 的算法，(1, A) 必然是在 (1, C) 之前的，但实际情况可能是 (1, C) 在前。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>⇔ is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>∨ is logical or, ∧ is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
 ]]></content:encoded>
     </item>
     
