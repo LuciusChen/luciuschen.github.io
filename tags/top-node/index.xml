@@ -6,44 +6,11 @@
     <description>Recent content in top-node on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2022 11:51:16 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>MySQL</title>
-      <link>https://luciuschen.github.io/posts/main/20220530185321-mysql/</link>
-      <pubDate>Sat, 11 Jun 2022 11:51:16 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220530185321-mysql/</guid>
-      <description>Troubleshoot Issues in MySQL
-Sort Chinese text fields alphabetically by first letter</description>
-      <content:encoded><![CDATA[<p><a href="/posts/main/20220530180443-troubleshoot_issues_in_mysql/">Troubleshoot Issues in MySQL</a></p>
-<p><a href="/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/">Sort Chinese text fields alphabetically by first letter</a></p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Refactoring Code</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</link>
-      <pubDate>Sat, 11 Jun 2022 11:50:30 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</guid>
-      <description>Refactoring Code How To Find Time Complexity Of An Algorithm
-JavaScript Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await </description>
-      <content:encoded><![CDATA[<h2 id="refactoring-code">Refactoring Code</h2>
-<p><a href="/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">How To Find Time Complexity Of An Algorithm</a></p>
-<h3 id="javascript">JavaScript</h3>
-<h4 id="refactoring-tips">Refactoring Tips</h4>
-<ol>
-<li><a href="/posts/main/20220506193520-refactoring_condition_statements/">Refactoring Condition statements</a></li>
-<li><a href="/posts/main/20220506193545-converting_callbacks_to_promises/">Converting callbacks to promises</a></li>
-<li><a href="/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">Refactoring Promise chains with async/await</a></li>
-</ol>
-]]></content:encoded>
-    </item>
-    
+    <lastBuildDate>Sat, 11 Jun 2022 16:37:32 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Sat, 11 Jun 2022 11:41:58 +0800</pubDate>
+      <pubDate>Sat, 11 Jun 2022 16:37:32 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -129,7 +96,8 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
 <p>但这样也有缺点，算法在时间戳相同，节点名称不同的平行事件的顺序判定时，会出现与实际情况不符的情况。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
 </li>
 <li>
-<p><a href="/posts/main/20220602235916-vector_clocks/">Vector Clocks</a></p>
+<p><a href="/posts/main/20220602235916-vector_clocks/">Vector Clocks</a> 除了矢量之外，矢量时钟算法与 Lamport 时钟非常相似。一个节点的矢量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 N<sub>i</sub> 发生事件时，它就会增加其向量钟中的第 i 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
+<p>这样就可以弥补 Lamport 的缺点，可以完全确定每个事件的因果顺序。</p>
 </li>
 </ul>
 <div class="footnotes" role="doc-endnotes">
@@ -143,6 +111,39 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
 </li>
 </ol>
 </div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>MySQL</title>
+      <link>https://luciuschen.github.io/posts/main/20220530185321-mysql/</link>
+      <pubDate>Sat, 11 Jun 2022 11:51:16 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220530185321-mysql/</guid>
+      <description>Troubleshoot Issues in MySQL
+Sort Chinese text fields alphabetically by first letter</description>
+      <content:encoded><![CDATA[<p><a href="/posts/main/20220530180443-troubleshoot_issues_in_mysql/">Troubleshoot Issues in MySQL</a></p>
+<p><a href="/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/">Sort Chinese text fields alphabetically by first letter</a></p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Refactoring Code</title>
+      <link>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</link>
+      <pubDate>Sat, 11 Jun 2022 11:50:30 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</guid>
+      <description>Refactoring Code How To Find Time Complexity Of An Algorithm
+JavaScript Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await </description>
+      <content:encoded><![CDATA[<h2 id="refactoring-code">Refactoring Code</h2>
+<p><a href="/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">How To Find Time Complexity Of An Algorithm</a></p>
+<h3 id="javascript">JavaScript</h3>
+<h4 id="refactoring-tips">Refactoring Tips</h4>
+<ol>
+<li><a href="/posts/main/20220506193520-refactoring_condition_statements/">Refactoring Condition statements</a></li>
+<li><a href="/posts/main/20220506193545-converting_callbacks_to_promises/">Converting callbacks to promises</a></li>
+<li><a href="/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">Refactoring Promise chains with async/await</a></li>
+</ol>
 ]]></content:encoded>
     </item>
     

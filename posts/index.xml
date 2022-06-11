@@ -6,7 +6,114 @@
     <description>Recent content in Posts on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2022 16:34:13 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jun 2022 16:37:32 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Distribution System</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
+      <pubDate>Sat, 11 Jun 2022 16:37:32 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
+      <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
+      <content:encoded><![CDATA[<h2 id="remote-procedure-call">Remote Procedure Call</h2>
+<p><a href="/posts/main/20220603220847-remote_procedure_call_rpc/">Remote Procedure Call (RPC)</a> 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎么办？</p>
+<ol>
+<li>如果在函数调用过程中，服务挂了？</li>
+<li>如果消息丢失了？</li>
+<li>如果消息延迟了？</li>
+<li>如果出了问题，回复消息是否安全？</li>
+</ol>
+<p>要解决这些问题，就需要将网络以及节点之间的情况抽象出来，以及时序的问题。在设计分布式算法时，需要更加抽象一点，以便更好的推理整个过程。</p>
+<h2 id="network-behaviour">Network behaviour</h2>
+<p><a href="/posts/main/20220602202247-the_two_generals_problem/">The two generals problem</a> 描述了网络通信丢失的场景。</p>
+<p>假设两个节点之是间双向的点对点的通信。</p>
+<h3 id="reliable-links">Reliable links</h3>
+<p>一条消息只会在被一个节点发送的时候才会收到，并且消息是可以重新排序的。</p>
+<p>中间没有伪造消息等行为，发送了就一定会被收到。</p>
+<h3 id="fair-loss-links">Fair-loss links</h3>
+<p>消息可能会丢失、重复或重新排序，如果你一直重新发送，消息终将会传递过去。</p>
+<p>每次发送消息成功的概率都是非零，这个时候只要一直重试，我们就假设消息一定会传递到另外一个节点。</p>
+<p><strong>Fair-losl links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</strong></p>
+<h3 id="arbitrary-links">Arbitrary links</h3>
+<p>可能传递过程中会有恶意的第三方对消息进行干预。</p>
+<p>比如公共场合的公共 WiFi 就会出现这种情况。</p>
+<p><strong>Arbitrary links 通过 TLS 的加持，就可以达到 Fair-loss links 的效果。</strong></p>
+<h2 id="nodes-behaviour">Nodes behaviour</h2>
+<p><a href="/posts/main/20220602202317-the_byzantine_generals_problem/">The Byzantine generals problem</a> 描述了节点出错，导致全体协作策略失败以及容错率的问题。</p>
+<p>假设每个节点都执行指定的算法，假设有以下情况。</p>
+<h3 id="crash-stop--fail-stop">Crash-stop (fail-stop)</h3>
+<p>如果一个节点出现问题挂了，并且在这之后永远停机。</p>
+<h3 id="crash-recovery--fail-recovery">Crash-recovery (fail-recovery)</h3>
+<p>一个节点挂了，并丢失了内存状态，但会在过段时间后恢复。</p>
+<h3 id="byzantine-fail-arbitrary">Byzantine （fail-arbitrary)</h3>
+<p>节点偏离了原本的算法，可能会发生任何事情，包括崩溃或者恶意的行为。</p>
+<h2 id="同步-时序-假定">同步（时序）假定</h2>
+<h3 id="synchronous">Synchronous</h3>
+<p>消息延迟不超过已知的上限。到达这个上限后，消息要么被传递，要么丢失。节点以已知的速度执行算法。每一步代码的执行都有执行时间的上限。</p>
+<h3 id="partically-synchronous">Partically synchronous</h3>
+<p>系统中一部分时间内是异步的，另一部分是同步的。</p>
+<h3 id="asynchronous">Asynchronous</h3>
+<p>消息可以任意地被延迟，节点可以任意地暂停，并没有时序上的保证。</p>
+<h2 id="clocks-and-time-in-distributed-systems">Clocks and time in distributed systems</h2>
+<p>分布式系统中经常涉及到需要测量时间，比如：</p>
+<ul>
+<li>Schedulers, timeouts, failure detectors, retry timers</li>
+<li>Performance measurements, statistics, profiling (performance analysis也称为profiling)</li>
+<li>Log files &amp; databases: record when an event occurred</li>
+<li>Data with time-limited validity (e.g. cache entries)</li>
+<li><code>Determining order of events across several nodes</code></li>
+</ul>
+<p>分布式系统中会遇到两种类型的时钟：</p>
+<ul>
+<li>physical clocks: count number of seconds elapsed</li>
+<li>logical clocks: count events, e.g. messages sent</li>
+</ul>
+<h3 id="clock-synchronisation">Clock synchronisation</h3>
+<p>物理时钟会有时间上的偏移，通常是通过和电脑、手机、电视等相对准确的地方来校准物理时钟的时间，比如手表，老式的钟摆。</p>
+<p>电脑上的时间同样会有偏移，是通过 <a href="/posts/main/20220602202411-network_time_protocol_ntp/">Network Time Protocol(NTP)</a> 来校准电脑的时间，也就是物理时钟的校准。</p>
+<h2 id="broadcast-protocols-and-logical-time">Broadcast protocols and logical time</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ordering-of-messages.png"
+         alt="Figure 1: ordering-of-messages"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>ordering-of-messages</p>
+        </figcaption>
+</figure>
+
+<p>m1 = &ldquo;A says: The moon is made of cheese!&rdquo;</p>
+<p>m2 = &ldquo;B says: Oh no it isn&rsquo;t!&rdquo;</p>
+<p>User C sees m2 first, m1 second, even though logically m1 <strong>happened before</strong> m2.</p>
+<p><strong>Problem</strong>: even with synced clocks, t2 &lt; t1 is possible. Timestamp order is inconsistent with expected order!</p>
+<p>即便我们已经通过 NTP 尽量保证物理时钟上的同步，但这个时候依旧会发生因果关系不一致的情况，所以这个时候就需要逻辑时钟。</p>
+<p>逻辑时钟是在分布式系统中专门用于捕获系统中发生事件之间的因果关系，因此逻辑时钟其实就是一种计数器，每次事件发生的时候都会往前递增，所以随着事件的发生它会随着时间向前移动，但它和物理时间并没有实际的关系。</p>
+<h3 id="logical-time">Logical time</h3>
+<p>Logical clocks: designed to <strong>capture causal dependencies</strong>.</p>
+<p>(e<sub>1</sub> → e<sub>2</sub>) ⇒ (T(e<sub>1</sub>) &lt; T(e<sub>2</sub>))<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>当事件1发生在事件2之前，那么事件1的时间戳应该小于事件2的时间戳，这是逻辑时钟要保证的最基本的原则。</p>
+<p>下面将研究一下两种逻辑时钟：</p>
+<ul>
+<li>
+<p><a href="/posts/main/20220609201658-lamport_clocks/">Lamprot Clocks</a> 是在分布式系统中的每个节点都维护一个计数器，每一个当前节点事件 <code>e</code> 发生时自增 ；发送消息时，也会附带上当前节点的计数 <code>t</code> ，消息接收者收到消息后，取出消息中的计数器与当前节点计数器比较，去最大值后自增 1。</p>
+<p>这样可以实现局部顺序，再加上节点名称，形成(时间戳，节点名称)的组合后，就可以扩展为全局顺序。</p>
+<p>但这样也有缺点，算法在时间戳相同，节点名称不同的平行事件的顺序判定时，会出现与实际情况不符的情况。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+</li>
+<li>
+<p><a href="/posts/main/20220602235916-vector_clocks/">Vector Clocks</a> 除了矢量之外，矢量时钟算法与 Lamport 时钟非常相似。一个节点的矢量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 N<sub>i</sub> 发生事件时，它就会增加其向量钟中的第 i 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
+<p>这样就可以弥补 Lamport 的缺点，可以完全确定每个事件的因果顺序。</p>
+</li>
+</ul>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="/posts/main/20220602202832-causality_and_happen_before_relation/">Causality and Happen-before relation</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>if a || b we could have either a ≺ b or b ≺ a, so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Vector Clocks</title>
       <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
@@ -1135,112 +1242,6 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
       <description>两军问题（英语：Two Generals&amp;rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该</description>
       <content:encoded><![CDATA[<p>两军问题（英语：Two Generals&rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该问题中，两支军队的将军只能通过派遣信使穿越敌方领土来互相通信，以此约定在同一时间点共同进攻。该问题希望求解如何在两位将军派出的任何信使都可能被俘虏的情况下，就发动攻击的时间点达成一致。</p>
 <p>两军问题是拜占庭将军问题的一个特例，常被编入与计算机网络相关的入门课程中。在传输控制协议（TCP）相关的课程中，该问题可用作解释 TCP 协议无法保证通信双方之间的状态一致性的原因。该问题也适用于其他存在信息丢失的双方通信的情况。作为认识逻辑的一个重要概念，该问题突出了共识（英语：Common_knowledge_(logic)）的重要性。一些学者也将此问题称作两军悖论（英语：Two Generals Paradox）或协同进攻问题（英语：Coordinated Attack Problem）。两军问题是第一个被证明无解的计算机通信问题。该证明的重要意义在于，其显示了对于存在通信错误的更广泛的问题（如拜占庭将军问题），同样是无解的。这也为所有分布式一致性协议的实现提供了一个符合现实的预期。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Distribution System</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Sat, 11 Jun 2022 11:41:58 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
-      <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
-      <content:encoded><![CDATA[<h2 id="remote-procedure-call">Remote Procedure Call</h2>
-<p><a href="/posts/main/20220603220847-remote_procedure_call_rpc/">Remote Procedure Call (RPC)</a> 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎么办？</p>
-<ol>
-<li>如果在函数调用过程中，服务挂了？</li>
-<li>如果消息丢失了？</li>
-<li>如果消息延迟了？</li>
-<li>如果出了问题，回复消息是否安全？</li>
-</ol>
-<p>要解决这些问题，就需要将网络以及节点之间的情况抽象出来，以及时序的问题。在设计分布式算法时，需要更加抽象一点，以便更好的推理整个过程。</p>
-<h2 id="network-behaviour">Network behaviour</h2>
-<p><a href="/posts/main/20220602202247-the_two_generals_problem/">The two generals problem</a> 描述了网络通信丢失的场景。</p>
-<p>假设两个节点之是间双向的点对点的通信。</p>
-<h3 id="reliable-links">Reliable links</h3>
-<p>一条消息只会在被一个节点发送的时候才会收到，并且消息是可以重新排序的。</p>
-<p>中间没有伪造消息等行为，发送了就一定会被收到。</p>
-<h3 id="fair-loss-links">Fair-loss links</h3>
-<p>消息可能会丢失、重复或重新排序，如果你一直重新发送，消息终将会传递过去。</p>
-<p>每次发送消息成功的概率都是非零，这个时候只要一直重试，我们就假设消息一定会传递到另外一个节点。</p>
-<p><strong>Fair-losl links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</strong></p>
-<h3 id="arbitrary-links">Arbitrary links</h3>
-<p>可能传递过程中会有恶意的第三方对消息进行干预。</p>
-<p>比如公共场合的公共 WiFi 就会出现这种情况。</p>
-<p><strong>Arbitrary links 通过 TLS 的加持，就可以达到 Fair-loss links 的效果。</strong></p>
-<h2 id="nodes-behaviour">Nodes behaviour</h2>
-<p><a href="/posts/main/20220602202317-the_byzantine_generals_problem/">The Byzantine generals problem</a> 描述了节点出错，导致全体协作策略失败以及容错率的问题。</p>
-<p>假设每个节点都执行指定的算法，假设有以下情况。</p>
-<h3 id="crash-stop--fail-stop">Crash-stop (fail-stop)</h3>
-<p>如果一个节点出现问题挂了，并且在这之后永远停机。</p>
-<h3 id="crash-recovery--fail-recovery">Crash-recovery (fail-recovery)</h3>
-<p>一个节点挂了，并丢失了内存状态，但会在过段时间后恢复。</p>
-<h3 id="byzantine-fail-arbitrary">Byzantine （fail-arbitrary)</h3>
-<p>节点偏离了原本的算法，可能会发生任何事情，包括崩溃或者恶意的行为。</p>
-<h2 id="同步-时序-假定">同步（时序）假定</h2>
-<h3 id="synchronous">Synchronous</h3>
-<p>消息延迟不超过已知的上限。到达这个上限后，消息要么被传递，要么丢失。节点以已知的速度执行算法。每一步代码的执行都有执行时间的上限。</p>
-<h3 id="partically-synchronous">Partically synchronous</h3>
-<p>系统中一部分时间内是异步的，另一部分是同步的。</p>
-<h3 id="asynchronous">Asynchronous</h3>
-<p>消息可以任意地被延迟，节点可以任意地暂停，并没有时序上的保证。</p>
-<h2 id="clocks-and-time-in-distributed-systems">Clocks and time in distributed systems</h2>
-<p>分布式系统中经常涉及到需要测量时间，比如：</p>
-<ul>
-<li>Schedulers, timeouts, failure detectors, retry timers</li>
-<li>Performance measurements, statistics, profiling (performance analysis也称为profiling)</li>
-<li>Log files &amp; databases: record when an event occurred</li>
-<li>Data with time-limited validity (e.g. cache entries)</li>
-<li><code>Determining order of events across several nodes</code></li>
-</ul>
-<p>分布式系统中会遇到两种类型的时钟：</p>
-<ul>
-<li>physical clocks: count number of seconds elapsed</li>
-<li>logical clocks: count events, e.g. messages sent</li>
-</ul>
-<h3 id="clock-synchronisation">Clock synchronisation</h3>
-<p>物理时钟会有时间上的偏移，通常是通过和电脑、手机、电视等相对准确的地方来校准物理时钟的时间，比如手表，老式的钟摆。</p>
-<p>电脑上的时间同样会有偏移，是通过 <a href="/posts/main/20220602202411-network_time_protocol_ntp/">Network Time Protocol(NTP)</a> 来校准电脑的时间，也就是物理时钟的校准。</p>
-<h2 id="broadcast-protocols-and-logical-time">Broadcast protocols and logical time</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/ordering-of-messages.png"
-         alt="Figure 1: ordering-of-messages"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>ordering-of-messages</p>
-        </figcaption>
-</figure>
-
-<p>m1 = &ldquo;A says: The moon is made of cheese!&rdquo;</p>
-<p>m2 = &ldquo;B says: Oh no it isn&rsquo;t!&rdquo;</p>
-<p>User C sees m2 first, m1 second, even though logically m1 <strong>happened before</strong> m2.</p>
-<p><strong>Problem</strong>: even with synced clocks, t2 &lt; t1 is possible. Timestamp order is inconsistent with expected order!</p>
-<p>即便我们已经通过 NTP 尽量保证物理时钟上的同步，但这个时候依旧会发生因果关系不一致的情况，所以这个时候就需要逻辑时钟。</p>
-<p>逻辑时钟是在分布式系统中专门用于捕获系统中发生事件之间的因果关系，因此逻辑时钟其实就是一种计数器，每次事件发生的时候都会往前递增，所以随着事件的发生它会随着时间向前移动，但它和物理时间并没有实际的关系。</p>
-<h3 id="logical-time">Logical time</h3>
-<p>Logical clocks: designed to <strong>capture causal dependencies</strong>.</p>
-<p>(e<sub>1</sub> → e<sub>2</sub>) ⇒ (T(e<sub>1</sub>) &lt; T(e<sub>2</sub>))<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<p>当事件1发生在事件2之前，那么事件1的时间戳应该小于事件2的时间戳，这是逻辑时钟要保证的最基本的原则。</p>
-<p>下面将研究一下两种逻辑时钟：</p>
-<ul>
-<li>
-<p><a href="/posts/main/20220609201658-lamport_clocks/">Lamprot Clocks</a> 是在分布式系统中的每个节点都维护一个计数器，每一个当前节点事件 <code>e</code> 发生时自增 ；发送消息时，也会附带上当前节点的计数 <code>t</code> ，消息接收者收到消息后，取出消息中的计数器与当前节点计数器比较，去最大值后自增 1。</p>
-<p>这样可以实现局部顺序，再加上节点名称，形成(时间戳，节点名称)的组合后，就可以扩展为全局顺序。</p>
-<p>但这样也有缺点，算法在时间戳相同，节点名称不同的平行事件的顺序判定时，会出现与实际情况不符的情况。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-</li>
-<li>
-<p><a href="/posts/main/20220602235916-vector_clocks/">Vector Clocks</a></p>
-</li>
-</ul>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p><a href="/posts/main/20220602202832-causality_and_happen_before_relation/">Causality and Happen-before relation</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>if a || b we could have either a ≺ b or b ≺ a, so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
 ]]></content:encoded>
     </item>
     
