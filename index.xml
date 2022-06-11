@@ -6,7 +6,90 @@
     <description>Recent content on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2022 16:37:32 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jun 2022 18:37:42 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vector Clocks</title>
+      <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
+      <pubDate>Sat, 11 Jun 2022 18:37:42 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</guid>
+      <description>Given Lamport timestamps L(a) and L(b) with L(a) &amp;lt; L(b)，我们推断不出 a → b 或者 a || b.1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 n 个节点，N = ⟨ N1, N2, &amp;hellip;, Nn ⟩ 事件 a 的向</description>
+      <content:encoded><![CDATA[<p>Given Lamport timestamps L(a) and L(b) with L(a) &lt; L(b)，我们推断不出 a → b 或者 a || b.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
+<ul>
+<li>假定分布式系统中有 n 个节点，N = ⟨ N<sub>1</sub>, N<sub>2</sub>, &hellip;, N<sub>n</sub> ⟩</li>
+<li><strong>事件 a</strong> 的向量时间戳写成 V(a) = ⟨ t<sub>1</sub>, t<sub>2</sub>, &hellip;, t<sub>n</sub> ⟩</li>
+<li>t<sub>i</sub> 是 N<sub>i</sub> 节点发生时间的数量</li>
+<li>每个​<strong>节点</strong>​都有一个当前的向量时间戳 T</li>
+<li>节点 N<sub>i</sub> 上的事件，向量时间戳 T[i] 递增。</li>
+<li>每个消息都附带上向量时间戳</li>
+<li>接收者将消息中的向量时间戳合并到本地</li>
+</ul>
+<p>除了标量和矢量之间的区别之外，矢量时钟算法与 Lamport 时钟非常相似。一个节点的矢量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 N<sub>i</sub> 发生事件时，它就会增加其向量钟中的第 i 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
+<h2 id="vector-clocks-algorithm">Vector clocks algorithm</h2>
+<blockquote>
+<p><strong>on</strong> initialisation at node N<sub>i</sub> <strong>do</strong></p>
+<p>T := ⟨0, 0, &hellip;, 0⟩ ▻ local variable at node N<sub>i</sub></p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> any event occurring at node N<sub>i</sub> <strong>do</strong></p>
+<p>T[i] = T[i] + 1</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> request to send message <code>m</code> at node N<sub>i</sub> <strong>do</strong></p>
+<p>T[i] := T[i] + 1; send (T, m) via network</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> receiving (T′, m) at node N<sub>i</sub> via the network <strong>do</strong></p>
+<p>T[j] := max(T[j], T′[j]) for every j ∈ {1, &hellip;, n}</p>
+<p>T[i] := T[i] + 1; deliver <code>m</code> to the application</p>
+<p><strong>end on</strong></p>
+</blockquote>
+<h2 id="vector-clocks-example">Vector clocks example</h2>
+<p>假定节点向量是 N = ⟨ A, B, C ⟩:</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/vector-example.png"
+         alt="Figure 1: vector-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>vector-example</p>
+        </figcaption>
+</figure>
+
+<p>事件 <code>e</code> 的向量时间戳是一系列事件的集合， <code>e</code> 和它的因果以来：{e} ∪ {a | a → e}<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup>, </sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>比如，⟨2, 2, 0⟩，第一个 2 是表示来自于 A 的两个事件，第二个 2 是表示来自于 B 的两个事件，并且没有来自于 C 的事件。</p>
+<h2 id="vector-clocks-ordering">Vector clocks ordering</h2>
+<p>Define the following order on vector timestamps(in a system with <code>n</code> nodes):</p>
+<ul>
+<li>T = T′ iff T[i] = T′[i] for all i ∈ {1, &hellip;, n}<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></li>
+<li>T ≤ T′ iff T[i] ≤ T′[i] for all i ∈ {1, &hellip;, n}</li>
+<li>T &lt; T′ iff T ≤ T′ and T ≠ T′</li>
+<li>T || T′ iff T &gt; T′ and T′ &gt; T</li>
+</ul>
+<p>V(a) ≤ V(b) iff ({a} ∪ {e | e → a}) ⊆ ({b} ∪ {e | e → b})</p>
+<p>Properties of this order:</p>
+<ul>
+<li>(V(a) &lt; V(b)) ⇔ (a → b)</li>
+<li>(V(a) = V(b)) ⇔ (a = b)</li>
+<li>(V(a) || V(b)) ⇔ (a || b)</li>
+</ul>
+<p>然后，我们对向量的时间戳进行部分排序。如果第一个向量的每个元素都小于或等于第二个向量的相应元素，我们就说一个向量小于或等于另一个向量。如果一个向量小于或等于另一个向量，并且它们至少有一个元素是不同的，那么这个向量就严格小于另一个向量。然而，如果一个向量在一个元素中的值较大，而另一个向量在另一个元素中的值较大，那么这两个向量是不可比的。例如，T = ⟨2, 2, 0⟩ 和 T′ = ⟨0, 0, 1⟩ 是不可比的，因为 T[1] &gt; T′[1] 但 T[3] &lt; T′[3]。</p>
+<p>矢量时间戳的部分顺序与发生之前关系所定义的部分顺序完全对应。因此，矢量时钟算法为我们提供了一种在实践中计算发生前关系的机制。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>∪ 并集的意思，∩ 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>集合的描述方法，描述格式为 {x | P(x)，x ∈ Ω}。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>if foreach 的缩写&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
@@ -108,89 +191,6 @@
 </li>
 <li id="fn:2">
 <p>if a || b we could have either a ≺ b or b ≺ a, so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Vector Clocks</title>
-      <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Sat, 11 Jun 2022 16:34:13 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</guid>
-      <description>Given Lamport timestamps L(a) and L(b) with L(a) &amp;lt; L(b)，我们推断不出 a → b 或者 a || b.1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 n 个节点，N = ⟨ N1, N2, &amp;hellip;, Nn ⟩ 事件 a 的向</description>
-      <content:encoded><![CDATA[<p>Given Lamport timestamps L(a) and L(b) with L(a) &lt; L(b)，我们推断不出 a → b 或者 a || b.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
-<ul>
-<li>假定分布式系统中有 n 个节点，N = ⟨ N<sub>1</sub>, N<sub>2</sub>, &hellip;, N<sub>n</sub> ⟩</li>
-<li><strong>事件 a</strong> 的向量时间戳写成 V(a) = ⟨ t<sub>1</sub>, t<sub>2</sub>, &hellip;, t<sub>n</sub> ⟩</li>
-<li>t<sub>i</sub> 是 N<sub>i</sub> 节点发生时间的数量</li>
-<li>每个​<strong>节点</strong>​都有一个当前的向量时间戳 T</li>
-<li>节点 N<sub>i</sub> 上的事件，向量时间戳 T[i] 递增。</li>
-<li>每个消息都附带上向量时间戳</li>
-<li>接收者将消息中的向量时间戳合并到本地</li>
-</ul>
-<p>除了标量和矢量之间的区别之外，矢量时钟算法与 Lamport 时钟非常相似。一个节点的矢量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 N<sub>i</sub> 发生事件时，它就会增加其向量钟中的第 i 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
-<h2 id="vector-clocks-algorithm">Vector clocks algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation at node N<sub>i</sub> <strong>do</strong></p>
-<p>T := ⟨0, 0, &hellip;, 0⟩ ▻ local variable at node N<sub>i</sub></p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> any event occurring at node N<sub>i</sub> <strong>do</strong></p>
-<p>T[i] = T[i] + 1</p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> request to send message <code>m</code> at node N<sub>i</sub> <strong>do</strong></p>
-<p>T[i] := T[i] + 1; send (T, m) via network</p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> receiving (T′, m) at node N<sub>i</sub> via the network <strong>do</strong></p>
-<p>T[j] := max(T[j], T′[j]) for every j ∈ {1, &hellip;, n}</p>
-<p>T[i] := T[i] + 1; deliver <code>m</code> to the application</p>
-<p><strong>end on</strong></p>
-</blockquote>
-<h2 id="vector-clocks-example">Vector clocks example</h2>
-<p>假定节点向量是 N = ⟨ A, B, C ⟩:</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/vector-example.png"
-         alt="Figure 1: vector-example"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>vector-example</p>
-        </figcaption>
-</figure>
-
-<p>事件 <code>e</code> 的向量时间戳是一系列事件的集合， <code>e</code> 和它的因果以来：{e} ∪ {a | a → e}<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup>, </sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
-<p>比如，⟨2, 2, 0⟩，第一个 2 是表示来自于 A 的两个事件，第二个 2 是表示来自于 B 的两个事件，并且没有来自于 C 的事件。</p>
-<h2 id="vector-clocks-ordering">Vector clocks ordering</h2>
-<p>Define the following order on vector timestamps(in a system with <code>n</code> nodes):</p>
-<ul>
-<li>T = T′ iff T[i] = T′[i] for all i ∈ {1, &hellip;, n}<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></li>
-<li>T ≤ T′ iff T[i] ≤ T′[i] for all i ∈ {1, &hellip;, n}</li>
-<li>T &lt; T′ iff T ≤ T′ and T ≠ T′</li>
-<li>T || T′ iff T &gt; T′ and T′ &gt; T</li>
-</ul>
-<p>V(a) ≤ V(b) iff ({a} ∪ {e | e → a}) ⊆ ({b} ∪ {e | e → b})</p>
-<p>Properties of this order:</p>
-<ul>
-<li>(V(a) &lt; V(b)) ⇔ (a → b)</li>
-<li>(V(a) = V(b)) ⇔ (a = b)</li>
-<li>(V(a) || V(b)) ⇔ (a || b)</li>
-</ul>
-<p>然后，我们对向量的时间戳进行部分排序。如果第一个向量的每个元素都小于或等于第二个向量的相应元素，我们就说一个向量小于或等于另一个向量。如果一个向量小于或等于另一个向量，并且它们至少有一个元素是不同的，那么这个向量就严格小于另一个向量。然而，如果一个向量在一个元素中的值较大，而另一个向量在另一个元素中的值较大，那么这两个向量是不可比的。例如，T = ⟨2, 2, 0⟩ 和 T′ = ⟨0, 0, 1⟩ 是不可比的，因为 T[1] &gt; T′[1] 但 T[3] &lt; T′[3]。</p>
-<p>矢量时间戳的部分顺序与发生之前关系所定义的部分顺序完全对应。因此，矢量时钟算法为我们提供了一种在实践中计算发生前关系的机制。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>∪ 并集的意思，∩ 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>集合的描述方法，描述格式为 {x|P(x)，x∈Ω}。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4">
-<p>if foreach 的缩写&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
