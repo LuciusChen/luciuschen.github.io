@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Jun 2022 21:39:39 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Jun 2022 23:09:32 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Sun, 12 Jun 2022 21:39:39 +0800</pubDate>
+      <pubDate>Sun, 12 Jun 2022 23:09:32 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -172,7 +172,22 @@
 <p>上图：broadcast(m<sub>1</sub>) → broadcast(m<sub>2</sub>) and broadcast(m<sub>1</sub>) → broadcast(m<sub>3</sub>) ⇒ valid orders are: (m<sub>1</sub>, m<sub>2</sub>, m<sub>3</sub>) or (m<sub>1</sub>, m<sub>3</sub>, m<sub>2</sub>)</p>
 <h4 id="total-order-broadcast">Total order broadcast</h4>
 <p>第三种类型的广播是总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。FIFO broadcast 和 Causal broadcast 允许不同的节点以不同的顺序传递信息，total order broadcast 在各节点之间强制执行一致性，确保所有节点以相同的顺序传递信息。精确的传递顺序没有规定，只要它在所有节点上都是一样的。</p>
-<p>幻灯片78和79显示了两个执行总秩序广播的例子。在幻灯片78上，所有三个节点都按照m 1 , m 2 , m 3的顺序传递信息，而在幻灯片79上，所有三个节点都按照m 1 , m 3 , m 2的顺序传递信息。只要节点同意，这两种执行方式都是有效的。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/total-order-broadcast-1.png"
+         alt="Figure 5: total-order-broadcast-1"/> <figcaption>
+            <p><span class="figure-number">Figure 5: </span>total-order-broadcast-1</p>
+        </figcaption>
+</figure>
+
+<p>所有三个节点都按照 m<sub>1</sub>, m<sub>2</sub>, m<sub>3</sub> 的顺序传递消息</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/total-order-broadcast-2.png"
+         alt="Figure 6: total-order-broadcast-2"/> <figcaption>
+            <p><span class="figure-number">Figure 6: </span>total-order-broadcast-2</p>
+        </figcaption>
+</figure>
+
+<p>所有三个节点都按照m<sub>1</sub>, m<sub>3</sub>, m<sub>2</sub> 的顺序传递信息。只要节点同意，这两种执行方式都是有效的。</p>
 <p>与因果广播一样，节点可能需要保留消息，等待其他需要首先传递的消息。例如，节点C可以按任一顺序接收消息m 2和m 3。如果算法确定m 3应该在m 2之前传递，但如果节点C首先收到m 2，那么C将需要保留m 2，直到收到m 3之后。</p>
 <p>在这些图上可以看到另一个重要的细节：在先进先出和因果广播的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是真的：例如，在幻灯片78上，m 2需要在m 3之前被传递，所以节点A向自己传递m 3必须等到A从B那里收到m 2之后。</p>
 <div class="footnotes" role="doc-endnotes">
