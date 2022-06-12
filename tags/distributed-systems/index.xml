@@ -6,11 +6,11 @@
     <description>Recent content in distributed-systems on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2022 18:37:42 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/distributed-systems/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jun 2022 18:46:15 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/distributed-systems/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vector Clocks</title>
       <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Sat, 11 Jun 2022 18:37:42 +0800</pubDate>
+      <pubDate>Sat, 11 Jun 2022 18:46:15 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</guid>
       <description>Given Lamport timestamps L(a) and L(b) with L(a) &amp;lt; L(b)，我们推断不出 a → b 或者 a || b.1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 n 个节点，N = ⟨ N1, N2, &amp;hellip;, Nn ⟩ 事件 a 的向</description>

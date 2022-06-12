@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2022 16:37:32 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Jun 2022 21:39:39 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Sat, 11 Jun 2022 16:37:32 +0800</pubDate>
+      <pubDate>Sun, 12 Jun 2022 21:39:39 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -23,35 +23,36 @@
 <li>如果出了问题，回复消息是否安全？</li>
 </ol>
 <p>要解决这些问题，就需要将网络以及节点之间的情况抽象出来，以及时序的问题。在设计分布式算法时，需要更加抽象一点，以便更好的推理整个过程。</p>
-<h2 id="network-behaviour">Network behaviour</h2>
+<h2 id="system-model">System model</h2>
+<h3 id="network-behaviour">Network behaviour</h3>
 <p><a href="/posts/main/20220602202247-the_two_generals_problem/">The two generals problem</a> 描述了网络通信丢失的场景。</p>
 <p>假设两个节点之是间双向的点对点的通信。</p>
-<h3 id="reliable-links">Reliable links</h3>
+<h4 id="reliable-links">Reliable links</h4>
 <p>一条消息只会在被一个节点发送的时候才会收到，并且消息是可以重新排序的。</p>
 <p>中间没有伪造消息等行为，发送了就一定会被收到。</p>
-<h3 id="fair-loss-links">Fair-loss links</h3>
+<h4 id="fair-loss-links">Fair-loss links</h4>
 <p>消息可能会丢失、重复或重新排序，如果你一直重新发送，消息终将会传递过去。</p>
 <p>每次发送消息成功的概率都是非零，这个时候只要一直重试，我们就假设消息一定会传递到另外一个节点。</p>
 <p><strong>Fair-losl links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</strong></p>
-<h3 id="arbitrary-links">Arbitrary links</h3>
+<h4 id="arbitrary-links">Arbitrary links</h4>
 <p>可能传递过程中会有恶意的第三方对消息进行干预。</p>
 <p>比如公共场合的公共 WiFi 就会出现这种情况。</p>
 <p><strong>Arbitrary links 通过 TLS 的加持，就可以达到 Fair-loss links 的效果。</strong></p>
-<h2 id="nodes-behaviour">Nodes behaviour</h2>
+<h3 id="nodes-behaviour">Nodes behaviour</h3>
 <p><a href="/posts/main/20220602202317-the_byzantine_generals_problem/">The Byzantine generals problem</a> 描述了节点出错，导致全体协作策略失败以及容错率的问题。</p>
 <p>假设每个节点都执行指定的算法，假设有以下情况。</p>
-<h3 id="crash-stop--fail-stop">Crash-stop (fail-stop)</h3>
+<h4 id="crash-stop--fail-stop">Crash-stop (fail-stop)</h4>
 <p>如果一个节点出现问题挂了，并且在这之后永远停机。</p>
-<h3 id="crash-recovery--fail-recovery">Crash-recovery (fail-recovery)</h3>
+<h4 id="crash-recovery--fail-recovery">Crash-recovery (fail-recovery)</h4>
 <p>一个节点挂了，并丢失了内存状态，但会在过段时间后恢复。</p>
-<h3 id="byzantine-fail-arbitrary">Byzantine （fail-arbitrary)</h3>
+<h4 id="byzantine-fail-arbitrary">Byzantine （fail-arbitrary)</h4>
 <p>节点偏离了原本的算法，可能会发生任何事情，包括崩溃或者恶意的行为。</p>
-<h2 id="同步-时序-假定">同步（时序）假定</h2>
-<h3 id="synchronous">Synchronous</h3>
+<h3 id="synchrony--timing--assumption">Synchrony (timing) assumption</h3>
+<h4 id="synchronous">Synchronous</h4>
 <p>消息延迟不超过已知的上限。到达这个上限后，消息要么被传递，要么丢失。节点以已知的速度执行算法。每一步代码的执行都有执行时间的上限。</p>
-<h3 id="partically-synchronous">Partically synchronous</h3>
+<h4 id="partically-synchronous">Partically synchronous</h4>
 <p>系统中一部分时间内是异步的，另一部分是同步的。</p>
-<h3 id="asynchronous">Asynchronous</h3>
+<h4 id="asynchronous">Asynchronous</h4>
 <p>消息可以任意地被延迟，节点可以任意地暂停，并没有时序上的保证。</p>
 <h2 id="clocks-and-time-in-distributed-systems">Clocks and time in distributed systems</h2>
 <p>分布式系统中经常涉及到需要测量时间，比如：</p>
@@ -60,7 +61,7 @@
 <li>Performance measurements, statistics, profiling (performance analysis也称为profiling)</li>
 <li>Log files &amp; databases: record when an event occurred</li>
 <li>Data with time-limited validity (e.g. cache entries)</li>
-<li><code>Determining order of events across several nodes</code></li>
+<li><strong>Determining order of events across several nodes</strong></li>
 </ul>
 <p>分布式系统中会遇到两种类型的时钟：</p>
 <ul>
@@ -96,10 +97,84 @@
 <p>但这样也有缺点，算法在时间戳相同，节点名称不同的平行事件的顺序判定时，会出现与实际情况不符的情况。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
 </li>
 <li>
-<p><a href="/posts/main/20220602235916-vector_clocks/">Vector Clocks</a> 除了矢量之外，矢量时钟算法与 Lamport 时钟非常相似。一个节点的矢量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 N<sub>i</sub> 发生事件时，它就会增加其向量钟中的第 i 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
+<p><a href="/posts/main/20220602235916-vector_clocks/">Vector Clocks</a> 除了矢量之外，矢量时钟算法与 Lamport 时钟非常相似。一个节点的矢量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 N<sub>i</sub> 发生事件时，它就会增加其向量钟中的第 i 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目</p>
 <p>这样就可以弥补 Lamport 的缺点，可以完全确定每个事件的因果顺序。</p>
 </li>
 </ul>
+<h3 id="delivery-order-in-broadcast-protocols">Delivery order in broadcast protocols</h3>
+<p>许多网络提供点对点（单播）的信息传递，其中一个信息有一个特定的收件人。现在来看看广播协议，它对网络进行了概括，使一条信息被发送到某个组的所有节点。组的成员可能是固定的，或者系统可能提供节点加入和离开组的机制。</p>
+<p>一些局域网在硬件层面提供组播或广播（例如，IP 组播），但互联网上的通信通常只允许单播。此外，硬件级的组播通常是在 best-effort 基础上提供的，允许消息被丢弃；要使其可靠，需要类似于这里讨论的重传协议。</p>
+<p>上面提到的 node behaviour 和 synchrony 的系统模型假设直接延伸到广播组。</p>
+<h4 id="broadcast-protocols">Broadcast protocols</h4>
+<p>Broadcast (multicast) is <strong>group communication</strong>:</p>
+<ul>
+<li>一个节点发送消息，所有组内节点传递。</li>
+<li>组内成为可以是固定的也可以是动态的</li>
+<li>如果一个节点发生错误，剩余的组内成员顶上。</li>
+<li>Note: 这个观念比 IP 组播更加普遍</li>
+</ul>
+<p>建立在之前讲到的系统模型上：</p>
+<ul>
+<li>可以是 <strong>best-effort</strong> (may drop messages) 或者 <strong>reliable</strong> (non-faulty nodes deliver every message, by retransmitting dropped messages)</li>
+<li>Asynchronous/ partially synchronous timing model ⇒ 消息延迟​<strong>没有上限</strong></li>
+</ul>
+<h4 id="receiving-versus-delivering">Receiving versus delivering</h4>
+<figure>
+    <img loading="lazy" src="/ox-hugo/receive-versus-deliver.png"
+         alt="Figure 2: receive-versus-deliver"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>receive-versus-deliver</p>
+        </figcaption>
+</figure>
+
+<p>假定网络提供点对点的发送/接收，在广播算法​从网络中​<strong>收到</strong>​消息后，传递给应用前会在缓存或者队列当中。</p>
+<p>下面将研究三种不同形式的「广播」。所有这些都是可靠的：每条消息最终都会被传递到每个非故障节点，但没有时间上的保证。然而，它们在每个节点上传递信息的顺序方面存在差异。事实证明，这种顺序上的差异对实现广播的算法有非常根本的影响。</p>
+<h4 id="forms-of-reliable-broadcast">Forms of reliable broadcast</h4>
+<ul>
+<li>
+<p><strong>FIFO broadcast</strong></p>
+<p>如果 m<sub>1</sub> 和 m<sub>2</sub> 从相同的节点广播，并且 broadcast(m<sub>1</sub>) → broadcast(m<sub>2</sub>)，那么 m<sub>1</sub> 必然在 m<sub>2</sub> 之前被传递。</p>
+</li>
+<li>
+<p><strong>Causal broadcast</strong></p>
+<p>如果 broadcast(m<sub>1</sub>) → broadcast(m<sub>2</sub>) 那么 m<sub>1</sub> 必然在 m<sub>2</sub> 之前被传递。</p>
+</li>
+<li>
+<p><strong>Total order broadcast</strong></p>
+<p>如果在同一个节点 m<sub>1</sub> 在 m<sub>2</sub> 之前被传递，那么所有节点 m<sub>1</sub> 必然在 m<sub>2</sub> 之前被传递。</p>
+</li>
+<li>
+<p><strong>FIFO-total order broadcast</strong></p>
+<p>是 FIFO broadcast 和 Total order broadcast 的结合</p>
+</li>
+</ul>
+<h4 id="fifo-broadcast">FIFO broadcast</h4>
+<p>最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，m<sub>1</sub> 必须在 m<sub>3</sub> 之前被传递，因为它们都是由 A 发送的。然而，m<sub>2</sub> 可以在 m<sub>1</sub> 和 m<sub>3</sub> 之前、之间或之后的任何时间被传递。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/FIFO-broadcast.png"
+         alt="Figure 3: FIFO-broadcast"/> <figcaption>
+            <p><span class="figure-number">Figure 3: </span>FIFO-broadcast</p>
+        </figcaption>
+</figure>
+
+<p>同一个节点发送的消息必须要按照发送的顺序传递，不同节点发送的消息可以是任意的顺序，比如 (m<sub>2</sub>, m<sub>1</sub>, m<sub>3</sub>)，(m<sub>1</sub>, m<sub>2</sub>, m<sub>3</sub>) 或者 (m<sub>1</sub>, m<sub>3</sub>, m<sub>2</sub>)。</p>
+<p>关于这些广播协议的另一个细节：我们假设每当一个节点广播一个消息时，它也会将该消息传递给自己（在上图中用回环箭头表示）。这在一开始似乎是不必要的&ndash;毕竟，一个节点知道它自己广播了什么消息！但是，我们将在 total order broadcast 中需要这个步骤。</p>
+<p>上图中的执行示例是有效的先进先出「广播」，但它违反了因果性：虽然 B 在接收了 m<sub>1</sub> 之后才广播的 m<sub>2</sub>，但节点 C 在 m<sub>1</sub> 之前就传递了 m<sub>2</sub>。Causal broadcast 提供了一个比 FIFO broadcast  更严格的排序属性。顾名思义，它确保信息按因果顺序传递：也就是说，如果一条信息的广播发生在另一条信息的广播之前，那么所有节点必须按这个顺序传递这两条信息。如果两个消息是同时广播的，一个节点可以按任何一个顺序传递它们。</p>
+<h4 id="causal-broadcast">Causal broadcast</h4>
+<p><strong>如果节点 C 在 m<sub>1</sub> 之前收到 m<sub>2</sub>，C 的广播算法将不得不保留（延迟或缓冲）m<sub>2</sub>，直到 m<sub>1</sub> 被传递之后，以确保消息按因果顺序传递</strong>​。在下图的例子中，消息 m<sub>2</sub> 和 m<sub>3</sub> 是​<strong>同时广播</strong>​的。节点 A 和 C 按照 m<sub>1</sub>、m<sub>3</sub>、m<sub>2</sub> 的顺序传递消息，而节点 B 按照 m<sub>1</sub>、m<sub>2</sub>、m<sub>3</sub> 的顺序传递。这些传递顺序中的任何一个都是可以接受的，因为它们都与因果关系一致。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causal-broadcast.png"
+         alt="Figure 4: causal-broadcast"/> <figcaption>
+            <p><span class="figure-number">Figure 4: </span>causal-broadcast</p>
+        </figcaption>
+</figure>
+
+<p>有因果关系的信息必须按因果顺序传递。并行的消息可以按照任何顺序传递。</p>
+<p>上图：broadcast(m<sub>1</sub>) → broadcast(m<sub>2</sub>) and broadcast(m<sub>1</sub>) → broadcast(m<sub>3</sub>) ⇒ valid orders are: (m<sub>1</sub>, m<sub>2</sub>, m<sub>3</sub>) or (m<sub>1</sub>, m<sub>3</sub>, m<sub>2</sub>)</p>
+<h4 id="total-order-broadcast">Total order broadcast</h4>
+<p>第三种类型的广播是总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。FIFO broadcast 和 Causal broadcast 允许不同的节点以不同的顺序传递信息，total order broadcast 在各节点之间强制执行一致性，确保所有节点以相同的顺序传递信息。精确的传递顺序没有规定，只要它在所有节点上都是一样的。</p>
+<p>幻灯片78和79显示了两个执行总秩序广播的例子。在幻灯片78上，所有三个节点都按照m 1 , m 2 , m 3的顺序传递信息，而在幻灯片79上，所有三个节点都按照m 1 , m 3 , m 2的顺序传递信息。只要节点同意，这两种执行方式都是有效的。</p>
+<p>与因果广播一样，节点可能需要保留消息，等待其他需要首先传递的消息。例如，节点C可以按任一顺序接收消息m 2和m 3。如果算法确定m 3应该在m 2之前传递，但如果节点C首先收到m 2，那么C将需要保留m 2，直到收到m 3之后。</p>
+<p>在这些图上可以看到另一个重要的细节：在先进先出和因果广播的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是真的：例如，在幻灯片78上，m 2需要在m 3之前被传递，所以节点A向自己传递m 3必须等到A从B那里收到m 2之后。</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
