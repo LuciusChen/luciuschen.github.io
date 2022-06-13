@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://luciuschen.github.io/posts/main/20220602202933-distribution_system/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-06-13T19:12:08&#43;08:00" />
+  <meta property="article:modified_time" content="2022-06-13T22:28:10&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -58,10 +58,10 @@
   "keywords": [
     "top-node"
   ],
-  "wordCount" : "5584",
+  "wordCount" : "5903",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-06-13T19:12:08+08:00",
+  "dateModified": "2022-06-13T22:28:10+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -274,7 +274,7 @@ function toggleThemeListener() {
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
   <span class="post-tags"><a href="https://luciuschen.github.io/tags/top-node/">top-node</a></span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>5584 words</span></span><span class="meta-item">
+  <span>5903 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
   <span>12 min</span></span>
 
@@ -359,7 +359,9 @@ function toggleThemeListener() {
                 <li>
                     <a href="#fifo-broadcast-algorithm" aria-label="FIFO broadcast algorithm">FIFO broadcast algorithm</a></li>
                 <li>
-                    <a href="#causal-broadcast-algorithm" aria-label="Causal broadcast algorithm">Causal broadcast algorithm</a>
+                    <a href="#causal-broadcast-algorithm" aria-label="Causal broadcast algorithm">Causal broadcast algorithm</a></li>
+                <li>
+                    <a href="#total-order-broadcast-algorithms" aria-label="Total order broadcast algorithms">Total order broadcast algorithms</a>
                 </li>
             </ul>
             </li>
@@ -545,7 +547,7 @@ function toggleThemeListener() {
 
 <p>所有三个节点都按照m<sub>1</sub>, m<sub>3</sub>, m<sub>2</sub> 的顺序传递信息。只要节点同意，这两种执行方式都是有效的。</p>
 <p>与 causal broadcast 一样，节点可能需要保留消息，等待其他需要首先传递的消息。例如，节点 C 可以按任一顺序接收消息 m<sub>2</sub> 和 m<sub>3</sub> 。如果算法确定 m<sub>3</sub> 应该在 m<sub>2</sub> 之前传递，但如果节点 C 首先收到 m<sub>2</sub>，那么 C 将需要保留 m<sub>2</sub>，直到收到 m<sub>3</sub> 之后。</p>
-<p>在这些图上可以看到另一个重要的细节：在 FIFO broadcast 和 causal broadcast 的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是这样：例如，在图<sub>total-order-broadcast-1</sub>上，m<sub>2</sub> 需要在 m<sub>3</sub> 之前被传递，所以节点 A 向自己传递 m<sub>3</sub> 必须等到 A 从 B 那里收到 m<sub>2</sub> 之后。</p>
+<p>在这些图上可以看到另一个重要的细节：在 FIFO broadcast 和 causal broadcast 的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是这样：例如，在图<sub>total-order-broadcast-1</sub> 上，m<sub>2</sub> 需要在 m<sub>3</sub> 之前被传递，所以节点 A 向自己传递 m<sub>3</sub> 必须等到 A 从 B 那里收到 m<sub>2</sub> 之后。</p>
 <p>最后，FIFO-total order broadcast 和 total order broadcast 很像，多了一个先进先出的要求，即同一节点广播的任何消息都按其发送的顺序交付。实际上图<sub>total-order-broadcast-1</sub> 和图<sub>total-order-broadcast-2</sub> 的例子就是有效的 FIFO-total order broadcast，因为 m<sub>1</sub> 都是在 m<sub>3</sub> 之前被传递的。</p>
 <h4 id="relationships-between-broadcast-models">Relationships between broadcast models<a hidden class="anchor" aria-hidden="true" href="#relationships-between-broadcast-models">¶</a></h4>
 <figure>
@@ -585,7 +587,7 @@ deliver <code>m</code> to the application</p>
 <p><strong>end on</strong></p>
 </blockquote>
 <p>节点 N<sub>i</sub> 发送的每个 FIFO broadcast 消息都会附带发送节点编号 i 和一个序列号（该节点发送消息对应的序列号，第一条消息对应为 0，第二条消息对应为 1）。每个节点的本地状态由序列号 sendSeq（计算该节点广播的消息数量）、delivered（一个向量，每个节点有一个条目，统计了每个节点发送消息并传递到该节点的数量）和 buﬀer（一个缓存，用于保留消息直到它们准备好被传递给 Application，也就是 Receiving versus delivering 中提到的 deliver 阶段）组成。该算法检查来自任何发送者的与预期的下一个序列号相匹配的消息，然后递增该序列号，确保来自每个特定发送者的消息按照序列号递增的顺序被传递。</p>
-<p>Causal broadcast 算法有点类似于 FIFO broadcast：这里不是给每条被广播的消息附上一个序列号，而是附上一个整数的向量。这种算法有时被称为矢量时钟算法，矢量时钟算法中，矢量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，矢量元素计算来自每个发送者的已发送的信息数量。</p>
+<p>Causal broadcast 算法有点类似于 FIFO broadcast：这里不是给每条被广播的消息附上一个序列号，而是附上一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟算法中，向量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，向量元素计算来自每个发送者的已发送的消息数量。</p>
 <h4 id="causal-broadcast-algorithm">Causal broadcast algorithm<a hidden class="anchor" aria-hidden="true" href="#causal-broadcast-algorithm">¶</a></h4>
 <blockquote>
 <p><strong>on</strong> initialisation <strong>do</strong></p>
@@ -607,6 +609,27 @@ deliver <code>m</code> to the application</p>
 </blockquote>
 <p>每个节点的本地状态由 sendSeq、delivered 和 buﬀer 组成，它们的含义与 FIFO broadcast 算法中相同。当一个节点想要广播一个消息时，我们会附上发送节点的编号 i 和 deps（表示该消息因果关系的向量）。deps 就是节点本地 delivered 的复制，统计了每个节点发送消息并传递到该节点的数量。在这次广播之前，所有已经在本地交付的消息必须出现在广播消息的因果顺序之前。然后将发送节点自己的这个向量的元素更新为等于 sendSeq，这就保证了这个节点所广播的每条消息都与同一节点所广播的前一条消息有因果关系。</p>
 <p>当收到一个消息时，算法首先将其添加到 buﬀer 中，就像 FIFO broadcast 一样，然后在 buﬀer 中搜索任何准备好的消息。比较 deps ≤ delivered。如果这个节点已经交付了所有在因果顺序上必须在这个消息之前的消息，那么。任何在因果关系上准备好的消息都会被传递给 Application，并从 buﬀer 中移除，并且将 delivered 中的相应条目被递增。</p>
+<p>阶段总结：</p>
+<ul>
+<li>FIFO broadcast 的保持消息顺序的原理和 Lamport clocks 很相似，都是用递增的整数来确定同一个节点上的消息传递的顺序，deliver 是个存放着所有节点 sendSeq 的向量，存放于每个节点，配合 sendSeq 控制来自同一个节点的消息传递的顺序。</li>
+<li>Causal broadcast 的保持因果顺序的原理和 Vector clocks 很相似，向量中的每个条目，前者是消息发送者已发送消息的数量，后者是每个节点发生事件的数量。deps 取代 FIFO broadcast 中的 sendSeq 附带在广播的信息中，这样通过在 Vector clocks 中介绍的向量比较方法，可以确定消息之间的因果关系来控制消息传递的顺序。</li>
+</ul>
+<h4 id="total-order-broadcast-algorithms">Total order broadcast algorithms<a hidden class="anchor" aria-hidden="true" href="#total-order-broadcast-algorithms">¶</a></h4>
+<blockquote>
+<p><strong>Single leader</strong> approach:</p>
+<ul>
+<li>One node is designated as leader (sequencer)</li>
+<li>To broadcast message, send it to the leader; leader broadcasts it via FIFO broadcast.</li>
+<li>Problem: leader crashes =⇒ no more messages delivered</li>
+<li>Changing the leader safely is diﬃcult</li>
+</ul>
+<p><strong>Lamport clocks</strong> approach:</p>
+<ul>
+<li>Attach Lamport timestamp to every message</li>
+<li>Deliver messages in total order of timestamps</li>
+<li>Problem: how do you know if you have seen all messages with timestamp &lt; T? Need to use FIFO links and wait for message with timestamp ≥ T from every node</li>
+</ul>
+</blockquote>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
