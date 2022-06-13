@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://luciuschen.github.io/posts/main/20220602202933-distribution_system/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-06-13T19:01:55&#43;08:00" />
+  <meta property="article:modified_time" content="2022-06-13T19:12:08&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -58,10 +58,10 @@
   "keywords": [
     "top-node"
   ],
-  "wordCount" : "5656",
+  "wordCount" : "5584",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-06-13T19:01:55+08:00",
+  "dateModified": "2022-06-13T19:12:08+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -274,7 +274,7 @@ function toggleThemeListener() {
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
   <span class="post-tags"><a href="https://luciuschen.github.io/tags/top-node/">top-node</a></span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>5656 words</span></span><span class="meta-item">
+  <span>5584 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
   <span>12 min</span></span>
 
@@ -570,26 +570,26 @@ function toggleThemeListener() {
 <h4 id="fifo-broadcast-algorithm">FIFO broadcast algorithm<a hidden class="anchor" aria-hidden="true" href="#fifo-broadcast-algorithm">¶</a></h4>
 <blockquote>
 <p><strong>on</strong> initialisation <strong>do</strong></p>
-<p>sendSeq := 0; delivered := 〈0, 0, &hellip;, 0〉; buﬀer := {}</p>
+<p>sendSeq := 0; delivered := ⟨0, 0, &hellip;, 0⟩; buﬀer := {}</p>
 <p><strong>end on</strong></p>
 <p><strong>on</strong> request to broadcast <code>m</code> at node N<sub>i</sub> <strong>do</strong></p>
 <p>send (i, sendSeq, m) via reliable broadcast</p>
 <p>sendSeq := sendSeq + 1</p>
 <p><strong>end on</strong></p>
-<p><strong>on</strong> receiving <code>msg</code> from reliable broadcast at node N<sub>i</sub> <strong>do</strong> ▻ msg 就是 (i, sendSeq, m)</p>
+<p><strong>on</strong> receiving <code>msg</code> from reliable broadcast at node N<sub>i</sub> <strong>do</strong><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
 <p>buﬀer := buﬀer ∪ {msg}</p>
-<p><strong>while</strong> ∃sender, m. (sender, delivered[sender], m) ∈ buﬀer <strong>do</strong> ▻ delivered[sender] 就是根据节点的编号 i 取出 delivered 中对应条目，也就是 sendSeq。</p>
-<p>deliver <code>m</code> to the application</p>
-<p>delivered[sender] := delivered[sender] + 1 ▻ delivered[sender] 就是当前要传递的消息的 sendSeq，+ 1 预期的下个需要传递消息的序列号。</p>
+<p><strong>while</strong> ∃sender, m. (sender, delivered[sender], m) ∈ buﬀer <strong>do</strong>
+deliver <code>m</code> to the application</p>
+<p>delivered[sender] := delivered[sender] + 1</p>
 <p><strong>end while</strong></p>
 <p><strong>end on</strong></p>
 </blockquote>
 <p>节点 N<sub>i</sub> 发送的每个 FIFO broadcast 消息都会附带发送节点编号 i 和一个序列号（该节点发送消息对应的序列号，第一条消息对应为 0，第二条消息对应为 1）。每个节点的本地状态由序列号 sendSeq（计算该节点广播的消息数量）、delivered（一个向量，每个节点有一个条目，统计了每个节点发送消息并传递到该节点的数量）和 buﬀer（一个缓存，用于保留消息直到它们准备好被传递给 Application，也就是 Receiving versus delivering 中提到的 deliver 阶段）组成。该算法检查来自任何发送者的与预期的下一个序列号相匹配的消息，然后递增该序列号，确保来自每个特定发送者的消息按照序列号递增的顺序被传递。</p>
-<p>Causal broadcast 算法有点类似于 FIFO broadcast；这里不是给每条被广播的消息附上一个序列号，而是附上一个整数的向量。这种算法有时被称为矢量时钟算法，矢量时钟算法中，矢量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，矢量元素计算来自每个发送者的已发送的信息数量。</p>
+<p>Causal broadcast 算法有点类似于 FIFO broadcast：这里不是给每条被广播的消息附上一个序列号，而是附上一个整数的向量。这种算法有时被称为矢量时钟算法，矢量时钟算法中，矢量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，矢量元素计算来自每个发送者的已发送的信息数量。</p>
 <h4 id="causal-broadcast-algorithm">Causal broadcast algorithm<a hidden class="anchor" aria-hidden="true" href="#causal-broadcast-algorithm">¶</a></h4>
 <blockquote>
 <p><strong>on</strong> initialisation <strong>do</strong></p>
-<p>sendSeq := 0; delivered := 〈0, 0, . . ., 0〉; buﬀer := {}</p>
+<p>sendSeq := 0; delivered := ⟨0, 0, . . ., 0⟩; buﬀer := {}</p>
 <p><strong>end on</strong></p>
 <p><strong>on</strong> request to broadcast <code>m</code> at node N<sub>i</sub> <strong>do</strong></p>
 <p>deps := delivered; deps[i] := sendSeq</p>
@@ -600,7 +600,7 @@ function toggleThemeListener() {
 <p>buﬀer := buﬀer ∪ {msg}</p>
 <p><strong>while</strong> ∃(sender, deps, m) ∈ buﬀer. deps ≤ delivered <strong>do</strong></p>
 <p>deliver <code>m</code> to the application</p>
-<p>buﬀer := buﬀer \ {(sender, deps, m)}<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>buﬀer := buﬀer \ {(sender, deps, m)}<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
 <p>delivered[sender] := delivered[sender] + 1</p>
 <p><strong>end while</strong></p>
 <p><strong>end on</strong></p>
@@ -617,7 +617,10 @@ function toggleThemeListener() {
 <p>if a || b we could have either a ≺ b or b ≺ a, so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3">
-<p>删除 buffer 中的  {(sender, deps, m)}&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>msg 就是 (i, sendSeq, m)&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>删除 buffer 中的  {(sender, deps, m)}&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>

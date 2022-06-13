@@ -6,11 +6,11 @@
     <description>Recent content on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Jun 2022 19:01:55 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Jun 2022 19:12:08 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Mon, 13 Jun 2022 19:01:55 +0800</pubDate>
+      <pubDate>Mon, 13 Jun 2022 19:12:08 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -214,26 +214,26 @@
 <h4 id="fifo-broadcast-algorithm">FIFO broadcast algorithm</h4>
 <blockquote>
 <p><strong>on</strong> initialisation <strong>do</strong></p>
-<p>sendSeq := 0; delivered := 〈0, 0, &hellip;, 0〉; buﬀer := {}</p>
+<p>sendSeq := 0; delivered := ⟨0, 0, &hellip;, 0⟩; buﬀer := {}</p>
 <p><strong>end on</strong></p>
 <p><strong>on</strong> request to broadcast <code>m</code> at node N<sub>i</sub> <strong>do</strong></p>
 <p>send (i, sendSeq, m) via reliable broadcast</p>
 <p>sendSeq := sendSeq + 1</p>
 <p><strong>end on</strong></p>
-<p><strong>on</strong> receiving <code>msg</code> from reliable broadcast at node N<sub>i</sub> <strong>do</strong> ▻ msg 就是 (i, sendSeq, m)</p>
+<p><strong>on</strong> receiving <code>msg</code> from reliable broadcast at node N<sub>i</sub> <strong>do</strong><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
 <p>buﬀer := buﬀer ∪ {msg}</p>
-<p><strong>while</strong> ∃sender, m. (sender, delivered[sender], m) ∈ buﬀer <strong>do</strong> ▻ delivered[sender] 就是根据节点的编号 i 取出 delivered 中对应条目，也就是 sendSeq。</p>
-<p>deliver <code>m</code> to the application</p>
-<p>delivered[sender] := delivered[sender] + 1 ▻ delivered[sender] 就是当前要传递的消息的 sendSeq，+ 1 预期的下个需要传递消息的序列号。</p>
+<p><strong>while</strong> ∃sender, m. (sender, delivered[sender], m) ∈ buﬀer <strong>do</strong>
+deliver <code>m</code> to the application</p>
+<p>delivered[sender] := delivered[sender] + 1</p>
 <p><strong>end while</strong></p>
 <p><strong>end on</strong></p>
 </blockquote>
 <p>节点 N<sub>i</sub> 发送的每个 FIFO broadcast 消息都会附带发送节点编号 i 和一个序列号（该节点发送消息对应的序列号，第一条消息对应为 0，第二条消息对应为 1）。每个节点的本地状态由序列号 sendSeq（计算该节点广播的消息数量）、delivered（一个向量，每个节点有一个条目，统计了每个节点发送消息并传递到该节点的数量）和 buﬀer（一个缓存，用于保留消息直到它们准备好被传递给 Application，也就是 Receiving versus delivering 中提到的 deliver 阶段）组成。该算法检查来自任何发送者的与预期的下一个序列号相匹配的消息，然后递增该序列号，确保来自每个特定发送者的消息按照序列号递增的顺序被传递。</p>
-<p>Causal broadcast 算法有点类似于 FIFO broadcast；这里不是给每条被广播的消息附上一个序列号，而是附上一个整数的向量。这种算法有时被称为矢量时钟算法，矢量时钟算法中，矢量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，矢量元素计算来自每个发送者的已发送的信息数量。</p>
+<p>Causal broadcast 算法有点类似于 FIFO broadcast：这里不是给每条被广播的消息附上一个序列号，而是附上一个整数的向量。这种算法有时被称为矢量时钟算法，矢量时钟算法中，矢量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，矢量元素计算来自每个发送者的已发送的信息数量。</p>
 <h4 id="causal-broadcast-algorithm">Causal broadcast algorithm</h4>
 <blockquote>
 <p><strong>on</strong> initialisation <strong>do</strong></p>
-<p>sendSeq := 0; delivered := 〈0, 0, . . ., 0〉; buﬀer := {}</p>
+<p>sendSeq := 0; delivered := ⟨0, 0, . . ., 0⟩; buﬀer := {}</p>
 <p><strong>end on</strong></p>
 <p><strong>on</strong> request to broadcast <code>m</code> at node N<sub>i</sub> <strong>do</strong></p>
 <p>deps := delivered; deps[i] := sendSeq</p>
@@ -244,7 +244,7 @@
 <p>buﬀer := buﬀer ∪ {msg}</p>
 <p><strong>while</strong> ∃(sender, deps, m) ∈ buﬀer. deps ≤ delivered <strong>do</strong></p>
 <p>deliver <code>m</code> to the application</p>
-<p>buﬀer := buﬀer \ {(sender, deps, m)}<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>buﬀer := buﬀer \ {(sender, deps, m)}<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
 <p>delivered[sender] := delivered[sender] + 1</p>
 <p><strong>end while</strong></p>
 <p><strong>end on</strong></p>
@@ -261,7 +261,10 @@
 <p>if a || b we could have either a ≺ b or b ≺ a, so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3">
-<p>删除 buffer 中的  {(sender, deps, m)}&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>msg 就是 (i, sendSeq, m)&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>删除 buffer 中的  {(sender, deps, m)}&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
