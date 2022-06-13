@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://luciuschen.github.io/posts/main/20220602202933-distribution_system/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-06-13T17:33:57&#43;08:00" />
+  <meta property="article:modified_time" content="2022-06-13T19:01:55&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -58,10 +58,10 @@
   "keywords": [
     "top-node"
   ],
-  "wordCount" : "5649",
+  "wordCount" : "5656",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-06-13T17:33:57+08:00",
+  "dateModified": "2022-06-13T19:01:55+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -274,7 +274,7 @@ function toggleThemeListener() {
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
   <span class="post-tags"><a href="https://luciuschen.github.io/tags/top-node/">top-node</a></span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>5649 words</span></span><span class="meta-item">
+  <span>5656 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
   <span>12 min</span></span>
 
@@ -576,11 +576,11 @@ function toggleThemeListener() {
 <p>send (i, sendSeq, m) via reliable broadcast</p>
 <p>sendSeq := sendSeq + 1</p>
 <p><strong>end on</strong></p>
-<p><strong>on</strong> receiving <code>msg</code> from reliable broadcast at node N<sub>i</sub> <strong>do</strong></p>
+<p><strong>on</strong> receiving <code>msg</code> from reliable broadcast at node N<sub>i</sub> <strong>do</strong> ▻ msg 就是 (i, sendSeq, m)</p>
 <p>buﬀer := buﬀer ∪ {msg}</p>
-<p><strong>while</strong> ∃sender, m. (sender, delivered[sender], m) ∈ buﬀer <strong>do</strong></p>
+<p><strong>while</strong> ∃sender, m. (sender, delivered[sender], m) ∈ buﬀer <strong>do</strong> ▻ delivered[sender] 就是根据节点的编号 i 取出 delivered 中对应条目，也就是 sendSeq。</p>
 <p>deliver <code>m</code> to the application</p>
-<p>delivered[sender] := delivered[sender] + 1</p>
+<p>delivered[sender] := delivered[sender] + 1 ▻ delivered[sender] 就是当前要传递的消息的 sendSeq，+ 1 预期的下个需要传递消息的序列号。</p>
 <p><strong>end while</strong></p>
 <p><strong>end on</strong></p>
 </blockquote>
@@ -605,9 +605,8 @@ function toggleThemeListener() {
 <p><strong>end while</strong></p>
 <p><strong>end on</strong></p>
 </blockquote>
-<p>每个节点的本地状态由 sendSeq、delivered 和 buﬀer 组成，它们的含义与 FIFO broadcast 算法中相同。当一个节点想要广播一个消息时，我们会附上发送节点的编号 i 和 deps（表示该消息因果关系的向量）。deps 就是节点本地 delivered 的复制，统计了每个节点发送消息并传递到该节点的数量。</p>
-<p>deps 就是 delivered 的复制，是计算每个发送者有多少消息在该节点被传递的向量。这表明，在这次广播之前，所有已经在本地交付的消息必须出现在广播消息的因果顺序之前。然后，我们将发送节点自己的这个向量的元素更新为等于 sendSeq，这就保证了这个节点所广播的每条消息都与同一节点所广播的前一条消息有因果关系。</p>
-<p>当收到一个消息时，算法首先将其添加到buﬀer中，就像FIFO广播一样，然后在buﬀer中搜索任何准备好的消息。比较deps≤delivered使用了在Slide 72上定义的向量的≤操作符。如果这个节点已经交付了所有在因果顺序上必须在这个消息之前的消息，那么这个比较就是真的。任何在因果关系上准备好的消息都会被交付给应用程序，并从buﬀer中移除，并且交付向量中的相应元素被递增。</p>
+<p>每个节点的本地状态由 sendSeq、delivered 和 buﬀer 组成，它们的含义与 FIFO broadcast 算法中相同。当一个节点想要广播一个消息时，我们会附上发送节点的编号 i 和 deps（表示该消息因果关系的向量）。deps 就是节点本地 delivered 的复制，统计了每个节点发送消息并传递到该节点的数量。在这次广播之前，所有已经在本地交付的消息必须出现在广播消息的因果顺序之前。然后将发送节点自己的这个向量的元素更新为等于 sendSeq，这就保证了这个节点所广播的每条消息都与同一节点所广播的前一条消息有因果关系。</p>
+<p>当收到一个消息时，算法首先将其添加到 buﬀer 中，就像 FIFO broadcast 一样，然后在 buﬀer 中搜索任何准备好的消息。比较 deps ≤ delivered。如果这个节点已经交付了所有在因果顺序上必须在这个消息之前的消息，那么。任何在因果关系上准备好的消息都会被传递给 Application，并从 buﬀer 中移除，并且将 delivered 中的相应条目被递增。</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
