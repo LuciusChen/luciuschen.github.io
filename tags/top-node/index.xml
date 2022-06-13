@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Jun 2022 23:09:32 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Jun 2022 09:24:17 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Sun, 12 Jun 2022 23:09:32 +0800</pubDate>
+      <pubDate>Mon, 13 Jun 2022 09:24:17 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -188,8 +188,8 @@
 </figure>
 
 <p>所有三个节点都按照m<sub>1</sub>, m<sub>3</sub>, m<sub>2</sub> 的顺序传递信息。只要节点同意，这两种执行方式都是有效的。</p>
-<p>与因果广播一样，节点可能需要保留消息，等待其他需要首先传递的消息。例如，节点C可以按任一顺序接收消息m 2和m 3。如果算法确定m 3应该在m 2之前传递，但如果节点C首先收到m 2，那么C将需要保留m 2，直到收到m 3之后。</p>
-<p>在这些图上可以看到另一个重要的细节：在先进先出和因果广播的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是真的：例如，在幻灯片78上，m 2需要在m 3之前被传递，所以节点A向自己传递m 3必须等到A从B那里收到m 2之后。</p>
+<p>与 causal broadcast 一样，节点可能需要保留消息，等待其他需要首先传递的消息。例如，节点 C 可以按任一顺序接收消息 m<sub>2</sub> 和 m<sub>3</sub> 。如果算法确定 m<sub>3</sub> 应该在 m<sub>2</sub> 之前传递，但如果节点 C 首先收到 m<sub>2</sub>，那么 C 将需要保留 m<sub>2</sub>，直到收到 m<sub>3</sub> 之后。</p>
+<p>在这些图上可以看到另一个重要的细节：在 FIFO broadcast 和 causal broadcast 的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是这样：例如，在图<sub>total-order-broadcast-1</sub>上，m<sub>2</sub> 需要在 m<sub>3</sub> 之前被传递，所以节点 A 向自己传递 m<sub>3</sub> 必须等到 A 从 B 那里收到 m<sub>2</sub> 之后。</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>

@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://luciuschen.github.io/posts/main/20220602202933-distribution_system/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-06-12T23:09:32&#43;08:00" />
+  <meta property="article:modified_time" content="2022-06-13T09:24:17&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -58,10 +58,10 @@
   "keywords": [
     "top-node"
   ],
-  "wordCount" : "3591",
+  "wordCount" : "3596",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-06-12T23:09:32+08:00",
+  "dateModified": "2022-06-13T09:24:17+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -270,11 +270,11 @@ function toggleThemeListener() {
     </h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>June 12, 2022</span></span><span class="meta-item">
+  <span>June 13, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
   <span class="post-tags"><a href="https://luciuschen.github.io/tags/top-node/">top-node</a></span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>3591 words</span></span><span class="meta-item">
+  <span>3596 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
   <span>8 min</span></span>
 
@@ -534,8 +534,8 @@ function toggleThemeListener() {
 </figure>
 
 <p>所有三个节点都按照m<sub>1</sub>, m<sub>3</sub>, m<sub>2</sub> 的顺序传递信息。只要节点同意，这两种执行方式都是有效的。</p>
-<p>与因果广播一样，节点可能需要保留消息，等待其他需要首先传递的消息。例如，节点C可以按任一顺序接收消息m 2和m 3。如果算法确定m 3应该在m 2之前传递，但如果节点C首先收到m 2，那么C将需要保留m 2，直到收到m 3之后。</p>
-<p>在这些图上可以看到另一个重要的细节：在先进先出和因果广播的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是真的：例如，在幻灯片78上，m 2需要在m 3之前被传递，所以节点A向自己传递m 3必须等到A从B那里收到m 2之后。</p>
+<p>与 causal broadcast 一样，节点可能需要保留消息，等待其他需要首先传递的消息。例如，节点 C 可以按任一顺序接收消息 m<sub>2</sub> 和 m<sub>3</sub> 。如果算法确定 m<sub>3</sub> 应该在 m<sub>2</sub> 之前传递，但如果节点 C 首先收到 m<sub>2</sub>，那么 C 将需要保留 m<sub>2</sub>，直到收到 m<sub>3</sub> 之后。</p>
+<p>在这些图上可以看到另一个重要的细节：在 FIFO broadcast 和 causal broadcast 的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是这样：例如，在图<sub>total-order-broadcast-1</sub>上，m<sub>2</sub> 需要在 m<sub>3</sub> 之前被传递，所以节点 A 向自己传递 m<sub>3</sub> 必须等到 A 从 B 那里收到 m<sub>2</sub> 之后。</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
