@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Jun 2022 09:24:17 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Jun 2022 17:33:57 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Mon, 13 Jun 2022 09:24:17 +0800</pubDate>
+      <pubDate>Mon, 13 Jun 2022 17:33:57 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -190,6 +190,68 @@
 <p>所有三个节点都按照m<sub>1</sub>, m<sub>3</sub>, m<sub>2</sub> 的顺序传递信息。只要节点同意，这两种执行方式都是有效的。</p>
 <p>与 causal broadcast 一样，节点可能需要保留消息，等待其他需要首先传递的消息。例如，节点 C 可以按任一顺序接收消息 m<sub>2</sub> 和 m<sub>3</sub> 。如果算法确定 m<sub>3</sub> 应该在 m<sub>2</sub> 之前传递，但如果节点 C 首先收到 m<sub>2</sub>，那么 C 将需要保留 m<sub>2</sub>，直到收到 m<sub>3</sub> 之后。</p>
 <p>在这些图上可以看到另一个重要的细节：在 FIFO broadcast 和 causal broadcast 的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是这样：例如，在图<sub>total-order-broadcast-1</sub>上，m<sub>2</sub> 需要在 m<sub>3</sub> 之前被传递，所以节点 A 向自己传递 m<sub>3</sub> 必须等到 A 从 B 那里收到 m<sub>2</sub> 之后。</p>
+<p>最后，FIFO-total order broadcast 和 total order broadcast 很像，多了一个先进先出的要求，即同一节点广播的任何消息都按其发送的顺序交付。实际上图<sub>total-order-broadcast-1</sub> 和图<sub>total-order-broadcast-2</sub> 的例子就是有效的 FIFO-total order broadcast，因为 m<sub>1</sub> 都是在 m<sub>3</sub> 之前被传递的。</p>
+<h4 id="relationships-between-broadcast-models">Relationships between broadcast models</h4>
+<figure>
+    <img loading="lazy" src="/ox-hugo/broadcast-models-relationship.png"
+         alt="Figure 7: broadcast-models-relationship"/> <figcaption>
+            <p><span class="figure-number">Figure 7: </span>broadcast-models-relationship</p>
+        </figcaption>
+</figure>
+
+<p>FIFO-total order broadcast 是一个严格意义上比因果广播更强的模型；换句话说，每个有效的 FIFO-total order broadcast 协议也是一个有效的 causal broadcast 协议（反过来就不是了），其他协议也是如此。</p>
+<h3 id="broadcast-algorithms">Broadcast algorithms</h3>
+<p>实现广播算法，简单来说，涉及到两个步骤。</p>
+<ol>
+<li>确保每个节点都能收到每天消息</li>
+<li>以正确的顺序传递这些消息</li>
+</ol>
+<p>首先研究如何可靠地传递消息，当一个节点想要广播一条消息时，它就单独向其他每个节点发送消息，使用上面提到过的 reliable links。但很可能一条消息丢失，发送的节点在重新发送前就崩溃了，这种情况下，丢失的这条消息对应的节点就无法接收到这条消息。</p>
+<p>为了提高可靠性，可以让其他节点帮忙。例如，当一个节点第一次收到一个特定消息时，它就把消息转发给其他每个节点（这种被称为急性可靠广播（Eager reliable broadcast））。这种算法确保了即使一些节点崩溃，所有剩下的非故障的节点都会收到每条消息。然而，这种算法很低效：在没有故障的情况下，每条消息在由 n 个节点组成的小组中要发送 O(n<sup>2</sup>) 次，每个节点要收到每条消息 n-1 次，意味着占用了大量的带宽。</p>
+<p>eager reliable broadcast 的变体沿着不同维度（比如容错性、所有节点接收消息的时间和被使用的带宽）优化，其中最常见的是流言协议（Gossip protocols，也被叫做流行病协议（Epidemic protocols））。在这些协议中，一个想广播消息的节点将其发送给随机选择的少量固定数量的节点。第一次收到信息时，一个节点会将其转发给固定数量的随机选择的节点。这类似于流言、谣言或传染病在人群中的传播方式。</p>
+<p>Gossip protocols 并不能保证所有节点都能收到消息：在随机选择节点时，有可能总是遗漏了一些节点。然而，如果算法的参数选择得当，信息不被传递的概率很小。Gossip protocols 很有吸引力，在正确的参数下，对消息丢失和节点崩溃有很强的弹性，同时还能保持高效。其实核裂变的发生过程，也类似于这种协议。</p>
+<p>可以在 eager reliable broadcast 或 gossip protocol 的基础上，建立 FIFO、causal 或者 total order broadcast。</p>
+<h4 id="fifo-broadcast-algorithm">FIFO broadcast algorithm</h4>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong></p>
+<p>sendSeq := 0; delivered := 〈0, 0, &hellip;, 0〉; buﬀer := {}</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> request to broadcast <code>m</code> at node N<sub>i</sub> <strong>do</strong></p>
+<p>send (i, sendSeq, m) via reliable broadcast</p>
+<p>sendSeq := sendSeq + 1</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> receiving <code>msg</code> from reliable broadcast at node N<sub>i</sub> <strong>do</strong></p>
+<p>buﬀer := buﬀer ∪ {msg}</p>
+<p><strong>while</strong> ∃sender, m. (sender, delivered[sender], m) ∈ buﬀer <strong>do</strong></p>
+<p>deliver <code>m</code> to the application</p>
+<p>delivered[sender] := delivered[sender] + 1</p>
+<p><strong>end while</strong></p>
+<p><strong>end on</strong></p>
+</blockquote>
+<p>节点 N<sub>i</sub> 发送的每个 FIFO broadcast 消息都会附带发送节点编号 i 和一个序列号（该节点发送消息对应的序列号，第一条消息对应为 0，第二条消息对应为 1）。每个节点的本地状态由序列号 sendSeq（计算该节点广播的消息数量）、delivered（一个向量，每个节点有一个条目，统计了每个节点发送消息并传递到该节点的数量）和 buﬀer（一个缓存，用于保留消息直到它们准备好被传递给 Application，也就是 Receiving versus delivering 中提到的 deliver 阶段）组成。该算法检查来自任何发送者的与预期的下一个序列号相匹配的消息，然后递增该序列号，确保来自每个特定发送者的消息按照序列号递增的顺序被传递。</p>
+<p>Causal broadcast 算法有点类似于 FIFO broadcast；这里不是给每条被广播的消息附上一个序列号，而是附上一个整数的向量。这种算法有时被称为矢量时钟算法，矢量时钟算法中，矢量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，矢量元素计算来自每个发送者的已发送的信息数量。</p>
+<h4 id="causal-broadcast-algorithm">Causal broadcast algorithm</h4>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong></p>
+<p>sendSeq := 0; delivered := 〈0, 0, . . ., 0〉; buﬀer := {}</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> request to broadcast <code>m</code> at node N<sub>i</sub> <strong>do</strong></p>
+<p>deps := delivered; deps[i] := sendSeq</p>
+<p>send (i, deps, m) via reliable broadcast</p>
+<p>sendSeq := sendSeq + 1</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> receiving <code>msg</code> from reliable broadcast at node N<sub>i</sub> <strong>do</strong></p>
+<p>buﬀer := buﬀer ∪ {msg}</p>
+<p><strong>while</strong> ∃(sender, deps, m) ∈ buﬀer. deps ≤ delivered <strong>do</strong></p>
+<p>deliver <code>m</code> to the application</p>
+<p>buﬀer := buﬀer \ {(sender, deps, m)}<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>delivered[sender] := delivered[sender] + 1</p>
+<p><strong>end while</strong></p>
+<p><strong>end on</strong></p>
+</blockquote>
+<p>每个节点的本地状态由 sendSeq、delivered 和 buﬀer 组成，它们的含义与 FIFO broadcast 算法中相同。当一个节点想要广播一个消息时，我们会附上发送节点的编号 i 和 deps（表示该消息因果关系的向量）。deps 就是节点本地 delivered 的复制，统计了每个节点发送消息并传递到该节点的数量。</p>
+<p>deps 就是 delivered 的复制，是计算每个发送者有多少消息在该节点被传递的向量。这表明，在这次广播之前，所有已经在本地交付的消息必须出现在广播消息的因果顺序之前。然后，我们将发送节点自己的这个向量的元素更新为等于 sendSeq，这就保证了这个节点所广播的每条消息都与同一节点所广播的前一条消息有因果关系。</p>
+<p>当收到一个消息时，算法首先将其添加到buﬀer中，就像FIFO广播一样，然后在buﬀer中搜索任何准备好的消息。比较deps≤delivered使用了在Slide 72上定义的向量的≤操作符。如果这个节点已经交付了所有在因果顺序上必须在这个消息之前的消息，那么这个比较就是真的。任何在因果关系上准备好的消息都会被交付给应用程序，并从buﬀer中移除，并且交付向量中的相应元素被递增。</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -199,6 +261,9 @@
 <li id="fn:2">
 <p>if a || b we could have either a ≺ b or b ≺ a, so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
+<li id="fn:3">
+<p>删除 buffer 中的  {(sender, deps, m)}&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
 </div>
 ]]></content:encoded>
@@ -207,7 +272,7 @@
     <item>
       <title>Vector Clocks</title>
       <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Sat, 11 Jun 2022 18:46:15 +0800</pubDate>
+      <pubDate>Mon, 13 Jun 2022 17:17:08 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</guid>
       <description>Given Lamport timestamps L(a) and L(b) with L(a) &amp;lt; L(b)，我们推断不出 a → b 或者 a || b.1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 n 个节点，N = ⟨ N1, N2, &amp;hellip;, Nn ⟩ 事件 a 的向</description>
@@ -290,7 +355,7 @@
     <item>
       <title>Lamport Clocks</title>
       <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
-      <pubDate>Sat, 11 Jun 2022 15:43:50 +0800</pubDate>
+      <pubDate>Mon, 13 Jun 2022 17:16:22 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
       <description>Lamport clocks algorithm on initialisation do t := 0 ▻ each node has its own local variable t end on on any event occurring at the local node do t := t + 1 end on on request to send message m do t := t + 1; send (t, m) via the underlying network link end on on receiving (t′, m) via the underlying network link</description>
