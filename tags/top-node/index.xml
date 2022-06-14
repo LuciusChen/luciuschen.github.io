@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Jun 2022 22:48:10 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Jun 2022 17:33:53 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Mon, 13 Jun 2022 22:48:10 +0800</pubDate>
+      <pubDate>Tue, 14 Jun 2022 17:33:53 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -97,7 +97,7 @@
 <p>但这样也有缺点，算法在时间戳相同，节点名称不同的平行事件的顺序判定时，会出现与实际情况不符的情况。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
 </li>
 <li>
-<p><a href="/posts/main/20220602235916-vector_clocks/">Vector Clocks</a> 除了矢量之外，矢量时钟算法与 Lamport 时钟非常相似。一个节点的矢量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 N<sub>i</sub> 发生事件时，它就会增加其向量钟中的第 i 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目</p>
+<p><a href="/posts/main/20220602235916-vector_clocks/">Vector Clocks</a> 除了是向量之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 N<sub>i</sub> 发生事件时，它就会增加其向量钟中的第 i 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目</p>
 <p>这样就可以弥补 Lamport 的缺点，可以完全确定每个事件的因果顺序。</p>
 </li>
 </ul>
@@ -260,18 +260,63 @@ deliver <code>m</code> to the application</p>
 <blockquote>
 <p><strong>Single leader</strong> approach:</p>
 <ul>
-<li>One node is designated as leader (sequencer)</li>
-<li>To broadcast message, send it to the leader; leader broadcasts it via FIFO broadcast.</li>
-<li>Problem: leader crashes =⇒ no more messages delivered</li>
-<li>Changing the leader safely is diﬃcult</li>
+<li>指定一个节点为 leader</li>
+<li>想要广播消息，将其发送给 leader，leader 再将其通过 FIFO broadcast 广播给其他节点。</li>
+<li>Problem: leader 崩溃 ⇒ 没有消息被传递</li>
+<li>安全地更换 leader 很困难</li>
 </ul>
 <p><strong>Lamport clocks</strong> approach:</p>
 <ul>
-<li>Attach Lamport timestamp to every message</li>
-<li>Deliver messages in total order of timestamps</li>
-<li>Problem: how do you know if you have seen all messages with timestamp &lt; T? Need to use FIFO links and wait for message with timestamp ≥ T from every node</li>
+<li>每条消息附带上 lamport 时间戳</li>
+<li>按照时间戳的总顺序传递消息</li>
+<li>Problem: 无法知道是否收到了所有时间戳小于 T<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> 的消息，需要在缓存中缓存来自每个节点时间戳大于等于 T 的消息。</li>
 </ul>
 </blockquote>
+<p>上述两个方法，都不具有容错性。单个节点崩溃以及 leader 节点崩溃都会使得其他节点无法传递消息。</p>
+<h2 id="replication">Replication</h2>
+<p>现在要讨论的是复制的问题，也就是在多个节点上维护相同数据的副本，每个节点被称为副本。复制是许多分布式数据库、文件系统和其他存储系统的一个标准特征。它是我们实现容错的主要机制之一：如果一个副本出现故障，我们可以继续访问其他副本上的数据副本。</p>
+<ul>
+<li>在不同节点维护相同数据的副本</li>
+<li>数据库、文件系统、缓存等等</li>
+<li>维护相同数据的节点叫做副本</li>
+<li>如果一些副本出错，其他副本依旧是可访问的。</li>
+<li>将负载分散到多个副本</li>
+<li>如果数据没有变化，维护很简单，只需要复制。</li>
+<li>专注于数据变化</li>
+</ul>
+<p>相较于 <a href="https://zh.wikipedia.org/zh-cn/RAID">RAID</a> (Redundant Array of Independent Disks)：在单个计算机内复制。</p>
+<ul>
+<li>RAID 只有一个控制器；在分布式系统中，每个节点都是独立的。</li>
+<li>副本可以在全世界靠近用户的地方分布（CDN 本质其实是一种大规模分布式多级缓存系统）</li>
+</ul>
+<h3 id="manipulating-remote-state">Manipulating remote state</h3>
+<p>在更新不同节点数据时，丢失数据或者丢失 TCP 返回的 ACK<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup> 时，就会使得不同节点之间的副本不一致，不满足幂等性（Idempotent）。为了解决这个问题，可以给每次更新操作都加上一个逻辑时间戳，并将其作为数据存储在数据库当中；当需要删除这条记录时，实际上并没有删除，而是写入一个特殊的值（称为墓碑 tombstone），将其标记为删除。（其实就类似于软删除）</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/reconciling-replicas.png"
+         alt="Figure 8: reconciling-replicas"/> <figcaption>
+            <p><span class="figure-number">Figure 8: </span>reconciling-replicas</p>
+        </figcaption>
+</figure>
+
+<p>在许多副本系统中，副本运行一个协议来检测和调和任何差异（这被称为反熵 anti-entropy），以便副本最终持有相同数据的一致副本。由于有了 tombstone，反熵过程可以分辨出已经被删除的记录和尚未被创建的记录之间的差异。由于有了逻辑时间戳，可以分辨出一条记录的哪个版本比较老，哪个版本比较新。然后，反熵过程会保留较新的记录并丢弃较旧的记录。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/concurrent-reconciling-replicas.png"
+         alt="Figure 9: concurrent-reconciling-replicas"/> <figcaption>
+            <p><span class="figure-number">Figure 9: </span>concurrent-reconciling-replicas</p>
+        </figcaption>
+</figure>
+
+<p>如果同时两个请求分别想把两个副本的 x 的值进行修改。</p>
+<ul>
+<li>
+<p><strong>Last writer wins</strong> (LWW):</p>
+<p>采用 Lamport clocks 时，t<sub>2</sub> &gt; t<sub>1</sub> 则保留 v<sub>2</sub> 丢弃 v<sub>1</sub>。</p>
+</li>
+<li>
+<p><strong>Multi-value register</strong>:</p>
+<p>采用 Vector clocks 时，t<sub>2 </sub>&gt; t<sub>1</sub> 则保留 v<sub>2</sub> 丢弃 v<sub>1</sub>；t<sub>2</sub> || t<sub>1</sub> 则 {v<sub>1</sub>, v<sub>2</sub>} 都保留。</p>
+</li>
+</ul>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -286,6 +331,12 @@ deliver <code>m</code> to the application</p>
 </li>
 <li id="fn:4">
 <p>删除 buffer 中的  {(sender, deps, m)}&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>当前节点的时间戳 T&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p>后面整理 TCP 相关内容时，可以加个链接。&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
