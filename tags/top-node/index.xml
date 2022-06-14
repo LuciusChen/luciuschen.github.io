@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Jun 2022 17:33:53 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Jun 2022 20:59:10 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Tue, 14 Jun 2022 17:33:53 +0800</pubDate>
+      <pubDate>Tue, 14 Jun 2022 20:59:10 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -317,6 +317,8 @@ deliver <code>m</code> to the application</p>
 <p>采用 Vector clocks 时，t<sub>2 </sub>&gt; t<sub>1</sub> 则保留 v<sub>2</sub> 丢弃 v<sub>1</sub>；t<sub>2</sub> || t<sub>1</sub> 则 {v<sub>1</sub>, v<sub>2</sub>} 都保留。</p>
 </li>
 </ul>
+<p>向量时钟的缺点是它们会变得很昂贵：每个客户端都需要在向量中输入一个条目，在有大量客户端的系统中（或者客户端每次重启都会有新的身份），这些向量会变得很大，可能会比数据本身占用更多内存。更多类型的逻辑时钟，如点状版本向量（Dotted version vectors）<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>，已经被开发出来以优化这种类型的系统。</p>
+<h3 id="quorums">Quorums</h3>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -337,6 +339,9 @@ deliver <code>m</code> to the application</p>
 </li>
 <li id="fn:6">
 <p>后面整理 TCP 相关内容时，可以加个链接。&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7">
+<p>待学习&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
