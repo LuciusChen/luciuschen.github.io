@@ -6,74 +6,65 @@
     <description>Recent content on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Jun 2022 16:05:30 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Jun 2022 16:45:07 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Lamport clocks</title>
-      <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
-      <pubDate>Thu, 16 Jun 2022 16:05:30 +0800</pubDate>
+      <title>Network Time Protocol (NTP)</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
+      <pubDate>Thu, 16 Jun 2022 16:45:07 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
-      <description>Lamport clocks algorithm on initialisation do t := 0 ▻ each node has its own local variable t end on on any event occurring at the local node do t := t + 1 end on on request to send message m do t := t + 1; send (t, m) via the underlying network link end on on receiving (t′, m) via the underlying network link</description>
-      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation <strong>do</strong></p>
-<p>t := 0 ▻ each node has its own local variable t</p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> any event occurring at the local node <strong>do</strong></p>
-<p>t := t + 1</p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> request to send message <code>m</code> <strong>do</strong></p>
-<p>t := t + 1; send (t, m) via the underlying network link</p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> receiving (t′, m) via the underlying network link <strong>do</strong></p>
-<p>t := max(t, t′) + 1</p>
-<p>deliver <code>m</code> to the application</p>
-<p><strong>end on</strong></p>
-</blockquote>
-<h2 id="lamport-clocks-in-words">Lamport clocks in words</h2>
+      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
+      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
+      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
+<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
 <figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
-         alt="Figure 1: lamport-example-simple"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
+    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
+         alt="Figure 1: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>NTP</p>
         </figcaption>
 </figure>
 
-<ul>
-<li>每个节点都维护一个计数器 <code>t</code> ，每一个当前节点事件 <code>e</code> 发生时，自增 1。</li>
-<li>增长后的值设为 <code>L(e)</code></li>
-<li>发送消息时附带上当前的计数 <code>t</code></li>
-<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
-</ul>
-<p>Properties of this scheme:</p>
-<ul>
-<li>if a → b then L(e) &lt; L(b)</li>
-<li>However, L(a) &lt; L(b) does not imply a → b</li>
-<li>Possible that L(a) = L(b) for a ≠ b ()</li>
-</ul>
-<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
-<h2 id="lamport-clocks-example">Lamport clocks example</h2>
+<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
 <figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example.png"
-         alt="Figure 2: lamport-example"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
+    <img loading="lazy" src="/ox-hugo/NTP.png"
+         alt="Figure 2: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>NTP</p>
         </figcaption>
 </figure>
 
-<p>Let N(e) be the node at which event e occurred.</p>
-<p>Then the pair (L(e), N(e)) <strong>uniquely identiﬁes</strong> event e.</p>
-<p>Deﬁne a <strong>total order</strong> ≺ using Lamport timestamps:</p>
-<p>(a ≺ b) \(\iff\) (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b)))<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<p>This order is <strong>causal</strong>: (a → b) \(\Longrightarrow\) (a ≺ b)</p>
-<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
-<p>对于任何两个事件 a ≠ b，那么既不是 a ≺ b 也不是 b ≺ a。只要 a → b，我们就有 a ≺ b，换句话说，≺ 是局部顺序 → 的线性扩展。然而，如果 a || b，我们可以有 a ≺ b 或 b ≺ a，所以两个事件的顺序是由算法任意决定的。 比如 (1, A) 和 (1, C) 两个事件是平行的，按照 Lamport 的算法，(1, A) 必然是在 (1, C) 之前的，但实际情况可能是 (1, C) 在前。</p>
+<ol>
+<li>
+<p>Round-trip network delay: δ = (t<sub>4</sub> - t<sub>1</sub>) - (t<sub>3</sub> - t<sub>2</sub>)</p>
+</li>
+<li>
+<p>Estimated server time when client receives response: t<sub>3</sub> + \(\frac{\delta}{2}\)（客户端收到响应时的服务器的时间）</p>
+</li>
+<li>
+<p>Estimated clock skew: θ = t<sub>3</sub> + \(\frac{\delta}{2}\) - t<sub>4</sub> =  \(\frac{(t_{2} - t_{1} + t_{3} - t_{4})}{2}\)（计算预估的服务器时间和当前客户端时间的偏差）</p>
+</li>
+</ol>
+<h2 id="correcting-clock-skew">Correcting clock skew</h2>
+<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
+<ul>
+<li>
+<p>if θ &lt; 125 ms, <strong>slew</strong> the clock:</p>
+<p>slightly speed it up or slow it down by up to 500 ppm<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
+</li>
+<li>
+<p>if 125 ms ≤ θ &lt; 1000 s, <strong>step</strong> the clock:</p>
+<p>suddenly reset client clock to estimated server timestamp</p>
+</li>
+<li>
+<p>if θ ≥ 1000 s, <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
+</li>
+</ul>
+<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
+<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
+<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1">
-<p>\(\iff\) is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>∨ is logical or, ∧ is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
@@ -81,9 +72,78 @@
     </item>
     
     <item>
+      <title>Quorum</title>
+      <link>https://luciuschen.github.io/posts/main/20220615143721-quorum/</link>
+      <pubDate>Thu, 16 Jun 2022 16:40:15 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220615143721-quorum/</guid>
+      <description>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于Quorum投票的冗余控制算法 在</description>
+      <content:encoded><![CDATA[<p>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。</p>
+<h2 id="基于quorum投票的冗余控制算法">基于Quorum投票的冗余控制算法</h2>
+<p>在有冗余数据的分布式存储系统当中，冗余数据对象会在不同的机器之间存放多份拷贝。但是同一时刻一个数据对象的多份拷贝只能用于读或者用于写。</p>
+<p>该算法可以保证同一份数据对象的多份拷贝不会被超过两个访问对象读写。</p>
+<p>分布式系统中的每一份数据拷贝对象都被赋予一票。每一个读操作获得的票数必须大于最小读票数（read quorum）（V<sub>r</sub>），每个写操作获得的票数必须大于最小写票数（write quorum）(V<sub>w</sub>）才能读或者写。如果系统有V票（意味着一个数据对象有V份冗余拷贝），那么最小读写票数(quorum)应满足如下限制：</p>
+<ol>
+<li>V<sub>r</sub> + V<sub>w</sub> &gt; V</li>
+<li>V<sub>w</sub> &gt; \(\frac{V}{2}\)</li>
+</ol>
+<p>第一条规则保证了一个数据不会被同时读写。当一个写操作请求过来的时候，它必须要获得 V<sub>w</sub> 个冗余拷贝的许可。而剩下的数量是 V - V<sub>w</sub>  不够 V<sub>r</sub>，因此不能再有读请求过来了。同理，当读请求已经获得了 V<sub>r</sub> 个冗余拷贝的许可时，写请求就无法获得许可了。</p>
+<p>第二条规则保证了数据的串行化修改。一份数据的冗余拷贝不可能同时被两个写请求修改。</p>
+<h2 id="算法的好处">算法的好处</h2>
+<p>在分布式系统中，冗余数据是保证可靠性的手段，因此冗余数据的一致性维护就非常重要。一般而言，一个写操作必须要对所有的冗余数据都更新完成了，才能称为成功结束。比如一份数据在5台设备上有冗余，因为不知道读数据会落在哪一台设备上，那么一次写操作，必须5台设备都更新完成，写操作才能返回。</p>
+<p>对于写操作比较频繁的系统，这个操作的瓶颈非常大。Quorum 算法可以让写操作只要写完3台就返回。剩下的由系统内部缓慢同步完成。而读操作，则需要也至少读3台，才能保证至少可以读到一个最新的数据。</p>
+<p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 V<sub>w</sub> 越大，则读票数 V<sub>r</sub> 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Latex</title>
+      <link>https://luciuschen.github.io/posts/main/20220616162256-latex/</link>
+      <pubDate>Thu, 16 Jun 2022 16:38:23 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220616162256-latex/</guid>
+      <description> \rightarrow \(\rightarrow\) \longrightarrow \(\longrightarrow\) \Longrightarrow \(\Longrightarrow\) \dot\imath \(\dot\imath\) \iff \(\iff\) \triangleright \(\triangleright\) \ell \(\ell\) </description>
+      <content:encoded><![CDATA[<table>
+<thead>
+<tr>
+<th><code>\rightarrow</code></th>
+<th>\(\rightarrow\)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\longrightarrow</code></td>
+<td>\(\longrightarrow\)</td>
+</tr>
+<tr>
+<td><code>\Longrightarrow</code></td>
+<td>\(\Longrightarrow\)</td>
+</tr>
+<tr>
+<td><code>\dot\imath</code></td>
+<td>\(\dot\imath\)</td>
+</tr>
+<tr>
+<td><code>\iff</code></td>
+<td>\(\iff\)</td>
+</tr>
+<tr>
+<td><code>\triangleright</code></td>
+<td>\(\triangleright\)</td>
+</tr>
+<tr>
+<td><code>\ell</code></td>
+<td>\(\ell\)</td>
+</tr>
+</tbody>
+</table>
+]]></content:encoded>
+    </item>
+    
+    <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Thu, 16 Jun 2022 16:04:17 +0800</pubDate>
+      <pubDate>Thu, 16 Jun 2022 16:34:19 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -328,6 +388,392 @@
 </li>
 <li id="fn:4">
 <p>待学习&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Org-roam</title>
+      <link>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</link>
+      <pubDate>Thu, 16 Jun 2022 16:09:51 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</guid>
+      <description>Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。</p>
+<p>Org-roam 是基于 Emacs 平台，对于直接触过 Vim 的我来讲，是个全新的东西，官方是这么形容它的。</p>
+<blockquote>
+<p>Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.</p>
+<p>– Neal Stephenson, In the Beginning was the Command Line (1998)</p>
+</blockquote>
+<h2 id="install-emacs-with-homebrew">Install Emacs With Homebrew</h2>
+<p>First, Doom’s dependencies:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install git ripgrep
+</span></span><span class="line"><span class="cl">brew install coreutils fd
+</span></span><span class="line"><span class="cl">xcode-selected --install
+</span></span></code></pre></div><p><a href="https://bitbucket.org/mituharu/emacs-mac/src">emacs-mac</a>. It offers good integration with macOS, native emojis and better childframe support.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap railwaycat/emacsmacport
+</span></span><span class="line"><span class="cl">brew install emacs-mac --with-modules
+</span></span><span class="line"><span class="cl">ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications/Emacs.app
+</span></span></code></pre></div><h3 id="doom-doctor-问题"><code>Doom Doctor</code> 问题</h3>
+<ol>
+<li>
+<p>Warning: unable to detect fonts because fontconfig isn&rsquo;t installed</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install fontconfig
+</span></span></code></pre></div></li>
+<li>
+<p>! Couldn&rsquo;t find shellcheck. Shell script linting will not work</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install shellcheck
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="doom-emacs">Doom Emacs</h2>
+<p>With Emacs and Doom&rsquo;s dependencies installed, next is to install Doom Emacs itself:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+</span></span><span class="line"><span class="cl">~/.emacs.d/bin/doom install
+</span></span></code></pre></div><p>如果提示 <code>.emacs.d</code> 已存在，删除重新执行上述命令即可。</p>
+<p><code>.zshrc</code> 中需要添加 <code>export PATH=&quot;$HOME/.emacs.d/bin:$PATH</code> ，这样就可以直接使用 <code>doom</code> 命令了。</p>
+<h2 id="org-roam">Org-roam</h2>
+<p>具体的配置文件在 <code>.doom.d/</code> 下，参见 <a href="https://github.com/LuciusChen/dotfiles/tree/master/.doom.d">.doom.d</a>。</p>
+<h2 id="shortcuts">Shortcuts</h2>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-RET</code></td>
+<td>在当前 headline 所属的内容后建立一个同级 headline</td>
+<td>无 headline 时创建一个一级 headline</td>
+</tr>
+<tr>
+<td><code>M-RET</code></td>
+<td>在当前 headline 后建立一个同级 headline</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-right</code></td>
+<td>降低当前 headline 的层级</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-left</code></td>
+<td>提高当前 headline 的层级</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-up</code></td>
+<td>将当前 headline 及其内容作为整体向上移动</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-down</code></td>
+<td>将当前 headline 及其内容作为整体向下移动</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-return</code></td>
+<td>在当前列表项的内容后建立一个同级列表项</td>
+<td>光标在列表项同一行时有效</td>
+</tr>
+<tr>
+<td><code>M-RET</code></td>
+<td>在当前列表项后建立一个同级列表项</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-right</code></td>
+<td>降低当前列表项的层级</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-left</code></td>
+<td>提高当前列表项的层级</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-up</code></td>
+<td>将当前列表项及其内容作为整体向上移动</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-down</code></td>
+<td>将当前列表项及其内容作为整体向下移动</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>C-x-o</code></td>
+<td>切换窗口</td>
+<td>C-x 中有很多操作，可以看提示。</td>
+</tr>
+<tr>
+<td><code>C-c C-c</code></td>
+<td>在创建 node 编写完毕后快速保存</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-g</code></td>
+<td>取消操作</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-x-d</code></td>
+<td>进入 dired 模式</td>
+<td></td>
+</tr>
+<tr>
+<td><code>SPC f r</code></td>
+<td>查找最近文件</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-v</code></td>
+<td>显示图片</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-c C-s</code></td>
+<td></td>
+<td>设置任务开始时间</td>
+</tr>
+<tr>
+<td><code>C-c C-d</code></td>
+<td>设置任务截止时间</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-t</code></td>
+<td>改变任务状态</td>
+<td></td>
+</tr>
+<tr>
+<td><code>S-Up/Down</code></td>
+<td>设置任务优先级 [#A], [#B], [#C]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-i</code></td>
+<td>开始任务计时</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-o</code></td>
+<td>终止任务计时</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c [</code></td>
+<td>将当前文件加入 Org-Agenda</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c ]</code></td>
+<td>将当前文件从 Org-Agenda 移除</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t</code></td>
+<td>在 Org-Agenda 的任务条目上， 修改任务状态。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-a</code></td>
+<td>归档</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-w</code></td>
+<td>activate refile</td>
+<td></td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>在 Org-Agenda 的任务条目上， 开始计时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td>在 Org-Agenda 的任务条目上， 终止计时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>在任务上添加 note</td>
+<td></td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>clock mode, 显示耗时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-l</code></td>
+<td>预览 Latex</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="org-grammar">Org grammar</h2>
+<h3 id="basic">basic</h3>
+<p>This is almost anything you need to know about Org mode syntax:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"> <span class="k">* </span>This Is A Heading
+</span></span><span class="line"><span class="cl"> ** This Is A Sub-Heading
+</span></span><span class="line"><span class="cl"> *** And A Sub-Sub-Heading
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> Paragraphs are separated by at least one empty line. <span class="gs">*bold*</span> <span class="ge">/italic/</span> <span class="gl">_underlined_</span> <span class="gd">+strikethrough+</span> <span class="nc">=monospaced=</span>
+</span></span><span class="line"><span class="cl"> [[<span class="na">http://Karl-Voit.at</span>][<span class="nt">Link description</span>]]
+</span></span><span class="line"><span class="cl"> http://Karl-Voit.at → link without description
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="k">- </span>list item
+</span></span><span class="line"><span class="cl"> <span class="k">- </span>another item
+</span></span><span class="line"><span class="cl">   <span class="k">- </span>sub-item
+</span></span><span class="line"><span class="cl">     <span class="k">1.</span> also enumerated
+</span></span><span class="line"><span class="cl">     <span class="k">2.</span> if you like
+</span></span><span class="line"><span class="cl"> <span class="k">- [ ]</span> yet to be done
+</span></span><span class="line"><span class="cl"> <span class="k">- [X]</span> item which is done
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> : Simple pre-formatted text such as for source code.
+</span></span><span class="line"><span class="cl"> : This also respects the line breaks. <span class="gs">*bold*</span> is not bold here.
+</span></span></code></pre></div><h3 id="code-block">code block</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">myresult</span> <span class="o">=</span> <span class="mi">42</span> <span class="o">*</span> <span class="mi">23</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello Europe! &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">myresult</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="table">table</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"> <span class="s">| My Column 1 | My Column 2 | Last Column |</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|-------------+-------------+-------------|</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|          42 | foo         | bar         |</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|          23 | baz         | abcdefg     |</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|-------------+-------------+-------------|</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|          65 |             |             |</span>
+</span></span></code></pre></div><h2 id="export">Export</h2>
+<h3 id="markdown-file">Markdown file</h3>
+<p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>， ~M-x org-pandoc-export-as-gfm~算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
+<h3 id="hugo">Hugo</h3>
+<p>在文件头部添加</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+HUGO_BASE_DIR: ~/Dropbox/hugo/
+</span></span><span class="line"><span class="cl">#+HUGO_SECTION: posts/main
+</span></span><span class="line"><span class="cl">#+HUGO_WEIGHT: auto
+</span></span><span class="line"><span class="cl">#+HUGO_AUTO_SET_LASTMOD: t
+</span></span></code></pre></div><p>需要导出为 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+begin_mark
+</span></span><span class="line"><span class="cl">marked text
+</span></span><span class="line"><span class="cl">#+end_mark
+</span></span></code></pre></div><p>需要导出为块级 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时，也就是前后的空格不进行 trim。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+header: :trim-pre nil :trim-post nil
+</span></span><span class="line"><span class="cl">#+begin_mark
+</span></span><span class="line"><span class="cl">marked text
+</span></span><span class="line"><span class="cl">#+end_mark
+</span></span></code></pre></div><h3 id="latex">Latex</h3>
+<p>需要安装 texlive</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install texlive
+</span></span></code></pre></div><h4 id="pdf-导出报错">PDF 导出报错</h4>
+<ul>
+<li><code>Unicode character 考 (U+8003) not set up for use with LaTeX.</code> 是因为 Latex 本身不支持中文。</li>
+</ul>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://ox-hugo.scripter.co/doc/org-special-blocks/">Org Special Blocks</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Lamport clocks</title>
+      <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
+      <pubDate>Thu, 16 Jun 2022 16:05:30 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
+      <description>Lamport clocks algorithm on initialisation do t := 0 ▻ each node has its own local variable t end on on any event occurring at the local node do t := t + 1 end on on request to send message m do t := t + 1; send (t, m) via the underlying network link end on on receiving (t′, m) via the underlying network link</description>
+      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong></p>
+<p>t := 0 ▻ each node has its own local variable t</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> any event occurring at the local node <strong>do</strong></p>
+<p>t := t + 1</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> request to send message <code>m</code> <strong>do</strong></p>
+<p>t := t + 1; send (t, m) via the underlying network link</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> receiving (t′, m) via the underlying network link <strong>do</strong></p>
+<p>t := max(t, t′) + 1</p>
+<p>deliver <code>m</code> to the application</p>
+<p><strong>end on</strong></p>
+</blockquote>
+<h2 id="lamport-clocks-in-words">Lamport clocks in words</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
+         alt="Figure 1: lamport-example-simple"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>每个节点都维护一个计数器 <code>t</code> ，每一个当前节点事件 <code>e</code> 发生时，自增 1。</li>
+<li>增长后的值设为 <code>L(e)</code></li>
+<li>发送消息时附带上当前的计数 <code>t</code></li>
+<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
+</ul>
+<p>Properties of this scheme:</p>
+<ul>
+<li>if a → b then L(e) &lt; L(b)</li>
+<li>However, L(a) &lt; L(b) does not imply a → b</li>
+<li>Possible that L(a) = L(b) for a ≠ b ()</li>
+</ul>
+<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
+<h2 id="lamport-clocks-example">Lamport clocks example</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example.png"
+         alt="Figure 2: lamport-example"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
+        </figcaption>
+</figure>
+
+<p>Let N(e) be the node at which event e occurred.</p>
+<p>Then the pair (L(e), N(e)) <strong>uniquely identiﬁes</strong> event e.</p>
+<p>Deﬁne a <strong>total order</strong> ≺ using Lamport timestamps:</p>
+<p>(a ≺ b) \(\iff\) (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b)))<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>This order is <strong>causal</strong>: (a → b) \(\Longrightarrow\) (a ≺ b)</p>
+<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
+<p>对于任何两个事件 a ≠ b，那么既不是 a ≺ b 也不是 b ≺ a。只要 a → b，我们就有 a ≺ b，换句话说，≺ 是局部顺序 → 的线性扩展。然而，如果 a || b，我们可以有 a ≺ b 或 b ≺ a，所以两个事件的顺序是由算法任意决定的。 比如 (1, A) 和 (1, C) 两个事件是平行的，按照 Lamport 的算法，(1, A) 必然是在 (1, C) 之前的，但实际情况可能是 (1, C) 在前。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>\(\iff\) is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>∨ is logical or, ∧ is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
@@ -1448,31 +1894,6 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
     </item>
     
     <item>
-      <title>Quorum</title>
-      <link>https://luciuschen.github.io/posts/main/20220615143721-quorum/</link>
-      <pubDate>Wed, 15 Jun 2022 14:49:04 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220615143721-quorum/</guid>
-      <description>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于Quorum投票的冗余控制算法 在</description>
-      <content:encoded><![CDATA[<p>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。</p>
-<h2 id="基于quorum投票的冗余控制算法">基于Quorum投票的冗余控制算法</h2>
-<p>在有冗余数据的分布式存储系统当中，冗余数据对象会在不同的机器之间存放多份拷贝。但是同一时刻一个数据对象的多份拷贝只能用于读或者用于写。</p>
-<p>该算法可以保证同一份数据对象的多份拷贝不会被超过两个访问对象读写。</p>
-<p>分布式系统中的每一份数据拷贝对象都被赋予一票。每一个读操作获得的票数必须大于最小读票数（read quorum）（V<sub>r</sub>），每个写操作获得的票数必须大于最小写票数（write quorum）(V<sub>w</sub>）才能读或者写。如果系统有V票（意味着一个数据对象有V份冗余拷贝），那么最小读写票数(quorum)应满足如下限制：</p>
-<ol>
-<li>V<sub>r</sub> + V<sub>w</sub> &gt; V</li>
-<li>V<sub>w</sub> &gt; V/2</li>
-</ol>
-<p>第一条规则保证了一个数据不会被同时读写。当一个写操作请求过来的时候，它必须要获得 V<sub>w</sub> 个冗余拷贝的许可。而剩下的数量是 V - V<sub>w</sub>  不够 V<sub>r</sub>，因此不能再有读请求过来了。同理，当读请求已经获得了 V<sub>r</sub> 个冗余拷贝的许可时，写请求就无法获得许可了。</p>
-<p>第二条规则保证了数据的串行化修改。一份数据的冗余拷贝不可能同时被两个写请求修改。</p>
-<h2 id="算法的好处">算法的好处</h2>
-<p>在分布式系统中，冗余数据是保证可靠性的手段，因此冗余数据的一致性维护就非常重要。一般而言，一个写操作必须要对所有的冗余数据都更新完成了，才能称为成功结束。比如一份数据在5台设备上有冗余，因为不知道读数据会落在哪一台设备上，那么一次写操作，必须5台设备都更新完成，写操作才能返回。</p>
-<p>对于写操作比较频繁的系统，这个操作的瓶颈非常大。Quorum 算法可以让写操作只要写完3台就返回。剩下的由系统内部缓慢同步完成。而读操作，则需要也至少读3台，才能保证至少可以读到一个最新的数据。</p>
-<p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 V<sub>w</sub> 越大，则读票数 V<sub>r</sub> 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Tools to Increase Productivity and Efficiency</title>
       <link>https://luciuschen.github.io/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</link>
       <pubDate>Wed, 15 Jun 2022 09:22:09 +0800</pubDate>
@@ -1575,314 +1996,6 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
 <p>The best place to build, test, and discover front-end code</p>
 </li>
 </ol>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Org-roam</title>
-      <link>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</link>
-      <pubDate>Sat, 11 Jun 2022 11:56:05 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</guid>
-      <description>Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。</p>
-<p>Org-roam 是基于 Emacs 平台，对于直接触过 Vim 的我来讲，是个全新的东西，官方是这么形容它的。</p>
-<blockquote>
-<p>Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.</p>
-<p>– Neal Stephenson, In the Beginning was the Command Line (1998)</p>
-</blockquote>
-<h2 id="install-emacs-with-homebrew">Install Emacs With Homebrew</h2>
-<p>First, Doom’s dependencies:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install git ripgrep
-</span></span><span class="line"><span class="cl">brew install coreutils fd
-</span></span><span class="line"><span class="cl">xcode-selected --install
-</span></span></code></pre></div><p><a href="https://bitbucket.org/mituharu/emacs-mac/src">emacs-mac</a>. It offers good integration with macOS, native emojis and better childframe support.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap railwaycat/emacsmacport
-</span></span><span class="line"><span class="cl">brew install emacs-mac --with-modules
-</span></span><span class="line"><span class="cl">ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications/Emacs.app
-</span></span></code></pre></div><h3 id="doom-doctor-问题"><code>Doom Doctor</code> 问题</h3>
-<ol>
-<li>
-<p>Warning: unable to detect fonts because fontconfig isn&rsquo;t installed</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install fontconfig
-</span></span></code></pre></div></li>
-<li>
-<p>! Couldn&rsquo;t find shellcheck. Shell script linting will not work</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install shellcheck
-</span></span></code></pre></div></li>
-</ol>
-<h2 id="doom-emacs">Doom Emacs</h2>
-<p>With Emacs and Doom&rsquo;s dependencies installed, next is to install Doom Emacs itself:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-</span></span><span class="line"><span class="cl">~/.emacs.d/bin/doom install
-</span></span></code></pre></div><p>如果提示 <code>.emacs.d</code> 已存在，删除重新执行上述命令即可。</p>
-<p><code>.zshrc</code> 中需要添加 <code>export PATH=&quot;$HOME/.emacs.d/bin:$PATH</code> ，这样就可以直接使用 <code>doom</code> 命令了。</p>
-<h2 id="org-roam">Org-roam</h2>
-<p>具体的配置文件在 <code>.doom.d/</code> 下，参见 <a href="https://github.com/LuciusChen/dotfiles/tree/master/.doom.d">.doom.d</a>。</p>
-<h2 id="shortcuts">Shortcuts</h2>
-<table>
-<thead>
-<tr>
-<th>Shortcuts</th>
-<th>功能</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>C-RET</code></td>
-<td>在当前 headline 所属的内容后建立一个同级 headline</td>
-<td>无 headline 时创建一个一级 headline</td>
-</tr>
-<tr>
-<td><code>M-RET</code></td>
-<td>在当前 headline 后建立一个同级 headline</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-right</code></td>
-<td>降低当前 headline 的层级</td>
-<td></td>
-</tr>
-<tr>
-<td><code>M-left</code></td>
-<td>提高当前 headline 的层级</td>
-<td></td>
-</tr>
-<tr>
-<td><code>M-up</code></td>
-<td>将当前 headline 及其内容作为整体向上移动</td>
-<td></td>
-</tr>
-<tr>
-<td><code>M-down</code></td>
-<td>将当前 headline 及其内容作为整体向下移动</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-return</code></td>
-<td>在当前列表项的内容后建立一个同级列表项</td>
-<td>光标在列表项同一行时有效</td>
-</tr>
-<tr>
-<td><code>M-RET</code></td>
-<td>在当前列表项后建立一个同级列表项</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-right</code></td>
-<td>降低当前列表项的层级</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-left</code></td>
-<td>提高当前列表项的层级</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-up</code></td>
-<td>将当前列表项及其内容作为整体向上移动</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-down</code></td>
-<td>将当前列表项及其内容作为整体向下移动</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>C-x-o</code></td>
-<td>切换窗口</td>
-<td>C-x 中有很多操作，可以看提示。</td>
-</tr>
-<tr>
-<td><code>C-c C-c</code></td>
-<td>在创建 node 编写完毕后快速保存</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-g</code></td>
-<td>取消操作</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-x-d</code></td>
-<td>进入 dired 模式</td>
-<td></td>
-</tr>
-<tr>
-<td><code>SPC f r</code></td>
-<td>查找最近文件</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-v</code></td>
-<td>显示图片</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Shortcuts</th>
-<th>功能</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>C-c C-s</code></td>
-<td></td>
-<td>设置任务开始时间</td>
-</tr>
-<tr>
-<td><code>C-c C-d</code></td>
-<td>设置任务截止时间</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-t</code></td>
-<td>改变任务状态</td>
-<td></td>
-</tr>
-<tr>
-<td><code>S-Up/Down</code></td>
-<td>设置任务优先级 [#A], [#B], [#C]</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-i</code></td>
-<td>开始任务计时</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-o</code></td>
-<td>终止任务计时</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c [</code></td>
-<td>将当前文件加入 Org-Agenda</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c ]</code></td>
-<td>将当前文件从 Org-Agenda 移除</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Shortcuts</th>
-<th>功能</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>t</code></td>
-<td>在 Org-Agenda 的任务条目上， 修改任务状态。</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-a</code></td>
-<td>归档</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-w</code></td>
-<td>activate refile</td>
-<td></td>
-</tr>
-<tr>
-<td><code>I</code></td>
-<td>在 Org-Agenda 的任务条目上， 开始计时。</td>
-<td></td>
-</tr>
-<tr>
-<td><code>O</code></td>
-<td>在 Org-Agenda 的任务条目上， 终止计时。</td>
-<td></td>
-</tr>
-<tr>
-<td><code>z</code></td>
-<td>在任务上添加 note</td>
-<td></td>
-</tr>
-<tr>
-<td><code>R</code></td>
-<td>clock mode, 显示耗时。</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="org-grammar">Org grammar</h2>
-<h3 id="basic">basic</h3>
-<p>This is almost anything you need to know about Org mode syntax:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"> <span class="k">* </span>This Is A Heading
-</span></span><span class="line"><span class="cl"> ** This Is A Sub-Heading
-</span></span><span class="line"><span class="cl"> *** And A Sub-Sub-Heading
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> Paragraphs are separated by at least one empty line. <span class="gs">*bold*</span> <span class="ge">/italic/</span> <span class="gl">_underlined_</span> <span class="gd">+strikethrough+</span> <span class="nc">=monospaced=</span>
-</span></span><span class="line"><span class="cl"> [[<span class="na">http://Karl-Voit.at</span>][<span class="nt">Link description</span>]]
-</span></span><span class="line"><span class="cl"> http://Karl-Voit.at → link without description
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> <span class="k">- </span>list item
-</span></span><span class="line"><span class="cl"> <span class="k">- </span>another item
-</span></span><span class="line"><span class="cl">   <span class="k">- </span>sub-item
-</span></span><span class="line"><span class="cl">     <span class="k">1.</span> also enumerated
-</span></span><span class="line"><span class="cl">     <span class="k">2.</span> if you like
-</span></span><span class="line"><span class="cl"> <span class="k">- [ ]</span> yet to be done
-</span></span><span class="line"><span class="cl"> <span class="k">- [X]</span> item which is done
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> : Simple pre-formatted text such as for source code.
-</span></span><span class="line"><span class="cl"> : This also respects the line breaks. <span class="gs">*bold*</span> is not bold here.
-</span></span></code></pre></div><h3 id="code-block">code block</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">myresult</span> <span class="o">=</span> <span class="mi">42</span> <span class="o">*</span> <span class="mi">23</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello Europe! &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">myresult</span><span class="p">))</span>
-</span></span></code></pre></div><h3 id="table">table</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"> <span class="s">| My Column 1 | My Column 2 | Last Column |</span>
-</span></span><span class="line"><span class="cl"> <span class="s">|-------------+-------------+-------------|</span>
-</span></span><span class="line"><span class="cl"> <span class="s">|          42 | foo         | bar         |</span>
-</span></span><span class="line"><span class="cl"> <span class="s">|          23 | baz         | abcdefg     |</span>
-</span></span><span class="line"><span class="cl"> <span class="s">|-------------+-------------+-------------|</span>
-</span></span><span class="line"><span class="cl"> <span class="s">|          65 |             |             |</span>
-</span></span></code></pre></div><h2 id="export">Export</h2>
-<h3 id="markdown-file">Markdown file</h3>
-<p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>， ~M-x org-pandoc-export-as-gfm~算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
-<h3 id="hugo">Hugo</h3>
-<p>在文件头部添加</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+HUGO_BASE_DIR: ~/Dropbox/hugo/
-</span></span><span class="line"><span class="cl">#+HUGO_SECTION: posts/main
-</span></span><span class="line"><span class="cl">#+HUGO_WEIGHT: auto
-</span></span><span class="line"><span class="cl">#+HUGO_AUTO_SET_LASTMOD: t
-</span></span></code></pre></div><p>需要导出为 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+begin_mark
-</span></span><span class="line"><span class="cl">marked text
-</span></span><span class="line"><span class="cl">#+end_mark
-</span></span></code></pre></div><p>需要导出为块级 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时，也就是前后的空格不进行 trim。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+header: :trim-pre nil :trim-post nil
-</span></span><span class="line"><span class="cl">#+begin_mark
-</span></span><span class="line"><span class="cl">marked text
-</span></span><span class="line"><span class="cl">#+end_mark
-</span></span></code></pre></div><h3 id="pdf">PDF</h3>
-<p>需要安装 texlive</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install texlive
-</span></span></code></pre></div><h4 id="导出报错">导出报错</h4>
-<ul>
-<li><code>Unicode character 考 (U+8003) not set up for use with LaTeX.</code> 是因为 Latex 本身不支持中文。</li>
-</ul>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p><a href="https://ox-hugo.scripter.co/doc/org-special-blocks/">Org Special Blocks</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
 ]]></content:encoded>
     </item>
     
@@ -2323,70 +2436,6 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
 <p>如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
 <p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
 <p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Network Time Protocol (NTP)</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
-      <pubDate>Sat, 11 Jun 2022 11:43:30 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
-      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
-      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
-<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
-         alt="Figure 1: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/NTP.png"
-         alt="Figure 2: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<ol>
-<li>
-<p>Round-trip network delay: δ = (t4 - t1) - (t3 - t2)</p>
-</li>
-<li>
-<p>Estimated server time when client receives response: t3 + ½δ（客户端收到响应时的服务器的时间）</p>
-</li>
-<li>
-<p>Estimated clock skew: θ = t3 + ½δ - t4 = ½(t2 - t1 + t3 - t4)（计算预估的服务器时间和当前客户端时间的偏差）</p>
-</li>
-</ol>
-<h2 id="correcting-clock-skew">Correcting clock skew</h2>
-<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
-<ul>
-<li>
-<p>if θ &lt; 125 ms, <strong>slew</strong> the clock:</p>
-<p>slightly speed it up or slow it down by up to 500 ppm<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
-</li>
-<li>
-<p>if 125 ms ≤ θ &lt; 1000 s, <strong>step</strong> the clock:</p>
-<p>suddenly reset client clock to estimated server timestamp</p>
-</li>
-<li>
-<p>if θ ≥ 1000 s, <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
-</li>
-</ul>
-<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
-<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
-<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
 ]]></content:encoded>
     </item>
     

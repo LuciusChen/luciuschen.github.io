@@ -3,25 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://luciuschen.github.io/tags/distributed-systems/</loc>
-    <lastmod>2022-06-16T16:05:30+08:00</lastmod>
+    <lastmod>2022-06-16T16:45:07+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/</loc>
+    <lastmod>2022-06-16T16:45:07+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</loc>
+    <lastmod>2022-06-16T16:45:07+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/</loc>
+    <lastmod>2022-06-16T16:45:07+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/tags/</loc>
+    <lastmod>2022-06-16T16:45:07+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220615143721-quorum/</loc>
+    <lastmod>2022-06-16T16:40:15+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220616162256-latex/</loc>
+    <lastmod>2022-06-16T16:38:23+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</loc>
+    <lastmod>2022-06-16T16:34:19+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/tags/top-node/</loc>
+    <lastmod>2022-06-16T16:34:19+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</loc>
+    <lastmod>2022-06-16T16:09:51+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</loc>
     <lastmod>2022-06-16T16:05:30+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/</loc>
-    <lastmod>2022-06-16T16:05:30+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/posts/</loc>
-    <lastmod>2022-06-16T16:05:30+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/tags/</loc>
-    <lastmod>2022-06-16T16:05:30+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</loc>
-    <lastmod>2022-06-16T16:04:17+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/tags/top-node/</loc>
-    <lastmod>2022-06-16T16:04:17+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220616135058-total_order_broadcast/</loc>
     <lastmod>2022-06-16T16:01:54+08:00</lastmod>
@@ -44,14 +56,8 @@
     <loc>https://luciuschen.github.io/posts/main/20220616092944-callback_hell/</loc>
     <lastmod>2022-06-16T09:32:58+08:00</lastmod>
   </url><url>
-    <loc>https://luciuschen.github.io/posts/main/20220615143721-quorum/</loc>
-    <lastmod>2022-06-15T14:49:04+08:00</lastmod>
-  </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</loc>
     <lastmod>2022-06-15T09:22:09+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</loc>
-    <lastmod>2022-06-11T11:56:05+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220530185321-mysql/</loc>
     <lastmod>2022-06-11T11:51:16+08:00</lastmod>
@@ -85,9 +91,6 @@
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</loc>
     <lastmod>2022-06-11T11:43:53+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</loc>
-    <lastmod>2022-06-11T11:43:30+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</loc>
     <lastmod>2022-06-11T11:43:15+08:00</lastmod>
