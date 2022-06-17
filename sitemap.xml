@@ -3,19 +3,25 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</loc>
-    <lastmod>2022-06-17T17:25:46+08:00</lastmod>
+    <lastmod>2022-06-17T20:58:18+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/</loc>
-    <lastmod>2022-06-17T17:25:46+08:00</lastmod>
+    <lastmod>2022-06-17T20:58:18+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/</loc>
-    <lastmod>2022-06-17T17:25:46+08:00</lastmod>
+    <lastmod>2022-06-17T20:58:18+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/tags/</loc>
-    <lastmod>2022-06-17T17:25:46+08:00</lastmod>
+    <lastmod>2022-06-17T20:58:18+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/tags/top-node/</loc>
-    <lastmod>2022-06-17T17:25:46+08:00</lastmod>
+    <lastmod>2022-06-17T20:58:18+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220616162256-latex/</loc>
+    <lastmod>2022-06-17T19:44:26+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</loc>
+    <lastmod>2022-06-17T18:03:40+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/tags/distributed-systems/</loc>
     <lastmod>2022-06-17T14:02:26+08:00</lastmod>
@@ -32,17 +38,11 @@
     <loc>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</loc>
     <lastmod>2022-06-17T13:42:10+08:00</lastmod>
   </url><url>
-    <loc>https://luciuschen.github.io/posts/main/20220616162256-latex/</loc>
-    <lastmod>2022-06-17T13:42:01+08:00</lastmod>
-  </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220616135058-total_order_broadcast/</loc>
     <lastmod>2022-06-17T13:41:52+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</loc>
     <lastmod>2022-06-17T13:41:20+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</loc>
-    <lastmod>2022-06-17T13:41:06+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</loc>
     <lastmod>2022-06-17T13:40:47+08:00</lastmod>

@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Jun 2022 17:25:46 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Jun 2022 20:58:18 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Fri, 17 Jun 2022 17:25:46 +0800</pubDate>
+      <pubDate>Fri, 17 Jun 2022 20:58:18 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -81,20 +81,20 @@
 
 <p>\(m_{1}\) = &ldquo;A says: The moon is made of cheese!&rdquo;</p>
 <p>\(m_{2}\) = &ldquo;B says: Oh no it isn&rsquo;t!&rdquo;</p>
-<p>User C sees \(m_{2}\) first, \(m_{1}\) second, even though logically \(m_{1}\) <strong>happened before</strong> \(m_{2}\).</p>
+<p>User C sees \(m_{2}\) first, \(m_{1}\) second, even though logically \(m_{1}\) <a href="/posts/main/20220602202832-causality_and_happen_before_relation/">happened before</a> \(m_{2}\).</p>
 <p><strong>Problem</strong>: even with synced clocks, \(t_{2 }&lt; t_{1}\) is possible. Timestamp order is inconsistent with expected order!</p>
 <p>即便我们已经通过 NTP 尽量保证物理时钟上的同步，但这个时候依旧会发生因果关系不一致的情况，所以这个时候就需要逻辑时钟。</p>
 <p>逻辑时钟是在分布式系统中专门用于捕获系统中发生事件之间的因果关系，因此逻辑时钟其实就是一种计数器，每次事件发生的时候都会往前递增，所以随着事件的发生它会随着时间向前移动，但它和物理时间并没有实际的关系。</p>
 <h3 id="logical-time">Logical time</h3>
 <p>Logical clocks: designed to <strong>capture causal dependencies</strong>.</p>
-<p>\((e_{1} \rightarrow e_{2}) \Longrightarrow (T(e_{1}) &lt; T(e_{2}))\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>\((e_{1} \rightarrow e_{2}) \Longrightarrow (T(e_{1}) &lt; T(e_{2}))\)</p>
 <p>当事件1发生在事件2之前，那么事件1的时间戳应该小于事件2的时间戳，这是逻辑时钟要保证的最基本的原则。</p>
 <p>下面将研究一下两种逻辑时钟：</p>
 <ul>
 <li>
 <p><a href="/posts/main/20220609201658-lamport_clocks/">Lamprot clocks</a> 是在分布式系统中的每个节点都维护一个计数器，每一个当前节点事件 \(e\) 发生时自增 ；发送消息时，也会附带上当前节点的计数 \(t\) ，消息接收者收到消息后，取出消息中的计数器与当前节点计数器比较，去最大值后自增 1。</p>
 <p>这样可以实现局部顺序，再加上节点名称，形成(时间戳，节点名称)的组合后，就可以扩展为全局顺序。</p>
-<p>但这样也有缺点，算法在时间戳相同，节点名称不同的平行事件的顺序判定时，会出现与实际情况不符的情况。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>但这样也有缺点，算法在时间戳相同，节点名称不同的平行事件的顺序判定时，会出现与实际情况不符的情况。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 </li>
 <li>
 <p><a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 除了是向量之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目</p>
@@ -189,7 +189,7 @@
 <li>副本可以在全世界靠近用户的地方分布（CDN 本质其实是一种大规模分布式多级缓存系统）</li>
 </ul>
 <h3 id="manipulating-remote-state">Manipulating remote state</h3>
-<p>在更新不同节点数据时，丢失数据或者丢失 TCP 返回的 \(ACK\)<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 时，就会使得不同节点之间的副本不一致，不满足幂等性（Idempotent）。为了解决这个问题，可以给每次更新操作都加上一个逻辑时间戳，并将其作为数据存储在数据库当中；当需要删除这条记录时，实际上并没有删除，而是写入一个特殊的值（称为墓碑 tombstone），将其标记为删除。（其实就类似于软删除）</p>
+<p>在更新不同节点数据时，丢失数据或者丢失 TCP 返回的 \(ACK\)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 时，就会使得不同节点之间的副本不一致，不满足幂等性（Idempotent）。为了解决这个问题，可以给每次更新操作都加上一个逻辑时间戳，并将其作为数据存储在数据库当中；当需要删除这条记录时，实际上并没有删除，而是写入一个特殊的值（称为墓碑 tombstone），将其标记为删除。（其实就类似于软删除）</p>
 <figure>
     <img loading="lazy" src="/ox-hugo/reconciling-replicas.png"
          alt="Figure 4: reconciling-replicas"/> <figcaption>
@@ -216,7 +216,7 @@
 <p>采用 Vector clocks 时，\(t_{2 }\gt t_{1}\) 则保留 \(v_{2}\) 丢弃 \(v_{1}\); \(t_{2} \rVert t_{1}\) 则 \(\{v_{1}, v_{2}\}\) 都保留。</p>
 </li>
 </ul>
-<p>向量时钟的缺点是它们会变得很昂贵：每个客户端都需要在向量中输入一个条目，在有大量客户端的系统中（或者客户端每次重启都会有新的身份），这些向量会变得很大，可能会比数据本身占用更多内存。更多类型的逻辑时钟，如点状版本向量（Dotted version vectors）<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>，已经被开发出来以优化这种类型的系统。</p>
+<p>向量时钟的缺点是它们会变得很昂贵：每个客户端都需要在向量中输入一个条目，在有大量客户端的系统中（或者客户端每次重启都会有新的身份），这些向量会变得很大，可能会比数据本身占用更多内存。更多类型的逻辑时钟，如点状版本向量（Dotted version vectors）<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>，已经被开发出来以优化这种类型的系统。</p>
 <h3 id="quorums">Quorums</h3>
 <p>具体如何进行复制的细节对系统的可靠性有很大影响。如果没有容错，拥有多个副本会使可靠性变差：副本越多，任何一个副本在任何时候出现故障的概率就越大（假设故障不是完全相关的）。然而，如果系统在一些有问题的复制体中仍然继续工作，那么可靠性就会提高：所有副本在同一时间出现问题的概率要比一个复制体出现问题的概率低很多。</p>
 <h4 id="read-after-write-consistency">Read-after-write consistency</h4>
@@ -229,7 +229,6 @@
 
 <p>一个副本写入了数据，从另外一个副本读取，用户并没有读取到他刚刚提交的内容。如果要保持读写一致性（read-after-write consistency），则要两个节点都同时写入和读取，一旦有一个不可访问就会破坏读写一致性，没有任何容错率可言。</p>
 <h4 id="quorum--2-out-of-3">Quorum (2 out of 3)</h4>
-<p>通过使用三个副本来解决这个难题，。我们将每个读写请求发送到所有三个副本，但只要收到 \(≥2\) 个响应，我们就认为请求成功。在这个例子中，写在复制体B和C上成功，而读在复制体A和B上成功。对读和写都采用 &ldquo;三选二 &ldquo;的策略，可以保证至少有一个对读的响应来自看到最近写的复制体（在这个例子中，这是复制体B）。</p>
 <figure>
     <img loading="lazy" src="/ox-hugo/quorum.png"
          alt="Figure 7: quorum"/> <figcaption>
@@ -237,7 +236,21 @@
         </figcaption>
 </figure>
 
-<p>1</p>
+<p>通过使用三个副本可以解决这个难题<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。将每个读写请求发送到所有三个副本，但只要收到 \(≥2\) 个响应，就认为请求成功。在这个例子中，写在复制体 \(B\) 和 \(C\) 上成功，而读在复制体 \(A\) 和 \(B\) 上成功。对读和写都采用 &ldquo;三选二 &ldquo;的策略，可以保证至少有一个对读的响应来自看到最近写的复制体（在这个例子中，这是复制体 \(B\)）。</p>
+<p>对于同一个请求，不同的副本可能会返回不同的响应：在上图中，\(A\) 处读取会返回初始值 \((t_{0}, v_{0})\)，而 \(B\) 处的读取会返回该客户端之前写入的 \((t_{1}, v_{1})\)。利用时间戳，客户端可以知道哪个响应是最近的，将 \(v_{1}\) 返回给 Application。</p>
+<p>在这个例子中，响应写请求的副本集合 \((B, C)\) 是一个 write quorum，而响应读请求的集合 \((A, B)\) 是一个 read quorum。一般来说，quorum 是一个最小的节点集合，它必须对某个请求作出响应才能成功。为了确保读写一致性，write quorum 和 read quorum 必须有一个非空的交集：换句话说，read quorum 必须包含至少一个已经被承认的 write quorum。</p>
+<p>在分布式系统中，常见的 majority quorum 是由超过半数的节点组成的任意子集。在三个节点的系统 \(\{A, B, C\}\) 中，majority quorum 可以是 \(\{A, B\}\)、\(\{A, C\}\) 和 \(\{B, C\}\)。通常来讲，奇数节点的系统，\(\frac{n+1}{2}\) 大小的任意子集就是 majority quorum，偶数节点的系统，需要四舍五入 \(\left \lceil \frac{n+1}{2} \right \rceil = \frac{n+2}{2}\)。majority quorum 有个特性：任意两个 quorums 至少有一个共同的元素，也就是交集至少有一个节点。</p>
+<p>只要不超过 \(n-w\) 个副本不可用（\(w\) 是 write quorum 的数量），系统就可以正常的处理更新；同样的，只要不超过 \(n-r\) 个副本不可以（\(r\) 是 read quorum 的数量），系统就可以正常的处理读请求。对于 majority quorum 来说，三个副本的系统可以容错一个节点，五个副本的系统可以容错两个节点，以此类推。</p>
+<p>在这种基于 quorum 的方法下，一些副本会错过一些更新。上图中，副本 \(A\) 错过了 \((t_{1}, v_{2})\)。让副本互相同步使其数据一致的方法上面提到过，叫做反熵（anti-entropy）。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/read-repair.png"
+         alt="Figure 8: read-repair"/> <figcaption>
+            <p><span class="figure-number">Figure 8: </span>read-repair</p>
+        </figcaption>
+</figure>
+
+<p>另外一个方法是让客户端帮助完成传播更新的过程。例如上图中，客户端从 \(B\) 读取了 \((t_{1}, v_{1})\)，但从 \(A\) 接收到的是 \((t_{0}, v_{0})\)，而 \(C\) 没有回应。这个时候客户端使用原始的时间戳 \(t_{1}\) 将最新的值发送给 \(A\) 和 \(C\)，\(C\) 如果已经更新了，也不过只是浪费一点点带宽。这种副本模式的数据库通常称为 Dynamo-style。</p>
+<h3 id="replication-using-broadcast">Replication using broadcast</h3>
 <h2 id="reference">Reference</h2>
 <ul>
 <li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>
@@ -246,16 +259,16 @@
 <hr>
 <ol>
 <li id="fn:1">
-<p><a href="/posts/main/20220602202832-causality_and_happen_before_relation/">Causality and Happen-before relation</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>if \(a \rVert b\) we could have either \(a ≺ b\) or \(b ≺ a\), so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2">
-<p>if \(a \rVert b\) we could have either \(a ≺ b\) or \(b ≺ a\), so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>后面整理 TCP 相关内容时，可以加个链接。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3">
-<p>后面整理 TCP 相关内容时，可以加个链接。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>待学习&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:4">
-<p>待学习&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="/posts/main/20220615143721-quorum/">基于 Quorum 投票的冗余控制算法</a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
