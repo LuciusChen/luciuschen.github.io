@@ -6,7 +6,111 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Jun 2022 20:58:18 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Jun 2022 22:45:46 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Causal broadcast</title>
+      <link>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</link>
+      <pubDate>Fri, 17 Jun 2022 22:45:46 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</guid>
+      <description>Definition Causal broadcast 算法有点类似于 FIFO broadcast： 每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟</description>
+      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
+<p>Causal broadcast 算法有点类似于 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a>：</p>
+<p>每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟算法中，向量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，向量元素计算来自每个发送者的已发送的消息数量。</p>
+<p>如果节点 \(C\) 在 \(m_{1}\) 之前收到 \(m_{2}\)，\(C\) 的广播算法将不得不保留（延迟或缓冲）\(m_{2}\)，直到 \(m_{1}\) 被传递之后，以确保消息按因果顺序传递​。在下图的例子中，消息 \(m_{2}\) 和 \(m_{3}\) 是​<strong>同时广播</strong>​的。节点 \(A\) 和 \(C\) 按照 \(m_{1}\)、\(m_{3}\)、\(m_{2}\) 的顺序传递消息，而节点 \(B\) 按照 \(m_{1}\)、\(m_{2}\)、\(m_{3}\)的顺序传递。这些传递顺序中的任何一个都是可以接受的，因为它们都与因果关系一致。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causal-broadcast.png"
+         alt="Figure 1: causal-broadcast"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>causal-broadcast</p>
+        </figcaption>
+</figure>
+
+<p>有因果关系的信息必须按因果顺序传递。并行的消息可以按照任何顺序传递。</p>
+<p>上图：broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) and broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) and broadcast(\(m_{1}\)) broadcast(\(m_{3}\)) \(\Longrightarrow\) valid orders are: (\(m_{1}\), \(m_{2}\), \(m_{3}\)) or (\(m_{1}\), \(m_{3}\), \(m_{2}\))</p>
+<h2 id="causal-broadcast-algorithm">Causal broadcast algorithm</h2>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong></p>
+<p>\(sendSeq := 0; delivered := \langle0, 0, . . ., 0\rangle; buﬀer := \{\}\)</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> request to broadcast \(m\) at node \(N_{i}\) <strong>do</strong></p>
+<p>\(deps := delivered; deps[i] := sendSeq\)</p>
+<p>send (\(i, deps, m\)) via reliable broadcast</p>
+<p>\(sendSeq := sendSeq + 1\)</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> receiving \(msg\) from reliable broadcast at node \(N_{i}\) <strong>do</strong></p>
+<p>\(buﬀer := buﬀer ∪ {msg}\)</p>
+<p><strong>while</strong> \(∃(sender, deps, m) ∈ buﬀer. deps ≤ delivered\) <strong>do</strong></p>
+<p>deliver \(m\) to the application</p>
+<p>\(buﬀer := buﬀer \ {(sender, deps, m)}\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>\(delivered[sender] := delivered[sender] + 1\)</p>
+<p><strong>end while</strong></p>
+<p><strong>end on</strong></p>
+</blockquote>
+<p>每个节点的本地状态由 \(sendSeq\)、\(delivered\) 和 \(buﬀer\) 组成，它们的含义与 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 算法中相同。当一个节点想要广播一个消息时，我们会附上发送节点的编号 \(i\) 和 \(deps\)（表示该消息因果关系的向量）。\(deps\) 就是节点本地 \(delivered\) 的复制，统计了每个节点发送消息并传递到该节点的数量。在这次广播之前，所有已经在本地交付的消息必须出现在广播消息的因果顺序之前。然后将发送节点自己的这个向量的元素更新为等于 \(sendSeq\)，这就​<strong>保证了这个节点所广播的每条消息都与同一节点所广播的前一条消息有因果关系</strong>​。</p>
+<p>当收到一个消息时，算法首先将其添加到 \(buﬀer\) 中，就像 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 一样，然后在 \(buﬀer\) 中搜索任何准备好的消息。比较 \(deps ≤ delivered\)。如果这个节点已经交付了所有在因果顺序上必须在这个消息之前的消息，那么，任何在因果关系上准备好的消息都会被传递给 Application，并从 \(buﬀer\) 中移除，并且将 \(delivered\) 中的相应条目被递增。</p>
+<h2 id="summary">Summary</h2>
+<p>Causal broadcast 的保持因果顺序的原理和 <a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 很相似，向量中的每个条目，前者是消息发送者已发送消息的数量，后者是每个节点发生事件的数量。deps 取代 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 中的 sendSeq 附带在广播的信息中，这样通过在 <a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 中介绍的向量比较方法，可以确定消息之间的因果关系来控制消息传递的顺序。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>删除 \(buﬀer\) 中的 \({(sender, deps, m)}\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>FIFO broadcast</title>
+      <link>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</link>
+      <pubDate>Fri, 17 Jun 2022 22:45:06 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</guid>
+      <description>Definition 最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之</description>
+      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
+<p>最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之前被传递，因为它们都是由 \(A\) 发送的。然而，\(m_{2}\) 可以在 \(m_{1}\) 和 \(m_{3}\) 之前、之间或之后的任何时间被传递。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/FIFO-broadcast.png"
+         alt="Figure 1: FIFO-broadcast"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>FIFO-broadcast</p>
+        </figcaption>
+</figure>
+
+<p>同一个节点发送的消息必须要按照发送的顺序传递，不同节点发送的消息可以是任意的顺序，比如 \((m_{2}, m_{1}, m_{3})\)，\((m_{1}, m_{2}, m_{3})\) 或者 \((m_{1}, m_{3}, m_{2})\)。</p>
+<p>关于这些广播协议的另一个细节：我们假设每当一个节点广播一个消息时，它也会将该消息传递给自己（在上图中用回环箭头表示）。一个节点知道它自己广播了什么消息，所以传递给自己看似没有必要，但在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中是需要这个步骤。</p>
+<p>上图中的执行示例是有效的先进先出「广播」，但它违反了因果性：虽然 \(B\) 在接收了 \(m_{1}\) 之后才广播的 \(m_{2}\)，但节点 \(C\) 在 \(m_{1}\) 之前就传递了 \(m_{2}\)。<a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 提供了一个比 FIFO broadcast  更严格的排序属性。顾名思义，它确保信息按因果顺序传递：也就是说，如果一条信息的广播发生在另一条信息的广播之前，那么所有节点必须按这个顺序传递这两条信息。如果两个消息是同时广播的，一个节点可以按任何一个顺序传递它们。</p>
+<h2 id="fifo-broadcast-algorithm">FIFO broadcast algorithm</h2>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong></p>
+<p>\(sendSeq := 0; delivered := \langle0, 0, &hellip;, 0\rangle; buﬀer := \{\}\)</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> request to broadcast \(m\) at node \(N_{i}\) <strong>do</strong></p>
+<p>send \((i, sendSeq, m)\) via reliable broadcast</p>
+<p>\(sendSeq := sendSeq + 1\)</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> receiving \(msg\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> from reliable broadcast at node \(N_{i}\) <strong>do</strong></p>
+<p>\(buﬀer := buﬀer ∪ {msg}\)</p>
+<p><strong>while</strong> \(∃sender, m. (sender, delivered[sender], m) ∈ buﬀer\) <strong>do</strong>
+deliver \(m\) to the application</p>
+<p>\(delivered[sender] := delivered[sender] + 1\)</p>
+<p><strong>end while</strong></p>
+<p><strong>end on</strong></p>
+</blockquote>
+<p>节点 \(N_{i}\) 发送的每个 FIFO broadcast 消息都会附带发送节点编号 \(i\) 和一个序列号（该节点发送消息对应的序列号，第一条消息对应为 0，第二条消息对应为 1）。每个节点的本地状态由序列号 \(sendSeq\)（计算该节点广播的消息数量）、\(delivered\)（一个向量，每个节点有一个条目，统计了每个节点发送消息并传递到该节点的数量）和 \(buﬀer\)（一个缓存，用于保留消息直到它们准备好被传递给 Application，也就是 <a href="/posts/main/20220602202933-distribution_system/#receiving-versus-delivering">Receiving versus delivering</a> 中提到的 deliver 阶段）组成。该算法检查来自任何发送者的与预期的下一个序列号相匹配的消息，然后递增该序列号，确保来自每个特定发送者的消息按照序列号递增的顺序被传递。</p>
+<h2 id="summary">Summary</h2>
+<p>FIFO broadcast 的保持消息顺序的原理和 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport clocks</a> 很相似，都是用递增的整数来确定同一个节点上的消息传递的顺序，\(deliver\) 是个存放着所有节点 \(sendSeq\) 的向量，存放于每个节点，配合 \(sendSeq\) 控制来自同一个节点的消息传递的顺序。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>\(msg\) 就是 \((i, sendSeq, m)\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
@@ -329,56 +433,6 @@
 </tbody>
 </table>
 <p>\(\boldsymbol{012…abc…ABC…\alpha \beta\gamma…}\)</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>FIFO broadcast</title>
-      <link>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</link>
-      <pubDate>Fri, 17 Jun 2022 18:03:40 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</guid>
-      <description>Definition 最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之</description>
-      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
-<p>最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之前被传递，因为它们都是由 \(A\) 发送的。然而，\(m_{2}\) 可以在 \(m_{1}\) 和 \(m_{3}\) 之前、之间或之后的任何时间被传递。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/FIFO-broadcast.png"
-         alt="Figure 1: FIFO-broadcast"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>FIFO-broadcast</p>
-        </figcaption>
-</figure>
-
-<p>同一个节点发送的消息必须要按照发送的顺序传递，不同节点发送的消息可以是任意的顺序，比如 \((m_{2}, m_{1}, m_{3})\)，\((m_{1}, m_{2}, m_{3})\) 或者 \((m_{1}, m_{3}, m_{2})\)。</p>
-<p>关于这些广播协议的另一个细节：我们假设每当一个节点广播一个消息时，它也会将该消息传递给自己（在上图中用回环箭头表示）。一个节点知道它自己广播了什么消息，所以传递给自己看似没有必要，但在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中是需要这个步骤。</p>
-<p>上图中的执行示例是有效的先进先出「广播」，但它违反了因果性：虽然 \(B\) 在接收了 \(m_{1}\) 之后才广播的 \(m_{2}\)，但节点 \(C\) 在 \(m_{1}\) 之前就传递了 \(m_{2}\)。<a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 提供了一个比 FIFO broadcast  更严格的排序属性。顾名思义，它确保信息按因果顺序传递：也就是说，如果一条信息的广播发生在另一条信息的广播之前，那么所有节点必须按这个顺序传递这两条信息。如果两个消息是同时广播的，一个节点可以按任何一个顺序传递它们。</p>
-<h2 id="fifo-broadcast-algorithm">FIFO broadcast algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation <strong>do</strong></p>
-<p>\(sendSeq := 0; delivered := \langle0, 0, &hellip;, 0\rangle; buﬀer := {}\)</p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> request to broadcast \(m\) at node \(N_{i}\) <strong>do</strong></p>
-<p>send \((i, sendSeq, m)\) via reliable broadcast</p>
-<p>\(sendSeq := sendSeq + 1\)</p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> receiving \(msg\) from reliable broadcast at node \(N_{i}\) <strong>do</strong><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<p>\(buﬀer := buﬀer ∪ {msg}\)</p>
-<p><strong>while</strong> \(∃sender, m. (sender, delivered[sender], m) ∈ buﬀer\) <strong>do</strong>
-deliver \(m\) to the application</p>
-<p>\(delivered[sender] := delivered[sender] + 1\)</p>
-<p><strong>end while</strong></p>
-<p><strong>end on</strong></p>
-</blockquote>
-<p>节点 \(N_{i}\) 发送的每个 FIFO broadcast 消息都会附带发送节点编号 \(i\) 和一个序列号（该节点发送消息对应的序列号，第一条消息对应为 0，第二条消息对应为 1）。每个节点的本地状态由序列号 \(sendSeq\)（计算该节点广播的消息数量）、\(delivered\)（一个向量，每个节点有一个条目，统计了每个节点发送消息并传递到该节点的数量）和 \(buﬀer\)（一个缓存，用于保留消息直到它们准备好被传递给 Application，也就是 <a href="/posts/main/20220602202933-distribution_system/#receiving-versus-delivering">Receiving versus delivering</a> 中提到的 deliver 阶段）组成。该算法检查来自任何发送者的与预期的下一个序列号相匹配的消息，然后递增该序列号，确保来自每个特定发送者的消息按照序列号递增的顺序被传递。</p>
-<h2 id="summary">Summary</h2>
-<p>FIFO broadcast 的保持消息顺序的原理和 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport clocks</a> 很相似，都是用递增的整数来确定同一个节点上的消息传递的顺序，\(deliver\) 是个存放着所有节点 \(sendSeq\) 的向量，存放于每个节点，配合 \(sendSeq\) 控制来自同一个节点的消息传递的顺序。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>\(msg\) 就是 \((i, sendSeq, m)\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
 ]]></content:encoded>
     </item>
     
@@ -768,60 +822,6 @@ deliver \(m\) to the application</p>
 </li>
 <li id="fn:2">
 <p>\(∨\) is logical or, \(∧\) is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Causal broadcast</title>
-      <link>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</link>
-      <pubDate>Fri, 17 Jun 2022 13:40:47 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</guid>
-      <description>Definition Causal broadcast 算法有点类似于 FIFO broadcast： 每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟</description>
-      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
-<p>Causal broadcast 算法有点类似于 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a>：</p>
-<p>每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟算法中，向量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，向量元素计算来自每个发送者的已发送的消息数量。</p>
-<p>如果节点 \(C\) 在 \(m_{1}\) 之前收到 \(m_{2}\)，\(C\) 的广播算法将不得不保留（延迟或缓冲）\(m_{2}\)，直到 \(m_{1}\) 被传递之后，以确保消息按因果顺序传递​。在下图的例子中，消息 \(m_{2}\) 和 \(m_{3}\) 是​<strong>同时广播</strong>​的。节点 \(A\) 和 \(C\) 按照 \(m_{1}\)、\(m_{3}\)、\(m_{2}\) 的顺序传递消息，而节点 \(B\) 按照 \(m_{1}\)、\(m_{2}\)、\(m_{3}\)的顺序传递。这些传递顺序中的任何一个都是可以接受的，因为它们都与因果关系一致。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/causal-broadcast.png"
-         alt="Figure 1: causal-broadcast"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>causal-broadcast</p>
-        </figcaption>
-</figure>
-
-<p>有因果关系的信息必须按因果顺序传递。并行的消息可以按照任何顺序传递。</p>
-<p>上图：broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) and broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) and broadcast(\(m_{1}\)) broadcast(\(m_{3}\)) \(\Longrightarrow\) valid orders are: (\(m_{1}\), \(m_{2}\), \(m_{3}\)) or (\(m_{1}\), \(m_{3}\), \(m_{2}\))</p>
-<h2 id="causal-broadcast-algorithm">Causal broadcast algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation <strong>do</strong></p>
-<p>\(sendSeq := 0; delivered := \langle0, 0, . . ., 0\rangle; buﬀer := {}\)</p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> request to broadcast \(m\) at node \(N_{i}\) <strong>do</strong></p>
-<p>\(deps := delivered; deps[i] := sendSeq\)</p>
-<p>send (\(i, deps, m\)) via reliable broadcast</p>
-<p>\(sendSeq := sendSeq + 1\)</p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> receiving \(msg\) from reliable broadcast at node \(N_{i}\) <strong>do</strong></p>
-<p>\(buﬀer := buﬀer ∪ {msg}\)</p>
-<p><strong>while</strong> \(∃(sender, deps, m) ∈ buﬀer. deps ≤ delivered\) <strong>do</strong></p>
-<p>deliver \(m\) to the application</p>
-<p>\(buﬀer := buﬀer \ {(sender, deps, m)}\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<p>\(delivered[sender] := delivered[sender] + 1\)</p>
-<p><strong>end while</strong></p>
-<p><strong>end on</strong></p>
-</blockquote>
-<p>每个节点的本地状态由 \(sendSeq\)、\(delivered\) 和 \(buﬀer\) 组成，它们的含义与 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 算法中相同。当一个节点想要广播一个消息时，我们会附上发送节点的编号 \(i\) 和 \(deps\)（表示该消息因果关系的向量）。\(deps\) 就是节点本地 \(delivered\) 的复制，统计了每个节点发送消息并传递到该节点的数量。在这次广播之前，所有已经在本地交付的消息必须出现在广播消息的因果顺序之前。然后将发送节点自己的这个向量的元素更新为等于 \(sendSeq\)，这就​<strong>保证了这个节点所广播的每条消息都与同一节点所广播的前一条消息有因果关系</strong>​。</p>
-<p>当收到一个消息时，算法首先将其添加到 \(buﬀer\) 中，就像 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 一样，然后在 \(buﬀer\) 中搜索任何准备好的消息。比较 \(deps ≤ delivered\)。如果这个节点已经交付了所有在因果顺序上必须在这个消息之前的消息，那么，任何在因果关系上准备好的消息都会被传递给 Application，并从 \(buﬀer\) 中移除，并且将 \(delivered\) 中的相应条目被递增。</p>
-<h2 id="summary">Summary</h2>
-<p>Causal broadcast 的保持因果顺序的原理和 <a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 很相似，向量中的每个条目，前者是消息发送者已发送消息的数量，后者是每个节点发生事件的数量。deps 取代 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 中的 sendSeq 附带在广播的信息中，这样通过在 <a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 中介绍的向量比较方法，可以确定消息之间的因果关系来控制消息传递的顺序。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>删除 \(buﬀer\) 中的 \({(sender, deps, m)}\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
