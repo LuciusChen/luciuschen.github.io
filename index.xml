@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Lucius&#39;s PKM</title>
+    <title>Lucius | Braindump</title>
     <link>https://luciuschen.github.io/</link>
-    <description>Recent content on Lucius&#39;s PKM</description>
+    <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 17 Jun 2022 17:25:46 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
