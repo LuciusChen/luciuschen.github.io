@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Jun 2022 13:41:38 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Jun 2022 17:25:46 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Fri, 17 Jun 2022 13:41:38 +0800</pubDate>
+      <pubDate>Fri, 17 Jun 2022 17:25:46 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -237,6 +237,7 @@
         </figcaption>
 </figure>
 
+<p>1</p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>

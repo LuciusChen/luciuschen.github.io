@@ -2,22 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</loc>
+    <lastmod>2022-06-17T17:25:46+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/</loc>
+    <lastmod>2022-06-17T17:25:46+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/</loc>
+    <lastmod>2022-06-17T17:25:46+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/tags/</loc>
+    <lastmod>2022-06-17T17:25:46+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/tags/top-node/</loc>
+    <lastmod>2022-06-17T17:25:46+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/tags/distributed-systems/</loc>
+    <lastmod>2022-06-17T14:02:26+08:00</lastmod>
+  </url><url>
+    <loc>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</loc>
+    <lastmod>2022-06-17T14:02:26+08:00</lastmod>
+  </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220607104757-hugo/</loc>
     <lastmod>2022-06-17T13:47:22+08:00</lastmod>
   </url><url>
-    <loc>https://luciuschen.github.io/</loc>
-    <lastmod>2022-06-17T13:47:22+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/posts/</loc>
-    <lastmod>2022-06-17T13:47:22+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/tags/distributed-systems/</loc>
-    <lastmod>2022-06-17T13:46:03+08:00</lastmod>
-  </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220615143721-quorum/</loc>
-    <lastmod>2022-06-17T13:46:03+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/tags/</loc>
     <lastmod>2022-06-17T13:46:03+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</loc>
@@ -29,12 +38,6 @@
     <loc>https://luciuschen.github.io/posts/main/20220616135058-total_order_broadcast/</loc>
     <lastmod>2022-06-17T13:41:52+08:00</lastmod>
   </url><url>
-    <loc>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</loc>
-    <lastmod>2022-06-17T13:41:38+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/tags/top-node/</loc>
-    <lastmod>2022-06-17T13:41:38+08:00</lastmod>
-  </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</loc>
     <lastmod>2022-06-17T13:41:20+08:00</lastmod>
   </url><url>
@@ -43,9 +46,6 @@
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</loc>
     <lastmod>2022-06-17T13:40:47+08:00</lastmod>
-  </url><url>
-    <loc>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</loc>
-    <lastmod>2022-06-17T13:39:27+08:00</lastmod>
   </url><url>
     <loc>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</loc>
     <lastmod>2022-06-16T16:09:51+08:00</lastmod>
