@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius&#39;s PKM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Jun 2022 22:19:33 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Jun 2022 13:41:38 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Thu, 16 Jun 2022 22:19:33 +0800</pubDate>
+      <pubDate>Fri, 17 Jun 2022 13:41:38 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -115,8 +115,8 @@
 </ul>
 <p>建立在之前讲到的系统模型上：</p>
 <ul>
-<li>可以是 <strong>best-effort</strong> (may drop messages) 或者 <strong>reliable</strong> (non-faulty nodes deliver every message, by retransmitting dropped messages)</li>
-<li>Asynchronous/ partially synchronous timing model \(\Longrightarrow\) 消息延迟​<strong>没有上限</strong></li>
+<li>可以是 <strong>best-effort</strong> (可能会丢失消息) 或者 <strong>reliable</strong> (非故障节点传递每条消息，重传丢失的消息。)</li>
+<li>Asynchronous / partially synchronous timing model \(\Longrightarrow\) 消息延迟​<strong>没有上限</strong></li>
 </ul>
 <h4 id="receiving-versus-delivering">Receiving versus delivering</h4>
 <figure>
@@ -132,7 +132,7 @@
 <ul>
 <li>
 <p><a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a></p>
-<p>如果 \(m_{1}\) 和 \(m_{2}\)<sub>nil</sub> 从相同的节点广播，并且 broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\))，那么 \(m_{1}\) 必然在 \(m_{2}\) 之前被传递。</p>
+<p>如果 \(m_{1}\) 和 \(m_{2}\) 从相同的节点广播，并且 broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\))，那么 \(m_{1}\) 必然在 \(m_{2}\) 之前被传递。</p>
 </li>
 <li>
 <p><a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a></p>
@@ -189,7 +189,7 @@
 <li>副本可以在全世界靠近用户的地方分布（CDN 本质其实是一种大规模分布式多级缓存系统）</li>
 </ul>
 <h3 id="manipulating-remote-state">Manipulating remote state</h3>
-<p>在更新不同节点数据时，丢失数据或者丢失 TCP 返回的 ACK<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 时，就会使得不同节点之间的副本不一致，不满足幂等性（Idempotent）。为了解决这个问题，可以给每次更新操作都加上一个逻辑时间戳，并将其作为数据存储在数据库当中；当需要删除这条记录时，实际上并没有删除，而是写入一个特殊的值（称为墓碑 tombstone），将其标记为删除。（其实就类似于软删除）</p>
+<p>在更新不同节点数据时，丢失数据或者丢失 TCP 返回的 \(ACK\)<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 时，就会使得不同节点之间的副本不一致，不满足幂等性（Idempotent）。为了解决这个问题，可以给每次更新操作都加上一个逻辑时间戳，并将其作为数据存储在数据库当中；当需要删除这条记录时，实际上并没有删除，而是写入一个特殊的值（称为墓碑 tombstone），将其标记为删除。（其实就类似于软删除）</p>
 <figure>
     <img loading="lazy" src="/ox-hugo/reconciling-replicas.png"
          alt="Figure 4: reconciling-replicas"/> <figcaption>
@@ -205,15 +205,15 @@
         </figcaption>
 </figure>
 
-<p>如果同时两个请求分别想把两个副本的 x 的值进行修改。</p>
+<p>如果同时两个请求分别想把两个副本的 \(x\) 的值进行修改。</p>
 <ul>
 <li>
 <p><strong>Last writer wins</strong> (LWW):</p>
-<p>采用 Lamport clocks 时，t<sub>2</sub> &gt; t<sub>1</sub> 则保留 v<sub>2</sub> 丢弃 v<sub>1</sub>。</p>
+<p>采用 Lamport clocks 时，\(t_{2} \gt t_{1}\)则保留 \(v_{2}\) 丢弃 \(v_{1}\)。</p>
 </li>
 <li>
 <p><strong>Multi-value register</strong>:</p>
-<p>采用 Vector clocks 时，t<sub>2 </sub>&gt; t<sub>1</sub> 则保留 v<sub>2</sub> 丢弃 v<sub>1</sub>；t<sub>2</sub> || t<sub>1</sub> 则 {v<sub>1</sub>, v<sub>2</sub>} 都保留。</p>
+<p>采用 Vector clocks 时，\(t_{2 }\gt t_{1}\) 则保留 \(v_{2}\) 丢弃 \(v_{1}\); \(t_{2} \rVert t_{1}\) 则 \(\{v_{1}, v_{2}\}\) 都保留。</p>
 </li>
 </ul>
 <p>向量时钟的缺点是它们会变得很昂贵：每个客户端都需要在向量中输入一个条目，在有大量客户端的系统中（或者客户端每次重启都会有新的身份），这些向量会变得很大，可能会比数据本身占用更多内存。更多类型的逻辑时钟，如点状版本向量（Dotted version vectors）<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>，已经被开发出来以优化这种类型的系统。</p>
@@ -229,7 +229,7 @@
 
 <p>一个副本写入了数据，从另外一个副本读取，用户并没有读取到他刚刚提交的内容。如果要保持读写一致性（read-after-write consistency），则要两个节点都同时写入和读取，一旦有一个不可访问就会破坏读写一致性，没有任何容错率可言。</p>
 <h4 id="quorum--2-out-of-3">Quorum (2 out of 3)</h4>
-<p>通过使用三个副本来解决这个难题，。我们将每个读写请求发送到所有三个副本，但只要收到 ≥2 个响应，我们就认为请求成功。在这个例子中，写在复制体B和C上成功，而读在复制体A和B上成功。对读和写都采用 &ldquo;三选二 &ldquo;的策略，可以保证至少有一个对读的响应来自看到最近写的复制体（在这个例子中，这是复制体B）。</p>
+<p>通过使用三个副本来解决这个难题，。我们将每个读写请求发送到所有三个副本，但只要收到 \(≥2\) 个响应，我们就认为请求成功。在这个例子中，写在复制体B和C上成功，而读在复制体A和B上成功。对读和写都采用 &ldquo;三选二 &ldquo;的策略，可以保证至少有一个对读的响应来自看到最近写的复制体（在这个例子中，这是复制体B）。</p>
 <figure>
     <img loading="lazy" src="/ox-hugo/quorum.png"
          alt="Figure 7: quorum"/> <figcaption>
@@ -248,7 +248,7 @@
 <p><a href="/posts/main/20220602202832-causality_and_happen_before_relation/">Causality and Happen-before relation</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2">
-<p>if a || b we could have either a ≺ b or b ≺ a, so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>if \(a \rVert b\) we could have either \(a ≺ b\) or \(b ≺ a\), so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3">
 <p>后面整理 TCP 相关内容时，可以加个链接。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>

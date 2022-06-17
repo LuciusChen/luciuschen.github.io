@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>Quorum | Lucius&#39;s PKM</title>
 <meta name="keywords" content="distributed-systems">
-<meta name="description" content="Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于Quorum投票的冗余控制算法 在">
+<meta name="description" content="Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于 Quorum 投票的冗余控制算法 在有冗余数据">
 <meta name="author" content="Lucius Chen">
 <link rel="canonical" href="https://luciuschen.github.io/posts/main/20220615143721-quorum/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.34f0771e19a1fe21a81494e1b365627c8ae40a4c35dae22326079739a581c770.css" integrity="sha256-NPB3Hhmh/iGoFJThs2VifIrkCkw12uIjJgeXOaWBx3A=" rel="preload stylesheet" as="style">
@@ -16,16 +16,16 @@
 <script async defer data-website-id="f4e3ad0a-7fc1-4f18-b08c-9be77b60cdd5" src="https://oishii.reorx.com/oishii.js"></script>
 
 <meta name="twitter:title" content="Quorum | Lucius&#39;s PKM" />
-<meta name="twitter:description" content="Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于Quorum投票的冗余控制算法 在" />
+<meta name="twitter:description" content="Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于 Quorum 投票的冗余控制算法 在有冗余数据" />
 <meta name="twitter:site" content="@novoreorx" />
 <meta name="twitter:creator" content="@novoreorx" />
 <meta property="og:title" content="Quorum | Lucius&#39;s PKM" />
-<meta property="og:description" content="Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于Quorum投票的冗余控制算法 在" />
+<meta property="og:description" content="Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于 Quorum 投票的冗余控制算法 在有冗余数据" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://luciuschen.github.io/posts/main/20220615143721-quorum/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-06-16T16:40:15&#43;08:00" />
+  <meta property="article:modified_time" content="2022-06-17T13:46:03&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -54,14 +54,14 @@
   "@type": "BlogPosting",
   "headline": "Quorum | Lucius's PKM",
   "name": "Quorum",
-  "description": "Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于Quorum投票的冗余控制算法 在",
+  "description": "Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于 Quorum 投票的冗余控制算法 在有冗余数据",
   "keywords": [
     "distributed-systems"
   ],
-  "wordCount" : "793",
+  "wordCount" : "809",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-06-16T16:40:15+08:00",
+  "dateModified": "2022-06-17T13:46:03+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -241,6 +241,38 @@ function toggleThemeListener() {
                 </button>
             </span>
         </div>
+        <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
         <ul id="menu">
             <li>
                 <a href="https://luciuschen.github.io/tags/" title="Tags"
@@ -263,20 +295,17 @@ function toggleThemeListener() {
 <main class="main post">
 <article class="post-single">
   <header class="post-header">
-    <script type="text/javascript"
-      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
     
     <h1 class="post-title">
       Quorum
     </h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>June 16, 2022</span></span><span class="meta-item">
+  <span>June 17, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
   <span class="post-tags"><a href="https://luciuschen.github.io/tags/distributed-systems/">distributed-systems</a></span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>793 words</span></span><span class="meta-item">
+  <span>809 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
   <span>2 min</span></span>
 
@@ -291,7 +320,7 @@ function toggleThemeListener() {
 
         <div class="inner"><ul>
                 <li>
-                    <a href="#%e5%9f%ba%e4%ba%8equorum%e6%8a%95%e7%a5%a8%e7%9a%84%e5%86%97%e4%bd%99%e6%8e%a7%e5%88%b6%e7%ae%97%e6%b3%95" aria-label="基于Quorum投票的冗余控制算法">基于Quorum投票的冗余控制算法</a></li>
+                    <a href="#%e5%9f%ba%e4%ba%8e-quorum-%e6%8a%95%e7%a5%a8%e7%9a%84%e5%86%97%e4%bd%99%e6%8e%a7%e5%88%b6%e7%ae%97%e6%b3%95" aria-label="基于 Quorum 投票的冗余控制算法">基于 Quorum 投票的冗余控制算法</a></li>
                 <li>
                     <a href="#%e7%ae%97%e6%b3%95%e7%9a%84%e5%a5%bd%e5%a4%84" aria-label="算法的好处">算法的好处</a>
                 </li>
@@ -301,20 +330,20 @@ function toggleThemeListener() {
 </div>
 
   <div class="post-content"><p>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。</p>
-<h2 id="基于quorum投票的冗余控制算法">基于Quorum投票的冗余控制算法<a hidden class="anchor" aria-hidden="true" href="#基于quorum投票的冗余控制算法">¶</a></h2>
+<h2 id="基于-quorum-投票的冗余控制算法">基于 Quorum 投票的冗余控制算法<a hidden class="anchor" aria-hidden="true" href="#基于-quorum-投票的冗余控制算法">¶</a></h2>
 <p>在有冗余数据的分布式存储系统当中，冗余数据对象会在不同的机器之间存放多份拷贝。但是同一时刻一个数据对象的多份拷贝只能用于读或者用于写。</p>
 <p>该算法可以保证同一份数据对象的多份拷贝不会被超过两个访问对象读写。</p>
-<p>分布式系统中的每一份数据拷贝对象都被赋予一票。每一个读操作获得的票数必须大于最小读票数（read quorum）（V<sub>r</sub>），每个写操作获得的票数必须大于最小写票数（write quorum）(V<sub>w</sub>）才能读或者写。如果系统有V票（意味着一个数据对象有V份冗余拷贝），那么最小读写票数(quorum)应满足如下限制：</p>
+<p>分布式系统中的每一份数据拷贝对象都被赋予一票。每一个读操作获得的票数必须大于最小读票数（read quorum）（\(V_{r}\)），每个写操作获得的票数必须大于最小写票数（write quorum）(\(V_{w}\)）才能读或者写。如果系统有V票（意味着一个数据对象有 \(V\) 份冗余拷贝），那么最小读写票数(quorum)应满足如下限制：</p>
 <ol>
-<li>V<sub>r</sub> + V<sub>w</sub> &gt; V</li>
-<li>V<sub>w</sub> &gt; \(\frac{V}{2}\)</li>
+<li>\(V_{r} + V_{w} &gt; V\)</li>
+<li>\(V_{w} &gt; \frac{V}{2}\)</li>
 </ol>
-<p>第一条规则保证了一个数据不会被同时读写。当一个写操作请求过来的时候，它必须要获得 V<sub>w</sub> 个冗余拷贝的许可。而剩下的数量是 V - V<sub>w</sub>  不够 V<sub>r</sub>，因此不能再有读请求过来了。同理，当读请求已经获得了 V<sub>r</sub> 个冗余拷贝的许可时，写请求就无法获得许可了。</p>
+<p>第一条规则保证了一个数据不会被同时读写。当一个写操作请求过来的时候，它必须要获得 \(V_{w}\) 个冗余拷贝的许可。而剩下的数量是 \(V - V_{w}\) 不够 \(V_{r}\)，因此不能再有读请求过来了。同理，当读请求已经获得了 \(V_{r}\) 个冗余拷贝的许可时，写请求就无法获得许可了。</p>
 <p>第二条规则保证了数据的串行化修改。一份数据的冗余拷贝不可能同时被两个写请求修改。</p>
 <h2 id="算法的好处">算法的好处<a hidden class="anchor" aria-hidden="true" href="#算法的好处">¶</a></h2>
 <p>在分布式系统中，冗余数据是保证可靠性的手段，因此冗余数据的一致性维护就非常重要。一般而言，一个写操作必须要对所有的冗余数据都更新完成了，才能称为成功结束。比如一份数据在5台设备上有冗余，因为不知道读数据会落在哪一台设备上，那么一次写操作，必须5台设备都更新完成，写操作才能返回。</p>
 <p>对于写操作比较频繁的系统，这个操作的瓶颈非常大。Quorum 算法可以让写操作只要写完3台就返回。剩下的由系统内部缓慢同步完成。而读操作，则需要也至少读3台，才能保证至少可以读到一个最新的数据。</p>
-<p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 V<sub>w</sub> 越大，则读票数 V<sub>r</sub> 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
+<p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 \(V_{w}\) 越大，则读票数 \(V_{r}\) 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
 
 
     
@@ -421,11 +450,11 @@ function toggleThemeListener() {
     <br>
     <span>Hugo</span>
   </a>
-  <a class="next" href="https://luciuschen.github.io/posts/main/20220505220832-org_roam/">
+  <a class="next" href="https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/">
     <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
     </span>
     <br>
-    <span>Org-roam</span>
+    <span>Network Time Protocol (NTP)</span>
   </a>
 </nav>
 
