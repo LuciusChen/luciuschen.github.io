@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Jun 2022 20:58:18 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Jun 2022 09:42:07 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Fri, 17 Jun 2022 20:58:18 +0800</pubDate>
+      <pubDate>Sat, 18 Jun 2022 09:42:07 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -251,6 +251,39 @@
 
 <p>另外一个方法是让客户端帮助完成传播更新的过程。例如上图中，客户端从 \(B\) 读取了 \((t_{1}, v_{1})\)，但从 \(A\) 接收到的是 \((t_{0}, v_{0})\)，而 \(C\) 没有回应。这个时候客户端使用原始的时间戳 \(t_{1}\) 将最新的值发送给 \(A\) 和 \(C\)，\(C\) 如果已经更新了，也不过只是浪费一点点带宽。这种副本模式的数据库通常称为 Dynamo-style。</p>
 <h3 id="replication-using-broadcast">Replication using broadcast</h3>
+<p>在 Replication 中，基本上使用了 best-effort 以及客户端辅助使其他副本数据一致的方法，但这些都是不可靠的，中途会发生丢失，并且排序无法保证。</p>
+<h4 id="state-machine-replication--smr">State machine replication (SMR)</h4>
+<p>FIFO-total order broadcast: 每个节点以​<strong>相同的顺序</strong>​传递​<strong>相同的消息</strong>​。</p>
+<ul>
+<li>FIFO-total order broadcast 将每次更新，更新到所有副本。</li>
+<li>副本通过传递消息来确认自身状态</li>
+<li>更新具有确定性</li>
+<li>副本是一种状态机：开始于固定的初始状态，以相同的顺序经历相同序列状态的变换 \(\Longrightarrow\) 所有副本都以相同的状态结尾</li>
+</ul>
+<p>利用 FIFO-total order broadcast 很容易建立一个副本系统：将每个更新请求广播给副本，副本基于传递的每个消息更新其状态。副本作为一个状态机，其输入是消息的传递，这种就叫做 state machine replication (SMR)。只要更新逻辑是确定的：任何两个处于相同状态的复制体，被赋予相同的输入，最终必须处于相同的下一个状态。甚至错误也必须是确定的：如果一个副本的更新成功了，但在另一个副本上失败了，它们就会变得不一致。</p>
+<p>SMR 的一个优秀特点是，从一个状态到下一个状态只要是确定的，其中的逻辑可以任意复杂。例如，可以处理具有任意业务逻辑的整个数据库事务，而这个逻辑可以同时依赖于广播信息和数据库的当前状态。一些分布式数据库以每个副本独立执行相同的确定性交易代码（这被称为主动复制）来实现副本。这一原则也是区块链、加密货币和分布式账本的基础：区块链中的 &ldquo;区块链 &ldquo;无非是由 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 传递的消息序列，每个副本都确定性地执行这些区块中描述的交易，以确定账本的状态（例如，谁拥有哪些钱）。一个 &ldquo;智能合约 &ldquo;只是一个确定的程序，当一个特定的消息被传递时，副本会执行这个程序。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">*on* request to perform update \(u\) *do*
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    send \(u\) via FIFO-total order broadcast
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">*end on*
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">*on* delivering \(u\) through FIFO-total order broadcast *do*
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    update state using arbitrary deterministic logic!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">*end on*
+</span></span></code></pre></div><p>密切相关的概念：</p>
+<ul>
+<li>可序列化事务（按传递顺序执行）</li>
+<li>区块链、分布式账本、智能合约。</li>
+</ul>
+<p>限制：</p>
+<ul>
+<li>不能立即更新状态，必须等待广播传递。</li>
+<li>需要容错的 total order broadcast</li>
+</ul>
+<p>State machine replication 的缺点是 total order broadcast 的限制。当一个节点想通过 total order broadcast 来广播一个消息时，它不能立即将该消息传递给自己。由于这个原因，当使用状态机复制时，想要更新其状态的副本不能立即这样做，而是要经过广播过程，与其他节点协调，并等待更新信息被传递给自己。状态机复制的容错性取决于底层 total order broadcast 的容错性。尽管如此，基于 total order replication 的副本还是被广泛使用。</p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>
