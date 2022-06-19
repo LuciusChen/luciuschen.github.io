@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://luciuschen.github.io/posts/main/20220602202933-distribution_system/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-06-18T09:42:07&#43;08:00" />
+  <meta property="article:modified_time" content="2022-06-19T22:12:08&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -58,10 +58,10 @@
   "keywords": [
     "top-node"
   ],
-  "wordCount" : "6462",
+  "wordCount" : "6841",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-06-18T09:42:07+08:00",
+  "dateModified": "2022-06-19T22:12:08+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -301,13 +301,13 @@ code.has-jax {
     </h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>June 18, 2022</span></span><span class="meta-item">
+  <span>June 19, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
   <span class="post-tags"><a href="https://luciuschen.github.io/tags/top-node/">top-node</a></span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>6462 words</span></span><span class="meta-item">
+  <span>6841 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>13 min</span></span>
+  <span>14 min</span></span>
 
       
       
@@ -401,6 +401,8 @@ code.has-jax {
                     <a href="#state-machine-replication--smr" aria-label="State machine replication (SMR)">State machine replication (SMR)</a></li></ul>
                 </li></ul>
                 </li>
+                <li>
+                    <a href="#consensus" aria-label="Consensus">Consensus</a></li>
                 <li>
                     <a href="#reference" aria-label="Reference">Reference</a>
                 </li>
@@ -568,7 +570,7 @@ code.has-jax {
 <li><a href="/posts/main/20220616135058-total_order_broadcast/#total-order-broadcast-algorithms">Total order broadcast algorithms</a></li>
 </ul>
 <h2 id="replication">Replication<a hidden class="anchor" aria-hidden="true" href="#replication">¶</a></h2>
-<p>现在要讨论的是复制的问题，也就是在多个节点上维护相同数据的副本，每个节点被称为副本。复制是许多分布式数据库、文件系统和其他存储系统的一个标准特征。它是我们实现容错的主要机制之一：如果一个副本出现故障，我们可以继续访问其他副本上的数据副本。</p>
+<p>现在要讨论的是复制的问题，也就是在多个节点上维护相同数据的复制体，每个节点被称为副本。复制是许多分布式数据库、文件系统和其他存储系统的一个标准特征。它是我们实现容错的主要机制之一：如果一个副本出现故障，我们可以继续访问其他副本上的数据副本。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
 <ul>
 <li>在不同节点维护相同数据的副本</li>
 <li>数据库、文件系统、缓存等等</li>
@@ -584,7 +586,7 @@ code.has-jax {
 <li>副本可以在全世界靠近用户的地方分布（CDN 本质其实是一种大规模分布式多级缓存系统）</li>
 </ul>
 <h3 id="manipulating-remote-state">Manipulating remote state<a hidden class="anchor" aria-hidden="true" href="#manipulating-remote-state">¶</a></h3>
-<p>在更新不同节点数据时，丢失数据或者丢失 TCP 返回的 \(ACK\)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 时，就会使得不同节点之间的副本不一致，不满足幂等性（Idempotent）。为了解决这个问题，可以给每次更新操作都加上一个逻辑时间戳，并将其作为数据存储在数据库当中；当需要删除这条记录时，实际上并没有删除，而是写入一个特殊的值（称为墓碑 tombstone），将其标记为删除。（其实就类似于软删除）</p>
+<p>在更新不同节点数据时，丢失数据或者丢失 TCP 返回的 \(ACK\)<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 时，就会使得不同节点之间的副本不一致，不满足幂等性（Idempotent）。为了解决这个问题，可以给每次更新操作都加上一个逻辑时间戳，并将其作为数据存储在数据库当中；当需要删除这条记录时，实际上并没有删除，而是写入一个特殊的值（称为墓碑 tombstone），将其标记为删除。（其实就类似于软删除）</p>
 <figure>
     <img loading="lazy" src="/ox-hugo/reconciling-replicas.png"
          alt="Figure 4: reconciling-replicas"/> <figcaption>
@@ -604,16 +606,16 @@ code.has-jax {
 <ul>
 <li>
 <p><strong>Last writer wins</strong> (LWW):</p>
-<p>采用 Lamport clocks 时，\(t_{2} \gt t_{1}\)则保留 \(v_{2}\) 丢弃 \(v_{1}\)。</p>
+<p>采用 Lamport clocks 时，$t<sub>2</sub> &gt; t<sub>1</sub>$则保留 \(v_{2}\) 丢弃 \(v_{1}\)。</p>
 </li>
 <li>
 <p><strong>Multi-value register</strong>:</p>
 <p>采用 Vector clocks 时，\(t_{2 }\gt t_{1}\) 则保留 \(v_{2}\) 丢弃 \(v_{1}\); \(t_{2} \rVert t_{1}\) 则 \(\{v_{1}, v_{2}\}\) 都保留。</p>
 </li>
 </ul>
-<p>向量时钟的缺点是它们会变得很昂贵：每个客户端都需要在向量中输入一个条目，在有大量客户端的系统中（或者客户端每次重启都会有新的身份），这些向量会变得很大，可能会比数据本身占用更多内存。更多类型的逻辑时钟，如点状版本向量（Dotted version vectors）<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>，已经被开发出来以优化这种类型的系统。</p>
+<p>向量时钟的缺点是它们会变得很昂贵：每个客户端都需要在向量中输入一个条目，在有大量客户端的系统中（或者客户端每次重启都会有新的身份），这些向量会变得很大，可能会比数据本身占用更多内存。更多类型的逻辑时钟，如点状版本向量（Dotted version vectors）<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>，已经被开发出来以优化这种类型的系统。</p>
 <h3 id="quorums">Quorums<a hidden class="anchor" aria-hidden="true" href="#quorums">¶</a></h3>
-<p>具体如何进行复制的细节对系统的可靠性有很大影响。如果没有容错，拥有多个副本会使可靠性变差：副本越多，任何一个副本在任何时候出现故障的概率就越大（假设故障不是完全相关的）。然而，如果系统在一些有问题的复制体中仍然继续工作，那么可靠性就会提高：所有副本在同一时间出现问题的概率要比一个复制体出现问题的概率低很多。</p>
+<p>具体如何进行复制的细节对系统的可靠性有很大影响。如果没有容错，拥有多个副本会使可靠性变差：副本越多，任何一个副本在任何时候出现故障的概率就越大（假设故障不是完全相关的）。然而，如果系统在一些有问题的复制体中仍然继续工作，那么可靠性就会提高：所有副本在同一时间出现问题的概率要比一个副本出现问题的概率低很多。</p>
 <h4 id="read-after-write-consistency">Read-after-write consistency<a hidden class="anchor" aria-hidden="true" href="#read-after-write-consistency">¶</a></h4>
 <figure>
     <img loading="lazy" src="/ox-hugo/read-after-write-consistency.png"
@@ -631,7 +633,7 @@ code.has-jax {
         </figcaption>
 </figure>
 
-<p>通过使用三个副本可以解决这个难题<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。将每个读写请求发送到所有三个副本，但只要收到 \(≥2\) 个响应，就认为请求成功。在这个例子中，写在复制体 \(B\) 和 \(C\) 上成功，而读在复制体 \(A\) 和 \(B\) 上成功。对读和写都采用 &ldquo;三选二 &ldquo;的策略，可以保证至少有一个对读的响应来自看到最近写的复制体（在这个例子中，这是复制体 \(B\)）。</p>
+<p>通过使用三个副本可以解决这个难题<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。将每个读写请求发送到所有三个副本，但只要收到 \(≥2\) 个响应，就认为请求成功。在这个例子中，写在复制体 \(B\) 和 \(C\) 上成功，而读在副本 \(A\) 和 \(B\) 上成功。对读和写都采用 &ldquo;三选二 &ldquo;的策略，可以保证至少有一个对读的响应来自看到最近写的副本（在这个例子中，这是副本 \(B\)）。</p>
 <p>对于同一个请求，不同的副本可能会返回不同的响应：在上图中，\(A\) 处读取会返回初始值 \((t_{0}, v_{0})\)，而 \(B\) 处的读取会返回该客户端之前写入的 \((t_{1}, v_{1})\)。利用时间戳，客户端可以知道哪个响应是最近的，将 \(v_{1}\) 返回给 Application。</p>
 <p>在这个例子中，响应写请求的副本集合 \((B, C)\) 是一个 write quorum，而响应读请求的集合 \((A, B)\) 是一个 read quorum。一般来说，quorum 是一个最小的节点集合，它必须对某个请求作出响应才能成功。为了确保读写一致性，write quorum 和 read quorum 必须有一个非空的交集：换句话说，read quorum 必须包含至少一个已经被承认的 write quorum。</p>
 <p>在分布式系统中，常见的 majority quorum 是由超过半数的节点组成的任意子集。在三个节点的系统 \(\{A, B, C\}\) 中，majority quorum 可以是 \(\{A, B\}\)、\(\{A, C\}\) 和 \(\{B, C\}\)。通常来讲，奇数节点的系统，\(\frac{n+1}{2}\) 大小的任意子集就是 majority quorum，偶数节点的系统，需要四舍五入 \(\left \lceil \frac{n+1}{2} \right \rceil = \frac{n+2}{2}\)。majority quorum 有个特性：任意两个 quorums 至少有一个共同的元素，也就是交集至少有一个节点。</p>
@@ -644,9 +646,9 @@ code.has-jax {
         </figcaption>
 </figure>
 
-<p>另外一个方法是让客户端帮助完成传播更新的过程。例如上图中，客户端从 \(B\) 读取了 \((t_{1}, v_{1})\)，但从 \(A\) 接收到的是 \((t_{0}, v_{0})\)，而 \(C\) 没有回应。这个时候客户端使用原始的时间戳 \(t_{1}\) 将最新的值发送给 \(A\) 和 \(C\)，\(C\) 如果已经更新了，也不过只是浪费一点点带宽。这种副本模式的数据库通常称为 Dynamo-style。</p>
+<p>另外一个方法是让客户端帮助完成传播更新的过程。例如上图中，客户端从 \(B\) 读取了 \((t_{1}, v_{1})\)，但从 \(A\) 接收到的是 \((t_{0}, v_{0})\)，而 \(C\) 没有回应。这个时候客户端使用原始的时间戳 \(t_{1}\) 将最新的值发送给 \(A\) 和 \(C\)，\(C\) 如果已经更新了，也不过只是浪费一点点带宽。这种复制模式的数据库通常称为 Dynamo-style。</p>
 <h3 id="replication-using-broadcast">Replication using broadcast<a hidden class="anchor" aria-hidden="true" href="#replication-using-broadcast">¶</a></h3>
-<p>在 Replication 中，基本上使用了 best-effort 以及客户端辅助使其他副本数据一致的方法，但这些都是不可靠的，中途会发生丢失，并且排序无法保证。</p>
+<p>在 quorum 中，基本上使用了 best-effort 以及客户端辅助使其他副本数据一致的方法，但这些都是不可靠的，中途会发生丢失，并且排序无法保证。</p>
 <h4 id="state-machine-replication--smr">State machine replication (SMR)<a hidden class="anchor" aria-hidden="true" href="#state-machine-replication--smr">¶</a></h4>
 <p>FIFO-total order broadcast: 每个节点以​<strong>相同的顺序</strong>​传递​<strong>相同的消息</strong>​。</p>
 <ul>
@@ -655,20 +657,17 @@ code.has-jax {
 <li>更新具有确定性</li>
 <li>副本是一种状态机：开始于固定的初始状态，以相同的顺序经历相同序列状态的变换 \(\Longrightarrow\) 所有副本都以相同的状态结尾</li>
 </ul>
-<p>利用 FIFO-total order broadcast 很容易建立一个副本系统：将每个更新请求广播给副本，副本基于传递的每个消息更新其状态。副本作为一个状态机，其输入是消息的传递，这种就叫做 state machine replication (SMR)。只要更新逻辑是确定的：任何两个处于相同状态的复制体，被赋予相同的输入，最终必须处于相同的下一个状态。甚至错误也必须是确定的：如果一个副本的更新成功了，但在另一个副本上失败了，它们就会变得不一致。</p>
-<p>SMR 的一个优秀特点是，从一个状态到下一个状态只要是确定的，其中的逻辑可以任意复杂。例如，可以处理具有任意业务逻辑的整个数据库事务，而这个逻辑可以同时依赖于广播信息和数据库的当前状态。一些分布式数据库以每个副本独立执行相同的确定性交易代码（这被称为主动复制）来实现副本。这一原则也是区块链、加密货币和分布式账本的基础：区块链中的 &ldquo;区块链 &ldquo;无非是由 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 传递的消息序列，每个副本都确定性地执行这些区块中描述的交易，以确定账本的状态（例如，谁拥有哪些钱）。一个 &ldquo;智能合约 &ldquo;只是一个确定的程序，当一个特定的消息被传递时，副本会执行这个程序。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">*on* request to perform update \(u\) *do*
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    send \(u\) via FIFO-total order broadcast
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">*end on*
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">*on* delivering \(u\) through FIFO-total order broadcast *do*
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    update state using arbitrary deterministic logic!
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">*end on*
-</span></span></code></pre></div><p>密切相关的概念：</p>
+<p>利用 FIFO-total order broadcast 很容易建立一个复制系统：将每个更新请求广播给副本，副本基于传递的每个消息更新其状态。副本作为一个状态机，其输入是消息的传递，这种就叫做 state machine replication (SMR)。只要更新逻辑是确定的：任何两个处于相同状态的复制体，被赋予相同的输入，最终必须处于相同的下一个状态。甚至错误也必须是确定的：如果一个副本的更新成功了，但在另一个副本上失败了，它们就会变得不一致。</p>
+<p>SMR 的一个优秀特点是，从一个状态到下一个状态只要是确定的，其中的逻辑可以任意复杂。例如，可以处理具有任意业务逻辑的整个数据库事务，而这个逻辑可以同时依赖于广播信息和数据库的当前状态。一些分布式数据库以每个副本独立执行相同的确定性交易代码（这被称为主动复制）来实现复制。这一原则也是区块链、加密货币和分布式账本的基础：区块链中的 &ldquo;区块链 &ldquo;无非是由 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 传递的消息序列，每个副本都确定性地执行这些区块中描述的交易，以确定账本的状态（例如，谁拥有哪些钱）。一个 &ldquo;智能合约 &ldquo;只是一个确定的程序，当一个特定的消息被传递时，副本会执行这个程序。</p>
+<blockquote>
+<p><strong>on</strong> request to perform update \(u\) <strong>do</strong></p>
+<p>send \(u\) via FIFO-total order broadcast</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> delivering \(u\) through FIFO-total order broadcast <strong>do</strong></p>
+<p>update state using arbitrary deterministic logic!</p>
+<p><strong>end on</strong></p>
+</blockquote>
+<p>密切相关的概念：</p>
 <ul>
 <li>可序列化事务（按传递顺序执行）</li>
 <li>区块链、分布式账本、智能合约。</li>
@@ -678,7 +677,17 @@ code.has-jax {
 <li>不能立即更新状态，必须等待广播传递。</li>
 <li>需要容错的 total order broadcast</li>
 </ul>
-<p>State machine replication 的缺点是 total order broadcast 的限制。当一个节点想通过 total order broadcast 来广播一个消息时，它不能立即将该消息传递给自己。由于这个原因，当使用状态机复制时，想要更新其状态的副本不能立即这样做，而是要经过广播过程，与其他节点协调，并等待更新信息被传递给自己。状态机复制的容错性取决于底层 total order broadcast 的容错性。尽管如此，基于 total order replication 的副本还是被广泛使用。</p>
+<p>State machine replication 的缺点是 total order broadcast 的限制。当一个节点想通过 total order broadcast 来广播一个消息时，它不能立即将该消息传递给自己。由于这个原因，当使用状态机复制时，想要更新其状态的副本不能立即这样做，而是要经过广播过程，与其他节点协调，并等待更新信息被传递给自己。状态机复制的容错性取决于底层 total order broadcast 的容错性。尽管如此，基于 total order replication 的复制还是被广泛使用。</p>
+<p>在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中提到过一种实现方法是指定一个节点作为 Leader，并将所有的消息通过它来路由，保证传递的顺序。这一原则也被广泛应用于数据库副本：许多数据库系统指定一个副本作为 leader，primary 或者 master。所有修改数据库的事务都需要在 leader 副本上执行。虽然 leader 会同时执行多个事务，但事务提交时会按照总的顺序提交。当事务提交后， leader 副本将数据变动广播给所有的 follow 副本，follow 副本按照之前提交的顺序在本地进行事务提交，这种方法被称为被动复制（passive replication）或者主从复制（primary-backup replication），这样的方式其实和 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 是等效的。</p>
+<p>至于之前提到的其他广播方式，也可以用作复制，但需要更加小心，保证副本之间数据的一致性。</p>
+<h2 id="consensus">Consensus<a hidden class="anchor" aria-hidden="true" href="#consensus">¶</a></h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
+         alt="Figure 9: node-state-transitions-in-raft"/> <figcaption>
+            <p><span class="figure-number">Figure 9: </span>node-state-transitions-in-raft</p>
+        </figcaption>
+</figure>
+
 <h2 id="reference">Reference<a hidden class="anchor" aria-hidden="true" href="#reference">¶</a></h2>
 <ul>
 <li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>
@@ -690,13 +699,16 @@ code.has-jax {
 <p>if \(a \rVert b\) we could have either \(a ≺ b\) or \(b ≺ a\), so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2">
-<p>后面整理 TCP 相关内容时，可以加个链接。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>replication 翻译成「复制」，名词；replica 翻译成「副本」，名词。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3">
-<p>待学习&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>后面整理 TCP 相关内容时，可以加个链接。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:4">
-<p><a href="/posts/main/20220615143721-quorum/">基于 Quorum 投票的冗余控制算法</a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>待学习&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="/posts/main/20220615143721-quorum/">基于 Quorum 投票的冗余控制算法</a>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
@@ -720,11 +732,11 @@ code.has-jax {
    
 
    
+
+   
+
+   
 	  
-   
-
-   
-
    
 
    
@@ -809,17 +821,11 @@ code.has-jax {
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://luciuschen.github.io/posts/main/20220616162256-latex/">
-    <span class="title">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;Prev Page</span>
-    <br>
-    <span>Latex</span>
-  </a>
-  <a class="next" href="https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/">
+  <a class="next" href="https://luciuschen.github.io/posts/main/20220615143721-quorum/">
     <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
     </span>
     <br>
-    <span>Causal broadcast</span>
+    <span>Quorum</span>
   </a>
 </nav>
 

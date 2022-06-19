@@ -6,11 +6,36 @@
     <description>Recent content in distributed-systems on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Jun 2022 14:02:26 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/distributed-systems/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Jun 2022 13:02:32 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/distributed-systems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quorum</title>
+      <link>https://luciuschen.github.io/posts/main/20220615143721-quorum/</link>
+      <pubDate>Sun, 19 Jun 2022 13:02:32 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220615143721-quorum/</guid>
+      <description>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于 Quorum 投票的冗余控制算法 在有冗余数据</description>
+      <content:encoded><![CDATA[<p>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。</p>
+<h2 id="基于-quorum-投票的冗余控制算法">基于 Quorum 投票的冗余控制算法</h2>
+<p>在有冗余数据的分布式存储系统当中，冗余数据对象会在不同的机器之间存放多份拷贝。但是同一时刻一个数据对象的多份拷贝只能用于读或者用于写。</p>
+<p>该算法可以保证同一份数据对象的多份拷贝不会被超过两个访问对象读写。</p>
+<p>分布式系统中的每一份数据拷贝对象都被赋予一票。每一个读操作获得的票数必须大于最小读票数（read quorum）（\(V_{r}\)），每个写操作获得的票数必须大于最小写票数（write quorum）(\(V_{w}\)）才能读或者写。如果系统有V票（意味着一个数据对象有 \(V\) 份冗余拷贝），那么最小读写票数(quorum)应满足如下限制：</p>
+<ol>
+<li>\(V_{r} + V_{w} &gt; V\)</li>
+<li>\(V_{w} &gt; \frac{V}{2}\)</li>
+</ol>
+<p>第一条规则保证了一个数据不会被同时读写。当一个写操作请求过来的时候，它必须要获得 \(V_{w}\) 个冗余拷贝的许可。而剩下的数量是 \(V - V_{w}\) 不够 \(V_{r}\)，因此不能再有读请求过来了。同理，当读请求已经获得了 \(V_{r}\) 个冗余拷贝的许可时，写请求就无法获得许可了。</p>
+<p>第二条规则保证了数据的串行化修改。一份数据的冗余拷贝不可能同时被两个写请求修改。</p>
+<h2 id="算法的好处">算法的好处</h2>
+<p>在分布式系统中，冗余数据是保证可靠性的手段，因此冗余数据的一致性维护就非常重要。一般而言，一个写操作必须要对所有的冗余数据都更新完成了，才能称为成功结束。比如一份数据在5台设备上有冗余，因为不知道读数据会落在哪一台设备上，那么一次写操作，必须5台设备都更新完成，写操作才能返回。</p>
+<p>对于写操作比较频繁的系统，这个操作的瓶颈非常大。Quorum 算法可以让写操作只要写完3台就返回。剩下的由系统内部缓慢同步完成。而读操作，则需要也至少读3台，才能保证至少可以读到一个最新的数据。</p>
+<p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 \(V_{w}\) 越大，则读票数 \(V_{r}\) 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Vector clocks</title>
       <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Fri, 17 Jun 2022 14:02:26 +0800</pubDate>
+      <pubDate>Sun, 19 Jun 2022 12:58:47 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</guid>
       <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \l</description>
@@ -57,7 +82,7 @@
 <p>Define the following order on vector timestamps(in a system with \(n\) nodes):</p>
 <ul>
 <li>\(T = T&rsquo;\) iff \(T[i] = T&rsquo;[i]\) for all \(i \in {1, &hellip;, n}\)<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></li>
-<li>\(T \le T&rsquo;\) iff \(T[i] \le T&rsquo;[i]\) for all \( \in {1, &hellip;, n}\)</li>
+<li>\(T \le T&rsquo;\) iff \(T[i] \le T&rsquo;[i]\) for all $ ∈ {1, &hellip;, n}$</li>
 <li>\(T &lt; T&rsquo;\) iff \(T \le T&rsquo;\) and \(T \neq T&rsquo;\)</li>
 <li>\(T || T&rsquo;\) iff \(T &gt; T&rsquo;\) and \(T&rsquo; &gt; T\)</li>
 </ul>
@@ -91,98 +116,9 @@
     </item>
     
     <item>
-      <title>Quorum</title>
-      <link>https://luciuschen.github.io/posts/main/20220615143721-quorum/</link>
-      <pubDate>Fri, 17 Jun 2022 13:46:03 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220615143721-quorum/</guid>
-      <description>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于 Quorum 投票的冗余控制算法 在有冗余数据</description>
-      <content:encoded><![CDATA[<p>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。</p>
-<h2 id="基于-quorum-投票的冗余控制算法">基于 Quorum 投票的冗余控制算法</h2>
-<p>在有冗余数据的分布式存储系统当中，冗余数据对象会在不同的机器之间存放多份拷贝。但是同一时刻一个数据对象的多份拷贝只能用于读或者用于写。</p>
-<p>该算法可以保证同一份数据对象的多份拷贝不会被超过两个访问对象读写。</p>
-<p>分布式系统中的每一份数据拷贝对象都被赋予一票。每一个读操作获得的票数必须大于最小读票数（read quorum）（\(V_{r}\)），每个写操作获得的票数必须大于最小写票数（write quorum）(\(V_{w}\)）才能读或者写。如果系统有V票（意味着一个数据对象有 \(V\) 份冗余拷贝），那么最小读写票数(quorum)应满足如下限制：</p>
-<ol>
-<li>\(V_{r} + V_{w} &gt; V\)</li>
-<li>\(V_{w} &gt; \frac{V}{2}\)</li>
-</ol>
-<p>第一条规则保证了一个数据不会被同时读写。当一个写操作请求过来的时候，它必须要获得 \(V_{w}\) 个冗余拷贝的许可。而剩下的数量是 \(V - V_{w}\) 不够 \(V_{r}\)，因此不能再有读请求过来了。同理，当读请求已经获得了 \(V_{r}\) 个冗余拷贝的许可时，写请求就无法获得许可了。</p>
-<p>第二条规则保证了数据的串行化修改。一份数据的冗余拷贝不可能同时被两个写请求修改。</p>
-<h2 id="算法的好处">算法的好处</h2>
-<p>在分布式系统中，冗余数据是保证可靠性的手段，因此冗余数据的一致性维护就非常重要。一般而言，一个写操作必须要对所有的冗余数据都更新完成了，才能称为成功结束。比如一份数据在5台设备上有冗余，因为不知道读数据会落在哪一台设备上，那么一次写操作，必须5台设备都更新完成，写操作才能返回。</p>
-<p>对于写操作比较频繁的系统，这个操作的瓶颈非常大。Quorum 算法可以让写操作只要写完3台就返回。剩下的由系统内部缓慢同步完成。而读操作，则需要也至少读3台，才能保证至少可以读到一个最新的数据。</p>
-<p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 \(V_{w}\) 越大，则读票数 \(V_{r}\) 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Network Time Protocol (NTP)</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
-      <pubDate>Fri, 17 Jun 2022 13:42:10 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
-      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
-      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
-<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
-         alt="Figure 1: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/NTP.png"
-         alt="Figure 2: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<ol>
-<li>
-<p>Round-trip network delay: \(\delta = (t_{4} - t_{1}) - (t_{3} - t_{2})\)</p>
-</li>
-<li>
-<p>Estimated server time when client receives response: \(t_{3} + \frac{\delta}{2}\)（客户端收到响应时的服务器的时间）</p>
-</li>
-<li>
-<p>Estimated clock skew: \(\theta = t_{3} + \frac{\delta}{2} - t_{4} = \frac{(t_{2} - t_{1} + t_{3} - t_{4})}{2}\)（计算预估的服务器时间和当前客户端时间的偏差）</p>
-</li>
-</ol>
-<h2 id="correcting-clock-skew">Correcting clock skew</h2>
-<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
-<ul>
-<li>
-<p>if \(\theta &lt; 125 ms\), <strong>slew</strong> the clock:</p>
-<p>slightly speed it up or slow it down by up to \(500 ppm\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
-</li>
-<li>
-<p>if \(125 ms \le \theta &lt; 1000 s\), <strong>step</strong> the clock:</p>
-<p>suddenly reset client clock to estimated server timestamp</p>
-</li>
-<li>
-<p>if \(\theta \ge 1000 s\), <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
-</li>
-</ul>
-<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
-<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
-<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Lamport clocks</title>
       <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
-      <pubDate>Fri, 17 Jun 2022 13:41:20 +0800</pubDate>
+      <pubDate>Sun, 19 Jun 2022 12:57:51 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
       <description>Lamport clocks algorithm on initialisation do \(t := 0\) ▻ each node has its own local variable t end on on any event occurring at the local node do \(t := t + 1\) end on on request to send message \(m\) do \(t := t + 1\); send \((t, m)\) via the underlying network link end on on receiving \((t′, m)\) via the underlying</description>
@@ -246,6 +182,70 @@
 </li>
 <li id="fn:2">
 <p>\(∨\) is logical or, \(∧\) is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Network Time Protocol (NTP)</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
+      <pubDate>Sun, 19 Jun 2022 12:57:07 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
+      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
+      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
+<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
+         alt="Figure 1: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>NTP</p>
+        </figcaption>
+</figure>
+
+<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/NTP.png"
+         alt="Figure 2: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>NTP</p>
+        </figcaption>
+</figure>
+
+<ol>
+<li>
+<p>Round-trip network delay: \(\delta = (t_{4} - t_{1}) - (t_{3} - t_{2})\)</p>
+</li>
+<li>
+<p>Estimated server time when client receives response: \(t_{3} + \frac{\delta}{2}\)（客户端收到响应时的服务器的时间）</p>
+</li>
+<li>
+<p>Estimated clock skew: \(\theta = t_{3} + \frac{\delta}{2} - t_{4} = \frac{(t_{2} - t_{1} + t_{3} - t_{4})}{2}\)（计算预估的服务器时间和当前客户端时间的偏差）</p>
+</li>
+</ol>
+<h2 id="correcting-clock-skew">Correcting clock skew</h2>
+<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
+<ul>
+<li>
+<p>if \(\theta &lt; 125 ms\), <strong>slew</strong> the clock:</p>
+<p>slightly speed it up or slow it down by up to \(500 ppm\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
+</li>
+<li>
+<p>if \(125 ms \le \theta &lt; 1000 s\), <strong>step</strong> the clock:</p>
+<p>suddenly reset client clock to estimated server timestamp</p>
+</li>
+<li>
+<p>if \(\theta \ge 1000 s\), <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
+</li>
+</ul>
+<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
+<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
+<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
