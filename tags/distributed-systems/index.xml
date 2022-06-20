@@ -6,7 +6,137 @@
     <description>Recent content in distributed-systems on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Jun 2022 22:26:56 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/distributed-systems/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Jun 2022 11:05:57 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/distributed-systems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lamport clocks</title>
+      <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
+      <pubDate>Mon, 20 Jun 2022 11:05:57 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
+      <description>Lamport clocks algorithm on initialisation do \(t := 0\) ▻ each node has its own local variable t end on on any event occurring at the local node do \(t := t + 1\) end on on request to send message \(m\) do \(t := t + 1\); send \((t, m)\) via the underlying network link end on on receiving \((t′, m)\) via the underlying</description>
+      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong></p>
+<p>\(t := 0\) ▻ each node has its own local variable t</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> any event occurring at the local node <strong>do</strong></p>
+<p>\(t := t + 1\)</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> request to send message \(m\) <strong>do</strong></p>
+<p>\(t := t + 1\); send \((t, m)\) via the underlying network link</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> receiving \((t′, m)\) via the underlying network link <strong>do</strong></p>
+<p>\(t := max(t, t′) + 1\)</p>
+<p>deliver \(m\) to the application</p>
+<p><strong>end on</strong></p>
+</blockquote>
+<h2 id="lamport-clocks-in-words">Lamport clocks in words</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
+         alt="Figure 1: lamport-example-simple"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。</li>
+<li>增长后的值设为 \(L(e)\)</li>
+<li>发送消息时附带上当前的计数 \(t\)</li>
+<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
+</ul>
+<p>Properties of this scheme:</p>
+<ul>
+<li>if \(a \rightarrow b\) then \(L(e) &lt; L(b)\)</li>
+<li>However, \(L(a) &lt; L(b)\) does not imply \(a \rightarrow b\)</li>
+<li>Possible that \(L(a) = L(b)\) for \(a \ne b\)</li>
+</ul>
+<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
+<h2 id="lamport-clocks-example">Lamport clocks example</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example.png"
+         alt="Figure 2: lamport-example"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
+        </figcaption>
+</figure>
+
+<p>Let \(N(e)\) be the node at which event \(e\) occurred.</p>
+<p>Then the pair \((L(e), N(e))\) <strong>uniquely identiﬁes</strong> event \(e\).</p>
+<p>Deﬁne a <strong>total order</strong> \(≺\) using Lamport timestamps:</p>
+<p>\((a ≺ b) \iff (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b)))\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>This order is <strong>causal</strong>: \((a → b) \Longrightarrow (a ≺ b)\)</p>
+<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
+<p>对于任何两个事件 \(a \ne b\)，那么既不是 \(a ≺ b\) 也不是 \(b ≺ a\)。只要 \(a → b\)，我们就有 \(a ≺ b\)，换句话说，\(≺\) 是局部顺序 \(\rightarrow\) 的线性扩展。然而，如果 \(a \rVert b\)，我们可以有 \(a ≺ b\) 或 \(b ≺ a\)，所以两个事件的顺序是由算法任意决定的。 比如 \((1, A)\) 和 \((1, C)\) 两个事件是平行的，按照 Lamport 的算法，\((1, A)\) 必然是在 \((1, C)\) 之前的，但实际情况可能是 \((1, C)\) 在前。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>\(\iff\) is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>\(∨\) is logical or, \(∧\) is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Causality and Happen-before relation</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</link>
+      <pubDate>Mon, 20 Jun 2022 10:20:01 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
+      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
+      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
+<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
+<p>event a <strong>happens before</strong> event b, written a → b.</p>
+<p>那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前：</p>
+<ul>
+<li>
+<p>a 和 b 发生在相同节点，并且按照本地节点的执行顺序，a 发生在 b 之前。</p>
+</li>
+<li>
+<p>事件 a 是发送消息 m，事件 b 是接收相同的消息 m（假定发送的消息都是唯一的）。</p>
+</li>
+<li>
+<p>有这么一个时间 c 满足，a → c 且 c → b。</p>
+<p>happens-before relation 是局部的顺序：有可能存在既不满足 a → b 也不满足 b → a，这样 a 和 b 就是并行的，写作 a || b。</p>
+</li>
+</ul>
+<h3 id="happen-before-relation-example">Happen-before relation example</h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
+         alt="Figure 1: happens-before-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>a → b, c → d, and e → f due to process order</li>
+<li>b → c and d → f due to messages m1 and m2</li>
+<li>a → c, a → d, a → f, b → d, b → f, and c → f due to transitivity</li>
+<li>a || e, b || e, c || e, and d || e</li>
+</ul>
+<h2 id="causality">Causality</h2>
+<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
+<ul>
+<li>当 a → b, 那么 a 可能是 b 的因。</li>
+<li>当 a || b, a 和 b 之间不存在因果关系。</li>
+</ul>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causality.png"
+         alt="Figure 2: causality"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>causality</p>
+        </figcaption>
+</figure>
+
+<p>Let ≺ be a strict total order on events.</p>
+<p>如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
+<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
+<p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Network Time Protocol (NTP)</title>
       <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
@@ -176,136 +306,6 @@
 </li>
 </ol>
 </div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Lamport clocks</title>
-      <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
-      <pubDate>Sun, 19 Jun 2022 12:57:51 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
-      <description>Lamport clocks algorithm on initialisation do \(t := 0\) ▻ each node has its own local variable t end on on any event occurring at the local node do \(t := t + 1\) end on on request to send message \(m\) do \(t := t + 1\); send \((t, m)\) via the underlying network link end on on receiving \((t′, m)\) via the underlying</description>
-      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation <strong>do</strong></p>
-<p>\(t := 0\) ▻ each node has its own local variable t</p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> any event occurring at the local node <strong>do</strong></p>
-<p>\(t := t + 1\)</p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> request to send message \(m\) <strong>do</strong></p>
-<p>\(t := t + 1\); send \((t, m)\) via the underlying network link</p>
-<p><strong>end on</strong></p>
-<p><strong>on</strong> receiving \((t′, m)\) via the underlying network link <strong>do</strong></p>
-<p>\(t := max(t, t′) + 1\)</p>
-<p>deliver \(m\) to the application</p>
-<p><strong>end on</strong></p>
-</blockquote>
-<h2 id="lamport-clocks-in-words">Lamport clocks in words</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
-         alt="Figure 1: lamport-example-simple"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
-        </figcaption>
-</figure>
-
-<ul>
-<li>每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。</li>
-<li>增长后的值设为 \(L(e)\)</li>
-<li>发送消息时附带上当前的计数 \(t\)</li>
-<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
-</ul>
-<p>Properties of this scheme:</p>
-<ul>
-<li>if \(a \rightarrow b\) then \(L(e) &lt; L(b)\)</li>
-<li>However, \(L(a) &lt; L(b)\) does not imply \(a \rightarrow b\)</li>
-<li>Possible that \(L(a) = L(b)\) for \(a \ne b\)</li>
-</ul>
-<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
-<h2 id="lamport-clocks-example">Lamport clocks example</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example.png"
-         alt="Figure 2: lamport-example"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
-        </figcaption>
-</figure>
-
-<p>Let \(N(e)\) be the node at which event \(e\) occurred.</p>
-<p>Then the pair \((L(e), N(e))\) <strong>uniquely identiﬁes</strong> event \(e\).</p>
-<p>Deﬁne a <strong>total order</strong> \(≺\) using Lamport timestamps:</p>
-<p>\((a ≺ b) \iff (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b)))\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<p>This order is <strong>causal</strong>: \((a → b) \Longrightarrow (a ≺ b)\)</p>
-<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
-<p>对于任何两个事件 \(a \ne b\)，那么既不是 \(a ≺ b\) 也不是 \(b ≺ a\)。只要 \(a → b\)，我们就有 \(a ≺ b\)，换句话说，\(≺\) 是局部顺序 \(\rightarrow\) 的线性扩展。然而，如果 \(a \rVert b\)，我们可以有 \(a ≺ b\) 或 \(b ≺ a\)，所以两个事件的顺序是由算法任意决定的。 比如 \((1, A)\) 和 \((1, C)\) 两个事件是平行的，按照 Lamport 的算法，\((1, A)\) 必然是在 \((1, C)\) 之前的，但实际情况可能是 \((1, C)\) 在前。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>\(\iff\) is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>\(∨\) is logical or, \(∧\) is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Causality and Happen-before relation</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</link>
-      <pubDate>Sat, 11 Jun 2022 11:43:53 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
-      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
-      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
-<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
-<p>event a <strong>happens before</strong> event b, written a → b.</p>
-<p>那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前：</p>
-<ul>
-<li>
-<p>a 和 b 发生在相同节点，并且按照本地节点的执行顺序，a 发生在 b 之前。</p>
-</li>
-<li>
-<p>事件 a 是发送消息 m，事件 b 是接收相同的消息 m（假定发送的消息都是唯一的）。</p>
-</li>
-<li>
-<p>有这么一个时间 c 满足，a → c 且 c → b。</p>
-<p>happens-before relation 是局部的顺序：有可能存在既不满足 a → b 也不满足 b → a，这样 a 和 b 就是并行的，写作 a || b。</p>
-</li>
-</ul>
-<h3 id="happen-before-relation-example">Happen-before relation example</h3>
-<figure>
-    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
-         alt="Figure 1: happens-before-example"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
-        </figcaption>
-</figure>
-
-<ul>
-<li>a → b, c → d, and e → f due to process order</li>
-<li>b → c and d → f due to messages m1 and m2</li>
-<li>a → c, a → d, a → f, b → d, b → f, and c → f due to transitivity</li>
-<li>a || e, b || e, c || e, and d || e</li>
-</ul>
-<h2 id="causality">Causality</h2>
-<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
-<ul>
-<li>当 a → b, 那么 a 可能是 b 的因。</li>
-<li>当 a || b, a 和 b 之间不存在因果关系。</li>
-</ul>
-<figure>
-    <img loading="lazy" src="/ox-hugo/causality.png"
-         alt="Figure 2: causality"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>causality</p>
-        </figcaption>
-</figure>
-
-<p>Let ≺ be a strict total order on events.</p>
-<p>如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
-<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
-<p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
 ]]></content:encoded>
     </item>
     
