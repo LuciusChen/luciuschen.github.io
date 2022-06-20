@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Jun 2022 12:49:11 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Jun 2022 14:25:29 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Mon, 20 Jun 2022 12:49:11 +0800</pubDate>
+      <pubDate>Mon, 20 Jun 2022 14:25:29 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -241,7 +241,7 @@
 <p>在这个例子中，响应写请求的副本集合 \((B, C)\) 是一个 write quorum，而响应读请求的集合 \((A, B)\) 是一个 read quorum。一般来说，quorum 是一个最小的节点集合，它必须对某个请求作出响应才能成功。为了确保读写一致性，write quorum 和 read quorum 必须有一个非空的交集：换句话说，read quorum 必须包含至少一个已经被承认的 write quorum。</p>
 <p>在分布式系统中，常见的 majority quorum 是由超过半数的节点组成的任意子集。在三个节点的系统 \(\{A, B, C\}\) 中，majority quorum 可以是 \(\{A, B\}\)、\(\{A, C\}\) 和 \(\{B, C\}\)。通常来讲，奇数节点的系统，\(\frac{n+1}{2}\) 大小的任意子集就是 majority quorum，偶数节点的系统，需要四舍五入 \(\left \lceil \frac{n+1}{2} \right \rceil = \frac{n+2}{2}\)。majority quorum 有个特性：任意两个 quorums 至少有一个共同的元素，也就是交集至少有一个节点。</p>
 <p>只要不超过 \(n-w\) 个副本不可用（\(w\) 是 write quorum 的数量），系统就可以正常的处理更新；同样的，只要不超过 \(n-r\) 个副本不可以（\(r\) 是 read quorum 的数量），系统就可以正常的处理读请求。对于 majority quorum 来说，三个副本的系统可以容错一个节点，五个副本的系统可以容错两个节点，以此类推。</p>
-<p>在这种基于 quorum 的方法下，一些副本会错过一些更新。上图中，副本 \(A\) 错过了 \((t_{1}, v_{2})\)。让副本互相同步使其数据一致的方法上面提到过，叫做反熵（anti-entropy）。</p>
+<p>在这种基于 quorum 的方法下，一些副本会错过一些更新。上图中，副本 \(A\) 错过了 \((t_{1}, v_{1})\)。让副本互相同步使其数据一致的方法上面提到过，叫做反熵（anti-entropy）。</p>
 <figure>
     <img loading="lazy" src="/ox-hugo/read-repair.png"
          alt="Figure 8: read-repair"/> <figcaption>
