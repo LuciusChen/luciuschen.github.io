@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Jun 2022 14:25:29 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Jun 2022 14:47:51 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Mon, 20 Jun 2022 14:25:29 +0800</pubDate>
+      <pubDate>Mon, 20 Jun 2022 14:47:51 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -321,7 +321,7 @@
     <item>
       <title>Total order broadcast</title>
       <link>https://luciuschen.github.io/posts/main/20220616135058-total_order_broadcast/</link>
-      <pubDate>Mon, 20 Jun 2022 12:46:02 +0800</pubDate>
+      <pubDate>Mon, 20 Jun 2022 14:47:46 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220616135058-total_order_broadcast/</guid>
       <description>Definition 总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。FIFO broadcast 和 Causal broadcast 允许不同的节点以不同</description>
@@ -377,7 +377,7 @@
     <item>
       <title>Causal broadcast</title>
       <link>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</link>
-      <pubDate>Mon, 20 Jun 2022 12:26:55 +0800</pubDate>
+      <pubDate>Mon, 20 Jun 2022 14:47:39 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</guid>
       <description>Definition Causal broadcast 算法有点类似于 FIFO broadcast： 每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟</description>
@@ -431,7 +431,7 @@
     <item>
       <title>FIFO broadcast</title>
       <link>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</link>
-      <pubDate>Mon, 20 Jun 2022 11:54:25 +0800</pubDate>
+      <pubDate>Mon, 20 Jun 2022 14:47:28 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</guid>
       <description>Definition 最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之</description>
@@ -481,7 +481,7 @@ deliver \(m\) to the application</p>
     <item>
       <title>Vector clocks</title>
       <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Mon, 20 Jun 2022 11:26:00 +0800</pubDate>
+      <pubDate>Mon, 20 Jun 2022 14:47:18 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</guid>
       <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \l</description>
@@ -564,7 +564,7 @@ deliver \(m\) to the application</p>
     <item>
       <title>Lamport clocks</title>
       <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
-      <pubDate>Mon, 20 Jun 2022 11:05:57 +0800</pubDate>
+      <pubDate>Mon, 20 Jun 2022 14:47:12 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
       <description>Lamport clocks algorithm on initialisation do \(t := 0\) ▻ each node has its own local variable t end on on any event occurring at the local node do \(t := t + 1\) end on on request to send message \(m\) do \(t := t + 1\); send \((t, m)\) via the underlying network link end on on receiving \((t′, m)\) via the underlying</description>
@@ -637,7 +637,7 @@ deliver \(m\) to the application</p>
     <item>
       <title>Causality and Happen-before relation</title>
       <link>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</link>
-      <pubDate>Mon, 20 Jun 2022 10:20:01 +0800</pubDate>
+      <pubDate>Mon, 20 Jun 2022 14:47:03 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
       <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
