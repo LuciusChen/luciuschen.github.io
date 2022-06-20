@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Jun 2022 17:31:55 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Jun 2022 22:46:26 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Mon, 20 Jun 2022 17:31:55 +0800</pubDate>
+      <pubDate>Mon, 20 Jun 2022 22:46:26 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -316,7 +316,28 @@
 <p>start election timer</p>
 <p><strong>end on</strong></p>
 </blockquote>
-<p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。</p>
+<p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
+<p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
+<p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
+<h3 id="raft--2-9--voting-on-a-new-leader">Raft(2/9): voting on a new leader</h3>
+<blockquote>
+<p><strong>on</strong> receiving (VoteRequest, \(cId\), \(cTerm\), \(cLogLength\), \(cLogTerm\)) at node \(nodeId\) <strong>do</strong></p>
+<p>if \(cTerm \gt currentTerm\) <strong>then</strong></p>
+<pre><code>\\(currentTerm := cTerm; currentRole\\) := follower
+\\(votedFor\\) := null
+</code></pre>
+<p><strong>end if</strong></p>
+<p>\(lastTerm\) := 0</p>
+<p><strong>if</strong> \(log\).length &gt; <strong>then</strong> \(lastTerm := log[log\).length - 1].term; <strong>end if</strong></p>
+<p>\(logOk := (cLogTerm \gt lastTerm) \vee (cLogTerm = lastTerm \wedge cLogLength \ge log\).length)</p>
+<p><strong>if</strong> \(cTerm = currentTerm \wedge logOk \wedge votedFor \in {cId\), null} <strong>then</strong></p>
+<p>\(votedFor := cId\)</p>
+<p><strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), true) to node \(cId\)</p>
+<p><strong>else</strong></p>
+<p><strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), false) to node \(cId\)</p>
+<p><strong>end if</strong></p>
+<p><strong>end on</strong></p>
+</blockquote>
 <h2 id="reference">Reference</h2>
 <ul>
 <li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>
