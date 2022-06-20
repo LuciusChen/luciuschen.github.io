@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Jun 2022 14:47:51 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Jun 2022 17:31:55 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Mon, 20 Jun 2022 14:47:51 +0800</pubDate>
+      <pubDate>Mon, 20 Jun 2022 17:31:55 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -256,7 +256,7 @@
 <p>FIFO-total order broadcast: 每个节点以​<strong>相同的顺序</strong>​传递​<strong>相同的消息</strong>​。</p>
 <ul>
 <li>FIFO-total order broadcast 将每次更新，更新到所有副本。</li>
-<li>副本通过传递消息来确认自身状态</li>
+<li>副本通过传递的消息来确认自身状态</li>
 <li>更新具有确定性</li>
 <li>副本是一种状态机：开始于固定的初始状态，以相同的顺序经历相同序列状态的变换 \(\Longrightarrow\) 所有副本都以相同的状态结尾</li>
 </ul>
@@ -280,10 +280,11 @@
 <li>不能立即更新状态，必须等待广播传递。</li>
 <li>需要容错的 total order broadcast</li>
 </ul>
-<p>State machine replication 的缺点是 total order broadcast 的限制。当一个节点想通过 total order broadcast 来广播一个消息时，它不能立即将该消息传递给自己。由于这个原因，当使用状态机复制时，想要更新其状态的副本不能立即这样做，而是要经过广播过程，与其他节点协调，并等待更新信息被传递给自己。状态机复制的容错性取决于底层 total order broadcast 的容错性。尽管如此，基于 total order replication 的复制还是被广泛使用。</p>
+<p>State machine replication 的缺点是 total order broadcast 的限制。当一个节点想通过 total order broadcast 来广播一个消息时，它不能立即将该消息传递给自己。之前讲过，传递给自己的消息也要遵从总秩序，所以当使用状态机复制时，想要更新其状态的副本要等待广播，与其他节点协调，并等待更新信息被传递给自己。状态机复制的容错性取决于底层 total order broadcast 的容错性。尽管如此，基于 total order replication 的复制还是被广泛使用。</p>
 <p>在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中提到过一种实现方法是指定一个节点作为 Leader，并将所有的消息通过它来路由，保证传递的顺序。这一原则也被广泛应用于数据库副本：许多数据库系统指定一个副本作为 leader，primary 或者 master。所有修改数据库的事务都需要在 leader 副本上执行。虽然 leader 会同时执行多个事务，但事务提交时会按照总的顺序提交。当事务提交后， leader 副本将数据变动广播给所有的 follow 副本，follow 副本按照之前提交的顺序在本地进行事务提交，这种方法被称为被动复制（passive replication）或者主从复制（primary-backup replication），这样的方式其实和 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 是等效的。</p>
 <p>至于之前提到的其他广播方式，也可以用作复制，但需要更加小心，保证副本之间数据的一致性。</p>
-<h2 id="consensus">Consensus</h2>
+<h2 id="the-raft-consensus-algorithm">The Raft consensus algorithm</h2>
+<p>为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画示意<a href="http://thesecretlivesofdata.com/raft/">网站</a>。</p>
 <figure>
     <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
          alt="Figure 9: node-state-transitions-in-raft"/> <figcaption>
@@ -291,6 +292,31 @@
         </figcaption>
 </figure>
 
+<p>一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。</p>
+<p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
+<p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
+<h3 id="raft--1-9--initialisation">Raft(1/9): initialisation</h3>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong></p>
+<p>\(currentTerm\) := 0; \(votedFor\) := null</p>
+<p>\(log := \langle\rangle; commitLength\) := 0</p>
+<p>\(currentRole\) := follower; \(curentLeader\) := null</p>
+<p>\(votesReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\)</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> recovery from crash <strong>do</strong></p>
+<p>\(currentRole\) := follower; \(currentLeader\) := null</p>
+<p>\(votedReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\)</p>
+<p><strong>end on</strong></p>
+<p><strong>on</strong> node \(nodeId\) suspects leader has failed, or on election timeout <strong>do</strong></p>
+<p>\(currentTerm := currentTerm + 1; currentRole\) := candidate</p>
+<p>\(votedFor := nodeId; votesReceived := { nodeId } ; lastTerm := 0\)</p>
+<p><strong>if</strong> \(log\).length &gt; 0 <strong>then</strong> \(lastTerm\) := \(log[log\).length − 1].term; <strong>end if</strong></p>
+<p>\(msg\) := (VoteRequest, \(nodeId\), \(currentTerm\), \(log\).length, \(lastTerm\))</p>
+<p><strong>for each</strong> \(node \in nodes\): <strong>send</strong> \(msg\) to \(node\)</p>
+<p>start election timer</p>
+<p><strong>end on</strong></p>
+</blockquote>
+<p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。</p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>
