@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Jun 2022 22:46:26 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 Jun 2022 19:59:55 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Mon, 20 Jun 2022 22:46:26 +0800</pubDate>
+      <pubDate>Tue, 21 Jun 2022 19:59:55 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -239,7 +239,7 @@
 <p>通过使用三个副本可以解决这个难题<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。将每个读写请求发送到所有三个副本，但只要收到 \(≥2\) 个响应，就认为请求成功。在这个例子中，写在复制体 \(B\) 和 \(C\) 上成功，而读在副本 \(A\) 和 \(B\) 上成功。对读和写都采用 &ldquo;三选二 &ldquo;的策略，可以保证至少有一个对读的响应来自看到最近写的副本（在这个例子中，这是副本 \(B\)）。</p>
 <p>对于同一个请求，不同的副本可能会返回不同的响应：在上图中，\(A\) 处读取会返回初始值 \((t_{0}, v_{0})\)，而 \(B\) 处的读取会返回该客户端之前写入的 \((t_{1}, v_{1})\)。利用时间戳，客户端可以知道哪个响应是最近的，将 \(v_{1}\) 返回给 Application。</p>
 <p>在这个例子中，响应写请求的副本集合 \((B, C)\) 是一个 write quorum，而响应读请求的集合 \((A, B)\) 是一个 read quorum。一般来说，quorum 是一个最小的节点集合，它必须对某个请求作出响应才能成功。为了确保读写一致性，write quorum 和 read quorum 必须有一个非空的交集：换句话说，read quorum 必须包含至少一个已经被承认的 write quorum。</p>
-<p>在分布式系统中，常见的 majority quorum 是由超过半数的节点组成的任意子集。在三个节点的系统 \(\{A, B, C\}\) 中，majority quorum 可以是 \(\{A, B\}\)、\(\{A, C\}\) 和 \(\{B, C\}\)。通常来讲，奇数节点的系统，\(\frac{n+1}{2}\) 大小的任意子集就是 majority quorum，偶数节点的系统，需要四舍五入 \(\left \lceil \frac{n+1}{2} \right \rceil = \frac{n+2}{2}\)。majority quorum 有个特性：任意两个 quorums 至少有一个共同的元素，也就是交集至少有一个节点。</p>
+<p>在分布式系统中，常见的 majority quorum 是由超过半数的节点组成的任意子集。在三个节点的系统 \(\{A, B, C\}\) 中，majority quorum 可以是 \(\{A, B\}\)、\(\{A, C\}\) 和 \(\{B, C\}\)。通常来讲，奇数节点的系统，\(\frac{n+1}{2}\) 大小的任意子集就是 majority quorum，偶数节点的系统，需要四舍五入 \(\left \lceil \frac{n+1}{2} \right \rceil = \frac{n+2}{2}\)<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>。majority quorum 有个特性：任意两个 quorums 至少有一个共同的元素，也就是交集至少有一个节点。</p>
 <p>只要不超过 \(n-w\) 个副本不可用（\(w\) 是 write quorum 的数量），系统就可以正常的处理更新；同样的，只要不超过 \(n-r\) 个副本不可以（\(r\) 是 read quorum 的数量），系统就可以正常的处理读请求。对于 majority quorum 来说，三个副本的系统可以容错一个节点，五个副本的系统可以容错两个节点，以此类推。</p>
 <p>在这种基于 quorum 的方法下，一些副本会错过一些更新。上图中，副本 \(A\) 错过了 \((t_{1}, v_{1})\)。让副本互相同步使其数据一致的方法上面提到过，叫做反熵（anti-entropy）。</p>
 <figure>
@@ -284,7 +284,7 @@
 <p>在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中提到过一种实现方法是指定一个节点作为 Leader，并将所有的消息通过它来路由，保证传递的顺序。这一原则也被广泛应用于数据库副本：许多数据库系统指定一个副本作为 leader，primary 或者 master。所有修改数据库的事务都需要在 leader 副本上执行。虽然 leader 会同时执行多个事务，但事务提交时会按照总的顺序提交。当事务提交后， leader 副本将数据变动广播给所有的 follow 副本，follow 副本按照之前提交的顺序在本地进行事务提交，这种方法被称为被动复制（passive replication）或者主从复制（primary-backup replication），这样的方式其实和 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 是等效的。</p>
 <p>至于之前提到的其他广播方式，也可以用作复制，但需要更加小心，保证副本之间数据的一致性。</p>
 <h2 id="the-raft-consensus-algorithm">The Raft consensus algorithm</h2>
-<p>为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画示意<a href="http://thesecretlivesofdata.com/raft/">网站</a>。</p>
+<p>为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画<a href="http://thesecretlivesofdata.com/raft/">示意网站</a>。</p>
 <figure>
     <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
          alt="Figure 9: node-state-transitions-in-raft"/> <figcaption>
@@ -295,7 +295,7 @@
 <p>一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。</p>
 <p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
 <p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
-<h3 id="raft--1-9--initialisation">Raft(1/9): initialisation</h3>
+<h3 id="raft--1-9--initialisation">Raft (1/9): initialisation</h3>
 <blockquote>
 <p><strong>on</strong> initialisation <strong>do</strong></p>
 <p>\(currentTerm\) := 0; \(votedFor\) := null</p>
@@ -319,24 +319,85 @@
 <p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
 <p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
 <p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
-<h3 id="raft--2-9--voting-on-a-new-leader">Raft(2/9): voting on a new leader</h3>
+<h3 id="raft--2-9--voting-on-a-new-leader">Raft (2/9): voting on a new leader</h3>
 <blockquote>
 <p><strong>on</strong> receiving (VoteRequest, \(cId\), \(cTerm\), \(cLogLength\), \(cLogTerm\)) at node \(nodeId\) <strong>do</strong></p>
 <p>if \(cTerm \gt currentTerm\) <strong>then</strong></p>
-<pre><code>\\(currentTerm := cTerm; currentRole\\) := follower
-\\(votedFor\\) := null
-</code></pre>
+<p>\(currentTerm := cTerm; currentRole\) := follower
+\(votedFor\) := null</p>
 <p><strong>end if</strong></p>
 <p>\(lastTerm\) := 0</p>
-<p><strong>if</strong> \(log\).length &gt; <strong>then</strong> \(lastTerm := log[log\).length - 1].term; <strong>end if</strong></p>
-<p>\(logOk := (cLogTerm \gt lastTerm) \vee (cLogTerm = lastTerm \wedge cLogLength \ge log\).length)</p>
-<p><strong>if</strong> \(cTerm = currentTerm \wedge logOk \wedge votedFor \in {cId\), null} <strong>then</strong></p>
+<p><strong>if</strong> \(log\).length &gt; 0 <strong>then</strong> \(lastTerm := log[log\).length - 1].term; <strong>end if</strong></p>
+<p>\(logOk := (cLogTerm \gt lastTerm) \vee (cLogTerm = lastTerm \wedge cLogLength \ge log\).length)<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup></p>
+<p><strong>if</strong> \(cTerm = currentTerm \wedge logOk \wedge votedFor \in\) {\(cId\), null} <strong>then</strong></p>
 <p>\(votedFor := cId\)</p>
 <p><strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), true) to node \(cId\)</p>
 <p><strong>else</strong></p>
 <p><strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), false) to node \(cId\)</p>
 <p><strong>end if</strong></p>
 <p><strong>end on</strong></p>
+</blockquote>
+<p>如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。</p>
+<p>votedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及 当前的 term。</p>
+<h3 id="raft--3-9--collecting-votes">Raft (3/9) collecting votes</h3>
+<blockquote>
+<p><strong>on</strong> receiving (VoteResponse, \(voterId, term, granted\)) at \(nodeId\) <strong>do</strong></p>
+<p><strong>if</strong> \(currentRole\) = candidate \(\wedge term = currentTerm \wedge granted\) <strong>then</strong></p>
+<p>\(votesReceived := votesReceived \cup {voterId}\)</p>
+<p><strong>if</strong> \(|votesReceived| \ge \left \lceil\frac{(|nodes|) + 1}{2}\right \rceil\) <strong>then</strong></p>
+<p>\(currentRole\) := leader; \(curentLeader := nodeId\)</p>
+<p>cancel election timer</p>
+<p><strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong></p>
+<p>\(sentLength[follower] := log\).length</p>
+<p>\(ackedLength[folloer]\) := 0</p>
+<p>\(ReplicateLog(nodeId, follower)\)</p>
+<p><strong>end for</strong></p>
+<p><strong>end if</strong></p>
+<p><strong>else if</strong> \(term \gt currentTerm\) <strong>Then</strong></p>
+<p>\(currentTerm := term\)</p>
+<p>\(currentRole\) := follower</p>
+<p>\(votedFor\) := null</p>
+<p>cancel election timer</p>
+<p><strong>end if</strong></p>
+<p><strong>end on</strong></p>
+</blockquote>
+<p>回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。</p>
+<p>如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。</p>
+<p>sentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。</p>
+<h3 id="raft--4-9--broadcasting-messages">Raft (4/9): broadcasting messages</h3>
+<blockquote>
+<p><strong>on</strong> request to broadcast \(msg\) at node \(nodeId\) <strong>do</strong></p>
+<p><strong>if</strong> \(currentRole\) = leader <strong>then</strong></p>
+<p>append the record (msg: \(msg\), term: \(currentTerm\)) to \(log\)</p>
+<p>\(ackedLength[nodeId]\) := \(log\).length</p>
+<p><strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong></p>
+<p>\(ReplicateLog(nodeId, follower)\)</p>
+<p><strong>end for</strong></p>
+<p><strong>else</strong></p>
+<p>forward the request to \(currentLeader\) via a FIFO link</p>
+<p><strong>end if</strong></p>
+<p><strong>end on</strong></p>
+<p><strong>periodically</strong> at node \(nodeId\) <strong>do</strong></p>
+<p><strong>if</strong> \(currentRole\) = leader <strong>then</strong></p>
+<p><strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong></p>
+<p>\(ReplicateLog(nodeId, follower)\)</p>
+<p><strong>end for</strong></p>
+<p><strong>end if</strong></p>
+<p><strong>end do</strong></p>
+</blockquote>
+<p>以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。</p>
+<p>leader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。</p>
+<h3 id="raft--5-9--replicating-from-leader-to-followers">Raft (5/9): replicating from leader to followers</h3>
+<blockquote>
+<p><strong>function</strong> \(ReplicateLog(leaderId, followerId)\)</p>
+<p>\(prefixLen := sentLength[followerId]\)</p>
+<p>\(suffix := \langle log[prefixLen], log[prefixLen + 1]\), &hellip;, \(log[log\).length − 1]\(\rangle\)</p>
+<p>\(prefixTerm\) := 0</p>
+<p><strong>if</strong> \(prefixLen \gt\) 0 <strong>then</strong></p>
+<p>\(prefixTerm := log[prefixLen − 1]\).term</p>
+<p><strong>end if</strong></p>
+<p><strong>send</strong> (LogRequest, \(leaderId, currentTerm, prefixLen, prefixTerm, commitLength, suffix\)) to \(followerId\)</p>
+<p><strong>end function</strong></p>
 </blockquote>
 <h2 id="reference">Reference</h2>
 <ul>
@@ -360,8 +421,377 @@
 <li id="fn:5">
 <p><a href="/posts/main/20220615143721-quorum/">基于 Quorum 投票的冗余控制算法</a>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
+<li id="fn:6">
+<p>向上去整&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7">
+<p>\(\vee\) is logical or, \(\wedge\) is logical and.&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
 </div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Latex</title>
+      <link>https://luciuschen.github.io/posts/main/20220616162256-latex/</link>
+      <pubDate>Tue, 21 Jun 2022 16:56:12 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220616162256-latex/</guid>
+      <description>语法 效果 语法 效果 语法 效果 \bar{x} \(\bar{x}\) \acute{\eta} \(\acute{\eta}\) \check{\alpha} \(\check{\alpha}\) \grave{\eta} \(\grave{\eta}\) \breve{a} \(\breve{a}\) \ddot{y} \(\ddot{y}\) \dot{x} \(\dot{x}\) \hat{\alpha} \(\hat{\alpha}\) \tilde{\iota} \(\tilde{\iota}\) 语法 效果 语法 效果 语法 效果 \sin\theta \(\sin\!\theta\) \cos\theta \(\cos\theta\) \tan\theta \(\tan\theta\) \arcsin\frac{L}{r} \(\arcsin\frac{L}{r}\) \arccos\frac{T}{r} \(\arccos\frac{T}{r}\) \arctan\frac{L}{T} \(\arctan\frac{L}{T}\) \sinh g \(\sinh\ g\) \cosh h \(\cosh h\) \tanh i \(\tanh i\) \operatorname{sh}j \(\operatorname{sh}j\) \operatorname{argsh}k \(\operatorname{argsh}k\)</description>
+      <content:encoded><![CDATA[<p><a id="table--声调"></a></p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\bar{x}</code></td>
+<td>\(\bar{x}\)</td>
+<td><code>\acute{\eta}</code></td>
+<td>\(\acute{\eta}\)</td>
+<td><code>\check{\alpha}</code></td>
+<td>\(\check{\alpha}\)</td>
+</tr>
+<tr>
+<td><code>\grave{\eta}</code></td>
+<td>\(\grave{\eta}\)</td>
+<td><code>\breve{a}</code></td>
+<td>\(\breve{a}\)</td>
+<td><code>\ddot{y}</code></td>
+<td>\(\ddot{y}\)</td>
+</tr>
+<tr>
+<td><code>\dot{x}</code></td>
+<td>\(\dot{x}\)</td>
+<td><code>\hat{\alpha}</code></td>
+<td>\(\hat{\alpha}\)</td>
+<td><code>\tilde{\iota}</code></td>
+<td>\(\tilde{\iota}\)</td>
+</tr>
+</tbody>
+</table>
+<p><a id="table--函数"></a></p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\sin\theta</code></td>
+<td>\(\sin\!\theta\)</td>
+<td><code>\cos\theta</code></td>
+<td>\(\cos\theta\)</td>
+<td><code>\tan\theta</code></td>
+<td>\(\tan\theta\)</td>
+</tr>
+<tr>
+<td><code>\arcsin\frac{L}{r}</code></td>
+<td>\(\arcsin\frac{L}{r}\)</td>
+<td><code>\arccos\frac{T}{r}</code></td>
+<td>\(\arccos\frac{T}{r}\)</td>
+<td><code>\arctan\frac{L}{T}</code></td>
+<td>\(\arctan\frac{L}{T}\)</td>
+</tr>
+<tr>
+<td><code>\sinh g</code></td>
+<td>\(\sinh\ g\)</td>
+<td><code>\cosh h</code></td>
+<td>\(\cosh h\)</td>
+<td><code>\tanh i</code></td>
+<td>\(\tanh i\)</td>
+</tr>
+<tr>
+<td><code>\operatorname{sh}j</code></td>
+<td>\(\operatorname{sh}j\)</td>
+<td><code>\operatorname{argsh}k</code></td>
+<td>\(\operatorname{argsh}k\)</td>
+<td><code>\operatorname{ch}h</code></td>
+<td>\(\operatorname{ch}h\)</td>
+</tr>
+<tr>
+<td><code>\operatorname{argch}l</code></td>
+<td>\(\operatorname{argch}l\)</td>
+<td><code>\operatorname{th}i</code></td>
+<td>\(\operatorname{th}i\)</td>
+<td><code>\operatorname{argth}m</code></td>
+<td>\(\operatorname{argth}m\)</td>
+</tr>
+<tr>
+<td><code>k'(x)=\lim_{\Delta x\to 0}\frac{k(x)-k(x-\Delta x)}{\Deltax}</code></td>
+<td>\(k&rsquo;(x)=\lim_{\Delta x\to0}\!\frac{k(x)-k(x-\Delta x)}{\Delta x}\)</td>
+<td><code>\limsup S</code></td>
+<td>\(\limsup S\)</td>
+<td><code>\liminf I</code></td>
+<td>\(\liminf I\)</td>
+</tr>
+<tr>
+<td><code>\max H</code></td>
+<td>\(\max\!H\)</td>
+<td><code>\min L</code></td>
+<td>\(\min L\)</td>
+<td><code>\inf s</code></td>
+<td>\(\inf s\)</td>
+</tr>
+<tr>
+<td><code>\sup t</code></td>
+<td>\(\sup t\)</td>
+<td><code>\exp\!t</code></td>
+<td>\(\exp\!t\)</td>
+<td><code>\ln X</code></td>
+<td>\(\ln\!X\)</td>
+</tr>
+<tr>
+<td><code>\lg X</code></td>
+<td>\(\lg\!X\)</td>
+<td><code>\log X</code></td>
+<td>\(\log X\)</td>
+<td><code>\log_\alpha X</code></td>
+<td>\(\log_\alpha X\)</td>
+</tr>
+<tr>
+<td><code>\ker x</code></td>
+<td>\(\ker x\)</td>
+<td><code>\deg x</code></td>
+<td>\(\deg x\)</td>
+<td><code>\gcd(T,U,V,W,X)</code></td>
+<td>\(\gcd(T,U,V,W,X)\)</td>
+</tr>
+<tr>
+<td><code>\Pr x</code></td>
+<td>$Pr x	$</td>
+<td><code>\det x</code></td>
+<td>\(\det x\)</td>
+<td><code>\hom x</code></td>
+<td>\(\hom x\)</td>
+</tr>
+<tr>
+<td><code>\arg x</code></td>
+<td>\(\arg x\)</td>
+<td><code>\dim x</code></td>
+<td>\(\dim x\)</td>
+<td><code>\lim_{t\to n}T</code></td>
+<td>\(\lim_{t\to n}T\)</td>
+</tr>
+<tr>
+<td><code>\lceil\frac{n+1}{2}\rceil</code></td>
+<td>\(\lceil\frac{n+1}{2}\rceil\)</td>
+<td><code>\left \lceil\frac{n+1}{2}\right \rceil</code></td>
+<td>\(\left \lceil\frac{n+1}{2}\right \rceil\)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a id="table--同余"></a></p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\pmod{m}</code></td>
+<td>\(\pmod{m}\)</td>
+<td><code>a \bmod b</code></td>
+<td>\(a \bmod b\)</td>
+</tr>
+</tbody>
+</table>
+<p><a id="table--微分"></a></p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\nabla</code></td>
+<td>\(\nabla\)</td>
+<td><code>\partial x</code></td>
+<td>\(\partial x\)</td>
+<td><code>\mathrm{d}x</code></td>
+<td>\(\mathrm{d}x\)</td>
+</tr>
+<tr>
+<td><code>\dot x</code></td>
+<td>\(\dot x\)</td>
+<td><code>\ddot y</code></td>
+<td>\(\ddot y\)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a id="table--集合"></a></p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\forall</code></td>
+<td>\(\forall\)</td>
+<td><code>\exists</code></td>
+<td>\(\exists\)</td>
+<td><code>\empty</code></td>
+<td>∅</td>
+<td><code>\emptyset</code></td>
+<td>\(\emptyset\)</td>
+<td><code>\varnothing</code></td>
+<td>\(\varnothing\)</td>
+</tr>
+<tr>
+<td><code>\in</code></td>
+<td>\(\in\)</td>
+<td><code>\ni</code></td>
+<td>\(\ni\)</td>
+<td><code>\not\in</code></td>
+<td>\(\not\in\)</td>
+<td><code>\notin</code></td>
+<td>\(\notin\)</td>
+<td><code>\subset</code></td>
+<td>\(\subset\)</td>
+</tr>
+<tr>
+<td><code>\subseteq</code></td>
+<td>\(\subseteq\)</td>
+<td><code>\supset</code></td>
+<td>\(\supset\)</td>
+<td><code>\supseteq</code></td>
+<td>\(\supseteq\)</td>
+<td><code>\cap</code></td>
+<td>\(\cap\)</td>
+<td><code>\bigcap</code></td>
+<td>\(\bigcap\)</td>
+</tr>
+<tr>
+<td><code>\cup</code></td>
+<td>\(\cup\)</td>
+<td><code>\bigcup</code></td>
+<td>\(\bigcup\)</td>
+<td><code>\biguplus</code></td>
+<td>\(\biguplus\)</td>
+<td><code>\sqsubset</code></td>
+<td>\(\sqsubset\)</td>
+<td><code>\sqsubseteq</code></td>
+<td>\(\sqsubseteq\)</td>
+</tr>
+<tr>
+<td><code>\sqsupset</code></td>
+<td>\(\sqsupset\)</td>
+<td><code>\sqsupseteq</code></td>
+<td>\(\sqsupseteq\)</td>
+<td><code>\sqcap</code></td>
+<td>\(\sqcap\)</td>
+<td><code>\sqcup</code></td>
+<td>\(\sqcup\)</td>
+<td><code>\bigsqcup</code></td>
+<td>\(\bigsqcup\)</td>
+</tr>
+</tbody>
+</table>
+<p><a id="table--逻辑"></a></p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>p</code></td>
+<td>\(p\)</td>
+<td><code>\land</code></td>
+<td>\(\land\)</td>
+<td><code>\wedge</code></td>
+<td>\(\wedge\)</td>
+<td><code>\bigwedge</code></td>
+<td>\(\bigwedge\)</td>
+</tr>
+<tr>
+<td><code>\bar{q} \to p</code></td>
+<td>\(\bar{q} \to p\)</td>
+<td><code>\lor</code></td>
+<td>\(\lor\)</td>
+<td><code>\vee</code></td>
+<td>\(\vee\)</td>
+<td><code>\bigvee</code></td>
+<td>\(\bigvee\)</td>
+</tr>
+<tr>
+<td><code>\lnot</code></td>
+<td>\(\lnot\)</td>
+<td><code>\neg q</code></td>
+<td>\(\neg q\)</td>
+<td><code>\setminus</code></td>
+<td>\(\setminus\)</td>
+<td><code>\smallsetminus</code></td>
+<td>\(\smallsetminus\)</td>
+</tr>
+</tbody>
+</table>
+<p><a id="table--根号"></a></p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>效果</th>
+<th>语法</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\sqrt{3}</code></td>
+<td>\(\sqrt{3}\)</td>
+<td><code>\sqrt[n]{3}</code></td>
+<td>\(\sqrt[n]{3}\)</td>
+</tr>
+</tbody>
+</table>
 ]]></content:encoded>
     </item>
     
@@ -824,361 +1254,6 @@ deliver \(m\) to the application</p>
 <p>在分布式系统中，冗余数据是保证可靠性的手段，因此冗余数据的一致性维护就非常重要。一般而言，一个写操作必须要对所有的冗余数据都更新完成了，才能称为成功结束。比如一份数据在5台设备上有冗余，因为不知道读数据会落在哪一台设备上，那么一次写操作，必须5台设备都更新完成，写操作才能返回。</p>
 <p>对于写操作比较频繁的系统，这个操作的瓶颈非常大。Quorum 算法可以让写操作只要写完3台就返回。剩下的由系统内部缓慢同步完成。而读操作，则需要也至少读3台，才能保证至少可以读到一个最新的数据。</p>
 <p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 \(V_{w}\) 越大，则读票数 \(V_{r}\) 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Latex</title>
-      <link>https://luciuschen.github.io/posts/main/20220616162256-latex/</link>
-      <pubDate>Sun, 19 Jun 2022 12:53:28 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220616162256-latex/</guid>
-      <description>语法 效果 语法 效果 语法 效果 \bar{x} \(\bar{x}\) \acute{\eta} \(\acute{\eta}\) \check{\alpha} \(\check{\alpha}\) \grave{\eta} \(\grave{\eta}\) \breve{a} \(\breve{a}\) \ddot{y} \(\ddot{y}\) \dot{x} \(\dot{x}\) \hat{\alpha} \(\hat{\alpha}\) \tilde{\iota} \(\tilde{\iota}\) 语法 效果 语法 效果 语法 效果 \sin\theta \(\sin\!\theta\) \cos\theta \(\cos\theta\) \tan\theta \(\tan\theta\) \arcsin\frac{L}{r} \(\arcsin\frac{L}{r}\) \arccos\frac{T}{r} \(\arccos\frac{T}{r}\) \arctan\frac{L}{T} \(\arctan\frac{L}{T}\) \sinh g \(\sinh\ g\) \cosh h \(\cosh h\) \tanh i \(\tanh i\) \operatorname{sh}j \(\operatorname{sh}j\) \operatorname{argsh}k \(\operatorname{argsh}k\)</description>
-      <content:encoded><![CDATA[<p><a id="table--声调"></a></p>
-<table>
-<thead>
-<tr>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>\bar{x}</code></td>
-<td>\(\bar{x}\)</td>
-<td><code>\acute{\eta}</code></td>
-<td>\(\acute{\eta}\)</td>
-<td><code>\check{\alpha}</code></td>
-<td>\(\check{\alpha}\)</td>
-</tr>
-<tr>
-<td><code>\grave{\eta}</code></td>
-<td>\(\grave{\eta}\)</td>
-<td><code>\breve{a}</code></td>
-<td>\(\breve{a}\)</td>
-<td><code>\ddot{y}</code></td>
-<td>\(\ddot{y}\)</td>
-</tr>
-<tr>
-<td><code>\dot{x}</code></td>
-<td>\(\dot{x}\)</td>
-<td><code>\hat{\alpha}</code></td>
-<td>\(\hat{\alpha}\)</td>
-<td><code>\tilde{\iota}</code></td>
-<td>\(\tilde{\iota}\)</td>
-</tr>
-</tbody>
-</table>
-<p><a id="table--函数"></a></p>
-<table>
-<thead>
-<tr>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>\sin\theta</code></td>
-<td>\(\sin\!\theta\)</td>
-<td><code>\cos\theta</code></td>
-<td>\(\cos\theta\)</td>
-<td><code>\tan\theta</code></td>
-<td>\(\tan\theta\)</td>
-</tr>
-<tr>
-<td><code>\arcsin\frac{L}{r}</code></td>
-<td>\(\arcsin\frac{L}{r}\)</td>
-<td><code>\arccos\frac{T}{r}</code></td>
-<td>\(\arccos\frac{T}{r}\)</td>
-<td><code>\arctan\frac{L}{T}</code></td>
-<td>\(\arctan\frac{L}{T}\)</td>
-</tr>
-<tr>
-<td><code>\sinh g</code></td>
-<td>\(\sinh\ g\)</td>
-<td><code>\cosh h</code></td>
-<td>\(\cosh h\)</td>
-<td><code>\tanh i</code></td>
-<td>\(\tanh i\)</td>
-</tr>
-<tr>
-<td><code>\operatorname{sh}j</code></td>
-<td>\(\operatorname{sh}j\)</td>
-<td><code>\operatorname{argsh}k</code></td>
-<td>\(\operatorname{argsh}k\)</td>
-<td><code>\operatorname{ch}h</code></td>
-<td>\(\operatorname{ch}h\)</td>
-</tr>
-<tr>
-<td><code>\operatorname{argch}l</code></td>
-<td>\(\operatorname{argch}l\)</td>
-<td><code>\operatorname{th}i</code></td>
-<td>\(\operatorname{th}i\)</td>
-<td><code>\operatorname{argth}m</code></td>
-<td>\(\operatorname{argth}m\)</td>
-</tr>
-<tr>
-<td><code>k'(x)=\lim_{\Delta x\to 0}\frac{k(x)-k(x-\Delta x)}{\Deltax}</code></td>
-<td>\(k&rsquo;(x)=\lim_{\Delta x\to0}\!\frac{k(x)-k(x-\Delta x)}{\Delta x}\)</td>
-<td><code>\limsup S</code></td>
-<td>\(\limsup S\)</td>
-<td><code>\liminf I</code></td>
-<td>\(\liminf I\)</td>
-</tr>
-<tr>
-<td><code>\max H</code></td>
-<td>\(\max\!H\)</td>
-<td><code>\min L</code></td>
-<td>\(\min L\)</td>
-<td><code>\inf s</code></td>
-<td>\(\inf s\)</td>
-</tr>
-<tr>
-<td><code>\sup t</code></td>
-<td>\(\sup t\)</td>
-<td><code>\exp\!t</code></td>
-<td>\(\exp\!t\)</td>
-<td><code>\ln X</code></td>
-<td>\(\ln\!X\)</td>
-</tr>
-<tr>
-<td><code>\lg X</code></td>
-<td>\(\lg\!X\)</td>
-<td><code>\log X</code></td>
-<td>\(\log X\)</td>
-<td><code>\log_\alpha X</code></td>
-<td>\(\log_\alpha X\)</td>
-</tr>
-<tr>
-<td><code>\ker x</code></td>
-<td>\(\ker x\)</td>
-<td><code>\deg x</code></td>
-<td>\(\deg x\)</td>
-<td><code>\gcd(T,U,V,W,X)</code></td>
-<td>\(\gcd(T,U,V,W,X)\)</td>
-</tr>
-<tr>
-<td><code>\Pr x</code></td>
-<td>$Pr x	$</td>
-<td><code>\det x</code></td>
-<td>\(\det x\)</td>
-<td><code>\hom x</code></td>
-<td>\(\hom x\)</td>
-</tr>
-<tr>
-<td><code>\arg x</code></td>
-<td>\(\arg x\)</td>
-<td><code>\dim x</code></td>
-<td>\(\dim x\)</td>
-<td><code>\lim_{t\to n}T</code></td>
-<td>\(\lim_{t\to n}T\)</td>
-</tr>
-</tbody>
-</table>
-<p><a id="table--同余"></a></p>
-<table>
-<thead>
-<tr>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>\pmod{m}</code></td>
-<td>\(\pmod{m}\)</td>
-<td><code>a \bmod b</code></td>
-<td>\(a \bmod b\)</td>
-</tr>
-</tbody>
-</table>
-<p><a id="table--微分"></a></p>
-<table>
-<thead>
-<tr>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>\nabla</code></td>
-<td>\(\nabla\)</td>
-<td><code>\partial x</code></td>
-<td>\(\partial x\)</td>
-<td><code>\mathrm{d}x</code></td>
-<td>\(\mathrm{d}x\)</td>
-</tr>
-<tr>
-<td><code>\dot x</code></td>
-<td>\(\dot x\)</td>
-<td><code>\ddot y</code></td>
-<td>\(\ddot y\)</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><a id="table--集合"></a></p>
-<table>
-<thead>
-<tr>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>\forall</code></td>
-<td>\(\forall\)</td>
-<td><code>\exists</code></td>
-<td>\(\exists\)</td>
-<td><code>\empty</code></td>
-<td>∅</td>
-<td><code>\emptyset</code></td>
-<td>\(\emptyset\)</td>
-<td><code>\varnothing</code></td>
-<td>\(\varnothing\)</td>
-</tr>
-<tr>
-<td><code>\in</code></td>
-<td>\(\in\)</td>
-<td><code>\ni</code></td>
-<td>\(\ni\)</td>
-<td><code>\not\in</code></td>
-<td>\(\not\in\)</td>
-<td><code>\notin</code></td>
-<td>\(\notin\)</td>
-<td><code>\subset</code></td>
-<td>\(\subset\)</td>
-</tr>
-<tr>
-<td><code>\subseteq</code></td>
-<td>\(\subseteq\)</td>
-<td><code>\supset</code></td>
-<td>\(\supset\)</td>
-<td><code>\supseteq</code></td>
-<td>\(\supseteq\)</td>
-<td><code>\cap</code></td>
-<td>\(\cap\)</td>
-<td><code>\bigcap</code></td>
-<td>\(\bigcap\)</td>
-</tr>
-<tr>
-<td><code>\cup</code></td>
-<td>\(\cup\)</td>
-<td><code>\bigcup</code></td>
-<td>\(\bigcup\)</td>
-<td><code>\biguplus</code></td>
-<td>\(\biguplus\)</td>
-<td><code>\sqsubset</code></td>
-<td>\(\sqsubset\)</td>
-<td><code>\sqsubseteq</code></td>
-<td>\(\sqsubseteq\)</td>
-</tr>
-<tr>
-<td><code>\sqsupset</code></td>
-<td>\(\sqsupset\)</td>
-<td><code>\sqsupseteq</code></td>
-<td>\(\sqsupseteq\)</td>
-<td><code>\sqcap</code></td>
-<td>\(\sqcap\)</td>
-<td><code>\sqcup</code></td>
-<td>\(\sqcup\)</td>
-<td><code>\bigsqcup</code></td>
-<td>\(\bigsqcup\)</td>
-</tr>
-</tbody>
-</table>
-<p><a id="table--逻辑"></a></p>
-<table>
-<thead>
-<tr>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>p</code></td>
-<td>\(p\)</td>
-<td><code>\land</code></td>
-<td>\(\land\)</td>
-<td><code>\wedge</code></td>
-<td>\(\wedge\)</td>
-<td><code>\bigwedge</code></td>
-<td>\(\bigwedge\)</td>
-</tr>
-<tr>
-<td><code>\bar{q} \to p</code></td>
-<td>\(\bar{q} \to p\)</td>
-<td><code>\lor</code></td>
-<td>\(\lor\)</td>
-<td><code>\vee</code></td>
-<td>\(\vee\)</td>
-<td><code>\bigvee</code></td>
-<td>\(\bigvee\)</td>
-</tr>
-<tr>
-<td><code>\lnot</code></td>
-<td>\(\lnot\)</td>
-<td><code>\neg q</code></td>
-<td>\(\neg q\)</td>
-<td><code>\setminus</code></td>
-<td>\(\setminus\)</td>
-<td><code>\smallsetminus</code></td>
-<td>\(\smallsetminus\)</td>
-</tr>
-</tbody>
-</table>
-<p><a id="table--根号"></a></p>
-<table>
-<thead>
-<tr>
-<th>语法</th>
-<th>效果</th>
-<th>语法</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>\sqrt{3}</code></td>
-<td>\(\sqrt{3}\)</td>
-<td><code>\sqrt[n]{3}</code></td>
-<td>\(\sqrt[n]{3}\)</td>
-</tr>
-</tbody>
-</table>
 ]]></content:encoded>
     </item>
     
