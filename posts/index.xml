@@ -6,74 +6,217 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Jun 2022 23:27:11 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Jun 2022 17:21:30 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Lamport clocks</title>
-      <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
-      <pubDate>Wed, 22 Jun 2022 23:27:11 +0800</pubDate>
+      <title>Raft consensus algorithm</title>
+      <link>https://luciuschen.github.io/posts/main/20220623152601-raft_consensus_algorithm/</link>
+      <pubDate>Thu, 23 Jun 2022 17:21:30 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
-      <description>Lamport clocks algorithm on initialisation do \(\qquad t := 0\) ▻ each node has its own local variable t end on on any event occurring at the local node do \(\qquad t := t + 1\) end on on request to send message \(m\) do \(\qquad t := t + 1\); send \((t, m)\) via the underlying network link end on on receiving \((t′, m)\)</description>
-      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
+      <guid>https://luciuschen.github.io/posts/main/20220623152601-raft_consensus_algorithm/</guid>
+      <description>为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画示意网站。 Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candi</description>
+      <content:encoded><![CDATA[<p>为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画<a href="http://thesecretlivesofdata.com/raft/">示意网站</a>。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
+         alt="Figure 1: node-state-transitions-in-raft"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>node-state-transitions-in-raft</p>
+        </figcaption>
+</figure>
+
+<p>一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。</p>
+<p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
+<p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
+<h2 id="initialisation">Initialisation</h2>
 <blockquote>
 <p><strong>on</strong> initialisation <strong>do</strong> <br />
-\(\qquad t := 0\) ▻ each node has its own local variable t <br />
+\(\qquad currentTerm\) := 0; \(votedFor\) := null <br />
+\(\qquad log := \langle\rangle; commitLength\) := 0 <br />
+\(\qquad currentRole\) := follower; \(curentLeader\) := null <br />
+\(\qquad votesReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\) <br />
 <strong>end on</strong></p>
-<p><strong>on</strong> any event occurring at the local node <strong>do</strong> <br />
-\(\qquad t := t + 1\) <br />
+<p><strong>on</strong> recovery from crash <strong>do</strong> <br />
+\(\qquad currentRole\) := follower; \(currentLeader\) := null <br />
+\(\qquad votedReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\) <br />
 <strong>end on</strong></p>
-<p><strong>on</strong> request to send message \(m\) <strong>do</strong> <br />
-\(\qquad t := t + 1\); send \((t, m)\) via the underlying network link <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> receiving \((t′, m)\) via the underlying network link <strong>do</strong> <br />
-\(\qquad t := max(t, t′) + 1\) <br />
-\(\qquad\)​deliver \(m\) to the application <br />
+<p><strong>on</strong> node \(nodeId\) suspects leader has failed, or on election timeout <strong>do</strong> <br />
+\(\qquad currentTerm := currentTerm + 1; currentRole\) := candidate <br />
+\(\qquad votedFor := nodeId; votesReceived := { nodeId } ; lastTerm := 0\) <br />
+\(\qquad\)​<strong>if</strong> \(log\).length &gt; 0 <strong>then</strong> \(lastTerm\) := \(log[log\).length − 1].term; <strong>end if</strong> <br />
+\(\qquad\qquad msg\) := (VoteRequest, \(nodeId\), \(currentTerm\), \(log\).length, \(lastTerm\)) <br />
+\(\qquad\)​<strong>for each</strong> \(node \in nodes\): <strong>send</strong> \(msg\) to \(node\) <br />
+\(\qquad\)​start election timer <br />
 <strong>end on</strong></p>
 </blockquote>
-<h2 id="lamport-clocks-in-words">Lamport clocks in words</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
-         alt="Figure 1: lamport-example-simple"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
-        </figcaption>
-</figure>
-
-<ul>
-<li>每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。</li>
-<li>增长后的值设为 \(L(e)\)</li>
-<li>发送消息时附带上当前的计数 \(t\)</li>
-<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
-</ul>
-<p>Properties of this scheme:</p>
-<ul>
-<li>if \(a \rightarrow b\) then \(L(e) &lt; L(b)\)</li>
-<li>However, \(L(a) &lt; L(b)\) does not imply \(a \rightarrow b\)</li>
-<li>Possible that \(L(a) = L(b)\) for \(a \ne b\)</li>
-</ul>
-<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
-<h2 id="lamport-clocks-example">Lamport clocks example</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example.png"
-         alt="Figure 2: lamport-example"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
-        </figcaption>
-</figure>
-
-<p>Let \(N(e)\) be the node at which event \(e\) occurred.</p>
-<p>Then the pair \((L(e), N(e))\) <strong>uniquely identiﬁes</strong> event \(e\).</p>
-<p>Deﬁne a <strong>total order</strong> \(≺\) using Lamport timestamps:</p>
-<p>\((a ≺ b) \iff (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b)))\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<p>This order is <strong>causal</strong>: \((a → b) \Longrightarrow (a ≺ b)\)</p>
-<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
-<p>对于任何两个事件 \(a \ne b\)，那么既不是 \(a ≺ b\) 也不是 \(b ≺ a\)。只要 \(a → b\)，我们就有 \(a ≺ b\)，换句话说，\(≺\) 是局部顺序 \(\rightarrow\) 的线性扩展。然而，如果 \(a \rVert b\)，我们可以有 \(a ≺ b\) 或 \(b ≺ a\)，所以两个事件的顺序是由算法任意决定的。 比如 \((1, A)\) 和 \((1, C)\) 两个事件是平行的，按照 Lamport 的算法，\((1, A)\) 必然是在 \((1, C)\) 之前的，但实际情况可能是 \((1, C)\) 在前。</p>
+<p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
+<p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
+<p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
+<h2 id="voting-on-a-new-leader">Voting on a new leader</h2>
+<blockquote>
+<p><strong>on</strong> receiving (VoteRequest, \(cId\), \(cTerm\), \(cLogLength\), \(cLogTerm\)) at node \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(cTerm \gt currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad currentTerm := cTerm; currentRole\) := follower <br />
+\(\qquad\qquad votedFor\) := null <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad lastTerm\) := 0 <br />
+\(\qquad\)​<strong>if</strong> \(log\).length &gt; 0 <strong>then</strong> \(lastTerm := log[log\).length - 1].term; <strong>end if</strong> <br />
+\(\qquad logOk := (cLogTerm \gt lastTerm) \vee (cLogTerm = lastTerm \wedge cLogLength \ge log\).length)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <br />
+\(\qquad\)​<strong>if</strong> \(cTerm = currentTerm \wedge logOk \wedge votedFor \in\) {\(cId\), null} <strong>then</strong> <br />
+\(\qquad\qquad votedFor := cId\) <br />
+\(\qquad\qquad\)​<strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), true) to node \(cId\) <br />
+\(\qquad\)​<strong>else</strong> <br />
+\(\qquad\qquad\)​<strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), false) to node \(cId\) <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end on</strong></p>
+</blockquote>
+<p>如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。</p>
+<p>votedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及 当前的 term。</p>
+<h2 id="collecting-votes">Collecting votes</h2>
+<blockquote>
+<p><strong>on</strong> receiving (VoteResponse, \(voterId, term, granted\)) at \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(currentRole\) = candidate \(\wedge term = currentTerm \wedge granted\) <strong>then</strong> <br />
+\(\qquad\qquad votesReceived := votesReceived \cup {voterId}\) <br />
+\(\qquad\qquad\)​<strong>if</strong> \(|votesReceived| \ge \left \lceil\frac{(|nodes|) + 1}{2}\right \rceil\) <strong>then</strong> <br />
+\(\qquad\qquad\qquad currentRole\) := leader; \(curentLeader := nodeId\) <br />
+\(\qquad\qquad\qquad\)​cancel election timer <br />
+\(\qquad\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
+\(\qquad\qquad\qquad\qquad sentLength[follower] := log\).length <br />
+\(\qquad\qquad\qquad\qquad ackedLength[follower]\) := 0 <br />
+\(\qquad\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
+\(\qquad\qquad\qquad\) ​<strong>end for</strong> <br />
+\(\qquad\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>else if</strong> \(term \gt currentTerm\) <strong>Then</strong> <br />
+\(\qquad\qquad currentTerm := term\) <br />
+\(\qquad\qquad currentRole\) := follower <br />
+\(\qquad\qquad votedFor\) := null <br />
+\(\qquad\qquad\)​cancel election timer <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end on</strong></p>
+</blockquote>
+<p>回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。</p>
+<p>如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。</p>
+<p>sentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。</p>
+<h2 id="broadcasting-messages">Broadcasting messages</h2>
+<blockquote>
+<p><strong>on</strong> request to broadcast \(msg\) at node \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(currentRole\) = leader <strong>then</strong> <br />
+\(\qquad\qquad\)​append the record (msg: \(msg\), term: \(currentTerm\)) to \(log\) <br />
+\(\qquad\qquad ackedLength[nodeId]\) := \(log\).length <br />
+\(\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
+\(\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\)​<strong>else</strong> <br />
+\(\qquad\qquad\)​forward the request to \(currentLeader\) via a FIFO link <br />
+\(\qquad\)​<strong>end if</strong><br />
+<strong>end on</strong></p>
+<p><strong>periodically</strong> at node \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(currentRole\) = leader <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
+\(\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end do</strong></p>
+</blockquote>
+<p>以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。</p>
+<p>leader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。</p>
+<h2 id="replicating-from-leader-to-followers">Replicating from leader to followers</h2>
+<blockquote>
+<p><strong>function</strong> \(\mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(leaderId, followerId)\) <br />
+\(\qquad prefixLen := sentLength[followerId]\) <br />
+\(\qquad suffix := \langle log[prefixLen], log[prefixLen + 1]\), &hellip;, \(log[log\).length − 1]\(\rangle\) <br />
+\(\qquad prefixTerm\) := 0 <br />
+\(\qquad\)​<strong>if</strong> \(prefixLen \gt\) 0 <strong>then</strong> <br />
+\(\qquad\qquad prefixTerm := log[prefixLen − 1]\).term <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>send</strong> (LogRequest, \(leaderId, currentTerm, prefixLen, prefixTerm, commitLength, suffix\)) to \(followerId\) <br />
+<strong>end function</strong></p>
+</blockquote>
+<p>ReplicateLog 方法是从 leader 利用 followerId 发送任何新的 log 条目给 follower。prefixLen 是已经发送给 follower 消息的数量，suffix 就是还没有发送给 follower 的消息。所以当 sentLength[follower] = log.length 时，suffix 是一个空数组。</p>
+<h2 id="followers-receiving-messages">Followers receiving messages</h2>
+<blockquote>
+<p><strong>on</strong> receiving (LogRequest, \(leaderId, term, prefixLen, prefixTerm, leaderCommit, suffix\)) at node \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(term \gt currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad currentTerm := term; votedFor\) := null <br />
+\(\qquad\qquad\)​cancel election timer <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>if</strong> \(term = currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad currentRole\) := follower; \(currentLeader := leaderId\) <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad logOk := (log\).length \(\ge prefixLen) \wedge (prefixLen = 0 \vee log[prefixLen - 1]\).term = \(prefixTerm\)) <br />
+\(\qquad\)​<strong>if</strong> \(term = currentTerm \wedge logOk\) <strong>then</strong> <br />
+\(\qquad\qquad \mathrm{A}\mathrm{\scriptsize PPEND}\mathrm{E}\mathrm{\scriptsize NTRIES}(prefixLen, leaderCommit, suffix)\) <br />
+\(\qquad\qquad ack := prefixLen + suffix\).length <br />
+\(\qquad\qquad\)​<strong>send</strong> (LogResponse, \(nodeId, currentTerm, ack\), true) to \(leaderId\) <br />
+\(\qquad\)​<strong>else</strong> <br />
+\(\qquad\qquad\)​<strong>send</strong> (LogResponse, \(nodeId, currentTerm\), 0, false) to \(leaderId\) <br />
+\(\qquad\)​<strong>end if</strong>
+<strong>end on</strong></p>
+</blockquote>
+<p>首先，如果消息的 term 比 follower 当前的 term 高，则更新当前的 term，并接受消息的发送者为 leader。相等的时候，也会和之前一样的逻辑，承认发送者为 leader。</p>
+<p>prefixLen 为 suffix 包含 log 条目之前的条目数量，follower 要求自己当前的 log 长度要大于等于 prefixLen，并且 prefixLen 长度前的最后一个 log 条目中的 term 要与 leader 的 prefixTerm 相同<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。Raft 算法保证两个节点相同下标对应的 log 条目中的 term 相同，那么在这之前的 log 都是相同。</p>
+<p>以上条件满足就会调用 AppendEntries 将 suffix 添加到自己的 log 当中。</p>
+<h2 id="updating-followers-logs">Updating followers&rsquo; logs</h2>
+<blockquote>
+<p><strong>function</strong> \(\mathrm{A}\mathrm{\scriptsize PPEND}\mathrm{E}\mathrm{\scriptsize NTRIES}(prefixLen, leaderCommit, suffix)\) <br />
+\(\qquad\)​<strong>if</strong> \(suffix\).length \(\gt 0 \wedge log\).length \(\gt prefixLen\) <strong>then</strong> <br />
+\(\qquad\qquad index\) := min(\(log\).length, \(prefixLen + suffix\).length) - 1 <br />
+\(\qquad\qquad\)​<strong>if</strong> \(log[index]\).term \(\ne suffix[index - prefixLen]\).term <strong>then</strong> <br />
+\(\qquad\qquad\qquad log := \langle log[0], log[1], &hellip;, log[prefixLen - 1]\rangle\) <br />
+\(\qquad\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>if</strong> \(prefixLen + suffix\).length \(\gt log\).length <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>for</strong> \(i := log\).length - \(prefixLen\) <strong>to</strong> \(suffix\).length - 1 <strong>do</strong> <br />
+\(\qquad\qquad\qquad\)​append \(suffix[i]\) to \(log\) <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>if</strong> \(leaderCommit \gt commitLength\) <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>for</strong> \(i := commitLength\) <strong>to</strong> \(leaderCommit\) - 1 <strong>do</strong> <br />
+\(\qquad\qquad\qquad\)​deliver \(log[i]\).msg to the application <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\qquad commitLength := leaderCommit\) <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end function</strong></p>
+</blockquote>
+<h2 id="leader-receiving-log-acknowledgements">Leader receiving log acknowledgements</h2>
+<blockquote>
+<p><strong>on</strong> receiving (LogResponse, \(follower, term, ack, success\)) at \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(term = currentTerm \wedge currentRole\) = leader <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>if</strong> \(success\) = true \(\wedge ack \ge ackedLength[follower]\) <strong>then</strong> <br />
+\(\qquad\qquad\qquad sentLength[follower] := ack\) <br />
+\(\qquad\qquad\qquad ackedLength[follower] := ack\) <br />
+\(\qquad\qquad\qquad \mathrm{C}\mathrm{\scriptsize OMMIT}\mathrm{L}\mathrm{\scriptsize OG}\mathrm{E}\mathrm{\scriptsize NTRIES}()\) <br />
+\(\qquad\qquad\)​<strong>else if</strong> \(sentLength[follower] \gt 0\) <strong>then</strong> <br />
+\(\qquad\qquad\qquad sentLength[follower] := sentLength[follower] - 1\) <br />
+\(\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
+\(\qquad\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>end if</strong> \(term \gt currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad currentTerm := term\) <br />
+\(\qquad\qquad currentRole\) := folloer <br />
+\(\qquad\qquad votedFor\) := null <br />
+\(\qquad\qquad\)​cancel election timer <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end on</strong></p>
+</blockquote>
+<h2 id="leader-committing-log-entries">Leader committing log entries</h2>
+<blockquote>
+<p><strong>define</strong> acks(\(length\)) = \(|{n \in nodes | ackedLength[n] \ge length}|\)</p>
+<p><strong>function</strong> \(\mathrm{C}\mathrm{\scriptsize OMMIT}\mathrm{L}\mathrm{\scriptsize OG}\mathrm{E}\mathrm{\scriptsize NTRIES}\) <br />
+\(\qquad minAcks := \left \lceil\frac{|nodes| + 1}{2} \right \rceil\) <br />
+\(\qquad ready\) := {\(len \in\) {1, &hellip;, \(log\).length} | acks(\(len\)) \(\ge minAcks\)} <br />
+\(\qquad\)​<strong>if</strong> \(ready \ne {} \wedge\) max(\(ready\)) \(\gt commitLength \wedge log\)[max(\(ready\)) - 1].term = \(currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>for</strong> \(i := commitLength\) <strong>to</strong> max(\(ready\)) - 1 <strong>do</strong> <br />
+\(\qquad\qquad\qquad\)​deliver \(log[i]\).msg to the application <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\qquad commitLength\) := max(\(ready\)) <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end function</strong></p>
+</blockquote>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1">
-<p>\(\iff\) is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>\(\vee\) is logical or, \(\wedge\) is logical and.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2">
-<p>\(∨\) is logical or, \(∧\) is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>参考上一个步骤中 prefixTerm 的来源&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
@@ -83,7 +226,7 @@
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Wed, 22 Jun 2022 16:10:33 +0800</pubDate>
+      <pubDate>Thu, 23 Jun 2022 15:31:21 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -357,142 +500,7 @@
 <p>在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中提到过一种实现方法是指定一个节点作为 Leader，并将所有的消息通过它来路由，保证传递的顺序。这一原则也被广泛应用于数据库副本：许多数据库系统指定一个副本作为 leader，primary 或者 master。所有修改数据库的事务都需要在 leader 副本上执行。虽然 leader 会同时执行多个事务，但事务提交时会按照总的顺序提交。当事务提交后， leader 副本将数据变动广播给所有的 follow 副本，follow 副本按照之前提交的顺序在本地进行事务提交，这种方法被称为被动复制（passive replication）或者主从复制（primary-backup replication），这样的方式其实和 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 是等效的。</p>
 <p>至于之前提到的其他广播方式，也可以用作复制，但需要更加小心，保证副本之间数据的一致性。</p>
 <h2 id="the-raft-consensus-algorithm">The Raft consensus algorithm</h2>
-<p>为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画<a href="http://thesecretlivesofdata.com/raft/">示意网站</a>。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
-         alt="Figure 9: node-state-transitions-in-raft"/> <figcaption>
-            <p><span class="figure-number">Figure 9: </span>node-state-transitions-in-raft</p>
-        </figcaption>
-</figure>
-
-<p>一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。</p>
-<p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
-<p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
-<h3 id="raft--1-9--initialisation">Raft (1/9): initialisation</h3>
-<blockquote>
-<p><strong>on</strong> initialisation <strong>do</strong> <br />
-\(\qquad currentTerm\) := 0; \(votedFor\) := null <br />
-\(\qquad log := \langle\rangle; commitLength\) := 0 <br />
-\(\qquad currentRole\) := follower; \(curentLeader\) := null <br />
-\(\qquad votesReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> recovery from crash <strong>do</strong> <br />
-\(\qquad currentRole\) := follower; \(currentLeader\) := null <br />
-\(\qquad votedReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> node \(nodeId\) suspects leader has failed, or on election timeout <strong>do</strong> <br />
-\(\qquad currentTerm := currentTerm + 1; currentRole\) := candidate <br />
-\(\qquad votedFor := nodeId; votesReceived := { nodeId } ; lastTerm := 0\) <br />
-\(\qquad\)​<strong>if</strong> \(log\).length &gt; 0 <strong>then</strong> \(lastTerm\) := \(log[log\).length − 1].term; <strong>end if</strong> <br />
-\(\qquad\qquad msg\) := (VoteRequest, \(nodeId\), \(currentTerm\), \(log\).length, \(lastTerm\)) <br />
-\(\qquad\)​<strong>for each</strong> \(node \in nodes\): <strong>send</strong> \(msg\) to \(node\) <br />
-\(\qquad\)​start election timer <br />
-<strong>end on</strong></p>
-</blockquote>
-<p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
-<p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
-<p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
-<h3 id="raft--2-9--voting-on-a-new-leader">Raft (2/9): voting on a new leader</h3>
-<blockquote>
-<p><strong>on</strong> receiving (VoteRequest, \(cId\), \(cTerm\), \(cLogLength\), \(cLogTerm\)) at node \(nodeId\) <strong>do</strong> <br />
-\(\qquad\)​<strong>if</strong> \(cTerm \gt currentTerm\) <strong>then</strong> <br />
-\(\qquad\qquad currentTerm := cTerm; currentRole\) := follower <br />
-\(\qquad\qquad votedFor\) := null <br />
-\(\qquad\)​<strong>end if</strong> <br />
-\(\qquad lastTerm\) := 0 <br />
-\(\qquad\)​<strong>if</strong> \(log\).length &gt; 0 <strong>then</strong> \(lastTerm := log[log\).length - 1].term; <strong>end if</strong> <br />
-\(\qquad logOk := (cLogTerm \gt lastTerm) \vee (cLogTerm = lastTerm \wedge cLogLength \ge log\).length)<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup> <br />
-\(\qquad\)​<strong>if</strong> \(cTerm = currentTerm \wedge logOk \wedge votedFor \in\) {\(cId\), null} <strong>then</strong> <br />
-\(\qquad\qquad votedFor := cId\) <br />
-\(\qquad\qquad\)​<strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), true) to node \(cId\) <br />
-\(\qquad\)​<strong>else</strong> <br />
-\(\qquad\qquad\)​<strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), false) to node \(cId\) <br />
-\(\qquad\)​<strong>end if</strong> <br />
-<strong>end on</strong></p>
-</blockquote>
-<p>如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。</p>
-<p>votedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及 当前的 term。</p>
-<h3 id="raft--3-9--collecting-votes">Raft (3/9) collecting votes</h3>
-<blockquote>
-<p><strong>on</strong> receiving (VoteResponse, \(voterId, term, granted\)) at \(nodeId\) <strong>do</strong> <br />
-\(\qquad\)​<strong>if</strong> \(currentRole\) = candidate \(\wedge term = currentTerm \wedge granted\) <strong>then</strong> <br />
-\(\qquad\qquad votesReceived := votesReceived \cup {voterId}\) <br />
-\(\qquad\qquad\)​<strong>if</strong> \(|votesReceived| \ge \left \lceil\frac{(|nodes|) + 1}{2}\right \rceil\) <strong>then</strong> <br />
-\(\qquad\qquad\qquad currentRole\) := leader; \(curentLeader := nodeId\) <br />
-\(\qquad\qquad\qquad\)​cancel election timer <br />
-\(\qquad\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
-\(\qquad\qquad\qquad\qquad sentLength[follower] := log\).length <br />
-\(\qquad\qquad\qquad\qquad ackedLength[follower]\) := 0 <br />
-\(\qquad\qquad\qquad\qquad ReplicateLog(nodeId, follower)\) <br />
-\(\qquad\qquad\qquad\) ​<strong>end for</strong> <br />
-\(\qquad\qquad\)​<strong>end if</strong> <br />
-\(\qquad\)​<strong>else if</strong> \(term \gt currentTerm\) <strong>Then</strong> <br />
-\(\qquad\qquad currentTerm := term\) <br />
-\(\qquad\qquad currentRole\) := follower <br />
-\(\qquad\qquad votedFor\) := null <br />
-\(\qquad\qquad\)​cancel election timer <br />
-\(\qquad\)​<strong>end if</strong> <br />
-<strong>end on</strong></p>
-</blockquote>
-<p>回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。</p>
-<p>如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。</p>
-<p>sentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。</p>
-<h3 id="raft--4-9--broadcasting-messages">Raft (4/9): broadcasting messages</h3>
-<blockquote>
-<p><strong>on</strong> request to broadcast \(msg\) at node \(nodeId\) <strong>do</strong> <br />
-\(\qquad\)​<strong>if</strong> \(currentRole\) = leader <strong>then</strong> <br />
-\(\qquad\qquad\)​append the record (msg: \(msg\), term: \(currentTerm\)) to \(log\) <br />
-\(\qquad\qquad ackedLength[nodeId]\) := \(log\).length <br />
-\(\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
-\(\qquad\qquad\qquad ReplicateLog(nodeId, follower)\) <br />
-\(\qquad\qquad\)​<strong>end for</strong> <br />
-\(\qquad\)​<strong>else</strong> <br />
-\(\qquad\qquad\)​forward the request to \(currentLeader\) via a FIFO link <br />
-\(\qquad\)​<strong>end if</strong><br />
-<strong>end on</strong></p>
-<p><strong>periodically</strong> at node \(nodeId\) <strong>do</strong> <br />
-\(\qquad\)​<strong>if</strong> \(currentRole\) = leader <strong>then</strong> <br />
-\(\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
-\(\qquad\qquad\qquad ReplicateLog(nodeId, follower)\) <br />
-\(\qquad\qquad\)​<strong>end for</strong> <br />
-\(\qquad\)​<strong>end if</strong> <br />
-<strong>end do</strong></p>
-</blockquote>
-<p>以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。</p>
-<p>leader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。</p>
-<h3 id="raft--5-9--replicating-from-leader-to-followers">Raft (5/9): replicating from leader to followers</h3>
-<blockquote>
-<p><strong>function</strong> \(ReplicateLog(leaderId, followerId)\) <br />
-\(\qquad prefixLen := sentLength[followerId]\) <br />
-\(\qquad suffix := \langle log[prefixLen], log[prefixLen + 1]\), &hellip;, \(log[log\).length − 1]\(\rangle\) <br />
-\(\qquad prefixTerm\) := 0 <br />
-\(\qquad\)​<strong>if</strong> \(prefixLen \gt\) 0 <strong>then</strong> <br />
-\(\qquad\qquad prefixTerm := log[prefixLen − 1]\).term <br />
-\(\qquad\)​<strong>end if</strong> <br />
-\(\qquad\)​<strong>send</strong> (LogRequest, \(leaderId, currentTerm, prefixLen, prefixTerm, commitLength, suffix\)) to \(followerId\) <br />
-<strong>end function</strong></p>
-</blockquote>
-<p>ReplicateLog 方法是从 leader 利用 followerId 发送任何新的 log 条目给 follower。prefixLen 是已经发送给 follower 消息的数量，suffix 就是还没有发送给 follower 的消息。所以当 sentLength[follower] = log.length 时，suffix 是一个空数组。</p>
-<h3 id="raft--6-9--followers-receiving-messages">Raft (6/9): followers receiving messages</h3>
-<blockquote>
-<p><strong>on</strong> receiving (LogRequest, \(leaderId, term, prefixLen, prefixTerm, leaderCommit, suffix\)) at node \(nodeId\) <strong>do</strong> <br />
-\(\qquad\)​<strong>if</strong> \(term \gt currentTerm\) <strong>then</strong> <br />
-\(\qquad\qquad currentTerm := term; votedFor\) := null <br />
-\(\qquad\qquad\)​cancel election timer <br />
-\(\qquad\)​<strong>end if</strong> <br />
-\(\qquad\)​<strong>if</strong> \(term = currentTerm\) <strong>then</strong> <br />
-\(\qquad\qquad currentRole\) := follower; \(currentLeader := leaderId\) <br />
-\(\qquad\)​<strong>end if</strong> <br />
-\(\qquad logOk := (log\).length \(\ge prefixLen) \wedge (prefixLen = 0 \vee log[prefixLen - 1]\).term = \(prefixTerm\)) <br />
-\(\qquad\)​<strong>if</strong> \(term = currentTerm \wedge logOk\) <strong>then</strong> <br />
-\(\qquad\qquad AppendEntries(prefixLen, leaderCommit, suffix)\) <br />
-\(\qquad\qquad ack := prefixLen + suffix\).length <br />
-\(\qquad\qquad\)​<strong>send</strong> (LogResponse, \(nodeId, currentTerm, ack\), true) to \(leaderId\) <br />
-\(\qquad\)​<strong>else</strong> <br />
-\(\qquad\qquad\)​<strong>send</strong> (LogResponse, \(nodeId, currentTerm\), 0, false) to \(leaderId\) <br />
-\(\qquad\)​<strong>end if</strong>
-<strong>end on</strong></p>
-</blockquote>
+<p><a href="/posts/main/20220623152601-raft_consensus_algorithm/">Raft consensus algorithm</a></p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>
@@ -518,196 +526,6 @@
 <li id="fn:6">
 <p>向上去整&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:7">
-<p>\(\vee\) is logical or, \(\wedge\) is logical and.&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Causal broadcast</title>
-      <link>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</link>
-      <pubDate>Wed, 22 Jun 2022 14:33:28 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</guid>
-      <description>Definition Causal broadcast 算法有点类似于 FIFO broadcast： 每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟</description>
-      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
-<p>Causal broadcast 算法有点类似于 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a>：</p>
-<p>每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟算法中，向量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，向量元素计算来自每个发送者的已发送的消息数量。</p>
-<p>如果节点 \(C\) 在 \(m_{1}\) 之前收到 \(m_{2}\)，\(C\) 的广播算法将不得不保留（延迟或缓冲）\(m_{2}\)，直到 \(m_{1}\) 被传递之后，以确保消息按因果顺序传递​。在下图的例子中，消息 \(m_{2}\) 和 \(m_{3}\) 是​<strong>同时广播</strong>​的。节点 \(A\) 和 \(C\) 按照 \(m_{1}\)、\(m_{3}\)、\(m_{2}\) 的顺序传递消息，而节点 \(B\) 按照 \(m_{1}\)、\(m_{2}\)、$m<sub>3</sub>$的顺序传递。这些传递顺序中的任何一个都是可以接受的，因为它们都与因果关系一致。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/causal-broadcast.png"
-         alt="Figure 1: causal-broadcast"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>causal-broadcast</p>
-        </figcaption>
-</figure>
-
-<p>有因果关系的信息必须按因果顺序传递。并行的消息可以按照任何顺序传递。</p>
-<p>上图：broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) and broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) and broadcast(\(m_{1}\)) broadcast(\(m_{3}\)) \(\Longrightarrow\) valid orders are: (\(m_{1}\), \(m_{2}\), \(m_{3}\)) or (\(m_{1}\), \(m_{3}\), \(m_{2}\))</p>
-<h2 id="causal-broadcast-algorithm">Causal broadcast algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation <strong>do</strong> <br />
-\(\qquad sendSeq := 0; delivered := \langle0, 0, . . ., 0\rangle; buﬀer := \{\}\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> request to broadcast \(m\) at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad deps := delivered; deps[i] := sendSeq\) <br />
-\(\qquad\)​send (\(i, deps, m\)) via reliable broadcast <br />
-\(\qquad sendSeq := sendSeq + 1\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> receiving \(msg\) from reliable broadcast at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad buﬀer := buﬀer ∪ {msg}\) <br />
-\(\qquad\)​<strong>while</strong> \(∃(sender, deps, m) ∈ buﬀer. deps ≤ delivered\) <strong>do</strong> <br />
-\(\qquad\qquad\)​deliver \(m\) to the application <br />
-\(\qquad\qquad buﬀer := buﬀer \ {(sender, deps, m)}\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <br />
-\(\qquad\qquad delivered[sender] := delivered[sender] + 1\) <br />
-\(\qquad\)​<strong>end while</strong> <br />
-<strong>end on</strong></p>
-</blockquote>
-<p>每个节点的本地状态由 \(sendSeq\)、\(delivered\) 和 \(buﬀer\) 组成，它们的含义与 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 算法中相同。当一个节点想要广播一个消息时，我们会附上发送节点的编号 \(i\) 和 \(deps\)（表示该消息因果关系的向量）。\(deps\) 就是节点本地 \(delivered\) 的复制，统计了每个节点发送消息并传递到该节点的数量。在这次广播之前，所有已经在本地交付的消息必须出现在广播消息的因果顺序之前。然后将发送节点自己的这个向量的元素更新为等于 \(sendSeq\)，这就​<strong>保证了这个节点所广播的每条消息都与同一节点所广播的前一条消息有因果关系</strong>​。</p>
-<p>当收到一个消息时，算法首先将其添加到 \(buﬀer\) 中，就像 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 一样，然后在 \(buﬀer\) 中搜索任何准备好的消息。比较 \(deps ≤ delivered\)。如果这个节点已经交付了所有在因果顺序上必须在这个消息之前的消息，那么，任何在因果关系上准备好的消息都会被传递给 Application，并从 \(buﬀer\) 中移除，并且将 \(delivered\) 中的相应条目被递增。</p>
-<h2 id="summary">Summary</h2>
-<p>Causal broadcast 的保持因果顺序的原理和 <a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 很相似，向量中的每个条目，前者是消息发送者已发送消息的数量，后者是每个节点发生事件的数量。deps 取代 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 中的 sendSeq 附带在广播的信息中，这样通过在 <a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 中介绍的向量比较方法，可以确定消息之间的因果关系来控制消息传递的顺序。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>删除 \(buﬀer\) 中的 \({(sender, deps, m)}\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Vector clocks</title>
-      <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Wed, 22 Jun 2022 14:31:21 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</guid>
-      <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \l</description>
-      <content:encoded><![CDATA[<p>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
-<ul>
-<li>假定分布式系统中有 \(n\) 个节点，\(N = \langle​N_{1}, N_{2}, &hellip;, N_{n}\rangle\)</li>
-<li><strong>事件 \(a\)</strong> 的向量时间戳写成 \(V(a) = \langle​t_{1}, t_{2}, &hellip;, t_{n}\rangle\)</li>
-<li>\(t_{i}\) 是 \(N_{i}\) 节点发生时间的数量</li>
-<li>每个​<strong>节点</strong>​都有一个当前的向量时间戳 \(T\)</li>
-<li>节点 \(N_{i}\) 上的事件，向量时间戳 \(T[i]\) 递增。</li>
-<li>每个消息都附带上向量时间戳</li>
-<li>接收者将消息中的向量时间戳合并到本地</li>
-</ul>
-<p>除了标量和向量之间的区别之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
-<h2 id="vector-clocks-algorithm">Vector clocks algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad T := \langle0, 0, &hellip;, 0\rangle\) ▻ local variable at node \(N_{i}\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> any event occurring at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad T[i] = T[i] + 1\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> request to send message \(m\) at node N<sub>i</sub> <strong>do</strong> <br />
-\(\qquad T[i] := T[i] + 1\); send \((T, m)\) via network <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> receiving \((T&rsquo;, m)\) at node \(N_{i}\) via the network <strong>do</strong> <br />
-\(\qquad T[j] := max(T[j], T&rsquo;[j])\) for every \(j \in {1, &hellip;, n}\) <br />
-\(\qquad T[i] := T[i] + 1\); deliver \(m\) to the application <br />
-<strong>end on</strong></p>
-</blockquote>
-<h2 id="vector-clocks-example">Vector clocks example</h2>
-<p>假定节点向量是 \(N = \langle​A, B, C\rangle\):</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/vector-example.png"
-         alt="Figure 1: vector-example"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>vector-example</p>
-        </figcaption>
-</figure>
-
-<p>事件 \(e\) 的向量时间戳是一系列事件的集合， \(e\) 和它的因果以来：\({e} \cup {a | a \rightarrow e}\)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup>, </sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
-<p>比如，\(\langle2, 2, 0\rangle\)，第一个 2 是表示来自于 \(A\) 的两个事件，第二个 2 是表示来自于 \(B\) 的两个事件，并且没有来自于 \(C\) 的事件。</p>
-<h2 id="vector-clocks-ordering">Vector clocks ordering</h2>
-<p>Define the following order on vector timestamps(in a system with \(n\) nodes):</p>
-<ul>
-<li>\(T = T&rsquo;\) iff \(T[i] = T&rsquo;[i]\) for all \(i \in {1, &hellip;, n}\)<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></li>
-<li>\(T \le T&rsquo;\) iff \(T[i] \le T&rsquo;[i]\) for all $ ∈ {1, &hellip;, n}$</li>
-<li>\(T &lt; T&rsquo;\) iff \(T \le T&rsquo;\) and \(T \neq T&rsquo;\)</li>
-<li>\(T || T&rsquo;\) iff \(T &gt; T&rsquo;\) and \(T&rsquo; &gt; T\)</li>
-</ul>
-<p>\(V(a) \le V(b)\) iff \(({a} \cup {e | e \rightarrow a}) ⊆ ({b} \cup{} {e | e \rightarrow b})\)</p>
-<p>Properties of this order:</p>
-<ul>
-<li>\((V(a) &lt; V(b)) \iff (a \rightarrow b)\)</li>
-<li>\((V(a) = V(b)) \iff (a = b)\)</li>
-<li>\((V(a) \rVert V(b)) \iff (a \rVert b)\)</li>
-</ul>
-<p>然后，我们对向量的时间戳进行部分排序。如果第一个向量的每个元素都小于或等于第二个向量的相应元素，我们就说一个向量小于或等于另一个向量。如果一个向量小于或等于另一个向量，并且它们至少有一个元素是不同的，那么这个向量就严格小于另一个向量。然而，如果一个向量在一个元素中的值较大，而另一个向量在另一个元素中的值较大，那么这两个向量是不可比的。例如，\(T = \langle2, 2, 0\rangle\) 和 \(T&rsquo; = \langle0, 0, 1\rangle\) 是不可比的，因为 \(T[1] &gt; T&rsquo;[1]\) 但 \(T[3] &lt; T&rsquo;[3]\)。</p>
-<p>向量时间戳的部分顺序与发生之前关系所定义的部分顺序完全对应。因此，向量时钟算法为我们提供了一种在实践中计算发生前关系的机制。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>\(\cup\) 并集的意思，\(\cap\) 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>集合的描述方法，描述格式为 \({x | P(x)，x ∈ Ω}\)。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4">
-<p>if and only if，相当于 \(\iff\)，其 Latex 写作 <code>\iff</code>​。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>FIFO broadcast</title>
-      <link>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</link>
-      <pubDate>Wed, 22 Jun 2022 14:30:35 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</guid>
-      <description>Definition 最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之</description>
-      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
-<p>最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之前被传递，因为它们都是由 \(A\) 发送的。然而，\(m_{2}\) 可以在 \(m_{1}\) 和 \(m_{3}\) 之前、之间或之后的任何时间被传递。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/FIFO-broadcast.png"
-         alt="Figure 1: FIFO-broadcast"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>FIFO-broadcast</p>
-        </figcaption>
-</figure>
-
-<p>同一个节点发送的消息必须要按照发送的顺序传递，不同节点发送的消息可以是任意的顺序，比如 \((m_{2}, m_{1}, m_{3})\)，\((m_{1}, m_{2}, m_{3})\) 或者 \((m_{1}, m_{3}, m_{2})\)。</p>
-<p>关于这些广播协议的另一个细节：我们假设每当一个节点广播一个消息时，它也会将该消息传递给自己（在上图中用回环箭头表示）。一个节点知道它自己广播了什么消息，所以传递给自己看似没有必要，但在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中是需要这个步骤。</p>
-<p>上图中的执行示例是有效的先进先出「广播」，但它违反了因果性：虽然 \(B\) 在接收了 \(m_{1}\) 之后才广播的 \(m_{2}\)，但节点 \(C\) 在 \(m_{1}\) 之前就传递了 \(m_{2}\)。<a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 提供了一个比 FIFO broadcast  更严格的排序属性。顾名思义，它确保信息按因果顺序传递：也就是说，如果一条信息的广播发生在另一条信息的广播之前，那么所有节点必须按这个顺序传递这两条信息。如果两个消息是同时广播的，一个节点可以按任何一个顺序传递它们。</p>
-<h2 id="fifo-broadcast-algorithm">FIFO broadcast algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation <strong>do</strong> <br />
-\(\qquad sendSeq := 0; delivered := \langle0, 0, &hellip;, 0\rangle; buﬀer := \{\}\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> request to broadcast \(m\) at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad\)​send \((i, sendSeq, m)\) via reliable broadcast <br />
-\(\qquad sendSeq := sendSeq + 1\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> receiving \(msg\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> from reliable broadcast at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad buﬀer := buﬀer ∪ {msg}\) <br />
-\(\qquad\)​<strong>while</strong> \(∃sender, m. (sender, delivered[sender], m) ∈ buﬀer\) <strong>do</strong> <br />
-\(\qquad\qquad\)​deliver \(m\) to the application <br />
-\(\qquad\qquad delivered[sender] := delivered[sender] + 1\) <br />
-\(\qquad\)​<strong>end while</strong> <br />
-<strong>end on</strong></p>
-</blockquote>
-<p>节点 \(N_{i}\) 发送的每个 FIFO broadcast 消息都会附带发送节点编号 \(i\) 和一个序列号（该节点发送消息对应的序列号，第一条消息对应为 0，第二条消息对应为 1）。每个节点的本地状态由序列号 \(sendSeq\)（计算该节点广播的消息数量）、\(delivered\)（一个向量，每个节点有一个条目，统计了每个节点发送消息并传递到该节点的数量）和 \(buﬀer\)（一个缓存，用于保留消息直到它们准备好被传递给 Application，也就是 <a href="/posts/main/20220602202933-distribution_system/#receiving-versus-delivering">Receiving versus delivering</a> 中提到的 deliver 阶段）组成。该算法检查来自任何发送者的与预期的下一个序列号相匹配的消息，然后递增该序列号，确保来自每个特定发送者的消息按照序列号递增的顺序被传递。</p>
-<h2 id="summary">Summary</h2>
-<p>FIFO broadcast 的保持消息顺序的原理和 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport clocks</a> 很相似，都是用递增的整数来确定同一个节点上的消息传递的顺序，\(deliver\) 是个存放着所有节点 \(sendSeq\) 的向量，存放于每个节点，配合 \(sendSeq\) 控制来自同一个节点的消息传递的顺序。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>\(msg\) 就是 \((i, sendSeq, m)\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
 </ol>
 </div>
 ]]></content:encoded>
@@ -716,7 +534,7 @@
     <item>
       <title>Latex</title>
       <link>https://luciuschen.github.io/posts/main/20220616162256-latex/</link>
-      <pubDate>Wed, 22 Jun 2022 09:19:34 +0800</pubDate>
+      <pubDate>Thu, 23 Jun 2022 15:00:14 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220616162256-latex/</guid>
       <description>语法 效果 语法 效果 语法 效果 \bar{x} \(\bar{x}\) \acute{\eta} \(\acute{\eta}\) \check{\alpha} \(\check{\alpha}\) \grave{\eta} \(\grave{\eta}\) \breve{a} \(\breve{a}\) \ddot{y} \(\ddot{y}\) \dot{x} \(\dot{x}\) \hat{\alpha} \(\hat{\alpha}\) \tilde{\iota} \(\tilde{\iota}\) 语法 效果 语法 效果 语法 效果 \sin\theta \(\sin\!\theta\) \cos\theta \(\cos\theta\) \tan\theta \(\tan\theta\) \arcsin\frac{L}{r} \(\arcsin\frac{L}{r}\) \arccos\frac{T}{r} \(\arccos\frac{T}{r}\) \arctan\frac{L}{T} \(\arctan\frac{L}{T}\) \sinh g \(\sinh\ g\) \cosh h \(\cosh h\) \tanh i \(\tanh i\) \operatorname{sh}j \(\operatorname{sh}j\) \operatorname{argsh}k \(\operatorname{argsh}k\)</description>
@@ -1090,217 +908,27 @@
 <td><code>A \qquad B</code></td>
 <td>\(A \qquad B\)</td>
 </tr>
+<tr>
+<td><code>NORMAL-\mathrm{UPRIGHT}</code></td>
+<td>\(NORMAL-\mathrm{UPRIGHT}\)</td>
+<td><code>NORMAL-\mathrm{\small SAMLL}</code></td>
+<td>\(NORMAL-\mathrm{\small SMALL}\)</td>
+</tr>
+<tr>
+<td><code>NORMAL-\mathrm{\scriptsize SCRIPTSIZE}</code></td>
+<td>\(NORMAL-\mathrm{\scriptsize SCRIPTSIZE}\)</td>
+<td><code>NORMAL-\mathrm{\tiny TINY}</code></td>
+<td>\(NORMAL-\mathrm{\tiny TINY}\)</td>
+</tr>
 </tbody>
 </table>
 ]]></content:encoded>
     </item>
     
     <item>
-      <title>Total order broadcast</title>
-      <link>https://luciuschen.github.io/posts/main/20220616135058-total_order_broadcast/</link>
-      <pubDate>Mon, 20 Jun 2022 14:47:46 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220616135058-total_order_broadcast/</guid>
-      <description>Definition 总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。FIFO broadcast 和 Causal broadcast 允许不同的节点以不同</description>
-      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
-<p>总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。<a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 和 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 允许不同的节点以不同的顺序传递信息，total order broadcast 在各节点之间强制执行一致性，确保所有节点以相同的顺序传递信息。精确的传递顺序没有规定，只要它在所有节点上都是一样的。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/total-order-broadcast-1.png"
-         alt="Figure 1: total-order-broadcast-1"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>total-order-broadcast-1</p>
-        </figcaption>
-</figure>
-
-<p>所有三个节点都按照 \(m_{1}\), \(m_{2}\), \(m_{3}\) 的顺序传递消息</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/total-order-broadcast-2.png"
-         alt="Figure 2: total-order-broadcast-2"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>total-order-broadcast-2</p>
-        </figcaption>
-</figure>
-
-<p>所有三个节点都按照 \(m_{1}\), \(m_{3}\), \(m_{2}\) 的顺序传递信息。只要节点同意，这两种执行方式都是有效的。</p>
-<p>与 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 一样，节点可能需要保留消息，等待其他需要首先传递的消息。例如，节点 \(C\) 可以按任一顺序接收消息 \(m_{2}\) 和 \(m_{3}\)。如果算法确定 \(m_{3}\) 应该在 \(m_{2}\) 之前传递，但如果节点 \(C\) 首先收到 \(m_{2}\)，那么 \(C\) 将需要保留 \(m_{2}\)，直到收到 \(m_{3}\) 之后。</p>
-<p>在这些图上可以看到另一个重要的细节：在 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 和 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是这样：例如，在 图<sub>total-order-broadcast-1</sub> 上，\(m_{2}\) 需要在 \(m_{3}\) 之前被传递，所以节点 \(A\) 向自己传递 \(m_{3}\) 必须等到 \(A\) 从 \(B\) 那里收到 \(m_{2}\) 之后。</p>
-<p>最后，FIFO-total order broadcast 和 total order broadcast 很像，多了一个先进先出的要求，即同一节点广播的任何消息都按其发送的顺序交付。实际上图<sub>total-order-broadcast-1</sub> 和图<sub>total-order-broadcast-2</sub> 的例子就是有效的 FIFO-total order broadcast，因为 \(m_{1}\) 都是在 \(m_{3}\) 之前被传递的。</p>
-<h2 id="total-order-broadcast-algorithms">Total order broadcast algorithms</h2>
-<blockquote>
-<p><strong>Single leader</strong> approach:</p>
-<ul>
-<li>指定一个节点为 leader</li>
-<li>想要广播消息，将其发送给 leader，leader 再将其通过 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 广播给其他节点。</li>
-<li>Problem: leader 崩溃 \(\Longrightarrow\) 没有消息被传递</li>
-<li>安全地更换 leader 很困难</li>
-</ul>
-<p><a href="/posts/main/20220609201658-lamport_clocks/">Lamport clocks</a> approach:</p>
-<ul>
-<li>每条消息附带上 lamport 时间戳</li>
-<li>按照时间戳的总顺序传递消息</li>
-<li>Problem: 无法知道是否收到了所有时间戳小于 \(T\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 的消息，需要在缓存中缓存来自每个节点时间戳大于等于 \(T\) 的消息。</li>
-</ul>
-</blockquote>
-<p>上述两个方法，都不具有容错性。单个节点崩溃以及 leader 节点崩溃都会使得其他节点无法传递消息。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>当前节点的时间戳 \(T\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Causality and Happen-before relation</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</link>
-      <pubDate>Mon, 20 Jun 2022 14:47:03 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
-      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
-      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
-<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
-<p>event a <strong>happens before</strong> event b, written a → b.</p>
-<p>那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前：</p>
-<ul>
-<li>
-<p>a 和 b 发生在相同节点，并且按照本地节点的执行顺序，a 发生在 b 之前。</p>
-</li>
-<li>
-<p>事件 a 是发送消息 m，事件 b 是接收相同的消息 m（假定发送的消息都是唯一的）。</p>
-</li>
-<li>
-<p>有这么一个时间 c 满足，a → c 且 c → b。</p>
-<p>happens-before relation 是局部的顺序：有可能存在既不满足 a → b 也不满足 b → a，这样 a 和 b 就是并行的，写作 a || b。</p>
-</li>
-</ul>
-<h3 id="happen-before-relation-example">Happen-before relation example</h3>
-<figure>
-    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
-         alt="Figure 1: happens-before-example"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
-        </figcaption>
-</figure>
-
-<ul>
-<li>a → b, c → d, and e → f due to process order</li>
-<li>b → c and d → f due to messages m1 and m2</li>
-<li>a → c, a → d, a → f, b → d, b → f, and c → f due to transitivity</li>
-<li>a || e, b || e, c || e, and d || e</li>
-</ul>
-<h2 id="causality">Causality</h2>
-<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
-<ul>
-<li>当 a → b, 那么 a 可能是 b 的因。</li>
-<li>当 a || b, a 和 b 之间不存在因果关系。</li>
-</ul>
-<figure>
-    <img loading="lazy" src="/ox-hugo/causality.png"
-         alt="Figure 2: causality"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>causality</p>
-        </figcaption>
-</figure>
-
-<p>Let ≺ be a strict total order on events.</p>
-<p>如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
-<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
-<p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Network Time Protocol (NTP)</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
-      <pubDate>Sun, 19 Jun 2022 22:26:56 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
-      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
-      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
-<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
-         alt="Figure 1: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/NTP.png"
-         alt="Figure 2: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<ol>
-<li>
-<p>Round-trip network delay: \(\delta = (t_{4} - t_{1}) - (t_{3} - t_{2})\)</p>
-</li>
-<li>
-<p>Estimated server time when client receives response: \(t_{3} + \frac{\delta}{2}\)（客户端收到响应时的服务器的时间）</p>
-</li>
-<li>
-<p>Estimated clock skew: \(\theta = t_{3} + \frac{\delta}{2} - t_{4} = \frac{(t_{2} - t_{1} + t_{3} - t_{4})}{2}\)（计算预估的服务器时间和当前客户端时间的偏差）</p>
-</li>
-</ol>
-<h2 id="correcting-clock-skew">Correcting clock skew</h2>
-<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
-<ul>
-<li>
-<p>if \(\theta &lt; 125 ms\), <strong>slew</strong> the clock:</p>
-<p>slightly speed it up or slow it down by up to \(500 ppm\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
-</li>
-<li>
-<p>if \(125 ms \le \theta &lt; 1000 s\), <strong>step</strong> the clock:</p>
-<p>suddenly reset client clock to estimated server timestamp</p>
-</li>
-<li>
-<p>if \(\theta \ge 1000 s\), <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
-</li>
-</ul>
-<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
-<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
-<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Quorum</title>
-      <link>https://luciuschen.github.io/posts/main/20220615143721-quorum/</link>
-      <pubDate>Sun, 19 Jun 2022 13:02:32 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220615143721-quorum/</guid>
-      <description>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于 Quorum 投票的冗余控制算法 在有冗余数据</description>
-      <content:encoded><![CDATA[<p>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。</p>
-<h2 id="基于-quorum-投票的冗余控制算法">基于 Quorum 投票的冗余控制算法</h2>
-<p>在有冗余数据的分布式存储系统当中，冗余数据对象会在不同的机器之间存放多份拷贝。但是同一时刻一个数据对象的多份拷贝只能用于读或者用于写。</p>
-<p>该算法可以保证同一份数据对象的多份拷贝不会被超过两个访问对象读写。</p>
-<p>分布式系统中的每一份数据拷贝对象都被赋予一票。每一个读操作获得的票数必须大于最小读票数（read quorum）（\(V_{r}\)），每个写操作获得的票数必须大于最小写票数（write quorum）(\(V_{w}\)）才能读或者写。如果系统有V票（意味着一个数据对象有 \(V\) 份冗余拷贝），那么最小读写票数(quorum)应满足如下限制：</p>
-<ol>
-<li>\(V_{r} + V_{w} &gt; V\)</li>
-<li>\(V_{w} &gt; \frac{V}{2}\)</li>
-</ol>
-<p>第一条规则保证了一个数据不会被同时读写。当一个写操作请求过来的时候，它必须要获得 \(V_{w}\) 个冗余拷贝的许可。而剩下的数量是 \(V - V_{w}\) 不够 \(V_{r}\)，因此不能再有读请求过来了。同理，当读请求已经获得了 \(V_{r}\) 个冗余拷贝的许可时，写请求就无法获得许可了。</p>
-<p>第二条规则保证了数据的串行化修改。一份数据的冗余拷贝不可能同时被两个写请求修改。</p>
-<h2 id="算法的好处">算法的好处</h2>
-<p>在分布式系统中，冗余数据是保证可靠性的手段，因此冗余数据的一致性维护就非常重要。一般而言，一个写操作必须要对所有的冗余数据都更新完成了，才能称为成功结束。比如一份数据在5台设备上有冗余，因为不知道读数据会落在哪一台设备上，那么一次写操作，必须5台设备都更新完成，写操作才能返回。</p>
-<p>对于写操作比较频繁的系统，这个操作的瓶颈非常大。Quorum 算法可以让写操作只要写完3台就返回。剩下的由系统内部缓慢同步完成。而读操作，则需要也至少读3台，才能保证至少可以读到一个最新的数据。</p>
-<p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 \(V_{w}\) 越大，则读票数 \(V_{r}\) 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Org-roam</title>
       <link>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</link>
-      <pubDate>Sun, 19 Jun 2022 00:53:35 +0800</pubDate>
+      <pubDate>Thu, 23 Jun 2022 10:38:55 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</guid>
       <description>Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也</description>
@@ -1317,9 +945,9 @@
 </span></span><span class="line"><span class="cl">brew install coreutils fd
 </span></span><span class="line"><span class="cl">xcode-selected --install
 </span></span></code></pre></div><p><a href="https://bitbucket.org/mituharu/emacs-mac/src">emacs-mac</a>. It offers good integration with macOS, native emojis and better childframe support.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap railwaycat/emacsmacport
-</span></span><span class="line"><span class="cl">brew install emacs-mac --with-modules
-</span></span><span class="line"><span class="cl">ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications/Emacs.app
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap d12frosted/emacs-plus
+</span></span><span class="line"><span class="cl">brew install emacs-plus --with-native-comp
+</span></span><span class="line"><span class="cl">ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
 </span></span></code></pre></div><h3 id="doom-doctor-问题"><code>Doom Doctor</code> 问题</h3>
 <ol>
 <li>
@@ -1623,6 +1251,468 @@
 </li>
 </ol>
 </div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Lamport clocks</title>
+      <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
+      <pubDate>Wed, 22 Jun 2022 23:27:11 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
+      <description>Lamport clocks algorithm on initialisation do \(\qquad t := 0\) ▻ each node has its own local variable t end on on any event occurring at the local node do \(\qquad t := t + 1\) end on on request to send message \(m\) do \(\qquad t := t + 1\); send \((t, m)\) via the underlying network link end on on receiving \((t′, m)\)</description>
+      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong> <br />
+\(\qquad t := 0\) ▻ each node has its own local variable t <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> any event occurring at the local node <strong>do</strong> <br />
+\(\qquad t := t + 1\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> request to send message \(m\) <strong>do</strong> <br />
+\(\qquad t := t + 1\); send \((t, m)\) via the underlying network link <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> receiving \((t′, m)\) via the underlying network link <strong>do</strong> <br />
+\(\qquad t := max(t, t′) + 1\) <br />
+\(\qquad\)​deliver \(m\) to the application <br />
+<strong>end on</strong></p>
+</blockquote>
+<h2 id="lamport-clocks-in-words">Lamport clocks in words</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
+         alt="Figure 1: lamport-example-simple"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。</li>
+<li>增长后的值设为 \(L(e)\)</li>
+<li>发送消息时附带上当前的计数 \(t\)</li>
+<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
+</ul>
+<p>Properties of this scheme:</p>
+<ul>
+<li>if \(a \rightarrow b\) then \(L(e) &lt; L(b)\)</li>
+<li>However, \(L(a) &lt; L(b)\) does not imply \(a \rightarrow b\)</li>
+<li>Possible that \(L(a) = L(b)\) for \(a \ne b\)</li>
+</ul>
+<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
+<h2 id="lamport-clocks-example">Lamport clocks example</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example.png"
+         alt="Figure 2: lamport-example"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
+        </figcaption>
+</figure>
+
+<p>Let \(N(e)\) be the node at which event \(e\) occurred.</p>
+<p>Then the pair \((L(e), N(e))\) <strong>uniquely identiﬁes</strong> event \(e\).</p>
+<p>Deﬁne a <strong>total order</strong> \(≺\) using Lamport timestamps:</p>
+<p>\((a ≺ b) \iff (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b)))\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>This order is <strong>causal</strong>: \((a → b) \Longrightarrow (a ≺ b)\)</p>
+<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
+<p>对于任何两个事件 \(a \ne b\)，那么既不是 \(a ≺ b\) 也不是 \(b ≺ a\)。只要 \(a → b\)，我们就有 \(a ≺ b\)，换句话说，\(≺\) 是局部顺序 \(\rightarrow\) 的线性扩展。然而，如果 \(a \rVert b\)，我们可以有 \(a ≺ b\) 或 \(b ≺ a\)，所以两个事件的顺序是由算法任意决定的。 比如 \((1, A)\) 和 \((1, C)\) 两个事件是平行的，按照 Lamport 的算法，\((1, A)\) 必然是在 \((1, C)\) 之前的，但实际情况可能是 \((1, C)\) 在前。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>\(\iff\) is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>\(∨\) is logical or, \(∧\) is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Causal broadcast</title>
+      <link>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</link>
+      <pubDate>Wed, 22 Jun 2022 14:33:28 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</guid>
+      <description>Definition Causal broadcast 算法有点类似于 FIFO broadcast： 每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟</description>
+      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
+<p>Causal broadcast 算法有点类似于 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a>：</p>
+<p>每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟算法中，向量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，向量元素计算来自每个发送者的已发送的消息数量。</p>
+<p>如果节点 \(C\) 在 \(m_{1}\) 之前收到 \(m_{2}\)，\(C\) 的广播算法将不得不保留（延迟或缓冲）\(m_{2}\)，直到 \(m_{1}\) 被传递之后，以确保消息按因果顺序传递​。在下图的例子中，消息 \(m_{2}\) 和 \(m_{3}\) 是​<strong>同时广播</strong>​的。节点 \(A\) 和 \(C\) 按照 \(m_{1}\)、\(m_{3}\)、\(m_{2}\) 的顺序传递消息，而节点 \(B\) 按照 \(m_{1}\)、\(m_{2}\)、$m<sub>3</sub>$的顺序传递。这些传递顺序中的任何一个都是可以接受的，因为它们都与因果关系一致。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causal-broadcast.png"
+         alt="Figure 1: causal-broadcast"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>causal-broadcast</p>
+        </figcaption>
+</figure>
+
+<p>有因果关系的信息必须按因果顺序传递。并行的消息可以按照任何顺序传递。</p>
+<p>上图：broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) and broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) and broadcast(\(m_{1}\)) broadcast(\(m_{3}\)) \(\Longrightarrow\) valid orders are: (\(m_{1}\), \(m_{2}\), \(m_{3}\)) or (\(m_{1}\), \(m_{3}\), \(m_{2}\))</p>
+<h2 id="causal-broadcast-algorithm">Causal broadcast algorithm</h2>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong> <br />
+\(\qquad sendSeq := 0; delivered := \langle0, 0, . . ., 0\rangle; buﬀer := \{\}\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> request to broadcast \(m\) at node \(N_{i}\) <strong>do</strong> <br />
+\(\qquad deps := delivered; deps[i] := sendSeq\) <br />
+\(\qquad\)​send (\(i, deps, m\)) via reliable broadcast <br />
+\(\qquad sendSeq := sendSeq + 1\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> receiving \(msg\) from reliable broadcast at node \(N_{i}\) <strong>do</strong> <br />
+\(\qquad buﬀer := buﬀer ∪ {msg}\) <br />
+\(\qquad\)​<strong>while</strong> \(∃(sender, deps, m) ∈ buﬀer. deps ≤ delivered\) <strong>do</strong> <br />
+\(\qquad\qquad\)​deliver \(m\) to the application <br />
+\(\qquad\qquad buﬀer := buﬀer \ {(sender, deps, m)}\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <br />
+\(\qquad\qquad delivered[sender] := delivered[sender] + 1\) <br />
+\(\qquad\)​<strong>end while</strong> <br />
+<strong>end on</strong></p>
+</blockquote>
+<p>每个节点的本地状态由 \(sendSeq\)、\(delivered\) 和 \(buﬀer\) 组成，它们的含义与 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 算法中相同。当一个节点想要广播一个消息时，我们会附上发送节点的编号 \(i\) 和 \(deps\)（表示该消息因果关系的向量）。\(deps\) 就是节点本地 \(delivered\) 的复制，统计了每个节点发送消息并传递到该节点的数量。在这次广播之前，所有已经在本地交付的消息必须出现在广播消息的因果顺序之前。然后将发送节点自己的这个向量的元素更新为等于 \(sendSeq\)，这就​<strong>保证了这个节点所广播的每条消息都与同一节点所广播的前一条消息有因果关系</strong>​。</p>
+<p>当收到一个消息时，算法首先将其添加到 \(buﬀer\) 中，就像 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 一样，然后在 \(buﬀer\) 中搜索任何准备好的消息。比较 \(deps ≤ delivered\)。如果这个节点已经交付了所有在因果顺序上必须在这个消息之前的消息，那么，任何在因果关系上准备好的消息都会被传递给 Application，并从 \(buﬀer\) 中移除，并且将 \(delivered\) 中的相应条目被递增。</p>
+<h2 id="summary">Summary</h2>
+<p>Causal broadcast 的保持因果顺序的原理和 <a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 很相似，向量中的每个条目，前者是消息发送者已发送消息的数量，后者是每个节点发生事件的数量。deps 取代 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 中的 sendSeq 附带在广播的信息中，这样通过在 <a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 中介绍的向量比较方法，可以确定消息之间的因果关系来控制消息传递的顺序。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>删除 \(buﬀer\) 中的 \({(sender, deps, m)}\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Vector clocks</title>
+      <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
+      <pubDate>Wed, 22 Jun 2022 14:31:21 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</guid>
+      <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \l</description>
+      <content:encoded><![CDATA[<p>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
+<ul>
+<li>假定分布式系统中有 \(n\) 个节点，\(N = \langle​N_{1}, N_{2}, &hellip;, N_{n}\rangle\)</li>
+<li><strong>事件 \(a\)</strong> 的向量时间戳写成 \(V(a) = \langle​t_{1}, t_{2}, &hellip;, t_{n}\rangle\)</li>
+<li>\(t_{i}\) 是 \(N_{i}\) 节点发生时间的数量</li>
+<li>每个​<strong>节点</strong>​都有一个当前的向量时间戳 \(T\)</li>
+<li>节点 \(N_{i}\) 上的事件，向量时间戳 \(T[i]\) 递增。</li>
+<li>每个消息都附带上向量时间戳</li>
+<li>接收者将消息中的向量时间戳合并到本地</li>
+</ul>
+<p>除了标量和向量之间的区别之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
+<h2 id="vector-clocks-algorithm">Vector clocks algorithm</h2>
+<blockquote>
+<p><strong>on</strong> initialisation at node \(N_{i}\) <strong>do</strong> <br />
+\(\qquad T := \langle0, 0, &hellip;, 0\rangle\) ▻ local variable at node \(N_{i}\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> any event occurring at node \(N_{i}\) <strong>do</strong> <br />
+\(\qquad T[i] = T[i] + 1\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> request to send message \(m\) at node N<sub>i</sub> <strong>do</strong> <br />
+\(\qquad T[i] := T[i] + 1\); send \((T, m)\) via network <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> receiving \((T&rsquo;, m)\) at node \(N_{i}\) via the network <strong>do</strong> <br />
+\(\qquad T[j] := max(T[j], T&rsquo;[j])\) for every \(j \in {1, &hellip;, n}\) <br />
+\(\qquad T[i] := T[i] + 1\); deliver \(m\) to the application <br />
+<strong>end on</strong></p>
+</blockquote>
+<h2 id="vector-clocks-example">Vector clocks example</h2>
+<p>假定节点向量是 \(N = \langle​A, B, C\rangle\):</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/vector-example.png"
+         alt="Figure 1: vector-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>vector-example</p>
+        </figcaption>
+</figure>
+
+<p>事件 \(e\) 的向量时间戳是一系列事件的集合， \(e\) 和它的因果以来：\({e} \cup {a | a \rightarrow e}\)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup>, </sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>比如，\(\langle2, 2, 0\rangle\)，第一个 2 是表示来自于 \(A\) 的两个事件，第二个 2 是表示来自于 \(B\) 的两个事件，并且没有来自于 \(C\) 的事件。</p>
+<h2 id="vector-clocks-ordering">Vector clocks ordering</h2>
+<p>Define the following order on vector timestamps(in a system with \(n\) nodes):</p>
+<ul>
+<li>\(T = T&rsquo;\) iff \(T[i] = T&rsquo;[i]\) for all \(i \in {1, &hellip;, n}\)<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></li>
+<li>\(T \le T&rsquo;\) iff \(T[i] \le T&rsquo;[i]\) for all $ ∈ {1, &hellip;, n}$</li>
+<li>\(T &lt; T&rsquo;\) iff \(T \le T&rsquo;\) and \(T \neq T&rsquo;\)</li>
+<li>\(T || T&rsquo;\) iff \(T &gt; T&rsquo;\) and \(T&rsquo; &gt; T\)</li>
+</ul>
+<p>\(V(a) \le V(b)\) iff \(({a} \cup {e | e \rightarrow a}) ⊆ ({b} \cup{} {e | e \rightarrow b})\)</p>
+<p>Properties of this order:</p>
+<ul>
+<li>\((V(a) &lt; V(b)) \iff (a \rightarrow b)\)</li>
+<li>\((V(a) = V(b)) \iff (a = b)\)</li>
+<li>\((V(a) \rVert V(b)) \iff (a \rVert b)\)</li>
+</ul>
+<p>然后，我们对向量的时间戳进行部分排序。如果第一个向量的每个元素都小于或等于第二个向量的相应元素，我们就说一个向量小于或等于另一个向量。如果一个向量小于或等于另一个向量，并且它们至少有一个元素是不同的，那么这个向量就严格小于另一个向量。然而，如果一个向量在一个元素中的值较大，而另一个向量在另一个元素中的值较大，那么这两个向量是不可比的。例如，\(T = \langle2, 2, 0\rangle\) 和 \(T&rsquo; = \langle0, 0, 1\rangle\) 是不可比的，因为 \(T[1] &gt; T&rsquo;[1]\) 但 \(T[3] &lt; T&rsquo;[3]\)。</p>
+<p>向量时间戳的部分顺序与发生之前关系所定义的部分顺序完全对应。因此，向量时钟算法为我们提供了一种在实践中计算发生前关系的机制。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>\(\cup\) 并集的意思，\(\cap\) 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>集合的描述方法，描述格式为 \({x | P(x)，x ∈ Ω}\)。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>if and only if，相当于 \(\iff\)，其 Latex 写作 <code>\iff</code>​。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>FIFO broadcast</title>
+      <link>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</link>
+      <pubDate>Wed, 22 Jun 2022 14:30:35 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</guid>
+      <description>Definition 最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之</description>
+      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
+<p>最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之前被传递，因为它们都是由 \(A\) 发送的。然而，\(m_{2}\) 可以在 \(m_{1}\) 和 \(m_{3}\) 之前、之间或之后的任何时间被传递。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/FIFO-broadcast.png"
+         alt="Figure 1: FIFO-broadcast"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>FIFO-broadcast</p>
+        </figcaption>
+</figure>
+
+<p>同一个节点发送的消息必须要按照发送的顺序传递，不同节点发送的消息可以是任意的顺序，比如 \((m_{2}, m_{1}, m_{3})\)，\((m_{1}, m_{2}, m_{3})\) 或者 \((m_{1}, m_{3}, m_{2})\)。</p>
+<p>关于这些广播协议的另一个细节：我们假设每当一个节点广播一个消息时，它也会将该消息传递给自己（在上图中用回环箭头表示）。一个节点知道它自己广播了什么消息，所以传递给自己看似没有必要，但在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中是需要这个步骤。</p>
+<p>上图中的执行示例是有效的先进先出「广播」，但它违反了因果性：虽然 \(B\) 在接收了 \(m_{1}\) 之后才广播的 \(m_{2}\)，但节点 \(C\) 在 \(m_{1}\) 之前就传递了 \(m_{2}\)。<a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 提供了一个比 FIFO broadcast  更严格的排序属性。顾名思义，它确保信息按因果顺序传递：也就是说，如果一条信息的广播发生在另一条信息的广播之前，那么所有节点必须按这个顺序传递这两条信息。如果两个消息是同时广播的，一个节点可以按任何一个顺序传递它们。</p>
+<h2 id="fifo-broadcast-algorithm">FIFO broadcast algorithm</h2>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong> <br />
+\(\qquad sendSeq := 0; delivered := \langle0, 0, &hellip;, 0\rangle; buﬀer := \{\}\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> request to broadcast \(m\) at node \(N_{i}\) <strong>do</strong> <br />
+\(\qquad\)​send \((i, sendSeq, m)\) via reliable broadcast <br />
+\(\qquad sendSeq := sendSeq + 1\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> receiving \(msg\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> from reliable broadcast at node \(N_{i}\) <strong>do</strong> <br />
+\(\qquad buﬀer := buﬀer ∪ {msg}\) <br />
+\(\qquad\)​<strong>while</strong> \(∃sender, m. (sender, delivered[sender], m) ∈ buﬀer\) <strong>do</strong> <br />
+\(\qquad\qquad\)​deliver \(m\) to the application <br />
+\(\qquad\qquad delivered[sender] := delivered[sender] + 1\) <br />
+\(\qquad\)​<strong>end while</strong> <br />
+<strong>end on</strong></p>
+</blockquote>
+<p>节点 \(N_{i}\) 发送的每个 FIFO broadcast 消息都会附带发送节点编号 \(i\) 和一个序列号（该节点发送消息对应的序列号，第一条消息对应为 0，第二条消息对应为 1）。每个节点的本地状态由序列号 \(sendSeq\)（计算该节点广播的消息数量）、\(delivered\)（一个向量，每个节点有一个条目，统计了每个节点发送消息并传递到该节点的数量）和 \(buﬀer\)（一个缓存，用于保留消息直到它们准备好被传递给 Application，也就是 <a href="/posts/main/20220602202933-distribution_system/#receiving-versus-delivering">Receiving versus delivering</a> 中提到的 deliver 阶段）组成。该算法检查来自任何发送者的与预期的下一个序列号相匹配的消息，然后递增该序列号，确保来自每个特定发送者的消息按照序列号递增的顺序被传递。</p>
+<h2 id="summary">Summary</h2>
+<p>FIFO broadcast 的保持消息顺序的原理和 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport clocks</a> 很相似，都是用递增的整数来确定同一个节点上的消息传递的顺序，\(deliver\) 是个存放着所有节点 \(sendSeq\) 的向量，存放于每个节点，配合 \(sendSeq\) 控制来自同一个节点的消息传递的顺序。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>\(msg\) 就是 \((i, sendSeq, m)\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Total order broadcast</title>
+      <link>https://luciuschen.github.io/posts/main/20220616135058-total_order_broadcast/</link>
+      <pubDate>Mon, 20 Jun 2022 14:47:46 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220616135058-total_order_broadcast/</guid>
+      <description>Definition 总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。FIFO broadcast 和 Causal broadcast 允许不同的节点以不同</description>
+      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
+<p>总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。<a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 和 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 允许不同的节点以不同的顺序传递信息，total order broadcast 在各节点之间强制执行一致性，确保所有节点以相同的顺序传递信息。精确的传递顺序没有规定，只要它在所有节点上都是一样的。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/total-order-broadcast-1.png"
+         alt="Figure 1: total-order-broadcast-1"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>total-order-broadcast-1</p>
+        </figcaption>
+</figure>
+
+<p>所有三个节点都按照 \(m_{1}\), \(m_{2}\), \(m_{3}\) 的顺序传递消息</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/total-order-broadcast-2.png"
+         alt="Figure 2: total-order-broadcast-2"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>total-order-broadcast-2</p>
+        </figcaption>
+</figure>
+
+<p>所有三个节点都按照 \(m_{1}\), \(m_{3}\), \(m_{2}\) 的顺序传递信息。只要节点同意，这两种执行方式都是有效的。</p>
+<p>与 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 一样，节点可能需要保留消息，等待其他需要首先传递的消息。例如，节点 \(C\) 可以按任一顺序接收消息 \(m_{2}\) 和 \(m_{3}\)。如果算法确定 \(m_{3}\) 应该在 \(m_{2}\) 之前传递，但如果节点 \(C\) 首先收到 \(m_{2}\)，那么 \(C\) 将需要保留 \(m_{2}\)，直到收到 \(m_{3}\) 之后。</p>
+<p>在这些图上可以看到另一个重要的细节：在 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 和 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是这样：例如，在 图<sub>total-order-broadcast-1</sub> 上，\(m_{2}\) 需要在 \(m_{3}\) 之前被传递，所以节点 \(A\) 向自己传递 \(m_{3}\) 必须等到 \(A\) 从 \(B\) 那里收到 \(m_{2}\) 之后。</p>
+<p>最后，FIFO-total order broadcast 和 total order broadcast 很像，多了一个先进先出的要求，即同一节点广播的任何消息都按其发送的顺序交付。实际上图<sub>total-order-broadcast-1</sub> 和图<sub>total-order-broadcast-2</sub> 的例子就是有效的 FIFO-total order broadcast，因为 \(m_{1}\) 都是在 \(m_{3}\) 之前被传递的。</p>
+<h2 id="total-order-broadcast-algorithms">Total order broadcast algorithms</h2>
+<blockquote>
+<p><strong>Single leader</strong> approach:</p>
+<ul>
+<li>指定一个节点为 leader</li>
+<li>想要广播消息，将其发送给 leader，leader 再将其通过 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 广播给其他节点。</li>
+<li>Problem: leader 崩溃 \(\Longrightarrow\) 没有消息被传递</li>
+<li>安全地更换 leader 很困难</li>
+</ul>
+<p><a href="/posts/main/20220609201658-lamport_clocks/">Lamport clocks</a> approach:</p>
+<ul>
+<li>每条消息附带上 lamport 时间戳</li>
+<li>按照时间戳的总顺序传递消息</li>
+<li>Problem: 无法知道是否收到了所有时间戳小于 \(T\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 的消息，需要在缓存中缓存来自每个节点时间戳大于等于 \(T\) 的消息。</li>
+</ul>
+</blockquote>
+<p>上述两个方法，都不具有容错性。单个节点崩溃以及 leader 节点崩溃都会使得其他节点无法传递消息。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>当前节点的时间戳 \(T\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Causality and Happen-before relation</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</link>
+      <pubDate>Mon, 20 Jun 2022 14:47:03 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
+      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
+      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
+<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
+<p>event a <strong>happens before</strong> event b, written a → b.</p>
+<p>那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前：</p>
+<ul>
+<li>
+<p>a 和 b 发生在相同节点，并且按照本地节点的执行顺序，a 发生在 b 之前。</p>
+</li>
+<li>
+<p>事件 a 是发送消息 m，事件 b 是接收相同的消息 m（假定发送的消息都是唯一的）。</p>
+</li>
+<li>
+<p>有这么一个时间 c 满足，a → c 且 c → b。</p>
+<p>happens-before relation 是局部的顺序：有可能存在既不满足 a → b 也不满足 b → a，这样 a 和 b 就是并行的，写作 a || b。</p>
+</li>
+</ul>
+<h3 id="happen-before-relation-example">Happen-before relation example</h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
+         alt="Figure 1: happens-before-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>a → b, c → d, and e → f due to process order</li>
+<li>b → c and d → f due to messages m1 and m2</li>
+<li>a → c, a → d, a → f, b → d, b → f, and c → f due to transitivity</li>
+<li>a || e, b || e, c || e, and d || e</li>
+</ul>
+<h2 id="causality">Causality</h2>
+<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
+<ul>
+<li>当 a → b, 那么 a 可能是 b 的因。</li>
+<li>当 a || b, a 和 b 之间不存在因果关系。</li>
+</ul>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causality.png"
+         alt="Figure 2: causality"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>causality</p>
+        </figcaption>
+</figure>
+
+<p>Let ≺ be a strict total order on events.</p>
+<p>如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
+<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
+<p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Network Time Protocol (NTP)</title>
+      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
+      <pubDate>Sun, 19 Jun 2022 22:26:56 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
+      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
+      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
+<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
+         alt="Figure 1: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>NTP</p>
+        </figcaption>
+</figure>
+
+<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/NTP.png"
+         alt="Figure 2: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>NTP</p>
+        </figcaption>
+</figure>
+
+<ol>
+<li>
+<p>Round-trip network delay: \(\delta = (t_{4} - t_{1}) - (t_{3} - t_{2})\)</p>
+</li>
+<li>
+<p>Estimated server time when client receives response: \(t_{3} + \frac{\delta}{2}\)（客户端收到响应时的服务器的时间）</p>
+</li>
+<li>
+<p>Estimated clock skew: \(\theta = t_{3} + \frac{\delta}{2} - t_{4} = \frac{(t_{2} - t_{1} + t_{3} - t_{4})}{2}\)（计算预估的服务器时间和当前客户端时间的偏差）</p>
+</li>
+</ol>
+<h2 id="correcting-clock-skew">Correcting clock skew</h2>
+<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
+<ul>
+<li>
+<p>if \(\theta &lt; 125 ms\), <strong>slew</strong> the clock:</p>
+<p>slightly speed it up or slow it down by up to \(500 ppm\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
+</li>
+<li>
+<p>if \(125 ms \le \theta &lt; 1000 s\), <strong>step</strong> the clock:</p>
+<p>suddenly reset client clock to estimated server timestamp</p>
+</li>
+<li>
+<p>if \(\theta \ge 1000 s\), <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
+</li>
+</ul>
+<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
+<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
+<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Quorum</title>
+      <link>https://luciuschen.github.io/posts/main/20220615143721-quorum/</link>
+      <pubDate>Sun, 19 Jun 2022 13:02:32 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220615143721-quorum/</guid>
+      <description>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于 Quorum 投票的冗余控制算法 在有冗余数据</description>
+      <content:encoded><![CDATA[<p>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。</p>
+<h2 id="基于-quorum-投票的冗余控制算法">基于 Quorum 投票的冗余控制算法</h2>
+<p>在有冗余数据的分布式存储系统当中，冗余数据对象会在不同的机器之间存放多份拷贝。但是同一时刻一个数据对象的多份拷贝只能用于读或者用于写。</p>
+<p>该算法可以保证同一份数据对象的多份拷贝不会被超过两个访问对象读写。</p>
+<p>分布式系统中的每一份数据拷贝对象都被赋予一票。每一个读操作获得的票数必须大于最小读票数（read quorum）（\(V_{r}\)），每个写操作获得的票数必须大于最小写票数（write quorum）(\(V_{w}\)）才能读或者写。如果系统有V票（意味着一个数据对象有 \(V\) 份冗余拷贝），那么最小读写票数(quorum)应满足如下限制：</p>
+<ol>
+<li>\(V_{r} + V_{w} &gt; V\)</li>
+<li>\(V_{w} &gt; \frac{V}{2}\)</li>
+</ol>
+<p>第一条规则保证了一个数据不会被同时读写。当一个写操作请求过来的时候，它必须要获得 \(V_{w}\) 个冗余拷贝的许可。而剩下的数量是 \(V - V_{w}\) 不够 \(V_{r}\)，因此不能再有读请求过来了。同理，当读请求已经获得了 \(V_{r}\) 个冗余拷贝的许可时，写请求就无法获得许可了。</p>
+<p>第二条规则保证了数据的串行化修改。一份数据的冗余拷贝不可能同时被两个写请求修改。</p>
+<h2 id="算法的好处">算法的好处</h2>
+<p>在分布式系统中，冗余数据是保证可靠性的手段，因此冗余数据的一致性维护就非常重要。一般而言，一个写操作必须要对所有的冗余数据都更新完成了，才能称为成功结束。比如一份数据在5台设备上有冗余，因为不知道读数据会落在哪一台设备上，那么一次写操作，必须5台设备都更新完成，写操作才能返回。</p>
+<p>对于写操作比较频繁的系统，这个操作的瓶颈非常大。Quorum 算法可以让写操作只要写完3台就返回。剩下的由系统内部缓慢同步完成。而读操作，则需要也至少读3台，才能保证至少可以读到一个最新的数据。</p>
+<p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 \(V_{w}\) 越大，则读票数 \(V_{r}\) 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
 ]]></content:encoded>
     </item>
     

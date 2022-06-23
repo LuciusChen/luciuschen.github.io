@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Raft consensus algorithm | Lucius | Braindump</title>
+<meta name="keywords" content="">
+<meta name="description" content="为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画示意网站。 Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candi">
+<meta name="author" content="Lucius Chen">
+<link rel="canonical" href="https://luciuschen.github.io/posts/main/20220623152601-raft_consensus_algorithm/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.34f0771e19a1fe21a81494e1b365627c8ae40a4c35dae22326079739a581c770.css" integrity="sha256-NPB3Hhmh/iGoFJThs2VifIrkCkw12uIjJgeXOaWBx3A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://luciuschen.github.io/favicon.ico">
+<link rel="apple-touch-icon" href="https://luciuschen.github.io/apple-touch-icon.png">
+<script async defer data-website-id="f4e3ad0a-7fc1-4f18-b08c-9be77b60cdd5" src="https://oishii.reorx.com/oishii.js"></script>
+
+<meta name="twitter:title" content="Raft consensus algorithm | Lucius | Braindump" />
+<meta name="twitter:description" content="为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画示意网站。 Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candi" />
+<meta name="twitter:site" content="@novoreorx" />
+<meta name="twitter:creator" content="@novoreorx" />
+<meta property="og:title" content="Raft consensus algorithm | Lucius | Braindump" />
+<meta property="og:description" content="为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画示意网站。 Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candi" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://luciuschen.github.io/posts/main/20220623152601-raft_consensus_algorithm/" />
+<meta property="article:section" content="posts" />
+  
+  <meta property="article:modified_time" content="2022-06-23T17:21:30&#43;08:00" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://luciuschen.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Raft consensus algorithm",
+      "item": "https://luciuschen.github.io/posts/main/20220623152601-raft_consensus_algorithm/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Raft consensus algorithm | Lucius | Braindump",
+  "name": "Raft consensus algorithm",
+  "description": "为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画示意网站。 Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candi",
+  "keywords": [
+    
+  ],
+  "wordCount" : "4370",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "2022-06-23T17:21:30+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "Lucius Chen"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://luciuschen.github.io/posts/main/20220623152601-raft_consensus_algorithm/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lucius | Braindump",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://luciuschen.github.io/favicon.ico"
+    }
+  }
+}
+</script><style>
+  #icons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2em;
+  }
+  #icons .item {
+    width: 80px;
+    height: 50px;
+    margin: 10px;
+  }
+  #icons .item .name {
+    font-size: 12px;
+    user-select: all;
+    text-align: center;
+  }
+  #icons .item .icon {
+    display: flex;
+    justify-content: center;
+  }
+  #icons .item svg {
+    width: 30px;
+    height: 30px;
+  }
+</style>
+
+
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary-bg: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+</head>
+
+<body class="" id="top"><script data-no-instant>
+function switchTheme(theme) {
+  switch (theme) {
+    case 'light':
+      document.body.classList.remove('dark');
+      break;
+    case 'dark':
+      document.body.classList.add('dark');
+      break;
+    
+    default:
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+      }
+  }
+}
+
+function isDarkTheme() {
+  return document.body.className.includes("dark");
+}
+
+function getPrefTheme() {
+  return localStorage.getItem("pref-theme");
+}
+
+function setPrefTheme(theme) {
+  switchTheme(theme)
+  localStorage.setItem("pref-theme", theme);
+}
+
+const toggleThemeCallbacks = {}
+toggleThemeCallbacks['main'] = (isDark) => {
+  
+  if (isDark) {
+    setPrefTheme('light');
+  } else {
+    setPrefTheme('dark');
+  }
+}
+
+
+
+
+window.addEventListener('toggle-theme', function() {
+  
+  const isDark = isDarkTheme()
+  for (const key in toggleThemeCallbacks) {
+    toggleThemeCallbacks[key](isDark)
+  }
+});
+
+
+function toggleThemeListener() {
+  
+  window.dispatchEvent(new CustomEvent('toggle-theme'));
+}
+
+</script>
+<script>
+  
+  (function() {
+    const defaultTheme = 'auto';
+    const prefTheme = getPrefTheme();
+    const theme = prefTheme ? prefTheme : defaultTheme;
+
+    switchTheme(theme);
+  })();
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://luciuschen.github.io/" accesskey="h" title="Lucius | Braindump (Alt + H)">Lucius | Braindump</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+        <ul id="menu">
+            <li>
+                <a href="https://luciuschen.github.io/tags/" title="Tags"
+                >Tags
+                </a>
+            </li>
+            <li>
+                <a href="https://luciuschen.github.io/archives/" title="Archive"
+                >Archive
+                </a>
+            </li>
+            <li>
+                <a href="https://luciuschen.github.io/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
+                >Search
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main post">
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Raft consensus algorithm
+    </h1>
+    <div class="post-meta"><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
+  <span>June 23, 2022</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
+  <span>4370 words</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
+  <span>9 min</span></span>
+
+      
+      
+    </div>
+  </header> <div class="toc side right">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#initialisation" aria-label="Initialisation">Initialisation</a></li>
+                <li>
+                    <a href="#voting-on-a-new-leader" aria-label="Voting on a new leader">Voting on a new leader</a></li>
+                <li>
+                    <a href="#collecting-votes" aria-label="Collecting votes">Collecting votes</a></li>
+                <li>
+                    <a href="#broadcasting-messages" aria-label="Broadcasting messages">Broadcasting messages</a></li>
+                <li>
+                    <a href="#replicating-from-leader-to-followers" aria-label="Replicating from leader to followers">Replicating from leader to followers</a></li>
+                <li>
+                    <a href="#followers-receiving-messages" aria-label="Followers receiving messages">Followers receiving messages</a></li>
+                <li>
+                    <a href="#updating-followers-logs" aria-label="Updating followers&amp;rsquo; logs">Updating followers&rsquo; logs</a></li>
+                <li>
+                    <a href="#leader-receiving-log-acknowledgements" aria-label="Leader receiving log acknowledgements">Leader receiving log acknowledgements</a></li>
+                <li>
+                    <a href="#leader-committing-log-entries" aria-label="Leader committing log entries">Leader committing log entries</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画<a href="http://thesecretlivesofdata.com/raft/">示意网站</a>。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
+         alt="Figure 1: node-state-transitions-in-raft"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>node-state-transitions-in-raft</p>
+        </figcaption>
+</figure>
+
+<p>一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。</p>
+<p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
+<p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
+<h2 id="initialisation">Initialisation<a hidden class="anchor" aria-hidden="true" href="#initialisation">¶</a></h2>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong> <br />
+\(\qquad currentTerm\) := 0; \(votedFor\) := null <br />
+\(\qquad log := \langle\rangle; commitLength\) := 0 <br />
+\(\qquad currentRole\) := follower; \(curentLeader\) := null <br />
+\(\qquad votesReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> recovery from crash <strong>do</strong> <br />
+\(\qquad currentRole\) := follower; \(currentLeader\) := null <br />
+\(\qquad votedReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> node \(nodeId\) suspects leader has failed, or on election timeout <strong>do</strong> <br />
+\(\qquad currentTerm := currentTerm + 1; currentRole\) := candidate <br />
+\(\qquad votedFor := nodeId; votesReceived := { nodeId } ; lastTerm := 0\) <br />
+\(\qquad\)​<strong>if</strong> \(log\).length &gt; 0 <strong>then</strong> \(lastTerm\) := \(log[log\).length − 1].term; <strong>end if</strong> <br />
+\(\qquad\qquad msg\) := (VoteRequest, \(nodeId\), \(currentTerm\), \(log\).length, \(lastTerm\)) <br />
+\(\qquad\)​<strong>for each</strong> \(node \in nodes\): <strong>send</strong> \(msg\) to \(node\) <br />
+\(\qquad\)​start election timer <br />
+<strong>end on</strong></p>
+</blockquote>
+<p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
+<p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
+<p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
+<h2 id="voting-on-a-new-leader">Voting on a new leader<a hidden class="anchor" aria-hidden="true" href="#voting-on-a-new-leader">¶</a></h2>
+<blockquote>
+<p><strong>on</strong> receiving (VoteRequest, \(cId\), \(cTerm\), \(cLogLength\), \(cLogTerm\)) at node \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(cTerm \gt currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad currentTerm := cTerm; currentRole\) := follower <br />
+\(\qquad\qquad votedFor\) := null <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad lastTerm\) := 0 <br />
+\(\qquad\)​<strong>if</strong> \(log\).length &gt; 0 <strong>then</strong> \(lastTerm := log[log\).length - 1].term; <strong>end if</strong> <br />
+\(\qquad logOk := (cLogTerm \gt lastTerm) \vee (cLogTerm = lastTerm \wedge cLogLength \ge log\).length)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <br />
+\(\qquad\)​<strong>if</strong> \(cTerm = currentTerm \wedge logOk \wedge votedFor \in\) {\(cId\), null} <strong>then</strong> <br />
+\(\qquad\qquad votedFor := cId\) <br />
+\(\qquad\qquad\)​<strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), true) to node \(cId\) <br />
+\(\qquad\)​<strong>else</strong> <br />
+\(\qquad\qquad\)​<strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), false) to node \(cId\) <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end on</strong></p>
+</blockquote>
+<p>如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。</p>
+<p>votedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及 当前的 term。</p>
+<h2 id="collecting-votes">Collecting votes<a hidden class="anchor" aria-hidden="true" href="#collecting-votes">¶</a></h2>
+<blockquote>
+<p><strong>on</strong> receiving (VoteResponse, \(voterId, term, granted\)) at \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(currentRole\) = candidate \(\wedge term = currentTerm \wedge granted\) <strong>then</strong> <br />
+\(\qquad\qquad votesReceived := votesReceived \cup {voterId}\) <br />
+\(\qquad\qquad\)​<strong>if</strong> \(|votesReceived| \ge \left \lceil\frac{(|nodes|) + 1}{2}\right \rceil\) <strong>then</strong> <br />
+\(\qquad\qquad\qquad currentRole\) := leader; \(curentLeader := nodeId\) <br />
+\(\qquad\qquad\qquad\)​cancel election timer <br />
+\(\qquad\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
+\(\qquad\qquad\qquad\qquad sentLength[follower] := log\).length <br />
+\(\qquad\qquad\qquad\qquad ackedLength[follower]\) := 0 <br />
+\(\qquad\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
+\(\qquad\qquad\qquad\) ​<strong>end for</strong> <br />
+\(\qquad\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>else if</strong> \(term \gt currentTerm\) <strong>Then</strong> <br />
+\(\qquad\qquad currentTerm := term\) <br />
+\(\qquad\qquad currentRole\) := follower <br />
+\(\qquad\qquad votedFor\) := null <br />
+\(\qquad\qquad\)​cancel election timer <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end on</strong></p>
+</blockquote>
+<p>回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。</p>
+<p>如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。</p>
+<p>sentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。</p>
+<h2 id="broadcasting-messages">Broadcasting messages<a hidden class="anchor" aria-hidden="true" href="#broadcasting-messages">¶</a></h2>
+<blockquote>
+<p><strong>on</strong> request to broadcast \(msg\) at node \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(currentRole\) = leader <strong>then</strong> <br />
+\(\qquad\qquad\)​append the record (msg: \(msg\), term: \(currentTerm\)) to \(log\) <br />
+\(\qquad\qquad ackedLength[nodeId]\) := \(log\).length <br />
+\(\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
+\(\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\)​<strong>else</strong> <br />
+\(\qquad\qquad\)​forward the request to \(currentLeader\) via a FIFO link <br />
+\(\qquad\)​<strong>end if</strong><br />
+<strong>end on</strong></p>
+<p><strong>periodically</strong> at node \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(currentRole\) = leader <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
+\(\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end do</strong></p>
+</blockquote>
+<p>以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。</p>
+<p>leader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。</p>
+<h2 id="replicating-from-leader-to-followers">Replicating from leader to followers<a hidden class="anchor" aria-hidden="true" href="#replicating-from-leader-to-followers">¶</a></h2>
+<blockquote>
+<p><strong>function</strong> \(\mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(leaderId, followerId)\) <br />
+\(\qquad prefixLen := sentLength[followerId]\) <br />
+\(\qquad suffix := \langle log[prefixLen], log[prefixLen + 1]\), &hellip;, \(log[log\).length − 1]\(\rangle\) <br />
+\(\qquad prefixTerm\) := 0 <br />
+\(\qquad\)​<strong>if</strong> \(prefixLen \gt\) 0 <strong>then</strong> <br />
+\(\qquad\qquad prefixTerm := log[prefixLen − 1]\).term <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>send</strong> (LogRequest, \(leaderId, currentTerm, prefixLen, prefixTerm, commitLength, suffix\)) to \(followerId\) <br />
+<strong>end function</strong></p>
+</blockquote>
+<p>ReplicateLog 方法是从 leader 利用 followerId 发送任何新的 log 条目给 follower。prefixLen 是已经发送给 follower 消息的数量，suffix 就是还没有发送给 follower 的消息。所以当 sentLength[follower] = log.length 时，suffix 是一个空数组。</p>
+<h2 id="followers-receiving-messages">Followers receiving messages<a hidden class="anchor" aria-hidden="true" href="#followers-receiving-messages">¶</a></h2>
+<blockquote>
+<p><strong>on</strong> receiving (LogRequest, \(leaderId, term, prefixLen, prefixTerm, leaderCommit, suffix\)) at node \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(term \gt currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad currentTerm := term; votedFor\) := null <br />
+\(\qquad\qquad\)​cancel election timer <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>if</strong> \(term = currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad currentRole\) := follower; \(currentLeader := leaderId\) <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad logOk := (log\).length \(\ge prefixLen) \wedge (prefixLen = 0 \vee log[prefixLen - 1]\).term = \(prefixTerm\)) <br />
+\(\qquad\)​<strong>if</strong> \(term = currentTerm \wedge logOk\) <strong>then</strong> <br />
+\(\qquad\qquad \mathrm{A}\mathrm{\scriptsize PPEND}\mathrm{E}\mathrm{\scriptsize NTRIES}(prefixLen, leaderCommit, suffix)\) <br />
+\(\qquad\qquad ack := prefixLen + suffix\).length <br />
+\(\qquad\qquad\)​<strong>send</strong> (LogResponse, \(nodeId, currentTerm, ack\), true) to \(leaderId\) <br />
+\(\qquad\)​<strong>else</strong> <br />
+\(\qquad\qquad\)​<strong>send</strong> (LogResponse, \(nodeId, currentTerm\), 0, false) to \(leaderId\) <br />
+\(\qquad\)​<strong>end if</strong>
+<strong>end on</strong></p>
+</blockquote>
+<p>首先，如果消息的 term 比 follower 当前的 term 高，则更新当前的 term，并接受消息的发送者为 leader。相等的时候，也会和之前一样的逻辑，承认发送者为 leader。</p>
+<p>prefixLen 为 suffix 包含 log 条目之前的条目数量，follower 要求自己当前的 log 长度要大于等于 prefixLen，并且 prefixLen 长度前的最后一个 log 条目中的 term 要与 leader 的 prefixTerm 相同<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。Raft 算法保证两个节点相同下标对应的 log 条目中的 term 相同，那么在这之前的 log 都是相同。</p>
+<p>以上条件满足就会调用 AppendEntries 将 suffix 添加到自己的 log 当中。</p>
+<h2 id="updating-followers-logs">Updating followers&rsquo; logs<a hidden class="anchor" aria-hidden="true" href="#updating-followers-logs">¶</a></h2>
+<blockquote>
+<p><strong>function</strong> \(\mathrm{A}\mathrm{\scriptsize PPEND}\mathrm{E}\mathrm{\scriptsize NTRIES}(prefixLen, leaderCommit, suffix)\) <br />
+\(\qquad\)​<strong>if</strong> \(suffix\).length \(\gt 0 \wedge log\).length \(\gt prefixLen\) <strong>then</strong> <br />
+\(\qquad\qquad index\) := min(\(log\).length, \(prefixLen + suffix\).length) - 1 <br />
+\(\qquad\qquad\)​<strong>if</strong> \(log[index]\).term \(\ne suffix[index - prefixLen]\).term <strong>then</strong> <br />
+\(\qquad\qquad\qquad log := \langle log[0], log[1], &hellip;, log[prefixLen - 1]\rangle\) <br />
+\(\qquad\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>if</strong> \(prefixLen + suffix\).length \(\gt log\).length <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>for</strong> \(i := log\).length - \(prefixLen\) <strong>to</strong> \(suffix\).length - 1 <strong>do</strong> <br />
+\(\qquad\qquad\qquad\)​append \(suffix[i]\) to \(log\) <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>if</strong> \(leaderCommit \gt commitLength\) <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>for</strong> \(i := commitLength\) <strong>to</strong> \(leaderCommit\) - 1 <strong>do</strong> <br />
+\(\qquad\qquad\qquad\)​deliver \(log[i]\).msg to the application <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\qquad commitLength := leaderCommit\) <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end function</strong></p>
+</blockquote>
+<h2 id="leader-receiving-log-acknowledgements">Leader receiving log acknowledgements<a hidden class="anchor" aria-hidden="true" href="#leader-receiving-log-acknowledgements">¶</a></h2>
+<blockquote>
+<p><strong>on</strong> receiving (LogResponse, \(follower, term, ack, success\)) at \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(term = currentTerm \wedge currentRole\) = leader <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>if</strong> \(success\) = true \(\wedge ack \ge ackedLength[follower]\) <strong>then</strong> <br />
+\(\qquad\qquad\qquad sentLength[follower] := ack\) <br />
+\(\qquad\qquad\qquad ackedLength[follower] := ack\) <br />
+\(\qquad\qquad\qquad \mathrm{C}\mathrm{\scriptsize OMMIT}\mathrm{L}\mathrm{\scriptsize OG}\mathrm{E}\mathrm{\scriptsize NTRIES}()\) <br />
+\(\qquad\qquad\)​<strong>else if</strong> \(sentLength[follower] \gt 0\) <strong>then</strong> <br />
+\(\qquad\qquad\qquad sentLength[follower] := sentLength[follower] - 1\) <br />
+\(\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
+\(\qquad\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>end if</strong> \(term \gt currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad currentTerm := term\) <br />
+\(\qquad\qquad currentRole\) := folloer <br />
+\(\qquad\qquad votedFor\) := null <br />
+\(\qquad\qquad\)​cancel election timer <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end on</strong></p>
+</blockquote>
+<h2 id="leader-committing-log-entries">Leader committing log entries<a hidden class="anchor" aria-hidden="true" href="#leader-committing-log-entries">¶</a></h2>
+<blockquote>
+<p><strong>define</strong> acks(\(length\)) = \(|{n \in nodes | ackedLength[n] \ge length}|\)</p>
+<p><strong>function</strong> \(\mathrm{C}\mathrm{\scriptsize OMMIT}\mathrm{L}\mathrm{\scriptsize OG}\mathrm{E}\mathrm{\scriptsize NTRIES}\) <br />
+\(\qquad minAcks := \left \lceil\frac{|nodes| + 1}{2} \right \rceil\) <br />
+\(\qquad ready\) := {\(len \in\) {1, &hellip;, \(log\).length} | acks(\(len\)) \(\ge minAcks\)} <br />
+\(\qquad\)​<strong>if</strong> \(ready \ne {} \wedge\) max(\(ready\)) \(\gt commitLength \wedge log\)[max(\(ready\)) - 1].term = \(currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>for</strong> \(i := commitLength\) <strong>to</strong> max(\(ready\)) - 1 <strong>do</strong> <br />
+\(\qquad\qquad\qquad\)​deliver \(log[i]\).msg to the application <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\qquad commitLength\) := max(\(ready\)) <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end function</strong></p>
+</blockquote>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>\(\vee\) is logical or, \(\wedge\) is logical and.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>参考上一个步骤中 prefixTerm 的来源&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+    
+
+
+   
+
+   
+
+   
+
+   
+	  
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+<hr>
+
+  <div class="bl-section">
+	<h4 style="color: var(--secondary);">Links to this note</h4>
+	<div class="backlinks">
+	  <ul>
+	   
+		  <li><a href="/posts/main/20220602202933-distribution_system/">Distribution System</a></li>
+	   
+	 </ul>
+	</div>
+  </div>
+
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="next" href="https://luciuschen.github.io/posts/main/20220602202933-distribution_system/">
+    <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
+    </span>
+    <br>
+    <span>Distribution System</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+  <span>&copy; 2022 <a href="https://luciuschen.github.io/">Lucius | Braindump</a></span><span style="display: inline-block; margin-left: 1em;">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
+  </span>
+  <span style="display: inline-block; margin-left: 1em;">
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
+  </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+    <path d="M12 6H0l6-6z" />
+  </svg>
+</a>
+
+<script>
+  (function() {
+     
+    const disableThemeToggle = '' == '1';
+    if (disableThemeToggle) {
+      return;
+    }
+
+    let button = document.getElementById("theme-toggle")
+    
+    button.removeEventListener('click', toggleThemeListener)
+    
+    button.addEventListener('click', toggleThemeListener)
+  })();
+</script>
+
+<script>
+  (function () {
+    let menu = document.getElementById('menu')
+    if (menu) {
+      menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+      menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+      }
+    }
+
+    const disableSmoothScroll = '' == '1';
+    const enableInstantClick = '1' == '1';
+    
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || disableSmoothScroll || enableInstantClick) {
+      return;
+    }
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        var id = this.getAttribute("href").substr(1);
+        document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+          behavior: "smooth"
+        });
+        if (id === "top") {
+          history.replaceState(null, null, " ");
+        } else {
+          history.pushState(null, null, `#${id}`);
+        }
+      });
+    });
+  })();
+</script>
+<script>
+  var mybutton = document.getElementById("top-link");
+  window.onscroll = function () {
+    if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+      mybutton.style.visibility = "visible";
+      mybutton.style.opacity = "1";
+    } else {
+      mybutton.style.visibility = "hidden";
+      mybutton.style.opacity = "0";
+    }
+  };
+</script>
+<script>
+  if (window.scrollListeners) {
+    
+    for (const listener of scrollListeners) {
+      window.removeEventListener('scroll', listener)
+    }
+  }
+  window.scrollListeners = []
+</script>
+
+
+
+<script src="/js/medium-zoom.min.js" data-no-instant
+></script>
+<script>
+  document.querySelectorAll('pre > code').forEach((codeblock) => {
+    const container = codeblock.parentNode.parentNode;
+
+    const copybutton = document.createElement('button');
+    copybutton.classList.add('copy-code');
+    copybutton.innerText = 'copy';
+
+    function copyingDone() {
+      copybutton.innerText = 'copied!';
+      setTimeout(() => {
+        copybutton.innerText = 'copy';
+      }, 2000);
+    }
+
+    copybutton.addEventListener('click', (cb) => {
+      if ('clipboard' in navigator) {
+        navigator.clipboard.writeText(codeblock.textContent);
+        copyingDone();
+        return;
+      }
+
+      const range = document.createRange();
+      range.selectNodeContents(codeblock);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      try {
+        document.execCommand('copy');
+        copyingDone();
+      } catch (e) { };
+      selection.removeRange(range);
+    });
+
+    if (container.classList.contains("highlight")) {
+      container.appendChild(copybutton);
+    } else if (container.parentNode.firstChild == container) {
+      
+    } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+      
+      codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+    } else {
+      
+      codeblock.parentNode.appendChild(copybutton);
+    }
+  });
+</script>
+
+
+
+
+<script>
+  
+  
+  (function() {
+    const enableTocScroll = '1' == '1'
+    if (!enableTocScroll) {
+      return
+    }
+    if (!document.querySelector('.toc')) {
+      console.log('no toc found, ignore toc scroll')
+      return
+    }
+    
+
+    
+    const scrollListeners = window.scrollListeners
+    const headings = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id]');
+    const activeClass = 'active';
+
+    
+    let activeHeading = headings[0];
+    getLinkByHeading(activeHeading).classList.add(activeClass);
+
+    const onScroll = () => {
+      const passedHeadings = [];
+      for (const h of headings) {
+        
+        if (getOffsetTop(h) < 5) {
+          passedHeadings.push(h)
+        } else {
+          break;
+        }
+      }
+      if (passedHeadings.length > 0) {
+        newActiveHeading = passedHeadings[passedHeadings.length - 1];
+      } else {
+        newActiveHeading = headings[0];
+      }
+      if (activeHeading != newActiveHeading) {
+        getLinkByHeading(activeHeading).classList.remove(activeClass);
+        activeHeading = newActiveHeading;
+        getLinkByHeading(activeHeading).classList.add(activeClass);
+      }
+    }
+
+    let timer = null;
+    const scrollListener = () => {
+      if (timer !== null) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(onScroll, 50)
+    }
+    window.addEventListener('scroll', scrollListener, false);
+    scrollListeners.push(scrollListener)
+
+    function getLinkByHeading(heading) {
+      const id = encodeURI(heading.getAttribute('id')).toLowerCase();
+      return document.querySelector(`.toc ul li a[href="#${id}"]`);
+    }
+
+    function getOffsetTop(heading) {
+      if (!heading.getClientRects().length) {
+        return 0;
+      }
+      let rect = heading.getBoundingClientRect();
+      return rect.top
+    }
+  })();
+  </script>
+<script>
+  mediumZoom('.entry-cover img');
+  mediumZoom('.post-content img:not([no-zoom])');
+</script>
+
+<script src="/js/instantclick.min.js" data-no-instant
+></script>
+<script data-no-instant>
+  
+  
+  
+  
+  
+  
+  InstantClick.init();
+</script>
+</body>
+
+</html>
