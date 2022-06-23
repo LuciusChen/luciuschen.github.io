@@ -6,227 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jun 2022 17:21:30 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Raft consensus algorithm</title>
-      <link>https://luciuschen.github.io/posts/main/20220623152601-raft_consensus_algorithm/</link>
-      <pubDate>Thu, 23 Jun 2022 17:21:30 +0800</pubDate>
-      
-      <guid>https://luciuschen.github.io/posts/main/20220623152601-raft_consensus_algorithm/</guid>
-      <description>为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画示意网站。 Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candi</description>
-      <content:encoded><![CDATA[<p>为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画<a href="http://thesecretlivesofdata.com/raft/">示意网站</a>。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
-         alt="Figure 1: node-state-transitions-in-raft"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>node-state-transitions-in-raft</p>
-        </figcaption>
-</figure>
-
-<p>一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。</p>
-<p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
-<p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
-<h2 id="initialisation">Initialisation</h2>
-<blockquote>
-<p><strong>on</strong> initialisation <strong>do</strong> <br />
-\(\qquad currentTerm\) := 0; \(votedFor\) := null <br />
-\(\qquad log := \langle\rangle; commitLength\) := 0 <br />
-\(\qquad currentRole\) := follower; \(curentLeader\) := null <br />
-\(\qquad votesReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> recovery from crash <strong>do</strong> <br />
-\(\qquad currentRole\) := follower; \(currentLeader\) := null <br />
-\(\qquad votedReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> node \(nodeId\) suspects leader has failed, or on election timeout <strong>do</strong> <br />
-\(\qquad currentTerm := currentTerm + 1; currentRole\) := candidate <br />
-\(\qquad votedFor := nodeId; votesReceived := { nodeId } ; lastTerm := 0\) <br />
-\(\qquad\)​<strong>if</strong> \(log\).length &gt; 0 <strong>then</strong> \(lastTerm\) := \(log[log\).length − 1].term; <strong>end if</strong> <br />
-\(\qquad\qquad msg\) := (VoteRequest, \(nodeId\), \(currentTerm\), \(log\).length, \(lastTerm\)) <br />
-\(\qquad\)​<strong>for each</strong> \(node \in nodes\): <strong>send</strong> \(msg\) to \(node\) <br />
-\(\qquad\)​start election timer <br />
-<strong>end on</strong></p>
-</blockquote>
-<p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
-<p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
-<p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
-<h2 id="voting-on-a-new-leader">Voting on a new leader</h2>
-<blockquote>
-<p><strong>on</strong> receiving (VoteRequest, \(cId\), \(cTerm\), \(cLogLength\), \(cLogTerm\)) at node \(nodeId\) <strong>do</strong> <br />
-\(\qquad\)​<strong>if</strong> \(cTerm \gt currentTerm\) <strong>then</strong> <br />
-\(\qquad\qquad currentTerm := cTerm; currentRole\) := follower <br />
-\(\qquad\qquad votedFor\) := null <br />
-\(\qquad\)​<strong>end if</strong> <br />
-\(\qquad lastTerm\) := 0 <br />
-\(\qquad\)​<strong>if</strong> \(log\).length &gt; 0 <strong>then</strong> \(lastTerm := log[log\).length - 1].term; <strong>end if</strong> <br />
-\(\qquad logOk := (cLogTerm \gt lastTerm) \vee (cLogTerm = lastTerm \wedge cLogLength \ge log\).length)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <br />
-\(\qquad\)​<strong>if</strong> \(cTerm = currentTerm \wedge logOk \wedge votedFor \in\) {\(cId\), null} <strong>then</strong> <br />
-\(\qquad\qquad votedFor := cId\) <br />
-\(\qquad\qquad\)​<strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), true) to node \(cId\) <br />
-\(\qquad\)​<strong>else</strong> <br />
-\(\qquad\qquad\)​<strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), false) to node \(cId\) <br />
-\(\qquad\)​<strong>end if</strong> <br />
-<strong>end on</strong></p>
-</blockquote>
-<p>如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。</p>
-<p>votedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及 当前的 term。</p>
-<h2 id="collecting-votes">Collecting votes</h2>
-<blockquote>
-<p><strong>on</strong> receiving (VoteResponse, \(voterId, term, granted\)) at \(nodeId\) <strong>do</strong> <br />
-\(\qquad\)​<strong>if</strong> \(currentRole\) = candidate \(\wedge term = currentTerm \wedge granted\) <strong>then</strong> <br />
-\(\qquad\qquad votesReceived := votesReceived \cup {voterId}\) <br />
-\(\qquad\qquad\)​<strong>if</strong> \(|votesReceived| \ge \left \lceil\frac{(|nodes|) + 1}{2}\right \rceil\) <strong>then</strong> <br />
-\(\qquad\qquad\qquad currentRole\) := leader; \(curentLeader := nodeId\) <br />
-\(\qquad\qquad\qquad\)​cancel election timer <br />
-\(\qquad\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
-\(\qquad\qquad\qquad\qquad sentLength[follower] := log\).length <br />
-\(\qquad\qquad\qquad\qquad ackedLength[follower]\) := 0 <br />
-\(\qquad\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
-\(\qquad\qquad\qquad\) ​<strong>end for</strong> <br />
-\(\qquad\qquad\)​<strong>end if</strong> <br />
-\(\qquad\)​<strong>else if</strong> \(term \gt currentTerm\) <strong>Then</strong> <br />
-\(\qquad\qquad currentTerm := term\) <br />
-\(\qquad\qquad currentRole\) := follower <br />
-\(\qquad\qquad votedFor\) := null <br />
-\(\qquad\qquad\)​cancel election timer <br />
-\(\qquad\)​<strong>end if</strong> <br />
-<strong>end on</strong></p>
-</blockquote>
-<p>回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。</p>
-<p>如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。</p>
-<p>sentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。</p>
-<h2 id="broadcasting-messages">Broadcasting messages</h2>
-<blockquote>
-<p><strong>on</strong> request to broadcast \(msg\) at node \(nodeId\) <strong>do</strong> <br />
-\(\qquad\)​<strong>if</strong> \(currentRole\) = leader <strong>then</strong> <br />
-\(\qquad\qquad\)​append the record (msg: \(msg\), term: \(currentTerm\)) to \(log\) <br />
-\(\qquad\qquad ackedLength[nodeId]\) := \(log\).length <br />
-\(\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
-\(\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
-\(\qquad\qquad\)​<strong>end for</strong> <br />
-\(\qquad\)​<strong>else</strong> <br />
-\(\qquad\qquad\)​forward the request to \(currentLeader\) via a FIFO link <br />
-\(\qquad\)​<strong>end if</strong><br />
-<strong>end on</strong></p>
-<p><strong>periodically</strong> at node \(nodeId\) <strong>do</strong> <br />
-\(\qquad\)​<strong>if</strong> \(currentRole\) = leader <strong>then</strong> <br />
-\(\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
-\(\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
-\(\qquad\qquad\)​<strong>end for</strong> <br />
-\(\qquad\)​<strong>end if</strong> <br />
-<strong>end do</strong></p>
-</blockquote>
-<p>以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。</p>
-<p>leader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。</p>
-<h2 id="replicating-from-leader-to-followers">Replicating from leader to followers</h2>
-<blockquote>
-<p><strong>function</strong> \(\mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(leaderId, followerId)\) <br />
-\(\qquad prefixLen := sentLength[followerId]\) <br />
-\(\qquad suffix := \langle log[prefixLen], log[prefixLen + 1]\), &hellip;, \(log[log\).length − 1]\(\rangle\) <br />
-\(\qquad prefixTerm\) := 0 <br />
-\(\qquad\)​<strong>if</strong> \(prefixLen \gt\) 0 <strong>then</strong> <br />
-\(\qquad\qquad prefixTerm := log[prefixLen − 1]\).term <br />
-\(\qquad\)​<strong>end if</strong> <br />
-\(\qquad\)​<strong>send</strong> (LogRequest, \(leaderId, currentTerm, prefixLen, prefixTerm, commitLength, suffix\)) to \(followerId\) <br />
-<strong>end function</strong></p>
-</blockquote>
-<p>ReplicateLog 方法是从 leader 利用 followerId 发送任何新的 log 条目给 follower。prefixLen 是已经发送给 follower 消息的数量，suffix 就是还没有发送给 follower 的消息。所以当 sentLength[follower] = log.length 时，suffix 是一个空数组。</p>
-<h2 id="followers-receiving-messages">Followers receiving messages</h2>
-<blockquote>
-<p><strong>on</strong> receiving (LogRequest, \(leaderId, term, prefixLen, prefixTerm, leaderCommit, suffix\)) at node \(nodeId\) <strong>do</strong> <br />
-\(\qquad\)​<strong>if</strong> \(term \gt currentTerm\) <strong>then</strong> <br />
-\(\qquad\qquad currentTerm := term; votedFor\) := null <br />
-\(\qquad\qquad\)​cancel election timer <br />
-\(\qquad\)​<strong>end if</strong> <br />
-\(\qquad\)​<strong>if</strong> \(term = currentTerm\) <strong>then</strong> <br />
-\(\qquad\qquad currentRole\) := follower; \(currentLeader := leaderId\) <br />
-\(\qquad\)​<strong>end if</strong> <br />
-\(\qquad logOk := (log\).length \(\ge prefixLen) \wedge (prefixLen = 0 \vee log[prefixLen - 1]\).term = \(prefixTerm\)) <br />
-\(\qquad\)​<strong>if</strong> \(term = currentTerm \wedge logOk\) <strong>then</strong> <br />
-\(\qquad\qquad \mathrm{A}\mathrm{\scriptsize PPEND}\mathrm{E}\mathrm{\scriptsize NTRIES}(prefixLen, leaderCommit, suffix)\) <br />
-\(\qquad\qquad ack := prefixLen + suffix\).length <br />
-\(\qquad\qquad\)​<strong>send</strong> (LogResponse, \(nodeId, currentTerm, ack\), true) to \(leaderId\) <br />
-\(\qquad\)​<strong>else</strong> <br />
-\(\qquad\qquad\)​<strong>send</strong> (LogResponse, \(nodeId, currentTerm\), 0, false) to \(leaderId\) <br />
-\(\qquad\)​<strong>end if</strong>
-<strong>end on</strong></p>
-</blockquote>
-<p>首先，如果消息的 term 比 follower 当前的 term 高，则更新当前的 term，并接受消息的发送者为 leader。相等的时候，也会和之前一样的逻辑，承认发送者为 leader。</p>
-<p>prefixLen 为 suffix 包含 log 条目之前的条目数量，follower 要求自己当前的 log 长度要大于等于 prefixLen，并且 prefixLen 长度前的最后一个 log 条目中的 term 要与 leader 的 prefixTerm 相同<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。Raft 算法保证两个节点相同下标对应的 log 条目中的 term 相同，那么在这之前的 log 都是相同。</p>
-<p>以上条件满足就会调用 AppendEntries 将 suffix 添加到自己的 log 当中。</p>
-<h2 id="updating-followers-logs">Updating followers&rsquo; logs</h2>
-<blockquote>
-<p><strong>function</strong> \(\mathrm{A}\mathrm{\scriptsize PPEND}\mathrm{E}\mathrm{\scriptsize NTRIES}(prefixLen, leaderCommit, suffix)\) <br />
-\(\qquad\)​<strong>if</strong> \(suffix\).length \(\gt 0 \wedge log\).length \(\gt prefixLen\) <strong>then</strong> <br />
-\(\qquad\qquad index\) := min(\(log\).length, \(prefixLen + suffix\).length) - 1 <br />
-\(\qquad\qquad\)​<strong>if</strong> \(log[index]\).term \(\ne suffix[index - prefixLen]\).term <strong>then</strong> <br />
-\(\qquad\qquad\qquad log := \langle log[0], log[1], &hellip;, log[prefixLen - 1]\rangle\) <br />
-\(\qquad\qquad\)​<strong>end if</strong> <br />
-\(\qquad\)​<strong>end if</strong> <br />
-\(\qquad\)​<strong>if</strong> \(prefixLen + suffix\).length \(\gt log\).length <strong>then</strong> <br />
-\(\qquad\qquad\)​<strong>for</strong> \(i := log\).length - \(prefixLen\) <strong>to</strong> \(suffix\).length - 1 <strong>do</strong> <br />
-\(\qquad\qquad\qquad\)​append \(suffix[i]\) to \(log\) <br />
-\(\qquad\qquad\)​<strong>end for</strong> <br />
-\(\qquad\)​<strong>end if</strong> <br />
-\(\qquad\)​<strong>if</strong> \(leaderCommit \gt commitLength\) <strong>then</strong> <br />
-\(\qquad\qquad\)​<strong>for</strong> \(i := commitLength\) <strong>to</strong> \(leaderCommit\) - 1 <strong>do</strong> <br />
-\(\qquad\qquad\qquad\)​deliver \(log[i]\).msg to the application <br />
-\(\qquad\qquad\)​<strong>end for</strong> <br />
-\(\qquad\qquad commitLength := leaderCommit\) <br />
-\(\qquad\)​<strong>end if</strong> <br />
-<strong>end function</strong></p>
-</blockquote>
-<h2 id="leader-receiving-log-acknowledgements">Leader receiving log acknowledgements</h2>
-<blockquote>
-<p><strong>on</strong> receiving (LogResponse, \(follower, term, ack, success\)) at \(nodeId\) <strong>do</strong> <br />
-\(\qquad\)​<strong>if</strong> \(term = currentTerm \wedge currentRole\) = leader <strong>then</strong> <br />
-\(\qquad\qquad\)​<strong>if</strong> \(success\) = true \(\wedge ack \ge ackedLength[follower]\) <strong>then</strong> <br />
-\(\qquad\qquad\qquad sentLength[follower] := ack\) <br />
-\(\qquad\qquad\qquad ackedLength[follower] := ack\) <br />
-\(\qquad\qquad\qquad \mathrm{C}\mathrm{\scriptsize OMMIT}\mathrm{L}\mathrm{\scriptsize OG}\mathrm{E}\mathrm{\scriptsize NTRIES}()\) <br />
-\(\qquad\qquad\)​<strong>else if</strong> \(sentLength[follower] \gt 0\) <strong>then</strong> <br />
-\(\qquad\qquad\qquad sentLength[follower] := sentLength[follower] - 1\) <br />
-\(\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
-\(\qquad\qquad\)​<strong>end if</strong> <br />
-\(\qquad\)​<strong>end if</strong> \(term \gt currentTerm\) <strong>then</strong> <br />
-\(\qquad\qquad currentTerm := term\) <br />
-\(\qquad\qquad currentRole\) := folloer <br />
-\(\qquad\qquad votedFor\) := null <br />
-\(\qquad\qquad\)​cancel election timer <br />
-\(\qquad\)​<strong>end if</strong> <br />
-<strong>end on</strong></p>
-</blockquote>
-<h2 id="leader-committing-log-entries">Leader committing log entries</h2>
-<blockquote>
-<p><strong>define</strong> acks(\(length\)) = \(|{n \in nodes | ackedLength[n] \ge length}|\)</p>
-<p><strong>function</strong> \(\mathrm{C}\mathrm{\scriptsize OMMIT}\mathrm{L}\mathrm{\scriptsize OG}\mathrm{E}\mathrm{\scriptsize NTRIES}\) <br />
-\(\qquad minAcks := \left \lceil\frac{|nodes| + 1}{2} \right \rceil\) <br />
-\(\qquad ready\) := {\(len \in\) {1, &hellip;, \(log\).length} | acks(\(len\)) \(\ge minAcks\)} <br />
-\(\qquad\)​<strong>if</strong> \(ready \ne {} \wedge\) max(\(ready\)) \(\gt commitLength \wedge log\)[max(\(ready\)) - 1].term = \(currentTerm\) <strong>then</strong> <br />
-\(\qquad\qquad\)​<strong>for</strong> \(i := commitLength\) <strong>to</strong> max(\(ready\)) - 1 <strong>do</strong> <br />
-\(\qquad\qquad\qquad\)​deliver \(log[i]\).msg to the application <br />
-\(\qquad\qquad\)​<strong>end for</strong> <br />
-\(\qquad\qquad commitLength\) := max(\(ready\)) <br />
-\(\qquad\)​<strong>end if</strong> <br />
-<strong>end function</strong></p>
-</blockquote>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>\(\vee\) is logical or, \(\wedge\) is logical and.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>参考上一个步骤中 prefixTerm 的来源&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
+    <lastBuildDate>Thu, 23 Jun 2022 20:26:34 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Thu, 23 Jun 2022 15:31:21 +0800</pubDate>
+      <pubDate>Thu, 23 Jun 2022 20:26:34 +0800</pubDate>
       
       <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -500,7 +284,8 @@
 <p>在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中提到过一种实现方法是指定一个节点作为 Leader，并将所有的消息通过它来路由，保证传递的顺序。这一原则也被广泛应用于数据库副本：许多数据库系统指定一个副本作为 leader，primary 或者 master。所有修改数据库的事务都需要在 leader 副本上执行。虽然 leader 会同时执行多个事务，但事务提交时会按照总的顺序提交。当事务提交后， leader 副本将数据变动广播给所有的 follow 副本，follow 副本按照之前提交的顺序在本地进行事务提交，这种方法被称为被动复制（passive replication）或者主从复制（primary-backup replication），这样的方式其实和 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 是等效的。</p>
 <p>至于之前提到的其他广播方式，也可以用作复制，但需要更加小心，保证副本之间数据的一致性。</p>
 <h2 id="the-raft-consensus-algorithm">The Raft consensus algorithm</h2>
-<p><a href="/posts/main/20220623152601-raft_consensus_algorithm/">Raft consensus algorithm</a></p>
+<p>为了实现容错的 FIFO-total order broadcast，具体实现细节可以参见 <a href="/posts/main/20220623152601-raft_consensus_algorithm/">Raft consensus algorithm</a>，另外有个非常好的动画<a href="http://thesecretlivesofdata.com/raft/">示意网站</a>可以更加直观的观察整个过程。。</p>
+<p>集群内的节点都对选举出的领袖采取信任，因此Raft不是一种拜占庭容错算法。</p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>
@@ -525,6 +310,222 @@
 </li>
 <li id="fn:6">
 <p>向上去整&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Raft consensus algorithm</title>
+      <link>https://luciuschen.github.io/posts/main/20220623152601-raft_consensus_algorithm/</link>
+      <pubDate>Thu, 23 Jun 2022 17:21:30 +0800</pubDate>
+      
+      <guid>https://luciuschen.github.io/posts/main/20220623152601-raft_consensus_algorithm/</guid>
+      <description>为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画示意网站。 Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candi</description>
+      <content:encoded><![CDATA[<p>为了实现容错的 FIFO-total order broadcast，下面开始研究 Raft 一致性算法，有个非常好的动画<a href="http://thesecretlivesofdata.com/raft/">示意网站</a>。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
+         alt="Figure 1: node-state-transitions-in-raft"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>node-state-transitions-in-raft</p>
+        </figcaption>
+</figure>
+
+<p>一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。</p>
+<p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
+<p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
+<h2 id="initialisation">Initialisation</h2>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong> <br />
+\(\qquad currentTerm\) := 0; \(votedFor\) := null <br />
+\(\qquad log := \langle\rangle; commitLength\) := 0 <br />
+\(\qquad currentRole\) := follower; \(curentLeader\) := null <br />
+\(\qquad votesReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> recovery from crash <strong>do</strong> <br />
+\(\qquad currentRole\) := follower; \(currentLeader\) := null <br />
+\(\qquad votedReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> node \(nodeId\) suspects leader has failed, or on election timeout <strong>do</strong> <br />
+\(\qquad currentTerm := currentTerm + 1; currentRole\) := candidate <br />
+\(\qquad votedFor := nodeId; votesReceived := { nodeId } ; lastTerm := 0\) <br />
+\(\qquad\)​<strong>if</strong> \(log\).length &gt; 0 <strong>then</strong> \(lastTerm\) := \(log[log\).length − 1].term; <strong>end if</strong> <br />
+\(\qquad\qquad msg\) := (VoteRequest, \(nodeId\), \(currentTerm\), \(log\).length, \(lastTerm\)) <br />
+\(\qquad\)​<strong>for each</strong> \(node \in nodes\): <strong>send</strong> \(msg\) to \(node\) <br />
+\(\qquad\)​start election timer <br />
+<strong>end on</strong></p>
+</blockquote>
+<p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
+<p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
+<p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
+<h2 id="voting-on-a-new-leader">Voting on a new leader</h2>
+<blockquote>
+<p><strong>on</strong> receiving (VoteRequest, \(cId\), \(cTerm\), \(cLogLength\), \(cLogTerm\)) at node \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(cTerm \gt currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad currentTerm := cTerm; currentRole\) := follower <br />
+\(\qquad\qquad votedFor\) := null <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad lastTerm\) := 0 <br />
+\(\qquad\)​<strong>if</strong> \(log\).length &gt; 0 <strong>then</strong> \(lastTerm := log[log\).length - 1].term; <strong>end if</strong> <br />
+\(\qquad logOk := (cLogTerm \gt lastTerm) \vee (cLogTerm = lastTerm \wedge cLogLength \ge log\).length)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <br />
+\(\qquad\)​<strong>if</strong> \(cTerm = currentTerm \wedge logOk \wedge votedFor \in\) {\(cId\), null} <strong>then</strong> <br />
+\(\qquad\qquad votedFor := cId\) <br />
+\(\qquad\qquad\)​<strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), true) to node \(cId\) <br />
+\(\qquad\)​<strong>else</strong> <br />
+\(\qquad\qquad\)​<strong>send</strong> (VoteResponse, \(nodeId, currentTerm\), false) to node \(cId\) <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end on</strong></p>
+</blockquote>
+<p>如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。</p>
+<p>votedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及 当前的 term。</p>
+<h2 id="collecting-votes">Collecting votes</h2>
+<blockquote>
+<p><strong>on</strong> receiving (VoteResponse, \(voterId, term, granted\)) at \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(currentRole\) = candidate \(\wedge term = currentTerm \wedge granted\) <strong>then</strong> <br />
+\(\qquad\qquad votesReceived := votesReceived \cup {voterId}\) <br />
+\(\qquad\qquad\)​<strong>if</strong> \(|votesReceived| \ge \left \lceil\frac{(|nodes|) + 1}{2}\right \rceil\) <strong>then</strong> <br />
+\(\qquad\qquad\qquad currentRole\) := leader; \(curentLeader := nodeId\) <br />
+\(\qquad\qquad\qquad\)​cancel election timer <br />
+\(\qquad\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
+\(\qquad\qquad\qquad\qquad sentLength[follower] := log\).length <br />
+\(\qquad\qquad\qquad\qquad ackedLength[follower]\) := 0 <br />
+\(\qquad\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
+\(\qquad\qquad\qquad\) ​<strong>end for</strong> <br />
+\(\qquad\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>else if</strong> \(term \gt currentTerm\) <strong>Then</strong> <br />
+\(\qquad\qquad currentTerm := term\) <br />
+\(\qquad\qquad currentRole\) := follower <br />
+\(\qquad\qquad votedFor\) := null <br />
+\(\qquad\qquad\)​cancel election timer <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end on</strong></p>
+</blockquote>
+<p>回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。</p>
+<p>如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。</p>
+<p>sentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。</p>
+<h2 id="broadcasting-messages">Broadcasting messages</h2>
+<blockquote>
+<p><strong>on</strong> request to broadcast \(msg\) at node \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(currentRole\) = leader <strong>then</strong> <br />
+\(\qquad\qquad\)​append the record (msg: \(msg\), term: \(currentTerm\)) to \(log\) <br />
+\(\qquad\qquad ackedLength[nodeId]\) := \(log\).length <br />
+\(\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
+\(\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\)​<strong>else</strong> <br />
+\(\qquad\qquad\)​forward the request to \(currentLeader\) via a FIFO link <br />
+\(\qquad\)​<strong>end if</strong><br />
+<strong>end on</strong></p>
+<p><strong>periodically</strong> at node \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(currentRole\) = leader <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>for</strong> each \(follower \in nodes \ {nodeId}\) <strong>do</strong> <br />
+\(\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end do</strong></p>
+</blockquote>
+<p>以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。</p>
+<p>leader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。</p>
+<h2 id="replicating-from-leader-to-followers">Replicating from leader to followers</h2>
+<blockquote>
+<p><strong>function</strong> \(\mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(leaderId, followerId)\) <br />
+\(\qquad prefixLen := sentLength[followerId]\) <br />
+\(\qquad suffix := \langle log[prefixLen], log[prefixLen + 1]\), &hellip;, \(log[log\).length − 1]\(\rangle\) <br />
+\(\qquad prefixTerm\) := 0 <br />
+\(\qquad\)​<strong>if</strong> \(prefixLen \gt\) 0 <strong>then</strong> <br />
+\(\qquad\qquad prefixTerm := log[prefixLen − 1]\).term <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>send</strong> (LogRequest, \(leaderId, currentTerm, prefixLen, prefixTerm, commitLength, suffix\)) to \(followerId\) <br />
+<strong>end function</strong></p>
+</blockquote>
+<p>ReplicateLog 方法是从 leader 利用 followerId 发送任何新的 log 条目给 follower。prefixLen 是已经发送给 follower 消息的数量，suffix 就是还没有发送给 follower 的消息。所以当 sentLength[follower] = log.length 时，suffix 是一个空数组。</p>
+<h2 id="followers-receiving-messages">Followers receiving messages</h2>
+<blockquote>
+<p><strong>on</strong> receiving (LogRequest, \(leaderId, term, prefixLen, prefixTerm, leaderCommit, suffix\)) at node \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(term \gt currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad currentTerm := term; votedFor\) := null <br />
+\(\qquad\qquad\)​cancel election timer <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>if</strong> \(term = currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad currentRole\) := follower; \(currentLeader := leaderId\) <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad logOk := (log\).length \(\ge prefixLen) \wedge (prefixLen = 0 \vee log[prefixLen - 1]\).term = \(prefixTerm\)) <br />
+\(\qquad\)​<strong>if</strong> \(term = currentTerm \wedge logOk\) <strong>then</strong> <br />
+\(\qquad\qquad \mathrm{A}\mathrm{\scriptsize PPEND}\mathrm{E}\mathrm{\scriptsize NTRIES}(prefixLen, leaderCommit, suffix)\) <br />
+\(\qquad\qquad ack := prefixLen + suffix\).length <br />
+\(\qquad\qquad\)​<strong>send</strong> (LogResponse, \(nodeId, currentTerm, ack\), true) to \(leaderId\) <br />
+\(\qquad\)​<strong>else</strong> <br />
+\(\qquad\qquad\)​<strong>send</strong> (LogResponse, \(nodeId, currentTerm\), 0, false) to \(leaderId\) <br />
+\(\qquad\)​<strong>end if</strong>
+<strong>end on</strong></p>
+</blockquote>
+<p>首先，如果消息的 term 比 follower 当前的 term 高，则更新当前的 term，并接受消息的发送者为 leader。相等的时候，也会和之前一样的逻辑，承认发送者为 leader。</p>
+<p>prefixLen 为 suffix 包含 log 条目之前的条目数量，follower 要求自己当前的 log 长度要大于等于 prefixLen，并且 prefixLen 长度前的最后一个 log 条目中的 term 要与 leader 的 prefixTerm 相同<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。Raft 算法保证两个节点相同下标对应的 log 条目中的 term 相同，那么在这之前的 log 都是相同。</p>
+<p>以上条件满足就会调用 AppendEntries 将 suffix 添加到自己的 log 当中。</p>
+<h2 id="updating-followers-logs">Updating followers&rsquo; logs</h2>
+<blockquote>
+<p><strong>function</strong> \(\mathrm{A}\mathrm{\scriptsize PPEND}\mathrm{E}\mathrm{\scriptsize NTRIES}(prefixLen, leaderCommit, suffix)\) <br />
+\(\qquad\)​<strong>if</strong> \(suffix\).length \(\gt 0 \wedge log\).length \(\gt prefixLen\) <strong>then</strong> <br />
+\(\qquad\qquad index\) := min(\(log\).length, \(prefixLen + suffix\).length) - 1 <br />
+\(\qquad\qquad\)​<strong>if</strong> \(log[index]\).term \(\ne suffix[index - prefixLen]\).term <strong>then</strong> <br />
+\(\qquad\qquad\qquad log := \langle log[0], log[1], &hellip;, log[prefixLen - 1]\rangle\) <br />
+\(\qquad\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>if</strong> \(prefixLen + suffix\).length \(\gt log\).length <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>for</strong> \(i := log\).length - \(prefixLen\) <strong>to</strong> \(suffix\).length - 1 <strong>do</strong> <br />
+\(\qquad\qquad\qquad\)​append \(suffix[i]\) to \(log\) <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>if</strong> \(leaderCommit \gt commitLength\) <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>for</strong> \(i := commitLength\) <strong>to</strong> \(leaderCommit\) - 1 <strong>do</strong> <br />
+\(\qquad\qquad\qquad\)​deliver \(log[i]\).msg to the application <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\qquad commitLength := leaderCommit\) <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end function</strong></p>
+</blockquote>
+<h2 id="leader-receiving-log-acknowledgements">Leader receiving log acknowledgements</h2>
+<blockquote>
+<p><strong>on</strong> receiving (LogResponse, \(follower, term, ack, success\)) at \(nodeId\) <strong>do</strong> <br />
+\(\qquad\)​<strong>if</strong> \(term = currentTerm \wedge currentRole\) = leader <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>if</strong> \(success\) = true \(\wedge ack \ge ackedLength[follower]\) <strong>then</strong> <br />
+\(\qquad\qquad\qquad sentLength[follower] := ack\) <br />
+\(\qquad\qquad\qquad ackedLength[follower] := ack\) <br />
+\(\qquad\qquad\qquad \mathrm{C}\mathrm{\scriptsize OMMIT}\mathrm{L}\mathrm{\scriptsize OG}\mathrm{E}\mathrm{\scriptsize NTRIES}()\) <br />
+\(\qquad\qquad\)​<strong>else if</strong> \(sentLength[follower] \gt 0\) <strong>then</strong> <br />
+\(\qquad\qquad\qquad sentLength[follower] := sentLength[follower] - 1\) <br />
+\(\qquad\qquad\qquad \mathrm{R}\mathrm{\scriptsize EPLICATE}\mathrm{L}\mathrm{\scriptsize OG}(nodeId, follower)\) <br />
+\(\qquad\qquad\)​<strong>end if</strong> <br />
+\(\qquad\)​<strong>end if</strong> \(term \gt currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad currentTerm := term\) <br />
+\(\qquad\qquad currentRole\) := folloer <br />
+\(\qquad\qquad votedFor\) := null <br />
+\(\qquad\qquad\)​cancel election timer <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end on</strong></p>
+</blockquote>
+<h2 id="leader-committing-log-entries">Leader committing log entries</h2>
+<blockquote>
+<p><strong>define</strong> acks(\(length\)) = \(|{n \in nodes | ackedLength[n] \ge length}|\)</p>
+<p><strong>function</strong> \(\mathrm{C}\mathrm{\scriptsize OMMIT}\mathrm{L}\mathrm{\scriptsize OG}\mathrm{E}\mathrm{\scriptsize NTRIES}\) <br />
+\(\qquad minAcks := \left \lceil\frac{|nodes| + 1}{2} \right \rceil\) <br />
+\(\qquad ready\) := {\(len \in\) {1, &hellip;, \(log\).length} | acks(\(len\)) \(\ge minAcks\)} <br />
+\(\qquad\)​<strong>if</strong> \(ready \ne {} \wedge\) max(\(ready\)) \(\gt commitLength \wedge log\)[max(\(ready\)) - 1].term = \(currentTerm\) <strong>then</strong> <br />
+\(\qquad\qquad\)​<strong>for</strong> \(i := commitLength\) <strong>to</strong> max(\(ready\)) - 1 <strong>do</strong> <br />
+\(\qquad\qquad\qquad\)​deliver \(log[i]\).msg to the application <br />
+\(\qquad\qquad\)​<strong>end for</strong> <br />
+\(\qquad\qquad commitLength\) := max(\(ready\)) <br />
+\(\qquad\)​<strong>end if</strong> <br />
+<strong>end function</strong></p>
+</blockquote>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>\(\vee\) is logical or, \(\wedge\) is logical and.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>参考上一个步骤中 prefixTerm 的来源&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
