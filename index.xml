@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Lucius | Braindump</title>
-    <link>https://luciuschen.github.io/</link>
+    <link>https://sheerwill.live/</link>
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 Jun 2022 14:41:06 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Jun 2022 14:41:06 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Raft consensus algorithm</title>
-      <link>https://luciuschen.github.io/posts/main/20220623152601-raft_consensus_algorithm/</link>
+      <link>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</link>
       <pubDate>Fri, 24 Jun 2022 14:41:06 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220623152601-raft_consensus_algorithm/</guid>
+      <guid>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</guid>
       <description>Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其</description>
       <content:encoded><![CDATA[<figure>
     <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
@@ -232,10 +232,10 @@
     
     <item>
       <title>Distribution System</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
+      <link>https://sheerwill.live/posts/main/20220602202933-distribution_system/</link>
       <pubDate>Thu, 23 Jun 2022 20:26:34 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
+      <guid>https://sheerwill.live/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
       <content:encoded><![CDATA[<h2 id="remote-procedure-call">Remote Procedure Call</h2>
 <p><a href="/posts/main/20220603220847-remote_procedure_call_rpc/">Remote Procedure Call (RPC)</a> 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎么办？</p>
@@ -541,10 +541,10 @@
     
     <item>
       <title>Latex</title>
-      <link>https://luciuschen.github.io/posts/main/20220616162256-latex/</link>
+      <link>https://sheerwill.live/posts/main/20220616162256-latex/</link>
       <pubDate>Thu, 23 Jun 2022 15:00:14 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220616162256-latex/</guid>
+      <guid>https://sheerwill.live/posts/main/20220616162256-latex/</guid>
       <description>语法 效果 语法 效果 语法 效果 \bar{x} \(\bar{x}\) \acute{\eta} \(\acute{\eta}\) \check{\alpha} \(\check{\alpha}\) \grave{\eta} \(\grave{\eta}\) \breve{a} \(\breve{a}\) \ddot{y} \(\ddot{y}\) \dot{x} \(\dot{x}\) \hat{\alpha} \(\hat{\alpha}\) \tilde{\iota} \(\tilde{\iota}\) 语法 效果 语法 效果 语法 效果 \sin\theta \(\sin\!\theta\) \cos\theta \(\cos\theta\) \tan\theta \(\tan\theta\) \arcsin\frac{L}{r} \(\arcsin\frac{L}{r}\) \arccos\frac{T}{r} \(\arccos\frac{T}{r}\) \arctan\frac{L}{T} \(\arctan\frac{L}{T}\) \sinh g \(\sinh\ g\) \cosh h \(\cosh h\) \tanh i \(\tanh i\) \operatorname{sh}j \(\operatorname{sh}j\) \operatorname{argsh}k \(\operatorname{argsh}k\)</description>
       <content:encoded><![CDATA[<p><a id="table--声调"></a></p>
 <table>
@@ -935,10 +935,10 @@
     
     <item>
       <title>Org-roam</title>
-      <link>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</link>
+      <link>https://sheerwill.live/posts/main/20220505220832-org_roam/</link>
       <pubDate>Thu, 23 Jun 2022 10:38:55 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220505220832-org_roam/</guid>
+      <guid>https://sheerwill.live/posts/main/20220505220832-org_roam/</guid>
       <description>Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。</p>
@@ -1264,10 +1264,10 @@
     
     <item>
       <title>Lamport clocks</title>
-      <link>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</link>
+      <link>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</link>
       <pubDate>Wed, 22 Jun 2022 23:27:11 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220609201658-lamport_clocks/</guid>
+      <guid>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</guid>
       <description>Lamport clocks algorithm on initialisation do \(\qquad t := 0\) ▻ each node has its own local variable t end on on any event occurring at the local node do \(\qquad t := t + 1\) end on on request to send message \(m\) do \(\qquad t := t + 1\); send \((t, m)\) via the underlying network link end on on receiving \((t′, m)\)</description>
       <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
 <blockquote>
@@ -1337,10 +1337,10 @@
     
     <item>
       <title>Causal broadcast</title>
-      <link>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</link>
+      <link>https://sheerwill.live/posts/main/20220616132407-causal_broadcast/</link>
       <pubDate>Wed, 22 Jun 2022 14:33:28 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220616132407-causal_broadcast/</guid>
+      <guid>https://sheerwill.live/posts/main/20220616132407-causal_broadcast/</guid>
       <description>Definition Causal broadcast 算法有点类似于 FIFO broadcast： 每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟</description>
       <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
 <p>Causal broadcast 算法有点类似于 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a>：</p>
@@ -1391,10 +1391,10 @@
     
     <item>
       <title>Vector clocks</title>
-      <link>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</link>
+      <link>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</link>
       <pubDate>Wed, 22 Jun 2022 14:31:21 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220602235916-vector_clocks/</guid>
+      <guid>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</guid>
       <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \l</description>
       <content:encoded><![CDATA[<p>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 <p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
@@ -1474,10 +1474,10 @@
     
     <item>
       <title>FIFO broadcast</title>
-      <link>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</link>
+      <link>https://sheerwill.live/posts/main/20220616105609-fifo_broadcast/</link>
       <pubDate>Wed, 22 Jun 2022 14:30:35 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220616105609-fifo_broadcast/</guid>
+      <guid>https://sheerwill.live/posts/main/20220616105609-fifo_broadcast/</guid>
       <description>Definition 最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之</description>
       <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
 <p>最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之前被传递，因为它们都是由 \(A\) 发送的。然而，\(m_{2}\) 可以在 \(m_{1}\) 和 \(m_{3}\) 之前、之间或之后的任何时间被传递。</p>
@@ -1524,10 +1524,10 @@
     
     <item>
       <title>Total order broadcast</title>
-      <link>https://luciuschen.github.io/posts/main/20220616135058-total_order_broadcast/</link>
+      <link>https://sheerwill.live/posts/main/20220616135058-total_order_broadcast/</link>
       <pubDate>Mon, 20 Jun 2022 14:47:46 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220616135058-total_order_broadcast/</guid>
+      <guid>https://sheerwill.live/posts/main/20220616135058-total_order_broadcast/</guid>
       <description>Definition 总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。FIFO broadcast 和 Causal broadcast 允许不同的节点以不同</description>
       <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
 <p>总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。<a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 和 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 允许不同的节点以不同的顺序传递信息，total order broadcast 在各节点之间强制执行一致性，确保所有节点以相同的顺序传递信息。精确的传递顺序没有规定，只要它在所有节点上都是一样的。</p>
@@ -1580,10 +1580,10 @@
     
     <item>
       <title>Causality and Happen-before relation</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</link>
+      <link>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</link>
       <pubDate>Mon, 20 Jun 2022 14:47:03 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
+      <guid>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
       <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
       <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
 <p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
@@ -1637,10 +1637,10 @@
     
     <item>
       <title>Network Time Protocol (NTP)</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</link>
+      <link>https://sheerwill.live/posts/main/20220602202411-network_time_protocol_ntp/</link>
       <pubDate>Sun, 19 Jun 2022 22:26:56 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220602202411-network_time_protocol_ntp/</guid>
+      <guid>https://sheerwill.live/posts/main/20220602202411-network_time_protocol_ntp/</guid>
       <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
       <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
 <p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
@@ -1701,10 +1701,10 @@
     
     <item>
       <title>Quorum</title>
-      <link>https://luciuschen.github.io/posts/main/20220615143721-quorum/</link>
+      <link>https://sheerwill.live/posts/main/20220615143721-quorum/</link>
       <pubDate>Sun, 19 Jun 2022 13:02:32 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220615143721-quorum/</guid>
+      <guid>https://sheerwill.live/posts/main/20220615143721-quorum/</guid>
       <description>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于 Quorum 投票的冗余控制算法 在有冗余数据</description>
       <content:encoded><![CDATA[<p>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。</p>
 <h2 id="基于-quorum-投票的冗余控制算法">基于 Quorum 投票的冗余控制算法</h2>
@@ -1726,10 +1726,10 @@
     
     <item>
       <title>Hugo</title>
-      <link>https://luciuschen.github.io/posts/main/20220607104757-hugo/</link>
+      <link>https://sheerwill.live/posts/main/20220607104757-hugo/</link>
       <pubDate>Fri, 17 Jun 2022 13:47:22 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220607104757-hugo/</guid>
+      <guid>https://sheerwill.live/posts/main/20220607104757-hugo/</guid>
       <description>Add backlink 在 themes/xxx/layouts/partials/ 下新增 ~backlink.html~，内容如下。 {{ $re := $.File.BaseFileName }} {{ $backlinks := slice }} {{ range .Site.AllPages }} {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }} {{ $backlinks = $backlinks | append . }} {{ end }} {{ end }} {{ if gt</description>
       <content:encoded><![CDATA[<h2 id="add-backlink">Add backlink</h2>
 <p>在 <code>themes/xxx/layouts/partials/</code> 下新增 ~backlink.html~，内容如下。</p>
@@ -1817,10 +1817,10 @@
     
     <item>
       <title>Refactoring Code</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</link>
+      <link>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</link>
       <pubDate>Thu, 16 Jun 2022 09:33:31 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</guid>
+      <guid>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</guid>
       <description>Refactoring Code How To Find Time Complexity Of An Algorithm
 JavaScript Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await Refactoring Code examples Callback Hell </description>
       <content:encoded><![CDATA[<h2 id="refactoring-code">Refactoring Code</h2>
@@ -1841,10 +1841,10 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
     
     <item>
       <title>Callback Hell</title>
-      <link>https://luciuschen.github.io/posts/main/20220616092944-callback_hell/</link>
+      <link>https://sheerwill.live/posts/main/20220616092944-callback_hell/</link>
       <pubDate>Thu, 16 Jun 2022 09:32:58 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220616092944-callback_hell/</guid>
+      <guid>https://sheerwill.live/posts/main/20220616092944-callback_hell/</guid>
       <description>重构小程序前端校验接口返参处理 主要是用 Map (ES6+) 处理 if (code){} else if (code){}~，并且利用 ~Promise 封装函数，配合 async 和 await (ES7+)，使得异步操作同步化，抽</description>
       <content:encoded><![CDATA[<h2 id="重构小程序前端校验接口返参处理">重构小程序前端校验接口返参处理</h2>
 <p>主要是用 <code>Map</code> (ES6+) 处理 <code>if (code){} else if (code){}~，并且利用 ~Promise</code> 封装函数，配合 <code>async</code> 和 <code>await</code> (ES7+)，使得异步操作同步化，抽离出嵌套的逻辑。</p>
@@ -2636,10 +2636,10 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
     
     <item>
       <title>Tools to Increase Productivity and Efficiency</title>
-      <link>https://luciuschen.github.io/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</link>
+      <link>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</link>
       <pubDate>Wed, 15 Jun 2022 09:22:09 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</guid>
+      <guid>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</guid>
       <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Writing WeChat Markdown Editor 一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档</description>
       <content:encoded><![CDATA[<h2 id="misc">Misc</h2>
 <ol>
@@ -2742,10 +2742,10 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
     
     <item>
       <title>MySQL</title>
-      <link>https://luciuschen.github.io/posts/main/20220530185321-mysql/</link>
+      <link>https://sheerwill.live/posts/main/20220530185321-mysql/</link>
       <pubDate>Sat, 11 Jun 2022 11:51:16 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220530185321-mysql/</guid>
+      <guid>https://sheerwill.live/posts/main/20220530185321-mysql/</guid>
       <description>Troubleshoot Issues in MySQL
 Sort Chinese text fields alphabetically by first letter</description>
       <content:encoded><![CDATA[<p><a href="/posts/main/20220530180443-troubleshoot_issues_in_mysql/">Troubleshoot Issues in MySQL</a></p>
@@ -2755,10 +2755,10 @@ Sort Chinese text fields alphabetically by first letter</description>
     
     <item>
       <title>Converting callbacks to promises</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193545-converting_callbacks_to_promises/</link>
+      <link>https://sheerwill.live/posts/main/20220506193545-converting_callbacks_to_promises/</link>
       <pubDate>Sat, 11 Jun 2022 11:49:29 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220506193545-converting_callbacks_to_promises/</guid>
+      <guid>https://sheerwill.live/posts/main/20220506193545-converting_callbacks_to_promises/</guid>
       <description>这里用 setTimeout() 模仿异步请求。 const callbackFn = (firstName, callback) =&amp;gt; { setTimeout(() =&amp;gt; { if (!firstName) return callback(new Error(&amp;#34;no first name passed in!&amp;#34;)); // failed const fullName = `${firstName} Doe`; return callback(fullName); // succeed }, 2000); }; callbackFn(&amp;#34;John&amp;#34;, console.log); callbackFn(null, console.log); Promise 实现如下 const promiseFn = (firstName) =&amp;gt; { return new Promise((resolve, reject) =&amp;gt; { setTimeout(() =&amp;gt; { if (!firstName)</description>
       <content:encoded><![CDATA[<p>这里用 <code>setTimeout()</code> 模仿异步请求。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">callbackFn</span> <span class="o">=</span> <span class="p">(</span><span class="nx">firstName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
@@ -2846,10 +2846,10 @@ Sort Chinese text fields alphabetically by first letter</description>
     
     <item>
       <title>Refactoring Promise chains with async/await</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</link>
+      <link>https://sheerwill.live/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</link>
       <pubDate>Sat, 11 Jun 2022 11:49:15 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</guid>
+      <guid>https://sheerwill.live/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</guid>
       <description>const setDelay = (millisecond) =&amp;gt; { return new Promise((resolve, reject) =&amp;gt; { if (typeof millisecond != &amp;#34;number&amp;#34;) reject(new Error(&amp;#34;参数必须是number类型&amp;#34;)); setTimeout(() =&amp;gt; { resolve(`我延迟了${mi</description>
       <content:encoded><![CDATA[<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">setDelay</span> <span class="o">=</span> <span class="p">(</span><span class="nx">millisecond</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
@@ -2903,10 +2903,10 @@ Sort Chinese text fields alphabetically by first letter</description>
     
     <item>
       <title>Refactoring Condition statements</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193520-refactoring_condition_statements/</link>
+      <link>https://sheerwill.live/posts/main/20220506193520-refactoring_condition_statements/</link>
       <pubDate>Sat, 11 Jun 2022 11:48:48 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220506193520-refactoring_condition_statements/</guid>
+      <guid>https://sheerwill.live/posts/main/20220506193520-refactoring_condition_statements/</guid>
       <description>前端网络请求回调中经常会根据后端返回的不同 code 进行不同的业务处理。 if (res.data.code === &amp;#34;0000&amp;#34;) { //do something } else if (res.data.code === &amp;#34;0001&amp;#34;) { //do something } else if (res.data.code === &amp;#34;0002&amp;#34;) { //do something } else { //do something } 简单应用 const statusCode =</description>
       <content:encoded><![CDATA[<p>前端网络请求回调中经常会根据后端返回的不同 code 进行不同的业务处理。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s2">&#34;0000&#34;</span><span class="p">)</span> <span class="p">{</span>
@@ -2981,10 +2981,10 @@ Sort Chinese text fields alphabetically by first letter</description>
     
     <item>
       <title>How To Find Time Complexity Of An Algorithm</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</link>
+      <link>https://sheerwill.live/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</link>
       <pubDate>Sat, 11 Jun 2022 11:48:23 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</guid>
+      <guid>https://sheerwill.live/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</guid>
       <description>The most common metric for calculating time complexity is Big O notation. This removes all constant factors so that the running time can be estimated in relation to N as N approaches infinity. In general you can think of it like this:
 statement; Is constant. The running time of the statement will not change in relation to N.
 for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loop is directly proportional to N.</description>
@@ -3018,10 +3018,10 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     
     <item>
       <title>Sort Chinese text fields alphabetically by first letter</title>
-      <link>https://luciuschen.github.io/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/</link>
+      <link>https://sheerwill.live/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/</link>
       <pubDate>Sat, 11 Jun 2022 11:47:46 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/</guid>
+      <guid>https://sheerwill.live/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/</guid>
       <description>UTF8 default Proofing set is Utf8_general_ci, it is not in Chinese. You need to force MySQL to sort by Chinese. select * FROM MyTable ORDER by CONVERT (Chinesecolumnname USING GBK) COLLATE gbk_chinese_ci; 为了达到更快更效率的查询，需要另外再建立一个索引列，并在索引列中插入标签字第</description>
       <content:encoded><![CDATA[<p>UTF8 default Proofing set is <code>Utf8_general_ci</code>, it is not in Chinese. You need to force MySQL to sort by Chinese.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">MyTable</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">CONVERT</span><span class="w"> </span><span class="p">(</span><span class="n">Chinesecolumnname</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">GBK</span><span class="p">)</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">gbk_chinese_ci</span><span class="p">;</span><span class="w">
@@ -3031,10 +3031,10 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     
     <item>
       <title>Troubleshoot Issues in MySQL</title>
-      <link>https://luciuschen.github.io/posts/main/20220530180443-troubleshoot_issues_in_mysql/</link>
+      <link>https://sheerwill.live/posts/main/20220530180443-troubleshoot_issues_in_mysql/</link>
       <pubDate>Sat, 11 Jun 2022 11:47:23 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220530180443-troubleshoot_issues_in_mysql/</guid>
+      <guid>https://sheerwill.live/posts/main/20220530180443-troubleshoot_issues_in_mysql/</guid>
       <description>Mysql 无法更新表 查询是否有锁表。 SHOW OPEN TABLES WHERE In_use &amp;gt; 0; 查询是否有正在执行的事务 SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX;</description>
       <content:encoded><![CDATA[<h2 id="mysql-无法更新表">Mysql 无法更新表</h2>
 <ol>
@@ -3052,10 +3052,10 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     
     <item>
       <title>Personal Knowledge Wiki</title>
-      <link>https://luciuschen.github.io/posts/main/20220508195206-personal_knowledge_wiki/</link>
+      <link>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</link>
       <pubDate>Sat, 11 Jun 2022 11:46:23 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220508195206-personal_knowledge_wiki/</guid>
+      <guid>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</guid>
       <description>Hardware HHKB Logitech MX Master 3 for Mac 17 MBP DELL U2417H Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency HammerSpoon Karabiner-Elements VSCode Squirrel</description>
       <content:encoded><![CDATA[<h2 id="hardware">Hardware</h2>
 <ul>
@@ -3088,20 +3088,20 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     
     <item>
       <title>HammerSpoon</title>
-      <link>https://luciuschen.github.io/posts/main/20220520185239-hammerspoon/</link>
+      <link>https://sheerwill.live/posts/main/20220520185239-hammerspoon/</link>
       <pubDate>Sat, 11 Jun 2022 11:46:14 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220520185239-hammerspoon/</guid>
+      <guid>https://sheerwill.live/posts/main/20220520185239-hammerspoon/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Git Skills</title>
-      <link>https://luciuschen.github.io/posts/main/20220503160055-git-skills/</link>
+      <link>https://sheerwill.live/posts/main/20220503160055-git-skills/</link>
       <pubDate>Sat, 11 Jun 2022 11:45:53 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220503160055-git-skills/</guid>
+      <guid>https://sheerwill.live/posts/main/20220503160055-git-skills/</guid>
       <description>删除以往的提交记录 git checkout --orphan latest_branch git add -A git commit -am &amp;#34;commit message&amp;#34; git branch -D main git branch -m main git push -f origin main 发现上次提交的内容有误，需要再次修改，但不想重复提交，而是合并到上一次提</description>
       <content:encoded><![CDATA[<p>删除以往的提交记录</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout --orphan latest_branch
@@ -3125,10 +3125,10 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     
     <item>
       <title>Remote Procedure Call (RPC)</title>
-      <link>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</link>
+      <link>https://sheerwill.live/posts/main/20220603220847-remote_procedure_call_rpc/</link>
       <pubDate>Sat, 11 Jun 2022 11:43:15 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220603220847-remote_procedure_call_rpc/</guid>
+      <guid>https://sheerwill.live/posts/main/20220603220847-remote_procedure_call_rpc/</guid>
       <description>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样</description>
       <content:encoded><![CDATA[<p>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样调用远程系统上的其他进程。</p>
 <p>RPC 是通过 Interface Definition Language (IDL) 来描述接口，使得在不同的平台上运行的不同程序编写的程序可以相互通信。(IDL 是不以任何一种特定编程语言的方式指定类型签名或者函数调用的语言。)</p>
@@ -3163,10 +3163,10 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     
     <item>
       <title>Stub</title>
-      <link>https://luciuschen.github.io/posts/main/20220604180341-stub/</link>
+      <link>https://sheerwill.live/posts/main/20220604180341-stub/</link>
       <pubDate>Sat, 11 Jun 2022 11:42:56 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220604180341-stub/</guid>
+      <guid>https://sheerwill.live/posts/main/20220604180341-stub/</guid>
       <description>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。 在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端</description>
       <content:encoded><![CDATA[<ol>
 <li>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。</li>
@@ -3177,10 +3177,10 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     
     <item>
       <title>The Byzantine generals problem</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</link>
+      <link>https://sheerwill.live/posts/main/20220602202317-the_byzantine_generals_problem/</link>
       <pubDate>Sat, 11 Jun 2022 11:42:34 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220602202317-the_byzantine_generals_problem/</guid>
+      <guid>https://sheerwill.live/posts/main/20220602202317-the_byzantine_generals_problem/</guid>
       <description>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同</description>
       <content:encoded><![CDATA[<p>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。</p>
 <p>在分布式计算中，不同的计算机通过通讯交换信息达成共识而按照同一套协作策略行动。但有时候，系统中的成员计算机可能出错而发送错误的信息，用于传递信息的通讯网络也可能导致信息损坏，使得网络中不同的成员关于全体协作的策略得出不同结论，从而破坏系统一致性。拜占庭将军问题被认为是容错性问题中最难的问题类型之一。</p>
@@ -3190,10 +3190,10 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     
     <item>
       <title>The two generals problem</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</link>
+      <link>https://sheerwill.live/posts/main/20220602202247-the_two_generals_problem/</link>
       <pubDate>Sat, 11 Jun 2022 11:42:17 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220602202247-the_two_generals_problem/</guid>
+      <guid>https://sheerwill.live/posts/main/20220602202247-the_two_generals_problem/</guid>
       <description>两军问题（英语：Two Generals&amp;rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该</description>
       <content:encoded><![CDATA[<p>两军问题（英语：Two Generals&rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该问题中，两支军队的将军只能通过派遣信使穿越敌方领土来互相通信，以此约定在同一时间点共同进攻。该问题希望求解如何在两位将军派出的任何信使都可能被俘虏的情况下，就发动攻击的时间点达成一致。</p>
 <p>两军问题是拜占庭将军问题的一个特例，常被编入与计算机网络相关的入门课程中。在传输控制协议（TCP）相关的课程中，该问题可用作解释 TCP 协议无法保证通信双方之间的状态一致性的原因。该问题也适用于其他存在信息丢失的双方通信的情况。作为认识逻辑的一个重要概念，该问题突出了共识（英语：Common_knowledge_(logic)）的重要性。一些学者也将此问题称作两军悖论（英语：Two Generals Paradox）或协同进攻问题（英语：Coordinated Attack Problem）。两军问题是第一个被证明无解的计算机通信问题。该证明的重要意义在于，其显示了对于存在通信错误的更广泛的问题（如拜占庭将军问题），同样是无解的。这也为所有分布式一致性协议的实现提供了一个符合现实的预期。</p>
@@ -3202,10 +3202,10 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     
     <item>
       <title>Figma</title>
-      <link>https://luciuschen.github.io/posts/main/20220503154744-figma/</link>
+      <link>https://sheerwill.live/posts/main/20220503154744-figma/</link>
       <pubDate>Sat, 11 Jun 2022 11:41:35 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220503154744-figma/</guid>
+      <guid>https://sheerwill.live/posts/main/20220503154744-figma/</guid>
       <description>Plugin Scale Scale any frame, it’s contents, and all effects to any defined width or height. Sankey Connect Sankey Diagram Connect. </description>
       <content:encoded><![CDATA[<h2 id="plugin">Plugin</h2>
 <ul>
@@ -3217,10 +3217,10 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     
     <item>
       <title>Build Diagram</title>
-      <link>https://luciuschen.github.io/posts/main/20220503145636-build_diagram/</link>
+      <link>https://sheerwill.live/posts/main/20220503145636-build_diagram/</link>
       <pubDate>Sat, 11 Jun 2022 11:41:12 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220503145636-build_diagram/</guid>
+      <guid>https://sheerwill.live/posts/main/20220503145636-build_diagram/</guid>
       <description>Sankey diagram 使用软件：Figma Plugin: Sankey Connect 展现数据流动的利器 案例：工作流描述 初始的思路是按照流程图来画，用 Excalidraw 插件画起来很快，但不够明晰。工作流也是处理数</description>
       <content:encoded><![CDATA[<h2 id="sankey-diagram">Sankey diagram</h2>
 <ul>
@@ -3300,10 +3300,10 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     
     <item>
       <title>How I Take Notes</title>
-      <link>https://luciuschen.github.io/posts/article/20220505162419-how_i_take_notes/</link>
+      <link>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</link>
       <pubDate>Sat, 11 Jun 2022 11:40:35 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/article/20220505162419-how_i_take_notes/</guid>
+      <guid>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</guid>
       <description>Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>最先接触到 <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettlekasten</a> (German: &ldquo;slip box&rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、Notion、Obsidian（当时还不知道 Backlinks），都觉得不太合适，尤其是第一步文件夹的分类就让我头疼，很多内容是互相交叉的，并不是简单的可以归在一个分类下面，若是细分的分类过多，又会过于混乱，最后的结果就是“垃圾场”。</p>
@@ -3382,10 +3382,10 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     
     <item>
       <title>Implementation Intention GTD</title>
-      <link>https://luciuschen.github.io/posts/article/20220503143427-gtd/</link>
+      <link>https://sheerwill.live/posts/article/20220503143427-gtd/</link>
       <pubDate>Sat, 11 Jun 2022 11:39:58 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/article/20220503143427-gtd/</guid>
+      <guid>https://sheerwill.live/posts/article/20220503143427-gtd/</guid>
       <description>Introduction 2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omni</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omnifocus、Things 等等。</p>

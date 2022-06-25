@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>newsletter on Lucius | Braindump</title>
-    <link>https://luciuschen.github.io/tags/newsletter/</link>
+    <link>https://sheerwill.live/tags/newsletter/</link>
     <description>Recent content in newsletter on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2022 11:40:35 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/newsletter/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jun 2022 11:40:35 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/newsletter/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How I Take Notes</title>
-      <link>https://luciuschen.github.io/posts/article/20220505162419-how_i_take_notes/</link>
+      <link>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</link>
       <pubDate>Sat, 11 Jun 2022 11:40:35 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/article/20220505162419-how_i_take_notes/</guid>
+      <guid>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</guid>
       <description>Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>最先接触到 <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettlekasten</a> (German: &ldquo;slip box&rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、Notion、Obsidian（当时还不知道 Backlinks），都觉得不太合适，尤其是第一步文件夹的分类就让我头疼，很多内容是互相交叉的，并不是简单的可以归在一个分类下面，若是细分的分类过多，又会过于混乱，最后的结果就是“垃圾场”。</p>
@@ -91,10 +91,10 @@
     
     <item>
       <title>Implementation Intention GTD</title>
-      <link>https://luciuschen.github.io/posts/article/20220503143427-gtd/</link>
+      <link>https://sheerwill.live/posts/article/20220503143427-gtd/</link>
       <pubDate>Sat, 11 Jun 2022 11:39:58 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/article/20220503143427-gtd/</guid>
+      <guid>https://sheerwill.live/posts/article/20220503143427-gtd/</guid>
       <description>Introduction 2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omni</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omnifocus、Things 等等。</p>

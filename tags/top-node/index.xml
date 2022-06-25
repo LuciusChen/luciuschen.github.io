@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>top-node on Lucius | Braindump</title>
-    <link>https://luciuschen.github.io/tags/top-node/</link>
+    <link>https://sheerwill.live/tags/top-node/</link>
     <description>Recent content in top-node on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jun 2022 20:26:34 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Jun 2022 20:26:34 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
-      <link>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</link>
+      <link>https://sheerwill.live/posts/main/20220602202933-distribution_system/</link>
       <pubDate>Thu, 23 Jun 2022 20:26:34 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220602202933-distribution_system/</guid>
+      <guid>https://sheerwill.live/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
       <content:encoded><![CDATA[<h2 id="remote-procedure-call">Remote Procedure Call</h2>
 <p><a href="/posts/main/20220603220847-remote_procedure_call_rpc/">Remote Procedure Call (RPC)</a> 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎么办？</p>
@@ -318,10 +318,10 @@
     
     <item>
       <title>Refactoring Code</title>
-      <link>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</link>
+      <link>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</link>
       <pubDate>Thu, 16 Jun 2022 09:33:31 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220506193054-refactoring_code/</guid>
+      <guid>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</guid>
       <description>Refactoring Code How To Find Time Complexity Of An Algorithm
 JavaScript Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await Refactoring Code examples Callback Hell </description>
       <content:encoded><![CDATA[<h2 id="refactoring-code">Refactoring Code</h2>
@@ -342,10 +342,10 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
     
     <item>
       <title>MySQL</title>
-      <link>https://luciuschen.github.io/posts/main/20220530185321-mysql/</link>
+      <link>https://sheerwill.live/posts/main/20220530185321-mysql/</link>
       <pubDate>Sat, 11 Jun 2022 11:51:16 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/posts/main/20220530185321-mysql/</guid>
+      <guid>https://sheerwill.live/posts/main/20220530185321-mysql/</guid>
       <description>Troubleshoot Issues in MySQL
 Sort Chinese text fields alphabetically by first letter</description>
       <content:encoded><![CDATA[<p><a href="/posts/main/20220530180443-troubleshoot_issues_in_mysql/">Troubleshoot Issues in MySQL</a></p>

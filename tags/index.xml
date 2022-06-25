@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Lucius | Braindump</title>
-    <link>https://luciuschen.github.io/tags/</link>
+    <link>https://sheerwill.live/tags/</link>
     <description>Recent content in Tags on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jun 2022 20:26:34 +0800</lastBuildDate><atom:link href="https://luciuschen.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Jun 2022 20:26:34 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>top-node</title>
-      <link>https://luciuschen.github.io/tags/top-node/</link>
+      <link>https://sheerwill.live/tags/top-node/</link>
       <pubDate>Thu, 23 Jun 2022 20:26:34 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/tags/top-node/</guid>
+      <guid>https://sheerwill.live/tags/top-node/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>distributed-systems</title>
-      <link>https://luciuschen.github.io/tags/distributed-systems/</link>
+      <link>https://sheerwill.live/tags/distributed-systems/</link>
       <pubDate>Wed, 22 Jun 2022 23:27:11 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/tags/distributed-systems/</guid>
+      <guid>https://sheerwill.live/tags/distributed-systems/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>newsletter</title>
-      <link>https://luciuschen.github.io/tags/newsletter/</link>
+      <link>https://sheerwill.live/tags/newsletter/</link>
       <pubDate>Sat, 11 Jun 2022 11:40:35 +0800</pubDate>
       
-      <guid>https://luciuschen.github.io/tags/newsletter/</guid>
+      <guid>https://sheerwill.live/tags/newsletter/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
