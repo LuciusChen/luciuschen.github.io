@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Jun 2022 11:08:00 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Jun 2022 15:01:44 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://sheerwill.live/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Sat, 25 Jun 2022 11:08:00 +0800</pubDate>
+      <pubDate>Sat, 25 Jun 2022 15:01:44 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -288,6 +288,29 @@
 <p>集群内的节点都对选举出的领袖采取信任，因此 Raft 不是一种拜占庭容错算法。</p>
 <h2 id="replica-consistency">Replica consistency</h2>
 <p>事务的关键是原子性。当一个事务跨越多个节点时，希望整个事务仍然具有原子性：也就是说，要么所有节点都必须提交事务且具有持久性，要么所有节点都回滚。因此，各节点之间就事务应该终止回滚还是提交要达成一致。这里说的一致和 Raft 中的不太一样，细节上有很大不同。</p>
+<table>
+<thead>
+<tr>
+<th>Consensus</th>
+<th>Atomic commit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一个或多个节点提出一个值</td>
+<td>每个节点投票是否提交或中止</td>
+</tr>
+<tr>
+<td>任意一个提出的值都可以被承认</td>
+<td>如果所有的节点投票提交那么就必须提交；如果所有的节点都投票中止那么就必须中止。</td>
+</tr>
+<tr>
+<td>只要 quorum 数量的节点可以工作，崩溃的节点是可以被容忍的。</td>
+<td>如果不分的节点崩溃，必须中止。</td>
+</tr>
+</tbody>
+</table>
+<p>用来保证多个节点 atomic commitment 最常用的算法是 two-phase commit protocol (2PC)，也有 three-phase commit protocol，但这里不做研究。</p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>
