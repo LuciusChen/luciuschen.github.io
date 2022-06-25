@@ -6,11 +6,11 @@
     <description>Recent content in top-node on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jun 2022 20:26:34 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Jun 2022 11:08:00 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/top-node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://sheerwill.live/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Thu, 23 Jun 2022 20:26:34 +0800</pubDate>
+      <pubDate>Sat, 25 Jun 2022 11:08:00 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -284,8 +284,10 @@
 <p>在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中提到过一种实现方法是指定一个节点作为 Leader，并将所有的消息通过它来路由，保证传递的顺序。这一原则也被广泛应用于数据库副本：许多数据库系统指定一个副本作为 leader，primary 或者 master。所有修改数据库的事务都需要在 leader 副本上执行。虽然 leader 会同时执行多个事务，但事务提交时会按照总的顺序提交。当事务提交后， leader 副本将数据变动广播给所有的 follow 副本，follow 副本按照之前提交的顺序在本地进行事务提交，这种方法被称为被动复制（passive replication）或者主从复制（primary-backup replication），这样的方式其实和 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 是等效的。</p>
 <p>至于之前提到的其他广播方式，也可以用作复制，但需要更加小心，保证副本之间数据的一致性。</p>
 <h2 id="the-raft-consensus-algorithm">The Raft consensus algorithm</h2>
-<p>为了实现容错的 FIFO-total order broadcast，具体实现细节可以参见 <a href="/posts/main/20220623152601-raft_consensus_algorithm/">Raft consensus algorithm</a>，另外有个非常好的动画<a href="http://thesecretlivesofdata.com/raft/">示意网站</a>可以更加直观的观察整个过程。。</p>
-<p>集群内的节点都对选举出的领袖采取信任，因此Raft不是一种拜占庭容错算法。</p>
+<p>为了实现容错的 FIFO-total order broadcast，Raft 的具体实现细节可以参见 <a href="/posts/main/20220623152601-raft_consensus_algorithm/">Raft consensus algorithm</a>，另外有个非常好的动画<a href="http://thesecretlivesofdata.com/raft/">示意网站</a>可以更加直观的观察整个过程。。</p>
+<p>集群内的节点都对选举出的领袖采取信任，因此 Raft 不是一种拜占庭容错算法。</p>
+<h2 id="replica-consistency">Replica consistency</h2>
+<p>事务的关键是原子性。当一个事务跨越多个节点时，希望整个事务仍然具有原子性：也就是说，要么所有节点都必须提交事务且具有持久性，要么所有节点都回滚。因此，各节点之间就事务应该终止回滚还是提交要达成一致。这里说的一致和 Raft 中的不太一样，细节上有很大不同。</p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>
