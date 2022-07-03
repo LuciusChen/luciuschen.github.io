@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Stub | Lucius | Braindump</title>
-<meta name="keywords" content="distributed-systems">
+<meta name="keywords" content="distributed">
 <meta name="description" content="在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。 在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端">
 <meta name="author" content="Lucius Chen">
 <link rel="canonical" href="https://sheerwill.live/posts/main/20220604180341-stub/">
@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://sheerwill.live/posts/main/20220604180341-stub/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-06-11T11:42:56&#43;08:00" />
+  <meta property="article:modified_time" content="2022-06-30T14:18:17&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -56,12 +56,12 @@
   "name": "Stub",
   "description": "在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。 在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端",
   "keywords": [
-    "distributed-systems"
+    "distributed"
   ],
   "wordCount" : "86",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-06-11T11:42:56+08:00",
+  "dateModified": "2022-06-30T14:18:17+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -270,9 +270,9 @@ function toggleThemeListener() {
     </h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>June 11, 2022</span></span><span class="meta-item">
+  <span>June 30, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
-  <span class="post-tags"><a href="https://sheerwill.live/tags/distributed-systems/">distributed-systems</a></span></span><span class="meta-item">
+  <span class="post-tags"><a href="https://sheerwill.live/tags/distributed/">distributed</a></span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
   <span>86 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
@@ -291,28 +291,6 @@ function toggleThemeListener() {
 
     
 
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
 
    
 
@@ -380,6 +358,34 @@ function toggleThemeListener() {
 
    
 
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
 <hr>
 
   <div class="bl-section">
@@ -398,17 +404,11 @@ function toggleThemeListener() {
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://sheerwill.live/posts/main/20220603220847-remote_procedure_call_rpc/">
-    <span class="title">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;Prev Page</span>
-    <br>
-    <span>Remote Procedure Call (RPC)</span>
-  </a>
-  <a class="next" href="https://sheerwill.live/posts/main/20220602202317-the_byzantine_generals_problem/">
+  <a class="next" href="https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/">
     <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
     </span>
     <br>
-    <span>The Byzantine generals problem</span>
+    <span>Tools to Increase Productivity and Efficiency</span>
   </a>
 </nav>
 

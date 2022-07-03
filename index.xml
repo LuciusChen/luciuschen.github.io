@@ -6,11 +6,1166 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Jun 2022 15:01:44 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Jun 2022 14:18:17 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Stub</title>
+      <link>https://sheerwill.live/posts/main/20220604180341-stub/</link>
+      <pubDate>Thu, 30 Jun 2022 14:18:17 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220604180341-stub/</guid>
+      <description>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。 在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端</description>
+      <content:encoded><![CDATA[<ol>
+<li>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。</li>
+<li>在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端和服务端之间传递参数的一段代码。</li>
+</ol>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Tools to Increase Productivity and Efficiency</title>
+      <link>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</link>
+      <pubDate>Thu, 30 Jun 2022 08:58:24 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</guid>
+      <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Writing WeChat Markdown Editor 一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档</description>
+      <content:encoded><![CDATA[<h2 id="misc">Misc</h2>
+<ol>
+<li>
+<p><a href="https://www.templatemaker.nl/zh-cn/">Templatemaker</a></p>
+<p>制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。</p>
+</li>
+</ol>
+<h2 id="writing">Writing</h2>
+<ol>
+<li>
+<p><a href="https://github.com/doocs/md">WeChat Markdown Editor</a></p>
+<p>一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性。</p>
+</li>
+</ol>
+<h3 id="查找-citations-的网站">查找 citations 的网站</h3>
+<ol>
+<li>
+<p><a href="https://zbib.org/">zoterobib</a></p>
+<p>Your bibliography is empty. To add a source, paste or type its URL, ISBN, DOI, PMID, arXiv ID, or title into the search box above</p>
+</li>
+<li>
+<p><a href="https://www.doi2bib.org/">doi2bib</a></p>
+<p>give us a DOI and we will do our best to get you the BibTeX entry</p>
+</li>
+<li>
+<p><a href="https://www.bibsonomy.org/">BibSonomy</a></p>
+<p>The easy way to manage scientific publications and bookmarks</p>
+<p>BibSonomy helps you to manage your publications and bookmarks, to collaborate with your colleagues and to find new interesting material for your research.</p>
+</li>
+<li>
+<p><a href="http://www.bibtexsearch.com/">BibTeX Search</a></p>
+<p>You&rsquo;re searching over millions of BibTeX records&hellip;</p>
+</li>
+<li>
+<p><a href="https://scholar.google.com/">Google Scholar</a></p>
+<p>站在巨人的肩膀上</p>
+</li>
+</ol>
+<h4 id="book">Book</h4>
+<p>For books I usually use a site, where it is possible to get Bibtex citations from Amazon.com articles. This is very good for books, and some inproceedings and incollections might be found here as well.</p>
+<ol>
+<li><a href="https://lead.to/amazon/com/">Amazon</a></li>
+</ol>
+<h4 id="article">Article</h4>
+<p>As a Software Engineer I quite often have to deal with technical papers from ACM or IEEE. Both their catalogs provide Bibtex export capabilities.</p>
+<ol>
+<li>
+<p><a href="https://dl.acm.org/">ACM</a></p>
+</li>
+<li>
+<p><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a></p>
+<p>Advancing Technology for Humanity</p>
+</li>
+</ol>
+<h2 id="book">Book</h2>
+<ol>
+<li>
+<p><a href="http://libgen.rs/">Library Genesis</a></p>
+<p>电子书资源查找，中英文都有，英文相对较多。</p>
+</li>
+</ol>
+<h2 id="video">Video</h2>
+<ol>
+<li>
+<p><a href="https://sound-effects.bbcrewind.co.uk/">BBC Sound effects</a></p>
+<p>BBC 提供的免费下载的音效的网站。</p>
+</li>
+</ol>
+<h2 id="medicine">Medicine</h2>
+<ol>
+<li>
+<p><a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a></p>
+<p>顾名思义，权威的诊疗查询手册。</p>
+</li>
+</ol>
+<h2 id="design">Design</h2>
+<h3 id="color-picker">Color Picker</h3>
+<ul>
+<li>
+<p><a href="https://nipponcolors.com/">日本の伝統色</a></p>
+<p>日本的一个颜色拾取网站，很漂亮。</p>
+</li>
+</ul>
+<h3 id="plantuml">PlantUML</h3>
+<ul>
+<li>
+<p><a href="https://real-world-plantuml.com/">Real World PlantUML</a></p>
+<p>PlantUML 例子</p>
+</li>
+</ul>
+<h2 id="chrome-extension">Chrome extension</h2>
+<ol>
+<li>
+<p><a href="https://www.languagereactor.com/">Language Reactor</a></p>
+<p>提供 NetFlix、Youtube、TurtleTube、Video File、Text 的翻译，以及 Flashcards。</p>
+</li>
+</ol>
+<h2 id="front-end">Front-End</h2>
+<ol>
+<li>
+<p><a href="https://codepen.io/">codepen</a></p>
+<p>The best place to build, test, and discover front-end code</p>
+</li>
+</ol>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>VSCode</title>
+      <link>https://sheerwill.live/posts/main/20220629203733-vscode/</link>
+      <pubDate>Wed, 29 Jun 2022 22:51:37 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220629203733-vscode/</guid>
+      <description>Extensions ESLint Markdown All in One Markdown Preview Github MoonScript Language One Dark Pro Prettier - Code formatter Settings { &amp;#34;editor.fontFamily&amp;#34;: &amp;#34;&amp;#39;Iosevka&amp;#39;, LXGW WenKai Mono, Menlo, Monaco, &amp;#39;Courier New&amp;#39;, monospace&amp;#34;, &amp;#34;editor.fontLigatures&amp;#34;: true, &amp;#34;editor.fontSize&amp;#34;: 14, &amp;#34;security.workspace.trust.untrustedFiles&amp;#34;: &amp;#34;open&amp;#34;, &amp;#34;editor.bracketPairColorization.enabled&amp;#34;: true, &amp;#34;editor.renderWhitespace&amp;#34;: &amp;#34;boundary&amp;#34;, &amp;#34;workbench.colorCustomizations&amp;#34;: { &amp;#34;editorBracketHighlight.foreground1&amp;#34;: &amp;#34;#EFBB24&amp;#34;, &amp;#34;editorBracketHighlight.foreground2&amp;#34;: &amp;#34;#F8C3CD&amp;#34;, &amp;#34;editorBracketHighlight.foreground3&amp;#34;: &amp;#34;#A5DEE4&amp;#34;, &amp;#34;editorBracketHighlight.foreground4&amp;#34;: &amp;#34;#8A6BBE&amp;#34;, &amp;#34;editorBracketHighlight.foreground5&amp;#34;: &amp;#34;#90B44B&amp;#34;, &amp;#34;editorBracketHighlight.foreground6&amp;#34;: &amp;#34;#FFB11B&amp;#34;, &amp;#34;editorBracketHighlight.unexpectedBracket.foreground&amp;#34;: &amp;#34;#E83015&amp;#34;, &amp;#34;tab.activeBackground&amp;#34;: &amp;#34;#724832&amp;#34;, &amp;#34;scrollbarSlider.background&amp;#34;: &amp;#34;#91AD70&amp;#34;, &amp;#34;scrollbarSlider.hoverBackground&amp;#34;: &amp;#34;#91AD70&amp;#34;, &amp;#34;scrollbarSlider.activeBackground&amp;#34;: &amp;#34;#91AD70&amp;#34; }, &amp;#34;[javascript]&amp;#34;: { &amp;#34;editor.defaultFormatter&amp;#34;: &amp;#34;esbenp.prettier-vscode&amp;#34; }, &amp;#34;[html]&amp;#34;: { &amp;#34;editor.</description>
+      <content:encoded><![CDATA[<h2 id="extensions">Extensions</h2>
+<ul>
+<li>ESLint</li>
+<li>Markdown All in One</li>
+<li>Markdown Preview Github</li>
+<li>MoonScript Language</li>
+<li>One Dark Pro</li>
+<li>Prettier - Code formatter</li>
+</ul>
+<h2 id="settings">Settings</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;editor.fontFamily&#34;</span><span class="p">:</span> <span class="s2">&#34;&#39;Iosevka&#39;, LXGW WenKai Mono, Menlo, Monaco, &#39;Courier New&#39;, monospace&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;editor.fontLigatures&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;editor.fontSize&#34;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;security.workspace.trust.untrustedFiles&#34;</span><span class="p">:</span> <span class="s2">&#34;open&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;editor.bracketPairColorization.enabled&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;editor.renderWhitespace&#34;</span><span class="p">:</span> <span class="s2">&#34;boundary&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;workbench.colorCustomizations&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;editorBracketHighlight.foreground1&#34;</span><span class="p">:</span> <span class="s2">&#34;#EFBB24&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;editorBracketHighlight.foreground2&#34;</span><span class="p">:</span> <span class="s2">&#34;#F8C3CD&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;editorBracketHighlight.foreground3&#34;</span><span class="p">:</span> <span class="s2">&#34;#A5DEE4&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;editorBracketHighlight.foreground4&#34;</span><span class="p">:</span> <span class="s2">&#34;#8A6BBE&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;editorBracketHighlight.foreground5&#34;</span><span class="p">:</span> <span class="s2">&#34;#90B44B&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;editorBracketHighlight.foreground6&#34;</span><span class="p">:</span> <span class="s2">&#34;#FFB11B&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;editorBracketHighlight.unexpectedBracket.foreground&#34;</span><span class="p">:</span> <span class="s2">&#34;#E83015&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;tab.activeBackground&#34;</span><span class="p">:</span> <span class="s2">&#34;#724832&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;scrollbarSlider.background&#34;</span><span class="p">:</span> <span class="s2">&#34;#91AD70&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;scrollbarSlider.hoverBackground&#34;</span><span class="p">:</span> <span class="s2">&#34;#91AD70&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;scrollbarSlider.activeBackground&#34;</span><span class="p">:</span> <span class="s2">&#34;#91AD70&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;[javascript]&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;editor.defaultFormatter&#34;</span><span class="p">:</span> <span class="s2">&#34;esbenp.prettier-vscode&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;[html]&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;editor.defaultFormatter&#34;</span><span class="p">:</span> <span class="s2">&#34;esbenp.prettier-vscode&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;[markdown]&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;editor.defaultFormatter&#34;</span><span class="p">:</span> <span class="s2">&#34;esbenp.prettier-vscode&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;editor.inlineSuggest.enabled&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;workbench.colorTheme&#34;</span><span class="p">:</span> <span class="s2">&#34;One Dark Pro Darker&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;[json]&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;editor.defaultFormatter&#34;</span><span class="p">:</span> <span class="s2">&#34;esbenp.prettier-vscode&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;[css]&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;editor.defaultFormatter&#34;</span><span class="p">:</span> <span class="s2">&#34;esbenp.prettier-vscode&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Git Skills</title>
+      <link>https://sheerwill.live/posts/main/20220503160055-git-skills/</link>
+      <pubDate>Wed, 29 Jun 2022 20:54:27 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220503160055-git-skills/</guid>
+      <description>删除以往的提交记录 git checkout --orphan latest_branch git add -A git commit -am &amp;#34;commit message&amp;#34; git branch -D main git branch -m main git push -f origin main 发现上次提交的内容有误，需要再次修改，但不想重复提交，而是合并到上一次提</description>
+      <content:encoded><![CDATA[<h2 id="删除以往的提交记录">删除以往的提交记录</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout --orphan latest_branch
+</span></span><span class="line"><span class="cl">git add -A
+</span></span><span class="line"><span class="cl">git commit -am <span class="s2">&#34;commit message&#34;</span>
+</span></span><span class="line"><span class="cl">git branch -D main
+</span></span><span class="line"><span class="cl">git branch -m main
+</span></span><span class="line"><span class="cl">git push -f origin main
+</span></span></code></pre></div><h2 id="发现上次提交的内容有误-需要再次修改-但不想重复提交-而是合并到上一次提交中-并且不更新提交-comment">发现上次提交的内容有误，需要再次修改，但不想重复提交，而是合并到上一次提交中，并且不更新提交 comment。</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git commit --amend --no-edit
+</span></span></code></pre></div><ul>
+<li><code>--amend</code>: 修改最新的一次 commit，将这次的 stage change 直接添加到上一次 commit 中。</li>
+<li><code>--no-edit</code>: 不修改上一次 commit 的 comment，直接使用上一次的 comment。
+<ul>
+<li>如果需要修改的是最新一次 comment 的内容，则不需要该参数，就可以修改 comment。</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>iTerm2</title>
+      <link>https://sheerwill.live/posts/main/20220629204553-iterm2/</link>
+      <pubDate>Wed, 29 Jun 2022 20:48:58 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220629204553-iterm2/</guid>
+      <description>ohmyzsh powerlevel10k $ p10k configure: Lean &amp;ndash;&amp;gt; Unicode &amp;ndash;&amp;gt; 256 colors &amp;ndash;&amp;gt; 24-hour format &amp;ndash;&amp;gt; Two lines &amp;ndash;&amp;gt; Dotted &amp;ndash;&amp;gt; Left &amp;ndash;&amp;gt; Lightest &amp;ndash;&amp;gt; Sparse &amp;ndash;&amp;gt; Many icons &amp;ndash;&amp;gt; Concise &amp;ndash;&amp;gt; No
+Plugin zsh-autosuggestions </description>
+      <content:encoded><![CDATA[<h2 id="ohmyzsh">ohmyzsh</h2>
+<h3 id="powerlevel10k"><a href="https://github.com/romkatv/powerlevel10k">powerlevel10k</a></h3>
+<p><code>$ p10k configure</code>: Lean &ndash;&gt; Unicode &ndash;&gt; 256 colors &ndash;&gt; 24-hour format &ndash;&gt; Two lines &ndash;&gt; Dotted &ndash;&gt; Left &ndash;&gt; Lightest &ndash;&gt; Sparse &ndash;&gt; Many icons &ndash;&gt; Concise &ndash;&gt; No</p>
+<h3 id="plugin">Plugin</h3>
+<ul>
+<li><a href="https://github.com/zsh-users/zsh-autosuggestions">zsh-autosuggestions</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Personal Knowledge Wiki</title>
+      <link>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</link>
+      <pubDate>Wed, 29 Jun 2022 20:45:57 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</guid>
+      <description>Hardware HHKB Logitech MX Master 3 for Mac 17 MBP DELL U2417H Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency Workflow HammerSpoon Hugo Karabiner-Elements Emacs Latex Editor VSCode iTerm2 Squirrel</description>
+      <content:encoded><![CDATA[<h2 id="hardware">Hardware</h2>
+<ul>
+<li>HHKB</li>
+<li>Logitech MX Master 3 for Mac</li>
+<li>17 MBP</li>
+<li>DELL U2417H</li>
+<li>Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u</li>
+</ul>
+<h2 id="software">Software</h2>
+<h3 id="git">Git</h3>
+<ul>
+<li><a href="/posts/main/20220503160055-git-skills/">Git Skills</a></li>
+</ul>
+<h3 id="design-tools">Design Tools</h3>
+<ul>
+<li><a href="/posts/main/20220503154744-figma/">Figma</a></li>
+<li>Excalidraw</li>
+</ul>
+<h3 id="pinboard">Pinboard</h3>
+<ul>
+<li><a href="/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/">Tools to Increase Productivity and Efficiency</a></li>
+</ul>
+<h3 id="workflow">Workflow</h3>
+<ul>
+<li><a href="/posts/main/20220520185239-hammerspoon/">HammerSpoon</a></li>
+<li><a href="/posts/main/20220607104757-hugo/">Hugo</a></li>
+<li>Karabiner-Elements</li>
+<li><a href="/posts/main/20220505220832-emacs/">Emacs</a></li>
+<li><a href="/posts/main/20220616162256-latex/">Latex</a></li>
+</ul>
+<h3 id="editor">Editor</h3>
+<ul>
+<li><a href="/posts/main/20220629203733-vscode/">VSCode</a></li>
+<li><a href="/posts/main/20220629204553-iterm2/">iTerm2</a></li>
+</ul>
+<h3 id="squirrel">Squirrel</h3>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://sheerwill.live/posts/main/20220607104757-hugo/</link>
+      <pubDate>Wed, 29 Jun 2022 19:10:14 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220607104757-hugo/</guid>
+      <description>Install brew install hugo Add backlink 在 themes/xxx/layouts/partials/ 下新增 ~backlink.html~，内容如下。 {{ $re := $.File.BaseFileName }} {{ $backlinks := slice }} {{ range .Site.AllPages }} {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }} {{ $backlinks = $backlinks | append . }} {{ end }} {{ end</description>
+      <content:encoded><![CDATA[<h2 id="install">Install</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install hugo
+</span></span></code></pre></div><h2 id="add-backlink">Add backlink</h2>
+<p>在 <code>themes/xxx/layouts/partials/</code> 下新增 ~backlink.html~，内容如下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ $re := $.File.BaseFileName }}
+</span></span><span class="line"><span class="cl">{{ $backlinks := slice }}
+</span></span><span class="line"><span class="cl">{{ range .Site.AllPages }}
+</span></span><span class="line"><span class="cl">   {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }}
+</span></span><span class="line"><span class="cl">	  {{ $backlinks = $backlinks | append . }}
+</span></span><span class="line"><span class="cl">   {{ end }}
+</span></span><span class="line"><span class="cl">{{ end }}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{{ if gt (len $backlinks) 0 }}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Links to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;backlinks&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	   {{ range $backlinks }}
+</span></span><span class="line"><span class="cl">		  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .RelPermalink }}&#34;</span><span class="p">&gt;</span>{{ .Title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	   {{ end }}
+</span></span><span class="line"><span class="cl">	 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{ else  }}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>No notes link to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{ end }}
+</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/_default/single.html</code> 中增加下面代码，放到合适的地方。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;backlinks.html&#34; . }}
+</span></span></code></pre></div><p>放在文章下方的话可以插入如下位置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post-content&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {{- if not (.Param &#34;disableAnchoredHeadings&#34;) }}
+</span></span><span class="line"><span class="cl">    {{- partial &#34;anchored_headings.html&#34; .Content -}}
+</span></span><span class="line"><span class="cl">    {{- else }}{{ .Content }}{{ end }}
+</span></span><span class="line"><span class="cl">    {{ partial &#34;backlinks.html&#34; . }}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h2 id="mathjax-support">MathJax support</h2>
+<h3 id="方案1">方案1</h3>
+<p>在 <code>themes/xxx/layouts/_default/single.html</code> 中 <code>header</code> 中增加下面代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h3 id="方案2">方案2</h3>
+<p>增加 <code>themes/xxx/layouts/partials/mathjax.html</code> 文件，并在其中增加下面代码，实现即便是页面间的跳转，也可以实时渲染公式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">MathJax</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">tex</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">inlineMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\(&#39;</span><span class="p">,</span> <span class="s1">&#39;\\)&#39;</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">displayMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$$&#39;</span><span class="p">,</span><span class="s1">&#39;$$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\[&#39;</span><span class="p">,</span> <span class="s1">&#39;\\]&#39;</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">processEscapes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">processEnvironments</span><span class="o">:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">skipHtmlTags</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;noscript&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;pre&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&#34;mjx-container&#34;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">x</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">classList</span> <span class="o">+=</span> <span class="s1">&#39;has-jax&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://polyfill.io/v3/polyfill.min.js?features=es6&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;MathJax-script&#34;</span> <span class="na">async</span>
+</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">code</span><span class="p">.</span><span class="nc">has-jax</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="mh">#515151</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/_default/header.html</code> 中增加下面代码，放到合适的地方。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;mathjax.html&#34; . }}
+</span></span></code></pre></div><p>如果不想所有页面都加载 MathJax，就添加下面代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ if .Params.mathjax }}{{ partial &#34;mathjax.html&#34; . }}{{ end }}
+</span></span></code></pre></div><p>并通过 <a href="https://ox-hugo.scripter.co/doc/custom-front-matter/">Custom Front-matter Parameters</a> 设置 <code>mathjax: true~。具体是添加下面代码到需要导出并用 MathJax 展示的 org 文件头部，导出后就是 ~.md</code> 文件中的 metadata。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+HUGO_CUSTOM_FRONT_MATTER</span><span class="c">: :mathjax true</span>
+</span></span></code></pre></div>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>How I Take Notes</title>
+      <link>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</link>
+      <pubDate>Wed, 29 Jun 2022 16:42:16 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</guid>
+      <description>Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>最先接触到 <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettlekasten</a> (German: &ldquo;slip box&rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、Notion、Obsidian（当时还不知道 Backlinks），都觉得不太合适，尤其是第一步文件夹的分类就让我头疼，很多内容是互相交叉的，并不是简单的可以归在一个分类下面，若是细分的分类过多，又会过于混乱，最后的结果就是“垃圾场”。</p>
+<ul>
+<li>根据 Zettlekasten 衍生出来的各种 APP 中的 Backlinks 将笔记串联起来，作为一个草稿箱，定期去整理回顾形成自己的知识。</li>
+</ul>
+<p>另外一个极为吸引我的就是 Daily Notes 或者 Journals，非常适合我当前的工作场景。「生产问题」或者「零碎的需求」会不断从打断我的工作，有时候会非常紧急需要优先处理「需求」或者「生产问题」，解决后会有两种情况。</p>
+<ul>
+<li>
+<p>问题或需求解决后，要花一些时间梳理之前在做的事情才能够重新接续之前的思路继续工作。</p>
+</li>
+<li>
+<p>问题解决后几个月遇到相同或类似的问题，虽然记得解决过，但是当时解决的思路以及细节需要注意的地方就模糊不清了。通常为了万无一失需要重复上次的工作，仔细查看过代码结合业务后，才能作出正确的判断，确保干净利落地解决问题。</p>
+</li>
+</ul>
+<p>上面两种情况完全可以用 Journals 记录解决问题前的工作思路，记录解决问题后的思路，来避免上述两种情况发生。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
+         alt="Figure 1: take-notes-sankey"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>take-notes-sankey</p>
+        </figcaption>
+</figure>
+
+<p>信息大爆炸的副作用就是信噪比降低，通过分阶段的信息处理，不断地归纳、处理形成自己的想法，并将其固化下来，作为知识库。</p>
+<h2 id="流程设计">流程设计</h2>
+<ol>
+<li>
+<p>图中的流程其实就是多层的过滤器。</p>
+<p>从最初的信息源处到 Logseq 的过程，只需要考虑这个信息源是否值得读，是否值得扩展，答案确定则大胆地记入 Logseq。其中零散的思绪及文章阅读记录在 Journals 中，书籍这类大部头则在 page 中记录，前者因为零散在 Journals 中，需要加 page 的双链或 Tag。</p>
+<p>Logseq 中 Journals 中的事件重要的会被我移到 Org-roam 中的 Journals.org 文件中，这个文件类似于日记的作用，并不是每天都会记录，记录多了之后按照年份进行分割。</p>
+<p>从 Logseq 到 Org-roam 则是知识固化的过程，需要考虑该知识是否以后会被自己再次用到，是否值得扩展，答案确定则精炼后记入，并标明灵感来源，引用材料。因此，Logseq 中记录的都只能算是草稿，需要再次的整合，提高信噪比。</p>
+</li>
+<li>
+<p>对信息源处理时，可以用 Excalidraw 进行流程图、思维图等图的草稿绘制。后续有时间的时候再用 Figma 重新绘制，视觉和逻辑上的重新设计，使得阐述的内容更加直观。</p>
+<p>对于产品来说，通过<a href="/posts/main/20220503145636-build_diagram/">设计降低理解门槛和使用门槛</a>，是一件挺重要的事情。输出文章同样如此。</p>
+</li>
+<li>
+<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 <a href="/posts/main/20220505220832-emacs/">Emacs</a> 中做了一些设置。</p>
+</li>
+<li>
+<p>Org-roam-ui 非常优秀，不管是 UI 还是操作性，可以明晰的查看笔记之间的关联，知识是否形成闭环，哪些知识还需要进行拓展阅读。</p>
+</li>
+</ol>
+<h2 id="准则">准则</h2>
+<ul>
+<li>
+<p>卡片应该具有原子性。这点和编程的原则很像，一个方法只做一件事，在这里也就是只记录一个主题的内容。</p>
+</li>
+<li>
+<p>卡片内容应该具有独立性。这点和上面并不冲突，设想一下，为了保持每个卡片的纯净，X 和 Y 之间的关系，你可能会用 Z 去链接他们。但回顾的时候，没有 Z，单纯回顾 X 或 Y 无法得知两者之间的关联。所以这里不管在 X 或者 Y 中去描述与对方的关系都是可以的，一点点内容的冗余可以使得内容更加独立。</p>
+</li>
+<li>
+<p>遵守奥卡姆剃刀原则。对新工具充分调研，是否满足自己的需求后再考虑替换或增加到现有工作流当中。</p>
+</li>
+<li>
+<p>Literature Notes 需要及时回顾，在一两天内转化为 Permanent Notes 或者直接删掉。</p>
+</li>
+</ul>
+<h2 id="误区">误区</h2>
+<ul>
+<li>
+<p>All-In-One 的思想。Markdown 的扩展语法实现并不统一，扩展语法的内容导出时经常要手动兼容，或不可再用。云端服务的不可持续性，互联网这么多年已经太多的云端服务用着用着就停掉了。</p>
+</li>
+<li>
+<p>Permanent Notes 并不是不需要回顾和修改了。</p>
+</li>
+<li>
+<p>记太多的内容。从资料中复制大量的原文。笔记应该是对所读内容的提炼：用自己的话改写观点和概念有助于加强理解。</p>
+</li>
+<li>
+<p>太复杂的笔记流程。复杂的工作流通常需要自动化，但自动化不利于笔记的整理，形成最重笔记时应该慎重考虑哪些是需要保留的，否则知识库就会变成垃圾场。</p>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Emacs</title>
+      <link>https://sheerwill.live/posts/main/20220505220832-emacs/</link>
+      <pubDate>Wed, 29 Jun 2022 16:35:21 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220505220832-emacs/</guid>
+      <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs With Homebrew First, Doom’s dependencies: brew install git ripgrep brew install coreutils fd xcode-selected --install emacs-mac. It offers good integration</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<blockquote>
+<p>Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.</p>
+<p>– Neal Stephenson, In the Beginning was the Command Line (1998)</p>
+</blockquote>
+<h2 id="install-emacs-with-homebrew">Install Emacs With Homebrew</h2>
+<p>First, Doom’s dependencies:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install git ripgrep
+</span></span><span class="line"><span class="cl">brew install coreutils fd
+</span></span><span class="line"><span class="cl">xcode-selected --install
+</span></span></code></pre></div><p><a href="https://bitbucket.org/mituharu/emacs-mac/src">emacs-mac</a>. It offers good integration with macOS, native emojis and better childframe support.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap d12frosted/emacs-plus
+</span></span><span class="line"><span class="cl">brew install emacs-plus --with-native-comp
+</span></span><span class="line"><span class="cl">ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
+</span></span></code></pre></div><h2 id="doom-emacs">Doom Emacs</h2>
+<p>With Emacs and Doom&rsquo;s dependencies installed, next is to install Doom Emacs itself:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+</span></span><span class="line"><span class="cl">~/.emacs.d/bin/doom install
+</span></span></code></pre></div><p>如果提示 <code>.emacs.d</code> 已存在，删除重新执行上述命令即可。</p>
+<p><code>.zshrc</code> 中需要添加 <code>export PATH=&quot;$HOME/.emacs.d/bin:$PATH</code> ，这样就可以直接使用 <code>doom</code> 命令了。</p>
+<h3 id="doom-doctor-问题"><code>Doom Doctor</code> 问题</h3>
+<ol>
+<li>
+<p>Warning: unable to detect fonts because fontconfig isn&rsquo;t installed</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install fontconfig
+</span></span></code></pre></div></li>
+<li>
+<p>! Couldn&rsquo;t find shellcheck. Shell script linting will not work</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install shellcheck
+</span></span></code></pre></div></li>
+<li>
+<p>Couldn&rsquo;t find the dot executable (from graphviz). org-roam will not be able to generate graph visualizations.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install graphviz
+</span></span></code></pre></div></li>
+<li>
+<p>This installed grep binary was not built with support for PCRE lookaheads. Some advanced consult filtering features will not work as a result, see the module readme.</p>
+</li>
+</ol>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">#  因为 Mac 本身安装的是 BSD 的。</span>
+</span></span><span class="line"><span class="cl">grep --version
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以看到 grep (BSD grep, GNU compatible) 2.6.0-FreeBSD ，即 BSD 版本。</span>
+</span></span><span class="line"><span class="cl">brew install grep
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装 GNU 的 grep，并在 .zshrc 中配置 PATH=&#34;/usr/local/opt/grep/libexec/gnubin:$PATH&#34; 即可。再次查看版本可以看到如下。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># grep (GNU grep) 3.7</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Packaged by Homebrew</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Copyright (C) 2021 Free Software Foundation, Inc.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># License GPLv3+: GNU GPL version 3 or later &lt;https://gnu.org/licenses/gpl.html&gt;.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># This is free software: you are free to change and redistribute it.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># There is NO WARRANTY, to the extent permitted by law.</span>
+</span></span></code></pre></div><h2 id="org-roam">Org-roam</h2>
+<p>具体的配置文件在 <code>.doom.d/</code> 下，参见 <a href="https://github.com/LuciusChen/dotfiles/tree/master/.doom.d">.doom.d</a>。</p>
+<h2 id="shortcuts">Shortcuts</h2>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-RET</code></td>
+<td>在当前 headline 所属的内容后建立一个同级 headline</td>
+<td>无 headline 时创建一个一级 headline</td>
+</tr>
+<tr>
+<td><code>M-RET</code></td>
+<td>在当前 headline 后建立一个同级 headline</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-right</code></td>
+<td>降低当前 headline 的层级</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-left</code></td>
+<td>提高当前 headline 的层级</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-up</code></td>
+<td>将当前 headline 及其内容作为整体向上移动</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-down</code></td>
+<td>将当前 headline 及其内容作为整体向下移动</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-return</code></td>
+<td>在当前列表项的内容后建立一个同级列表项</td>
+<td>光标在列表项同一行时有效</td>
+</tr>
+<tr>
+<td><code>M-RET</code></td>
+<td>在当前列表项后建立一个同级列表项</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-right</code></td>
+<td>降低当前列表项的层级</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-left</code></td>
+<td>提高当前列表项的层级</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-up</code></td>
+<td>将当前列表项及其内容作为整体向上移动</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-down</code></td>
+<td>将当前列表项及其内容作为整体向下移动</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>C-x-o</code></td>
+<td>切换窗口</td>
+<td>C-x 中有很多操作，可以看提示。</td>
+</tr>
+<tr>
+<td><code>C-c C-c</code></td>
+<td>在创建 node 编写完毕后快速保存</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-g</code></td>
+<td>取消操作</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-x-d</code></td>
+<td>进入 dired 模式</td>
+<td></td>
+</tr>
+<tr>
+<td><code>SPC f r</code></td>
+<td>查找最近文件</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-v</code></td>
+<td>显示图片</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-c C-s</code></td>
+<td></td>
+<td>设置任务开始时间</td>
+</tr>
+<tr>
+<td><code>C-c C-d</code></td>
+<td>设置任务截止时间</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-t</code></td>
+<td>改变任务状态</td>
+<td></td>
+</tr>
+<tr>
+<td><code>S-Up/Down</code></td>
+<td>设置任务优先级 [#A], [#B], [#C]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-i</code></td>
+<td>开始任务计时</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-o</code></td>
+<td>终止任务计时</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c [</code></td>
+<td>将当前文件加入 Org-Agenda</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c ]</code></td>
+<td>将当前文件从 Org-Agenda 移除</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t</code></td>
+<td>在 Org-Agenda 的任务条目上， 修改任务状态。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-a</code></td>
+<td>归档</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-w</code></td>
+<td>activate refile</td>
+<td></td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>在 Org-Agenda 的任务条目上， 开始计时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td>在 Org-Agenda 的任务条目上， 终止计时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>在任务上添加 note</td>
+<td></td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>clock mode, 显示耗时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-l</code></td>
+<td>预览 Latex</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c \</code></td>
+<td>按 tag 搜索</td>
+<td>好像只能单文件内</td>
+</tr>
+</tbody>
+</table>
+<h2 id="org-grammar">Org grammar</h2>
+<h3 id="basic">basic</h3>
+<p>This is almost anything you need to know about Org mode syntax:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"> <span class="k">* </span>This Is A Heading
+</span></span><span class="line"><span class="cl"> ** This Is A Sub-Heading
+</span></span><span class="line"><span class="cl"> *** And A Sub-Sub-Heading
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> Paragraphs are separated by at least one empty line. <span class="gs">*bold*</span> <span class="ge">/italic/</span> <span class="gl">_underlined_</span> <span class="gd">+strikethrough+</span> <span class="nc">=monospaced=</span>
+</span></span><span class="line"><span class="cl"> [[<span class="na">http://Karl-Voit.at</span>][<span class="nt">Link description</span>]]
+</span></span><span class="line"><span class="cl"> http://Karl-Voit.at → link without description
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="k">- </span>list item
+</span></span><span class="line"><span class="cl"> <span class="k">- </span>another item
+</span></span><span class="line"><span class="cl">   <span class="k">- </span>sub-item
+</span></span><span class="line"><span class="cl">     <span class="k">1.</span> also enumerated
+</span></span><span class="line"><span class="cl">     <span class="k">2.</span> if you like
+</span></span><span class="line"><span class="cl"> <span class="k">- [ ]</span> yet to be done
+</span></span><span class="line"><span class="cl"> <span class="k">- [X]</span> item which is done
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> : Simple pre-formatted text such as for source code.
+</span></span><span class="line"><span class="cl"> : This also respects the line breaks. <span class="gs">*bold*</span> is not bold here.
+</span></span></code></pre></div><h3 id="code-block">code block</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">myresult</span> <span class="o">=</span> <span class="mi">42</span> <span class="o">*</span> <span class="mi">23</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello Europe! &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">myresult</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="table">table</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"> <span class="s">| My Column 1 | My Column 2 | Last Column |</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|-------------+-------------+-------------|</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|          42 | foo         | bar         |</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|          23 | baz         | abcdefg     |</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|-------------+-------------+-------------|</span>
+</span></span><span class="line"><span class="cl"> <span class="s">|          65 |             |             |</span>
+</span></span></code></pre></div><h2 id="export">Export</h2>
+<h3 id="markdown-file">Markdown file</h3>
+<p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>， ~M-x org-pandoc-export-as-gfm~算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
+<h3 id="hugo">Hugo</h3>
+<p>在文件头部添加</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+HUGO_BASE_DIR: ~/Dropbox/hugo/
+</span></span><span class="line"><span class="cl">#+HUGO_SECTION: posts/main
+</span></span><span class="line"><span class="cl">#+HUGO_WEIGHT: auto
+</span></span><span class="line"><span class="cl">#+HUGO_AUTO_SET_LASTMOD: t
+</span></span></code></pre></div><p>需要导出为 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="c">#+begin_mark</span>
+</span></span><span class="line"><span class="cl">marked text
+</span></span><span class="line"><span class="cl"><span class="c">#+end_mark</span>
+</span></span></code></pre></div><p>需要导出为块级 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时，也就是前后的空格不进行 trim。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+header</span><span class="c">: :trim-pre nil :trim-post nil</span>
+</span></span><span class="line"><span class="cl"><span class="c">#+begin_mark</span>
+</span></span><span class="line"><span class="cl">marked text
+</span></span><span class="line"><span class="cl"><span class="c">#+end_mark</span>
+</span></span></code></pre></div><h3 id="latex">Latex</h3>
+<h4 id="dependency">Dependency</h4>
+<p>需要安装 texlive</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install texlive
+</span></span></code></pre></div><h4 id="latex-语法">Latex 语法</h4>
+<p><a href="/posts/main/20220616162256-latex/">Latex 语法</a></p>
+<h4 id="pdf-导出报错">PDF 导出报错</h4>
+<ul>
+<li><code>Unicode character 考 (U+8003) not set up for use with LaTeX.</code> 是因为 Latex 本身不支持中文。</li>
+</ul>
+<h4 id="中文-pdf-导出设置">中文 PDF 导出设置</h4>
+<ol>
+<li>
+<p>使用 <a href="https://github.com/ElegantLaTeX/ElegantPaper">ElegantPaper</a>，需要将 elegantpaper.cls 文件放在 org 目录下。</p>
+</li>
+<li>
+<p>安装依赖</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">brew install pygments
+</span></span></code></pre></div></li>
+<li>
+<p>导出文件头部增加</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+LATEX_COMPILER</span><span class="c">: xelatex</span>
+</span></span><span class="line"><span class="cl"><span class="cs">#+LATEX_CLASS</span><span class="c">: elegantpaper</span>
+</span></span><span class="line"><span class="cl"><span class="cs">#+OPTIONS</span><span class="c">: prop:t</span>
+</span></span></code></pre></div></li>
+</ol>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://ox-hugo.scripter.co/doc/org-special-blocks/">Org Special Blocks</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>The core of efficiency improvement</title>
+      <link>https://sheerwill.live/posts/main/20220602185216-the_core_of_efficiency_improvement/</link>
+      <pubDate>Wed, 29 Jun 2022 12:57:51 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220602185216-the_core_of_efficiency_improvement/</guid>
+      <description>其实提高时间利用率，就是两点，事件所需时间的准确评估，另外一个就是牛逼的执行力。</description>
+      <content:encoded><![CDATA[<p>其实提高时间利用率，就是两点，事件所需时间的准确评估，另外一个就是牛逼的执行力。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Refactoring Code</title>
+      <link>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</link>
+      <pubDate>Wed, 29 Jun 2022 12:49:44 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</guid>
+      <description>Refactoring Code How To Find Time Complexity Of An Algorithm
+JavaScript Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await Refactoring Code examples Callback Hell </description>
+      <content:encoded><![CDATA[<h2 id="refactoring-code">Refactoring Code</h2>
+<p><a href="/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">How To Find Time Complexity Of An Algorithm</a></p>
+<h3 id="javascript">JavaScript</h3>
+<h4 id="refactoring-tips">Refactoring Tips</h4>
+<ol>
+<li><a href="/posts/main/20220506193520-refactoring_condition_statements/">Refactoring Condition statements</a></li>
+<li><a href="/posts/main/20220506193545-converting_callbacks_to_promises/">Converting callbacks to promises</a></li>
+<li><a href="/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">Refactoring Promise chains with async/await</a></li>
+</ol>
+<h4 id="refactoring-code-examples">Refactoring Code examples</h4>
+<ul>
+<li><a href="/posts/main/20220616092944-callback_hell/">Callback Hell</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>MySQL</title>
+      <link>https://sheerwill.live/posts/main/20220530185321-mysql/</link>
+      <pubDate>Wed, 29 Jun 2022 12:49:27 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220530185321-mysql/</guid>
+      <description>Troubleshoot Issues in MySQL
+Sort Chinese text fields alphabetically by first letter</description>
+      <content:encoded><![CDATA[<p><a href="/posts/main/20220530180443-troubleshoot_issues_in_mysql/">Troubleshoot Issues in MySQL</a></p>
+<p><a href="/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/">Sort Chinese text fields alphabetically by first letter</a></p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>The two generals problem</title>
+      <link>https://sheerwill.live/posts/main/20220602202247-the_two_generals_problem/</link>
+      <pubDate>Wed, 29 Jun 2022 12:48:52 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220602202247-the_two_generals_problem/</guid>
+      <description>两军问题（英语：Two Generals&amp;rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该</description>
+      <content:encoded><![CDATA[<p>两军问题（英语：Two Generals&rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该问题中，两支军队的将军只能通过派遣信使穿越敌方领土来互相通信，以此约定在同一时间点共同进攻。该问题希望求解如何在两位将军派出的任何信使都可能被俘虏的情况下，就发动攻击的时间点达成一致。</p>
+<p>两军问题是拜占庭将军问题的一个特例，常被编入与计算机网络相关的入门课程中。在传输控制协议（TCP）相关的课程中，该问题可用作解释 TCP 协议无法保证通信双方之间的状态一致性的原因。该问题也适用于其他存在信息丢失的双方通信的情况。作为认识逻辑的一个重要概念，该问题突出了共识（英语：Common_knowledge_(logic)）的重要性。一些学者也将此问题称作两军悖论（英语：Two Generals Paradox）或协同进攻问题（英语：Coordinated Attack Problem）。两军问题是第一个被证明无解的计算机通信问题。该证明的重要意义在于，其显示了对于存在通信错误的更广泛的问题（如拜占庭将军问题），同样是无解的。这也为所有分布式一致性协议的实现提供了一个符合现实的预期。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>The Byzantine generals problem</title>
+      <link>https://sheerwill.live/posts/main/20220602202317-the_byzantine_generals_problem/</link>
+      <pubDate>Wed, 29 Jun 2022 12:48:39 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220602202317-the_byzantine_generals_problem/</guid>
+      <description>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同</description>
+      <content:encoded><![CDATA[<p>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。</p>
+<p>在分布式计算中，不同的计算机通过通讯交换信息达成共识而按照同一套协作策略行动。但有时候，系统中的成员计算机可能出错而发送错误的信息，用于传递信息的通讯网络也可能导致信息损坏，使得网络中不同的成员关于全体协作的策略得出不同结论，从而破坏系统一致性。拜占庭将军问题被认为是容错性问题中最难的问题类型之一。</p>
+<p>容错率：Theorem: need 3ƒ+1 generals in total to tolerate ƒ malicious generals.</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Remote Procedure Call (RPC)</title>
+      <link>https://sheerwill.live/posts/main/20220603220847-remote_procedure_call_rpc/</link>
+      <pubDate>Wed, 29 Jun 2022 12:47:37 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220603220847-remote_procedure_call_rpc/</guid>
+      <description>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样</description>
+      <content:encoded><![CDATA[<p>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样调用远程系统上的其他进程。</p>
+<p>RPC 是通过 Interface Definition Language (IDL) 来描述接口，使得在不同的平台上运行的不同程序编写的程序可以相互通信。(IDL 是不以任何一种特定编程语言的方式指定类型签名或者函数调用的语言。)</p>
+<p>基本上，你可以用 IDL 定义客户端和服务端之间的接口，这样 RPC 机制就可以创建跨网络调用功能所需要的代码存根（Code <a href="/posts/main/20220604180341-stub/">Stub</a>）。</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">+----------------+
+| Client         |
+|  +----------+  |         +---------------+
+|  |   main   |  |         | Server        |
+|  |----------|  |         |  +----------+ |
+|  | stub_cli |----(comms)---&gt;| stub_svr | |
+|  +----------+  |         |  |----------| |
++----------------+         |  | function | |
+                           |  +----------+ |
+                           +---------------+
+</code></pre><p>在这个例子中，~main~ 没有在同一个程序中调用函数，而是调用了一个客户端存根函数（与函数的原型相同），该函数负责将信息打包，并通过通讯通道将其传送给另一个进程。</p>
+<p>这里可以是同一台机器或者不同机器，RPC 的优势之一就是能够随意移动服务器。</p>
+<p>在服务器中，有个「监听者」进程，它将接收这些信息并将其传递给服务器。服务器的存根接收信息，解包并将其传递给真正执行的函数。</p>
+<p>真正的函数运行后返回结果给到服务器存根，服务器存根可以将返回的信息打包，并将其传回给客户端存根。客户端存根再将其解包并传回给 ~main~。</p>
+<p>实际上的 IDL 大概像下面这样：</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">[   uuid(f9f6be21-fd32-5577-8f2d-0800132bd567),
+    version(0),
+    endpoint(&#34;ncadg_ip_udp:[1234]&#34;, &#34;dds:[19]&#34;)
+] interface function_iface {
+    [idempotent] void function(
+        [in] int handle,
+        [out] int *status
+    );
+}
+</code></pre><p>头部是一些用于链接客户端和服务端的网络信息，RPC 发生在「会话层」中。接口部分才是 IDL 编译器建立客户端和服务器端存根的地方，以便客户端和服务端能够进行通讯，使得 RPC 正常工作。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Quorum</title>
+      <link>https://sheerwill.live/posts/main/20220615143721-quorum/</link>
+      <pubDate>Wed, 29 Jun 2022 12:47:21 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220615143721-quorum/</guid>
+      <description>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于 Quorum 投票的冗余控制算法 在有冗余数据</description>
+      <content:encoded><![CDATA[<p>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。</p>
+<h2 id="基于-quorum-投票的冗余控制算法">基于 Quorum 投票的冗余控制算法</h2>
+<p>在有冗余数据的分布式存储系统当中，冗余数据对象会在不同的机器之间存放多份拷贝。但是同一时刻一个数据对象的多份拷贝只能用于读或者用于写。</p>
+<p>该算法可以保证同一份数据对象的多份拷贝不会被超过两个访问对象读写。</p>
+<p>分布式系统中的每一份数据拷贝对象都被赋予一票。每一个读操作获得的票数必须大于最小读票数（read quorum）（\(V_{r}\)），每个写操作获得的票数必须大于最小写票数（write quorum）(\(V_{w}\)）才能读或者写。如果系统有V票（意味着一个数据对象有 \(V\) 份冗余拷贝），那么最小读写票数(quorum)应满足如下限制：</p>
+<ol>
+<li>\(V_{r} + V_{w} &gt; V\)</li>
+<li>\(V_{w} &gt; \frac{V}{2}\)</li>
+</ol>
+<p>第一条规则保证了一个数据不会被同时读写。当一个写操作请求过来的时候，它必须要获得 \(V_{w}\) 个冗余拷贝的许可。而剩下的数量是 \(V - V_{w}\) 不够 \(V_{r}\)，因此不能再有读请求过来了。同理，当读请求已经获得了 \(V_{r}\) 个冗余拷贝的许可时，写请求就无法获得许可了。</p>
+<p>第二条规则保证了数据的串行化修改。一份数据的冗余拷贝不可能同时被两个写请求修改。</p>
+<h2 id="算法的好处">算法的好处</h2>
+<p>在分布式系统中，冗余数据是保证可靠性的手段，因此冗余数据的一致性维护就非常重要。一般而言，一个写操作必须要对所有的冗余数据都更新完成了，才能称为成功结束。比如一份数据在5台设备上有冗余，因为不知道读数据会落在哪一台设备上，那么一次写操作，必须5台设备都更新完成，写操作才能返回。</p>
+<p>对于写操作比较频繁的系统，这个操作的瓶颈非常大。Quorum 算法可以让写操作只要写完3台就返回。剩下的由系统内部缓慢同步完成。而读操作，则需要也至少读3台，才能保证至少可以读到一个最新的数据。</p>
+<p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 \(V_{w}\) 越大，则读票数 \(V_{r}\) 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Lamport clocks</title>
+      <link>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</link>
+      <pubDate>Wed, 29 Jun 2022 12:47:08 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</guid>
+      <description>Lamport clocks algorithm on initialisation do \(\qquad t := 0\) ▻ each node has its own local variable t end on on any event occurring at the local node do \(\qquad t := t + 1\) end on on request to send message \(m\) do \(\qquad t := t + 1\); send \((t, m)\) via the underlying network link end on on receiving \((t′, m)\)</description>
+      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
+<blockquote>
+<p><strong>on</strong> initialisation <strong>do</strong> <br />
+\(\qquad t := 0\) ▻ each node has its own local variable t <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> any event occurring at the local node <strong>do</strong> <br />
+\(\qquad t := t + 1\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> request to send message \(m\) <strong>do</strong> <br />
+\(\qquad t := t + 1\); send \((t, m)\) via the underlying network link <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> receiving \((t′, m)\) via the underlying network link <strong>do</strong> <br />
+\(\qquad t := max(t, t′) + 1\) <br />
+\(\qquad\)​deliver \(m\) to the application <br />
+<strong>end on</strong></p>
+</blockquote>
+<h2 id="lamport-clocks-in-words">Lamport clocks in words</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
+         alt="Figure 1: lamport-example-simple"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。</li>
+<li>增长后的值设为 \(L(e)\)</li>
+<li>发送消息时附带上当前的计数 \(t\)</li>
+<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
+</ul>
+<p>Properties of this scheme:</p>
+<ul>
+<li>if \(a \rightarrow b\) then \(L(e) &lt; L(b)\)</li>
+<li>However, \(L(a) &lt; L(b)\) does not imply \(a \rightarrow b\)</li>
+<li>Possible that \(L(a) = L(b)\) for \(a \ne b\)</li>
+</ul>
+<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
+<h2 id="lamport-clocks-example">Lamport clocks example</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example.png"
+         alt="Figure 2: lamport-example"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
+        </figcaption>
+</figure>
+
+<p>Let \(N(e)\) be the node at which event \(e\) occurred.</p>
+<p>Then the pair \((L(e), N(e))\) <strong>uniquely identiﬁes</strong> event \(e\).</p>
+<p>Deﬁne a <strong>total order</strong> \(≺\) using Lamport timestamps:</p>
+<p>\((a ≺ b) \iff (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b)))\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>This order is <strong>causal</strong>: \((a → b) \Longrightarrow (a ≺ b)\)</p>
+<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
+<p>对于任何两个事件 \(a \ne b\)，那么既不是 \(a ≺ b\) 也不是 \(b ≺ a\)。只要 \(a → b\)，我们就有 \(a ≺ b\)，换句话说，\(≺\) 是局部顺序 \(\rightarrow\) 的线性扩展。然而，如果 \(a \rVert b\)，我们可以有 \(a ≺ b\) 或 \(b ≺ a\)，所以两个事件的顺序是由算法任意决定的。 比如 \((1, A)\) 和 \((1, C)\) 两个事件是平行的，按照 Lamport 的算法，\((1, A)\) 必然是在 \((1, C)\) 之前的，但实际情况可能是 \((1, C)\) 在前。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>\(\iff\) is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>\(∨\) is logical or, \(∧\) is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Causality and Happen-before relation</title>
+      <link>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</link>
+      <pubDate>Wed, 29 Jun 2022 12:46:53 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
+      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
+      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
+<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
+<p>event a <strong>happens before</strong> event b, written a → b.</p>
+<p>那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前：</p>
+<ul>
+<li>
+<p>a 和 b 发生在相同节点，并且按照本地节点的执行顺序，a 发生在 b 之前。</p>
+</li>
+<li>
+<p>事件 a 是发送消息 m，事件 b 是接收相同的消息 m（假定发送的消息都是唯一的）。</p>
+</li>
+<li>
+<p>有这么一个时间 c 满足，a → c 且 c → b。</p>
+<p>happens-before relation 是局部的顺序：有可能存在既不满足 a → b 也不满足 b → a，这样 a 和 b 就是并行的，写作 a || b。</p>
+</li>
+</ul>
+<h3 id="happen-before-relation-example">Happen-before relation example</h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
+         alt="Figure 1: happens-before-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>a → b, c → d, and e → f due to process order</li>
+<li>b → c and d → f due to messages m1 and m2</li>
+<li>a → c, a → d, a → f, b → d, b → f, and c → f due to transitivity</li>
+<li>a || e, b || e, c || e, and d || e</li>
+</ul>
+<h2 id="causality">Causality</h2>
+<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
+<ul>
+<li>当 a → b, 那么 a 可能是 b 的因。</li>
+<li>当 a || b, a 和 b 之间不存在因果关系。</li>
+</ul>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causality.png"
+         alt="Figure 2: causality"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>causality</p>
+        </figcaption>
+</figure>
+
+<p>Let ≺ be a strict total order on events.</p>
+<p>如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
+<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
+<p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Vector clocks</title>
+      <link>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</link>
+      <pubDate>Wed, 29 Jun 2022 12:46:37 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</guid>
+      <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \l</description>
+      <content:encoded><![CDATA[<p>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
+<ul>
+<li>假定分布式系统中有 \(n\) 个节点，\(N = \langle​N_{1}, N_{2}, &hellip;, N_{n}\rangle\)</li>
+<li><strong>事件 \(a\)</strong> 的向量时间戳写成 \(V(a) = \langle​t_{1}, t_{2}, &hellip;, t_{n}\rangle\)</li>
+<li>\(t_{i}\) 是 \(N_{i}\) 节点发生时间的数量</li>
+<li>每个​<strong>节点</strong>​都有一个当前的向量时间戳 \(T\)</li>
+<li>节点 \(N_{i}\) 上的事件，向量时间戳 \(T[i]\) 递增。</li>
+<li>每个消息都附带上向量时间戳</li>
+<li>接收者将消息中的向量时间戳合并到本地</li>
+</ul>
+<p>除了标量和向量之间的区别之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
+<h2 id="vector-clocks-algorithm">Vector clocks algorithm</h2>
+<blockquote>
+<p><strong>on</strong> initialisation at node \(N_{i}\) <strong>do</strong> <br />
+\(\qquad T := \langle0, 0, &hellip;, 0\rangle\) ▻ local variable at node \(N_{i}\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> any event occurring at node \(N_{i}\) <strong>do</strong> <br />
+\(\qquad T[i] = T[i] + 1\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> request to send message \(m\) at node N<sub>i</sub> <strong>do</strong> <br />
+\(\qquad T[i] := T[i] + 1\); send \((T, m)\) via network <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> receiving \((T&rsquo;, m)\) at node \(N_{i}\) via the network <strong>do</strong> <br />
+\(\qquad T[j] := max(T[j], T&rsquo;[j])\) for every \(j \in {1, &hellip;, n}\) <br />
+\(\qquad T[i] := T[i] + 1\); deliver \(m\) to the application <br />
+<strong>end on</strong></p>
+</blockquote>
+<h2 id="vector-clocks-example">Vector clocks example</h2>
+<p>假定节点向量是 \(N = \langle​A, B, C\rangle\):</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/vector-example.png"
+         alt="Figure 1: vector-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>vector-example</p>
+        </figcaption>
+</figure>
+
+<p>事件 \(e\) 的向量时间戳是一系列事件的集合， \(e\) 和它的因果以来：\({e} \cup {a | a \rightarrow e}\)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup>, </sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>比如，\(\langle2, 2, 0\rangle\)，第一个 2 是表示来自于 \(A\) 的两个事件，第二个 2 是表示来自于 \(B\) 的两个事件，并且没有来自于 \(C\) 的事件。</p>
+<h2 id="vector-clocks-ordering">Vector clocks ordering</h2>
+<p>Define the following order on vector timestamps(in a system with \(n\) nodes):</p>
+<ul>
+<li>\(T = T&rsquo;\) iff \(T[i] = T&rsquo;[i]\) for all \(i \in {1, &hellip;, n}\)<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></li>
+<li>\(T \le T&rsquo;\) iff \(T[i] \le T&rsquo;[i]\) for all $ ∈ {1, &hellip;, n}$</li>
+<li>\(T &lt; T&rsquo;\) iff \(T \le T&rsquo;\) and \(T \neq T&rsquo;\)</li>
+<li>\(T || T&rsquo;\) iff \(T &gt; T&rsquo;\) and \(T&rsquo; &gt; T\)</li>
+</ul>
+<p>\(V(a) \le V(b)\) iff \(({a} \cup {e | e \rightarrow a}) ⊆ ({b} \cup{} {e | e \rightarrow b})\)</p>
+<p>Properties of this order:</p>
+<ul>
+<li>\((V(a) &lt; V(b)) \iff (a \rightarrow b)\)</li>
+<li>\((V(a) = V(b)) \iff (a = b)\)</li>
+<li>\((V(a) \rVert V(b)) \iff (a \rVert b)\)</li>
+</ul>
+<p>然后，我们对向量的时间戳进行部分排序。如果第一个向量的每个元素都小于或等于第二个向量的相应元素，我们就说一个向量小于或等于另一个向量。如果一个向量小于或等于另一个向量，并且它们至少有一个元素是不同的，那么这个向量就严格小于另一个向量。然而，如果一个向量在一个元素中的值较大，而另一个向量在另一个元素中的值较大，那么这两个向量是不可比的。例如，\(T = \langle2, 2, 0\rangle\) 和 \(T&rsquo; = \langle0, 0, 1\rangle\) 是不可比的，因为 \(T[1] &gt; T&rsquo;[1]\) 但 \(T[3] &lt; T&rsquo;[3]\)。</p>
+<p>向量时间戳的部分顺序与发生之前关系所定义的部分顺序完全对应。因此，向量时钟算法为我们提供了一种在实践中计算发生前关系的机制。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>\(\cup\) 并集的意思，\(\cap\) 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>集合的描述方法，描述格式为 \({x | P(x)，x ∈ Ω}\)。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>if and only if，相当于 \(\iff\)，其 Latex 写作 <code>\iff</code>​。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Distribution System</title>
       <link>https://sheerwill.live/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Sat, 25 Jun 2022 15:01:44 +0800</pubDate>
+      <pubDate>Wed, 29 Jun 2022 12:45:35 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -311,6 +1466,16 @@
 </tbody>
 </table>
 <p>用来保证多个节点 atomic commitment 最常用的算法是 two-phase commit protocol (2PC)，也有 three-phase commit protocol，但这里不做研究。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/Two-phase%20commit%20%282PC%29.png"
+         alt="Figure 9: Two-phase commit (2PC)"/> <figcaption>
+            <p><span class="figure-number">Figure 9: </span>Two-phase commit (2PC)</p>
+        </figcaption>
+</figure>
+
+<p>当使用 two-phase 提交时，客户端首先在参与交易的每个副本上启动一个常规的单节点交易，并在这些交易中执行常规的读写操作。当客户端准备好提交交易时，它向交易协调者（一个管理 2PC 协议的指定节点）发送提交请求。(在一些系统中，协调器是客户端的一部分）。</p>
+<p>协调器首先向参与交易的每个副本发送一个准备消息，每个副本都会回复一个消息，表明它是否能够提交交易（这是协议的第一阶段）。副本实际上还没有提交交易，但它们必须确保在第二阶段中，当协调者发出指示，它们一定能够提交交易。这就意味着，副本必须将交易的所有内容更新写入磁盘，并在回复准备信息之前检查完整性约束，同时继续持有交易的任何锁。</p>
+<p>协调器收集响应，并决定是否实际提交交易。如果所有节点都回复 OK，协调者就决定提交；如果任何节点想放弃，或者任何节点未能在某个超时时间内回复，协调者就决定放弃。然后，协调者将其决定发送给每个副本，它们都按照指示提交或放弃（这是第二阶段）。如果决定是提交，每个副本保证能够提交其事务，因为之前的准备请求奠定了基础。如果决定放弃，副本就会回滚该事务。</p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>
@@ -342,331 +1507,63 @@
     </item>
     
     <item>
-      <title>Org-roam</title>
-      <link>https://sheerwill.live/posts/main/20220505220832-org_roam/</link>
-      <pubDate>Sat, 25 Jun 2022 10:28:51 +0800</pubDate>
+      <title>Network Time Protocol (NTP)</title>
+      <link>https://sheerwill.live/posts/main/20220602202411-network_time_protocol_ntp/</link>
+      <pubDate>Wed, 29 Jun 2022 12:45:01 +0800</pubDate>
       
-      <guid>https://sheerwill.live/posts/main/20220505220832-org_roam/</guid>
-      <description>Introduction 说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>说起来好笑，我选择 Org-roam 作为自己 PKM 流程最终知识固化的地方，还是因为与之配合的 Org-roam-ui 的美观，随后发现易用性上也很不错。2013年时，第一次接触到 GTD 也是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。</p>
-<p>Org-roam 是基于 Emacs 平台，对于直接触过 Vim 的我来讲，是个全新的东西，官方是这么形容它的。</p>
-<blockquote>
-<p>Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.</p>
-<p>– Neal Stephenson, In the Beginning was the Command Line (1998)</p>
-</blockquote>
-<h2 id="install-emacs-with-homebrew">Install Emacs With Homebrew</h2>
-<p>First, Doom’s dependencies:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install git ripgrep
-</span></span><span class="line"><span class="cl">brew install coreutils fd
-</span></span><span class="line"><span class="cl">xcode-selected --install
-</span></span></code></pre></div><p><a href="https://bitbucket.org/mituharu/emacs-mac/src">emacs-mac</a>. It offers good integration with macOS, native emojis and better childframe support.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap d12frosted/emacs-plus
-</span></span><span class="line"><span class="cl">brew install emacs-plus --with-native-comp
-</span></span><span class="line"><span class="cl">ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
-</span></span></code></pre></div><h3 id="doom-doctor-问题"><code>Doom Doctor</code> 问题</h3>
+      <guid>https://sheerwill.live/posts/main/20220602202411-network_time_protocol_ntp/</guid>
+      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
+      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
+<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
+         alt="Figure 1: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>NTP</p>
+        </figcaption>
+</figure>
+
+<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/NTP.png"
+         alt="Figure 2: NTP"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>NTP</p>
+        </figcaption>
+</figure>
+
 <ol>
 <li>
-<p>Warning: unable to detect fonts because fontconfig isn&rsquo;t installed</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install fontconfig
-</span></span></code></pre></div></li>
-<li>
-<p>! Couldn&rsquo;t find shellcheck. Shell script linting will not work</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install shellcheck
-</span></span></code></pre></div></li>
-</ol>
-<h2 id="doom-emacs">Doom Emacs</h2>
-<p>With Emacs and Doom&rsquo;s dependencies installed, next is to install Doom Emacs itself:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-</span></span><span class="line"><span class="cl">~/.emacs.d/bin/doom install
-</span></span></code></pre></div><p>如果提示 <code>.emacs.d</code> 已存在，删除重新执行上述命令即可。</p>
-<p><code>.zshrc</code> 中需要添加 <code>export PATH=&quot;$HOME/.emacs.d/bin:$PATH</code> ，这样就可以直接使用 <code>doom</code> 命令了。</p>
-<h2 id="org-roam">Org-roam</h2>
-<p>具体的配置文件在 <code>.doom.d/</code> 下，参见 <a href="https://github.com/LuciusChen/dotfiles/tree/master/.doom.d">.doom.d</a>。</p>
-<h2 id="shortcuts">Shortcuts</h2>
-<table>
-<thead>
-<tr>
-<th>Shortcuts</th>
-<th>功能</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>C-RET</code></td>
-<td>在当前 headline 所属的内容后建立一个同级 headline</td>
-<td>无 headline 时创建一个一级 headline</td>
-</tr>
-<tr>
-<td><code>M-RET</code></td>
-<td>在当前 headline 后建立一个同级 headline</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-right</code></td>
-<td>降低当前 headline 的层级</td>
-<td></td>
-</tr>
-<tr>
-<td><code>M-left</code></td>
-<td>提高当前 headline 的层级</td>
-<td></td>
-</tr>
-<tr>
-<td><code>M-up</code></td>
-<td>将当前 headline 及其内容作为整体向上移动</td>
-<td></td>
-</tr>
-<tr>
-<td><code>M-down</code></td>
-<td>将当前 headline 及其内容作为整体向下移动</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-return</code></td>
-<td>在当前列表项的内容后建立一个同级列表项</td>
-<td>光标在列表项同一行时有效</td>
-</tr>
-<tr>
-<td><code>M-RET</code></td>
-<td>在当前列表项后建立一个同级列表项</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-right</code></td>
-<td>降低当前列表项的层级</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-left</code></td>
-<td>提高当前列表项的层级</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-up</code></td>
-<td>将当前列表项及其内容作为整体向上移动</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-down</code></td>
-<td>将当前列表项及其内容作为整体向下移动</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>C-x-o</code></td>
-<td>切换窗口</td>
-<td>C-x 中有很多操作，可以看提示。</td>
-</tr>
-<tr>
-<td><code>C-c C-c</code></td>
-<td>在创建 node 编写完毕后快速保存</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-g</code></td>
-<td>取消操作</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-x-d</code></td>
-<td>进入 dired 模式</td>
-<td></td>
-</tr>
-<tr>
-<td><code>SPC f r</code></td>
-<td>查找最近文件</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-v</code></td>
-<td>显示图片</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Shortcuts</th>
-<th>功能</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>C-c C-s</code></td>
-<td></td>
-<td>设置任务开始时间</td>
-</tr>
-<tr>
-<td><code>C-c C-d</code></td>
-<td>设置任务截止时间</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-t</code></td>
-<td>改变任务状态</td>
-<td></td>
-</tr>
-<tr>
-<td><code>S-Up/Down</code></td>
-<td>设置任务优先级 [#A], [#B], [#C]</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-i</code></td>
-<td>开始任务计时</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-o</code></td>
-<td>终止任务计时</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c [</code></td>
-<td>将当前文件加入 Org-Agenda</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c ]</code></td>
-<td>将当前文件从 Org-Agenda 移除</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Shortcuts</th>
-<th>功能</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>t</code></td>
-<td>在 Org-Agenda 的任务条目上， 修改任务状态。</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-a</code></td>
-<td>归档</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-w</code></td>
-<td>activate refile</td>
-<td></td>
-</tr>
-<tr>
-<td><code>I</code></td>
-<td>在 Org-Agenda 的任务条目上， 开始计时。</td>
-<td></td>
-</tr>
-<tr>
-<td><code>O</code></td>
-<td>在 Org-Agenda 的任务条目上， 终止计时。</td>
-<td></td>
-</tr>
-<tr>
-<td><code>z</code></td>
-<td>在任务上添加 note</td>
-<td></td>
-</tr>
-<tr>
-<td><code>R</code></td>
-<td>clock mode, 显示耗时。</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-l</code></td>
-<td>预览 Latex</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="org-grammar">Org grammar</h2>
-<h3 id="basic">basic</h3>
-<p>This is almost anything you need to know about Org mode syntax:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"> <span class="k">* </span>This Is A Heading
-</span></span><span class="line"><span class="cl"> ** This Is A Sub-Heading
-</span></span><span class="line"><span class="cl"> *** And A Sub-Sub-Heading
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> Paragraphs are separated by at least one empty line. <span class="gs">*bold*</span> <span class="ge">/italic/</span> <span class="gl">_underlined_</span> <span class="gd">+strikethrough+</span> <span class="nc">=monospaced=</span>
-</span></span><span class="line"><span class="cl"> [[<span class="na">http://Karl-Voit.at</span>][<span class="nt">Link description</span>]]
-</span></span><span class="line"><span class="cl"> http://Karl-Voit.at → link without description
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> <span class="k">- </span>list item
-</span></span><span class="line"><span class="cl"> <span class="k">- </span>another item
-</span></span><span class="line"><span class="cl">   <span class="k">- </span>sub-item
-</span></span><span class="line"><span class="cl">     <span class="k">1.</span> also enumerated
-</span></span><span class="line"><span class="cl">     <span class="k">2.</span> if you like
-</span></span><span class="line"><span class="cl"> <span class="k">- [ ]</span> yet to be done
-</span></span><span class="line"><span class="cl"> <span class="k">- [X]</span> item which is done
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> : Simple pre-formatted text such as for source code.
-</span></span><span class="line"><span class="cl"> : This also respects the line breaks. <span class="gs">*bold*</span> is not bold here.
-</span></span></code></pre></div><h3 id="code-block">code block</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">myresult</span> <span class="o">=</span> <span class="mi">42</span> <span class="o">*</span> <span class="mi">23</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello Europe! &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">myresult</span><span class="p">))</span>
-</span></span></code></pre></div><h3 id="table">table</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"> <span class="s">| My Column 1 | My Column 2 | Last Column |</span>
-</span></span><span class="line"><span class="cl"> <span class="s">|-------------+-------------+-------------|</span>
-</span></span><span class="line"><span class="cl"> <span class="s">|          42 | foo         | bar         |</span>
-</span></span><span class="line"><span class="cl"> <span class="s">|          23 | baz         | abcdefg     |</span>
-</span></span><span class="line"><span class="cl"> <span class="s">|-------------+-------------+-------------|</span>
-</span></span><span class="line"><span class="cl"> <span class="s">|          65 |             |             |</span>
-</span></span></code></pre></div><h2 id="export">Export</h2>
-<h3 id="markdown-file">Markdown file</h3>
-<p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>， ~M-x org-pandoc-export-as-gfm~算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
-<h3 id="hugo">Hugo</h3>
-<p>在文件头部添加</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+HUGO_BASE_DIR: ~/Dropbox/hugo/
-</span></span><span class="line"><span class="cl">#+HUGO_SECTION: posts/main
-</span></span><span class="line"><span class="cl">#+HUGO_WEIGHT: auto
-</span></span><span class="line"><span class="cl">#+HUGO_AUTO_SET_LASTMOD: t
-</span></span></code></pre></div><p>需要导出为 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+begin_mark
-</span></span><span class="line"><span class="cl">marked text
-</span></span><span class="line"><span class="cl">#+end_mark
-</span></span></code></pre></div><p>需要导出为块级 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时，也就是前后的空格不进行 trim。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+header: :trim-pre nil :trim-post nil
-</span></span><span class="line"><span class="cl">#+begin_mark
-</span></span><span class="line"><span class="cl">marked text
-</span></span><span class="line"><span class="cl">#+end_mark
-</span></span></code></pre></div><h3 id="latex">Latex</h3>
-<h4 id="dependency">Dependency</h4>
-<p>需要安装 texlive</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install texlive
-</span></span></code></pre></div><h4 id="latex-语法">Latex 语法</h4>
-<p><a href="/posts/main/20220616162256-latex/">Latex 语法</a></p>
-<h4 id="pdf-导出报错">PDF 导出报错</h4>
-<ul>
-<li><code>Unicode character 考 (U+8003) not set up for use with LaTeX.</code> 是因为 Latex 本身不支持中文。</li>
-</ul>
-<h4 id="中文-pdf-导出设置">中文 PDF 导出设置</h4>
-<ol>
-<li>
-<p>使用 <a href="https://github.com/ElegantLaTeX/ElegantPaper">ElegantPaper</a>，需要将 elegantpaper.cls 文件放在 org 目录下。</p>
+<p>Round-trip network delay: \(\delta = (t_{4} - t_{1}) - (t_{3} - t_{2})\)</p>
 </li>
 <li>
-<p>安装依赖</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">brew install pygments
-</span></span></code></pre></div></li>
+<p>Estimated server time when client receives response: \(t_{3} + \frac{\delta}{2}\)（客户端收到响应时的服务器的时间）</p>
+</li>
 <li>
-<p>导出文件头部增加</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+LATEX_COMPILER</span><span class="c">: xelatex</span>
-</span></span><span class="line"><span class="cl"><span class="cs">#+LATEX_CLASS</span><span class="c">: elegantpaper</span>
-</span></span><span class="line"><span class="cl"><span class="cs">#+OPTIONS</span><span class="c">: prop:t</span>
-</span></span></code></pre></div></li>
+<p>Estimated clock skew: \(\theta = t_{3} + \frac{\delta}{2} - t_{4} = \frac{(t_{2} - t_{1} + t_{3} - t_{4})}{2}\)（计算预估的服务器时间和当前客户端时间的偏差）</p>
+</li>
 </ol>
+<h2 id="correcting-clock-skew">Correcting clock skew</h2>
+<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
+<ul>
+<li>
+<p>if \(\theta &lt; 125 ms\), <strong>slew</strong> the clock:</p>
+<p>slightly speed it up or slow it down by up to \(500 ppm\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
+</li>
+<li>
+<p>if \(125 ms \le \theta &lt; 1000 s\), <strong>step</strong> the clock:</p>
+<p>suddenly reset client clock to estimated server timestamp</p>
+</li>
+<li>
+<p>if \(\theta \ge 1000 s\), <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
+</li>
+</ul>
+<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
+<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
+<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1">
-<p><a href="https://ox-hugo.scripter.co/doc/org-special-blocks/">Org Special Blocks</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
@@ -1291,79 +2188,6 @@
     </item>
     
     <item>
-      <title>Lamport clocks</title>
-      <link>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</link>
-      <pubDate>Wed, 22 Jun 2022 23:27:11 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</guid>
-      <description>Lamport clocks algorithm on initialisation do \(\qquad t := 0\) ▻ each node has its own local variable t end on on any event occurring at the local node do \(\qquad t := t + 1\) end on on request to send message \(m\) do \(\qquad t := t + 1\); send \((t, m)\) via the underlying network link end on on receiving \((t′, m)\)</description>
-      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation <strong>do</strong> <br />
-\(\qquad t := 0\) ▻ each node has its own local variable t <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> any event occurring at the local node <strong>do</strong> <br />
-\(\qquad t := t + 1\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> request to send message \(m\) <strong>do</strong> <br />
-\(\qquad t := t + 1\); send \((t, m)\) via the underlying network link <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> receiving \((t′, m)\) via the underlying network link <strong>do</strong> <br />
-\(\qquad t := max(t, t′) + 1\) <br />
-\(\qquad\)​deliver \(m\) to the application <br />
-<strong>end on</strong></p>
-</blockquote>
-<h2 id="lamport-clocks-in-words">Lamport clocks in words</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
-         alt="Figure 1: lamport-example-simple"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
-        </figcaption>
-</figure>
-
-<ul>
-<li>每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。</li>
-<li>增长后的值设为 \(L(e)\)</li>
-<li>发送消息时附带上当前的计数 \(t\)</li>
-<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
-</ul>
-<p>Properties of this scheme:</p>
-<ul>
-<li>if \(a \rightarrow b\) then \(L(e) &lt; L(b)\)</li>
-<li>However, \(L(a) &lt; L(b)\) does not imply \(a \rightarrow b\)</li>
-<li>Possible that \(L(a) = L(b)\) for \(a \ne b\)</li>
-</ul>
-<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
-<h2 id="lamport-clocks-example">Lamport clocks example</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example.png"
-         alt="Figure 2: lamport-example"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
-        </figcaption>
-</figure>
-
-<p>Let \(N(e)\) be the node at which event \(e\) occurred.</p>
-<p>Then the pair \((L(e), N(e))\) <strong>uniquely identiﬁes</strong> event \(e\).</p>
-<p>Deﬁne a <strong>total order</strong> \(≺\) using Lamport timestamps:</p>
-<p>\((a ≺ b) \iff (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b)))\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<p>This order is <strong>causal</strong>: \((a → b) \Longrightarrow (a ≺ b)\)</p>
-<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
-<p>对于任何两个事件 \(a \ne b\)，那么既不是 \(a ≺ b\) 也不是 \(b ≺ a\)。只要 \(a → b\)，我们就有 \(a ≺ b\)，换句话说，\(≺\) 是局部顺序 \(\rightarrow\) 的线性扩展。然而，如果 \(a \rVert b\)，我们可以有 \(a ≺ b\) 或 \(b ≺ a\)，所以两个事件的顺序是由算法任意决定的。 比如 \((1, A)\) 和 \((1, C)\) 两个事件是平行的，按照 Lamport 的算法，\((1, A)\) 必然是在 \((1, C)\) 之前的，但实际情况可能是 \((1, C)\) 在前。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>\(\iff\) is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>\(∨\) is logical or, \(∧\) is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Causal broadcast</title>
       <link>https://sheerwill.live/posts/main/20220616132407-causal_broadcast/</link>
       <pubDate>Wed, 22 Jun 2022 14:33:28 +0800</pubDate>
@@ -1411,89 +2235,6 @@
 <ol>
 <li id="fn:1">
 <p>删除 \(buﬀer\) 中的 \({(sender, deps, m)}\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Vector clocks</title>
-      <link>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Wed, 22 Jun 2022 14:31:21 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</guid>
-      <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \l</description>
-      <content:encoded><![CDATA[<p>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
-<ul>
-<li>假定分布式系统中有 \(n\) 个节点，\(N = \langle​N_{1}, N_{2}, &hellip;, N_{n}\rangle\)</li>
-<li><strong>事件 \(a\)</strong> 的向量时间戳写成 \(V(a) = \langle​t_{1}, t_{2}, &hellip;, t_{n}\rangle\)</li>
-<li>\(t_{i}\) 是 \(N_{i}\) 节点发生时间的数量</li>
-<li>每个​<strong>节点</strong>​都有一个当前的向量时间戳 \(T\)</li>
-<li>节点 \(N_{i}\) 上的事件，向量时间戳 \(T[i]\) 递增。</li>
-<li>每个消息都附带上向量时间戳</li>
-<li>接收者将消息中的向量时间戳合并到本地</li>
-</ul>
-<p>除了标量和向量之间的区别之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
-<h2 id="vector-clocks-algorithm">Vector clocks algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad T := \langle0, 0, &hellip;, 0\rangle\) ▻ local variable at node \(N_{i}\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> any event occurring at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad T[i] = T[i] + 1\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> request to send message \(m\) at node N<sub>i</sub> <strong>do</strong> <br />
-\(\qquad T[i] := T[i] + 1\); send \((T, m)\) via network <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> receiving \((T&rsquo;, m)\) at node \(N_{i}\) via the network <strong>do</strong> <br />
-\(\qquad T[j] := max(T[j], T&rsquo;[j])\) for every \(j \in {1, &hellip;, n}\) <br />
-\(\qquad T[i] := T[i] + 1\); deliver \(m\) to the application <br />
-<strong>end on</strong></p>
-</blockquote>
-<h2 id="vector-clocks-example">Vector clocks example</h2>
-<p>假定节点向量是 \(N = \langle​A, B, C\rangle\):</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/vector-example.png"
-         alt="Figure 1: vector-example"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>vector-example</p>
-        </figcaption>
-</figure>
-
-<p>事件 \(e\) 的向量时间戳是一系列事件的集合， \(e\) 和它的因果以来：\({e} \cup {a | a \rightarrow e}\)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup>, </sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
-<p>比如，\(\langle2, 2, 0\rangle\)，第一个 2 是表示来自于 \(A\) 的两个事件，第二个 2 是表示来自于 \(B\) 的两个事件，并且没有来自于 \(C\) 的事件。</p>
-<h2 id="vector-clocks-ordering">Vector clocks ordering</h2>
-<p>Define the following order on vector timestamps(in a system with \(n\) nodes):</p>
-<ul>
-<li>\(T = T&rsquo;\) iff \(T[i] = T&rsquo;[i]\) for all \(i \in {1, &hellip;, n}\)<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></li>
-<li>\(T \le T&rsquo;\) iff \(T[i] \le T&rsquo;[i]\) for all $ ∈ {1, &hellip;, n}$</li>
-<li>\(T &lt; T&rsquo;\) iff \(T \le T&rsquo;\) and \(T \neq T&rsquo;\)</li>
-<li>\(T || T&rsquo;\) iff \(T &gt; T&rsquo;\) and \(T&rsquo; &gt; T\)</li>
-</ul>
-<p>\(V(a) \le V(b)\) iff \(({a} \cup {e | e \rightarrow a}) ⊆ ({b} \cup{} {e | e \rightarrow b})\)</p>
-<p>Properties of this order:</p>
-<ul>
-<li>\((V(a) &lt; V(b)) \iff (a \rightarrow b)\)</li>
-<li>\((V(a) = V(b)) \iff (a = b)\)</li>
-<li>\((V(a) \rVert V(b)) \iff (a \rVert b)\)</li>
-</ul>
-<p>然后，我们对向量的时间戳进行部分排序。如果第一个向量的每个元素都小于或等于第二个向量的相应元素，我们就说一个向量小于或等于另一个向量。如果一个向量小于或等于另一个向量，并且它们至少有一个元素是不同的，那么这个向量就严格小于另一个向量。然而，如果一个向量在一个元素中的值较大，而另一个向量在另一个元素中的值较大，那么这两个向量是不可比的。例如，\(T = \langle2, 2, 0\rangle\) 和 \(T&rsquo; = \langle0, 0, 1\rangle\) 是不可比的，因为 \(T[1] &gt; T&rsquo;[1]\) 但 \(T[3] &lt; T&rsquo;[3]\)。</p>
-<p>向量时间戳的部分顺序与发生之前关系所定义的部分顺序完全对应。因此，向量时钟算法为我们提供了一种在实践中计算发生前关系的机制。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>\(\cup\) 并集的意思，\(\cap\) 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>集合的描述方法，描述格式为 \({x | P(x)，x ∈ Ω}\)。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4">
-<p>if and only if，相当于 \(\iff\)，其 Latex 写作 <code>\iff</code>​。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
@@ -1603,267 +2344,6 @@
 </li>
 </ol>
 </div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Causality and Happen-before relation</title>
-      <link>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</link>
-      <pubDate>Mon, 20 Jun 2022 14:47:03 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
-      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
-      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
-<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
-<p>event a <strong>happens before</strong> event b, written a → b.</p>
-<p>那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前：</p>
-<ul>
-<li>
-<p>a 和 b 发生在相同节点，并且按照本地节点的执行顺序，a 发生在 b 之前。</p>
-</li>
-<li>
-<p>事件 a 是发送消息 m，事件 b 是接收相同的消息 m（假定发送的消息都是唯一的）。</p>
-</li>
-<li>
-<p>有这么一个时间 c 满足，a → c 且 c → b。</p>
-<p>happens-before relation 是局部的顺序：有可能存在既不满足 a → b 也不满足 b → a，这样 a 和 b 就是并行的，写作 a || b。</p>
-</li>
-</ul>
-<h3 id="happen-before-relation-example">Happen-before relation example</h3>
-<figure>
-    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
-         alt="Figure 1: happens-before-example"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
-        </figcaption>
-</figure>
-
-<ul>
-<li>a → b, c → d, and e → f due to process order</li>
-<li>b → c and d → f due to messages m1 and m2</li>
-<li>a → c, a → d, a → f, b → d, b → f, and c → f due to transitivity</li>
-<li>a || e, b || e, c || e, and d || e</li>
-</ul>
-<h2 id="causality">Causality</h2>
-<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
-<ul>
-<li>当 a → b, 那么 a 可能是 b 的因。</li>
-<li>当 a || b, a 和 b 之间不存在因果关系。</li>
-</ul>
-<figure>
-    <img loading="lazy" src="/ox-hugo/causality.png"
-         alt="Figure 2: causality"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>causality</p>
-        </figcaption>
-</figure>
-
-<p>Let ≺ be a strict total order on events.</p>
-<p>如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
-<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
-<p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Network Time Protocol (NTP)</title>
-      <link>https://sheerwill.live/posts/main/20220602202411-network_time_protocol_ntp/</link>
-      <pubDate>Sun, 19 Jun 2022 22:26:56 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220602202411-network_time_protocol_ntp/</guid>
-      <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
-      <content:encoded><![CDATA[<p>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers.</p>
-<p>Mac 中可以在设置中找到 NTP 服务器的地址，比如下图中的地址就是 <code>time.apple.com</code> 。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/ntp-in-mac.png"
-         alt="Figure 1: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<h2 id="estimating-time-over-a-network">Estimating time over a network</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/NTP.png"
-         alt="Figure 2: NTP"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>NTP</p>
-        </figcaption>
-</figure>
-
-<ol>
-<li>
-<p>Round-trip network delay: \(\delta = (t_{4} - t_{1}) - (t_{3} - t_{2})\)</p>
-</li>
-<li>
-<p>Estimated server time when client receives response: \(t_{3} + \frac{\delta}{2}\)（客户端收到响应时的服务器的时间）</p>
-</li>
-<li>
-<p>Estimated clock skew: \(\theta = t_{3} + \frac{\delta}{2} - t_{4} = \frac{(t_{2} - t_{1} + t_{3} - t_{4})}{2}\)（计算预估的服务器时间和当前客户端时间的偏差）</p>
-</li>
-</ol>
-<h2 id="correcting-clock-skew">Correcting clock skew</h2>
-<p>Once the client has estimated the clock skew θ, it needs to apply that correction to its clock.</p>
-<ul>
-<li>
-<p>if \(\theta &lt; 125 ms\), <strong>slew</strong> the clock:</p>
-<p>slightly speed it up or slow it down by up to \(500 ppm\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (brings clocks in sync within ≈ 5 minutes)</p>
-</li>
-<li>
-<p>if \(125 ms \le \theta &lt; 1000 s\), <strong>step</strong> the clock:</p>
-<p>suddenly reset client clock to estimated server timestamp</p>
-</li>
-<li>
-<p>if \(\theta \ge 1000 s\), <strong>panic</strong> and do nothing (leave the problem for a human operator to resolve)</p>
-</li>
-</ul>
-<p>依靠时钟同步的系统需要监控时钟偏移。从最后一条可以看出，如果 NTP Client 和 NTP Server 偏差过大，则会拒绝同步 NTP 的时间，留给人工来处理，因此我们需要避免出现这种偏差过大的情况。</p>
-<p>当初初学 Java 的时候，需要知晓某个函数或某段代码执行的时间，通常会用 <code>System.currentTimeMillis()</code> 来测量</p>
-<p>原来 <code>System.currentTimeMillis()</code> 用来测量某个函数运行的时间是错误的，会受到 NTP 的影响（机率虽然很小）。应该用 <code>System.nanoTime()</code> 来测量，不会受到 NTP 很大的影响，最多影响「单调时间」步进的频率。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>1 ppm = 1 microsecond/second = 86ms/day = 32s/year (ppm 是 part per million 的简称)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Quorum</title>
-      <link>https://sheerwill.live/posts/main/20220615143721-quorum/</link>
-      <pubDate>Sun, 19 Jun 2022 13:02:32 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220615143721-quorum/</guid>
-      <description>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于 Quorum 投票的冗余控制算法 在有冗余数据</description>
-      <content:encoded><![CDATA[<p>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。</p>
-<h2 id="基于-quorum-投票的冗余控制算法">基于 Quorum 投票的冗余控制算法</h2>
-<p>在有冗余数据的分布式存储系统当中，冗余数据对象会在不同的机器之间存放多份拷贝。但是同一时刻一个数据对象的多份拷贝只能用于读或者用于写。</p>
-<p>该算法可以保证同一份数据对象的多份拷贝不会被超过两个访问对象读写。</p>
-<p>分布式系统中的每一份数据拷贝对象都被赋予一票。每一个读操作获得的票数必须大于最小读票数（read quorum）（\(V_{r}\)），每个写操作获得的票数必须大于最小写票数（write quorum）(\(V_{w}\)）才能读或者写。如果系统有V票（意味着一个数据对象有 \(V\) 份冗余拷贝），那么最小读写票数(quorum)应满足如下限制：</p>
-<ol>
-<li>\(V_{r} + V_{w} &gt; V\)</li>
-<li>\(V_{w} &gt; \frac{V}{2}\)</li>
-</ol>
-<p>第一条规则保证了一个数据不会被同时读写。当一个写操作请求过来的时候，它必须要获得 \(V_{w}\) 个冗余拷贝的许可。而剩下的数量是 \(V - V_{w}\) 不够 \(V_{r}\)，因此不能再有读请求过来了。同理，当读请求已经获得了 \(V_{r}\) 个冗余拷贝的许可时，写请求就无法获得许可了。</p>
-<p>第二条规则保证了数据的串行化修改。一份数据的冗余拷贝不可能同时被两个写请求修改。</p>
-<h2 id="算法的好处">算法的好处</h2>
-<p>在分布式系统中，冗余数据是保证可靠性的手段，因此冗余数据的一致性维护就非常重要。一般而言，一个写操作必须要对所有的冗余数据都更新完成了，才能称为成功结束。比如一份数据在5台设备上有冗余，因为不知道读数据会落在哪一台设备上，那么一次写操作，必须5台设备都更新完成，写操作才能返回。</p>
-<p>对于写操作比较频繁的系统，这个操作的瓶颈非常大。Quorum 算法可以让写操作只要写完3台就返回。剩下的由系统内部缓慢同步完成。而读操作，则需要也至少读3台，才能保证至少可以读到一个最新的数据。</p>
-<p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 \(V_{w}\) 越大，则读票数 \(V_{r}\) 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Hugo</title>
-      <link>https://sheerwill.live/posts/main/20220607104757-hugo/</link>
-      <pubDate>Fri, 17 Jun 2022 13:47:22 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220607104757-hugo/</guid>
-      <description>Add backlink 在 themes/xxx/layouts/partials/ 下新增 ~backlink.html~，内容如下。 {{ $re := $.File.BaseFileName }} {{ $backlinks := slice }} {{ range .Site.AllPages }} {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }} {{ $backlinks = $backlinks | append . }} {{ end }} {{ end }} {{ if gt</description>
-      <content:encoded><![CDATA[<h2 id="add-backlink">Add backlink</h2>
-<p>在 <code>themes/xxx/layouts/partials/</code> 下新增 ~backlink.html~，内容如下。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ $re := $.File.BaseFileName }}
-</span></span><span class="line"><span class="cl">{{ $backlinks := slice }}
-</span></span><span class="line"><span class="cl">{{ range .Site.AllPages }}
-</span></span><span class="line"><span class="cl">   {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }}
-</span></span><span class="line"><span class="cl">	  {{ $backlinks = $backlinks | append . }}
-</span></span><span class="line"><span class="cl">   {{ end }}
-</span></span><span class="line"><span class="cl">{{ end }}
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">{{ if gt (len $backlinks) 0 }}
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Links to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;backlinks&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	   {{ range $backlinks }}
-</span></span><span class="line"><span class="cl">		  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .RelPermalink }}&#34;</span><span class="p">&gt;</span>{{ .Title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	   {{ end }}
-</span></span><span class="line"><span class="cl">	 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ else  }}
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>No notes link to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ end }}
-</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/_default/single.html</code> 中增加下面代码，放到合适的地方。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;backlinks.html&#34; . }}
-</span></span></code></pre></div><p>放在文章下方的话可以插入如下位置</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post-content&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    {{- if not (.Param &#34;disableAnchoredHeadings&#34;) }}
-</span></span><span class="line"><span class="cl">    {{- partial &#34;anchored_headings.html&#34; .Content -}}
-</span></span><span class="line"><span class="cl">    {{- else }}{{ .Content }}{{ end }}
-</span></span><span class="line"><span class="cl">    {{ partial &#34;backlinks.html&#34; . }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span></code></pre></div><h2 id="mathjax-support">MathJax support</h2>
-<h3 id="方案1">方案1</h3>
-<p>在 <code>themes/xxx/layouts/_default/single.html</code> 中 <code>header</code> 中增加下面代码。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span></code></pre></div><h3 id="方案2">方案2</h3>
-<p>增加 <code>themes/xxx/layouts/partials/mathjax.html</code> 文件，并在其中增加下面代码，实现即便是页面间的跳转，也可以实时渲染公式。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">MathJax</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">tex</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">inlineMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\(&#39;</span><span class="p">,</span> <span class="s1">&#39;\\)&#39;</span><span class="p">]],</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">displayMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$$&#39;</span><span class="p">,</span><span class="s1">&#39;$$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\[&#39;</span><span class="p">,</span> <span class="s1">&#39;\\]&#39;</span><span class="p">]],</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">processEscapes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">processEnvironments</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">skipHtmlTags</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;noscript&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;pre&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&#34;mjx-container&#34;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">x</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">classList</span> <span class="o">+=</span> <span class="s1">&#39;has-jax&#39;</span><span class="p">})</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://polyfill.io/v3/polyfill.min.js?features=es6&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;MathJax-script&#34;</span> <span class="na">async</span>
-</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">code</span><span class="p">.</span><span class="nc">has-jax</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">font</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">border</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="mh">#515151</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/_default/header.html</code> 中增加下面代码，放到合适的地方。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;mathjax.html&#34; . }}
-</span></span></code></pre></div><p>如果不想所有页面都加载 MathJax，就添加下面代码。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ if .Params.mathjax }}{{ partial &#34;mathjax.html&#34; . }}{{ end }}
-</span></span></code></pre></div><p>并通过 <a href="https://ox-hugo.scripter.co/doc/custom-front-matter/">Custom Front-matter Parameters</a> 设置 <code>mathjax: true~。具体是添加下面代码到需要导出并用 MathJax 展示的 org 文件头部，导出后就是 ~.md</code> 文件中的 metadata。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+HUGO_CUSTOM_FRONT_MATTER</span><span class="c">: :mathjax true</span>
-</span></span></code></pre></div>]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Refactoring Code</title>
-      <link>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</link>
-      <pubDate>Thu, 16 Jun 2022 09:33:31 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</guid>
-      <description>Refactoring Code How To Find Time Complexity Of An Algorithm
-JavaScript Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await Refactoring Code examples Callback Hell </description>
-      <content:encoded><![CDATA[<h2 id="refactoring-code">Refactoring Code</h2>
-<p><a href="/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">How To Find Time Complexity Of An Algorithm</a></p>
-<h3 id="javascript">JavaScript</h3>
-<h4 id="refactoring-tips">Refactoring Tips</h4>
-<ol>
-<li><a href="/posts/main/20220506193520-refactoring_condition_statements/">Refactoring Condition statements</a></li>
-<li><a href="/posts/main/20220506193545-converting_callbacks_to_promises/">Converting callbacks to promises</a></li>
-<li><a href="/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">Refactoring Promise chains with async/await</a></li>
-</ol>
-<h4 id="refactoring-code-examples">Refactoring Code examples</h4>
-<ul>
-<li><a href="/posts/main/20220616092944-callback_hell/">Callback Hell</a></li>
-</ul>
 ]]></content:encoded>
     </item>
     
@@ -2663,125 +3143,6 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
     </item>
     
     <item>
-      <title>Tools to Increase Productivity and Efficiency</title>
-      <link>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</link>
-      <pubDate>Wed, 15 Jun 2022 09:22:09 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</guid>
-      <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Writing WeChat Markdown Editor 一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档</description>
-      <content:encoded><![CDATA[<h2 id="misc">Misc</h2>
-<ol>
-<li>
-<p><a href="https://www.templatemaker.nl/zh-cn/">Templatemaker</a></p>
-<p>制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。</p>
-</li>
-</ol>
-<h2 id="writing">Writing</h2>
-<ol>
-<li>
-<p><a href="https://github.com/doocs/md">WeChat Markdown Editor</a></p>
-<p>一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性。</p>
-</li>
-</ol>
-<h3 id="查找-citations-的网站">查找 citations 的网站</h3>
-<ol>
-<li>
-<p><a href="https://zbib.org/">zoterobib</a></p>
-<p>Your bibliography is empty. To add a source, paste or type its URL, ISBN, DOI, PMID, arXiv ID, or title into the search box above</p>
-</li>
-<li>
-<p><a href="https://www.doi2bib.org/">doi2bib</a></p>
-<p>give us a DOI and we will do our best to get you the BibTeX entry</p>
-</li>
-<li>
-<p><a href="https://www.bibsonomy.org/">BibSonomy</a></p>
-<p>The easy way to manage scientific publications and bookmarks</p>
-<p>BibSonomy helps you to manage your publications and bookmarks, to collaborate with your colleagues and to find new interesting material for your research.</p>
-</li>
-<li>
-<p><a href="http://www.bibtexsearch.com/">BibTeX Search</a></p>
-<p>You&rsquo;re searching over millions of BibTeX records&hellip;</p>
-</li>
-<li>
-<p><a href="https://scholar.google.com/">Google Scholar</a></p>
-<p>站在巨人的肩膀上</p>
-</li>
-</ol>
-<h4 id="book">Book</h4>
-<p>For books I usually use a site, where it is possible to get Bibtex citations from Amazon.com articles. This is very good for books, and some inproceedings and incollections might be found here as well.</p>
-<ol>
-<li><a href="https://lead.to/amazon/com/">Amazon</a></li>
-</ol>
-<h4 id="article">Article</h4>
-<p>As a Software Engineer I quite often have to deal with technical papers from ACM or IEEE. Both their catalogs provide Bibtex export capabilities.</p>
-<ol>
-<li>
-<p><a href="https://dl.acm.org/">ACM</a></p>
-</li>
-<li>
-<p><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a></p>
-<p>Advancing Technology for Humanity</p>
-</li>
-</ol>
-<h2 id="book">Book</h2>
-<ol>
-<li>
-<p><a href="http://libgen.rs/">Library Genesis</a></p>
-<p>电子书资源查找，中英文都有，英文相对较多。</p>
-</li>
-</ol>
-<h2 id="video">Video</h2>
-<ol>
-<li>
-<p><a href="https://sound-effects.bbcrewind.co.uk/">BBC Sound effects</a></p>
-<p>BBC 提供的免费下载的音效的网站。</p>
-</li>
-</ol>
-<h2 id="medicine">Medicine</h2>
-<ol>
-<li>
-<p><a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a></p>
-<p>顾名思义，权威的诊疗查询手册。</p>
-</li>
-</ol>
-<h2 id="design">Design</h2>
-<ol>
-<li>
-<p><a href="https://nipponcolors.com/">日本の伝統色</a></p>
-<p>日本的一个颜色拾取网站，很漂亮。</p>
-</li>
-</ol>
-<h2 id="chrome-extension">Chrome extension</h2>
-<ol>
-<li>
-<p><a href="https://www.languagereactor.com/">Language Reactor</a></p>
-<p>提供 NetFlix、Youtube、TurtleTube、Video File、Text 的翻译，以及 Flashcards。</p>
-</li>
-</ol>
-<h2 id="front-end">Front-End</h2>
-<ol>
-<li>
-<p><a href="https://codepen.io/">codepen</a></p>
-<p>The best place to build, test, and discover front-end code</p>
-</li>
-</ol>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>MySQL</title>
-      <link>https://sheerwill.live/posts/main/20220530185321-mysql/</link>
-      <pubDate>Sat, 11 Jun 2022 11:51:16 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220530185321-mysql/</guid>
-      <description>Troubleshoot Issues in MySQL
-Sort Chinese text fields alphabetically by first letter</description>
-      <content:encoded><![CDATA[<p><a href="/posts/main/20220530180443-troubleshoot_issues_in_mysql/">Troubleshoot Issues in MySQL</a></p>
-<p><a href="/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/">Sort Chinese text fields alphabetically by first letter</a></p>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Converting callbacks to promises</title>
       <link>https://sheerwill.live/posts/main/20220506193545-converting_callbacks_to_promises/</link>
       <pubDate>Sat, 11 Jun 2022 11:49:29 +0800</pubDate>
@@ -3079,42 +3440,6 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     </item>
     
     <item>
-      <title>Personal Knowledge Wiki</title>
-      <link>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</link>
-      <pubDate>Sat, 11 Jun 2022 11:46:23 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</guid>
-      <description>Hardware HHKB Logitech MX Master 3 for Mac 17 MBP DELL U2417H Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency HammerSpoon Karabiner-Elements VSCode Squirrel</description>
-      <content:encoded><![CDATA[<h2 id="hardware">Hardware</h2>
-<ul>
-<li>HHKB</li>
-<li>Logitech MX Master 3 for Mac</li>
-<li>17 MBP</li>
-<li>DELL U2417H</li>
-<li>Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u</li>
-</ul>
-<h2 id="software">Software</h2>
-<h3 id="git">Git</h3>
-<ul>
-<li><a href="/posts/main/20220503160055-git-skills/">Git Skills</a></li>
-</ul>
-<h3 id="design-tools">Design Tools</h3>
-<ul>
-<li><a href="/posts/main/20220503154744-figma/">Figma</a></li>
-<li>Excalidraw</li>
-</ul>
-<h3 id="pinboard">Pinboard</h3>
-<ul>
-<li><a href="/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/">Tools to Increase Productivity and Efficiency</a></li>
-</ul>
-<h3 id="hammerspoon--20220520185239-hammerspoon-dot-md"><a href="/posts/main/20220520185239-hammerspoon/">HammerSpoon</a></h3>
-<h3 id="karabiner-elements">Karabiner-Elements</h3>
-<h3 id="vscode">VSCode</h3>
-<h3 id="squirrel">Squirrel</h3>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>HammerSpoon</title>
       <link>https://sheerwill.live/posts/main/20220520185239-hammerspoon/</link>
       <pubDate>Sat, 11 Jun 2022 11:46:14 +0800</pubDate>
@@ -3122,110 +3447,6 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
       <guid>https://sheerwill.live/posts/main/20220520185239-hammerspoon/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Git Skills</title>
-      <link>https://sheerwill.live/posts/main/20220503160055-git-skills/</link>
-      <pubDate>Sat, 11 Jun 2022 11:45:53 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220503160055-git-skills/</guid>
-      <description>删除以往的提交记录 git checkout --orphan latest_branch git add -A git commit -am &amp;#34;commit message&amp;#34; git branch -D main git branch -m main git push -f origin main 发现上次提交的内容有误，需要再次修改，但不想重复提交，而是合并到上一次提</description>
-      <content:encoded><![CDATA[<p>删除以往的提交记录</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout --orphan latest_branch
-</span></span><span class="line"><span class="cl">git add -A
-</span></span><span class="line"><span class="cl">git commit -am <span class="s2">&#34;commit message&#34;</span>
-</span></span><span class="line"><span class="cl">git branch -D main
-</span></span><span class="line"><span class="cl">git branch -m main
-</span></span><span class="line"><span class="cl">git push -f origin main
-</span></span></code></pre></div><p>发现上次提交的内容有误，需要再次修改，但不想重复提交，而是合并到上一次提交中，并且不更新提交 comment。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git commit --amend --no-edit
-</span></span></code></pre></div><ul>
-<li><code>--amend</code>: 修改最新的一次 commit，将这次的 stage change 直接添加到上一次 commit 中。</li>
-<li><code>--no-edit</code>: 不修改上一次 commit 的 comment，直接使用上一次的 comment。
-<ul>
-<li>如果需要修改的是最新一次 comment 的内容，则不需要该参数，就可以修改 comment。</li>
-</ul>
-</li>
-</ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Remote Procedure Call (RPC)</title>
-      <link>https://sheerwill.live/posts/main/20220603220847-remote_procedure_call_rpc/</link>
-      <pubDate>Sat, 11 Jun 2022 11:43:15 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220603220847-remote_procedure_call_rpc/</guid>
-      <description>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样</description>
-      <content:encoded><![CDATA[<p>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样调用远程系统上的其他进程。</p>
-<p>RPC 是通过 Interface Definition Language (IDL) 来描述接口，使得在不同的平台上运行的不同程序编写的程序可以相互通信。(IDL 是不以任何一种特定编程语言的方式指定类型签名或者函数调用的语言。)</p>
-<p>基本上，你可以用 IDL 定义客户端和服务端之间的接口，这样 RPC 机制就可以创建跨网络调用功能所需要的代码存根（Code <a href="/posts/main/20220604180341-stub/">Stub</a>）。</p>
-<pre tabindex="0"><code class="language-nil" data-lang="nil">+----------------+
-| Client         |
-|  +----------+  |         +---------------+
-|  |   main   |  |         | Server        |
-|  |----------|  |         |  +----------+ |
-|  | stub_cli |----(comms)---&gt;| stub_svr | |
-|  +----------+  |         |  |----------| |
-+----------------+         |  | function | |
-                           |  +----------+ |
-                           +---------------+
-</code></pre><p>在这个例子中，~main~ 没有在同一个程序中调用函数，而是调用了一个客户端存根函数（与函数的原型相同），该函数负责将信息打包，并通过通讯通道将其传送给另一个进程。</p>
-<p>这里可以是同一台机器或者不同机器，RPC 的优势之一就是能够随意移动服务器。</p>
-<p>在服务器中，有个「监听者」进程，它将接收这些信息并将其传递给服务器。服务器的存根接收信息，解包并将其传递给真正执行的函数。</p>
-<p>真正的函数运行后返回结果给到服务器存根，服务器存根可以将返回的信息打包，并将其传回给客户端存根。客户端存根再将其解包并传回给 ~main~。</p>
-<p>实际上的 IDL 大概像下面这样：</p>
-<pre tabindex="0"><code class="language-nil" data-lang="nil">[   uuid(f9f6be21-fd32-5577-8f2d-0800132bd567),
-    version(0),
-    endpoint(&#34;ncadg_ip_udp:[1234]&#34;, &#34;dds:[19]&#34;)
-] interface function_iface {
-    [idempotent] void function(
-        [in] int handle,
-        [out] int *status
-    );
-}
-</code></pre><p>头部是一些用于链接客户端和服务端的网络信息，RPC 发生在「会话层」中。接口部分才是 IDL 编译器建立客户端和服务器端存根的地方，以便客户端和服务端能够进行通讯，使得 RPC 正常工作。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Stub</title>
-      <link>https://sheerwill.live/posts/main/20220604180341-stub/</link>
-      <pubDate>Sat, 11 Jun 2022 11:42:56 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220604180341-stub/</guid>
-      <description>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。 在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端</description>
-      <content:encoded><![CDATA[<ol>
-<li>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。</li>
-<li>在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端和服务端之间传递参数的一段代码。</li>
-</ol>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>The Byzantine generals problem</title>
-      <link>https://sheerwill.live/posts/main/20220602202317-the_byzantine_generals_problem/</link>
-      <pubDate>Sat, 11 Jun 2022 11:42:34 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220602202317-the_byzantine_generals_problem/</guid>
-      <description>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同</description>
-      <content:encoded><![CDATA[<p>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。</p>
-<p>在分布式计算中，不同的计算机通过通讯交换信息达成共识而按照同一套协作策略行动。但有时候，系统中的成员计算机可能出错而发送错误的信息，用于传递信息的通讯网络也可能导致信息损坏，使得网络中不同的成员关于全体协作的策略得出不同结论，从而破坏系统一致性。拜占庭将军问题被认为是容错性问题中最难的问题类型之一。</p>
-<p>容错率：Theorem: need 3ƒ+1 generals in total to tolerate ƒ malicious generals.</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>The two generals problem</title>
-      <link>https://sheerwill.live/posts/main/20220602202247-the_two_generals_problem/</link>
-      <pubDate>Sat, 11 Jun 2022 11:42:17 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220602202247-the_two_generals_problem/</guid>
-      <description>两军问题（英语：Two Generals&amp;rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该</description>
-      <content:encoded><![CDATA[<p>两军问题（英语：Two Generals&rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该问题中，两支军队的将军只能通过派遣信使穿越敌方领土来互相通信，以此约定在同一时间点共同进攻。该问题希望求解如何在两位将军派出的任何信使都可能被俘虏的情况下，就发动攻击的时间点达成一致。</p>
-<p>两军问题是拜占庭将军问题的一个特例，常被编入与计算机网络相关的入门课程中。在传输控制协议（TCP）相关的课程中，该问题可用作解释 TCP 协议无法保证通信双方之间的状态一致性的原因。该问题也适用于其他存在信息丢失的双方通信的情况。作为认识逻辑的一个重要概念，该问题突出了共识（英语：Common_knowledge_(logic)）的重要性。一些学者也将此问题称作两军悖论（英语：Two Generals Paradox）或协同进攻问题（英语：Coordinated Attack Problem）。两军问题是第一个被证明无解的计算机通信问题。该证明的重要意义在于，其显示了对于存在通信错误的更广泛的问题（如拜占庭将军问题），同样是无解的。这也为所有分布式一致性协议的实现提供了一个符合现实的预期。</p>
-]]></content:encoded>
     </item>
     
     <item>
@@ -3321,88 +3542,6 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
             </figcaption>
     </figure>
 
-</li>
-</ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>How I Take Notes</title>
-      <link>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</link>
-      <pubDate>Sat, 11 Jun 2022 11:40:35 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</guid>
-      <description>Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>最先接触到 <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettlekasten</a> (German: &ldquo;slip box&rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、Notion、Obsidian（当时还不知道 Backlinks），都觉得不太合适，尤其是第一步文件夹的分类就让我头疼，很多内容是互相交叉的，并不是简单的可以归在一个分类下面，若是细分的分类过多，又会过于混乱，最后的结果就是“垃圾场”。</p>
-<ul>
-<li>根据 Zettlekasten 衍生出来的各种 APP 中的 Backlinks 将笔记串联起来，作为一个草稿箱，定期去整理回顾形成自己的知识。</li>
-</ul>
-<p>另外一个极为吸引我的就是 Daily Notes 或者 Journals，非常适合我当前的工作场景。「生产问题」或者「零碎的需求」会不断从打断我的工作，有时候会非常紧急需要优先处理「需求」或者「生产问题」，解决后会有两种情况。</p>
-<ul>
-<li>
-<p>问题或需求解决后，要花一些时间梳理之前在做的事情才能够重新接续之前的思路继续工作。</p>
-</li>
-<li>
-<p>问题解决后几个月遇到相同或类似的问题，虽然记得解决过，但是当时解决的思路以及细节需要注意的地方就模糊不清了。通常为了万无一失需要重复上次的工作，仔细查看过代码结合业务后，才能作出正确的判断，确保干净利落地解决问题。</p>
-</li>
-</ul>
-<p>上面两种情况完全可以用 Journals 记录解决问题前的工作思路，记录解决问题后的思路，来避免上述两种情况发生。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
-         alt="Figure 1: take-notes-sankey"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>take-notes-sankey</p>
-        </figcaption>
-</figure>
-
-<p>信息大爆炸的副作用就是信噪比降低，通过分阶段的信息处理，不断地归纳、处理形成自己的想法，并将其固化下来，作为知识库。</p>
-<h2 id="流程设计">流程设计</h2>
-<ol>
-<li>
-<p>图中的流程其实就是多层的过滤器。</p>
-<p>从最初的信息源处到 Logseq 的过程，只需要考虑这个信息源是否值得读，是否值得扩展，答案确定则大胆地记入 Logseq。其中零散的思绪及文章阅读记录在 Journals 中，书籍这类大部头则在 page 中记录，前者因为零散在 Journals 中，需要加 page 的双链或 Tag。</p>
-<p>Logseq 中 Journals 中的事件重要的会被我移到 Org-roam 中的 Journals.org 文件中，这个文件类似于日记的作用，并不是每天都会记录，记录多了之后按照年份进行分割。</p>
-<p>从 Logseq 到 Org-roam 则是知识固化的过程，需要考虑该知识是否以后会被自己再次用到，是否值得扩展，答案确定则精炼后记入，并标明灵感来源，引用材料。因此，Logseq 中记录的都只能算是草稿，需要再次的整合，提高信噪比。</p>
-</li>
-<li>
-<p>对信息源处理时，可以用 Excalidraw 进行流程图、思维图等图的草稿绘制。后续有时间的时候再用 Figma 重新绘制，视觉和逻辑上的重新设计，使得阐述的内容更加直观。</p>
-<p>对于产品来说，通过<a href="/posts/main/20220503145636-build_diagram/">设计降低理解门槛和使用门槛</a>，是一件挺重要的事情。输出文章同样如此。</p>
-</li>
-<li>
-<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 <a href="/posts/main/20220505220832-org_roam/">Org-roam</a> 中做了一些设置。</p>
-</li>
-<li>
-<p>Org-roam-ui 非常优秀，不管是 UI 还是操作性，可以明晰的查看笔记之间的关联，知识是否形成闭环，哪些知识还需要进行拓展阅读。</p>
-</li>
-</ol>
-<h2 id="准则">准则</h2>
-<ul>
-<li>
-<p>卡片应该具有原子性。这点和编程的原则很像，一个方法只做一件事，在这里也就是只记录一个主题的内容。</p>
-</li>
-<li>
-<p>卡片内容应该具有独立性。这点和上面并不冲突，设想一下，为了保持每个卡片的纯净，X 和 Y 之间的关系，你可能会用 Z 去链接他们。但回顾的时候，没有 Z，单纯回顾 X 或 Y 无法得知两者之间的关联。所以这里不管在 X 或者 Y 中去描述与对方的关系都是可以的，一点点内容的冗余可以使得内容更加独立。</p>
-</li>
-<li>
-<p>遵守奥卡姆剃刀原则。对新工具充分调研，是否满足自己的需求后再考虑替换或增加到现有工作流当中。</p>
-</li>
-<li>
-<p>Literature Notes 需要及时回顾，在一两天内转化为 Permanent Notes 或者直接删掉。</p>
-</li>
-</ul>
-<h2 id="误区">误区</h2>
-<ul>
-<li>
-<p>All-In-One 的思想。Markdown 的扩展语法实现并不统一，扩展语法的内容导出时经常要手动兼容，或不可再用。云端服务的不可持续性，互联网这么多年已经太多的云端服务用着用着就停掉了。</p>
-</li>
-<li>
-<p>Permanent Notes 并不是不需要回顾和修改了。</p>
-</li>
-<li>
-<p>记太多的内容。从资料中复制大量的原文。笔记应该是对所读内容的提炼：用自己的话改写观点和概念有助于加强理解。</p>
-</li>
-<li>
-<p>太复杂的笔记流程。复杂的工作流通常需要自动化，但自动化不利于笔记的整理，形成最重笔记时应该慎重考虑哪些是需要保留的，否则知识库就会变成垃圾场。</p>
 </li>
 </ul>
 ]]></content:encoded>

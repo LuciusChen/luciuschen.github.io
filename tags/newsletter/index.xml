@@ -6,11 +6,11 @@
     <description>Recent content in newsletter on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2022 11:40:35 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/newsletter/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Jun 2022 16:42:16 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/newsletter/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How I Take Notes</title>
       <link>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</link>
-      <pubDate>Sat, 11 Jun 2022 11:40:35 +0800</pubDate>
+      <pubDate>Wed, 29 Jun 2022 16:42:16 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</guid>
       <description>Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、</description>
@@ -50,7 +50,7 @@
 <p>对于产品来说，通过<a href="/posts/main/20220503145636-build_diagram/">设计降低理解门槛和使用门槛</a>，是一件挺重要的事情。输出文章同样如此。</p>
 </li>
 <li>
-<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 <a href="/posts/main/20220505220832-org_roam/">Org-roam</a> 中做了一些设置。</p>
+<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 <a href="/posts/main/20220505220832-emacs/">Emacs</a> 中做了一些设置。</p>
 </li>
 <li>
 <p>Org-roam-ui 非常优秀，不管是 UI 还是操作性，可以明晰的查看笔记之间的关联，知识是否形成闭环，哪些知识还需要进行拓展阅读。</p>
