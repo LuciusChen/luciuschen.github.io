@@ -6,14 +6,14 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Jul 2022 11:54:25 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Jul 2022 11:58:16 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Anki</title>
       <link>https://sheerwill.live/posts/main/20220706112803-anki/</link>
-      <pubDate>Wed, 06 Jul 2022 11:54:25 +0800</pubDate>
+      <pubDate>Wed, 06 Jul 2022 11:58:16 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220706112803-anki/</guid>
-      <description>Online Dictionary Helper Figure 1: online-dictionary-helper-result Settings Figure 2: online-dictionary-helper-setting Anki Template 模板的样式是根据卡片内容来设置的，其中 glossary 中本身就带了样式。 front &amp;lt;div class=&amp;#34;section&amp;#34;&amp;gt; &amp;lt;div id=&amp;#34;front&amp;#34; class=&amp;#34;items&amp;#34;&amp;gt; {{expression}}&amp;lt;span class=&amp;#34;audio&amp;#34;&amp;gt;{{audio}}&amp;lt;/span&amp;gt; &amp;lt;/div&amp;gt; {{#reading}} &amp;lt;hr /&amp;gt; &amp;lt;div id=&amp;#34;front-extra1&amp;#34; class=&amp;#34;items&amp;#34;&amp;gt; &amp;lt;span&amp;gt;{{reading}}&amp;amp;nbsp;&amp;lt;/span&amp;gt; &amp;lt;span&amp;gt;{{extrainfo}}&amp;lt;/span&amp;gt; &amp;lt;/div&amp;gt; {{/reading}} &amp;lt;/div&amp;gt; back {{FrontSide}} &amp;lt;div class=&amp;#34;section&amp;#34;&amp;gt; &amp;lt;div id=&amp;#34;back&amp;#34; class=&amp;#34;items&amp;#34;&amp;gt;{{glossary}}&amp;lt;/div&amp;gt; {{#sentence}} &amp;lt;hr</description>
+      <description>Online Dictionary Helper Figure 1: online-dictionary-helper-result Chrome extension 在线词典助手 Settings Figure 2: online-dictionary-helper-setting Anki Template 模板的样式是根据卡片内容来设置的，其中 glossary 中本身就带了样式。 front &amp;lt;div class=&amp;#34;section&amp;#34;&amp;gt; &amp;lt;div id=&amp;#34;front&amp;#34; class=&amp;#34;items&amp;#34;&amp;gt; {{expression}}&amp;lt;span class=&amp;#34;audio&amp;#34;&amp;gt;{{audio}}&amp;lt;/span&amp;gt; &amp;lt;/div&amp;gt; {{#reading}} &amp;lt;hr /&amp;gt; &amp;lt;div id=&amp;#34;front-extra1&amp;#34; class=&amp;#34;items&amp;#34;&amp;gt; &amp;lt;span&amp;gt;{{reading}}&amp;amp;nbsp;&amp;lt;/span&amp;gt; &amp;lt;span&amp;gt;{{extrainfo}}&amp;lt;/span&amp;gt; &amp;lt;/div&amp;gt; {{/reading}} &amp;lt;/div&amp;gt; back</description>
       <content:encoded><![CDATA[<h2 id="online-dictionary-helper">Online Dictionary Helper</h2>
 <figure>
     <img loading="lazy" src="/ox-hugo/online-dictionary-helper-result.png"
@@ -22,6 +22,8 @@
         </figcaption>
 </figure>
 
+<h3 id="chrome-extension">Chrome extension</h3>
+<p><a href="https://chrome.google.com/webstore/detail/online-dictionary-helper/lppjdajkacanlmpbbcdkccjkdbpllajb">在线词典助手</a></p>
 <h3 id="settings">Settings</h3>
 <figure>
     <img loading="lazy" src="/ox-hugo/online-dictionary-helper-setting.png"
