@@ -6,7 +6,188 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Jun 2022 14:18:17 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Jul 2022 11:54:25 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Anki</title>
+      <link>https://sheerwill.live/posts/main/20220706112803-anki/</link>
+      <pubDate>Wed, 06 Jul 2022 11:54:25 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220706112803-anki/</guid>
+      <description>Online Dictionary Helper Figure 1: online-dictionary-helper-result Settings Figure 2: online-dictionary-helper-setting Anki Template 模板的样式是根据卡片内容来设置的，其中 glossary 中本身就带了样式。 front &amp;lt;div class=&amp;#34;section&amp;#34;&amp;gt; &amp;lt;div id=&amp;#34;front&amp;#34; class=&amp;#34;items&amp;#34;&amp;gt; {{expression}}&amp;lt;span class=&amp;#34;audio&amp;#34;&amp;gt;{{audio}}&amp;lt;/span&amp;gt; &amp;lt;/div&amp;gt; {{#reading}} &amp;lt;hr /&amp;gt; &amp;lt;div id=&amp;#34;front-extra1&amp;#34; class=&amp;#34;items&amp;#34;&amp;gt; &amp;lt;span&amp;gt;{{reading}}&amp;amp;nbsp;&amp;lt;/span&amp;gt; &amp;lt;span&amp;gt;{{extrainfo}}&amp;lt;/span&amp;gt; &amp;lt;/div&amp;gt; {{/reading}} &amp;lt;/div&amp;gt; back {{FrontSide}} &amp;lt;div class=&amp;#34;section&amp;#34;&amp;gt; &amp;lt;div id=&amp;#34;back&amp;#34; class=&amp;#34;items&amp;#34;&amp;gt;{{glossary}}&amp;lt;/div&amp;gt; {{#sentence}} &amp;lt;hr</description>
+      <content:encoded><![CDATA[<h2 id="online-dictionary-helper">Online Dictionary Helper</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/online-dictionary-helper-result.png"
+         alt="Figure 1: online-dictionary-helper-result"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>online-dictionary-helper-result</p>
+        </figcaption>
+</figure>
+
+<h3 id="settings">Settings</h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/online-dictionary-helper-setting.png"
+         alt="Figure 2: online-dictionary-helper-setting"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>online-dictionary-helper-setting</p>
+        </figcaption>
+</figure>
+
+<h3 id="anki-template">Anki Template</h3>
+<p>模板的样式是根据卡片内容来设置的，其中 <code>glossary</code> 中本身就带了样式。</p>
+<h4 id="front">front</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;section&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;front&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;items&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {{expression}}<span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;audio&#34;</span><span class="p">&gt;</span>{{audio}}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {{#reading}}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">hr</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;front-extra1&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;items&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>{{reading}}<span class="ni">&amp;nbsp;</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>{{extrainfo}}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {{/reading}}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h4 id="back">back</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{FrontSide}}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;section&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;back&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;items&#34;</span><span class="p">&gt;</span>{{glossary}}<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {{#sentence}}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">hr</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;back-extra1&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;items&#34;</span><span class="p">&gt;</span>{{sentence}}<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {{/sentence}} {{#url}}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">hr</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;back-extra2&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;items&#34;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{url}}&#34;</span><span class="p">&gt;</span>Source<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  {{/url}}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h4 id="style">style</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="c">/*
+</span></span></span><span class="line"><span class="cl"><span class="c">ODH Template
+</span></span></span><span class="line"><span class="cl"><span class="c">author:ninja huang
+</span></span></span><span class="line"><span class="cl"><span class="c">site:https://github.com/ninja33/odh
+</span></span></span><span class="line"><span class="cl"><span class="c">*/</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">star</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">color</span><span class="p">:</span> <span class="mh">#ffbb00</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">card</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">margin</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">text-align</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#fff</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">section</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">color</span><span class="p">:</span> <span class="mh">#414141</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#fafafa</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">font-family</span><span class="p">:</span> <span class="s2">&#34;Segoe UI&#34;</span><span class="p">,</span> <span class="n">Arial</span><span class="p">,</span> <span class="s2">&#34;Microsoft Yahei&#34;</span><span class="p">,</span> <span class="kc">sans-serif</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">font-size</span><span class="p">:</span> <span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">box-shadow</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="mi">1</span><span class="kt">px</span> <span class="mi">5</span><span class="kt">px</span> <span class="mi">0</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">0</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">1</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">border-radius</span><span class="p">:</span> <span class="mi">4</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">margin</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">items</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">padding</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">audio</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">margin-left</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">audio</span> <span class="nt">img</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">width</span><span class="p">:</span> <span class="mi">64</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">height</span><span class="p">:</span> <span class="mi">64</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">vertical-align</span><span class="p">:</span> <span class="kc">middle</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">hr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">border</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">border-top</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="mh">#e5e5e5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">items</span> <span class="nt">hr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">border</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">margin</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">border-top</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="mh">#e5e5e5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">#</span><span class="nn">front</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">#</span><span class="nn">back</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">line-height</span><span class="p">:</span> <span class="mf">1.5</span><span class="kt">em</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">#</span><span class="nn">front</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">font-size</span><span class="p">:</span> <span class="mi">2</span><span class="kt">em</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">text-align</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">#</span><span class="nn">back</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">#</span><span class="nn">front-extra1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">font-size</span><span class="p">:</span> <span class="mf">0.8</span><span class="kt">em</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">#</span><span class="nn">front-extra2</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">#</span><span class="nn">back-extra1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">#</span><span class="nn">back-extra1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Personal Knowledge Wiki</title>
+      <link>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</link>
+      <pubDate>Wed, 06 Jul 2022 11:40:43 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</guid>
+      <description>Hardware HHKB Logitech MX Master 3 for Mac 17 MBP DELL U2417H Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency Workflow HammerSpoon Hugo Karabiner-Elements Emacs Latex Anki Editor VSCode iTerm2 Squirrel</description>
+      <content:encoded><![CDATA[<h2 id="hardware">Hardware</h2>
+<ul>
+<li>HHKB</li>
+<li>Logitech MX Master 3 for Mac</li>
+<li>17 MBP</li>
+<li>DELL U2417H</li>
+<li>Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u</li>
+</ul>
+<h2 id="software">Software</h2>
+<h3 id="git">Git</h3>
+<ul>
+<li><a href="/posts/main/20220503160055-git-skills/">Git Skills</a></li>
+</ul>
+<h3 id="design-tools">Design Tools</h3>
+<ul>
+<li><a href="/posts/main/20220503154744-figma/">Figma</a></li>
+<li>Excalidraw</li>
+</ul>
+<h3 id="pinboard">Pinboard</h3>
+<ul>
+<li><a href="/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/">Tools to Increase Productivity and Efficiency</a></li>
+</ul>
+<h3 id="workflow">Workflow</h3>
+<ul>
+<li><a href="/posts/main/20220520185239-hammerspoon/">HammerSpoon</a></li>
+<li><a href="/posts/main/20220607104757-hugo/">Hugo</a></li>
+<li>Karabiner-Elements</li>
+<li><a href="/posts/main/20220505220832-emacs/">Emacs</a></li>
+<li><a href="/posts/main/20220616162256-latex/">Latex</a></li>
+<li><a href="/posts/main/20220706112803-anki/">Anki</a></li>
+</ul>
+<h3 id="editor">Editor</h3>
+<ul>
+<li><a href="/posts/main/20220629203733-vscode/">VSCode</a></li>
+<li><a href="/posts/main/20220629204553-iterm2/">iTerm2</a></li>
+</ul>
+<h3 id="squirrel">Squirrel</h3>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Stub</title>
       <link>https://sheerwill.live/posts/main/20220604180341-stub/</link>
@@ -235,52 +416,6 @@ Plugin zsh-autosuggestions </description>
 <ul>
 <li><a href="https://github.com/zsh-users/zsh-autosuggestions">zsh-autosuggestions</a></li>
 </ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Personal Knowledge Wiki</title>
-      <link>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</link>
-      <pubDate>Wed, 29 Jun 2022 20:45:57 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</guid>
-      <description>Hardware HHKB Logitech MX Master 3 for Mac 17 MBP DELL U2417H Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency Workflow HammerSpoon Hugo Karabiner-Elements Emacs Latex Editor VSCode iTerm2 Squirrel</description>
-      <content:encoded><![CDATA[<h2 id="hardware">Hardware</h2>
-<ul>
-<li>HHKB</li>
-<li>Logitech MX Master 3 for Mac</li>
-<li>17 MBP</li>
-<li>DELL U2417H</li>
-<li>Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u</li>
-</ul>
-<h2 id="software">Software</h2>
-<h3 id="git">Git</h3>
-<ul>
-<li><a href="/posts/main/20220503160055-git-skills/">Git Skills</a></li>
-</ul>
-<h3 id="design-tools">Design Tools</h3>
-<ul>
-<li><a href="/posts/main/20220503154744-figma/">Figma</a></li>
-<li>Excalidraw</li>
-</ul>
-<h3 id="pinboard">Pinboard</h3>
-<ul>
-<li><a href="/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/">Tools to Increase Productivity and Efficiency</a></li>
-</ul>
-<h3 id="workflow">Workflow</h3>
-<ul>
-<li><a href="/posts/main/20220520185239-hammerspoon/">HammerSpoon</a></li>
-<li><a href="/posts/main/20220607104757-hugo/">Hugo</a></li>
-<li>Karabiner-Elements</li>
-<li><a href="/posts/main/20220505220832-emacs/">Emacs</a></li>
-<li><a href="/posts/main/20220616162256-latex/">Latex</a></li>
-</ul>
-<h3 id="editor">Editor</h3>
-<ul>
-<li><a href="/posts/main/20220629203733-vscode/">VSCode</a></li>
-<li><a href="/posts/main/20220629204553-iterm2/">iTerm2</a></li>
-</ul>
-<h3 id="squirrel">Squirrel</h3>
 ]]></content:encoded>
     </item>
     
