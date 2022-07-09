@@ -6,16 +6,15 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 09 Jul 2022 21:48:13 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 Jul 2022 22:08:10 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>iTerm2</title>
       <link>https://sheerwill.live/posts/main/20220629204553-iterm2/</link>
-      <pubDate>Sat, 09 Jul 2022 21:48:13 +0800</pubDate>
+      <pubDate>Sat, 09 Jul 2022 22:08:10 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220629204553-iterm2/</guid>
-      <description>ohmyzsh Starship brew install starship add eval &amp;quot;$(starship init zsh)&amp;quot; to .zshrc mkdir -p ~/.config &amp;amp;&amp;amp; touch ~/.config/starship.toml 默认配置 # 设置配置范例，开启编辑器的自动补全 &amp;#34;$schema&amp;#34; = &amp;#39;https://starship.rs/config-schema.json&amp;#39; # 在命令之间插入空行 add_newline = false # ~/.config/starship.toml # A minimal left prompt format = &amp;#34;&amp;#34;&amp;#34;$character&amp;#34;&amp;#34;&amp;#34; # move the rest</description>
-      <content:encoded><![CDATA[<h2 id="ohmyzsh">ohmyzsh</h2>
-<h3 id="starship">Starship</h3>
+      <description>Starship brew install starship add eval &amp;quot;$(starship init zsh)&amp;quot; to .zshrc mkdir -p ~/.config &amp;amp;&amp;amp; touch ~/.config/starship.toml 默认配置 # 设置配置范例，开启编辑器的自动补全 &amp;#34;$schema&amp;#34; = &amp;#39;https://starship.rs/config-schema.json&amp;#39; # 在命令之间插入空行 add_newline = false # ~/.config/starship.toml # A minimal left prompt format = &amp;#34;&amp;#34;&amp;#34;$character&amp;#34;&amp;#34;&amp;#34; # move the rest of</description>
+      <content:encoded><![CDATA[<h2 id="starship">Starship</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install starship
 </span></span></code></pre></div><p>add <code>eval &quot;$(starship init zsh)&quot;</code> to .zshrc</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir -p ~/.config <span class="o">&amp;&amp;</span> touch ~/.config/starship.toml
@@ -51,7 +50,16 @@
 </span></span><span class="line"><span class="cl"><span class="nx">time_format</span> <span class="p">=</span> <span class="s2">&#34;%R&#34;</span> <span class="c"># Hour:Minute Format</span>
 </span></span><span class="line"><span class="cl"><span class="nx">style</span> <span class="p">=</span> <span class="s2">&#34;bg:none&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nx">format</span> <span class="p">=</span> <span class="s1">&#39;[[♥ $time ](bg:none)]($style)&#39;</span>
-</span></span></code></pre></div><h3 id="plugin">Plugin</h3>
+</span></span></code></pre></div><h2 id="exa">Exa</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install exa
+</span></span></code></pre></div><p>add to <code>.zshrc</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">alias</span> <span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;exa&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">alias</span> <span class="nv">la</span><span class="o">=</span><span class="s1">&#39;exa -a&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">alias</span> <span class="nv">ll</span><span class="o">=</span><span class="s1">&#39;exa -lh&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#alias la=&#39;exa -lah&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">alias</span> <span class="nv">lr</span><span class="o">=</span><span class="s1">&#39;exa -lR&#39;</span>
+</span></span></code></pre></div><h2 id="ohmyzsh">Ohmyzsh</h2>
+<h3 id="plugin">Plugin</h3>
 <ul>
 <li><a href="https://github.com/zsh-users/zsh-autosuggestions">zsh-autosuggestions</a></li>
 </ul>
