@@ -6,7 +6,58 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Jul 2022 11:58:16 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 Jul 2022 21:48:13 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>iTerm2</title>
+      <link>https://sheerwill.live/posts/main/20220629204553-iterm2/</link>
+      <pubDate>Sat, 09 Jul 2022 21:48:13 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220629204553-iterm2/</guid>
+      <description>ohmyzsh Starship brew install starship add eval &amp;quot;$(starship init zsh)&amp;quot; to .zshrc mkdir -p ~/.config &amp;amp;&amp;amp; touch ~/.config/starship.toml 默认配置 # 设置配置范例，开启编辑器的自动补全 &amp;#34;$schema&amp;#34; = &amp;#39;https://starship.rs/config-schema.json&amp;#39; # 在命令之间插入空行 add_newline = false # ~/.config/starship.toml # A minimal left prompt format = &amp;#34;&amp;#34;&amp;#34;$character&amp;#34;&amp;#34;&amp;#34; # move the rest</description>
+      <content:encoded><![CDATA[<h2 id="ohmyzsh">ohmyzsh</h2>
+<h3 id="starship">Starship</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install starship
+</span></span></code></pre></div><p>add <code>eval &quot;$(starship init zsh)&quot;</code> to .zshrc</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir -p ~/.config <span class="o">&amp;&amp;</span> touch ~/.config/starship.toml
+</span></span></code></pre></div><p>默认配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="c"># 设置配置范例，开启编辑器的自动补全</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;$schema&#34;</span> <span class="p">=</span> <span class="s1">&#39;https://starship.rs/config-schema.json&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 在命令之间插入空行</span>
+</span></span><span class="line"><span class="cl"><span class="nx">add_newline</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="c"># ~/.config/starship.toml</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># A minimal left prompt</span>
+</span></span><span class="line"><span class="cl"><span class="nx">format</span> <span class="p">=</span> <span class="s2">&#34;&#34;&#34;$character&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c"># move the rest of the prompt to the right</span>
+</span></span><span class="line"><span class="cl"><span class="nx">right_format</span> <span class="p">=</span> <span class="s2">&#34;&#34;&#34;$all&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">line_break</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">disabled</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 将提示符的“❯”替换为“➜”</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">character</span><span class="p">]</span> <span class="c"># “character”是我们正在配置的组件</span>
+</span></span><span class="line"><span class="cl"><span class="nx">success_symbol</span> <span class="p">=</span> <span class="s2">&#34;[❯](bold green)&#34;</span> <span class="c"># 设置“success_symbol” 字段为绿色加粗的“➜”</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 禁用 package 组件，完全隐藏它的提示符</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">package</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">disabled</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">localip</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ssh_only</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="nx">format</span> <span class="p">=</span> <span class="s2">&#34;@[$localipv4](bold red) &#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">disabled</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">time</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">disabled</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="nx">time_format</span> <span class="p">=</span> <span class="s2">&#34;%R&#34;</span> <span class="c"># Hour:Minute Format</span>
+</span></span><span class="line"><span class="cl"><span class="nx">style</span> <span class="p">=</span> <span class="s2">&#34;bg:none&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">format</span> <span class="p">=</span> <span class="s1">&#39;[[♥ $time ](bg:none)]($style)&#39;</span>
+</span></span></code></pre></div><h3 id="plugin">Plugin</h3>
+<ul>
+<li><a href="https://github.com/zsh-users/zsh-autosuggestions">zsh-autosuggestions</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Anki</title>
       <link>https://sheerwill.live/posts/main/20220706112803-anki/</link>
@@ -399,24 +450,6 @@
 <li>如果需要修改的是最新一次 comment 的内容，则不需要该参数，就可以修改 comment。</li>
 </ul>
 </li>
-</ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>iTerm2</title>
-      <link>https://sheerwill.live/posts/main/20220629204553-iterm2/</link>
-      <pubDate>Wed, 29 Jun 2022 20:48:58 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220629204553-iterm2/</guid>
-      <description>ohmyzsh powerlevel10k $ p10k configure: Lean &amp;ndash;&amp;gt; Unicode &amp;ndash;&amp;gt; 256 colors &amp;ndash;&amp;gt; 24-hour format &amp;ndash;&amp;gt; Two lines &amp;ndash;&amp;gt; Dotted &amp;ndash;&amp;gt; Left &amp;ndash;&amp;gt; Lightest &amp;ndash;&amp;gt; Sparse &amp;ndash;&amp;gt; Many icons &amp;ndash;&amp;gt; Concise &amp;ndash;&amp;gt; No
-Plugin zsh-autosuggestions </description>
-      <content:encoded><![CDATA[<h2 id="ohmyzsh">ohmyzsh</h2>
-<h3 id="powerlevel10k"><a href="https://github.com/romkatv/powerlevel10k">powerlevel10k</a></h3>
-<p><code>$ p10k configure</code>: Lean &ndash;&gt; Unicode &ndash;&gt; 256 colors &ndash;&gt; 24-hour format &ndash;&gt; Two lines &ndash;&gt; Dotted &ndash;&gt; Left &ndash;&gt; Lightest &ndash;&gt; Sparse &ndash;&gt; Many icons &ndash;&gt; Concise &ndash;&gt; No</p>
-<h3 id="plugin">Plugin</h3>
-<ul>
-<li><a href="https://github.com/zsh-users/zsh-autosuggestions">zsh-autosuggestions</a></li>
 </ul>
 ]]></content:encoded>
     </item>
