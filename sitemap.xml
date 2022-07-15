@@ -2,17 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://sheerwill.live/posts/main/20220505220832-emacs/</loc>
+    <lastmod>2022-07-15T14:09:02+08:00</lastmod>
+  </url><url>
     <loc>https://sheerwill.live/</loc>
-    <lastmod>2022-07-09T22:22:18+08:00</lastmod>
+    <lastmod>2022-07-15T14:09:02+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/</loc>
+    <lastmod>2022-07-15T14:09:02+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220629204553-terminal/</loc>
+    <lastmod>2022-07-12T16:42:41+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/tags/distributed/</loc>
+    <lastmod>2022-07-12T12:03:15+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/tags/</loc>
+    <lastmod>2022-07-12T12:03:15+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</loc>
+    <lastmod>2022-07-12T12:03:15+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</loc>
     <lastmod>2022-07-09T22:22:18+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/</loc>
-    <lastmod>2022-07-09T22:22:18+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220629204553-terminal/</loc>
-    <lastmod>2022-07-09T22:20:06+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220629204553-iterm2/</loc>
     <lastmod>2022-07-09T22:08:10+08:00</lastmod>
@@ -20,13 +32,7 @@
     <loc>https://sheerwill.live/posts/main/20220706112803-anki/</loc>
     <lastmod>2022-07-06T11:58:16+08:00</lastmod>
   </url><url>
-    <loc>https://sheerwill.live/tags/distributed/</loc>
-    <lastmod>2022-06-30T14:18:17+08:00</lastmod>
-  </url><url>
     <loc>https://sheerwill.live/posts/main/20220604180341-stub/</loc>
-    <lastmod>2022-06-30T14:18:17+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/tags/</loc>
     <lastmod>2022-06-30T14:18:17+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</loc>
@@ -46,9 +52,6 @@
   </url><url>
     <loc>https://sheerwill.live/tags/newsletter/</loc>
     <lastmod>2022-06-29T16:42:16+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220505220832-emacs/</loc>
-    <lastmod>2022-06-29T16:35:21+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220602185216-the_core_of_efficiency_improvement/</loc>
     <lastmod>2022-06-29T12:57:51+08:00</lastmod>
@@ -79,9 +82,6 @@
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</loc>
     <lastmod>2022-06-29T12:46:53+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</loc>
-    <lastmod>2022-06-29T12:46:37+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220602202933-distribution_system/</loc>
     <lastmod>2022-06-29T12:45:35+08:00</lastmod>
