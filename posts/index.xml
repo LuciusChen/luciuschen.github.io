@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Jul 2022 14:09:02 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Jul 2022 22:44:32 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Emacs</title>
       <link>https://sheerwill.live/posts/main/20220505220832-emacs/</link>
-      <pubDate>Fri, 15 Jul 2022 14:09:02 +0800</pubDate>
+      <pubDate>Sat, 16 Jul 2022 22:44:32 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220505220832-emacs/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs With Homebrew First, Doom’s dependencies: brew install git ripgrep brew install coreutils fd xcode-selected --install emacs-mac. It offers good integration</description>
@@ -26,8 +26,8 @@
 </span></span><span class="line"><span class="cl">xcode-selected --install
 </span></span></code></pre></div><p><a href="https://bitbucket.org/mituharu/emacs-mac/src">emacs-mac</a>. It offers good integration with macOS, native emojis and better childframe support.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew tap d12frosted/emacs-plus
-</span></span><span class="line"><span class="cl">brew install emacs-plus --with-native-comp
-</span></span><span class="line"><span class="cl">ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
+</span></span><span class="line"><span class="cl">brew install emacs-plus --with-native-comp --with-modern-vscode-icon
+</span></span><span class="line"><span class="cl">ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications
 </span></span></code></pre></div><h2 id="doom-emacs">Doom Emacs</h2>
 <p>With Emacs and Doom&rsquo;s dependencies installed, next is to install Doom Emacs itself:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
@@ -314,6 +314,7 @@
 </span></span><span class="line"><span class="cl"><span class="s">|-------------+-------------+-------------|</span>
 </span></span><span class="line"><span class="cl"><span class="s">|          65 |             |             |</span>
 </span></span></code></pre></div><h2 id="export">Export</h2>
+<p>对于只需要导出某个 header 下的内容的需求，只需要在 header 上加上 <code>:export:</code> 即可。</p>
 <h3 id="markdown-file">Markdown file</h3>
 <p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>， ~M-x org-pandoc-export-as-gfm~算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
 <h3 id="hugo">Hugo</h3>
