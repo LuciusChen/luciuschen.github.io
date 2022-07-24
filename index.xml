@@ -6,62 +6,14 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 Jul 2022 22:59:30 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Personal Knowledge Wiki</title>
-      <link>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</link>
-      <pubDate>Sat, 23 Jul 2022 22:59:30 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</guid>
-      <description>Hardware HHKB Logitech MX Master 3 for Mac 17 MBP DELL U2417H Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency Workflow HammerSpoon Hugo Karabiner-Elements Doom Emacs Vanilla Emacs with Purcell Latex Anki Editor VSCode Terminal Squirrel</description>
-      <content:encoded><![CDATA[<h2 id="hardware">Hardware</h2>
-<ul>
-<li>HHKB</li>
-<li>Logitech MX Master 3 for Mac</li>
-<li>17 MBP</li>
-<li>DELL U2417H</li>
-<li>Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u</li>
-</ul>
-<h2 id="software">Software</h2>
-<h3 id="git">Git</h3>
-<ul>
-<li><a href="/posts/main/20220503160055-git-skills/">Git Skills</a></li>
-</ul>
-<h3 id="design-tools">Design Tools</h3>
-<ul>
-<li><a href="/posts/main/20220503154744-figma/">Figma</a></li>
-<li>Excalidraw</li>
-</ul>
-<h3 id="pinboard">Pinboard</h3>
-<ul>
-<li><a href="/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/">Tools to Increase Productivity and Efficiency</a></li>
-</ul>
-<h3 id="workflow">Workflow</h3>
-<ul>
-<li><a href="/posts/main/20220520185239-hammerspoon/">HammerSpoon</a></li>
-<li><a href="/posts/main/20220607104757-hugo/">Hugo</a></li>
-<li>Karabiner-Elements</li>
-<li><a href="/posts/main/20220505220832-doom-emacs/">Doom Emacs</a></li>
-<li><a href="/posts/main/20220723211325-vanilla_emacs_with_purcell/">Vanilla Emacs with Purcell</a></li>
-<li><a href="/posts/main/20220616162256-latex/">Latex</a></li>
-<li><a href="/posts/main/20220706112803-anki/">Anki</a></li>
-</ul>
-<h3 id="editor">Editor</h3>
-<ul>
-<li><a href="/posts/main/20220629203733-vscode/">VSCode</a></li>
-<li><a href="/posts/main/20220629204553-terminal/">Terminal</a></li>
-</ul>
-<h3 id="squirrel">Squirrel</h3>
-]]></content:encoded>
-    </item>
-    
+    <lastBuildDate>Sun, 24 Jul 2022 11:46:17 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Sat, 23 Jul 2022 22:58:16 +0800</pubDate>
+      <pubDate>Sun, 24 Jul 2022 11:46:17 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
-      <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow Personal Settings 在 init.el 中有如</description>
+      <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <blockquote>
 <p>Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.</p>
@@ -79,6 +31,55 @@
         </figcaption>
 </figure>
 
+<p>如上图所示，融合了笔记和 GTD 管理。</p>
+<h3 id="gtd">GTD</h3>
+<h4 id="capture">Capture</h4>
+<p>To-Dos 分为的来源分为六种：</p>
+<ul>
+<li>Habit Track: 即对于重复事件的循环，有利于习惯的养成。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+<li>Cyclic Tasks: 需要循环的任务。
+<ul>
+<li>生日提醒</li>
+<li>周报</li>
+<li>每日回顾</li>
+<li>稍后读</li>
+<li>etc&hellip;</li>
+</ul>
+</li>
+<li>Inbox: 用来收集各种 To-Dos，设置的快捷键为 <code>C-c c</code>​。每日回顾的时候分发到各自的分类，并行进行 Scheduled。
+<ul>
+<li>personal: 个人事宜</li>
+<li>someday: 存放一些不知道什么时候会做的 To-Dos，有时间回顾的时候再次分类。</li>
+<li>technical: 存放个人需要偿还的技术债</li>
+<li>work: 工作相关</li>
+</ul>
+</li>
+<li>books: 阅读的书籍，通过 ebib 的 <code>ebib-add-reading-list-item</code> 添加。</li>
+<li>Dynamic: 只要是 org 文件中的有 To-Dos，就会在保存文件时，自动给文件添加 <code>:dynamic:</code> 标签，纳入到 Agenda 文件中。</li>
+<li>note: 对一些地方的备注或者 To-Dos，后者和 Dynamic To-Dos 场景重复。</li>
+</ul>
+<h4 id="clarify">Clarify</h4>
+<p>对 Inbox 当中的 To-Dos 进行分发，并用关键字标记 To-Dos 的属性，比如 <code>PROJECT</code>, <code>DELEGRTED</code> 等。对于 <code>PROJECT</code> 这类还要继续分解。</p>
+<h4 id="organize">Organize</h4>
+<p>对明天需要做的或知道明确日期的 To-Dos 进行 Scheduled，对于 <code>DONE</code> 或 <code>CANCELLED</code> 的 To-Dos 会自动复制到今日的 Daily log 当中。</p>
+<h4 id="reflect">Reflect</h4>
+<p>回顾所有的 To-Dos，选取明天或者近期需要完成。对已完成或取消的 To-Dos 归档，是按照结构<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>归档到同级别 <code>*.org</code> 文件的 <code>archive</code> 文件夹下的同名文件中。</p>
+<h4 id="engage">Engage</h4>
+<p>按照重要，简单等因素顺序执行需要做的 To-Dos</p>
+<h3 id="note-taking">Note taking</h3>
+<p>输入源分为工作、书籍和文章（来自于 RSS、Newsletter、Twitter 等平台）。</p>
+<h4 id="book">Book</h4>
+<p>PDF 以及 Epub 格式的书籍或者论文通过 Ebib 管理 Bibtex，Ebib 的 <code>ebib-reading-list-file</code> 设置为 Agenda 中的 <code>books.org</code>​，这样就可以很方便在 Agenda View 中看到自己当前在阅读的书籍/论文，并查看进度。</p>
+<p>书籍/论文对应的笔记则是在 <code>references</code> 文件夹下，可以方便笔记中进行引用。</p>
+<h4 id="articles-work">Articles/Work</h4>
+<p>文章的阅读笔记是放在 Daily log 当中的，在 What I read? 的标题下，打上对应的 tags。后期回顾的时候，或者积累一定数量的同类型、同话题文章，可能会 refile 到 org-roam 内进行总结，形成知识点。</p>
+<p>工作中的事情都是记在 Daily log 中，每条 log 有明确的时间。</p>
+<p>对于问题的解决，有详细的原因和解决方案，后续遇到同样的问题可以参考之前的思路；对于与他人沟通的内容，有详细的操作记录、数据记录以及邮件聊天等记录链接或截图，有背锅风险时可以轻松应对。</p>
+<p>同样的，工作中某个类型的知识点的笔记积累多了，会在 org-roam 中进行总结，形成知识点。</p>
+<h4 id="export">Export</h4>
+<p>输出是 org 的强项，Hugo 方便与人在线分享，PDF/Markdown 离线分享。</p>
+<h4 id="org-roam-ui">org-roam-ui</h4>
+<p>方便的查看笔记之间的关系，进行系统性的回顾。</p>
 <h2 id="personal-settings">Personal Settings</h2>
 <p>在 <code>init.el</code> 中有如下代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Allow users to provide an optional &#34;init-local&#34; containing personal settings</span>
@@ -169,7 +170,7 @@
 </span></span><span class="line"><span class="cl"><span class="cs">#+HUGO_SECTION</span><span class="c">: posts/main</span>
 </span></span><span class="line"><span class="cl"><span class="cs">#+HUGO_WEIGHT</span><span class="c">: auto</span>
 </span></span><span class="line"><span class="cl"><span class="cs">#+HUGO_AUTO_SET_LASTMOD</span><span class="c">: t</span>
-</span></span></code></pre></div><p>需要到处为 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+</span></span></code></pre></div><p>需要到处为 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+header</span><span class="c">: :trim-pre nil :trim-post nil</span>
 </span></span><span class="line"><span class="cl"><span class="c">#+begin_mark</span>
 </span></span><span class="line"><span class="cl">marked text
@@ -1245,14 +1246,83 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org.el ends here</span>
+</span></span></code></pre></div><h3 id="org-roam-ui">Org-roam-ui</h3>
+<p>可以方便的查看笔记之间的关系</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-roam-ui</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:straight</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:host</span> <span class="nv">github</span> <span class="nb">:repo</span> <span class="s">&#34;org-roam/org-roam-ui&#34;</span> <span class="nb">:branch</span> <span class="s">&#34;main&#34;</span> <span class="nb">:files</span> <span class="p">(</span><span class="s">&#34;*.el&#34;</span> <span class="s">&#34;out&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">org-roam</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;;         normally we&#39;d recommend hooking orui after org-roam, but since org-roam does not have</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;;         a hookable mode anymore, you&#39;re advised to pick something yourself</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;;         if you don&#39;t care about startup time, use</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;;  :hook (after-init . org-roam-ui-mode)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-roam-ui-sync-theme</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-follow</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-update-on-save</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-open-on-start</span> <span class="no">t</span><span class="p">))</span>
 </span></span></code></pre></div><div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1">
-<p><a href="https://ox-hugo.scripter.co/doc/org-special-blocks/">Org Special Blocks</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://orgmode.org/manual/Tracking-your-habits.html">Tracking your habits</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://gist.github.com/kepi/2f4acc3cc93403c75fbba5684c5d852d">Hierarchical archiving for Org-mode</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://ox-hugo.scripter.co/doc/org-special-blocks/">Org Special Blocks</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Personal Knowledge Wiki</title>
+      <link>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</link>
+      <pubDate>Sat, 23 Jul 2022 22:59:30 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</guid>
+      <description>Hardware HHKB Logitech MX Master 3 for Mac 17 MBP DELL U2417H Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency Workflow HammerSpoon Hugo Karabiner-Elements Doom Emacs Vanilla Emacs with Purcell Latex Anki Editor VSCode Terminal Squirrel</description>
+      <content:encoded><![CDATA[<h2 id="hardware">Hardware</h2>
+<ul>
+<li>HHKB</li>
+<li>Logitech MX Master 3 for Mac</li>
+<li>17 MBP</li>
+<li>DELL U2417H</li>
+<li>Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u</li>
+</ul>
+<h2 id="software">Software</h2>
+<h3 id="git">Git</h3>
+<ul>
+<li><a href="/posts/main/20220503160055-git-skills/">Git Skills</a></li>
+</ul>
+<h3 id="design-tools">Design Tools</h3>
+<ul>
+<li><a href="/posts/main/20220503154744-figma/">Figma</a></li>
+<li>Excalidraw</li>
+</ul>
+<h3 id="pinboard">Pinboard</h3>
+<ul>
+<li><a href="/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/">Tools to Increase Productivity and Efficiency</a></li>
+</ul>
+<h3 id="workflow">Workflow</h3>
+<ul>
+<li><a href="/posts/main/20220520185239-hammerspoon/">HammerSpoon</a></li>
+<li><a href="/posts/main/20220607104757-hugo/">Hugo</a></li>
+<li>Karabiner-Elements</li>
+<li><a href="/posts/main/20220505220832-doom-emacs/">Doom Emacs</a></li>
+<li><a href="/posts/main/20220723211325-vanilla_emacs_with_purcell/">Vanilla Emacs with Purcell</a></li>
+<li><a href="/posts/main/20220616162256-latex/">Latex</a></li>
+<li><a href="/posts/main/20220706112803-anki/">Anki</a></li>
+</ul>
+<h3 id="editor">Editor</h3>
+<ul>
+<li><a href="/posts/main/20220629203733-vscode/">VSCode</a></li>
+<li><a href="/posts/main/20220629204553-terminal/">Terminal</a></li>
+</ul>
+<h3 id="squirrel">Squirrel</h3>
 ]]></content:encoded>
     </item>
     
