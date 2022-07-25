@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Jul 2022 22:39:07 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Jul 2022 10:32:53 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Sun, 24 Jul 2022 22:39:07 +0800</pubDate>
+      <pubDate>Mon, 25 Jul 2022 10:32:53 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -64,6 +64,7 @@
 <p>对明天需要做的或知道明确日期的 To-Dos 进行 Scheduled，对于 <code>DONE</code> 或 <code>CANCELLED</code> 的 To-Dos 会自动复制到今日的 Daily log 当中。</p>
 <h4 id="reflect">Reflect</h4>
 <p>回顾所有的 To-Dos，选取明天或者近期需要完成。对已完成或取消的 To-Dos 归档，是按照结构<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>归档到同级别 <code>*.org</code> 文件的 <code>archive</code> 文件夹下的同名文件中。</p>
+<p>同时，要回顾一下 Notes 当中的对某处的笔记或设定的 To-Dos。</p>
 <h4 id="engage">Engage</h4>
 <p>按照重要，简单等因素顺序执行需要做的 To-Dos</p>
 <h3 id="note-taking">Note taking</h3>
@@ -81,7 +82,12 @@
 <h4 id="org-roam-ui">org-roam-ui</h4>
 <p>方便的查看笔记之间的关系，进行系统性回顾。</p>
 <h2 id="personal-settings">Personal Settings</h2>
-<p>在 <code>init.el</code> 中有如下代码。</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">.
+├── lisp
+    ├── init-elpa.el
+    ├── init-local.el
+    ├── init-org.el
+</code></pre><p>在 <code>init.el</code> 中有如下代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Allow users to provide an optional &#34;init-local&#34; containing personal settings</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;init-local</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
 </span></span></code></pre></div><p>默认没有 <code>init-local.org</code> 这个文件，创建一个，就可以往里面塞自己的配置了。</p>
