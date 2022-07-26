@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Jul 2022 21:15:51 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Jul 2022 11:16:41 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Mon, 25 Jul 2022 21:15:51 +0800</pubDate>
+      <pubDate>Tue, 26 Jul 2022 11:16:41 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -88,11 +88,40 @@
     ├── init-elpa.el
     ├── init-local.el
     ├── init-org.el
-</code></pre><p>在 <code>init.el</code> 中有如下代码。</p>
+</code></pre><h3 id="init-epla">init-epla</h3>
+<p>增加 <code>use-package</code> 和 <code>straight</code> 的支持</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Bootstrap `use-package&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="ss">&#39;use-package</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">package-refresh-contents</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">package-install</span> <span class="ss">&#39;use-package</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">eval-and-compile</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-always-ensure</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-always-defer</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-always-demand</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-expand-minimally</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-enable-imenu-support</span> <span class="no">t</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">eval-when-compile</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;use-package</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Install straight.el</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">bootstrap-version</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">bootstrap-file</span>
+</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nf">expand-file-name</span> <span class="s">&#34;straight/repos/straight.el/bootstrap.el&#34;</span> <span class="nv">user-emacs-directory</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">bootstrap-version</span> <span class="mi">5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nf">file-exists-p</span> <span class="nv">bootstrap-file</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">with-current-buffer</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">url-retrieve-synchronously</span>
+</span></span><span class="line"><span class="cl">         <span class="s">&#34;https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el&#34;</span>
+</span></span><span class="line"><span class="cl">         <span class="ss">&#39;silent</span> <span class="ss">&#39;inhibit-cookies</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">goto-char</span> <span class="p">(</span><span class="nf">point-max</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">eval-print-last-sexp</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">load</span> <span class="nv">bootstrap-file</span> <span class="no">nil</span> <span class="ss">&#39;nomessage</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="init-local">init-local</h3>
+<p>在 <code>init.el</code> 中有如下代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Allow users to provide an optional &#34;init-local&#34; containing personal settings</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;init-local</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
 </span></span></code></pre></div><p>默认没有 <code>init-local.org</code> 这个文件，创建一个，就可以往里面塞自己的配置了。</p>
-<h3 id="consult">consult</h3>
+<h4 id="consult">consult</h4>
 <p>Purcell 中已经包含了这个 package，也有 <code>consult-ripgrep</code> 这个方法。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">bms/org-roam-rg-search</span> <span class="p">()</span>
 </span></span><span class="line"><span class="cl">  <span class="s">&#34;Search org-roam directory using consult-ripgrep. With live-preview.&#34;</span>
@@ -102,7 +131,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c rr&#34;</span><span class="p">)</span> <span class="ss">&#39;bms/org-roam-rg-search</span><span class="p">)</span>
 </span></span></code></pre></div><p>搜索 <code>org-roam-directory</code> 下的内容。</p>
-<h3 id="deft">deft</h3>
+<h4 id="deft">deft</h4>
 <p>用作一些不想放在 <code>org-roam</code> 中的一些笔记的操作。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;deft</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">deft-extensions</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;md&#34;</span> <span class="s">&#34;tex&#34;</span> <span class="s">&#34;org&#34;</span> <span class="s">&#34;mw&#34;</span> <span class="s">&#34;conf&#34;</span><span class="p">))</span>
@@ -132,7 +161,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">if</span> <span class="nv">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">string-trim</span> <span class="p">(</span><span class="nf">substring</span> <span class="nv">contents</span> <span class="nv">begin</span> <span class="p">(</span><span class="nf">match-end</span> <span class="mi">0</span><span class="p">))</span> <span class="s">&#34;#\\+[tT][iI][tT][lL][eE]: *&#34;</span> <span class="s">&#34;[\n\t ]+&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">deft-base-filename</span> <span class="nv">file</span><span class="p">))))</span>
-</span></span></code></pre></div><h3 id="vterm">vterm</h3>
+</span></span></code></pre></div><h4 id="vterm">vterm</h4>
 <p>在 Emacs 中使用终端，首先要在 <code>/.zshrc</code> 中添加如下代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$INSIDE_EMACS</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s1">&#39;vterm&#39;</span> <span class="o">]]</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> <span class="o">[[</span> -n <span class="si">${</span><span class="nv">EMACS_VTERM_PATH</span><span class="si">}</span> <span class="o">]]</span> <span class="se">\
@@ -167,7 +196,7 @@
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">vterm-send-M-w</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">vterm-send-string</span> <span class="nv">compile-command</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">vterm-send-return</span><span class="p">)))))</span>
-</span></span></code></pre></div><h3 id="ox-hugo">ox-hugo</h3>
+</span></span></code></pre></div><h4 id="ox-hugo">ox-hugo</h4>
 <p>导出到 Hugo，方便与他人分享内容。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;ox-hugo</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;ox</span>
@@ -182,7 +211,7 @@
 </span></span><span class="line"><span class="cl"><span class="c">#+begin_mark</span>
 </span></span><span class="line"><span class="cl">marked text
 </span></span><span class="line"><span class="cl"><span class="c">#+end_mark</span>
-</span></span></code></pre></div><h3 id="latex--auctex-plus-cdlatex">Latex(auctex + cdlatex)</h3>
+</span></span></code></pre></div><h4 id="latex--auctex-plus-cdlatex">Latex(auctex + cdlatex)</h4>
 <p>离线分享的时候最大程度的保持原貌的方法就是 PDF。</p>
 <p>需要安装 <code>texlive</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install texlive
@@ -215,7 +244,7 @@
 </span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="s">&#34;\\subparagraph{%s}&#34;</span> <span class="o">.</span> <span class="s">&#34;\\subparagraph*{%s}&#34;</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-latex-listings</span> <span class="ss">&#39;minted</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;org-latex-packages-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;&#34;</span> <span class="s">&#34;minted&#34;</span><span class="p">)))</span>
-</span></span></code></pre></div><h3 id="bibtex--ebib-plus-citar">Bibtex(ebib + citar)</h3>
+</span></span></code></pre></div><h4 id="bibtex--ebib-plus-citar">Bibtex(ebib + citar)</h4>
 <p>管理 Bibtex 可以方便在文章中引用，以及新增读书笔记，结合 agenda 更好的管理读书条目以及进度。（这部份配置需要精简，目前用的比较简单。）</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">bibtex</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:defer</span> <span class="no">t</span>
@@ -342,7 +371,22 @@
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="ne">user-error</span> <span class="s">&#34;No URI provided&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">ebib</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">ebib-zotero-import-url</span> <span class="p">(</span><span class="nf">plist-get</span> <span class="nv">info</span> <span class="nb">:href</span><span class="p">))))</span>
-</span></span></code></pre></div><h3 id="org-roam-plus-agenda">org-roam + agenda</h3>
+</span></span></code></pre></div><h4 id="org-roam-ui">Org-roam-ui</h4>
+<p>可以方便的查看笔记之间的关系</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-roam-ui</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:straight</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:host</span> <span class="nv">github</span> <span class="nb">:repo</span> <span class="s">&#34;org-roam/org-roam-ui&#34;</span> <span class="nb">:branch</span> <span class="s">&#34;main&#34;</span> <span class="nb">:files</span> <span class="p">(</span><span class="s">&#34;*.el&#34;</span> <span class="s">&#34;out&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">org-roam</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;;         normally we&#39;d recommend hooking orui after org-roam, but since org-roam does not have</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;;         a hookable mode anymore, you&#39;re advised to pick something yourself</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;;         if you don&#39;t care about startup time, use</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;;  :hook (after-init . org-roam-ui-mode)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-roam-ui-sync-theme</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-follow</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-update-on-save</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-open-on-start</span> <span class="no">t</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="init-org">init-org</h3>
 <p>org-roam 和 Emacs 自带的 agenda 可以很方便的将笔记和 GTD 结合起来。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org.el --- Org-mode config -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
@@ -372,6 +416,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;grab-mac-link</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 图片宽度</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-image-actual-width</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 方便插入复制链接</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;org-cliplink</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nf">define-key</span> <span class="nv">global-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c l&#34;</span><span class="p">)</span> <span class="ss">&#39;org-store-link</span><span class="p">)</span>
@@ -405,9 +450,6 @@
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;org-agenda</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-agenda-mode-hook</span>
 </span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;window-configuration-change-hook</span> <span class="ss">&#39;org-agenda-align-tags</span> <span class="no">nil</span> <span class="no">t</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;writeroom-mode</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
@@ -452,7 +494,6 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-support-shift-select</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Capturing</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-directory</span> <span class="s">&#34;~/Dropbox/org/&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c c&#34;</span><span class="p">)</span> <span class="ss">&#39;org-capture</span><span class="p">)</span>
@@ -463,7 +504,6 @@
 </span></span><span class="line"><span class="cl">         <span class="s">&#34;* %? :NOTE:\n%U\n%a\n&#34;</span> <span class="nb">:clock-resume</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Refiling</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-refile-use-cache</span> <span class="no">nil</span><span class="p">)</span>
@@ -502,7 +542,6 @@
 </span></span><span class="line"><span class="cl"><span class="c1">;; Allow refile to create parent tasks with confirmation</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-refile-allow-creating-parent-nodes</span> <span class="ss">&#39;confirm</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; To-do settings</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-todo-keywords</span>
@@ -515,8 +554,6 @@
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">quote</span> <span class="p">((</span><span class="s">&#34;NEXT&#34;</span> <span class="nb">:inherit</span> <span class="nv">warning</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="s">&#34;PROJECT&#34;</span> <span class="nb">:inherit</span> <span class="nv">font-lock-string-face</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Agenda views</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 将没有时间标记的任务，放在上方显示。</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-agenda-sort-notime-is-late</span> <span class="no">nil</span><span class="p">)</span>
@@ -692,7 +729,7 @@
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/books.org&#34;</span>          <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;b&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/someday.org&#34;</span>        <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;s&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/agenda.org&#34;</span>         <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;a&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/note.org&#34;</span>           <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;j&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/note.org&#34;</span>           <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;n&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;daily/journal.org&#34;</span>         <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;j&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; hydra</span>
@@ -870,7 +907,6 @@
 </span></span><span class="line"><span class="cl">                             <span class="p">(</span><span class="nf">point-max</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">replace-match</span> <span class="s">&#34;&#34;</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Archiving</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;; (setq org-archive-mark-done nil)</span>
@@ -1002,9 +1038,6 @@
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-subtree</span> <span class="p">()</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-archive-subtree-hierarchical</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-pomodoro</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-pomodoro-keep-killed-pomodoro-time</span> <span class="no">t</span><span class="p">)</span>
@@ -1253,21 +1286,6 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org.el ends here</span>
-</span></span></code></pre></div><h3 id="org-roam-ui">Org-roam-ui</h3>
-<p>可以方便的查看笔记之间的关系</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-roam-ui</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">:straight</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">:host</span> <span class="nv">github</span> <span class="nb">:repo</span> <span class="s">&#34;org-roam/org-roam-ui&#34;</span> <span class="nb">:branch</span> <span class="s">&#34;main&#34;</span> <span class="nb">:files</span> <span class="p">(</span><span class="s">&#34;*.el&#34;</span> <span class="s">&#34;out&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">org-roam</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;;         normally we&#39;d recommend hooking orui after org-roam, but since org-roam does not have</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;;         a hookable mode anymore, you&#39;re advised to pick something yourself</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;;         if you don&#39;t care about startup time, use</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;;  :hook (after-init . org-roam-ui-mode)</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-roam-ui-sync-theme</span> <span class="no">t</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-follow</span> <span class="no">t</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-update-on-save</span> <span class="no">t</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-open-on-start</span> <span class="no">t</span><span class="p">))</span>
 </span></span></code></pre></div><div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -1288,15 +1306,15 @@
     <item>
       <title>Personal Knowledge Wiki</title>
       <link>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</link>
-      <pubDate>Sat, 23 Jul 2022 22:59:30 +0800</pubDate>
+      <pubDate>Mon, 25 Jul 2022 21:35:59 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</guid>
-      <description>Hardware HHKB Logitech MX Master 3 for Mac 17 MBP DELL U2417H Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency Workflow HammerSpoon Hugo Karabiner-Elements Doom Emacs Vanilla Emacs with Purcell Latex Anki Editor VSCode Terminal Squirrel</description>
+      <description>Hardware HHKB Logitech MX Master 3 for Mac MacBook Pro (15-inch, 2017) DELL U2417H Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency Workflow HammerSpoon Hugo Karabiner-Elements Doom Emacs Vanilla Emacs with Purcell Latex Anki Editor VSCode Terminal Squirrel</description>
       <content:encoded><![CDATA[<h2 id="hardware">Hardware</h2>
 <ul>
 <li>HHKB</li>
 <li>Logitech MX Master 3 for Mac</li>
-<li>17 MBP</li>
+<li>MacBook Pro (15-inch, 2017)</li>
 <li>DELL U2417H</li>
 <li>Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u</li>
 </ul>
