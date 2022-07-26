@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Jul 2022 11:16:41 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Jul 2022 00:08:25 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Tue, 26 Jul 2022 11:16:41 +0800</pubDate>
+      <pubDate>Wed, 27 Jul 2022 00:08:25 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -43,7 +43,7 @@
 <li>周报</li>
 <li>每日回顾</li>
 <li>稍后读</li>
-<li>etc&hellip;</li>
+<li>etc.</li>
 </ul>
 </li>
 <li>Inbox: 用来收集各种 To-Dos，设置的快捷键为 <code>C-c c</code>​。每日回顾的时候分发到各自的分类，并行进行 Scheduled。
@@ -72,6 +72,9 @@
 <h4 id="book">Book</h4>
 <p>PDF 以及 Epub 格式的书籍或者论文通过 Ebib 管理 Bibtex，Ebib 的 <code>ebib-reading-list-file</code> 设置为 Agenda 中的 <code>books.org</code>​，这样就可以很方便在 Agenda View 中看到自己当前在阅读的书籍/论文，并查看进度。</p>
 <p>书籍/论文对应的笔记则是在 <code>references</code> 文件夹下，可以方便笔记中进行引用。</p>
+<h4 id="daily-log">Daily log</h4>
+<p>每个 Daily log 文件头部都有 <code>#+ARCHIVE: journal.org::</code> 来控制归档的位置，每天回顾完当天的 log 就归档到 <code>journal.org</code> 文件中，如果后续这个文件太大，还可以按照年份来继续归档。</p>
+<p>而且在 <code>journal.org</code> 中通过 <code>C-c \</code> 可以查看所有的 tags，选择对应的 tag 就可以过滤出想要的内容，其他内容全部收缩。</p>
 <h4 id="articles-work">Articles/Work</h4>
 <p>文章的阅读笔记是放在 Daily log 当中的，在 What I read? 的标题下，打上对应的 tags。后期回顾的时候，或者积累一定数量的同类型、同话题文章，可能会 refile 到 org-roam 内进行总结，形成知识点。</p>
 <p>工作中的事情都是记在 Daily log 中，每条 log 有明确的时间。</p>
@@ -88,7 +91,7 @@
     ├── init-elpa.el
     ├── init-local.el
     ├── init-org.el
-</code></pre><h3 id="init-epla">init-epla</h3>
+</code></pre><h3 id="init-epla-dot-el">init-epla.el</h3>
 <p>增加 <code>use-package</code> 和 <code>straight</code> 的支持</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Bootstrap `use-package&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="ss">&#39;use-package</span><span class="p">)</span>
@@ -116,7 +119,7 @@
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">goto-char</span> <span class="p">(</span><span class="nf">point-max</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">eval-print-last-sexp</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">load</span> <span class="nv">bootstrap-file</span> <span class="no">nil</span> <span class="ss">&#39;nomessage</span><span class="p">))</span>
-</span></span></code></pre></div><h3 id="init-local">init-local</h3>
+</span></span></code></pre></div><h3 id="init-local-dot-el">init-local.el</h3>
 <p>在 <code>init.el</code> 中有如下代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Allow users to provide an optional &#34;init-local&#34; containing personal settings</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;init-local</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
@@ -386,7 +389,7 @@
 </span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-follow</span> <span class="no">t</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-update-on-save</span> <span class="no">t</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-open-on-start</span> <span class="no">t</span><span class="p">))</span>
-</span></span></code></pre></div><h3 id="init-org">init-org</h3>
+</span></span></code></pre></div><h3 id="init-org-dot-el">init-org.el</h3>
 <p>org-roam 和 Emacs 自带的 agenda 可以很方便的将笔记和 GTD 结合起来。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org.el --- Org-mode config -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
