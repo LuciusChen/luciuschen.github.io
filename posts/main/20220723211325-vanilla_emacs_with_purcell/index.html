@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-07-27T00:08:25&#43;08:00" />
+  <meta property="article:modified_time" content="2022-07-27T18:00:37&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -58,10 +58,10 @@
   "keywords": [
     
   ],
-  "wordCount" : "5875",
+  "wordCount" : "6060",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-07-27T00:08:25+08:00",
+  "dateModified": "2022-07-27T18:00:37+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -272,9 +272,9 @@ function toggleThemeListener() {
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
   <span>July 27, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>5875 words</span></span><span class="meta-item">
+  <span>6060 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>12 min</span></span>
+  <span>13 min</span></span>
 
       
       
@@ -343,7 +343,9 @@ function toggleThemeListener() {
                 <li>
                     <a href="#bibtex--ebib-plus-citar" aria-label="Bibtex(ebib &#43; citar)">Bibtex(ebib + citar)</a></li>
                 <li>
-                    <a href="#org-roam-ui" aria-label="Org-roam-ui">Org-roam-ui</a></li></ul>
+                    <a href="#org-roam-ui" aria-label="Org-roam-ui">Org-roam-ui</a></li>
+                <li>
+                    <a href="#org-modern" aria-label="org-modern">org-modern</a></li></ul>
                 </li>
                 <li>
                     <a href="#init-org-dot-el" aria-label="init-org.el">init-org.el</a>
@@ -568,7 +570,6 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl"><span class="cs">#+OPTIONS</span><span class="c">: prop:t</span>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;auctex</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;cdlatex</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;ox-latex</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;LaTeX-mode-hook</span> <span class="ss">&#39;turn-on-cdlatex</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;ox-latex</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; http://orgmode.org/worg/org-faq.html#using-xelatex-for-pdf-export</span>
@@ -730,6 +731,29 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-follow</span> <span class="no">t</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-update-on-save</span> <span class="no">t</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-open-on-start</span> <span class="no">t</span><span class="p">))</span>
+</span></span></code></pre></div><h4 id="org-modern">org-modern<a hidden class="anchor" aria-hidden="true" href="#org-modern">¶</a></h4>
+<p>美化部分样式</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-modern</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-modern</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">org</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">org-mode</span> <span class="o">.</span> <span class="nv">org-modern-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:init</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-modern-block</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-radio-target</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-internal-target</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-list</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">;; org-modern-star nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-timestamp</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">;; org-modern-checkbox nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-todo</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">;; org-modern-footnote nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-priority</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-progress</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-keyword</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-table</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-tag</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-statistics</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-horizontal-rule</span> <span class="no">nil</span><span class="p">))</span>
 </span></span></code></pre></div><h3 id="init-org-dot-el">init-org.el<a hidden class="anchor" aria-hidden="true" href="#init-org-dot-el">¶</a></h3>
 <p>org-roam 和 Emacs 自带的 agenda 可以很方便的将笔记和 GTD 结合起来。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org.el --- Org-mode config -*- lexical-binding: t -*-</span>
@@ -760,7 +784,6 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;grab-mac-link</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 图片宽度</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-image-actual-width</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; 方便插入复制链接</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;org-cliplink</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nf">define-key</span> <span class="nv">global-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c l&#34;</span><span class="p">)</span> <span class="ss">&#39;org-store-link</span><span class="p">)</span>
@@ -794,6 +817,9 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;org-agenda</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-agenda-mode-hook</span>
 </span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;window-configuration-change-hook</span> <span class="ss">&#39;org-agenda-align-tags</span> <span class="no">nil</span> <span class="no">t</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;writeroom-mode</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
@@ -838,6 +864,7 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-support-shift-select</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Capturing</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-directory</span> <span class="s">&#34;~/Dropbox/org/&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c c&#34;</span><span class="p">)</span> <span class="ss">&#39;org-capture</span><span class="p">)</span>
@@ -848,6 +875,8 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">         <span class="s">&#34;* %? :NOTE:\n%U\n%a\n&#34;</span> <span class="nb">:clock-resume</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">))</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Refiling</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-refile-use-cache</span> <span class="no">nil</span><span class="p">)</span>
@@ -886,6 +915,7 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl"><span class="c1">;; Allow refile to create parent tasks with confirmation</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-refile-allow-creating-parent-nodes</span> <span class="ss">&#39;confirm</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; To-do settings</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-todo-keywords</span>
@@ -898,6 +928,8 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">quote</span> <span class="p">((</span><span class="s">&#34;NEXT&#34;</span> <span class="nb">:inherit</span> <span class="nv">warning</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="s">&#34;PROJECT&#34;</span> <span class="nb">:inherit</span> <span class="nv">font-lock-string-face</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Agenda views</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 将没有时间标记的任务，放在上方显示。</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-agenda-sort-notime-is-late</span> <span class="no">nil</span><span class="p">)</span>
@@ -906,71 +938,6 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-agenda-files</span> <span class="p">(</span><span class="nv">file-expand-wildcards</span> <span class="s">&#34;~/Dropbox/org/agenda/*.org&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq-default</span> <span class="nv">org-agenda-clockreport-parameter-plist</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:link</span> <span class="no">t</span> <span class="nb">:maxlevel</span> <span class="mi">3</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; Save the corresponding buffers</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">gtd-save-org-buffers</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Save </span><span class="ss">`org-agenda-files&#39;</span><span class="s"> buffers without user confirmation.
-</span></span></span><span class="line"><span class="cl"><span class="s">See also </span><span class="ss">`org-save-all-org-buffers&#39;</span><span class="s">&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Saving org-agenda-files buffers...&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">save-some-buffers</span> <span class="no">t</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">member</span> <span class="p">(</span><span class="nf">buffer-file-name</span><span class="p">)</span> <span class="nv">org-agenda-files</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">               <span class="no">t</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Saving org-agenda-files buffers... done&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; Add it after refile</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-refile</span> <span class="nb">:after</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="kp">&amp;rest</span> <span class="nv">_</span><span class="p">)</span> <span class="p">(</span><span class="nv">gtd-save-org-buffers</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">log-todo-next-creation-date</span> <span class="p">(</span><span class="kp">&amp;rest</span> <span class="nv">ignore</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Log NEXT creation time in the property drawer under the key &#39;ACTIVATED&#39;&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">string=</span> <span class="p">(</span><span class="nv">org-get-todo-state</span><span class="p">)</span> <span class="s">&#34;NEXT&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nv">org-entry-get</span> <span class="no">nil</span> <span class="s">&#34;ACTIVATED&#34;</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">org-entry-put</span> <span class="no">nil</span> <span class="s">&#34;ACTIVATED&#34;</span> <span class="p">(</span><span class="nf">format-time-string</span> <span class="s">&#34;[%Y-%m-%d]&#34;</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-after-todo-state-change-hook</span> <span class="nf">#&#39;</span><span class="nv">log-todo-next-creation-date</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; Put the text property afterwards with an advice</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-org-agenda-override-header</span> <span class="p">(</span><span class="nv">orig-fun</span> <span class="kp">&amp;rest</span> <span class="nv">args</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Change the face of the overriden header string if needed.
-</span></span></span><span class="line"><span class="cl"><span class="s">The propertized header text is taken from </span><span class="ss">`org-agenda-overriding-header&#39;</span><span class="s">.
-</span></span></span><span class="line"><span class="cl"><span class="s">The face is only changed if the overriding header is propertized with a face.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">pt</span> <span class="p">(</span><span class="nf">point</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">header</span> <span class="nv">org-agenda-overriding-header</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">apply</span> <span class="nv">orig-fun</span> <span class="nv">args</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">;; Only replace if there is an overriding header and not an empty string.</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">;; And only if the header text has a face property.</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">header</span> <span class="p">(</span><span class="nf">&gt;</span> <span class="p">(</span><span class="nf">length</span> <span class="nv">header</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nf">get-text-property</span> <span class="mi">0</span> <span class="ss">&#39;face</span> <span class="nv">header</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">save-excursion</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">goto-char</span> <span class="nv">pt</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">;; Search for the header text.</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">search-forward</span> <span class="nv">header</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">unwind-protect</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">progn</span>
-</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nv">read-only-mode</span> <span class="mi">-1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">              <span class="c1">;; Replace it with the propertized text.</span>
-</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nf">replace-match</span> <span class="nv">header</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nv">read-only-mode</span> <span class="mi">1</span><span class="p">))))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-org-agenda-override-header-add-advices</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Add advices to make changing work in all agenda commands.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">fun</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">org-agenda-list</span> <span class="nv">org-todo-list</span> <span class="nv">org-search-view</span> <span class="nv">org-tags-view</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">advice-add</span> <span class="nv">fun</span> <span class="nb">:around</span> <span class="nf">#&#39;</span><span class="nv">my-org-agenda-override-header</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">my-org-agenda-override-header-add-advices</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; 只显示 outline 下第一个 TODO</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-org-agenda-skip-all-siblings-but-first</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Skip all but the first non-done entry.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">(</span><span class="nv">should-skip-entry</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">org-current-is-todo</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">setq</span> <span class="nv">should-skip-entry</span> <span class="no">t</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">save-excursion</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">not</span> <span class="nv">should-skip-entry</span><span class="p">)</span> <span class="p">(</span><span class="nv">org-goto-sibling</span> <span class="no">t</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">org-current-is-todo</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">setq</span> <span class="nv">should-skip-entry</span> <span class="no">t</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="nv">should-skip-entry</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">outline-next-heading</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nf">goto-char</span> <span class="p">(</span><span class="nf">point-max</span><span class="p">))))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-current-is-todo</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">string=</span> <span class="s">&#34;TODO&#34;</span> <span class="p">(</span><span class="nv">org-get-todo-state</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">active-project-match</span> <span class="s">&#34;-INBOX/PROJECT&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
@@ -1057,6 +1024,127 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-agenda-mode-hook</span> <span class="ss">&#39;hl-line-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Org clock</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Save the running clock and all clock history when exiting Emacs, load it on startup</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;org</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-clock-persistence-insinuate</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-clock-persist</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-clock-in-resume</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Save clock data and notes in the LOGBOOK drawer</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-clock-into-drawer</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; Save state changes in the LOGBOOK drawer</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-log-into-drawer</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; Removes clocked tasks with 0:00 duration</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-clock-out-remove-zero-time-clocks</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Show clock sums as hours and minutes, not &#34;n days&#34; etc.</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-time-clocksum-format</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&#39;</span><span class="p">(</span><span class="nb">:hours</span> <span class="s">&#34;%d&#34;</span> <span class="nb">:require-hours</span> <span class="no">t</span> <span class="nb">:minutes</span> <span class="s">&#34;:%02d&#34;</span> <span class="nb">:require-minutes</span> <span class="no">t</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Show the clocked-in task - if any - in the header line</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">sanityinc/show-org-clock-in-header-line</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq-default</span> <span class="nv">header-line-format</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34; &#34;</span> <span class="nv">org-mode-line-string</span> <span class="s">&#34; &#34;</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">sanityinc/hide-org-clock-from-header-line</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq-default</span> <span class="nv">header-line-format</span> <span class="no">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-clock-in-hook</span> <span class="ss">&#39;sanityinc/show-org-clock-in-header-line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-clock-out-hook</span> <span class="ss">&#39;sanityinc/hide-org-clock-from-header-line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-clock-cancel-hook</span> <span class="ss">&#39;sanityinc/hide-org-clock-from-header-line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;org-clock</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">define-key</span> <span class="nv">org-clock-mode-line-map</span> <span class="p">[</span><span class="nv">header-line</span> <span class="nv">mouse-2</span><span class="p">]</span> <span class="ss">&#39;org-clock-goto</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">define-key</span> <span class="nv">org-clock-mode-line-map</span> <span class="p">[</span><span class="nv">header-line</span> <span class="nv">mouse-1</span><span class="p">]</span> <span class="ss">&#39;org-clock-menu</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="vg">*is-a-mac*</span> <span class="p">(</span><span class="nf">file-directory-p</span> <span class="s">&#34;/Applications/org-clock-statusbar.app&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-clock-in-hook</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nf">call-process</span> <span class="s">&#34;/usr/bin/osascript&#34;</span> <span class="no">nil</span> <span class="mi">0</span> <span class="no">nil</span> <span class="s">&#34;-e&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;tell application \&#34;org-clock-statusbar\&#34; to clock in \&#34;&#34;</span> <span class="nv">org-clock-current-task</span> <span class="s">&#34;\&#34;&#34;</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-clock-out-hook</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nf">call-process</span> <span class="s">&#34;/usr/bin/osascript&#34;</span> <span class="no">nil</span> <span class="mi">0</span> <span class="no">nil</span> <span class="s">&#34;-e&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="s">&#34;tell application \&#34;org-clock-statusbar\&#34; to clock out&#34;</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; TODO: warn about inconsistent items, e.g. TODO inside non-PROJECT</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; TODO: nested projects!</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Archiving</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-archive-mark-done</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-archive-location</span> <span class="s">&#34;%s_archive::* Archive&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-pomodoro</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-pomodoro-keep-killed-pomodoro-time</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;org-agenda</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">define-key</span> <span class="nv">org-agenda-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;P&#34;</span><span class="p">)</span> <span class="ss">&#39;org-pomodoro</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; ;; Show iCal calendars in the org agenda</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; (when (and *is-a-mac* (require &#39;org-mac-iCal nil t))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;   (setq org-agenda-include-diary t</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;         org-agenda-custom-commands</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;         &#39;((&#34;I&#34; &#34;Import diary from iCal&#34; agenda &#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;            ((org-agenda-mode-hook #&#39;org-mac-iCal)))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;;   (add-hook &#39;org-agenda-cleanup-fancy-diary-hook</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;             (lambda ()</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;               (goto-char (point-min))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;               (save-excursion</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;                 (while (re-search-forward &#34;^[a-z]&#34; nil t)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;                   (goto-char (match-beginning 0))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;                   (insert &#34;0:00-24:00 &#34;)))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;               (while (re-search-forward &#34;^ [a-z]&#34; nil t)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;                 (goto-char (match-beginning 0))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;                 (save-excursion</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;                   (re-search-backward &#34;^[0-9]+:[0-9]+-[0-9]+:[0-9]+ &#34; nil t))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;                 (insert (match-string 0))))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;org</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">define-key</span> <span class="nv">org-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-M-&lt;up&gt;&#34;</span><span class="p">)</span> <span class="ss">&#39;org-up-element</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">when</span> <span class="vg">*is-a-mac*</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">define-key</span> <span class="nv">org-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;M-h&#34;</span><span class="p">)</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">define-key</span> <span class="nv">org-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c g&#34;</span><span class="p">)</span> <span class="ss">&#39;grab-mac-link</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;org</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-babel-do-load-languages</span>
+</span></span><span class="line"><span class="cl">   <span class="ss">&#39;org-babel-load-languages</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nv">seq-filter</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">pair</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">featurep</span> <span class="p">(</span><span class="nf">intern</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;ob-&#34;</span> <span class="p">(</span><span class="nf">symbol-name</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">pair</span><span class="p">))))))</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&#39;</span><span class="p">((</span><span class="nv">R</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ditaa</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">dot</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">emacs-lisp</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">gnuplot</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">haskell</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">latex</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ledger</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ocaml</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">octave</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">plantuml</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">python</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ruby</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">screen</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">sh</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span> <span class="c1">;; obsolete</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">shell</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">sql</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">sqlite</span> <span class="o">.</span> <span class="no">t</span><span class="p">)))))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;; org-starter</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-starter</span><span class="p">)</span>
@@ -1383,67 +1471,7 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-archive-subtree-hierarchical</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-pomodoro</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-pomodoro-keep-killed-pomodoro-time</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;org-agenda</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">define-key</span> <span class="nv">org-agenda-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;P&#34;</span><span class="p">)</span> <span class="ss">&#39;org-pomodoro</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; ;; Show iCal calendars in the org agenda</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; (when (and *is-a-mac* (require &#39;org-mac-iCal nil t))</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;   (setq org-agenda-include-diary t</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;         org-agenda-custom-commands</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;         &#39;((&#34;I&#34; &#34;Import diary from iCal&#34; agenda &#34;&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;            ((org-agenda-mode-hook #&#39;org-mac-iCal)))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;;   (add-hook &#39;org-agenda-cleanup-fancy-diary-hook</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;             (lambda ()</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;               (goto-char (point-min))</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;               (save-excursion</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;                 (while (re-search-forward &#34;^[a-z]&#34; nil t)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;                   (goto-char (match-beginning 0))</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;                   (insert &#34;0:00-24:00 &#34;)))</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;               (while (re-search-forward &#34;^ [a-z]&#34; nil t)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;                 (goto-char (match-beginning 0))</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;                 (save-excursion</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;                   (re-search-backward &#34;^[0-9]+:[0-9]+-[0-9]+:[0-9]+ &#34; nil t))</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;                 (insert (match-string 0))))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;org</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">define-key</span> <span class="nv">org-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-M-&lt;up&gt;&#34;</span><span class="p">)</span> <span class="ss">&#39;org-up-element</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">when</span> <span class="vg">*is-a-mac*</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">define-key</span> <span class="nv">org-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;M-h&#34;</span><span class="p">)</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">define-key</span> <span class="nv">org-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c g&#34;</span><span class="p">)</span> <span class="ss">&#39;grab-mac-link</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;org</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-babel-do-load-languages</span>
-</span></span><span class="line"><span class="cl">   <span class="ss">&#39;org-babel-load-languages</span>
-</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nv">seq-filter</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">pair</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">featurep</span> <span class="p">(</span><span class="nf">intern</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;ob-&#34;</span> <span class="p">(</span><span class="nf">symbol-name</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">pair</span><span class="p">))))))</span>
-</span></span><span class="line"><span class="cl">    <span class="o">&#39;</span><span class="p">((</span><span class="nv">R</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ditaa</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">dot</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">emacs-lisp</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">gnuplot</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">haskell</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">latex</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ledger</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ocaml</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">octave</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">plantuml</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">python</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ruby</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">screen</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">sh</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span> <span class="c1">;; obsolete</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">shell</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">sql</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">sqlite</span> <span class="o">.</span> <span class="no">t</span><span class="p">)))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;emacsql-sqlite-builtin</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-roam</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:demand</span> <span class="no">t</span> <span class="c1">;; ensure org-roam is loaded by default</span>
@@ -1514,9 +1542,6 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="nv">direction</span> <span class="o">.</span> <span class="nv">right</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="nv">window-width</span> <span class="o">.</span> <span class="mf">0.33</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="nv">window-height</span> <span class="o">.</span> <span class="nv">fit-window-to-buffer</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;; If you&#39;re using a vertical completion framework, you might want a more informative completion interface</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;; ${type:15} 是为了在文件搜索列表展示当前所在文件夹，提高搜索效率。</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;; (setq org-roam-node-display-template (concat &#34;${type:15} ${title:*} &#34; (propertize &#34;${tags:10}&#34; &#39;face &#39;org-tag)))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-export-backends</span> <span class="p">(</span><span class="nb">quote</span> <span class="p">(</span><span class="nv">ascii</span> <span class="nv">html</span> <span class="nv">icalendar</span> <span class="nv">latex</span> <span class="nv">md</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; code hightlight</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-src-fontify-natively</span> <span class="no">t</span><span class="p">)</span>
@@ -1627,6 +1652,72 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nv">dired-toggle-marks</span><span class="p">)))</span>                             <span class="c1">; unmark all</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Error: Does not work outside dired-mode&#34;</span><span class="p">)</span>      <span class="c1">; can&#39;t work not in dired-mode</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">ding</span><span class="p">)))</span>                                                 <span class="c1">; error sound</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Save the corresponding buffers</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">gtd-save-org-buffers</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Save </span><span class="ss">`org-agenda-files&#39;</span><span class="s"> buffers without user confirmation.
+</span></span></span><span class="line"><span class="cl"><span class="s">See also </span><span class="ss">`org-save-all-org-buffers&#39;</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Saving org-agenda-files buffers...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">save-some-buffers</span> <span class="no">t</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">member</span> <span class="p">(</span><span class="nf">buffer-file-name</span><span class="p">)</span> <span class="nv">org-agenda-files</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">               <span class="no">t</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Saving org-agenda-files buffers... done&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; Add it after refile</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-refile</span> <span class="nb">:after</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="kp">&amp;rest</span> <span class="nv">_</span><span class="p">)</span> <span class="p">(</span><span class="nv">gtd-save-org-buffers</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">log-todo-next-creation-date</span> <span class="p">(</span><span class="kp">&amp;rest</span> <span class="nv">ignore</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Log NEXT creation time in the property drawer under the key &#39;ACTIVATED&#39;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">string=</span> <span class="p">(</span><span class="nv">org-get-todo-state</span><span class="p">)</span> <span class="s">&#34;NEXT&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nv">org-entry-get</span> <span class="no">nil</span> <span class="s">&#34;ACTIVATED&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">org-entry-put</span> <span class="no">nil</span> <span class="s">&#34;ACTIVATED&#34;</span> <span class="p">(</span><span class="nf">format-time-string</span> <span class="s">&#34;[%Y-%m-%d]&#34;</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-after-todo-state-change-hook</span> <span class="nf">#&#39;</span><span class="nv">log-todo-next-creation-date</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Put the text property afterwards with an advice</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-org-agenda-override-header</span> <span class="p">(</span><span class="nv">orig-fun</span> <span class="kp">&amp;rest</span> <span class="nv">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Change the face of the overriden header string if needed.
+</span></span></span><span class="line"><span class="cl"><span class="s">The propertized header text is taken from </span><span class="ss">`org-agenda-overriding-header&#39;</span><span class="s">.
+</span></span></span><span class="line"><span class="cl"><span class="s">The face is only changed if the overriding header is propertized with a face.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">pt</span> <span class="p">(</span><span class="nf">point</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">header</span> <span class="nv">org-agenda-overriding-header</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">apply</span> <span class="nv">orig-fun</span> <span class="nv">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;; Only replace if there is an overriding header and not an empty string.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;; And only if the header text has a face property.</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">header</span> <span class="p">(</span><span class="nf">&gt;</span> <span class="p">(</span><span class="nf">length</span> <span class="nv">header</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nf">get-text-property</span> <span class="mi">0</span> <span class="ss">&#39;face</span> <span class="nv">header</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">save-excursion</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">goto-char</span> <span class="nv">pt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">;; Search for the header text.</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">search-forward</span> <span class="nv">header</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">unwind-protect</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">progn</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nv">read-only-mode</span> <span class="mi">-1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">              <span class="c1">;; Replace it with the propertized text.</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nf">replace-match</span> <span class="nv">header</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nv">read-only-mode</span> <span class="mi">1</span><span class="p">))))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-org-agenda-override-header-add-advices</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Add advices to make changing work in all agenda commands.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">fun</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">org-agenda-list</span> <span class="nv">org-todo-list</span> <span class="nv">org-search-view</span> <span class="nv">org-tags-view</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">advice-add</span> <span class="nv">fun</span> <span class="nb">:around</span> <span class="nf">#&#39;</span><span class="nv">my-org-agenda-override-header</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">my-org-agenda-override-header-add-advices</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 只显示 outline 下第一个 TODO</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-org-agenda-skip-all-siblings-but-first</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Skip all but the first non-done entry.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">(</span><span class="nv">should-skip-entry</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">org-current-is-todo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">setq</span> <span class="nv">should-skip-entry</span> <span class="no">t</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">save-excursion</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">not</span> <span class="nv">should-skip-entry</span><span class="p">)</span> <span class="p">(</span><span class="nv">org-goto-sibling</span> <span class="no">t</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">org-current-is-todo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">setq</span> <span class="nv">should-skip-entry</span> <span class="no">t</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="nv">should-skip-entry</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">outline-next-heading</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nf">goto-char</span> <span class="p">(</span><span class="nf">point-max</span><span class="p">))))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-current-is-todo</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">string=</span> <span class="s">&#34;TODO&#34;</span> <span class="p">(</span><span class="nv">org-get-todo-state</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org.el ends here</span>
@@ -1769,17 +1860,11 @@ function toggleThemeListener() {
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://sheerwill.live/posts/main/20220616132407-causal_broadcast/">
-    <span class="title">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;Prev Page</span>
-    <br>
-    <span>Causal broadcast</span>
-  </a>
-  <a class="next" href="https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/">
+  <a class="next" href="https://sheerwill.live/posts/main/20220616092944-callback_hell/">
     <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
     </span>
     <br>
-    <span>Personal Knowledge Wiki</span>
+    <span>Callback Hell</span>
   </a>
 </nav>
 
