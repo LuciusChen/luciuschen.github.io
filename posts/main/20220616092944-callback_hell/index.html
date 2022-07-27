@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://sheerwill.live/posts/main/20220616092944-callback_hell/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-07-27T17:56:03&#43;08:00" />
+  <meta property="article:modified_time" content="2022-07-27T18:08:07&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -61,7 +61,7 @@
   "wordCount" : "2621",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-07-27T17:56:03+08:00",
+  "dateModified": "2022-07-27T18:08:07+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -868,10 +868,10 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">getResult</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">wxRequest</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// app.js
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span> <span class="p">{</span> <span class="nx">getResult</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;utils/util.js&#34;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span> <span class="p">{</span> <span class="nx">wxRequest</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;utils/util.js&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nx">App</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">getRequest</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">params</span><span class="p">,</span> <span class="nx">md</span><span class="p">,</span> <span class="nx">load</span><span class="p">,</span> <span class="nx">ctype</span><span class="p">)</span> <span class="p">{</span>
@@ -903,7 +903,7 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">dic</span> <span class="o">=</span> <span class="p">{};</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">dic</span><span class="p">.</span><span class="nx">cipher</span> <span class="o">=</span> <span class="nx">that</span><span class="p">.</span><span class="nx">encryption</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">getRequest</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">dic</span><span class="p">,</span> <span class="nx">md</span><span class="p">,</span> <span class="nx">load</span><span class="p">,</span> <span class="nx">ctype</span><span class="p">).</span><span class="nx">task</span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">wxRequest</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">dic</span><span class="p">,</span> <span class="nx">md</span><span class="p">,</span> <span class="nx">load</span><span class="p">,</span> <span class="nx">ctype</span><span class="p">).</span><span class="nx">task</span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">code</span> <span class="o">==</span> <span class="s2">&#34;8888&#34;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">          <span class="nx">wx</span><span class="p">.</span><span class="nx">clearStorage</span><span class="p">();</span> <span class="c1">//清理登录缓存数据
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nx">wx</span><span class="p">.</span><span class="nx">showToast</span><span class="p">({</span>
@@ -1210,17 +1210,11 @@ function toggleThemeListener() {
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/">
-    <span class="title">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;Prev Page</span>
-    <br>
-    <span>Vanilla Emacs with Purcell</span>
-  </a>
-  <a class="next" href="https://sheerwill.live/posts/main/20220616132407-causal_broadcast/">
+  <a class="next" href="https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/">
     <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
     </span>
     <br>
-    <span>Causal broadcast</span>
+    <span>Vanilla Emacs with Purcell</span>
   </a>
 </nav>
 
