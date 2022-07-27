@@ -6,15 +6,16 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Jul 2022 18:47:37 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Jul 2022 19:19:35 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Callback Hell</title>
       <link>https://sheerwill.live/posts/main/20220616092944-callback_hell/</link>
-      <pubDate>Wed, 27 Jul 2022 18:47:37 +0800</pubDate>
+      <pubDate>Wed, 27 Jul 2022 19:19:35 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220616092944-callback_hell/</guid>
-      <description>重构小程序前端校验接口返参处理 主要是用 Map (ES6+) 处理 if (code){} else if (code){}​，并且利用 Promise 封装函数，配合 async 和 await (ES7+)，使得异步操作同步化，抽</description>
+      <description>重构小程序前端校验接口返参处理 原本代码是通过嵌套回调，控制提示之间的前后依赖关系，形成了回调地狱，需要重构。 主要是用 Map (ES6+) 处理 if (code){} else if (cod</description>
       <content:encoded><![CDATA[<h2 id="重构小程序前端校验接口返参处理">重构小程序前端校验接口返参处理</h2>
+<p>原本代码是通过嵌套回调，控制提示之间的前后依赖关系，形成了回调地狱，需要重构。</p>
 <p>主要是用 <code>Map</code> (ES6+) 处理 <code>if (code){} else if (code){}</code>​，并且利用 <code>Promise</code> 封装函数，配合 <code>async</code> 和 <code>await</code> (ES7+)，使得异步操作同步化，抽离出嵌套的逻辑。后续代码维护只需要区分「仅提示」和「打断」两种模式，不需要考虑提示之间的互相依赖，后期维护成本大大降低。</p>
 <p>比较业务代码可以发现，代码量直接干掉了 2/3。</p>
 <h3 id="原始代码">原始代码</h3>
