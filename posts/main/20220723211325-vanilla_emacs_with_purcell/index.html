@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-07-31T09:51:13&#43;08:00" />
+  <meta property="article:modified_time" content="2022-08-03T09:58:20&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -58,10 +58,10 @@
   "keywords": [
     
   ],
-  "wordCount" : "6417",
+  "wordCount" : "6526",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-07-31T09:51:13+08:00",
+  "dateModified": "2022-08-03T09:58:20+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -270,11 +270,11 @@ function toggleThemeListener() {
     </h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>July 31, 2022</span></span><span class="meta-item">
+  <span>August 3, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>6417 words</span></span><span class="meta-item">
+  <span>6526 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>13 min</span></span>
+  <span>14 min</span></span>
 
       
       
@@ -348,7 +348,11 @@ function toggleThemeListener() {
                     <a href="#org-modern" aria-label="org-modern">org-modern</a></li></ul>
                 </li>
                 <li>
-                    <a href="#init-org-dot-el" aria-label="init-org.el">init-org.el</a></li>
+                    <a href="#init-org-dot-el" aria-label="init-org.el">init-org.el</a><ul>
+                        
+                <li>
+                    <a href="#org-babel" aria-label="Org-babel">Org-babel</a></li></ul>
+                </li>
                 <li>
                     <a href="#init-font-dot-el" aria-label="init-font.el">init-font.el</a>
                 </li>
@@ -1132,6 +1136,7 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">featurep</span> <span class="p">(</span><span class="nf">intern</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;ob-&#34;</span> <span class="p">(</span><span class="nf">symbol-name</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">pair</span><span class="p">))))))</span>
 </span></span><span class="line"><span class="cl">    <span class="o">&#39;</span><span class="p">((</span><span class="nv">R</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ditaa</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">rust</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">dot</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">emacs-lisp</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">gnuplot</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
@@ -1724,7 +1729,16 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org.el ends here</span>
-</span></span></code></pre></div><h3 id="init-font-dot-el">init-font.el<a hidden class="anchor" aria-hidden="true" href="#init-font-dot-el">¶</a></h3>
+</span></span></code></pre></div><h4 id="org-babel">Org-babel<a hidden class="anchor" aria-hidden="true" href="#org-babel">¶</a></h4>
+<p>输出 <code>:results</code> 有不同的选项，其中 <code>silent</code> 是指：Do not insert results in the Org mode buffer, but echo them in the minibuffer. Usage example: ‘:results output silent’.</p>
+<!--list-separator-->
+<ul>
+<li>
+<p>Rust</p>
+<p>运行代码块，需要安装 <a href="https://github.com/brotzeit/rustic">GitHub - brotzeit/rustic: Rust development environment for Emacs</a>，具体执行的时候会提示需要安装 <code>lsp-mode</code>​，确定即可。</p>
+</li>
+</ul>
+<h3 id="init-font-dot-el">init-font.el<a hidden class="anchor" aria-hidden="true" href="#init-font-dot-el">¶</a></h3>
 <p>使用的是 <code>Iosevka</code> 和 <code>LXGW WenKai Mono</code> 分别作为英文和中文字体，字体大小设置 13/14 就可以完美对齐了。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-font.el --- Dired customisations -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>

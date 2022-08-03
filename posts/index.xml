@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 Jul 2022 09:51:13 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Aug 2022 09:58:20 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Sun, 31 Jul 2022 09:51:13 +0800</pubDate>
+      <pubDate>Wed, 03 Aug 2022 09:58:20 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -787,6 +787,7 @@
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">featurep</span> <span class="p">(</span><span class="nf">intern</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;ob-&#34;</span> <span class="p">(</span><span class="nf">symbol-name</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">pair</span><span class="p">))))))</span>
 </span></span><span class="line"><span class="cl">    <span class="o">&#39;</span><span class="p">((</span><span class="nv">R</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ditaa</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">rust</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">dot</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">emacs-lisp</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">gnuplot</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
@@ -1379,7 +1380,16 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org.el ends here</span>
-</span></span></code></pre></div><h3 id="init-font-dot-el">init-font.el</h3>
+</span></span></code></pre></div><h4 id="org-babel">Org-babel</h4>
+<p>输出 <code>:results</code> 有不同的选项，其中 <code>silent</code> 是指：Do not insert results in the Org mode buffer, but echo them in the minibuffer. Usage example: ‘:results output silent’.</p>
+<!--list-separator-->
+<ul>
+<li>
+<p>Rust</p>
+<p>运行代码块，需要安装 <a href="https://github.com/brotzeit/rustic">GitHub - brotzeit/rustic: Rust development environment for Emacs</a>，具体执行的时候会提示需要安装 <code>lsp-mode</code>​，确定即可。</p>
+</li>
+</ul>
+<h3 id="init-font-dot-el">init-font.el</h3>
 <p>使用的是 <code>Iosevka</code> 和 <code>LXGW WenKai Mono</code> 分别作为英文和中文字体，字体大小设置 13/14 就可以完美对齐了。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-font.el --- Dired customisations -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
