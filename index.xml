@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Aug 2022 16:13:10 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Aug 2022 23:19:35 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Thu, 04 Aug 2022 16:13:10 +0800</pubDate>
+      <pubDate>Thu, 04 Aug 2022 23:19:35 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -1512,10 +1512,10 @@
     <item>
       <title>Personal Knowledge Wiki</title>
       <link>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</link>
-      <pubDate>Thu, 28 Jul 2022 23:04:21 +0800</pubDate>
+      <pubDate>Thu, 04 Aug 2022 23:18:45 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</guid>
-      <description>Hardware HHKB Logitech MX Master 3 for Mac MacBook Pro (15-inch, 2017) DELL U2417H Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency Workflow HammerSpoon Hugo Karabiner-Elements Doom Emacs Vanilla Emacs with Purcell Latex Anki Editor VSCode Terminal Squirrel Chrome Extensions Online Dictionary Helper 和 Anki 配合记忆单词十</description>
+      <description>Hardware HHKB Logitech MX Master 3 for Mac MacBook Pro (15-inch, 2017) DELL U2417H Bose QC 35/NFAUDIO 二单元娄氏动铁 NF2u Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency Workflow HammerSpoon Hugo Karabiner-Elements Doom Emacs Vanilla Emacs with Purcell Latex Anki Editor VSCode Terminal Squirrel 输入法词库扩充 - 肥猫百万维基</description>
       <content:encoded><![CDATA[<h2 id="hardware">Hardware</h2>
 <ul>
 <li>HHKB</li>
@@ -1554,7 +1554,19 @@
 <li><a href="/posts/main/20220629204553-terminal/">Terminal</a></li>
 </ul>
 <h3 id="squirrel">Squirrel</h3>
-<h3 id="chrome-extensions">Chrome Extensions</h3>
+<p>输入法词库扩充 - <a href="https://github.com/felixonmars/fcitx5-pinyin-zhwiki">肥猫百万维基词库</a></p>
+<p>下载 Releases 中的 <code>zhwiki.dict.yaml</code> 到 <code>Library/Rime/</code> 下，我使用的是「朙月拼音・简化字」版本，因此可以在 <code>luna_pinyin_simp.custom.yaml</code> 中找到下面配置。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#  載入朙月拼音擴充詞庫</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">&#34;translator/dictionary&#34;: </span><span class="l">luna_pinyin.extended</span><span class="w">
+</span></span></span></code></pre></div><p>扩展的词库都配置在 <code>luna_pinyin.extended.dict.yaml</code> 中，添加需要扩展的词库即可。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">import_tables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin.sgmain</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin.hanyu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin.poetry</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin.cn_en</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">zhwiki</span><span class="w">
+</span></span></span></code></pre></div><h3 id="chrome-extensions">Chrome Extensions</h3>
 <h4 id="online-dictionary-helper">Online Dictionary Helper</h4>
 <p>和 Anki 配合记忆单词十分好用</p>
 <h4 id="dark-reader">Dark Reader</h4>
