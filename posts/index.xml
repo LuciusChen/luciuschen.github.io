@@ -6,15 +6,16 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Aug 2022 11:39:28 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Aug 2022 20:09:36 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HammerSpoon</title>
       <link>https://sheerwill.live/posts/main/20220520185239-hammerspoon/</link>
-      <pubDate>Fri, 05 Aug 2022 11:39:28 +0800</pubDate>
+      <pubDate>Fri, 05 Aug 2022 20:09:36 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220520185239-hammerspoon/</guid>
-      <description>配置的整体如下。 ├── Spoons │ ├── Emojis.spoon │ ├── SpoonInstall.spoon │ └── TextClipboardHistory.spoon ├── conf.moon ├── control.moon ├── headphones.moon ├── init.lua ├── keyboard.moon ├── layout.moon ├── main.moon ├── mouse.moon ├── pwd.moon ├── reload.moon ├──</description>
-      <content:encoded><![CDATA[<p>配置的整体如下。</p>
+      <description>Introduction 配置的整体如下，通过不同的 Hyper key 在键盘上设置了两层功能，软件控制以及窗口管理。 ├── Spoons │ ├── Emojis.spoon │ ├── SpoonInstall.spoon │ └── TextClipboardHistory.spoon ├── conf.moon ├── control.moon ├── headphones.moon</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>配置的整体如下，通过不同的 Hyper key 在键盘上设置了两层功能，软件控制以及窗口管理。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">├── Spoons
 </span></span><span class="line"><span class="cl">│   ├── Emojis.spoon
 </span></span><span class="line"><span class="cl">│   ├── SpoonInstall.spoon
