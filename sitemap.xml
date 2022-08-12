@@ -2,20 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://sheerwill.live/posts/main/20220520185239-hammerspoon/</loc>
-    <lastmod>2022-08-05T20:09:36+08:00</lastmod>
-  </url><url>
     <loc>https://sheerwill.live/</loc>
-    <lastmod>2022-08-05T20:09:36+08:00</lastmod>
+    <lastmod>2022-08-12T12:27:08+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</loc>
+    <lastmod>2022-08-12T12:27:08+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/</loc>
+    <lastmod>2022-08-12T12:27:08+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220520185239-hammerspoon/</loc>
     <lastmod>2022-08-05T20:09:36+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220805101927-karabiner_elements/</loc>
     <lastmod>2022-08-05T10:49:35+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</loc>
-    <lastmod>2022-08-05T10:19:45+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</loc>
     <lastmod>2022-08-04T23:19:35+08:00</lastmod>
