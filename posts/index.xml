@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Aug 2022 11:32:26 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Aug 2022 11:44:51 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Personal Knowledge Wiki</title>
       <link>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</link>
-      <pubDate>Mon, 15 Aug 2022 11:32:26 +0800</pubDate>
+      <pubDate>Mon, 15 Aug 2022 11:44:51 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</guid>
       <description>Hardware HHKB Logitech MX Master 3 for Mac MacBook Pro (15-inch, 2017) DELL U2417H Bose QC 35 NFAUDIO 二单元娄氏动铁 NF2u Sony A7M3 iPhone 11 Pro Kindle Paper White Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency Workflow HammerSpoon Hugo Karabiner-Elements Doom Emacs Vanilla Emacs with Purcell Latex Anki Editor VSCode Terminal Squirrel 输入法词库</description>
@@ -218,7 +218,7 @@
 </span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="s1">&#39;DateTime&#39;</span> <span class="ow">in</span> <span class="n">exif</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">xif</span><span class="p">[</span><span class="s1">&#39;DateTime&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">19</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">exif</span><span class="p">[</span><span class="s1">&#39;DateTime&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">19</span><span class="p">])</span>
 </span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
