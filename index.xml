@@ -6,248 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Aug 2022 11:44:51 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Personal Knowledge Wiki</title>
-      <link>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</link>
-      <pubDate>Mon, 15 Aug 2022 11:44:51 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</guid>
-      <description>Hardware HHKB Logitech MX Master 3 for Mac MacBook Pro (15-inch, 2017) DELL U2417H Bose QC 35 NFAUDIO 二单元娄氏动铁 NF2u Sony A7M3 iPhone 11 Pro Kindle Paper White Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency Workflow HammerSpoon Hugo Karabiner-Elements Doom Emacs Vanilla Emacs with Purcell Latex Anki Editor VSCode Terminal Squirrel 输入法词库</description>
-      <content:encoded><![CDATA[<h2 id="hardware">Hardware</h2>
-<ul>
-<li>HHKB</li>
-<li>Logitech MX Master 3 for Mac</li>
-<li>MacBook Pro (15-inch, 2017)</li>
-<li>DELL U2417H</li>
-<li>Bose QC 35</li>
-<li>NFAUDIO 二单元娄氏动铁 NF2u</li>
-<li>Sony A7M3</li>
-<li>iPhone 11 Pro</li>
-<li>Kindle Paper White</li>
-</ul>
-<h2 id="software">Software</h2>
-<h3 id="git">Git</h3>
-<ul>
-<li><a href="/posts/main/20220503160055-git-skills/">Git Skills</a></li>
-</ul>
-<h3 id="design-tools">Design Tools</h3>
-<ul>
-<li><a href="/posts/main/20220503154744-figma/">Figma</a></li>
-<li>Excalidraw</li>
-</ul>
-<h3 id="pinboard">Pinboard</h3>
-<ul>
-<li><a href="/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/">Tools to Increase Productivity and Efficiency</a></li>
-</ul>
-<h3 id="workflow">Workflow</h3>
-<ul>
-<li><a href="/posts/main/20220520185239-hammerspoon/">HammerSpoon</a></li>
-<li><a href="/posts/main/20220607104757-hugo/">Hugo</a></li>
-<li><a href="/posts/main/20220805101927-karabiner_elements/">Karabiner-Elements</a></li>
-<li><a href="113872fb-68e6-4865-9b95-cf3f6de57191">Doom Emacs</a></li>
-<li><a href="/posts/main/20220723211325-vanilla_emacs_with_purcell/">Vanilla Emacs with Purcell</a></li>
-<li><a href="/posts/main/20220616162256-latex/">Latex</a></li>
-<li><a href="/posts/main/20220706112803-anki/">Anki</a></li>
-</ul>
-<h3 id="editor">Editor</h3>
-<ul>
-<li><a href="/posts/main/20220629203733-vscode/">VSCode</a></li>
-<li><a href="/posts/main/20220629204553-terminal/">Terminal</a></li>
-</ul>
-<h3 id="squirrel">Squirrel</h3>
-<p>输入法词库扩充 - <a href="https://github.com/felixonmars/fcitx5-pinyin-zhwiki">肥猫百万维基词库</a></p>
-<p>下载 Releases 中的 <code>zhwiki.dict.yaml</code> 到 <code>/Library/Rime/</code> 下，我使用的是「朙月拼音・简化字」版本，因此可以在 <code>luna_pinyin_simp.custom.yaml</code> 中找到下面配置。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#  載入朙月拼音擴充詞庫</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">&#34;translator/dictionary&#34;: </span><span class="l">luna_pinyin.extended</span><span class="w">
-</span></span></span></code></pre></div><p>扩展的词库都配置在 <code>luna_pinyin.extended.dict.yaml</code> 中，添加需要扩展的词库即可。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">import_tables</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin.sgmain</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin.hanyu</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin.poetry</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin.cn_en</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">zhwiki</span><span class="w">
-</span></span></span></code></pre></div><h3 id="chrome-extensions">Chrome Extensions</h3>
-<h4 id="online-dictionary-helper">Online Dictionary Helper</h4>
-<p>和 Anki 配合记忆单词十分好用</p>
-<h4 id="dark-reader">Dark Reader</h4>
-<p>可以让浏览器的界面变成超级舒服的棕黄色，很适合阅读。</p>
-<h4 id="為什麼你們就是不能加個空格呢">為什麼你們就是不能加個空格呢？</h4>
-<p>强迫症福音，可以给网页中英文之间自动加上空格。</p>
-<h4 id="the-great-suspender">The Great Suspender</h4>
-<p>将暂时不用的 Chrome Tabs 暂停，降低内存的使用。</p>
-<h3 id="calibre">Calibre</h3>
-<h4 id="e-book-viewer">E-book viewer</h4>
-<p>字体设置，Preferences &gt; Styles 中添加下面的 CSS。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">body</span> <span class="o">&gt;</span> <span class="o">*,</span> <span class="nt">span</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">font-family</span><span class="p">:</span> <span class="s2">&#34;LXGW WenKai Screen&#34;</span> <span class="cp">!important</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h3 id="photos">Photos</h3>
-<p>因为现在 iCloud 导出的照片会将 Live photos 转换成 <code>.MOV</code> 格式的视频，所以先要删除这部份视频。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">rm -f *<span class="o">[</span>IMG<span class="o">]</span>*.MOV
-</span></span></code></pre></div><p>然后将照片中的所有 <code>.jpg|.JPG|.JPEG|.PNG</code> 格式的照片筛选出来，剩下的就都是 <code>.HEIC</code> 格式的照片。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mv -f *<span class="o">(</span>.jpg<span class="p">|</span>.JPG<span class="p">|</span>.JPEG<span class="p">|</span>.PNG<span class="o">)</span> ~/Dropbox/Media/Photos/Love
-</span></span></code></pre></div><p>然后用下面代码将 <code>.HEIC</code> 格式的照片转换为 <code>.jpg</code> 格式。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">subprocess</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">directory</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;.heic&#34;</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Converting </span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&#34;magick&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.jpg&#39;</span><span class="p">)])</span>
-</span></span><span class="line"><span class="cl">        <span class="k">continue</span>
-</span></span></code></pre></div><p>再通过下面代码将照片按照 exif 信息整理分类。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">shutil</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">PIL.Image</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">PIL.ExifTags</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">dir</span> <span class="o">=</span> <span class="s1">&#39;/Users/luciuschen/Dropbox/Media/Photos/Love/&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 存在 exif 信息并且当中含有 DateTime，则在当前目录下按照 DateTime 分类</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 不存在 exif 或者 exif 中不含有 DateTime，则在 no-exif 文件夹下按照创建时间分类</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">timeStr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">directory</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">directorySec</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;PNG&#39;</span><span class="p">,</span> <span class="s1">&#39;jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;JPG&#39;</span><span class="p">,</span> <span class="s1">&#39;jpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;JPEG&#39;</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">        <span class="n">joined</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">=</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">            <span class="n">exif</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span> <span class="n">v</span>
-</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="s1">&#39;DateTime&#39;</span> <span class="ow">in</span> <span class="n">exif</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">timeStr</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">exif</span><span class="p">[</span><span class="s1">&#39;DateTime&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">19</span><span class="p">],</span> <span class="s2">&#34;%Y:%m:</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="n">directory</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">                <span class="n">directorySec</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span>
-</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">timeStr</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span><span class="o">.</span><span class="n">st_birthtime</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="n">directory</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">                <span class="n">directorySec</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span> <span class="o">+</span> \
-</span></span><span class="line"><span class="cl">                    <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">timeStr</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">                <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span><span class="o">.</span><span class="n">st_birthtime</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="n">directory</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">            <span class="n">directorySec</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span> <span class="o">+</span> \
-</span></span><span class="line"><span class="cl">                <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directorySec</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directorySec</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directorySec</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directorySec</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">directorySec</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">directorySec</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">joined</span><span class="p">,</span> <span class="n">directorySec</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
-</span></span></code></pre></div><h4 id="优化方案">优化方案</h4>
-<p>可以直接提取 <code>.HEIC</code> 的 exif 信息，不需要先转换成 <code>.jpg</code>​。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">io</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">shutil</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pyheif</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">exifread</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">PIL.Image</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">PIL.ExifTags</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">timeStr</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">dirlocal</span> <span class="o">=</span> <span class="nb">dir</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">timeStr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">timeStr</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">st_birthtime</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y:%m:</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">dirlocal</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">timeStr</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">timeStr</span><span class="p">,</span> <span class="s2">&#34;%Y:%m:</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;timeStr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timeStr</span>
-</span></span><span class="line"><span class="cl">    <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dirlocal</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directorySec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dirlocal</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">movefile</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">directory</span> <span class="o">=</span> <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">directorySec</span> <span class="o">=</span> <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directorySec&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directorySec</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directorySec</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directorySec</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directorySec</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 目标路径存在</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 目标路径下无相同文件存在</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">directorySec</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directorySec</span><span class="p">,</span> <span class="n">filename</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">joined</span><span class="p">,</span> <span class="n">directorySec</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 目标文件夹</span>
-</span></span><span class="line"><span class="cl"><span class="nb">dir</span> <span class="o">=</span> <span class="s1">&#39;/Users/luciuschen/Dropbox/Media/Photos/Girl/&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 存在 exif 信息并且当中含有 DateTime，则在当前目录下按照 DateTime 分类</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 不存在 exif 或者 exif 中不含有 DateTime，则在 no-exif 文件夹下进行分类</span>
-</span></span><span class="line"><span class="cl"><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
-</span></span><span class="line"><span class="cl"><span class="n">filedicts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;timeStr&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;directory&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;directorySec&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="k">continue</span>
-</span></span><span class="line"><span class="cl">    <span class="n">joined</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;jpeg&#39;</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">=</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">            <span class="n">exif</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span> <span class="n">v</span>
-</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="s1">&#39;DateTime&#39;</span> <span class="ow">in</span> <span class="n">exif</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">exif</span><span class="p">[</span><span class="s1">&#39;DateTime&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">19</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">movefile</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;.heic&#34;</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="n">heif_file</span> <span class="o">=</span> <span class="n">pyheif</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">tags</span> <span class="o">=</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">metadata</span> <span class="ow">in</span> <span class="n">heif_file</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># data 数据中前六个字符 b&#39;Exif 是我们不需要的</span>
-</span></span><span class="line"><span class="cl">            <span class="n">file_stream</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">6</span><span class="p">:])</span>
-</span></span><span class="line"><span class="cl">            <span class="n">tags</span> <span class="o">=</span> <span class="n">exifread</span><span class="o">.</span><span class="n">process_file</span><span class="p">(</span><span class="n">file_stream</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">tags</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">break</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">tags</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">tags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;EXIF DateTimeOriginal&#34;</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;EXIF DateTimeOriginal&#34;</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">                <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">movefile</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">)</span>
-</span></span></code></pre></div>]]></content:encoded>
-    </item>
-    
+    <lastBuildDate>Thu, 18 Aug 2022 17:08:52 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Fri, 12 Aug 2022 14:02:34 +0800</pubDate>
+      <pubDate>Thu, 18 Aug 2022 17:08:52 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -298,7 +61,10 @@
 <h4 id="clarify">Clarify</h4>
 <p>对 Inbox 当中的 To-Dos 进行分发，并用关键字标记 To-Dos 的属性，比如 <code>PROJECT</code>, <code>DELEGRTED</code> 等。对于 <code>PROJECT</code> 这类还要继续分解。</p>
 <h4 id="organize">Organize</h4>
-<p>对明天需要做的或知道明确日期的 To-Dos 进行 Scheduled，对于 <code>DONE</code> 或 <code>CANCELLED</code> 的 To-Dos 会自动复制到今日的 Daily log 当中。</p>
+<p>对明天需要做的或知道明确日期的 To-Dos 进行 Scheduled，对于 <code>DONE</code> 或 <code>CANCELLED</code> 的 To-Dos 会自动复制到今日的 Daily log 当中，这样呈现的结果，其实和 Logseq 中在 Journals 里面管理 To-Dos 是一致的。</p>
+<p>不过实现的过程，或者说内在逻辑是不一样的。在 Logseq 的 Journals 中管理 To-Dos 即便是通过查询汇聚展示 To-Dos 也没有 agenda 中这么灵活，另外前几天定下的需要后面完成的 To-Dos 有两种管理方式：1. 将 To-Dos 链接到需要做的某天，自动展示。这样的操作确实方便，但使得各种关联杂乱。2. 将 To-Dos 移动到对应需要做的某天。</p>
+<p>上面说的呈现结果一致，就是指的第二种，回顾起来也非常清晰。在 org-roam 配合 agenda 使用中，To-Dos 有了单独的收集仓库，整理分发。也可以通过自定义的函数在 agenda 和 org-roam 之间联动，比如对于 <code>DONE</code> 或 <code>CANCELLED</code> 的 To-Dos 会自动复制到今日的 Daily log 当中，比如 org-roam 中的 To-Dos 也会呈现在 agenda view 中，完成后也会自动复制到 Daily log 中。</p>
+<p>整体上来讲，内在逻辑 agenda 和 org-roam 配合起来更加清晰，灵活。</p>
 <h4 id="reflect">Reflect</h4>
 <p>回顾所有的 To-Dos，选取明天或者近期需要完成。对已完成或取消的 To-Dos 归档，是按照结构<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>归档到同级别 <code>*.org</code> 文件的 <code>archive</code> 文件夹下的同名文件中。</p>
 <p>同时，要回顾一下 Notes 当中的对某处的笔记或设定的 To-Dos。</p>
@@ -329,6 +95,7 @@
     ├── init-local.el
     ├── init-org.el
     ├── init-font.el
+    ├── init-corfu.el
 </code></pre><h3 id="init-epla-dot-el">init-epla.el</h3>
 <p>增加 <code>use-package</code> 和 <code>straight</code> 的支持</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Bootstrap `use-package&#39;</span>
@@ -649,7 +416,10 @@
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-table</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-tag</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-statistics</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-horizontal-rule</span> <span class="no">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-horizontal-rule</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-ellipsis</span> <span class="s">&#34;➘&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">custom-set-faces</span>
+</span></span><span class="line"><span class="cl"> <span class="o">&#39;</span><span class="p">(</span><span class="nv">org-ellipsis</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="nb">:foreground</span> <span class="s">&#34;yellow green&#34;</span><span class="p">)))))</span>
 </span></span></code></pre></div><h4 id="sis">sis</h4>
 <p>需要安装 <code>macism</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap laishulu/macism
@@ -668,12 +438,15 @@
 </span></span><span class="line"><span class="cl">  <span class="c1">;; enable the /context/ mode for all buffers</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">sis-global-context-mode</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; enable the /inline english/ mode for all buffers</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">sis-global-inline-mode</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;; (sis-global-inline-mode t)</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; not delete the head spaces</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">sis-inline-tighten-head-rule</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">sis-default-cursor-color</span> <span class="s">&#34;brown3&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">sis-other-cursor-color</span> <span class="s">&#34;orange&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">sis-prefix-override-keys</span> <span class="p">(</span><span class="nf">list</span> <span class="s">&#34;C-c&#34;</span> <span class="s">&#34;C-x&#34;</span> <span class="s">&#34;C-h&#34;</span> <span class="s">&#34;C-c e&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">sis-prefix-override-keys</span> <span class="p">(</span><span class="nf">list</span> <span class="s">&#34;C-c&#34;</span> <span class="s">&#34;C-x&#34;</span> <span class="s">&#34;C-h&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-capture-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">sis-set-other</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;; hydra 时切换到英文</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;hydra-org-agenda-menu/body</span> <span class="nb">:after</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span><span class="p">)</span>
 </span></span></code></pre></div><h3 id="init-org-dot-el">init-org.el</h3>
 <p>org-roam 和 Emacs 自带的 agenda 可以很方便的将笔记和 GTD 结合起来。</p>
@@ -700,12 +473,12 @@
 </span></span><span class="line"><span class="cl"><span class="c1">;; TODO states, which should make sense to GTD adherents.</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Code:</span>
-</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; 都是方便插入超链接的</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">when</span> <span class="vg">*is-a-mac*</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;grab-mac-link</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;org-cliplink</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 图片宽度</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-image-actual-width</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;org-cliplink</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nf">define-key</span> <span class="nv">global-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c l&#34;</span><span class="p">)</span> <span class="ss">&#39;org-store-link</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nf">define-key</span> <span class="nv">global-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c a&#34;</span><span class="p">)</span> <span class="ss">&#39;org-agenda</span><span class="p">)</span>
@@ -739,53 +512,6 @@
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-agenda-mode-hook</span>
 </span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;window-configuration-change-hook</span> <span class="ss">&#39;org-agenda-align-tags</span> <span class="no">nil</span> <span class="no">t</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;writeroom-mode</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">define-minor-mode</span> <span class="nv">prose-mode</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Set up a buffer for prose editing.
-</span></span></span><span class="line"><span class="cl"><span class="s">This enables or modifies a number of settings so that the
-</span></span></span><span class="line"><span class="cl"><span class="s">experience of editing prose is a little more like that of a
-</span></span></span><span class="line"><span class="cl"><span class="s">typical word processor.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">:init-value</span> <span class="no">nil</span> <span class="nb">:lighter</span> <span class="s">&#34; Prose&#34;</span> <span class="nb">:keymap</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="nv">prose-mode</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">progn</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">fboundp</span> <span class="ss">&#39;writeroom-mode</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nv">writeroom-mode</span> <span class="mi">1</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">setq</span> <span class="nv">truncate-lines</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">setq</span> <span class="nv">word-wrap</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">setq</span> <span class="nv">cursor-type</span> <span class="ss">&#39;bar</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">eq</span> <span class="nv">major-mode</span> <span class="ss">&#39;org</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nf">kill-local-variable</span> <span class="ss">&#39;buffer-face-mode-face</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">buffer-face-mode</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">;;(delete-selection-mode 1)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">setq-local</span> <span class="nv">blink-cursor-interval</span> <span class="mf">0.6</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">setq-local</span> <span class="nv">show-trailing-whitespace</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">setq-local</span> <span class="nv">line-spacing</span> <span class="mf">0.2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">setq-local</span> <span class="nv">electric-pair-mode</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">ignore-errors</span> <span class="p">(</span><span class="nv">flyspell-mode</span> <span class="mi">1</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">visual-line-mode</span> <span class="mi">1</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">kill-local-variable</span> <span class="ss">&#39;truncate-lines</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">kill-local-variable</span> <span class="ss">&#39;word-wrap</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">kill-local-variable</span> <span class="ss">&#39;cursor-type</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">kill-local-variable</span> <span class="ss">&#39;blink-cursor-interval</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">kill-local-variable</span> <span class="ss">&#39;show-trailing-whitespace</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">kill-local-variable</span> <span class="ss">&#39;line-spacing</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">kill-local-variable</span> <span class="ss">&#39;electric-pair-mode</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">buffer-face-mode</span> <span class="mi">-1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">;; (delete-selection-mode -1)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">flyspell-mode</span> <span class="mi">-1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">visual-line-mode</span> <span class="mi">-1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">fboundp</span> <span class="ss">&#39;writeroom-mode</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">writeroom-mode</span> <span class="mi">0</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;;(add-hook &#39;org-mode-hook &#39;buffer-face-mode)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-support-shift-select</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Capturing</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-directory</span> <span class="s">&#34;~/Dropbox/org/&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c c&#34;</span><span class="p">)</span> <span class="ss">&#39;org-capture</span><span class="p">)</span>
@@ -854,6 +580,8 @@
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Agenda views</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 将没有时间标记的任务，放在上方显示。</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-agenda-sort-notime-is-late</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 时间显示为两位数(9:30 -&gt; 09:30)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-agenda-time-leading-zero</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 过滤掉部分 tags</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-agenda-hide-tags-regexp</span> <span class="p">(</span><span class="nv">regexp-opt</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;dynamic&#34;</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-agenda-files</span> <span class="p">(</span><span class="nv">file-expand-wildcards</span> <span class="s">&#34;~/Dropbox/org/agenda/*.org&#34;</span><span class="p">))</span>
@@ -885,11 +613,11 @@
 </span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">tags</span> <span class="s">&#34;inbox&#34;</span>
 </span></span><span class="line"><span class="cl">                  <span class="p">((</span><span class="nv">org-agenda-overriding-header</span> <span class="s">&#34;Inbox&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="nv">org-tags-match-list-sublevels</span> <span class="no">nil</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">stuck</span> <span class="s">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">((</span><span class="nv">org-agenda-overriding-header</span> <span class="s">&#34;Stuck Projects&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="nv">org-agenda-tags-todo-honor-ignore-options</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="nv">org-tags-match-list-sublevels</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="nv">org-agenda-todo-ignore-scheduled</span> <span class="ss">&#39;future</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">;; (stuck &#34;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">;;        ((org-agenda-overriding-header &#34;Stuck Projects&#34;)</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">;;         (org-agenda-tags-todo-honor-ignore-options t)</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">;;         (org-tags-match-list-sublevels t)</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">;;         (org-agenda-todo-ignore-scheduled &#39;future)))</span>
 </span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">tags-todo</span> <span class="s">&#34;-INBOX&#34;</span>
 </span></span><span class="line"><span class="cl">                       <span class="p">((</span><span class="nv">org-agenda-overriding-header</span> <span class="s">&#34;Next Actions&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-agenda-tags-todo-honor-ignore-options</span> <span class="no">t</span><span class="p">)</span>
@@ -903,17 +631,6 @@
 </span></span><span class="line"><span class="cl">                         <span class="o">&#39;</span><span class="p">(</span><span class="nv">todo-state-down</span> <span class="nv">effort-up</span> <span class="nv">category-keep</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">tags-todo</span> <span class="o">,</span><span class="nv">active-project-match</span>
 </span></span><span class="line"><span class="cl">                       <span class="p">((</span><span class="nv">org-agenda-overriding-header</span> <span class="s">&#34;Projects&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-tags-match-list-sublevels</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-agenda-sorting-strategy</span>
-</span></span><span class="line"><span class="cl">                         <span class="o">&#39;</span><span class="p">(</span><span class="nv">category-keep</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">tags-todo</span> <span class="s">&#34;-INBOX/-NEXT&#34;</span>
-</span></span><span class="line"><span class="cl">                       <span class="p">((</span><span class="nv">org-agenda-overriding-header</span> <span class="s">&#34;Orphaned Tasks&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-agenda-tags-todo-honor-ignore-options</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-agenda-todo-ignore-scheduled</span> <span class="ss">&#39;future</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-agenda-skip-function</span>
-</span></span><span class="line"><span class="cl">                         <span class="o">&#39;</span><span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">                            <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">org-agenda-skip-subtree-if</span> <span class="ss">&#39;todo</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;PROJECT&#34;</span> <span class="s">&#34;HOLD&#34;</span> <span class="s">&#34;WAITING&#34;</span> <span class="s">&#34;DELEGATED&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                                <span class="p">(</span><span class="nv">org-agenda-skip-subtree-if</span> <span class="ss">&#39;nottododo</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;TODO&#34;</span><span class="p">)))))</span>
 </span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-tags-match-list-sublevels</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-agenda-sorting-strategy</span>
 </span></span><span class="line"><span class="cl">                         <span class="o">&#39;</span><span class="p">(</span><span class="nv">category-keep</span><span class="p">))))</span>
@@ -936,6 +653,17 @@
 </span></span><span class="line"><span class="cl">                            <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">org-agenda-skip-subtree-if</span> <span class="ss">&#39;todo</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;WAITING&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                                <span class="p">(</span><span class="nv">org-agenda-skip-entry-if</span> <span class="ss">&#39;nottodo</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;HOLD&#34;</span><span class="p">)))))</span>
 </span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-tags-match-list-sublevels</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-agenda-sorting-strategy</span>
+</span></span><span class="line"><span class="cl">                         <span class="o">&#39;</span><span class="p">(</span><span class="nv">category-keep</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">tags-todo</span> <span class="s">&#34;-INBOX/-NEXT&#34;</span>
+</span></span><span class="line"><span class="cl">                       <span class="p">((</span><span class="nv">org-agenda-overriding-header</span> <span class="s">&#34;Orphaned Tasks&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-agenda-tags-todo-honor-ignore-options</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-agenda-todo-ignore-scheduled</span> <span class="ss">&#39;future</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-agenda-skip-function</span>
+</span></span><span class="line"><span class="cl">                         <span class="o">&#39;</span><span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">org-agenda-skip-subtree-if</span> <span class="ss">&#39;todo</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;PROJECT&#34;</span> <span class="s">&#34;HOLD&#34;</span> <span class="s">&#34;WAITING&#34;</span> <span class="s">&#34;DELEGATED&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                                <span class="p">(</span><span class="nv">org-agenda-skip-subtree-if</span> <span class="ss">&#39;nottododo</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;TODO&#34;</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-tags-match-list-sublevels</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">org-agenda-sorting-strategy</span>
 </span></span><span class="line"><span class="cl">                         <span class="o">&#39;</span><span class="p">(</span><span class="nv">category-keep</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">;; (tags-todo &#34;-NEXT&#34;</span>
@@ -1640,7 +1368,6 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-current-is-todo</span> <span class="p">()</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">string=</span> <span class="s">&#34;TODO&#34;</span> <span class="p">(</span><span class="nv">org-get-todo-state</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org.el ends here</span>
 </span></span></code></pre></div><h4 id="org-babel">Org-babel</h4>
@@ -1730,6 +1457,43 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-font</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-font.el ends here</span>
+</span></span></code></pre></div><h3 id="init-corfu-dot-el">init-corfu.el</h3>
+<p>增加了 <code>kind-icon</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-corfu.el --- Interactive completion in buffers -*- lexical-binding: t -*-</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Code:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; WAITING: haskell-mode sets tags-table-list globally, breaks tags-completion-at-point-function</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; TODO Default sort order should place [a-z] before punctuation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">tab-always-indent</span> <span class="ss">&#39;complete</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;orderless</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;vertico</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;orderless</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">setq</span> <span class="nv">completion-styles</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">orderless</span> <span class="nv">basic</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">completion-category-defaults</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">completion-category-overrides</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">completion-cycle-threshold</span> <span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;corfu</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq-default</span> <span class="nv">corfu-auto</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq-default</span> <span class="nv">corfu-quit-no-match</span> <span class="ss">&#39;separator</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;after-init-hook</span> <span class="ss">&#39;global-corfu-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;corfu-doc</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;corfu</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;corfu-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">corfu-doc-mode</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">;; TODO: https://github.com/jdtsmith/kind-icon</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;kind-icon</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;corfu</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;corfu-margin-formatters</span> <span class="nf">#&#39;</span><span class="nv">kind-icon-margin-formatter</span><span class="p">)</span> <span class="c1">; Enable `kind-icon&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-corfu</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; init-corfu.el ends here</span>
 </span></span></code></pre></div><h2 id="export">Export</h2>
 <p>对于只需要导出某个 header 下的内容的需求，只需要在 header 上加上 <code>:export:</code> 即可。</p>
 <h3 id="markdown-file">Markdown file</h3>
@@ -1764,7 +1528,7 @@
 <li>使用 <a href="https://github.com/ElegantLaTeX/ElegantPaper">ElegantPaper</a>，需要将 elegantpaper.cls 文件放在 org 目录下。</li>
 <li>安装依赖</li>
 </ol>
-<!--listend-->
+<p>代码块需要用到 <code>minted</code>​，需要用到 <code>pygments</code> 作为依赖。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">brew install pygments
 </span></span></code></pre></div><ol>
 <li>导出文件头部增加</li>
@@ -1788,6 +1552,241 @@
 </ol>
 </div>
 ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Personal Knowledge Wiki</title>
+      <link>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</link>
+      <pubDate>Wed, 17 Aug 2022 11:43:52 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</guid>
+      <description>Hardware HHKB Logitech MX Master 3 for Mac MacBook Pro (15-inch, 2017) DELL U2417H Bose QC 35 NFAUDIO 二单元娄氏动铁 NF2u Sony A7M3 iPhone 11 Pro Kindle Paper White Software Git Git Skills Design Tools Figma Excalidraw Pinboard Tools to Increase Productivity and Efficiency Workflow HammerSpoon Hugo Karabiner-Elements Doom Emacs Vanilla Emacs with Purcell Latex Anki Editor VSCode Terminal Squirrel 输入法词库</description>
+      <content:encoded><![CDATA[<h2 id="hardware">Hardware</h2>
+<ul>
+<li>HHKB</li>
+<li>Logitech MX Master 3 for Mac</li>
+<li>MacBook Pro (15-inch, 2017)</li>
+<li>DELL U2417H</li>
+<li>Bose QC 35</li>
+<li>NFAUDIO 二单元娄氏动铁 NF2u</li>
+<li>Sony A7M3</li>
+<li>iPhone 11 Pro</li>
+<li>Kindle Paper White</li>
+</ul>
+<h2 id="software">Software</h2>
+<h3 id="git">Git</h3>
+<ul>
+<li><a href="/posts/main/20220503160055-git-skills/">Git Skills</a></li>
+</ul>
+<h3 id="design-tools">Design Tools</h3>
+<ul>
+<li><a href="/posts/main/20220503154744-figma/">Figma</a></li>
+<li>Excalidraw</li>
+</ul>
+<h3 id="pinboard">Pinboard</h3>
+<ul>
+<li><a href="/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/">Tools to Increase Productivity and Efficiency</a></li>
+</ul>
+<h3 id="workflow">Workflow</h3>
+<ul>
+<li><a href="/posts/main/20220520185239-hammerspoon/">HammerSpoon</a></li>
+<li><a href="/posts/main/20220607104757-hugo/">Hugo</a></li>
+<li><a href="/posts/main/20220805101927-karabiner_elements/">Karabiner-Elements</a></li>
+<li><a href="113872fb-68e6-4865-9b95-cf3f6de57191">Doom Emacs</a></li>
+<li><a href="/posts/main/20220723211325-vanilla_emacs_with_purcell/">Vanilla Emacs with Purcell</a></li>
+<li><a href="/posts/main/20220616162256-latex/">Latex</a></li>
+<li><a href="/posts/main/20220706112803-anki/">Anki</a></li>
+</ul>
+<h3 id="editor">Editor</h3>
+<ul>
+<li><a href="/posts/main/20220629203733-vscode/">VSCode</a></li>
+<li><a href="/posts/main/20220629204553-terminal/">Terminal</a></li>
+</ul>
+<h3 id="squirrel">Squirrel</h3>
+<p>输入法词库扩充 - <a href="https://github.com/felixonmars/fcitx5-pinyin-zhwiki">肥猫百万维基词库</a></p>
+<p>下载 Releases 中的 <code>zhwiki.dict.yaml</code> 到 <code>/Library/Rime/</code> 下，我使用的是「朙月拼音・简化字」版本，因此可以在 <code>luna_pinyin_simp.custom.yaml</code> 中找到下面配置。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c">#  載入朙月拼音擴充詞庫</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">&#34;translator/dictionary&#34;: </span><span class="l">luna_pinyin.extended</span><span class="w">
+</span></span></span></code></pre></div><p>扩展的词库都配置在 <code>luna_pinyin.extended.dict.yaml</code> 中，添加需要扩展的词库即可。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">import_tables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin.sgmain</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin.hanyu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin.poetry</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">luna_pinyin.cn_en</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">zhwiki</span><span class="w">
+</span></span></span></code></pre></div><h3 id="chrome-extensions">Chrome Extensions</h3>
+<h4 id="online-dictionary-helper">Online Dictionary Helper</h4>
+<p>和 Anki 配合记忆单词十分好用</p>
+<h4 id="dark-reader">Dark Reader</h4>
+<p>可以让浏览器的界面变成超级舒服的棕黄色，很适合阅读。</p>
+<h4 id="為什麼你們就是不能加個空格呢">為什麼你們就是不能加個空格呢？</h4>
+<p>强迫症福音，可以给网页中英文之间自动加上空格。</p>
+<h4 id="the-great-suspender">The Great Suspender</h4>
+<p>将暂时不用的 Chrome Tabs 暂停，降低内存的使用。</p>
+<h3 id="calibre">Calibre</h3>
+<h4 id="e-book-viewer">E-book viewer</h4>
+<p>字体设置，Preferences &gt; Styles 中添加下面的 CSS。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">body</span> <span class="o">&gt;</span> <span class="o">*,</span> <span class="nt">span</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">font-family</span><span class="p">:</span> <span class="s2">&#34;LXGW WenKai Screen&#34;</span> <span class="cp">!important</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="photos">Photos</h3>
+<p>因为现在 iCloud 导出的照片会将 Live photos 转换成 <code>.MOV</code> 格式的视频，所以先要删除这部份视频。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">rm -f *<span class="o">[</span>IMG<span class="o">]</span>*.MOV
+</span></span></code></pre></div><p>然后执行脚本分发照片。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">io</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">shutil</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pyheif</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">exifread</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">PIL.Image</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">PIL.ExifTags</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">timeStr</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dirlocal</span> <span class="o">=</span> <span class="nb">dir</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">timeStr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">timeStr</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">st_birthtime</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y:%m:</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dirlocal</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">timeStr</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">timeStr</span><span class="p">,</span> <span class="s2">&#34;%Y:%m:</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;timeStr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timeStr</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dirlocal</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directorySec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dirlocal</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">movefile</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">directory</span> <span class="o">=</span> <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">directorySec</span> <span class="o">=</span> <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directorySec&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directorySec</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directorySec</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directorySec</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directorySec</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 目标路径存在</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 目标路径下无相同文件存在</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">directorySec</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directorySec</span><span class="p">,</span> <span class="n">filename</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">joined</span><span class="p">,</span> <span class="n">directorySec</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 目标文件夹</span>
+</span></span><span class="line"><span class="cl"><span class="nb">dir</span> <span class="o">=</span> <span class="s1">&#39;/Users/luciuschen/Dropbox/Media/Photos/Girl/&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 存在 exif 信息并且当中含有 DateTime，则在当前目录下按照 DateTime 分类</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 不存在 exif 或者 exif 中不含有 DateTime，则在 no-exif 文件夹下进行分类</span>
+</span></span><span class="line"><span class="cl"><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl"><span class="n">filedicts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;timeStr&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;directory&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;directorySec&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">    <span class="n">joined</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;jpeg&#39;</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">=</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="n">exif</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span> <span class="n">v</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="s1">&#39;DateTime&#39;</span> <span class="ow">in</span> <span class="n">exif</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">exif</span><span class="p">[</span><span class="s1">&#39;DateTime&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">19</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">movefile</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;.heic&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">heif_file</span> <span class="o">=</span> <span class="n">pyheif</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tags</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">metadata</span> <span class="ow">in</span> <span class="n">heif_file</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># data 数据中前六个字符 b&#39;Exif 是我们不需要的</span>
+</span></span><span class="line"><span class="cl">            <span class="n">file_stream</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">6</span><span class="p">:])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tags</span> <span class="o">=</span> <span class="n">exifread</span><span class="o">.</span><span class="n">process_file</span><span class="p">(</span><span class="n">file_stream</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">tags</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">tags</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">tags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;EXIF DateTimeOriginal&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;EXIF DateTimeOriginal&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">movefile</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">)</span>
+</span></span></code></pre></div><p>优化版本，这里将处理没有 exif 信息和有 exif 信息的方法合并，不同的部分作为参数。（后续需要学一下 macro 和 generics 的区别和使用场景）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">io</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">shutil</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pyheif</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">exifread</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">PIL.Image</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">PIL.ExifTags</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">timeStr</span><span class="p">,</span> <span class="n">dirlocal</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">timeStr</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">timeStr</span><span class="p">,</span> <span class="s2">&#34;%Y:%m:</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;timeStr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timeStr</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dirlocal</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directorySec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dirlocal</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">movefile</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">directory</span> <span class="o">=</span> <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">directorySec</span> <span class="o">=</span> <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directorySec&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directorySec</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directorySec</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 目标路径存在</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 目标路径下无相同文件存在</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">directorySec</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directorySec</span><span class="p">,</span> <span class="n">filename</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">joined</span><span class="p">,</span> <span class="n">directorySec</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">dir</span> <span class="o">=</span> <span class="s1">&#39;/Users/luciuschen/&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 存在 exif 信息并且当中含有 DateTime，则在当前目录下按照 DateTime 分类</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 不存在 exif 或者 exif 中不含有 DateTime，则在 no-exif 文件夹下进行分类</span>
+</span></span><span class="line"><span class="cl"><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl"><span class="n">filedicts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;timeStr&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;directory&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;directorySec&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">    <span class="n">joined</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filebirthtime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">st_birthtime</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y:%m:</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;jpeg&#39;</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">=</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="n">exif</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span> <span class="n">v</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="s1">&#39;DateTime&#39;</span> <span class="ow">in</span> <span class="n">exif</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">exif</span><span class="p">[</span><span class="s1">&#39;DateTime&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">19</span><span class="p">],</span> <span class="nb">dir</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">filebirthtime</span><span class="p">,</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">filebirthtime</span><span class="p">,</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">movefile</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;.heic&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">heif_file</span> <span class="o">=</span> <span class="n">pyheif</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tags</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">metadata</span> <span class="ow">in</span> <span class="n">heif_file</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># data 数据中前六个字符 b&#39;Exif 是我们不需要的</span>
+</span></span><span class="line"><span class="cl">            <span class="n">file_stream</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">6</span><span class="p">:])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tags</span> <span class="o">=</span> <span class="n">exifread</span><span class="o">.</span><span class="n">process_file</span><span class="p">(</span><span class="n">file_stream</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">tags</span> <span class="ow">and</span> <span class="n">tags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;EXIF DateTimeOriginal&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;EXIF DateTimeOriginal&#34;</span><span class="p">)),</span> <span class="nb">dir</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">filebirthtime</span><span class="p">,</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">movefile</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span></code></pre></div>]]></content:encoded>
     </item>
     
     <item>

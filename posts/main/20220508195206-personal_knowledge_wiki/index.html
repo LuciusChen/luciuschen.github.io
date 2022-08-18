@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-08-15T11:44:51&#43;08:00" />
+  <meta property="article:modified_time" content="2022-08-17T11:43:52&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -58,10 +58,10 @@
   "keywords": [
     
   ],
-  "wordCount" : "1060",
+  "wordCount" : "1057",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-08-15T11:44:51+08:00",
+  "dateModified": "2022-08-17T11:43:52+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -270,9 +270,9 @@ function toggleThemeListener() {
     </h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>August 15, 2022</span></span><span class="meta-item">
+  <span>August 17, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>1060 words</span></span><span class="meta-item">
+  <span>1057 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
   <span>3 min</span></span>
 
@@ -322,13 +322,8 @@ function toggleThemeListener() {
                     <a href="#e-book-viewer" aria-label="E-book viewer">E-book viewer</a></li></ul>
                 </li>
                 <li>
-                    <a href="#photos" aria-label="Photos">Photos</a><ul>
-                        
-                <li>
-                    <a href="#%e4%bc%98%e5%8c%96%e6%96%b9%e6%a1%88" aria-label="优化方案">优化方案</a>
+                    <a href="#photos" aria-label="Photos">Photos</a>
                 </li>
-            </ul>
-            </li>
             </ul>
             </li>
             </ul>
@@ -408,80 +403,7 @@ function toggleThemeListener() {
 </span></span></code></pre></div><h3 id="photos">Photos<a hidden class="anchor" aria-hidden="true" href="#photos">¶</a></h3>
 <p>因为现在 iCloud 导出的照片会将 Live photos 转换成 <code>.MOV</code> 格式的视频，所以先要删除这部份视频。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">rm -f *<span class="o">[</span>IMG<span class="o">]</span>*.MOV
-</span></span></code></pre></div><p>然后将照片中的所有 <code>.jpg|.JPG|.JPEG|.PNG</code> 格式的照片筛选出来，剩下的就都是 <code>.HEIC</code> 格式的照片。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mv -f *<span class="o">(</span>.jpg<span class="p">|</span>.JPG<span class="p">|</span>.JPEG<span class="p">|</span>.PNG<span class="o">)</span> ~/Dropbox/Media/Photos/Love
-</span></span></code></pre></div><p>然后用下面代码将 <code>.HEIC</code> 格式的照片转换为 <code>.jpg</code> 格式。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">subprocess</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">directory</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;.heic&#34;</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Converting </span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&#34;magick&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.jpg&#39;</span><span class="p">)])</span>
-</span></span><span class="line"><span class="cl">        <span class="k">continue</span>
-</span></span></code></pre></div><p>再通过下面代码将照片按照 exif 信息整理分类。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">shutil</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">PIL.Image</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">PIL.ExifTags</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">dir</span> <span class="o">=</span> <span class="s1">&#39;/Users/luciuschen/Dropbox/Media/Photos/Love/&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 存在 exif 信息并且当中含有 DateTime，则在当前目录下按照 DateTime 分类</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 不存在 exif 或者 exif 中不含有 DateTime，则在 no-exif 文件夹下按照创建时间分类</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">timeStr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">directory</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">directorySec</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;PNG&#39;</span><span class="p">,</span> <span class="s1">&#39;jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;JPG&#39;</span><span class="p">,</span> <span class="s1">&#39;jpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;JPEG&#39;</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">        <span class="n">joined</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">=</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">            <span class="n">exif</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span> <span class="n">v</span>
-</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="s1">&#39;DateTime&#39;</span> <span class="ow">in</span> <span class="n">exif</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">timeStr</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">exif</span><span class="p">[</span><span class="s1">&#39;DateTime&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">19</span><span class="p">],</span> <span class="s2">&#34;%Y:%m:</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="n">directory</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">                <span class="n">directorySec</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span>
-</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">timeStr</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span><span class="o">.</span><span class="n">st_birthtime</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="n">directory</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">                <span class="n">directorySec</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span> <span class="o">+</span> \
-</span></span><span class="line"><span class="cl">                    <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">timeStr</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">                <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span><span class="o">.</span><span class="n">st_birthtime</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="n">directory</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">            <span class="n">directorySec</span> <span class="o">=</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span> <span class="o">+</span> \
-</span></span><span class="line"><span class="cl">                <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directorySec</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directorySec</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directorySec</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directorySec</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">directorySec</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">directorySec</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">joined</span><span class="p">,</span> <span class="n">directorySec</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
-</span></span></code></pre></div><h4 id="优化方案">优化方案<a hidden class="anchor" aria-hidden="true" href="#优化方案">¶</a></h4>
-<p>可以直接提取 <code>.HEIC</code> 的 exif 信息，不需要先转换成 <code>.jpg</code>​。</p>
+</span></span></code></pre></div><p>然后执行脚本分发照片。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">io</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">shutil</span>
@@ -563,6 +485,77 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">            <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="n">movefile</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">)</span>
+</span></span></code></pre></div><p>优化版本，这里将处理没有 exif 信息和有 exif 信息的方法合并，不同的部分作为参数。（后续需要学一下 macro 和 generics 的区别和使用场景）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">io</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">shutil</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pyheif</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">exifread</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">PIL.Image</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">PIL.ExifTags</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">timeStr</span><span class="p">,</span> <span class="n">dirlocal</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">timeStr</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">timeStr</span><span class="p">,</span> <span class="s2">&#34;%Y:%m:</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;timeStr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timeStr</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dirlocal</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directorySec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dirlocal</span> <span class="o">+</span> <span class="n">timeStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">timeStr</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">movefile</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">directory</span> <span class="o">=</span> <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">directorySec</span> <span class="o">=</span> <span class="n">filedicts</span><span class="p">[</span><span class="s1">&#39;directorySec&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directorySec</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directorySec</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 目标路径存在</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 目标路径下无相同文件存在</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">directorySec</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directorySec</span><span class="p">,</span> <span class="n">filename</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">joined</span><span class="p">,</span> <span class="n">directorySec</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">dir</span> <span class="o">=</span> <span class="s1">&#39;/Users/luciuschen/&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 存在 exif 信息并且当中含有 DateTime，则在当前目录下按照 DateTime 分类</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 不存在 exif 或者 exif 中不含有 DateTime，则在 no-exif 文件夹下进行分类</span>
+</span></span><span class="line"><span class="cl"><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl"><span class="n">filedicts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;timeStr&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;directory&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;directorySec&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">    <span class="n">joined</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filebirthtime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">st_birthtime</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y:%m:</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;jpeg&#39;</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">=</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">joined</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="n">exif</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span> <span class="n">v</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">PIL</span><span class="o">.</span><span class="n">ExifTags</span><span class="o">.</span><span class="n">TAGS</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="s1">&#39;DateTime&#39;</span> <span class="ow">in</span> <span class="n">exif</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">exif</span><span class="p">[</span><span class="s1">&#39;DateTime&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">19</span><span class="p">],</span> <span class="nb">dir</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">filebirthtime</span><span class="p">,</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">filebirthtime</span><span class="p">,</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">movefile</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;.heic&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">heif_file</span> <span class="o">=</span> <span class="n">pyheif</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tags</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">metadata</span> <span class="ow">in</span> <span class="n">heif_file</span><span class="o">.</span><span class="n">metadata</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># data 数据中前六个字符 b&#39;Exif 是我们不需要的</span>
+</span></span><span class="line"><span class="cl">            <span class="n">file_stream</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">6</span><span class="p">:])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tags</span> <span class="o">=</span> <span class="n">exifread</span><span class="o">.</span><span class="n">process_file</span><span class="p">(</span><span class="n">file_stream</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">tags</span> <span class="ow">and</span> <span class="n">tags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;EXIF DateTimeOriginal&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span> <span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">tags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;EXIF DateTimeOriginal&#34;</span><span class="p">)),</span> <span class="nb">dir</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mkexifdirs</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">filebirthtime</span><span class="p">,</span> <span class="nb">dir</span> <span class="o">+</span> <span class="s1">&#39;no-exif/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">movefile</span><span class="p">(</span><span class="n">filedicts</span><span class="p">,</span> <span class="n">joined</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
 </span></span></code></pre></div>
 
     
@@ -681,11 +674,17 @@ function toggleThemeListener() {
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="next" href="https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/">
+  <a class="prev" href="https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/">
+    <span class="title">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;Prev Page</span>
+    <br>
+    <span>Vanilla Emacs with Purcell</span>
+  </a>
+  <a class="next" href="https://sheerwill.live/posts/main/20220520185239-hammerspoon/">
     <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
     </span>
     <br>
-    <span>Vanilla Emacs with Purcell</span>
+    <span>HammerSpoon</span>
   </a>
 </nav>
 
