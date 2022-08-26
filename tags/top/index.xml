@@ -6,48 +6,11 @@
     <description>Recent content in top on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Jun 2022 12:49:44 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/top/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Refactoring Code</title>
-      <link>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</link>
-      <pubDate>Wed, 29 Jun 2022 12:49:44 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</guid>
-      <description>Refactoring Code How To Find Time Complexity Of An Algorithm
-JavaScript Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await Refactoring Code examples Callback Hell </description>
-      <content:encoded><![CDATA[<h2 id="refactoring-code">Refactoring Code</h2>
-<p><a href="/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">How To Find Time Complexity Of An Algorithm</a></p>
-<h3 id="javascript">JavaScript</h3>
-<h4 id="refactoring-tips">Refactoring Tips</h4>
-<ol>
-<li><a href="/posts/main/20220506193520-refactoring_condition_statements/">Refactoring Condition statements</a></li>
-<li><a href="/posts/main/20220506193545-converting_callbacks_to_promises/">Converting callbacks to promises</a></li>
-<li><a href="/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">Refactoring Promise chains with async/await</a></li>
-</ol>
-<h4 id="refactoring-code-examples">Refactoring Code examples</h4>
-<ul>
-<li><a href="/posts/main/20220616092944-callback_hell/">Callback Hell</a></li>
-</ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>MySQL</title>
-      <link>https://sheerwill.live/posts/main/20220530185321-mysql/</link>
-      <pubDate>Wed, 29 Jun 2022 12:49:27 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220530185321-mysql/</guid>
-      <description>Troubleshoot Issues in MySQL
-Sort Chinese text fields alphabetically by first letter</description>
-      <content:encoded><![CDATA[<p><a href="/posts/main/20220530180443-troubleshoot_issues_in_mysql/">Troubleshoot Issues in MySQL</a></p>
-<p><a href="/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/">Sort Chinese text fields alphabetically by first letter</a></p>
-]]></content:encoded>
-    </item>
-    
+    <lastBuildDate>Wed, 24 Aug 2022 21:10:20 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/top/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://sheerwill.live/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Wed, 29 Jun 2022 12:45:35 +0800</pubDate>
+      <pubDate>Wed, 24 Aug 2022 21:10:20 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -70,7 +33,7 @@ Sort Chinese text fields alphabetically by first letter</description>
 <h4 id="fair-loss-links">Fair-loss links</h4>
 <p>消息可能会丢失、重复或重新排序，如果你一直重新发送，消息终将会传递过去。</p>
 <p>每次发送消息成功的概率都是非零，这个时候只要一直重试，我们就假设消息一定会传递到另外一个节点。</p>
-<p><strong>Fair-losl links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</strong></p>
+<p><strong>Fair-lose links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</strong></p>
 <h4 id="arbitrary-links">Arbitrary links</h4>
 <p>可能传递过程中会有恶意的第三方对消息进行干预。</p>
 <p>比如公共场合的公共 WiFi 就会出现这种情况。</p>
@@ -385,6 +348,43 @@ Sort Chinese text fields alphabetically by first letter</description>
 </li>
 </ol>
 </div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Refactoring Code</title>
+      <link>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</link>
+      <pubDate>Wed, 29 Jun 2022 12:49:44 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</guid>
+      <description>Refactoring Code How To Find Time Complexity Of An Algorithm
+JavaScript Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await Refactoring Code examples Callback Hell </description>
+      <content:encoded><![CDATA[<h2 id="refactoring-code">Refactoring Code</h2>
+<p><a href="/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">How To Find Time Complexity Of An Algorithm</a></p>
+<h3 id="javascript">JavaScript</h3>
+<h4 id="refactoring-tips">Refactoring Tips</h4>
+<ol>
+<li><a href="/posts/main/20220506193520-refactoring_condition_statements/">Refactoring Condition statements</a></li>
+<li><a href="/posts/main/20220506193545-converting_callbacks_to_promises/">Converting callbacks to promises</a></li>
+<li><a href="/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">Refactoring Promise chains with async/await</a></li>
+</ol>
+<h4 id="refactoring-code-examples">Refactoring Code examples</h4>
+<ul>
+<li><a href="/posts/main/20220616092944-callback_hell/">Callback Hell</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>MySQL</title>
+      <link>https://sheerwill.live/posts/main/20220530185321-mysql/</link>
+      <pubDate>Wed, 29 Jun 2022 12:49:27 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220530185321-mysql/</guid>
+      <description>Troubleshoot Issues in MySQL
+Sort Chinese text fields alphabetically by first letter</description>
+      <content:encoded><![CDATA[<p><a href="/posts/main/20220530180443-troubleshoot_issues_in_mysql/">Troubleshoot Issues in MySQL</a></p>
+<p><a href="/posts/main/20220601104443-sort_chinese_text_fields_alphabetically_by_first_letter/">Sort Chinese text fields alphabetically by first letter</a></p>
 ]]></content:encoded>
     </item>
     
