@@ -3,13 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://sheerwill.live/</loc>
-    <lastmod>2022-08-26T11:03:17+08:00</lastmod>
+    <lastmod>2022-09-05T00:39:31+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/</loc>
-    <lastmod>2022-08-26T11:03:17+08:00</lastmod>
+    <lastmod>2022-09-05T00:39:31+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</loc>
-    <lastmod>2022-08-26T11:03:17+08:00</lastmod>
+    <lastmod>2022-09-05T00:39:31+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</loc>
+    <lastmod>2022-08-31T22:52:43+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220505220832-doom-emacs/</loc>
+    <lastmod>2022-08-29T21:30:20+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220508195206-personal_knowledge_wiki/</loc>
     <lastmod>2022-08-25T13:34:27+08:00</lastmod>
@@ -41,9 +47,6 @@
     <loc>https://sheerwill.live/posts/main/20220616132407-causal_broadcast/</loc>
     <lastmod>2022-07-27T11:33:02+08:00</lastmod>
   </url><url>
-    <loc>https://sheerwill.live/posts/main/20220505220832-doom-emacs/</loc>
-    <lastmod>2022-07-23T21:17:44+08:00</lastmod>
-  </url><url>
     <loc>https://sheerwill.live/posts/main/20220505220832-emacs/</loc>
     <lastmod>2022-07-16T22:44:32+08:00</lastmod>
   </url><url>
@@ -61,9 +64,6 @@
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220604180341-stub/</loc>
     <lastmod>2022-06-30T14:18:17+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</loc>
-    <lastmod>2022-06-30T08:58:24+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220629203733-vscode/</loc>
     <lastmod>2022-06-29T22:51:37+08:00</lastmod>

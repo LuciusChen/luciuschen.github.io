@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Aug 2022 11:03:17 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Sep 2022 00:39:31 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Fri, 26 Aug 2022 11:03:17 +0800</pubDate>
+      <pubDate>Mon, 05 Sep 2022 00:39:31 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -395,7 +395,7 @@
 </span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-update-on-save</span> <span class="no">t</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-open-on-start</span> <span class="no">t</span><span class="p">))</span>
 </span></span></code></pre></div><h4 id="org-modern">org-modern</h4>
-<p>美化部分样式</p>
+<p>美化部分样式，另外设置背景透明以及光标所在代码块按照括号高亮的函数也在放在这里。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-modern</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-modern</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">org</span>
@@ -410,6 +410,7 @@
 </span></span><span class="line"><span class="cl">        <span class="c1">;; org-modern-checkbox nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-todo</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">;; org-modern-footnote nil</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-block-name</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-priority</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-progress</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-keyword</span> <span class="no">nil</span>
@@ -420,6 +421,53 @@
 </span></span><span class="line"><span class="cl">        <span class="nv">org-ellipsis</span> <span class="s">&#34;➘&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">custom-set-faces</span>
 </span></span><span class="line"><span class="cl"> <span class="o">&#39;</span><span class="p">(</span><span class="nv">org-ellipsis</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="nb">:foreground</span> <span class="s">&#34;yellow green&#34;</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 设置背景透明度</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">user/change-background-opacity</span> <span class="p">(</span><span class="nv">alpha</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span> <span class="s">&#34;nOpacity: &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nf">&gt;=</span> <span class="nv">alpha</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nf">&lt;=</span> <span class="nv">alpha</span> <span class="mi">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">user/set-background-opacity</span> <span class="nv">alpha</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">format-message</span> <span class="s">&#34;Opacity has to be between 0 and 100 but is %d.&#34;</span> <span class="nv">alpha</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">user/set-background-opacity</span> <span class="p">(</span><span class="nv">alpha</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-frame-parameter</span> <span class="p">(</span><span class="nf">selected-frame</span><span class="p">)</span> <span class="ss">&#39;alpha</span> <span class="nv">alpha</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;default-frame-alist</span> <span class="p">(</span><span class="nf">cons</span> <span class="ss">&#39;alpha</span> <span class="nv">alpha</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">user/set-background-opacity</span> <span class="mi">90</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 高亮光标所在的括号内容，提高阅读效率。</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="ss">&#39;highlight-blocks</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">package-install</span> <span class="ss">&#39;highlight-blocks</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;highlight-blocks</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">highlight-blocks--get-bounds</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Get the bounds of the nested blocks the point is in.
+</span></span></span><span class="line"><span class="cl"><span class="s">The returned value is a list of conses, where car is the start of a
+</span></span></span><span class="line"><span class="cl"><span class="s">block and cdr is the end of a block, starting from the outermost
+</span></span></span><span class="line"><span class="cl"><span class="s">block.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">result</span> <span class="o">&#39;</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">parse-sexp-ignore-comments</span> <span class="no">t</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">condition-case</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">parse-state</span> <span class="p">(</span><span class="nv">syntax-ppss</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">starting-pos</span> <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nf">nth</span> <span class="mi">3</span> <span class="nv">parse-state</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                                     <span class="p">(</span><span class="nf">nth</span> <span class="mi">4</span> <span class="nv">parse-state</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                                 <span class="p">(</span><span class="nf">nth</span> <span class="mi">8</span> <span class="nv">parse-state</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nf">point</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">begins</span> <span class="p">(</span><span class="nf">nreverse</span> <span class="p">(</span><span class="nf">nth</span> <span class="mi">9</span> <span class="nv">parse-state</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">end</span> <span class="nv">starting-pos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">i</span> <span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nf">eq</span> <span class="nv">highlight-blocks-max-innermost-block-count</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                     <span class="p">(</span><span class="nf">&lt;</span> <span class="nv">i</span> <span class="nv">highlight-blocks-max-innermost-block-count</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">setq</span> <span class="nv">end</span> <span class="p">(</span><span class="nf">scan-lists</span> <span class="nv">end</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">push</span> <span class="p">(</span><span class="nf">cons</span> <span class="p">(</span><span class="nb">pop</span> <span class="nv">begins</span><span class="p">)</span> <span class="nv">end</span><span class="p">)</span> <span class="nv">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">setq</span> <span class="nv">i</span> <span class="p">(</span><span class="nf">1+</span> <span class="nv">i</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">scan-error</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 修改下这个函数函数的返回值，可以只高亮当前所在的块</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">last</span> <span class="nv">result</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; Put the mode hooks where you want it, for example</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-lisp-mode-hook</span>       <span class="ss">&#39;highlight-blocks--get-bounds</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; (add-hook &#39;lisp-interaction-mode-hook &#39;highlight-blocks-mode)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; (add-hook &#39;lisp-mode-hook             &#39;highlight-blocks-mode)</span>
 </span></span></code></pre></div><h4 id="sis">sis</h4>
 <p>需要安装 <code>macism</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap laishulu/macism
@@ -450,6 +498,94 @@
 </span></span><span class="line"><span class="cl">  <span class="c1">;; hydra 时切换到英文</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;hydra-org-agenda-menu/body</span> <span class="nb">:after</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span><span class="p">)</span>
+</span></span></code></pre></div><h4 id="elfeed">elfeed</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>require-package <span class="s1">&#39;elfeed)
+</span></span></span><span class="line"><span class="cl"><span class="s1">(global-set-key (kbd &#34;C-x w&#34;) &#39;</span>elfeed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>use-package elfeed-org
+</span></span><span class="line"><span class="cl">  :ensure t
+</span></span><span class="line"><span class="cl">  :config
+</span></span><span class="line"><span class="cl">  <span class="o">(</span>elfeed-org<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">(</span>setq rmh-elfeed-org-files <span class="o">(</span>list <span class="s2">&#34;~/Dropbox/org/elfeed.org&#34;</span><span class="o">)))</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>defun concatenate-authors <span class="o">(</span>authors-list<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Given AUTHORS-LIST, list of plists; return string of all authors
+</span></span></span><span class="line"><span class="cl"><span class="s2">concatenated.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">(</span>mapconcat
+</span></span><span class="line"><span class="cl">   <span class="o">(</span>lambda <span class="o">(</span>author<span class="o">)</span> <span class="o">(</span>plist-get author :name<span class="o">))</span>
+</span></span><span class="line"><span class="cl">   authors-list <span class="s2">&#34;, &#34;</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>defun my-search-print-fn <span class="o">(</span>entry<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Print ENTRY to the buffer.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">(</span>let* <span class="o">((</span>date <span class="o">(</span>elfeed-search-format-date <span class="o">(</span>elfeed-entry-date entry<span class="o">)))</span>
+</span></span><span class="line"><span class="cl">         <span class="o">(</span>title <span class="o">(</span>or <span class="o">(</span>elfeed-meta entry :title<span class="o">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">(</span>elfeed-entry-title entry<span class="o">)</span> <span class="s2">&#34;&#34;</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">         <span class="o">(</span>title-faces <span class="o">(</span>elfeed-search--faces <span class="o">(</span>elfeed-entry-tags entry<span class="o">)))</span>
+</span></span><span class="line"><span class="cl">         <span class="o">(</span>feed <span class="o">(</span>elfeed-entry-feed entry<span class="o">))</span>
+</span></span><span class="line"><span class="cl">         <span class="o">(</span>feed-title
+</span></span><span class="line"><span class="cl">          <span class="o">(</span>when feed
+</span></span><span class="line"><span class="cl">            <span class="o">(</span>or <span class="o">(</span>elfeed-meta feed :title<span class="o">)</span> <span class="o">(</span>elfeed-feed-title feed<span class="o">))))</span>
+</span></span><span class="line"><span class="cl">         <span class="o">(</span>entry-authors <span class="o">(</span>concatenate-authors
+</span></span><span class="line"><span class="cl">                         <span class="o">(</span>elfeed-meta entry :authors<span class="o">)))</span>
+</span></span><span class="line"><span class="cl">         <span class="o">(</span>tags <span class="o">(</span>mapcar <span class="c1">#&#39;symbol-name (elfeed-entry-tags entry)))</span>
+</span></span><span class="line"><span class="cl">         <span class="o">(</span>tags-str <span class="o">(</span>mapconcat
+</span></span><span class="line"><span class="cl">                    <span class="o">(</span>lambda <span class="o">(</span>s<span class="o">)</span> <span class="o">(</span>propertize s <span class="s1">&#39;face
+</span></span></span><span class="line"><span class="cl"><span class="s1">                                            &#39;</span>elfeed-search-tag-face<span class="o">))</span>
+</span></span><span class="line"><span class="cl">                    tags <span class="s2">&#34;,&#34;</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">         <span class="o">(</span>title-width <span class="o">(</span>- <span class="o">(</span>window-width<span class="o">)</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">                         elfeed-search-trailing-width<span class="o">))</span>
+</span></span><span class="line"><span class="cl">         <span class="o">(</span>title-column <span class="o">(</span>elfeed-format-column
+</span></span><span class="line"><span class="cl">                        title <span class="o">(</span>elfeed-clamp
+</span></span><span class="line"><span class="cl">                               elfeed-search-title-min-width
+</span></span><span class="line"><span class="cl">                               title-width
+</span></span><span class="line"><span class="cl">                               elfeed-search-title-max-width<span class="o">)</span>
+</span></span><span class="line"><span class="cl">                        :left<span class="o">))</span>
+</span></span><span class="line"><span class="cl">         <span class="o">(</span>authors-width 135<span class="o">)</span>
+</span></span><span class="line"><span class="cl">         <span class="o">(</span>authors-column <span class="o">(</span>elfeed-format-column
+</span></span><span class="line"><span class="cl">                        entry-authors <span class="o">(</span>elfeed-clamp
+</span></span><span class="line"><span class="cl">                               elfeed-search-title-min-width
+</span></span><span class="line"><span class="cl">                               authors-width
+</span></span><span class="line"><span class="cl">                               131<span class="o">)</span>
+</span></span><span class="line"><span class="cl">                        :left<span class="o">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">(</span>insert <span class="o">(</span>propertize date <span class="s1">&#39;face &#39;</span>elfeed-search-date-face<span class="o">)</span> <span class="s2">&#34; &#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">(</span>insert <span class="o">(</span>propertize title-column
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;face title-faces &#39;</span>kbd-help title<span class="o">)</span> <span class="s2">&#34; &#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">(</span>insert <span class="o">(</span>propertize authors-column
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;face &#39;</span>elfeed-search-date-face
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;kbd-help entry-authors) &#34; &#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    ;; (when feed-title
+</span></span></span><span class="line"><span class="cl"><span class="s1">    ;;   (insert (propertize entry-authors
+</span></span></span><span class="line"><span class="cl"><span class="s1">    ;; &#39;</span>face <span class="s1">&#39;elfeed-search-feed-face) &#34; &#34;))
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    (when entry-authors
+</span></span></span><span class="line"><span class="cl"><span class="s1">      (insert (propertize feed-title
+</span></span></span><span class="line"><span class="cl"><span class="s1">                          &#39;</span>face <span class="s1">&#39;elfeed-search-feed-face) &#34; &#34;))
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    ;; (when tags
+</span></span></span><span class="line"><span class="cl"><span class="s1">    ;;   (insert &#34;(&#34; tags-str &#34;)&#34;))
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    )
+</span></span></span><span class="line"><span class="cl"><span class="s1">  )
+</span></span></span><span class="line"><span class="cl"><span class="s1">(setq elfeed-search-print-entry-function #&#39;</span>my-search-print-fn<span class="o">)</span>
+</span></span></code></pre></div><h4 id="telega">telega</h4>
+<p><code>brew install tdlib</code> 的版本过低，需要自行编译，参考 <a href="https://tdlib.github.io/td/build.html?language=Swift">TDLib build instructions</a>。这个之后需要 <code>M-x telega-server-build</code> 重新加载 telega-server。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">xcode-select --install
+</span></span><span class="line"><span class="cl">/bin/bash -c <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">brew install gperf cmake openssl
+</span></span><span class="line"><span class="cl">git clone https://github.com/tdlib/td.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> td
+</span></span><span class="line"><span class="cl">rm -rf build
+</span></span><span class="line"><span class="cl">mkdir build
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> build
+</span></span><span class="line"><span class="cl">cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>Release -DOPENSSL_ROOT_DIR<span class="o">=</span>/usr/local/opt/openssl/ -DCMAKE_INSTALL_PREFIX:PATH<span class="o">=</span>/usr/local ..
+</span></span><span class="line"><span class="cl">cmake --build . --target install
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl">ls -l /usr/local
+</span></span></code></pre></div><p>其中 tblib 的版本当前需要 1.8.4，可以切换到 1.8.4 的版本。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout b447c32fe94c3d62d74c6b9608649c791641c3e5
 </span></span></code></pre></div><h3 id="init-org-dot-el">init-org.el</h3>
 <p>org-roam 和 Emacs 自带的 agenda 可以很方便的将笔记和 GTD 结合起来。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org.el --- Org-mode config -*- lexical-binding: t -*-</span>
@@ -1584,6 +1720,488 @@ Entity07 |o--|| Entity08
 </li>
 <li id="fn:3">
 <p><a href="https://ox-hugo.scripter.co/doc/org-special-blocks/">Org Special Blocks</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Tools to Increase Productivity and Efficiency</title>
+      <link>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</link>
+      <pubDate>Wed, 31 Aug 2022 22:52:43 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</guid>
+      <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Wi-Phi – Wireless Philosophy 很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学</description>
+      <content:encoded><![CDATA[<h2 id="misc">Misc</h2>
+<ol>
+<li>
+<p><a href="https://www.templatemaker.nl/zh-cn/">Templatemaker</a></p>
+<p>制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。</p>
+</li>
+<li>
+<p><a href="https://www.wi-phi.com/">Wi-Phi – Wireless Philosophy</a></p>
+<p>很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学网站，致力于以轻松有趣的动画形式阐释哲学问题及哲学思维方式。建于2013年，现在已经有105个哲学动画上线了。</p>
+</li>
+</ol>
+<h2 id="writing">Writing</h2>
+<ol>
+<li>
+<p><a href="https://github.com/doocs/md">WeChat Markdown Editor</a></p>
+<p>一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性。</p>
+</li>
+</ol>
+<h3 id="查找-citations-的网站">查找 citations 的网站</h3>
+<ol>
+<li>
+<p><a href="https://zbib.org/">zoterobib</a></p>
+<p>Your bibliography is empty. To add a source, paste or type its URL, ISBN, DOI, PMID, arXiv ID, or title into the search box above</p>
+</li>
+<li>
+<p><a href="https://www.doi2bib.org/">doi2bib</a></p>
+<p>give us a DOI and we will do our best to get you the BibTeX entry</p>
+</li>
+<li>
+<p><a href="https://www.bibsonomy.org/">BibSonomy</a></p>
+<p>The easy way to manage scientific publications and bookmarks</p>
+<p>BibSonomy helps you to manage your publications and bookmarks, to collaborate with your colleagues and to find new interesting material for your research.</p>
+</li>
+<li>
+<p><a href="http://www.bibtexsearch.com/">BibTeX Search</a></p>
+<p>You&rsquo;re searching over millions of BibTeX records&hellip;</p>
+</li>
+<li>
+<p><a href="https://scholar.google.com/">Google Scholar</a></p>
+<p>站在巨人的肩膀上</p>
+</li>
+</ol>
+<h4 id="book">Book</h4>
+<p>For books I usually use a site, where it is possible to get Bibtex citations from Amazon.com articles. This is very good for books, and some inproceedings and incollections might be found here as well.</p>
+<ol>
+<li><a href="https://lead.to/amazon/com/">Amazon</a></li>
+</ol>
+<h4 id="article">Article</h4>
+<p>As a Software Engineer I quite often have to deal with technical papers from ACM or IEEE. Both their catalogs provide Bibtex export capabilities.</p>
+<ol>
+<li>
+<p><a href="https://dl.acm.org/">ACM</a></p>
+</li>
+<li>
+<p><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a></p>
+<p>Advancing Technology for Humanity</p>
+</li>
+</ol>
+<h2 id="book">Book</h2>
+<ol>
+<li>
+<p><a href="http://libgen.rs/">Library Genesis</a></p>
+<p>电子书资源查找，中英文都有，英文相对较多。</p>
+</li>
+<li>
+<p><a href="https://www.loudreader.com/">Ebook Reader for web</a></p>
+<p>在线阅读 PDF、azw3、epub、mobi 几种格式。</p>
+</li>
+</ol>
+<h2 id="video">Video</h2>
+<ol>
+<li>
+<p><a href="https://sound-effects.bbcrewind.co.uk/">BBC Sound effects</a></p>
+<p>BBC 提供的免费下载的音效的网站。</p>
+</li>
+</ol>
+<h2 id="medicine">Medicine</h2>
+<ol>
+<li>
+<p><a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a></p>
+<p>顾名思义，权威的诊疗查询手册。</p>
+</li>
+</ol>
+<h2 id="design">Design</h2>
+<h3 id="color-picker">Color Picker</h3>
+<ul>
+<li>
+<p><a href="https://nipponcolors.com/">日本の伝統色</a></p>
+<p>日本的一个颜色拾取网站，很漂亮。</p>
+</li>
+</ul>
+<h3 id="plantuml">PlantUML</h3>
+<ul>
+<li>
+<p><a href="https://real-world-plantuml.com/">Real World PlantUML</a></p>
+<p>PlantUML 例子</p>
+</li>
+</ul>
+<h2 id="chrome-extension">Chrome extension</h2>
+<ol>
+<li>
+<p><a href="https://www.languagereactor.com/">Language Reactor</a></p>
+<p>提供 NetFlix、Youtube、TurtleTube、Video File、Text 的翻译，以及 Flashcards。</p>
+</li>
+</ol>
+<h2 id="front-end">Front-End</h2>
+<ol>
+<li>
+<p><a href="https://codepen.io/">codepen</a></p>
+<p>The best place to build, test, and discover front-end code</p>
+</li>
+</ol>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Doom Emacs</title>
+      <link>https://sheerwill.live/posts/main/20220505220832-doom-emacs/</link>
+      <pubDate>Mon, 29 Aug 2022 21:30:20 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220505220832-doom-emacs/</guid>
+      <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs With Homebrew First, Doom’s dependencies: brew install git ripgrep brew install coreutils fd xcode-selected --install emacs-mac. It offers good integration</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<blockquote>
+<p>Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.</p>
+<p>– Neal Stephenson, In the Beginning was the Command Line (1998)</p>
+</blockquote>
+<h2 id="install-emacs-with-homebrew">Install Emacs With Homebrew</h2>
+<p>First, Doom’s dependencies:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install git ripgrep
+</span></span><span class="line"><span class="cl">brew install coreutils fd
+</span></span><span class="line"><span class="cl">xcode-selected --install
+</span></span></code></pre></div><p><a href="https://bitbucket.org/mituharu/emacs-mac/src">emacs-mac</a>. It offers good integration with macOS, native emojis and better childframe support.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew tap d12frosted/emacs-plus
+</span></span><span class="line"><span class="cl">brew install emacs-plus --with-native-comp --with-modern-vscode-icon
+</span></span><span class="line"><span class="cl">ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications
+</span></span></code></pre></div><h2 id="doom-emacs">Doom Emacs</h2>
+<p>With Emacs and Doom&rsquo;s dependencies installed, next is to install Doom Emacs itself:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+</span></span><span class="line"><span class="cl">~/.emacs.d/bin/doom install
+</span></span></code></pre></div><p>如果提示 <code>.emacs.d</code> 已存在，删除重新执行上述命令即可。</p>
+<p><code>.zshrc</code> 中需要添加 <code>export PATH=&quot;$HOME/.emacs.d/bin:$PATH</code> ，这样就可以直接使用 <code>doom</code> 命令了。</p>
+<h3 id="doom-doctor-问题"><code>Doom Doctor</code> 问题</h3>
+<ol>
+<li>Warning: unable to detect fonts because fontconfig isn&rsquo;t installed</li>
+</ol>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install fontconfig
+</span></span></code></pre></div><ol>
+<li>! Couldn&rsquo;t find shellcheck. Shell script linting will not work</li>
+</ol>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install shellcheck
+</span></span></code></pre></div><ol>
+<li>Couldn&rsquo;t find the dot executable (from graphviz). org-roam will not be able to generate graph visualizations.</li>
+</ol>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install graphviz
+</span></span></code></pre></div><ol>
+<li>This installed grep binary was not built with support for PCRE lookaheads. Some advanced consult filtering features will not work as a result, see the module readme.</li>
+</ol>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#  因为 Mac 本身安装的是 BSD 的。</span>
+</span></span><span class="line"><span class="cl">grep --version
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以看到 grep (BSD grep, GNU compatible) 2.6.0-FreeBSD ，即 BSD 版本。</span>
+</span></span><span class="line"><span class="cl">brew install grep
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装 GNU 的 grep，并在 .zshrc 中配置 PATH=&#34;/usr/local/opt/grep/libexec/gnubin:$PATH&#34; 即可。再次查看版本可以看到如下。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># grep (GNU grep) 3.7</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Packaged by Homebrew</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Copyright (C) 2021 Free Software Foundation, Inc.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># License GPLv3+: GNU GPL version 3 or later &lt;https://gnu.org/licenses/gpl.html&gt;.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># This is free software: you are free to change and redistribute it.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># There is NO WARRANTY, to the extent permitted by law.</span>
+</span></span></code></pre></div><h2 id="org-roam">Org-roam</h2>
+<p>具体的配置文件在 <code>.doom.d/</code> 下，参见 <a href="https://github.com/LuciusChen/dotfiles/tree/master/.doom.d">.doom.d</a>。</p>
+<h2 id="shortcuts">Shortcuts</h2>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-RET</code></td>
+<td>在当前 headline 所属的内容后建立一个同级 headline</td>
+<td>无 headline 时创建一个一级 headline</td>
+</tr>
+<tr>
+<td><code>M-RET</code></td>
+<td>在当前 headline 后建立一个同级 headline</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-right</code></td>
+<td>降低当前 headline 的层级</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-left</code></td>
+<td>提高当前 headline 的层级</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-up</code></td>
+<td>将当前 headline 及其内容作为整体向上移动</td>
+<td></td>
+</tr>
+<tr>
+<td><code>M-down</code></td>
+<td>将当前 headline 及其内容作为整体向下移动</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-return</code></td>
+<td>在当前列表项的内容后建立一个同级列表项</td>
+<td>光标在列表项同一行时有效</td>
+</tr>
+<tr>
+<td><code>M-RET</code></td>
+<td>在当前列表项后建立一个同级列表项</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-right</code></td>
+<td>降低当前列表项的层级</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-left</code></td>
+<td>提高当前列表项的层级</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-up</code></td>
+<td>将当前列表项及其内容作为整体向上移动</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>M-down</code></td>
+<td>将当前列表项及其内容作为整体向下移动</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>C-x-o</code></td>
+<td>切换窗口</td>
+<td>C-x 中有很多操作，可以看提示。</td>
+</tr>
+<tr>
+<td><code>C-c C-c</code></td>
+<td>在创建 node 编写完毕后快速保存</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-g</code></td>
+<td>取消操作</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-x-d</code></td>
+<td>进入 dired 模式</td>
+<td></td>
+</tr>
+<tr>
+<td><code>SPC f r</code></td>
+<td>查找最近文件</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-v</code></td>
+<td>显示图片</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-c C-s</code></td>
+<td></td>
+<td>设置任务开始时间</td>
+</tr>
+<tr>
+<td><code>C-c C-d</code></td>
+<td>设置任务截止时间</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-t</code></td>
+<td>改变任务状态</td>
+<td></td>
+</tr>
+<tr>
+<td><code>S-Up/Down</code></td>
+<td>设置任务优先级 [#A], [#B], [#C]</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-i</code></td>
+<td>开始任务计时</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-o</code></td>
+<td>终止任务计时</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c [</code></td>
+<td>将当前文件加入 Org-Agenda</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c ]</code></td>
+<td>将当前文件从 Org-Agenda 移除</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Shortcuts</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>t</code></td>
+<td>在 Org-Agenda 的任务条目上， 修改任务状态。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-a</code></td>
+<td>归档</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-w</code></td>
+<td>activate refile</td>
+<td></td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>在 Org-Agenda 的任务条目上， 开始计时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td>在 Org-Agenda 的任务条目上， 终止计时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>在任务上添加 note</td>
+<td></td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>clock mode, 显示耗时。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-x C-l</code></td>
+<td>预览 Latex</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c \</code></td>
+<td>按 tag 搜索</td>
+<td>好像只能单文件内</td>
+</tr>
+<tr>
+<td><code>C-C C-o</code></td>
+<td>打开链接</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="org-grammar">Org grammar</h2>
+<h3 id="basic">basic</h3>
+<p>This is almost anything you need to know about Org mode syntax:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="gh">*</span><span class="gs"> This Is A Heading</span>
+</span></span><span class="line"><span class="cl"><span class="gu">**</span> This Is A Sub-Heading
+</span></span><span class="line"><span class="cl"><span class="gu">***</span> And A Sub-Sub-Heading
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Paragraphs are separated by at least one empty line.
+</span></span><span class="line"><span class="cl"><span class="gs">*bold*</span> <span class="ge">/italic/</span> <span class="gl">_underlined_</span> <span class="gd">+strikethrough+</span> <span class="nc">=monospaced=</span>
+</span></span><span class="line"><span class="cl">[[<span class="na">http://Karl-Voit.at</span>][<span class="nt">Link description</span>]]
+</span></span><span class="line"><span class="cl">http://Karl-Voit.at → link without description
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">- </span>list item
+</span></span><span class="line"><span class="cl"><span class="k">- </span>another item
+</span></span><span class="line"><span class="cl">  <span class="k">- </span>sub-item
+</span></span><span class="line"><span class="cl">    <span class="k">1.</span> also enumerated
+</span></span><span class="line"><span class="cl">    <span class="k">2.</span> if you like
+</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> yet to be done
+</span></span><span class="line"><span class="cl"><span class="k">- [X]</span> item which is done
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">: Simple pre-formatted text such as for source code.
+</span></span><span class="line"><span class="cl">: This also respects the line breaks. <span class="gs">*bold*</span> is not bold here.
+</span></span></code></pre></div><h3 id="code-block">code block</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">myresult</span> <span class="o">=</span> <span class="mi">42</span> <span class="o">*</span> <span class="mi">23</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello Europe! &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">myresult</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="table">table</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="s">| My Column 1 | My Column 2 | Last Column |</span>
+</span></span><span class="line"><span class="cl"><span class="s">|-------------+-------------+-------------|</span>
+</span></span><span class="line"><span class="cl"><span class="s">|          42 | foo         | bar         |</span>
+</span></span><span class="line"><span class="cl"><span class="s">|          23 | baz         | abcdefg     |</span>
+</span></span><span class="line"><span class="cl"><span class="s">|-------------+-------------+-------------|</span>
+</span></span><span class="line"><span class="cl"><span class="s">|          65 |             |             |</span>
+</span></span></code></pre></div><h2 id="export">Export</h2>
+<p>对于只需要导出某个 header 下的内容的需求，只需要在 header 上加上 <code>:export:</code> 即可。</p>
+<h3 id="markdown-file">Markdown file</h3>
+<p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>， <code>M-x org-pandoc-export-as-gfm</code> 算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
+<h3 id="hugo">Hugo</h3>
+<p>在文件头部添加</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+HUGO_BASE_DIR: ~/Dropbox/hugo/
+</span></span><span class="line"><span class="cl">#+HUGO_SECTION: posts/main
+</span></span><span class="line"><span class="cl">#+HUGO_WEIGHT: auto
+</span></span><span class="line"><span class="cl">#+HUGO_AUTO_SET_LASTMOD: t
+</span></span></code></pre></div><p>需要导出为 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="c">#+begin_mark</span>
+</span></span><span class="line"><span class="cl">marked text
+</span></span><span class="line"><span class="cl"><span class="c">#+end_mark</span>
+</span></span></code></pre></div><p>需要导出为块级 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时，也就是前后的空格不进行 trim。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+header</span><span class="c">: :trim-pre nil :trim-post nil</span>
+</span></span><span class="line"><span class="cl"><span class="c">#+begin_mark</span>
+</span></span><span class="line"><span class="cl">marked text
+</span></span><span class="line"><span class="cl"><span class="c">#+end_mark</span>
+</span></span></code></pre></div><h3 id="latex">Latex</h3>
+<h4 id="dependency">Dependency</h4>
+<p>需要安装 texlive</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install texlive
+</span></span></code></pre></div><h4 id="latex-语法">Latex 语法</h4>
+<p><a href="/posts/main/20220616162256-latex/">Latex 语法</a></p>
+<h4 id="pdf-导出报错">PDF 导出报错</h4>
+<ul>
+<li><code>Unicode character 考 (U+8003) not set up for use with LaTeX.</code> 是因为 Latex 本身不支持中文。</li>
+</ul>
+<h4 id="中文-pdf-导出设置">中文 PDF 导出设置</h4>
+<ol>
+<li>使用 <a href="https://github.com/ElegantLaTeX/ElegantPaper">ElegantPaper</a>，需要将 elegantpaper.cls 文件放在 org 目录下。</li>
+<li>安装依赖</li>
+</ol>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">brew install pygments
+</span></span></code></pre></div><ol>
+<li>导出文件头部增加</li>
+</ol>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+LATEX_COMPILER</span><span class="c">: xelatex</span>
+</span></span><span class="line"><span class="cl"><span class="cs">#+LATEX_CLASS</span><span class="c">: elegantpaper</span>
+</span></span><span class="line"><span class="cl"><span class="cs">#+OPTIONS</span><span class="c">: prop:t</span>
+</span></span></code></pre></div><div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://ox-hugo.scripter.co/doc/org-special-blocks/">Org Special Blocks</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
@@ -3545,366 +4163,6 @@ Entity07 |o--|| Entity08
     </item>
     
     <item>
-      <title>Doom Emacs</title>
-      <link>https://sheerwill.live/posts/main/20220505220832-doom-emacs/</link>
-      <pubDate>Sat, 23 Jul 2022 21:17:44 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220505220832-doom-emacs/</guid>
-      <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs With Homebrew First, Doom’s dependencies: brew install git ripgrep brew install coreutils fd xcode-selected --install emacs-mac. It offers good integration</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<blockquote>
-<p>Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.</p>
-<p>– Neal Stephenson, In the Beginning was the Command Line (1998)</p>
-</blockquote>
-<h2 id="install-emacs-with-homebrew">Install Emacs With Homebrew</h2>
-<p>First, Doom’s dependencies:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install git ripgrep
-</span></span><span class="line"><span class="cl">brew install coreutils fd
-</span></span><span class="line"><span class="cl">xcode-selected --install
-</span></span></code></pre></div><p><a href="https://bitbucket.org/mituharu/emacs-mac/src">emacs-mac</a>. It offers good integration with macOS, native emojis and better childframe support.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew tap d12frosted/emacs-plus
-</span></span><span class="line"><span class="cl">brew install emacs-plus --with-native-comp --with-modern-vscode-icon
-</span></span><span class="line"><span class="cl">ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications
-</span></span></code></pre></div><h2 id="doom-emacs">Doom Emacs</h2>
-<p>With Emacs and Doom&rsquo;s dependencies installed, next is to install Doom Emacs itself:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-</span></span><span class="line"><span class="cl">~/.emacs.d/bin/doom install
-</span></span></code></pre></div><p>如果提示 <code>.emacs.d</code> 已存在，删除重新执行上述命令即可。</p>
-<p><code>.zshrc</code> 中需要添加 <code>export PATH=&quot;$HOME/.emacs.d/bin:$PATH</code> ，这样就可以直接使用 <code>doom</code> 命令了。</p>
-<h3 id="doom-doctor-问题"><code>Doom Doctor</code> 问题</h3>
-<ol>
-<li>Warning: unable to detect fonts because fontconfig isn&rsquo;t installed</li>
-</ol>
-<!--listend-->
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install fontconfig
-</span></span></code></pre></div><ol>
-<li>! Couldn&rsquo;t find shellcheck. Shell script linting will not work</li>
-</ol>
-<!--listend-->
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install shellcheck
-</span></span></code></pre></div><ol>
-<li>Couldn&rsquo;t find the dot executable (from graphviz). org-roam will not be able to generate graph visualizations.</li>
-</ol>
-<!--listend-->
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install graphviz
-</span></span></code></pre></div><ol>
-<li>This installed grep binary was not built with support for PCRE lookaheads. Some advanced consult filtering features will not work as a result, see the module readme.</li>
-</ol>
-<!--listend-->
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#  因为 Mac 本身安装的是 BSD 的。</span>
-</span></span><span class="line"><span class="cl">grep --version
-</span></span><span class="line"><span class="cl"><span class="c1"># 可以看到 grep (BSD grep, GNU compatible) 2.6.0-FreeBSD ，即 BSD 版本。</span>
-</span></span><span class="line"><span class="cl">brew install grep
-</span></span><span class="line"><span class="cl"><span class="c1"># 安装 GNU 的 grep，并在 .zshrc 中配置 PATH=&#34;/usr/local/opt/grep/libexec/gnubin:$PATH&#34; 即可。再次查看版本可以看到如下。</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># grep (GNU grep) 3.7</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Packaged by Homebrew</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Copyright (C) 2021 Free Software Foundation, Inc.</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># License GPLv3+: GNU GPL version 3 or later &lt;https://gnu.org/licenses/gpl.html&gt;.</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># This is free software: you are free to change and redistribute it.</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># There is NO WARRANTY, to the extent permitted by law.</span>
-</span></span></code></pre></div><h2 id="org-roam">Org-roam</h2>
-<p>具体的配置文件在 <code>.doom.d/</code> 下，参见 <a href="https://github.com/LuciusChen/dotfiles/tree/master/.doom.d">.doom.d</a>。</p>
-<h2 id="shortcuts">Shortcuts</h2>
-<table>
-<thead>
-<tr>
-<th>Shortcuts</th>
-<th>功能</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>C-RET</code></td>
-<td>在当前 headline 所属的内容后建立一个同级 headline</td>
-<td>无 headline 时创建一个一级 headline</td>
-</tr>
-<tr>
-<td><code>M-RET</code></td>
-<td>在当前 headline 后建立一个同级 headline</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-right</code></td>
-<td>降低当前 headline 的层级</td>
-<td></td>
-</tr>
-<tr>
-<td><code>M-left</code></td>
-<td>提高当前 headline 的层级</td>
-<td></td>
-</tr>
-<tr>
-<td><code>M-up</code></td>
-<td>将当前 headline 及其内容作为整体向上移动</td>
-<td></td>
-</tr>
-<tr>
-<td><code>M-down</code></td>
-<td>将当前 headline 及其内容作为整体向下移动</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-return</code></td>
-<td>在当前列表项的内容后建立一个同级列表项</td>
-<td>光标在列表项同一行时有效</td>
-</tr>
-<tr>
-<td><code>M-RET</code></td>
-<td>在当前列表项后建立一个同级列表项</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-right</code></td>
-<td>降低当前列表项的层级</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-left</code></td>
-<td>提高当前列表项的层级</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-up</code></td>
-<td>将当前列表项及其内容作为整体向上移动</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>M-down</code></td>
-<td>将当前列表项及其内容作为整体向下移动</td>
-<td>同上</td>
-</tr>
-<tr>
-<td><code>C-x-o</code></td>
-<td>切换窗口</td>
-<td>C-x 中有很多操作，可以看提示。</td>
-</tr>
-<tr>
-<td><code>C-c C-c</code></td>
-<td>在创建 node 编写完毕后快速保存</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-g</code></td>
-<td>取消操作</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-x-d</code></td>
-<td>进入 dired 模式</td>
-<td></td>
-</tr>
-<tr>
-<td><code>SPC f r</code></td>
-<td>查找最近文件</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-v</code></td>
-<td>显示图片</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Shortcuts</th>
-<th>功能</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>C-c C-s</code></td>
-<td></td>
-<td>设置任务开始时间</td>
-</tr>
-<tr>
-<td><code>C-c C-d</code></td>
-<td>设置任务截止时间</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-t</code></td>
-<td>改变任务状态</td>
-<td></td>
-</tr>
-<tr>
-<td><code>S-Up/Down</code></td>
-<td>设置任务优先级 [#A], [#B], [#C]</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-i</code></td>
-<td>开始任务计时</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-o</code></td>
-<td>终止任务计时</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c [</code></td>
-<td>将当前文件加入 Org-Agenda</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c ]</code></td>
-<td>将当前文件从 Org-Agenda 移除</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Shortcuts</th>
-<th>功能</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>t</code></td>
-<td>在 Org-Agenda 的任务条目上， 修改任务状态。</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-a</code></td>
-<td>归档</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-w</code></td>
-<td>activate refile</td>
-<td></td>
-</tr>
-<tr>
-<td><code>I</code></td>
-<td>在 Org-Agenda 的任务条目上， 开始计时。</td>
-<td></td>
-</tr>
-<tr>
-<td><code>O</code></td>
-<td>在 Org-Agenda 的任务条目上， 终止计时。</td>
-<td></td>
-</tr>
-<tr>
-<td><code>z</code></td>
-<td>在任务上添加 note</td>
-<td></td>
-</tr>
-<tr>
-<td><code>R</code></td>
-<td>clock mode, 显示耗时。</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c C-x C-l</code></td>
-<td>预览 Latex</td>
-<td></td>
-</tr>
-<tr>
-<td><code>C-c \</code></td>
-<td>按 tag 搜索</td>
-<td>好像只能单文件内</td>
-</tr>
-<tr>
-<td><code>C-C C-o</code></td>
-<td>打开链接</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="org-grammar">Org grammar</h2>
-<h3 id="basic">basic</h3>
-<p>This is almost anything you need to know about Org mode syntax:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="gh">*</span><span class="gs"> This Is A Heading</span>
-</span></span><span class="line"><span class="cl"><span class="gu">**</span> This Is A Sub-Heading
-</span></span><span class="line"><span class="cl"><span class="gu">***</span> And A Sub-Sub-Heading
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Paragraphs are separated by at least one empty line.
-</span></span><span class="line"><span class="cl"><span class="gs">*bold*</span> <span class="ge">/italic/</span> <span class="gl">_underlined_</span> <span class="gd">+strikethrough+</span> <span class="nc">=monospaced=</span>
-</span></span><span class="line"><span class="cl">[[<span class="na">http://Karl-Voit.at</span>][<span class="nt">Link description</span>]]
-</span></span><span class="line"><span class="cl">http://Karl-Voit.at → link without description
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">- </span>list item
-</span></span><span class="line"><span class="cl"><span class="k">- </span>another item
-</span></span><span class="line"><span class="cl">  <span class="k">- </span>sub-item
-</span></span><span class="line"><span class="cl">    <span class="k">1.</span> also enumerated
-</span></span><span class="line"><span class="cl">    <span class="k">2.</span> if you like
-</span></span><span class="line"><span class="cl"><span class="k">- [ ]</span> yet to be done
-</span></span><span class="line"><span class="cl"><span class="k">- [X]</span> item which is done
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">: Simple pre-formatted text such as for source code.
-</span></span><span class="line"><span class="cl">: This also respects the line breaks. <span class="gs">*bold*</span> is not bold here.
-</span></span></code></pre></div><h3 id="code-block">code block</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">myresult</span> <span class="o">=</span> <span class="mi">42</span> <span class="o">*</span> <span class="mi">23</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello Europe! &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">myresult</span><span class="p">))</span>
-</span></span></code></pre></div><h3 id="table">table</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="s">| My Column 1 | My Column 2 | Last Column |</span>
-</span></span><span class="line"><span class="cl"><span class="s">|-------------+-------------+-------------|</span>
-</span></span><span class="line"><span class="cl"><span class="s">|          42 | foo         | bar         |</span>
-</span></span><span class="line"><span class="cl"><span class="s">|          23 | baz         | abcdefg     |</span>
-</span></span><span class="line"><span class="cl"><span class="s">|-------------+-------------+-------------|</span>
-</span></span><span class="line"><span class="cl"><span class="s">|          65 |             |             |</span>
-</span></span></code></pre></div><h2 id="export">Export</h2>
-<p>对于只需要导出某个 header 下的内容的需求，只需要在 header 上加上 <code>:export:</code> 即可。</p>
-<h3 id="markdown-file">Markdown file</h3>
-<p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>， ~M-x org-pandoc-export-as-gfm~算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
-<h3 id="hugo">Hugo</h3>
-<p>在文件头部添加</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+HUGO_BASE_DIR: ~/Dropbox/hugo/
-</span></span><span class="line"><span class="cl">#+HUGO_SECTION: posts/main
-</span></span><span class="line"><span class="cl">#+HUGO_WEIGHT: auto
-</span></span><span class="line"><span class="cl">#+HUGO_AUTO_SET_LASTMOD: t
-</span></span></code></pre></div><p>需要导出为 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="c">#+begin_mark</span>
-</span></span><span class="line"><span class="cl">marked text
-</span></span><span class="line"><span class="cl"><span class="c">#+end_mark</span>
-</span></span></code></pre></div><p>需要导出为块级 <code>&lt;mark&gt;&lt;/mark&gt;</code> 时，也就是前后的空格不进行 trim。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+header</span><span class="c">: :trim-pre nil :trim-post nil</span>
-</span></span><span class="line"><span class="cl"><span class="c">#+begin_mark</span>
-</span></span><span class="line"><span class="cl">marked text
-</span></span><span class="line"><span class="cl"><span class="c">#+end_mark</span>
-</span></span></code></pre></div><h3 id="latex">Latex</h3>
-<h4 id="dependency">Dependency</h4>
-<p>需要安装 texlive</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install texlive
-</span></span></code></pre></div><h4 id="latex-语法">Latex 语法</h4>
-<p><a href="/posts/main/20220616162256-latex/">Latex 语法</a></p>
-<h4 id="pdf-导出报错">PDF 导出报错</h4>
-<ul>
-<li><code>Unicode character 考 (U+8003) not set up for use with LaTeX.</code> 是因为 Latex 本身不支持中文。</li>
-</ul>
-<h4 id="中文-pdf-导出设置">中文 PDF 导出设置</h4>
-<ol>
-<li>使用 <a href="https://github.com/ElegantLaTeX/ElegantPaper">ElegantPaper</a>，需要将 elegantpaper.cls 文件放在 org 目录下。</li>
-<li>安装依赖</li>
-</ol>
-<!--listend-->
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">brew install pygments
-</span></span></code></pre></div><ol>
-<li>导出文件头部增加</li>
-</ol>
-<!--listend-->
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+LATEX_COMPILER</span><span class="c">: xelatex</span>
-</span></span><span class="line"><span class="cl"><span class="cs">#+LATEX_CLASS</span><span class="c">: elegantpaper</span>
-</span></span><span class="line"><span class="cl"><span class="cs">#+OPTIONS</span><span class="c">: prop:t</span>
-</span></span></code></pre></div><div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p><a href="https://ox-hugo.scripter.co/doc/org-special-blocks/">Org Special Blocks</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Emacs</title>
       <link>https://sheerwill.live/posts/main/20220505220832-emacs/</link>
       <pubDate>Sat, 16 Jul 2022 22:44:32 +0800</pubDate>
@@ -4611,120 +4869,6 @@ Entity07 |o--|| Entity08
       <content:encoded><![CDATA[<ol>
 <li>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。</li>
 <li>在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端和服务端之间传递参数的一段代码。</li>
-</ol>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Tools to Increase Productivity and Efficiency</title>
-      <link>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</link>
-      <pubDate>Thu, 30 Jun 2022 08:58:24 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220506185941-tools_to_increase_productivity_and_efficiency/</guid>
-      <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Writing WeChat Markdown Editor 一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档</description>
-      <content:encoded><![CDATA[<h2 id="misc">Misc</h2>
-<ol>
-<li>
-<p><a href="https://www.templatemaker.nl/zh-cn/">Templatemaker</a></p>
-<p>制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。</p>
-</li>
-</ol>
-<h2 id="writing">Writing</h2>
-<ol>
-<li>
-<p><a href="https://github.com/doocs/md">WeChat Markdown Editor</a></p>
-<p>一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性。</p>
-</li>
-</ol>
-<h3 id="查找-citations-的网站">查找 citations 的网站</h3>
-<ol>
-<li>
-<p><a href="https://zbib.org/">zoterobib</a></p>
-<p>Your bibliography is empty. To add a source, paste or type its URL, ISBN, DOI, PMID, arXiv ID, or title into the search box above</p>
-</li>
-<li>
-<p><a href="https://www.doi2bib.org/">doi2bib</a></p>
-<p>give us a DOI and we will do our best to get you the BibTeX entry</p>
-</li>
-<li>
-<p><a href="https://www.bibsonomy.org/">BibSonomy</a></p>
-<p>The easy way to manage scientific publications and bookmarks</p>
-<p>BibSonomy helps you to manage your publications and bookmarks, to collaborate with your colleagues and to find new interesting material for your research.</p>
-</li>
-<li>
-<p><a href="http://www.bibtexsearch.com/">BibTeX Search</a></p>
-<p>You&rsquo;re searching over millions of BibTeX records&hellip;</p>
-</li>
-<li>
-<p><a href="https://scholar.google.com/">Google Scholar</a></p>
-<p>站在巨人的肩膀上</p>
-</li>
-</ol>
-<h4 id="book">Book</h4>
-<p>For books I usually use a site, where it is possible to get Bibtex citations from Amazon.com articles. This is very good for books, and some inproceedings and incollections might be found here as well.</p>
-<ol>
-<li><a href="https://lead.to/amazon/com/">Amazon</a></li>
-</ol>
-<h4 id="article">Article</h4>
-<p>As a Software Engineer I quite often have to deal with technical papers from ACM or IEEE. Both their catalogs provide Bibtex export capabilities.</p>
-<ol>
-<li>
-<p><a href="https://dl.acm.org/">ACM</a></p>
-</li>
-<li>
-<p><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a></p>
-<p>Advancing Technology for Humanity</p>
-</li>
-</ol>
-<h2 id="book">Book</h2>
-<ol>
-<li>
-<p><a href="http://libgen.rs/">Library Genesis</a></p>
-<p>电子书资源查找，中英文都有，英文相对较多。</p>
-</li>
-</ol>
-<h2 id="video">Video</h2>
-<ol>
-<li>
-<p><a href="https://sound-effects.bbcrewind.co.uk/">BBC Sound effects</a></p>
-<p>BBC 提供的免费下载的音效的网站。</p>
-</li>
-</ol>
-<h2 id="medicine">Medicine</h2>
-<ol>
-<li>
-<p><a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a></p>
-<p>顾名思义，权威的诊疗查询手册。</p>
-</li>
-</ol>
-<h2 id="design">Design</h2>
-<h3 id="color-picker">Color Picker</h3>
-<ul>
-<li>
-<p><a href="https://nipponcolors.com/">日本の伝統色</a></p>
-<p>日本的一个颜色拾取网站，很漂亮。</p>
-</li>
-</ul>
-<h3 id="plantuml">PlantUML</h3>
-<ul>
-<li>
-<p><a href="https://real-world-plantuml.com/">Real World PlantUML</a></p>
-<p>PlantUML 例子</p>
-</li>
-</ul>
-<h2 id="chrome-extension">Chrome extension</h2>
-<ol>
-<li>
-<p><a href="https://www.languagereactor.com/">Language Reactor</a></p>
-<p>提供 NetFlix、Youtube、TurtleTube、Video File、Text 的翻译，以及 Flashcards。</p>
-</li>
-</ol>
-<h2 id="front-end">Front-End</h2>
-<ol>
-<li>
-<p><a href="https://codepen.io/">codepen</a></p>
-<p>The best place to build, test, and discover front-end code</p>
-</li>
 </ol>
 ]]></content:encoded>
     </item>
