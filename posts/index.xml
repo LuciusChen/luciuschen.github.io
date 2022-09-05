@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Sep 2022 00:39:31 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Sep 2022 17:35:15 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Mon, 05 Sep 2022 00:39:31 +0800</pubDate>
+      <pubDate>Mon, 05 Sep 2022 17:35:15 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -499,76 +499,76 @@
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;hydra-org-agenda-menu/body</span> <span class="nb">:after</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span><span class="p">)</span>
 </span></span></code></pre></div><h4 id="elfeed">elfeed</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>require-package <span class="s1">&#39;elfeed)
-</span></span></span><span class="line"><span class="cl"><span class="s1">(global-set-key (kbd &#34;C-x w&#34;) &#39;</span>elfeed<span class="o">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;elfeed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-x w&#34;</span><span class="p">)</span> <span class="ss">&#39;elfeed</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">(</span>use-package elfeed-org
-</span></span><span class="line"><span class="cl">  :ensure t
-</span></span><span class="line"><span class="cl">  :config
-</span></span><span class="line"><span class="cl">  <span class="o">(</span>elfeed-org<span class="o">)</span>
-</span></span><span class="line"><span class="cl">  <span class="o">(</span>setq rmh-elfeed-org-files <span class="o">(</span>list <span class="s2">&#34;~/Dropbox/org/elfeed.org&#34;</span><span class="o">)))</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>defun concatenate-authors <span class="o">(</span>authors-list<span class="o">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Given AUTHORS-LIST, list of plists; return string of all authors
-</span></span></span><span class="line"><span class="cl"><span class="s2">concatenated.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="o">(</span>mapconcat
-</span></span><span class="line"><span class="cl">   <span class="o">(</span>lambda <span class="o">(</span>author<span class="o">)</span> <span class="o">(</span>plist-get author :name<span class="o">))</span>
-</span></span><span class="line"><span class="cl">   authors-list <span class="s2">&#34;, &#34;</span><span class="o">))</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>defun my-search-print-fn <span class="o">(</span>entry<span class="o">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Print ENTRY to the buffer.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="o">(</span>let* <span class="o">((</span>date <span class="o">(</span>elfeed-search-format-date <span class="o">(</span>elfeed-entry-date entry<span class="o">)))</span>
-</span></span><span class="line"><span class="cl">         <span class="o">(</span>title <span class="o">(</span>or <span class="o">(</span>elfeed-meta entry :title<span class="o">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="o">(</span>elfeed-entry-title entry<span class="o">)</span> <span class="s2">&#34;&#34;</span><span class="o">))</span>
-</span></span><span class="line"><span class="cl">         <span class="o">(</span>title-faces <span class="o">(</span>elfeed-search--faces <span class="o">(</span>elfeed-entry-tags entry<span class="o">)))</span>
-</span></span><span class="line"><span class="cl">         <span class="o">(</span>feed <span class="o">(</span>elfeed-entry-feed entry<span class="o">))</span>
-</span></span><span class="line"><span class="cl">         <span class="o">(</span>feed-title
-</span></span><span class="line"><span class="cl">          <span class="o">(</span>when feed
-</span></span><span class="line"><span class="cl">            <span class="o">(</span>or <span class="o">(</span>elfeed-meta feed :title<span class="o">)</span> <span class="o">(</span>elfeed-feed-title feed<span class="o">))))</span>
-</span></span><span class="line"><span class="cl">         <span class="o">(</span>entry-authors <span class="o">(</span>concatenate-authors
-</span></span><span class="line"><span class="cl">                         <span class="o">(</span>elfeed-meta entry :authors<span class="o">)))</span>
-</span></span><span class="line"><span class="cl">         <span class="o">(</span>tags <span class="o">(</span>mapcar <span class="c1">#&#39;symbol-name (elfeed-entry-tags entry)))</span>
-</span></span><span class="line"><span class="cl">         <span class="o">(</span>tags-str <span class="o">(</span>mapconcat
-</span></span><span class="line"><span class="cl">                    <span class="o">(</span>lambda <span class="o">(</span>s<span class="o">)</span> <span class="o">(</span>propertize s <span class="s1">&#39;face
-</span></span></span><span class="line"><span class="cl"><span class="s1">                                            &#39;</span>elfeed-search-tag-face<span class="o">))</span>
-</span></span><span class="line"><span class="cl">                    tags <span class="s2">&#34;,&#34;</span><span class="o">))</span>
-</span></span><span class="line"><span class="cl">         <span class="o">(</span>title-width <span class="o">(</span>- <span class="o">(</span>window-width<span class="o">)</span> <span class="m">10</span>
-</span></span><span class="line"><span class="cl">                         elfeed-search-trailing-width<span class="o">))</span>
-</span></span><span class="line"><span class="cl">         <span class="o">(</span>title-column <span class="o">(</span>elfeed-format-column
-</span></span><span class="line"><span class="cl">                        title <span class="o">(</span>elfeed-clamp
-</span></span><span class="line"><span class="cl">                               elfeed-search-title-min-width
-</span></span><span class="line"><span class="cl">                               title-width
-</span></span><span class="line"><span class="cl">                               elfeed-search-title-max-width<span class="o">)</span>
-</span></span><span class="line"><span class="cl">                        :left<span class="o">))</span>
-</span></span><span class="line"><span class="cl">         <span class="o">(</span>authors-width 135<span class="o">)</span>
-</span></span><span class="line"><span class="cl">         <span class="o">(</span>authors-column <span class="o">(</span>elfeed-format-column
-</span></span><span class="line"><span class="cl">                        entry-authors <span class="o">(</span>elfeed-clamp
-</span></span><span class="line"><span class="cl">                               elfeed-search-title-min-width
-</span></span><span class="line"><span class="cl">                               authors-width
-</span></span><span class="line"><span class="cl">                               131<span class="o">)</span>
-</span></span><span class="line"><span class="cl">                        :left<span class="o">)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">elfeed-org</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">elfeed-org</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">rmh-elfeed-org-files</span> <span class="p">(</span><span class="nf">list</span> <span class="s">&#34;~/Dropbox/org/elfeed.org&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">concatenate-authors</span> <span class="p">(</span><span class="nv">authors-list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Given AUTHORS-LIST, list of plists; return string of all authors
+</span></span></span><span class="line"><span class="cl"><span class="s">concatenated.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">mapconcat</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">author</span><span class="p">)</span> <span class="p">(</span><span class="nf">plist-get</span> <span class="nv">author</span> <span class="nb">:name</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">   <span class="nv">authors-list</span> <span class="s">&#34;, &#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-search-print-fn</span> <span class="p">(</span><span class="nv">entry</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Print ENTRY to the buffer.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">date</span> <span class="p">(</span><span class="nv">elfeed-search-format-date</span> <span class="p">(</span><span class="nv">elfeed-entry-date</span> <span class="nv">entry</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">title</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">elfeed-meta</span> <span class="nv">entry</span> <span class="nb">:title</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="nv">elfeed-entry-title</span> <span class="nv">entry</span><span class="p">)</span> <span class="s">&#34;&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">title-faces</span> <span class="p">(</span><span class="nv">elfeed-search--faces</span> <span class="p">(</span><span class="nv">elfeed-entry-tags</span> <span class="nv">entry</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">feed</span> <span class="p">(</span><span class="nv">elfeed-entry-feed</span> <span class="nv">entry</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">feed-title</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">when</span> <span class="nv">feed</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">elfeed-meta</span> <span class="nv">feed</span> <span class="nb">:title</span><span class="p">)</span> <span class="p">(</span><span class="nv">elfeed-feed-title</span> <span class="nv">feed</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">entry-authors</span> <span class="p">(</span><span class="nv">concatenate-authors</span>
+</span></span><span class="line"><span class="cl">                         <span class="p">(</span><span class="nv">elfeed-meta</span> <span class="nv">entry</span> <span class="nb">:authors</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">tags</span> <span class="p">(</span><span class="nf">mapcar</span> <span class="nf">#&#39;symbol-name</span> <span class="p">(</span><span class="nv">elfeed-entry-tags</span> <span class="nv">entry</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">tags-str</span> <span class="p">(</span><span class="nf">mapconcat</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">s</span><span class="p">)</span> <span class="p">(</span><span class="nf">propertize</span> <span class="nv">s</span> <span class="ss">&#39;face</span>
+</span></span><span class="line"><span class="cl">                                            <span class="ss">&#39;elfeed-search-tag-face</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="nv">tags</span> <span class="s">&#34;,&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">title-width</span> <span class="p">(</span><span class="nf">-</span> <span class="p">(</span><span class="nv">window-width</span><span class="p">)</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">                         <span class="nv">elfeed-search-trailing-width</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">title-column</span> <span class="p">(</span><span class="nv">elfeed-format-column</span>
+</span></span><span class="line"><span class="cl">                        <span class="nv">title</span> <span class="p">(</span><span class="nv">elfeed-clamp</span>
+</span></span><span class="line"><span class="cl">                               <span class="nv">elfeed-search-title-min-width</span>
+</span></span><span class="line"><span class="cl">                               <span class="nv">title-width</span>
+</span></span><span class="line"><span class="cl">                               <span class="nv">elfeed-search-title-max-width</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="nb">:left</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">authors-width</span> <span class="mi">135</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">authors-column</span> <span class="p">(</span><span class="nv">elfeed-format-column</span>
+</span></span><span class="line"><span class="cl">                        <span class="nv">entry-authors</span> <span class="p">(</span><span class="nv">elfeed-clamp</span>
+</span></span><span class="line"><span class="cl">                               <span class="nv">elfeed-search-title-min-width</span>
+</span></span><span class="line"><span class="cl">                               <span class="nv">authors-width</span>
+</span></span><span class="line"><span class="cl">                               <span class="mi">131</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="nb">:left</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">(</span>insert <span class="o">(</span>propertize date <span class="s1">&#39;face &#39;</span>elfeed-search-date-face<span class="o">)</span> <span class="s2">&#34; &#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">insert</span> <span class="p">(</span><span class="nf">propertize</span> <span class="nv">date</span> <span class="ss">&#39;face</span> <span class="ss">&#39;elfeed-search-date-face</span><span class="p">)</span> <span class="s">&#34; &#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">(</span>insert <span class="o">(</span>propertize title-column
-</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;face title-faces &#39;</span>kbd-help title<span class="o">)</span> <span class="s2">&#34; &#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">insert</span> <span class="p">(</span><span class="nf">propertize</span> <span class="nv">title-column</span>
+</span></span><span class="line"><span class="cl">                        <span class="ss">&#39;face</span> <span class="nv">title-faces</span> <span class="ss">&#39;kbd-help</span> <span class="nv">title</span><span class="p">)</span> <span class="s">&#34; &#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">(</span>insert <span class="o">(</span>propertize authors-column
-</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;face &#39;</span>elfeed-search-date-face
-</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;kbd-help entry-authors) &#34; &#34;)
-</span></span></span><span class="line"><span class="cl"><span class="s1">
-</span></span></span><span class="line"><span class="cl"><span class="s1">    ;; (when feed-title
-</span></span></span><span class="line"><span class="cl"><span class="s1">    ;;   (insert (propertize entry-authors
-</span></span></span><span class="line"><span class="cl"><span class="s1">    ;; &#39;</span>face <span class="s1">&#39;elfeed-search-feed-face) &#34; &#34;))
-</span></span></span><span class="line"><span class="cl"><span class="s1">
-</span></span></span><span class="line"><span class="cl"><span class="s1">    (when entry-authors
-</span></span></span><span class="line"><span class="cl"><span class="s1">      (insert (propertize feed-title
-</span></span></span><span class="line"><span class="cl"><span class="s1">                          &#39;</span>face <span class="s1">&#39;elfeed-search-feed-face) &#34; &#34;))
-</span></span></span><span class="line"><span class="cl"><span class="s1">
-</span></span></span><span class="line"><span class="cl"><span class="s1">    ;; (when tags
-</span></span></span><span class="line"><span class="cl"><span class="s1">    ;;   (insert &#34;(&#34; tags-str &#34;)&#34;))
-</span></span></span><span class="line"><span class="cl"><span class="s1">
-</span></span></span><span class="line"><span class="cl"><span class="s1">    )
-</span></span></span><span class="line"><span class="cl"><span class="s1">  )
-</span></span></span><span class="line"><span class="cl"><span class="s1">(setq elfeed-search-print-entry-function #&#39;</span>my-search-print-fn<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">insert</span> <span class="p">(</span><span class="nf">propertize</span> <span class="nv">authors-column</span>
+</span></span><span class="line"><span class="cl">                        <span class="ss">&#39;face</span> <span class="ss">&#39;elfeed-search-date-face</span>
+</span></span><span class="line"><span class="cl">                        <span class="ss">&#39;kbd-help</span> <span class="nv">entry-authors</span><span class="p">)</span> <span class="s">&#34; &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">;; (when feed-title</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;;   (insert (propertize entry-authors</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;; &#39;face &#39;elfeed-search-feed-face) &#34; &#34;))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="nv">entry-authors</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">insert</span> <span class="p">(</span><span class="nf">propertize</span> <span class="nv">feed-title</span>
+</span></span><span class="line"><span class="cl">                          <span class="ss">&#39;face</span> <span class="ss">&#39;elfeed-search-feed-face</span><span class="p">)</span> <span class="s">&#34; &#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">;; (when tags</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;;   (insert &#34;(&#34; tags-str &#34;)&#34;))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">elfeed-search-print-entry-function</span> <span class="nf">#&#39;</span><span class="nv">my-search-print-fn</span><span class="p">)</span>
 </span></span></code></pre></div><h4 id="telega">telega</h4>
 <p><code>brew install tdlib</code> 的版本过低，需要自行编译，参考 <a href="https://tdlib.github.io/td/build.html?language=Swift">TDLib build instructions</a>。这个之后需要 <code>M-x telega-server-build</code> 重新加载 telega-server。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">xcode-select --install
@@ -586,7 +586,40 @@
 </span></span><span class="line"><span class="cl">ls -l /usr/local
 </span></span></code></pre></div><p>其中 tblib 的版本当前需要 1.8.4，可以切换到 1.8.4 的版本。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout b447c32fe94c3d62d74c6b9608649c791641c3e5
-</span></span></code></pre></div><h3 id="init-org-dot-el">init-org.el</h3>
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-c C-v</code></td>
+<td>发送图片</td>
+<td><code>brew install pngpaste</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; ========================  Telega  ===========================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nf">define-key</span> <span class="nv">global-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c t&#34;</span><span class="p">)</span> <span class="nv">telega-prefix-map</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 去除昵称、回复行的背景高亮</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-telega-chat-mode</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-heading</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:color</span> <span class="s">&#34;gray25&#34;</span> <span class="nb">:style</span> <span class="nv">wave</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:inherit</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:background</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-reply</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-chat-mode-hook</span> <span class="ss">&#39;my-telega-chat-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 缩小 emoji 显示</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Apple Color Emoji&#34;</span> <span class="o">.</span> <span class="mf">0.75</span><span class="p">))</span>
+</span></span></code></pre></div><p>另外一些特殊昵称的特殊字符无法正常显示，可以安装 Noto Sans Egyptian Hieroglyphs 字体。</p>
+<h3 id="init-org-dot-el">init-org.el</h3>
 <p>org-roam 和 Emacs 自带的 agenda 可以很方便的将笔记和 GTD 结合起来。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org.el --- Org-mode config -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
