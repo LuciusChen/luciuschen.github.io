@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Sep 2022 17:35:15 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Sep 2022 16:24:06 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Mon, 05 Sep 2022 17:35:15 +0800</pubDate>
+      <pubDate>Thu, 15 Sep 2022 16:24:06 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -96,6 +96,9 @@
     ├── init-org.el
     ├── init-font.el
     ├── init-corfu.el
+    ├── init-themes.el
+    ├── beancount.el
+    ├── ligature.el
 </code></pre><h3 id="init-epla-dot-el">init-epla.el</h3>
 <p>增加 <code>use-package</code> 和 <code>straight</code> 的支持</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Bootstrap `use-package&#39;</span>
@@ -495,7 +498,9 @@
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-capture-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">sis-set-other</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">sis-set-other</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;rust-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;; hydra 时切换到英文</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-chat-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">sis-set-other</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-agenda-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-agenda-todo</span> <span class="nb">:before</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;hydra-org-agenda-menu/body</span> <span class="nb">:after</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span><span class="p">)</span>
 </span></span></code></pre></div><h4 id="elfeed">elfeed</h4>
@@ -600,20 +605,33 @@
 <td>发送图片</td>
 <td><code>brew install pngpaste</code></td>
 </tr>
+<tr>
+<td><code>!</code></td>
+<td>点赞</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-a</code></td>
+<td>Attachment type</td>
+<td>其中 markup 可以发送 md 等格式</td>
+</tr>
 </tbody>
 </table>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; ========================  Telega  ===========================</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;telega</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nf">define-key</span> <span class="nv">global-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c t&#34;</span><span class="p">)</span> <span class="nv">telega-prefix-map</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 去除昵称、回复行的背景高亮</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-telega-chat-mode</span> <span class="p">()</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-heading</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:color</span> <span class="s">&#34;gray25&#34;</span> <span class="nb">:style</span> <span class="nv">wave</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:inherit</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:background</span> <span class="no">nil</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-reply</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-self-title</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">1.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-user-title</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">1.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setf</span> <span class="p">(</span><span class="nv">alist-get</span> <span class="mi">2</span> <span class="nv">telega-avatar-factors-alist</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="mf">0.4</span> <span class="o">.</span> <span class="mf">0.1</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-chat-mode-hook</span> <span class="ss">&#39;my-telega-chat-mode</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 缩小 emoji 显示</span>
@@ -1585,81 +1603,56 @@ Entity07 |o--|| Entity08
 </figure>
 
 <h3 id="init-font-dot-el">init-font.el</h3>
-<p>使用的是 <code>Iosevka</code> 和 <code>LXGW WenKai Mono</code> 分别作为英文和中文字体，字体大小设置 13/14 就可以完美对齐了。</p>
+<p>使用的是 <code>IBM Plex Mono</code> 和 <code>LXGW WenKai</code> 分别作为英文和中文字体，目前唯一的缺点就是不等高。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-font.el --- Dired customisations -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Code:</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; base on https://gist.github.com/coldnew/7398835</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">emacs-english-font</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;The font name of English.&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">emacs-cjk-font</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;The font name for CJK.&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">emacs-font-size-pair</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Default font size pair for (english . chinese)&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">emacs-font-size-pair-list</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;This list is used to store matching (englis . chinese) font-size.&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">font-exist-p</span> <span class="p">(</span><span class="nv">fontname</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;test if this font is exist or not.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">not</span> <span class="nv">fontname</span><span class="p">)</span> <span class="p">(</span><span class="nv">string=</span> <span class="nv">fontname</span> <span class="s">&#34;&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">qiang-font-existsp</span> <span class="p">(</span><span class="nv">font</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">null</span> <span class="p">(</span><span class="nf">x-list-fonts</span> <span class="nv">font</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">      <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">x-list-fonts</span> <span class="nv">fontname</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="no">nil</span> <span class="no">t</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="no">t</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">set-font</span> <span class="p">(</span><span class="nv">english</span> <span class="nv">chinese</span> <span class="nv">size-pair</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Setup emacs English and Chinese font on x window-system.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">font-exist-p</span> <span class="nv">english</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">set-frame-font</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;%s:pixelsize=%d&#34;</span> <span class="nv">english</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">size-pair</span><span class="p">))</span> <span class="no">t</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">zh-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;LXGW WenKai&#34;</span> <span class="s">&#34;HanaMinB&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">en-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;IBM Plex Mono&#34;</span> <span class="s">&#34;Iosevka&#34;</span> <span class="p">))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">font-exist-p</span> <span class="nv">chinese</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">charset</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">kana</span> <span class="nv">han</span> <span class="nv">symbol</span> <span class="nv">cjk-misc</span> <span class="nv">bopomofo</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">set-fontset-font</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="no">nil</span> <span class="ss">&#39;font</span><span class="p">)</span> <span class="nv">charset</span>
-</span></span><span class="line"><span class="cl">                          <span class="p">(</span><span class="nf">font-spec</span> <span class="nb">:family</span> <span class="nv">chinese</span> <span class="nb">:size</span> <span class="p">(</span><span class="nf">cdr</span> <span class="nv">size-pair</span><span class="p">))))))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">qiang-make-font-string</span> <span class="p">(</span><span class="nv">font-name</span> <span class="nv">font-size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nf">stringp</span> <span class="nv">font-size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">           <span class="p">(</span><span class="nf">equal</span> <span class="s">&#34;:&#34;</span> <span class="p">(</span><span class="nf">string</span> <span class="p">(</span><span class="nf">elt</span> <span class="nv">font-size</span> <span class="mi">0</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;%s%s&#34;</span> <span class="nv">font-name</span> <span class="nv">font-size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;%s %s&#34;</span> <span class="nv">font-name</span> <span class="nv">font-size</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">emacs-step-font-size</span> <span class="p">(</span><span class="nv">step</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Increase/Decrease emacs&#39;s font size.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">scale-steps</span> <span class="nv">emacs-font-size-pair-list</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">&lt;</span> <span class="nv">step</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nb">setq</span> <span class="nv">scale-steps</span> <span class="p">(</span><span class="nf">reverse</span> <span class="nv">scale-steps</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">setq</span> <span class="nv">emacs-font-size-pair</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">cadr</span> <span class="p">(</span><span class="nf">member</span> <span class="nv">emacs-font-size-pair</span> <span class="nv">scale-steps</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">              <span class="nv">emacs-font-size-pair</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="nv">emacs-font-size-pair</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;emacs font size set to %.1f&#34;</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">emacs-font-size-pair</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">set-font</span> <span class="nv">emacs-english-font</span> <span class="nv">emacs-cjk-font</span> <span class="nv">emacs-font-size-pair</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">qiang-set-font</span> <span class="p">(</span><span class="nv">english-fonts</span>
+</span></span><span class="line"><span class="cl">                       <span class="nv">english-font-size</span>
+</span></span><span class="line"><span class="cl">                       <span class="nv">chinese-fonts</span>
+</span></span><span class="line"><span class="cl">                       <span class="kp">&amp;optional</span> <span class="nv">chinese-font-scale</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">increase-emacs-font-size</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Decrease emacs&#39;s font-size acording emacs-font-size-pair-list.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span> <span class="p">(</span><span class="nv">emacs-step-font-size</span> <span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">chinese-font-scale</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">chinese-font-scale</span> <span class="mf">1.2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">decrease-emacs-font-size</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Increase emacs&#39;s font-size acording emacs-font-size-pair-list.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span> <span class="p">(</span><span class="nv">emacs-step-font-size</span> <span class="mi">-1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">face-font-rescale-alist</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">cl-loop</span> <span class="nv">for</span> <span class="nv">x</span> <span class="nv">in</span> <span class="nv">zh-font-list</span>
+</span></span><span class="line"><span class="cl">              <span class="nv">collect</span> <span class="p">(</span><span class="nf">cons</span> <span class="nv">x</span> <span class="nv">chinese-font-scale</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">list-faces-sample-text</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">concat</span>
-</span></span><span class="line"><span class="cl">       <span class="s">&#34;ABCDEFTHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz\n&#34;</span>
-</span></span><span class="line"><span class="cl">       <span class="s">&#34;11223344556677889900       壹貳參肆伍陸柒捌玖零&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;english-font-size could be set to \&#34;:pixelsize=18\&#34; or a integer.
+</span></span></span><span class="line"><span class="cl"><span class="s">If set/leave chinese-font-scale to nil, it will follow english-font-size&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">when</span> <span class="nf">window-system</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;; setup change size font, base on emacs-font-size-pair-list</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-M-=&#34;</span><span class="p">)</span> <span class="ss">&#39;increase-emacs-font-size</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-M--&#34;</span><span class="p">)</span> <span class="ss">&#39;decrease-emacs-font-size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">en-font</span> <span class="p">(</span><span class="nv">qiang-make-font-string</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">(</span><span class="nv">cl-find-if</span> <span class="nf">#&#39;</span><span class="nv">qiang-font-existsp</span> <span class="nv">english-fonts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                  <span class="nv">english-font-size</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">zh-font</span> <span class="p">(</span><span class="nf">font-spec</span> <span class="nb">:family</span> <span class="p">(</span><span class="nv">cl-find-if</span> <span class="nf">#&#39;</span><span class="nv">qiang-font-existsp</span> <span class="nv">chinese-fonts</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">;; setup default english font and cjk font</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">emacs-english-font</span> <span class="s">&#34;Iosevka&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">emacs-cjk-font</span> <span class="s">&#34;LXGW WenKai Mono&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">emacs-font-size-pair</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">13</span> <span class="o">.</span> <span class="mi">14</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">emacs-font-size-pair-list</span> <span class="o">&#39;</span><span class="p">((</span> <span class="mi">5</span> <span class="o">.</span>  <span class="mi">6</span><span class="p">)</span> <span class="p">(</span><span class="mi">10</span> <span class="o">.</span> <span class="mi">12</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                                    <span class="p">(</span><span class="mi">13</span> <span class="o">.</span> <span class="mi">16</span><span class="p">)</span> <span class="p">(</span><span class="mi">15</span> <span class="o">.</span> <span class="mi">18</span><span class="p">)</span> <span class="p">(</span><span class="mi">17</span> <span class="o">.</span> <span class="mi">20</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                                    <span class="p">(</span><span class="mi">19</span> <span class="o">.</span> <span class="mi">22</span><span class="p">)</span> <span class="p">(</span><span class="mi">20</span> <span class="o">.</span> <span class="mi">24</span><span class="p">)</span> <span class="p">(</span><span class="mi">21</span> <span class="o">.</span> <span class="mi">26</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                                    <span class="p">(</span><span class="mi">24</span> <span class="o">.</span> <span class="mi">28</span><span class="p">)</span> <span class="p">(</span><span class="mi">26</span> <span class="o">.</span> <span class="mi">32</span><span class="p">)</span> <span class="p">(</span><span class="mi">28</span> <span class="o">.</span> <span class="mi">34</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                                    <span class="p">(</span><span class="mi">30</span> <span class="o">.</span> <span class="mi">36</span><span class="p">)</span> <span class="p">(</span><span class="mi">34</span> <span class="o">.</span> <span class="mi">40</span><span class="p">)</span> <span class="p">(</span><span class="mi">36</span> <span class="o">.</span> <span class="mi">44</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;; Setup font size based on emacs-font-size-pair</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-font</span> <span class="nv">emacs-english-font</span> <span class="nv">emacs-cjk-font</span> <span class="nv">emacs-font-size-pair</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;; Set the default English font</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Set English Font to %s&#34;</span> <span class="nv">en-font</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="no">nil</span> <span class="nb">:font</span> <span class="nv">en-font</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">;; Set Chinese font</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;; Do not use &#39;unicode charset, it will cause the English font setting invalid</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Set Chinese Font to %s&#34;</span> <span class="nv">zh-font</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">charset</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">kana</span> <span class="nv">han</span> <span class="nv">symbol</span> <span class="nv">cjk-misc</span> <span class="nv">bopomofo</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">set-fontset-font</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="no">nil</span> <span class="ss">&#39;font</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="nv">charset</span> <span class="nv">zh-font</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">qiang-set-font</span> <span class="nv">en-font-list</span> <span class="mi">12</span> <span class="nv">zh-font-list</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-font</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-font.el ends here</span>
 </span></span></code></pre></div><h3 id="init-corfu-dot-el">init-corfu.el</h3>
@@ -1682,6 +1675,8 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;corfu</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq-default</span> <span class="nv">corfu-auto</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;eshell</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;eshell-mode-hook</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nb">setq-local</span> <span class="nv">corfu-auto</span> <span class="no">nil</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq-default</span> <span class="nv">corfu-quit-no-match</span> <span class="ss">&#39;separator</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;after-init-hook</span> <span class="ss">&#39;global-corfu-mode</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
@@ -1699,6 +1694,85 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-corfu</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-corfu.el ends here</span>
+</span></span></code></pre></div><h3 id="init-themes-dot-el">init-themes.el</h3>
+<p>用的 <a href="https://protesilaos.com/emacs/ef-themes-pictures">Screen shots of the Ef themes for GNU Emacs | Protesilaos Stavrou</a>，​<code>ef-spring</code> 作为非编码时的主题，​<code>ef-night</code> 作为编码时的主题。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-themes.el --- Defaults for themes -*- lexical-binding: t -*-</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Code:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;ef-themes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Don&#39;t prompt to confirm theme safety. This avoids problems with</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; first-time startup on Emacs &gt; 26.3.</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">custom-safe-themes</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; If you don&#39;t customize it, this is the theme you get.</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq-default</span> <span class="nv">custom-enabled-themes</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">ef-spring</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Ensure that themes will be applied even if they have not been customized</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">reapply-themes</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Forcibly load the themes listed in </span><span class="ss">`custom-enabled-themes&#39;</span><span class="s">.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">theme</span> <span class="nv">custom-enabled-themes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">custom-theme-p</span> <span class="nv">theme</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">load-theme</span> <span class="nv">theme</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">custom-set-variables</span> <span class="o">`</span><span class="p">(</span><span class="nv">custom-enabled-themes</span> <span class="p">(</span><span class="nb">quote</span> <span class="o">,</span><span class="nv">custom-enabled-themes</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;after-init-hook</span> <span class="ss">&#39;reapply-themes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Toggle between light and dark</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">light</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Activate a light color theme.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">custom-enabled-themes</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">ef-spring</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">reapply-themes</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dark</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Activate a dark color theme.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">custom-enabled-themes</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">ef-night</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">reapply-themes</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;dimmer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq-default</span> <span class="nv">dimmer-fraction</span> <span class="mf">0.15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;after-init-hook</span> <span class="ss">&#39;dimmer-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;dimmer</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;; TODO: file upstream as a PR</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;frame-set-background-mode</span> <span class="nb">:after</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="kp">&amp;rest</span> <span class="nv">args</span><span class="p">)</span> <span class="p">(</span><span class="nv">dimmer-process-all</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;dimmer</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;; Don&#39;t dim in terminal windows. Even with 256 colours it can</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;; lead to poor contrast.  Better would be to vary dimmer-fraction</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;; according to frame type.</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">defun</span> <span class="nv">sanityinc/display-non-graphic-p</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nv">display-graphic-p</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;dimmer-exclusion-predicates</span> <span class="ss">&#39;sanityinc/display-non-graphic-p</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-themes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; init-themes.el ends here</span>
+</span></span></code></pre></div><h3 id="beancount-dot-el">beancount.el</h3>
+<p><a href="https://github.com/beancount/beancount-mode">GitHub - beancount/beancount-mode: Emacs major-mode to work with Beancount le&hellip;</a>，这里是将其中的 <code>beancount.el</code> 下载到 <code>.emacs.d/lisp/</code> 目录下，加上下列代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;auto-mode-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;\\.beancount\\&#39;&#34;</span> <span class="o">.</span> <span class="nv">beancount-mode</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="ligature-dot-el">ligature.el</h3>
+<p><a href="https://github.com/mickeynp/ligature.el">GitHub - mickeynp/ligature.el: Display typographical ligatures in Emacs</a>，这里是将其中的 <code>ligature.el</code> 下载到 <code>.emacs.d/lisp/</code> 目录下，加上下列代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Enable the www ligature in every possible major mode</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">ligature-set-ligatures</span> <span class="ss">&#39;t</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;www&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Enable ligatures in programming modes</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">ligature-set-ligatures</span> <span class="ss">&#39;prog-mode</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;www&#34;</span> <span class="s">&#34;**&#34;</span> <span class="s">&#34;***&#34;</span> <span class="s">&#34;**/&#34;</span> <span class="s">&#34;*&gt;&#34;</span> <span class="s">&#34;*/&#34;</span> <span class="s">&#34;\\\\&#34;</span> <span class="s">&#34;\\\\\\&#34;</span> <span class="s">&#34;{-&#34;</span> <span class="s">&#34;::&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;:::&#34;</span> <span class="s">&#34;:=&#34;</span> <span class="s">&#34;!!&#34;</span> <span class="s">&#34;!=&#34;</span> <span class="s">&#34;!==&#34;</span> <span class="s">&#34;-}&#34;</span> <span class="s">&#34;----&#34;</span> <span class="s">&#34;--&gt;&#34;</span> <span class="s">&#34;-&gt;&#34;</span> <span class="s">&#34;-&gt;&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;-&lt;&#34;</span> <span class="s">&#34;-&lt;&lt;&#34;</span> <span class="s">&#34;-~&#34;</span> <span class="s">&#34;#{&#34;</span> <span class="s">&#34;#[&#34;</span> <span class="s">&#34;##&#34;</span> <span class="s">&#34;###&#34;</span> <span class="s">&#34;####&#34;</span> <span class="s">&#34;#(&#34;</span> <span class="s">&#34;#?&#34;</span> <span class="s">&#34;#_&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;#_(&#34;</span> <span class="s">&#34;.-&#34;</span> <span class="s">&#34;.=&#34;</span> <span class="s">&#34;..&#34;</span> <span class="s">&#34;..&lt;&#34;</span> <span class="s">&#34;...&#34;</span> <span class="s">&#34;?=&#34;</span> <span class="s">&#34;??&#34;</span> <span class="s">&#34;;;&#34;</span> <span class="s">&#34;/*&#34;</span> <span class="s">&#34;/**&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;/=&#34;</span> <span class="s">&#34;/==&#34;</span> <span class="s">&#34;/&gt;&#34;</span> <span class="s">&#34;//&#34;</span> <span class="s">&#34;///&#34;</span> <span class="s">&#34;&amp;&amp;&#34;</span> <span class="s">&#34;||&#34;</span> <span class="s">&#34;||=&#34;</span> <span class="s">&#34;|=&#34;</span> <span class="s">&#34;|&gt;&#34;</span> <span class="s">&#34;^=&#34;</span> <span class="s">&#34;$&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;++&#34;</span> <span class="s">&#34;+++&#34;</span> <span class="s">&#34;+&gt;&#34;</span> <span class="s">&#34;=:=&#34;</span> <span class="s">&#34;==&#34;</span> <span class="s">&#34;===&#34;</span> <span class="s">&#34;==&gt;&#34;</span> <span class="s">&#34;=&gt;&#34;</span> <span class="s">&#34;=&gt;&gt;&#34;</span> <span class="s">&#34;&lt;=&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;=&lt;&lt;&#34;</span> <span class="s">&#34;=/=&#34;</span> <span class="s">&#34;&gt;-&#34;</span> <span class="s">&#34;&gt;=&#34;</span> <span class="s">&#34;&gt;=&gt;&#34;</span> <span class="s">&#34;&gt;&gt;&#34;</span> <span class="s">&#34;&gt;&gt;-&#34;</span> <span class="s">&#34;&gt;&gt;=&#34;</span> <span class="s">&#34;&gt;&gt;&gt;&#34;</span> <span class="s">&#34;&lt;*&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;&lt;*&gt;&#34;</span> <span class="s">&#34;&lt;|&#34;</span> <span class="s">&#34;&lt;|&gt;&#34;</span> <span class="s">&#34;&lt;$&#34;</span> <span class="s">&#34;&lt;$&gt;&#34;</span> <span class="s">&#34;&lt;!--&#34;</span> <span class="s">&#34;&lt;-&#34;</span> <span class="s">&#34;&lt;--&#34;</span> <span class="s">&#34;&lt;-&gt;&#34;</span> <span class="s">&#34;&lt;+&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;&lt;+&gt;&#34;</span> <span class="s">&#34;&lt;=&#34;</span> <span class="s">&#34;&lt;==&#34;</span> <span class="s">&#34;&lt;=&gt;&#34;</span> <span class="s">&#34;&lt;=&lt;&#34;</span> <span class="s">&#34;&lt;&gt;&#34;</span> <span class="s">&#34;&lt;&lt;&#34;</span> <span class="s">&#34;&lt;&lt;-&#34;</span> <span class="s">&#34;&lt;&lt;=&#34;</span> <span class="s">&#34;&lt;&lt;&lt;&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;&lt;~&#34;</span> <span class="s">&#34;&lt;~~&#34;</span> <span class="s">&#34;&lt;/&#34;</span> <span class="s">&#34;&lt;/&gt;&#34;</span> <span class="s">&#34;~@&#34;</span> <span class="s">&#34;~-&#34;</span> <span class="s">&#34;~&gt;&#34;</span> <span class="s">&#34;~~&#34;</span> <span class="s">&#34;~~&gt;&#34;</span> <span class="s">&#34;%%&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-ligature-mode</span> <span class="ss">&#39;t</span><span class="p">)</span>
 </span></span></code></pre></div><h2 id="export">Export</h2>
 <p>对于只需要导出某个 header 下的内容的需求，只需要在 header 上加上 <code>:export:</code> 即可。</p>
 <h3 id="markdown-file">Markdown file</h3>
