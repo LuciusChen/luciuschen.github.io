@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 15 Sep 2022 16:24:06 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Sep 2022 19:52:54 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Thu, 15 Sep 2022 16:24:06 +0800</pubDate>
+      <pubDate>Thu, 15 Sep 2022 19:52:54 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -132,7 +132,7 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Allow users to provide an optional &#34;init-local&#34; containing personal settings</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;init-local</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
 </span></span></code></pre></div><p>默认没有 <code>init-local.org</code> 这个文件，创建一个，就可以往里面塞自己的配置了。</p>
-<h4 id="consult">consult</h4>
+<h4 id="consult">Consult</h4>
 <p>Purcell 中已经包含了这个 package，也有 <code>consult-ripgrep</code> 这个方法。需要安装 <code>ripgrep</code>​。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install ripgrep
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">bms/org-roam-rg-search</span> <span class="p">()</span>
@@ -143,7 +143,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c rr&#34;</span><span class="p">)</span> <span class="ss">&#39;bms/org-roam-rg-search</span><span class="p">)</span>
 </span></span></code></pre></div><p>搜索 <code>org-roam-directory</code> 下的内容。</p>
-<h4 id="deft">deft</h4>
+<h4 id="deft">Deft</h4>
 <p>用作一些不想放在 <code>org-roam</code> 中的一些笔记的操作。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;deft</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">deft-extensions</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;md&#34;</span> <span class="s">&#34;tex&#34;</span> <span class="s">&#34;org&#34;</span> <span class="s">&#34;mw&#34;</span> <span class="s">&#34;conf&#34;</span><span class="p">))</span>
@@ -173,7 +173,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">if</span> <span class="nv">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">string-trim</span> <span class="p">(</span><span class="nf">substring</span> <span class="nv">contents</span> <span class="nv">begin</span> <span class="p">(</span><span class="nf">match-end</span> <span class="mi">0</span><span class="p">))</span> <span class="s">&#34;#\\+[tT][iI][tT][lL][eE]: *&#34;</span> <span class="s">&#34;[\n\t ]+&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">deft-base-filename</span> <span class="nv">file</span><span class="p">))))</span>
-</span></span></code></pre></div><h4 id="vterm">vterm</h4>
+</span></span></code></pre></div><h4 id="vterm">Vterm</h4>
 <p>在 Emacs 中使用终端，首先要在 <code>/.zshrc</code> 中添加如下代码。（编译时需要 CMake）</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$INSIDE_EMACS</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s1">&#39;vterm&#39;</span> <span class="o">]]</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> <span class="o">[[</span> -n <span class="si">${</span><span class="nv">EMACS_VTERM_PATH</span><span class="si">}</span> <span class="o">]]</span> <span class="se">\
@@ -208,7 +208,7 @@
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">vterm-send-M-w</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">vterm-send-string</span> <span class="nv">compile-command</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">vterm-send-return</span><span class="p">)))))</span>
-</span></span></code></pre></div><h4 id="ox-hugo">ox-hugo</h4>
+</span></span></code></pre></div><h4 id="ox-hugo">Ox-hugo</h4>
 <p>导出到 Hugo，方便与他人分享内容。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;ox-hugo</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;ox</span>
@@ -397,7 +397,7 @@
 </span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-follow</span> <span class="no">t</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-update-on-save</span> <span class="no">t</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-roam-ui-open-on-start</span> <span class="no">t</span><span class="p">))</span>
-</span></span></code></pre></div><h4 id="org-modern">org-modern</h4>
+</span></span></code></pre></div><h4 id="org-modern">Org-modern</h4>
 <p>美化部分样式，另外设置背景透明以及光标所在代码块按照括号高亮的函数也在放在这里。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-modern</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-modern</span>
@@ -471,7 +471,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-lisp-mode-hook</span>       <span class="ss">&#39;highlight-blocks--get-bounds</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; (add-hook &#39;lisp-interaction-mode-hook &#39;highlight-blocks-mode)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; (add-hook &#39;lisp-mode-hook             &#39;highlight-blocks-mode)</span>
-</span></span></code></pre></div><h4 id="sis">sis</h4>
+</span></span></code></pre></div><h4 id="sis">Sis</h4>
 <p>需要安装 <code>macism</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap laishulu/macism
 </span></span><span class="line"><span class="cl">brew install macism
@@ -503,7 +503,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-agenda-todo</span> <span class="nb">:before</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;hydra-org-agenda-menu/body</span> <span class="nb">:after</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span><span class="p">)</span>
-</span></span></code></pre></div><h4 id="elfeed">elfeed</h4>
+</span></span></code></pre></div><h4 id="elfeed">Elfeed</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;elfeed</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-x w&#34;</span><span class="p">)</span> <span class="ss">&#39;elfeed</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
@@ -574,7 +574,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">elfeed-search-print-entry-function</span> <span class="nf">#&#39;</span><span class="nv">my-search-print-fn</span><span class="p">)</span>
-</span></span></code></pre></div><h4 id="telega">telega</h4>
+</span></span></code></pre></div><h4 id="telega">Telega</h4>
 <p><code>brew install tdlib</code> 的版本过低，需要自行编译，参考 <a href="https://tdlib.github.io/td/build.html?language=Swift">TDLib build instructions</a>。这个之后需要 <code>M-x telega-server-build</code> 重新加载 telega-server。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">xcode-select --install
 </span></span><span class="line"><span class="cl">/bin/bash -c <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&#34;</span>
@@ -631,13 +631,68 @@
 </span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">1.1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-user-title</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">1.1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setf</span> <span class="p">(</span><span class="nv">alist-get</span> <span class="mi">2</span> <span class="nv">telega-avatar-factors-alist</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="mf">0.4</span> <span class="o">.</span> <span class="mf">0.1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;; (setf (alist-get 2 telega-avatar-factors-alist) &#39;(0.4 . 0.1))</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-chat-mode-hook</span> <span class="ss">&#39;my-telega-chat-mode</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 缩小 emoji 显示</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Apple Color Emoji&#34;</span> <span class="o">.</span> <span class="mf">0.75</span><span class="p">))</span>
 </span></span></code></pre></div><p>另外一些特殊昵称的特殊字符无法正常显示，可以安装 Noto Sans Egyptian Hieroglyphs 字体。</p>
-<h3 id="init-org-dot-el">init-org.el</h3>
+<h4 id="hydra-plus-org-starter">Hydra + Org-starter</h4>
+<p><code>Hydra</code> + <code>Org-starter</code> 配置快捷菜单。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-starter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-refile-use-outline-path</span> <span class="ss">&#39;file</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-starter</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;; (add-hook! &#39;after-init-hook &#39;org-starter-load-all-files-in-path)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-starter-def</span> <span class="s">&#34;~/Dropbox/org&#34;</span>
+</span></span><span class="line"><span class="cl">                   <span class="nb">:files</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/inbox.org&#34;</span>                <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;i&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/work.org&#34;</span>                 <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;w&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/technical-debt.org&#34;</span>       <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;t&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/personal.org&#34;</span>             <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;p&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/books.org&#34;</span>                <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;b&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/someday.org&#34;</span>              <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;s&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/agenda.org&#34;</span>               <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;a&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/note.org&#34;</span>                 <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;n&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;daily/journal.org&#34;</span>               <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;j&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;beancount/2022.beancount&#34;</span>        <span class="nb">:agenda</span> <span class="no">nil</span> <span class="nb">:key</span> <span class="s">&#34;c&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;beancount/account.beancount&#34;</span>     <span class="nb">:agenda</span> <span class="no">nil</span> <span class="nb">:key</span> <span class="s">&#34;m&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;beancount/credit.beancount&#34;</span>      <span class="nb">:agenda</span> <span class="no">nil</span> <span class="nb">:key</span> <span class="s">&#34;e&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;beancount/insurance.beancount&#34;</span>   <span class="nb">:agenda</span> <span class="no">nil</span> <span class="nb">:key</span> <span class="s">&#34;u&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;beancount/salary.beancount&#34;</span>      <span class="nb">:agenda</span> <span class="no">nil</span> <span class="nb">:key</span> <span class="s">&#34;l&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;beancount/house.beancount&#34;</span>       <span class="nb">:agenda</span> <span class="no">nil</span> <span class="nb">:key</span> <span class="s">&#34;h&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; hydra</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;hydra</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="nv">defhydra</span> <span class="nv">hydra-org-agenda-menu</span> <span class="p">(</span><span class="nb">:color</span> <span class="nv">blue</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  Org-agenda-menu
+</span></span></span><span class="line"><span class="cl"><span class="s">  ^^^^------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="s">  _i_: inbox     _w_: work      _b_: books     _t_: technical-debt
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">  _a_: agenda    _p_: personal  _n_: note      _s_: someday   _j_: journal
+</span></span></span><span class="line"><span class="cl"><span class="s">  Beancount-menu
+</span></span></span><span class="line"><span class="cl"><span class="s">  ^^^^------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="s">  _c_: 2022      _m_: account   _e_: credit    _u_: insurance
+</span></span></span><span class="line"><span class="cl"><span class="s">  _l_: salary    _h_: house
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;i&#34;</span> <span class="nv">org-starter-find-file:inbox</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;w&#34;</span> <span class="nv">org-starter-find-file:work</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;t&#34;</span> <span class="nv">org-starter-find-file:technical-debt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;p&#34;</span> <span class="nv">org-starter-find-file:personal</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;b&#34;</span> <span class="nv">org-starter-find-file:books</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;n&#34;</span> <span class="nv">org-starter-find-file:note</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;s&#34;</span> <span class="nv">org-starter-find-file:someday</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;a&#34;</span> <span class="nv">org-starter-find-file:agenda</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;j&#34;</span> <span class="nv">org-starter-find-file:journal</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;c&#34;</span> <span class="nv">org-starter-find-file:2022</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;m&#34;</span> <span class="nv">org-starter-find-file:account</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;e&#34;</span> <span class="nv">org-starter-find-file:credit</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;u&#34;</span> <span class="nv">org-starter-find-file:2022</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;l&#34;</span> <span class="nv">org-starter-find-file:insurance</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;h&#34;</span> <span class="nv">org-starter-find-file:house</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="nb">:bind</span><span class="p">(</span><span class="s">&#34;C-c e&#34;</span> <span class="o">.</span> <span class="nv">hydra-org-agenda-menu/body</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="init-org-dot-el">init-org.el</h3>
 <p>org-roam 和 Emacs 自带的 agenda 可以很方便的将笔记和 GTD 结合起来。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org.el --- Org-mode config -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
@@ -753,11 +808,14 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; To-do settings</span>
-</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; TODO</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; HOLD(h@)       ; 进入时添加笔记</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; HOLD(h/!)      ; 离开时添加变更信息</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; HOLD(h@/!)     ; 进入时添加笔记，离开时添加变更信息</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-todo-keywords</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">quote</span> <span class="p">((</span><span class="nv">sequence</span> <span class="s">&#34;TODO(t)&#34;</span> <span class="s">&#34;NEXT(n)&#34;</span> <span class="s">&#34;|&#34;</span> <span class="s">&#34;DONE(d!/!)&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nv">sequence</span> <span class="s">&#34;PROJECT(p)&#34;</span> <span class="s">&#34;|&#34;</span> <span class="s">&#34;DONE(d!/!)&#34;</span> <span class="s">&#34;CANCELLED(c@/!)&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nv">sequence</span> <span class="s">&#34;WAITING(w@/!)&#34;</span> <span class="s">&#34;DELEGATED(e!)&#34;</span> <span class="s">&#34;HOLD(h)&#34;</span> <span class="s">&#34;|&#34;</span> <span class="s">&#34;CANCELLED(c@/!)&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nv">sequence</span> <span class="s">&#34;PROJECT(p)&#34;</span> <span class="s">&#34;|&#34;</span> <span class="s">&#34;DONE(d!/!)&#34;</span> <span class="s">&#34;CANCELLED(c/!)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nv">sequence</span> <span class="s">&#34;WAITING(w/!)&#34;</span> <span class="s">&#34;DELEGATED(e!)&#34;</span> <span class="s">&#34;HOLD(h)&#34;</span> <span class="s">&#34;|&#34;</span> <span class="s">&#34;CANCELLED(c/!)&#34;</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">      <span class="nv">org-todo-repeat-to-state</span> <span class="s">&#34;NEXT&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-todo-keyword-faces</span>
@@ -976,54 +1034,22 @@
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ledger</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ocaml</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">octave</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">plantuml</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">python</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">ruby</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">screen</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">sh</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span> <span class="c1">;; obsolete</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">shell</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">sql</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">sqlite</span> <span class="o">.</span> <span class="no">t</span><span class="p">)))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; org-starter</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-starter</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-refile-use-outline-path</span> <span class="ss">&#39;file</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-starter</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;; (add-hook! &#39;after-init-hook &#39;org-starter-load-all-files-in-path)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-starter-def</span> <span class="s">&#34;~/Dropbox/org&#34;</span>
-</span></span><span class="line"><span class="cl">                   <span class="nb">:files</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/inbox.org&#34;</span>          <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;i&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/work.org&#34;</span>           <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;w&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/technical-debt.org&#34;</span> <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;t&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/personal.org&#34;</span>       <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;p&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/books.org&#34;</span>          <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;b&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/someday.org&#34;</span>        <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;s&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/agenda.org&#34;</span>         <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;a&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/note.org&#34;</span>           <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;n&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;daily/journal.org&#34;</span>         <span class="nb">:agenda</span> <span class="no">t</span> <span class="nb">:key</span> <span class="s">&#34;j&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; hydra</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;hydra</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="nv">defhydra</span> <span class="nv">hydra-org-agenda-menu</span> <span class="p">(</span><span class="nb">:color</span> <span class="nv">blue</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  Org-agenda-menu
-</span></span></span><span class="line"><span class="cl"><span class="s">  ^^^^------------------------------------------------
-</span></span></span><span class="line"><span class="cl"><span class="s">  _i_: inbox.org     _w_: work.org      _t_: technical-debt.org
-</span></span></span><span class="line"><span class="cl"><span class="s">  _b_: books.org     _a_: agenda.org    _p_: personal.org
-</span></span></span><span class="line"><span class="cl"><span class="s">  _n_: note.org      _s_: someday.org   _j_: journal.org
-</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;i&#34;</span> <span class="nv">org-starter-find-file:inbox</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;w&#34;</span> <span class="nv">org-starter-find-file:work</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;t&#34;</span> <span class="nv">org-starter-find-file:technical-debt</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;p&#34;</span> <span class="nv">org-starter-find-file:personal</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;b&#34;</span> <span class="nv">org-starter-find-file:books</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;n&#34;</span> <span class="nv">org-starter-find-file:note</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;s&#34;</span> <span class="nv">org-starter-find-file:someday</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;a&#34;</span> <span class="nv">org-starter-find-file:agenda</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;j&#34;</span> <span class="nv">org-starter-find-file:journal</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="nb">:bind</span><span class="p">(</span><span class="s">&#34;C-c e&#34;</span> <span class="o">.</span> <span class="nv">hydra-org-agenda-menu/body</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">sqlite</span> <span class="o">.</span> <span class="no">t</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">;; plantuml</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-babel-do-load-languages</span>
+</span></span><span class="line"><span class="cl">   <span class="ss">&#39;org-babel-load-languages</span>
+</span></span><span class="line"><span class="cl">   <span class="o">&#39;</span><span class="p">(</span><span class="c1">;; other Babel languages</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nv">plantuml</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nv">python</span> <span class="o">.</span> <span class="no">t</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span>  <span class="nv">org-plantuml-jar-path</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">expand-file-name</span> <span class="s">&#34;~/Dropbox/org/planuml/plantuml.jar&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;; 这里应该就是 .zshrc 里面配置的 python3</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-babel-python-command</span> <span class="s">&#34;python3&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;; Dynamic org-agenda with org-roam</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; https://gist.github.com/d12frosted/a60e8ccb9aceba031af243dff0d19b2e</span>
