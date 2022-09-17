@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 15 Sep 2022 19:52:54 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Sep 2022 09:51:18 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Thu, 15 Sep 2022 19:52:54 +0800</pubDate>
+      <pubDate>Sat, 17 Sep 2022 09:51:18 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -630,6 +630,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-self-title</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">1.1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-user-title</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">1.1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; (setf (alist-get 2 telega-avatar-factors-alist) &#39;(0.4 . 0.1))</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
@@ -688,8 +689,8 @@
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;c&#34;</span> <span class="nv">org-starter-find-file:2022</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;m&#34;</span> <span class="nv">org-starter-find-file:account</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;e&#34;</span> <span class="nv">org-starter-find-file:credit</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;u&#34;</span> <span class="nv">org-starter-find-file:2022</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;l&#34;</span> <span class="nv">org-starter-find-file:insurance</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;u&#34;</span> <span class="nv">org-starter-find-file:insurance</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;l&#34;</span> <span class="nv">org-starter-find-file:salary</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;h&#34;</span> <span class="nv">org-starter-find-file:house</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span><span class="nb">:bind</span><span class="p">(</span><span class="s">&#34;C-c e&#34;</span> <span class="o">.</span> <span class="nv">hydra-org-agenda-menu/body</span><span class="p">))</span>
 </span></span></code></pre></div><h3 id="init-org-dot-el">init-org.el</h3>
