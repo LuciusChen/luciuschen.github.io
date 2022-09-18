@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 17 Sep 2022 09:51:18 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Sep 2022 20:45:29 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Sat, 17 Sep 2022 09:51:18 +0800</pubDate>
+      <pubDate>Sun, 18 Sep 2022 20:45:29 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -94,6 +94,7 @@
     ├── init-elpa.el
     ├── init-local.el
     ├── init-org.el
+    ├── init-org-enhance.el
     ├── init-font.el
     ├── init-corfu.el
     ├── init-themes.el
@@ -628,6 +629,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-reply</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-self-title</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#8A6BBE&#34;</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">1.1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-user-title</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span>
@@ -1052,291 +1054,6 @@
 </span></span><span class="line"><span class="cl">  <span class="c1">;; 这里应该就是 .zshrc 里面配置的 python3</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-babel-python-command</span> <span class="s">&#34;python3&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; Dynamic org-agenda with org-roam</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; https://gist.github.com/d12frosted/a60e8ccb9aceba031af243dff0d19b2e</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-dynamic-p</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Return non-nil if current buffer has any todo entry.
-</span></span></span><span class="line"><span class="cl"><span class="s">TODO entries marked as done are ignored, meaning the this
-</span></span></span><span class="line"><span class="cl"><span class="s">function returns nil if current buffer contains only completed
-</span></span></span><span class="line"><span class="cl"><span class="s">tasks.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">seq-find</span>                                 <span class="c1">; (3)</span>
-</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">type</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nf">eq</span> <span class="nv">type</span> <span class="ss">&#39;todo</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nv">org-element-map</span>                         <span class="c1">; (2)</span>
-</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nv">org-element-parse-buffer</span> <span class="ss">&#39;headline</span><span class="p">)</span> <span class="c1">; (1)</span>
-</span></span><span class="line"><span class="cl">       <span class="ss">&#39;headline</span>
-</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">h</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:todo-type</span> <span class="nv">h</span><span class="p">)))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-dynamic-update-tag</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="s">&#34;Update dynamic tag in the current buffer.&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">active-minibuffer-window</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">vulpea-buffer-p</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">save-excursion</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">goto-char</span> <span class="p">(</span><span class="nf">point-min</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">tags</span> <span class="p">(</span><span class="nv">vulpea-buffer-tags-get</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">original-tags</span> <span class="nv">tags</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">vulpea-dynamic-p</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nb">setq</span> <span class="nv">tags</span> <span class="p">(</span><span class="nf">cons</span> <span class="s">&#34;dynamic&#34;</span> <span class="nv">tags</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">setq</span> <span class="nv">tags</span> <span class="p">(</span><span class="nv">remove</span> <span class="s">&#34;dynamic&#34;</span> <span class="nv">tags</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">          <span class="c1">;; cleanup duplicates</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">setq</span> <span class="nv">tags</span> <span class="p">(</span><span class="nv">seq-uniq</span> <span class="nv">tags</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">          <span class="c1">;; update tags if changed</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">seq-difference</span> <span class="nv">tags</span> <span class="nv">original-tags</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="nv">seq-difference</span> <span class="nv">original-tags</span> <span class="nv">tags</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nf">apply</span> <span class="nf">#&#39;</span><span class="nv">vulpea-buffer-tags-set</span> <span class="nv">tags</span><span class="p">))))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-p</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Return non-nil if the currently visited buffer is a note.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">and</span> <span class="nf">buffer-file-name</span>
-</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nv">string-prefix-p</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">expand-file-name</span> <span class="p">(</span><span class="nf">file-name-as-directory</span> <span class="nv">org-roam-directory</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">file-name-directory</span> <span class="nf">buffer-file-name</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-dynamic-files</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="s">&#34;Return a list of note files containing &#39;dynamic&#39; tag.&#34;</span> <span class="c1">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">seq-uniq</span>
-</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nv">seq-map</span>
-</span></span><span class="line"><span class="cl">      <span class="nf">#&#39;car</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">org-roam-db-query</span>
-</span></span><span class="line"><span class="cl">       <span class="p">[</span><span class="nb">:select</span> <span class="p">[</span><span class="nv">nodes:file</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">:from</span> <span class="nv">tags</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">:left-join</span> <span class="nv">nodes</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">:on</span> <span class="p">(</span><span class="nf">=</span> <span class="nv">tags:node-id</span> <span class="nv">nodes:id</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">:where</span> <span class="p">(</span><span class="nv">like</span> <span class="nv">tag</span> <span class="p">(</span><span class="nb">quote</span> <span class="s">&#34;%\&#34;dynamic\&#34;%&#34;</span><span class="p">))]))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-agenda-files-update</span> <span class="p">(</span><span class="kp">&amp;rest</span> <span class="nv">_</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Update the value of </span><span class="ss">`org-agenda-files&#39;</span><span class="s">.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;; (setq org-agenda-files (vulpea-dynamic-files)))</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-agenda-files</span> <span class="p">(</span><span class="nv">seq-uniq</span>
-</span></span><span class="line"><span class="cl">                          <span class="p">(</span><span class="nf">append</span>
-</span></span><span class="line"><span class="cl">                           <span class="p">(</span><span class="nv">vulpea-dynamic-files</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                           <span class="p">(</span><span class="nv">file-expand-wildcards</span> <span class="s">&#34;~/Dropbox/org/agenda/*.org&#34;</span><span class="p">)))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;find-file-hook</span> <span class="nf">#&#39;</span><span class="nv">vulpea-dynamic-update-tag</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;before-save-hook</span> <span class="nf">#&#39;</span><span class="nv">vulpea-dynamic-update-tag</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-agenda</span> <span class="nb">:before</span> <span class="nf">#&#39;</span><span class="nv">vulpea-agenda-files-update</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-todo-list</span> <span class="nb">:before</span> <span class="nf">#&#39;</span><span class="nv">vulpea-agenda-files-update</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; functions borrowed from `vulpea&#39; library</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; https://github.com/d12frosted/vulpea/blob/6a735c34f1f64e1f70da77989e9ce8da7864e5ff/vulpea-buffer.el</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-tags-get</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Return filetags value in current buffer.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">vulpea-buffer-prop-get-list</span> <span class="s">&#34;filetags&#34;</span> <span class="s">&#34;[ :]&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-tags-set</span> <span class="p">(</span><span class="kp">&amp;rest</span> <span class="nv">tags</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Set TAGS in current buffer.
-</span></span></span><span class="line"><span class="cl"><span class="s">If filetags value is already set, replace it.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="nv">tags</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">vulpea-buffer-prop-set</span>
-</span></span><span class="line"><span class="cl">       <span class="s">&#34;filetags&#34;</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;:&#34;</span> <span class="p">(</span><span class="nv">string-join</span> <span class="nv">tags</span> <span class="s">&#34;:&#34;</span><span class="p">)</span> <span class="s">&#34;:&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">vulpea-buffer-prop-remove</span> <span class="s">&#34;filetags&#34;</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-tags-add</span> <span class="p">(</span><span class="nv">tag</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Add a TAG to filetags in current buffer.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">tags</span> <span class="p">(</span><span class="nv">vulpea-buffer-tags-get</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">tags</span> <span class="p">(</span><span class="nf">append</span> <span class="nv">tags</span> <span class="p">(</span><span class="nf">list</span> <span class="nv">tag</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">apply</span> <span class="nf">#&#39;</span><span class="nv">vulpea-buffer-tags-set</span> <span class="nv">tags</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-tags-remove</span> <span class="p">(</span><span class="nv">tag</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Remove a TAG from filetags in current buffer.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">tags</span> <span class="p">(</span><span class="nv">vulpea-buffer-tags-get</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">tags</span> <span class="p">(</span><span class="nf">delete</span> <span class="nv">tag</span> <span class="nv">tags</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">apply</span> <span class="nf">#&#39;</span><span class="nv">vulpea-buffer-tags-set</span> <span class="nv">tags</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-prop-set</span> <span class="p">(</span><span class="nv">name</span> <span class="nv">value</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Set a file property called NAME to VALUE in buffer file.
-</span></span></span><span class="line"><span class="cl"><span class="s">If the property is already set, replace its value.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">name</span> <span class="p">(</span><span class="nf">downcase</span> <span class="nv">name</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-with-point-at</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">case-fold-search</span> <span class="no">t</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">re-search-forward</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;^#\\+&#34;</span> <span class="nv">name</span> <span class="s">&#34;:\\(.*\\)&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                             <span class="p">(</span><span class="nf">point-max</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nf">replace-match</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;#+&#34;</span> <span class="nv">name</span> <span class="s">&#34;: &#34;</span> <span class="nv">value</span><span class="p">)</span> <span class="ss">&#39;fixedcase</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">eobp</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="nf">looking-at</span> <span class="s">&#34;^[#:]&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">save-excursion</span> <span class="p">(</span><span class="nf">end-of-line</span><span class="p">)</span> <span class="p">(</span><span class="nf">eobp</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nb">progn</span>
-</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nf">end-of-line</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nf">insert</span> <span class="s">&#34;\n&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nf">forward-line</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nf">beginning-of-line</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">insert</span> <span class="s">&#34;#+&#34;</span> <span class="nv">name</span> <span class="s">&#34;: &#34;</span> <span class="nv">value</span> <span class="s">&#34;\n&#34;</span><span class="p">)))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-prop-set-list</span> <span class="p">(</span><span class="nv">name</span> <span class="nv">values</span> <span class="kp">&amp;optional</span> <span class="nv">separators</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Set a file property called NAME to VALUES in current buffer.
-</span></span></span><span class="line"><span class="cl"><span class="s">VALUES are quoted and combined into single string using
-</span></span></span><span class="line"><span class="cl"><span class="s"></span><span class="ss">`combine-and-quote-strings&#39;</span><span class="s">.
-</span></span></span><span class="line"><span class="cl"><span class="s">If SEPARATORS is non-nil, it should be a regular expression
-</span></span></span><span class="line"><span class="cl"><span class="s">matching text that separates, but is not part of, the substrings.
-</span></span></span><span class="line"><span class="cl"><span class="s">If nil it defaults to </span><span class="ss">`split-string-default-separators&#39;</span><span class="s">, normally
-</span></span></span><span class="line"><span class="cl"><span class="s">\&#34;[ \f\t\n\r\v]+\&#34;, and OMIT-NULLS is forced to t.
-</span></span></span><span class="line"><span class="cl"><span class="s">If the property is already set, replace its value.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">vulpea-buffer-prop-set</span>
-</span></span><span class="line"><span class="cl">   <span class="nv">name</span> <span class="p">(</span><span class="nv">combine-and-quote-strings</span> <span class="nv">values</span> <span class="nv">separators</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-prop-get</span> <span class="p">(</span><span class="nv">name</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Get a buffer property called NAME as a string.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-with-point-at</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">re-search-forward</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;^#\\+&#34;</span> <span class="nv">name</span> <span class="s">&#34;: \\(.*\\)&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                             <span class="p">(</span><span class="nf">point-max</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">buffer-substring-no-properties</span>
-</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nf">match-beginning</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nf">match-end</span> <span class="mi">1</span><span class="p">)))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-prop-get-list</span> <span class="p">(</span><span class="nv">name</span> <span class="kp">&amp;optional</span> <span class="nv">separators</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Get a buffer property NAME as a list using SEPARATORS.
-</span></span></span><span class="line"><span class="cl"><span class="s">If SEPARATORS is non-nil, it should be a regular expression
-</span></span></span><span class="line"><span class="cl"><span class="s">matching text that separates, but is not part of, the substrings.
-</span></span></span><span class="line"><span class="cl"><span class="s">If nil it defaults to </span><span class="ss">`split-string-default-separators&#39;</span><span class="s">, normally
-</span></span></span><span class="line"><span class="cl"><span class="s">\&#34;[ \f\t\n\r\v]+\&#34;, and OMIT-NULLS is forced to t.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">value</span> <span class="p">(</span><span class="nv">vulpea-buffer-prop-get</span> <span class="nv">name</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">value</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nv">string-empty-p</span> <span class="nv">value</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">split-string-and-unquote</span> <span class="nv">value</span> <span class="nv">separators</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-prop-remove</span> <span class="p">(</span><span class="nv">name</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Remove a buffer property called NAME.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-with-point-at</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">re-search-forward</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;\\(^#\\+&#34;</span> <span class="nv">name</span> <span class="s">&#34;:.*\n?\\)&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                             <span class="p">(</span><span class="nf">point-max</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">replace-match</span> <span class="s">&#34;&#34;</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;;; Archiving</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; (setq org-archive-mark-done nil)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; (setq org-archive-location &#34;%s_archive::* Archive&#34;)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; https://gist.github.com/kepi/2f4acc3cc93403c75fbba5684c5d852d</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; org-archive-subtree-hierarchical.el</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; version 0.2</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; modified from https://lists.gnu.org/archive/html/emacs-orgmode/2014-08/msg00109.html</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; modified from https://stackoverflow.com/a/35475878/259187</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; In orgmode</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; * A</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; ** AA</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; *** AAA</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; ** AB</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; *** ABA</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; Archiving AA will remove the subtree from the original file and create</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; it like that in archive target:</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; * AA</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; ** AAA</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; And this give you</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; * A</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; ** AA</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; *** AAA</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; Install file to your include path and include in your init file with:</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;  (require &#39;org-archive-subtree-hierarchical)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;  (setq org-archive-default-command &#39;org-archive-subtree-hierarchical)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;org-archive-subtree-hierarchical</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-archive-default-command</span> <span class="ss">&#39;org-archive-subtree-hierarchical</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;org-archive</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-subtree-hierarchical--line-content-as-string</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Returns the content of the current line as a string&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">save-excursion</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">beginning-of-line</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">buffer-substring-no-properties</span>
-</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nf">line-beginning-position</span><span class="p">)</span> <span class="p">(</span><span class="nf">line-end-position</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-subtree-hierarchical--org-child-list</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;This function returns all children of a heading as a list. &#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">save-excursion</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">;; this only works with org-version &gt; 8.0, since in previous</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">;; org-mode versions the function (org-outline-level) returns</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">;; gargabe when the point is not on a heading.</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">=</span> <span class="p">(</span><span class="nv">org-outline-level</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">outline-next-visible-heading</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">org-goto-first-child</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">child-list</span> <span class="p">(</span><span class="nf">list</span> <span class="p">(</span><span class="nv">org-archive-subtree-hierarchical--line-content-as-string</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nv">org-goto-sibling</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">setq</span> <span class="nv">child-list</span> <span class="p">(</span><span class="nf">cons</span> <span class="p">(</span><span class="nv">org-archive-subtree-hierarchical--line-content-as-string</span><span class="p">)</span> <span class="nv">child-list</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">      <span class="nv">child-list</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-subtree-hierarchical--org-struct-subtree</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;This function returns the tree structure in which a subtree
-</span></span></span><span class="line"><span class="cl"><span class="s">belongs as a list.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">archive-tree</span> <span class="no">nil</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">save-excursion</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nv">org-up-heading-safe</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">heading</span>
-</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nf">buffer-substring-no-properties</span>
-</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nf">line-beginning-position</span><span class="p">)</span> <span class="p">(</span><span class="nf">line-end-position</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">eq</span> <span class="nv">archive-tree</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nb">setq</span> <span class="nv">archive-tree</span> <span class="p">(</span><span class="nf">list</span> <span class="nv">heading</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">setq</span> <span class="nv">archive-tree</span> <span class="p">(</span><span class="nf">cons</span> <span class="nv">heading</span> <span class="nv">archive-tree</span><span class="p">))))))</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">archive-tree</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-subtree-hierarchical</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;This function archives a subtree hierarchical&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">org-tree</span> <span class="p">(</span><span class="nv">org-archive-subtree-hierarchical--org-struct-subtree</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">this-buffer</span> <span class="p">(</span><span class="nf">current-buffer</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">file</span> <span class="p">(</span><span class="nv">abbreviate-file-name</span>
-</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nf">buffer-file-name</span> <span class="p">(</span><span class="nf">buffer-base-buffer</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="ne">error</span> <span class="s">&#34;No file associated to buffer&#34;</span><span class="p">)))))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">save-excursion</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">setq</span> <span class="nv">location</span> <span class="nv">org-archive-location</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">afile</span> <span class="p">(</span><span class="nf">car</span> <span class="p">(</span><span class="nv">org-archive--compute-location</span>
-</span></span><span class="line"><span class="cl">                                   <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">org-entry-get</span> <span class="no">nil</span> <span class="s">&#34;ARCHIVE&#34;</span> <span class="ss">&#39;inherit</span><span class="p">)</span> <span class="nv">location</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">;; heading (org-extract-archive-heading location)</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">infile-p</span> <span class="p">(</span><span class="nf">equal</span> <span class="nv">file</span> <span class="p">(</span><span class="nv">abbreviate-file-name</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">afile</span> <span class="s">&#34;&#34;</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">unless</span> <span class="nv">afile</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="ne">error</span> <span class="s">&#34;Invalid </span><span class="ss">`org-archive-location&#39;</span><span class="s">&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">&gt;</span> <span class="p">(</span><span class="nf">length</span> <span class="nv">afile</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">setq</span> <span class="nv">newfile-p</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">file-exists-p</span> <span class="nv">afile</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                <span class="nv">visiting</span> <span class="p">(</span><span class="nv">find-buffer-visiting</span> <span class="nv">afile</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="nv">buffer</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">visiting</span> <span class="p">(</span><span class="nv">find-file-noselect</span> <span class="nv">afile</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">setq</span> <span class="nv">buffer</span> <span class="p">(</span><span class="nf">current-buffer</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">unless</span> <span class="nv">buffer</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="ne">error</span> <span class="s">&#34;Cannot access file \&#34;%s\&#34;&#34;</span> <span class="nv">afile</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">org-cut-subtree</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">set-buffer</span> <span class="nv">buffer</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">org-mode</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">goto-char</span> <span class="p">(</span><span class="nf">point-min</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">equal</span> <span class="nv">org-tree</span> <span class="no">nil</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">child-list</span> <span class="p">(</span><span class="nv">org-archive-subtree-hierarchical--org-child-list</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">member</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">org-tree</span><span class="p">)</span> <span class="nv">child-list</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nb">progn</span>
-</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nf">search-forward</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">org-tree</span><span class="p">)</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-tree</span> <span class="p">(</span><span class="nf">cdr</span> <span class="nv">org-tree</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">progn</span>
-</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nf">goto-char</span> <span class="p">(</span><span class="nf">point-max</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nv">newline</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nv">org-insert-struct</span> <span class="nv">org-tree</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-tree</span> <span class="no">nil</span><span class="p">)))))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">newline</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">org-yank</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">eq</span> <span class="nv">this-buffer</span> <span class="nv">buffer</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">save-buffer</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Subtree archived %s&#34;</span>
-</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;in file: &#34;</span> <span class="p">(</span><span class="nv">abbreviate-file-name</span> <span class="nv">afile</span><span class="p">))))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-insert-struct</span> <span class="p">(</span><span class="nv">struct</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;TODO&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">when</span> <span class="nv">struct</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">insert</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">struct</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">newline</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">org-insert-struct</span> <span class="p">(</span><span class="nf">cdr</span> <span class="nv">struct</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-subtree</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-archive-subtree-hierarchical</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">)</span>
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;emacsql-sqlite-builtin</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-roam</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
@@ -1448,35 +1165,6 @@
 </span></span><span class="line"><span class="cl">           <span class="p">(</span><span class="nv">file-relative-name</span> <span class="p">(</span><span class="nv">org-roam-node-file</span> <span class="nv">node</span><span class="p">)</span> <span class="nv">org-roam-directory</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="ne">error</span> <span class="s">&#34;&#34;</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; Codes blow are used to general a hierachy for title nodes that under a file</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">cl-defmethod</span> <span class="nv">org-roam-node-doom-filetitle</span> <span class="p">((</span><span class="nv">node</span> <span class="nv">org-roam-node</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Return the value of \&#34;#+title:\&#34; (if any) from file that NODE resides in.
-</span></span></span><span class="line"><span class="cl"><span class="s">If there&#39;s no file-level title in the file, return empty string.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">=</span> <span class="p">(</span><span class="nv">org-roam-node-level</span> <span class="nv">node</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nv">org-roam-node-title</span> <span class="nv">node</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">org-roam-get-keyword</span> <span class="s">&#34;TITLE&#34;</span> <span class="p">(</span><span class="nv">org-roam-node-file</span> <span class="nv">node</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">      <span class="s">&#34;&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">cl-defmethod</span> <span class="nv">org-roam-node-doom-hierarchy</span> <span class="p">((</span><span class="nv">node</span> <span class="nv">org-roam-node</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Return hierarchy for NODE, constructed of its file title, OLP and direct title.
-</span></span></span><span class="line"><span class="cl"><span class="s">  If some elements are missing, they will be stripped out.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">title</span>     <span class="p">(</span><span class="nv">org-roam-node-title</span> <span class="nv">node</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">olp</span>       <span class="p">(</span><span class="nv">org-roam-node-olp</span>   <span class="nv">node</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">level</span>     <span class="p">(</span><span class="nv">org-roam-node-level</span> <span class="nv">node</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">filetitle</span> <span class="p">(</span><span class="nv">org-roam-node-doom-filetitle</span> <span class="nv">node</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">separator</span> <span class="p">(</span><span class="nf">propertize</span> <span class="s">&#34; &gt; &#34;</span> <span class="ss">&#39;face</span> <span class="ss">&#39;shadow</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">cl-case</span> <span class="nv">level</span>
-</span></span><span class="line"><span class="cl">      <span class="c1">;; node is a top-level file</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="mi">0</span> <span class="nv">filetitle</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="c1">;; node is a level 1 heading</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="mi">1</span> <span class="p">(</span><span class="nf">concat</span> <span class="p">(</span><span class="nf">propertize</span> <span class="nv">filetitle</span> <span class="ss">&#39;face</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">shadow</span> <span class="nv">italic</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                 <span class="nv">separator</span> <span class="nv">title</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="c1">;; node is a heading with an arbitrary outline path</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="no">t</span> <span class="p">(</span><span class="nf">concat</span> <span class="p">(</span><span class="nf">propertize</span> <span class="nv">filetitle</span> <span class="ss">&#39;face</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">shadow</span> <span class="nv">italic</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                 <span class="nv">separator</span> <span class="p">(</span><span class="nf">propertize</span> <span class="p">(</span><span class="nv">string-join</span> <span class="nv">olp</span> <span class="s">&#34; &gt; &#34;</span><span class="p">)</span> <span class="ss">&#39;face</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">shadow</span> <span class="nv">italic</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                 <span class="nv">separator</span> <span class="nv">title</span><span class="p">)))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-roam-node-display-template</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;${type:15} ${doom-hierarchy:80} &#34;</span> <span class="p">(</span><span class="nf">propertize</span> <span class="s">&#34;${tags:*}&#34;</span> <span class="ss">&#39;face</span> <span class="ss">&#39;org-tag</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;; 在记录的时候创建新的 node 时不退出当前状态，保存新建的 node。</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-roam-node-insert-immediate</span> <span class="p">(</span><span class="nv">arg</span> <span class="kp">&amp;rest</span> <span class="nv">args</span><span class="p">)</span>
@@ -1629,7 +1317,421 @@ Entity07 |o--|| Entity08
     <img loading="lazy" src="/ox-hugo/ERD-example.jpg"/> 
 </figure>
 
-<h3 id="init-font-dot-el">init-font.el</h3>
+<h3 id="init-org-enhance-dot-el">init-org-enhance.el</h3>
+<p>一些增强 org 功能的函数，可以方便使用。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org.el --- Org-mode config -*- lexical-binding: t -*-</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; ==============  Org-roam-backlinks-search  ==================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; https://github.com/Vidianos-Giannitsis/Dotfiles/blob/master/emacs/.emacs.d/libs/zettelkasten.org#org-roam-backlinks-search</span>
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="nb">defcustom</span> <span class="nv">org-roam-backlinks-choices</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;View Backlinks&#34;</span> <span class="s">&#34;Go to Node&#34;</span> <span class="s">&#34;Quit&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="s">&#34;List of choices for </span><span class="ss">`org-roam-backlinks-node-read&#39;</span><span class="s">.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="nb">defun</span> <span class="nv">org-roam-backlinks-query*</span> <span class="p">(</span><span class="nv">NODE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="s">&#34;Gets the backlinks of NODE with </span><span class="ss">`org-roam-db-query&#39;</span><span class="s">.&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nv">org-roam-db-query</span>
+</span></span><span class="line"><span class="cl">          <span class="p">[</span><span class="nb">:select</span> <span class="p">[</span><span class="nv">source</span> <span class="nv">dest</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                   <span class="nb">:from</span> <span class="nv">links</span>
+</span></span><span class="line"><span class="cl">                   <span class="nb">:where</span> <span class="p">(</span><span class="nf">=</span> <span class="nv">dest</span> <span class="nv">$s1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                   <span class="nb">:and</span> <span class="p">(</span><span class="nf">=</span> <span class="nv">type</span> <span class="s">&#34;id&#34;</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nv">org-roam-node-id</span> <span class="nv">NODE</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="nb">defun</span> <span class="nv">org-roam-backlinks-p</span> <span class="p">(</span><span class="nv">SOURCE</span> <span class="nv">NODE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="s">&#34;Predicate function that checks if NODE is a backlink of SOURCE.&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">source-id</span> <span class="p">(</span><span class="nv">org-roam-node-id</span> <span class="nv">SOURCE</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">           <span class="p">(</span><span class="nv">backlinks</span> <span class="p">(</span><span class="nv">org-roam-backlinks-query*</span> <span class="nv">SOURCE</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">           <span class="p">(</span><span class="nv">id</span> <span class="p">(</span><span class="nv">org-roam-node-id</span> <span class="nv">NODE</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">           <span class="p">(</span><span class="nv">id-list</span> <span class="p">(</span><span class="nf">list</span> <span class="nv">id</span> <span class="nv">source-id</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nf">member</span> <span class="nv">id-list</span> <span class="nv">backlinks</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="nb">defun</span> <span class="nv">org-roam-backlinks-poi-or-moc-p</span> <span class="p">(</span><span class="nv">NODE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="s">&#34;Check if NODE has the tag POI or the tag MOC.  Return t if it does.&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nf">string-equal</span> <span class="p">(</span><span class="nf">car</span> <span class="p">(</span><span class="nv">org-roam-node-tags</span> <span class="nv">NODE</span><span class="p">))</span> <span class="s">&#34;POI&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">string-equal</span> <span class="p">(</span><span class="nf">car</span> <span class="p">(</span><span class="nv">org-roam-node-tags</span> <span class="nv">NODE</span><span class="p">))</span> <span class="s">&#34;MOC&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="nb">defun</span> <span class="nv">org-roam-backlinks--read-node-backlinks</span> <span class="p">(</span><span class="nv">source</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="s">&#34;Runs </span><span class="ss">`org-roam-node-read&#39;</span><span class="s"> on the backlinks of SOURCE.
+</span></span></span><span class="line"><span class="cl"><span class="s"> The predicate used as </span><span class="ss">`org-roam-node-read&#39;</span><span class="s">&#39;s filter-fn is
+</span></span></span><span class="line"><span class="cl"><span class="s"> </span><span class="ss">`org-roam-backlinks-p&#39;</span><span class="s">.&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nv">org-roam-node-read</span> <span class="no">nil</span> <span class="p">(</span><span class="nv">apply-partially</span> <span class="nf">#&#39;</span><span class="nv">org-roam-backlinks-p</span> <span class="nv">source</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="nb">defun</span> <span class="nv">org-roam-backlinks-node-read</span> <span class="p">(</span><span class="nv">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="s">&#34;Read a NODE and run </span><span class="ss">`org-roam-backlinks--read-node-backlinks&#39;</span><span class="s">.
+</span></span></span><span class="line"><span class="cl"><span class="s"> Upon selecting a backlink, prompt the user for what to do with
+</span></span></span><span class="line"><span class="cl"><span class="s"> the backlink. The prompt is created with </span><span class="ss">`completing-read&#39;</span><span class="s"> with
+</span></span></span><span class="line"><span class="cl"><span class="s"> valid options being everything in the list
+</span></span></span><span class="line"><span class="cl"><span class="s"> </span><span class="ss">`org-roam-backlinks-choices&#39;</span><span class="s">.
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s"> If the user decides to view the selected node&#39;s backlinks, the
+</span></span></span><span class="line"><span class="cl"><span class="s"> function recursively runs itself with the selection as its
+</span></span></span><span class="line"><span class="cl"><span class="s"> argument. If they decide they want to go to the selected node,
+</span></span></span><span class="line"><span class="cl"><span class="s"> the function runs </span><span class="ss">`find-file&#39;</span><span class="s"> and the file associated to that
+</span></span></span><span class="line"><span class="cl"><span class="s"> node. Lastly, if they choose to quit, the function exits
+</span></span></span><span class="line"><span class="cl"><span class="s"> silently.&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">backlink</span> <span class="p">(</span><span class="nv">org-roam-backlinks--read-node-backlinks</span> <span class="nv">node</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">           <span class="p">(</span><span class="nv">choice</span> <span class="p">(</span><span class="nf">completing-read</span> <span class="s">&#34;What to do with NODE: &#34;</span>
+</span></span><span class="line"><span class="cl">                                    <span class="nv">org-roam-backlinks-choices</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nb">cond</span>
+</span></span><span class="line"><span class="cl">      <span class="p">((</span><span class="nf">string-equal</span>
+</span></span><span class="line"><span class="cl">         <span class="nv">choice</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nf">car</span> <span class="nv">org-roam-backlinks-choices</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">org-roam-backlinks-node-read</span> <span class="nv">backlink</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">((</span><span class="nf">string-equal</span>
+</span></span><span class="line"><span class="cl">         <span class="nv">choice</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">cadr</span> <span class="nv">org-roam-backlinks-choices</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">find-file</span> <span class="p">(</span><span class="nv">org-roam-node-file</span> <span class="nv">backlink</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">((</span><span class="nf">string-equal</span>
+</span></span><span class="line"><span class="cl">         <span class="nv">choice</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">caddr</span> <span class="nv">org-roam-backlinks-choices</span><span class="p">))))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="nb">defun</span> <span class="nv">org-roam-backlinks-search</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="s">&#34;Select an </span><span class="ss">`org-roam-node&#39;</span><span class="s"> and recursively search its backlinks.
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s"> This function is a starter function for
+</span></span></span><span class="line"><span class="cl"><span class="s"> </span><span class="ss">`org-roam-backlinks-node-read&#39;</span><span class="s"> which gets the initial node
+</span></span></span><span class="line"><span class="cl"><span class="s"> selection from </span><span class="ss">`org-roam-node-list&#39;</span><span class="s">. For more information about
+</span></span></span><span class="line"><span class="cl"><span class="s"> this function, check </span><span class="ss">`org-roam-backlinks-node-read&#39;</span><span class="s">.&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">node</span> <span class="p">(</span><span class="nv">org-roam-node-read</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nv">org-roam-backlinks-node-read</span> <span class="nv">node</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="nb">defun</span> <span class="nv">org-roam-backlinks-search-from-moc-or-poi</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="s">&#34;</span><span class="ss">`org-roam-backlinks-search&#39;</span><span class="s"> with an initial selection filter.
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s"> Since nodes tagged as \&#34;MOC\&#34; or \&#34;POI\&#34; are the entry points to
+</span></span></span><span class="line"><span class="cl"><span class="s"> my personal zettelkasten, I have this helper function which is
+</span></span></span><span class="line"><span class="cl"><span class="s"> identical to </span><span class="ss">`org-roam-backlinks-search&#39;</span><span class="s"> but filters initial
+</span></span></span><span class="line"><span class="cl"><span class="s"> selection to only those notes. That way, they initial selection
+</span></span></span><span class="line"><span class="cl"><span class="s"> has a point as it will be on a node that has a decent amount of
+</span></span></span><span class="line"><span class="cl"><span class="s"> backlinks.&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">node</span> <span class="p">(</span><span class="nv">org-roam-node-read</span> <span class="no">nil</span> <span class="nf">#&#39;</span><span class="nv">org-roam-backlinks-poi-or-moc-p</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nv">org-roam-backlinks-node-read</span> <span class="nv">node</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; ===========  Dynamic org-agenda with org-roam  ==============</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; https://gist.github.com/d12frosted/a60e8ccb9aceba031af243dff0d19b2e</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-dynamic-p</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Return non-nil if current buffer has any todo entry.
+</span></span></span><span class="line"><span class="cl"><span class="s">TODO entries marked as done are ignored, meaning the this
+</span></span></span><span class="line"><span class="cl"><span class="s">function returns nil if current buffer contains only completed
+</span></span></span><span class="line"><span class="cl"><span class="s">tasks.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">seq-find</span>                                 <span class="c1">; (3)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">type</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nf">eq</span> <span class="nv">type</span> <span class="ss">&#39;todo</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">   <span class="p">(</span><span class="nv">org-element-map</span>                         <span class="c1">; (2)</span>
+</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nv">org-element-parse-buffer</span> <span class="ss">&#39;headline</span><span class="p">)</span> <span class="c1">; (1)</span>
+</span></span><span class="line"><span class="cl">       <span class="ss">&#39;headline</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">h</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:todo-type</span> <span class="nv">h</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-dynamic-update-tag</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Update dynamic tag in the current buffer.&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">active-minibuffer-window</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">vulpea-buffer-p</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">save-excursion</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">goto-char</span> <span class="p">(</span><span class="nf">point-min</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">tags</span> <span class="p">(</span><span class="nv">vulpea-buffer-tags-get</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">original-tags</span> <span class="nv">tags</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">vulpea-dynamic-p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nb">setq</span> <span class="nv">tags</span> <span class="p">(</span><span class="nf">cons</span> <span class="s">&#34;dynamic&#34;</span> <span class="nv">tags</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">setq</span> <span class="nv">tags</span> <span class="p">(</span><span class="nv">remove</span> <span class="s">&#34;dynamic&#34;</span> <span class="nv">tags</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">          <span class="c1">;; cleanup duplicates</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">setq</span> <span class="nv">tags</span> <span class="p">(</span><span class="nv">seq-uniq</span> <span class="nv">tags</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">          <span class="c1">;; update tags if changed</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">seq-difference</span> <span class="nv">tags</span> <span class="nv">original-tags</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="nv">seq-difference</span> <span class="nv">original-tags</span> <span class="nv">tags</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nf">apply</span> <span class="nf">#&#39;</span><span class="nv">vulpea-buffer-tags-set</span> <span class="nv">tags</span><span class="p">))))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-p</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Return non-nil if the currently visited buffer is a note.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">and</span> <span class="nf">buffer-file-name</span>
+</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nv">string-prefix-p</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">expand-file-name</span> <span class="p">(</span><span class="nf">file-name-as-directory</span> <span class="nv">org-roam-directory</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">file-name-directory</span> <span class="nf">buffer-file-name</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-dynamic-files</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Return a list of note files containing &#39;dynamic&#39; tag.&#34;</span> <span class="c1">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">seq-uniq</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nv">seq-map</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">#&#39;car</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">org-roam-db-query</span>
+</span></span><span class="line"><span class="cl">       <span class="p">[</span><span class="nb">:select</span> <span class="p">[</span><span class="nv">nodes:file</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">:from</span> <span class="nv">tags</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">:left-join</span> <span class="nv">nodes</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">:on</span> <span class="p">(</span><span class="nf">=</span> <span class="nv">tags:node-id</span> <span class="nv">nodes:id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">:where</span> <span class="p">(</span><span class="nv">like</span> <span class="nv">tag</span> <span class="p">(</span><span class="nb">quote</span> <span class="s">&#34;%\&#34;dynamic\&#34;%&#34;</span><span class="p">))]))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-agenda-files-update</span> <span class="p">(</span><span class="kp">&amp;rest</span> <span class="nv">_</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Update the value of </span><span class="ss">`org-agenda-files&#39;</span><span class="s">.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;; (setq org-agenda-files (vulpea-dynamic-files)))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-agenda-files</span> <span class="p">(</span><span class="nv">seq-uniq</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">(</span><span class="nf">append</span>
+</span></span><span class="line"><span class="cl">                           <span class="p">(</span><span class="nv">vulpea-dynamic-files</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                           <span class="p">(</span><span class="nv">file-expand-wildcards</span> <span class="s">&#34;~/Dropbox/org/agenda/*.org&#34;</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;find-file-hook</span> <span class="nf">#&#39;</span><span class="nv">vulpea-dynamic-update-tag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;before-save-hook</span> <span class="nf">#&#39;</span><span class="nv">vulpea-dynamic-update-tag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-agenda</span> <span class="nb">:before</span> <span class="nf">#&#39;</span><span class="nv">vulpea-agenda-files-update</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-todo-list</span> <span class="nb">:before</span> <span class="nf">#&#39;</span><span class="nv">vulpea-agenda-files-update</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; functions borrowed from `vulpea&#39; library</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; https://github.com/d12frosted/vulpea/blob/6a735c34f1f64e1f70da77989e9ce8da7864e5ff/vulpea-buffer.el</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-tags-get</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Return filetags value in current buffer.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">vulpea-buffer-prop-get-list</span> <span class="s">&#34;filetags&#34;</span> <span class="s">&#34;[ :]&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-tags-set</span> <span class="p">(</span><span class="kp">&amp;rest</span> <span class="nv">tags</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Set TAGS in current buffer.
+</span></span></span><span class="line"><span class="cl"><span class="s">If filetags value is already set, replace it.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="nv">tags</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">vulpea-buffer-prop-set</span>
+</span></span><span class="line"><span class="cl">       <span class="s">&#34;filetags&#34;</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;:&#34;</span> <span class="p">(</span><span class="nv">string-join</span> <span class="nv">tags</span> <span class="s">&#34;:&#34;</span><span class="p">)</span> <span class="s">&#34;:&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">vulpea-buffer-prop-remove</span> <span class="s">&#34;filetags&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-tags-add</span> <span class="p">(</span><span class="nv">tag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Add a TAG to filetags in current buffer.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">tags</span> <span class="p">(</span><span class="nv">vulpea-buffer-tags-get</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">tags</span> <span class="p">(</span><span class="nf">append</span> <span class="nv">tags</span> <span class="p">(</span><span class="nf">list</span> <span class="nv">tag</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">apply</span> <span class="nf">#&#39;</span><span class="nv">vulpea-buffer-tags-set</span> <span class="nv">tags</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-tags-remove</span> <span class="p">(</span><span class="nv">tag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Remove a TAG from filetags in current buffer.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">tags</span> <span class="p">(</span><span class="nv">vulpea-buffer-tags-get</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">tags</span> <span class="p">(</span><span class="nf">delete</span> <span class="nv">tag</span> <span class="nv">tags</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">apply</span> <span class="nf">#&#39;</span><span class="nv">vulpea-buffer-tags-set</span> <span class="nv">tags</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-prop-set</span> <span class="p">(</span><span class="nv">name</span> <span class="nv">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Set a file property called NAME to VALUE in buffer file.
+</span></span></span><span class="line"><span class="cl"><span class="s">If the property is already set, replace its value.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">name</span> <span class="p">(</span><span class="nf">downcase</span> <span class="nv">name</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-with-point-at</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">case-fold-search</span> <span class="no">t</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">re-search-forward</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;^#\\+&#34;</span> <span class="nv">name</span> <span class="s">&#34;:\\(.*\\)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                             <span class="p">(</span><span class="nf">point-max</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nf">replace-match</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;#+&#34;</span> <span class="nv">name</span> <span class="s">&#34;: &#34;</span> <span class="nv">value</span><span class="p">)</span> <span class="ss">&#39;fixedcase</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">eobp</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="nf">looking-at</span> <span class="s">&#34;^[#:]&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">save-excursion</span> <span class="p">(</span><span class="nf">end-of-line</span><span class="p">)</span> <span class="p">(</span><span class="nf">eobp</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nb">progn</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nf">end-of-line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nf">insert</span> <span class="s">&#34;\n&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nf">forward-line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nf">beginning-of-line</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">insert</span> <span class="s">&#34;#+&#34;</span> <span class="nv">name</span> <span class="s">&#34;: &#34;</span> <span class="nv">value</span> <span class="s">&#34;\n&#34;</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-prop-set-list</span> <span class="p">(</span><span class="nv">name</span> <span class="nv">values</span> <span class="kp">&amp;optional</span> <span class="nv">separators</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Set a file property called NAME to VALUES in current buffer.
+</span></span></span><span class="line"><span class="cl"><span class="s">VALUES are quoted and combined into single string using
+</span></span></span><span class="line"><span class="cl"><span class="s"></span><span class="ss">`combine-and-quote-strings&#39;</span><span class="s">.
+</span></span></span><span class="line"><span class="cl"><span class="s">If SEPARATORS is non-nil, it should be a regular expression
+</span></span></span><span class="line"><span class="cl"><span class="s">matching text that separates, but is not part of, the substrings.
+</span></span></span><span class="line"><span class="cl"><span class="s">If nil it defaults to </span><span class="ss">`split-string-default-separators&#39;</span><span class="s">, normally
+</span></span></span><span class="line"><span class="cl"><span class="s">\&#34;[ \f\t\n\r\v]+\&#34;, and OMIT-NULLS is forced to t.
+</span></span></span><span class="line"><span class="cl"><span class="s">If the property is already set, replace its value.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">vulpea-buffer-prop-set</span>
+</span></span><span class="line"><span class="cl">   <span class="nv">name</span> <span class="p">(</span><span class="nv">combine-and-quote-strings</span> <span class="nv">values</span> <span class="nv">separators</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-prop-get</span> <span class="p">(</span><span class="nv">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Get a buffer property called NAME as a string.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-with-point-at</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">re-search-forward</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;^#\\+&#34;</span> <span class="nv">name</span> <span class="s">&#34;: \\(.*\\)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                             <span class="p">(</span><span class="nf">point-max</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">buffer-substring-no-properties</span>
+</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nf">match-beginning</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nf">match-end</span> <span class="mi">1</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-prop-get-list</span> <span class="p">(</span><span class="nv">name</span> <span class="kp">&amp;optional</span> <span class="nv">separators</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Get a buffer property NAME as a list using SEPARATORS.
+</span></span></span><span class="line"><span class="cl"><span class="s">If SEPARATORS is non-nil, it should be a regular expression
+</span></span></span><span class="line"><span class="cl"><span class="s">matching text that separates, but is not part of, the substrings.
+</span></span></span><span class="line"><span class="cl"><span class="s">If nil it defaults to </span><span class="ss">`split-string-default-separators&#39;</span><span class="s">, normally
+</span></span></span><span class="line"><span class="cl"><span class="s">\&#34;[ \f\t\n\r\v]+\&#34;, and OMIT-NULLS is forced to t.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">value</span> <span class="p">(</span><span class="nv">vulpea-buffer-prop-get</span> <span class="nv">name</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">value</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nv">string-empty-p</span> <span class="nv">value</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">split-string-and-unquote</span> <span class="nv">value</span> <span class="nv">separators</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">vulpea-buffer-prop-remove</span> <span class="p">(</span><span class="nv">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Remove a buffer property called NAME.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-with-point-at</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">re-search-forward</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;\\(^#\\+&#34;</span> <span class="nv">name</span> <span class="s">&#34;:.*\n?\\)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                             <span class="p">(</span><span class="nf">point-max</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">replace-match</span> <span class="s">&#34;&#34;</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; ======================  Archiving  ==========================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; (setq org-archive-mark-done nil)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; (setq org-archive-location &#34;%s_archive::* Archive&#34;)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; https://gist.github.com/kepi/2f4acc3cc93403c75fbba5684c5d852d</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; org-archive-subtree-hierarchical.el</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; version 0.2</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; modified from https://lists.gnu.org/archive/html/emacs-orgmode/2014-08/msg00109.html</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; modified from https://stackoverflow.com/a/35475878/259187</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; In orgmode</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; * A</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; ** AA</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; *** AAA</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; ** AB</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; *** ABA</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; Archiving AA will remove the subtree from the original file and create</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; it like that in archive target:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; * AA</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; ** AAA</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; And this give you</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; * A</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; ** AA</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; *** AAA</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; Install file to your include path and include in your init file with:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;  (require &#39;org-archive-subtree-hierarchical)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;  (setq org-archive-default-command &#39;org-archive-subtree-hierarchical)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;org-archive-subtree-hierarchical</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-archive-default-command</span> <span class="ss">&#39;org-archive-subtree-hierarchical</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;org-archive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-subtree-hierarchical--line-content-as-string</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Returns the content of the current line as a string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">save-excursion</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">beginning-of-line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">buffer-substring-no-properties</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nf">line-beginning-position</span><span class="p">)</span> <span class="p">(</span><span class="nf">line-end-position</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-subtree-hierarchical--org-child-list</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;This function returns all children of a heading as a list. &#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">save-excursion</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;; this only works with org-version &gt; 8.0, since in previous</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;; org-mode versions the function (org-outline-level) returns</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">;; gargabe when the point is not on a heading.</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">=</span> <span class="p">(</span><span class="nv">org-outline-level</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">outline-next-visible-heading</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">org-goto-first-child</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">child-list</span> <span class="p">(</span><span class="nf">list</span> <span class="p">(</span><span class="nv">org-archive-subtree-hierarchical--line-content-as-string</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nv">org-goto-sibling</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">setq</span> <span class="nv">child-list</span> <span class="p">(</span><span class="nf">cons</span> <span class="p">(</span><span class="nv">org-archive-subtree-hierarchical--line-content-as-string</span><span class="p">)</span> <span class="nv">child-list</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">child-list</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-subtree-hierarchical--org-struct-subtree</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;This function returns the tree structure in which a subtree
+</span></span></span><span class="line"><span class="cl"><span class="s">belongs as a list.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">archive-tree</span> <span class="no">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">save-excursion</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nv">org-up-heading-safe</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">heading</span>
+</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nf">buffer-substring-no-properties</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nf">line-beginning-position</span><span class="p">)</span> <span class="p">(</span><span class="nf">line-end-position</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">eq</span> <span class="nv">archive-tree</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nb">setq</span> <span class="nv">archive-tree</span> <span class="p">(</span><span class="nf">list</span> <span class="nv">heading</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">setq</span> <span class="nv">archive-tree</span> <span class="p">(</span><span class="nf">cons</span> <span class="nv">heading</span> <span class="nv">archive-tree</span><span class="p">))))))</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">archive-tree</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-subtree-hierarchical</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;This function archives a subtree hierarchical&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">org-tree</span> <span class="p">(</span><span class="nv">org-archive-subtree-hierarchical--org-struct-subtree</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">this-buffer</span> <span class="p">(</span><span class="nf">current-buffer</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">file</span> <span class="p">(</span><span class="nv">abbreviate-file-name</span>
+</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nf">buffer-file-name</span> <span class="p">(</span><span class="nf">buffer-base-buffer</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="ne">error</span> <span class="s">&#34;No file associated to buffer&#34;</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">save-excursion</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">setq</span> <span class="nv">location</span> <span class="nv">org-archive-location</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">afile</span> <span class="p">(</span><span class="nf">car</span> <span class="p">(</span><span class="nv">org-archive--compute-location</span>
+</span></span><span class="line"><span class="cl">                                   <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">org-entry-get</span> <span class="no">nil</span> <span class="s">&#34;ARCHIVE&#34;</span> <span class="ss">&#39;inherit</span><span class="p">)</span> <span class="nv">location</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">;; heading (org-extract-archive-heading location)</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">infile-p</span> <span class="p">(</span><span class="nf">equal</span> <span class="nv">file</span> <span class="p">(</span><span class="nv">abbreviate-file-name</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">afile</span> <span class="s">&#34;&#34;</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">unless</span> <span class="nv">afile</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="ne">error</span> <span class="s">&#34;Invalid </span><span class="ss">`org-archive-location&#39;</span><span class="s">&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">&gt;</span> <span class="p">(</span><span class="nf">length</span> <span class="nv">afile</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">setq</span> <span class="nv">newfile-p</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">file-exists-p</span> <span class="nv">afile</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">visiting</span> <span class="p">(</span><span class="nv">find-buffer-visiting</span> <span class="nv">afile</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">buffer</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">visiting</span> <span class="p">(</span><span class="nv">find-file-noselect</span> <span class="nv">afile</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">setq</span> <span class="nv">buffer</span> <span class="p">(</span><span class="nf">current-buffer</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">unless</span> <span class="nv">buffer</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="ne">error</span> <span class="s">&#34;Cannot access file \&#34;%s\&#34;&#34;</span> <span class="nv">afile</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">org-cut-subtree</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">set-buffer</span> <span class="nv">buffer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">org-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">goto-char</span> <span class="p">(</span><span class="nf">point-min</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">equal</span> <span class="nv">org-tree</span> <span class="no">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">child-list</span> <span class="p">(</span><span class="nv">org-archive-subtree-hierarchical--org-child-list</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">member</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">org-tree</span><span class="p">)</span> <span class="nv">child-list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nb">progn</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nf">search-forward</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">org-tree</span><span class="p">)</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-tree</span> <span class="p">(</span><span class="nf">cdr</span> <span class="nv">org-tree</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">progn</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nf">goto-char</span> <span class="p">(</span><span class="nf">point-max</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nv">newline</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nv">org-insert-struct</span> <span class="nv">org-tree</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-tree</span> <span class="no">nil</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">newline</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">org-yank</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">eq</span> <span class="nv">this-buffer</span> <span class="nv">buffer</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">save-buffer</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Subtree archived %s&#34;</span>
+</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;in file: &#34;</span> <span class="p">(</span><span class="nv">abbreviate-file-name</span> <span class="nv">afile</span><span class="p">))))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-insert-struct</span> <span class="p">(</span><span class="nv">struct</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;TODO&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">when</span> <span class="nv">struct</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">insert</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">struct</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">newline</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">org-insert-struct</span> <span class="p">(</span><span class="nf">cdr</span> <span class="nv">struct</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-archive-subtree</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-archive-subtree-hierarchical</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; ==============  Hierachy for title nodes  ===================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; Codes blow are used to general a hierachy for title nodes that under a file</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">cl-defmethod</span> <span class="nv">org-roam-node-doom-filetitle</span> <span class="p">((</span><span class="nv">node</span> <span class="nv">org-roam-node</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Return the value of \&#34;#+title:\&#34; (if any) from file that NODE resides in.
+</span></span></span><span class="line"><span class="cl"><span class="s">If there&#39;s no file-level title in the file, return empty string.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">=</span> <span class="p">(</span><span class="nv">org-roam-node-level</span> <span class="nv">node</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nv">org-roam-node-title</span> <span class="nv">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">org-roam-get-keyword</span> <span class="s">&#34;TITLE&#34;</span> <span class="p">(</span><span class="nv">org-roam-node-file</span> <span class="nv">node</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">      <span class="s">&#34;&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">cl-defmethod</span> <span class="nv">org-roam-node-doom-hierarchy</span> <span class="p">((</span><span class="nv">node</span> <span class="nv">org-roam-node</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Return hierarchy for NODE, constructed of its file title, OLP and direct title.
+</span></span></span><span class="line"><span class="cl"><span class="s">  If some elements are missing, they will be stripped out.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">title</span>     <span class="p">(</span><span class="nv">org-roam-node-title</span> <span class="nv">node</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">olp</span>       <span class="p">(</span><span class="nv">org-roam-node-olp</span>   <span class="nv">node</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">level</span>     <span class="p">(</span><span class="nv">org-roam-node-level</span> <span class="nv">node</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">filetitle</span> <span class="p">(</span><span class="nv">org-roam-node-doom-filetitle</span> <span class="nv">node</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">separator</span> <span class="p">(</span><span class="nf">propertize</span> <span class="s">&#34; &gt; &#34;</span> <span class="ss">&#39;face</span> <span class="ss">&#39;shadow</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">cl-case</span> <span class="nv">level</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">;; node is a top-level file</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="mi">0</span> <span class="nv">filetitle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">;; node is a level 1 heading</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="mi">1</span> <span class="p">(</span><span class="nf">concat</span> <span class="p">(</span><span class="nf">propertize</span> <span class="nv">filetitle</span> <span class="ss">&#39;face</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">shadow</span> <span class="nv">italic</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                 <span class="nv">separator</span> <span class="nv">title</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">;; node is a heading with an arbitrary outline path</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="no">t</span> <span class="p">(</span><span class="nf">concat</span> <span class="p">(</span><span class="nf">propertize</span> <span class="nv">filetitle</span> <span class="ss">&#39;face</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">shadow</span> <span class="nv">italic</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                 <span class="nv">separator</span> <span class="p">(</span><span class="nf">propertize</span> <span class="p">(</span><span class="nv">string-join</span> <span class="nv">olp</span> <span class="s">&#34; &gt; &#34;</span><span class="p">)</span> <span class="ss">&#39;face</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">shadow</span> <span class="nv">italic</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                 <span class="nv">separator</span> <span class="nv">title</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-roam-node-display-template</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;${type:15} ${doom-hierarchy:80} &#34;</span> <span class="p">(</span><span class="nf">propertize</span> <span class="s">&#34;${tags:*}&#34;</span> <span class="ss">&#39;face</span> <span class="ss">&#39;org-tag</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org-enhance</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; init-org-enhance.el ends here</span>
+</span></span></code></pre></div><h3 id="init-font-dot-el">init-font.el</h3>
 <p>使用的是 <code>IBM Plex Mono</code> 和 <code>LXGW WenKai</code> 分别作为英文和中文字体，目前唯一的缺点就是不等高。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-font.el --- Dired customisations -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
