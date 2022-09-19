@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Sep 2022 20:52:45 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Sep 2022 14:31:45 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Sun, 18 Sep 2022 20:52:45 +0800</pubDate>
+      <pubDate>Mon, 19 Sep 2022 14:31:45 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -98,6 +98,7 @@
     ├── init-font.el
     ├── init-corfu.el
     ├── init-themes.el
+    ├── init-tree-sitter.el
     ├── beancount.el
     ├── ligature.el
 </code></pre><h3 id="init-epla-dot-el">init-epla.el</h3>
@@ -629,7 +630,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-reply</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-self-title</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#8A6BBE&#34;</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#FFB11B&#34;</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">1.1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-user-title</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span>
@@ -1881,6 +1882,36 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-themes</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-themes.el ends here</span>
+</span></span></code></pre></div><h3 id="init-tree-sitter-dot-el">init-tree-sitter.el</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-tree-sitter.el --- Configure for tree sitter</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;tree-sitter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;tree-sitter-langs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;tree-sitter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;tree-sitter-langs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Code:</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-tree-sitter-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;tree-sitter-after-on-hook</span> <span class="nf">#&#39;</span><span class="nv">tree-sitter-hl-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Load the language definition for Rust, if it hasn&#39;t been loaded.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; Return the language object.</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">tree-sitter-require</span> <span class="ss">&#39;rust</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">tree-sitter-require</span> <span class="ss">&#39;python</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">tree-sitter-require</span> <span class="ss">&#39;javascript</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Add Emacs-Lisp for tree-sitter:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 1. git clone https://github.com/Wilfred/tree-sitter-elisp</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 2. gcc ./src/parser.c -fPIC -I./ --shared -o elisp.so</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 3. cp ./elisp.so ~/.tree-sitter-langs/bin (~/.tree-sitter-langs/bin is path of your tree-sitter-langs repo)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">tree-sitter-load</span> <span class="ss">&#39;elisp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;tree-sitter-major-mode-language-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">emacs-lisp-mode</span> <span class="o">.</span> <span class="nv">elisp</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;tree-sitter-major-mode-language-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">inferior-emacs-lisp-mode</span> <span class="o">.</span> <span class="nv">elisp</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-tree-sitter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; init-tree-sitter.el ends here</span>
 </span></span></code></pre></div><h3 id="beancount-dot-el">beancount.el</h3>
 <p><a href="https://github.com/beancount/beancount-mode">GitHub - beancount/beancount-mode: Emacs major-mode to work with Beancount le&hellip;</a>，这里是将其中的 <code>beancount.el</code> 下载到 <code>.emacs.d/lisp/</code> 目录下，加上下列代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;auto-mode-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;\\.beancount\\&#39;&#34;</span> <span class="o">.</span> <span class="nv">beancount-mode</span><span class="p">))</span>

@@ -25,7 +25,7 @@
 <meta property="og:url" content="https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-09-18T20:52:45&#43;08:00" />
+  <meta property="article:modified_time" content="2022-09-19T14:31:45&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -58,10 +58,10 @@
   "keywords": [
     
   ],
-  "wordCount" : "9018",
+  "wordCount" : "9119",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-09-18T20:52:45+08:00",
+  "dateModified": "2022-09-19T14:31:45+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -270,11 +270,11 @@ function toggleThemeListener() {
     </h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>September 18, 2022</span></span><span class="meta-item">
+  <span>September 19, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>9018 words</span></span><span class="meta-item">
+  <span>9119 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>18 min</span></span>
+  <span>19 min</span></span>
 
       
       
@@ -371,6 +371,8 @@ function toggleThemeListener() {
                     <a href="#init-corfu-dot-el" aria-label="init-corfu.el">init-corfu.el</a></li>
                 <li>
                     <a href="#init-themes-dot-el" aria-label="init-themes.el">init-themes.el</a></li>
+                <li>
+                    <a href="#init-tree-sitter-dot-el" aria-label="init-tree-sitter.el">init-tree-sitter.el</a></li>
                 <li>
                     <a href="#beancount-dot-el" aria-label="beancount.el">beancount.el</a></li>
                 <li>
@@ -488,6 +490,7 @@ function toggleThemeListener() {
     ├── init-font.el
     ├── init-corfu.el
     ├── init-themes.el
+    ├── init-tree-sitter.el
     ├── beancount.el
     ├── ligature.el
 </code></pre><h3 id="init-epla-dot-el">init-epla.el<a hidden class="anchor" aria-hidden="true" href="#init-epla-dot-el">¶</a></h3>
@@ -1019,7 +1022,7 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-reply</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-self-title</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#8A6BBE&#34;</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#FFB11B&#34;</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">1.1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-user-title</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span>
@@ -2271,6 +2274,36 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-themes</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-themes.el ends here</span>
+</span></span></code></pre></div><h3 id="init-tree-sitter-dot-el">init-tree-sitter.el<a hidden class="anchor" aria-hidden="true" href="#init-tree-sitter-dot-el">¶</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-tree-sitter.el --- Configure for tree sitter</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;tree-sitter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;tree-sitter-langs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;tree-sitter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;tree-sitter-langs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Code:</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-tree-sitter-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;tree-sitter-after-on-hook</span> <span class="nf">#&#39;</span><span class="nv">tree-sitter-hl-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Load the language definition for Rust, if it hasn&#39;t been loaded.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; Return the language object.</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">tree-sitter-require</span> <span class="ss">&#39;rust</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">tree-sitter-require</span> <span class="ss">&#39;python</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">tree-sitter-require</span> <span class="ss">&#39;javascript</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Add Emacs-Lisp for tree-sitter:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 1. git clone https://github.com/Wilfred/tree-sitter-elisp</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 2. gcc ./src/parser.c -fPIC -I./ --shared -o elisp.so</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 3. cp ./elisp.so ~/.tree-sitter-langs/bin (~/.tree-sitter-langs/bin is path of your tree-sitter-langs repo)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">tree-sitter-load</span> <span class="ss">&#39;elisp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;tree-sitter-major-mode-language-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">emacs-lisp-mode</span> <span class="o">.</span> <span class="nv">elisp</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;tree-sitter-major-mode-language-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">inferior-emacs-lisp-mode</span> <span class="o">.</span> <span class="nv">elisp</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-tree-sitter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; init-tree-sitter.el ends here</span>
 </span></span></code></pre></div><h3 id="beancount-dot-el">beancount.el<a hidden class="anchor" aria-hidden="true" href="#beancount-dot-el">¶</a></h3>
 <p><a href="https://github.com/beancount/beancount-mode">GitHub - beancount/beancount-mode: Emacs major-mode to work with Beancount le&hellip;</a>，这里是将其中的 <code>beancount.el</code> 下载到 <code>.emacs.d/lisp/</code> 目录下，加上下列代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;auto-mode-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;\\.beancount\\&#39;&#34;</span> <span class="o">.</span> <span class="nv">beancount-mode</span><span class="p">))</span>
