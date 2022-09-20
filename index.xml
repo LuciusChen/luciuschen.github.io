@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Sep 2022 15:24:44 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Sep 2022 16:45:52 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Tue, 20 Sep 2022 15:24:44 +0800</pubDate>
+      <pubDate>Tue, 20 Sep 2022 16:45:52 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -750,7 +750,10 @@ Entity07 |o--|| Entity08
 
 <h3 id="init-sis-dot-el">init-sis.el</h3>
 <p>根据 meow 的 <code>insert mode</code> 切换，同时根据上下文来判断切换输入法；另外在特定 <code>mode</code> 下也切换输入法，使用更加顺滑。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-sis.el  --- Custom configuration</span>
+<p>需要安装 `macism`</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap laishulu/macism
+</span></span><span class="line"><span class="cl">brew install macism
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-sis.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;sis</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; meow insert mode switch</span>
@@ -850,6 +853,7 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-font</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-font.el ends here</span>
 </span></span></code></pre></div><h3 id="init-ebib-dot-el">init-ebib.el</h3>
+<p>管理 Bibtex 可以方便在文章中引用，以及新增读书笔记，结合 agenda 更好的管理读书条目以及进度。（这部份配置需要精简，目前用的比较简单。）</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-ebib.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">bibtex</span>
@@ -1250,7 +1254,7 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-corfu</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-corfu.el ends here</span>
 </span></span></code></pre></div><h3 id="init-themes-dot-el">init-themes.el</h3>
-<p>用的 <a href="https://protesilaos.com/emacs/ef-themes-pictures">Screen shots of the Ef themes for GNU Emacs | Protesilaos Stavrou</a>，​<code>ef-spring</code> 作为非编码时的主题，​<code>ef-night</code> 作为编码时的主题。</p>
+<p>用的 <a href="https://protesilaos.com/emacs/ef-themes-pictures">Screen shots of the Ef themes for GNU Emacs | Protesilaos Stavrou</a>，​<code>ef-spring</code> 作为非编码时的主题，​<code>ef-night</code> 作为编码时的主题。另外设置背景透明以及光标所在代码块按照括号高亮的函数也在放在这里。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-themes.el --- Defaults for themes -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Code:</span>
@@ -1429,6 +1433,48 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-elfeed</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-elfeed.el ends here</span>
 </span></span></code></pre></div><h3 id="init-telega-dot-el">init-telega.el</h3>
+<p><code>brew install tdlib</code> 的版本过低，需要自行编译，参考 <a href="https://tdlib.github.io/td/build.html?language=Swift">TDLib build instructions</a> 。这个之后需要 <code>M-x telega-server-build</code> 重新加载 telega-server。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">xcode-select --install
+</span></span><span class="line"><span class="cl">/bin/bash -c <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">brew install gperf cmake openssl
+</span></span><span class="line"><span class="cl">git clone https://github.com/tdlib/td.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> td
+</span></span><span class="line"><span class="cl">rm -rf build
+</span></span><span class="line"><span class="cl">mkdir build
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> build
+</span></span><span class="line"><span class="cl">cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>Release -DOPENSSL_ROOT_DIR<span class="o">=</span>/usr/local/opt/openssl/ -DCMAKE_INSTALL_PREFIX:PATH<span class="o">=</span>/usr/local ..
+</span></span><span class="line"><span class="cl">cmake --build . --target install
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl">ls -l /usr/local
+</span></span></code></pre></div><p>其中 tblib 的版本当前需要 1.8.4，可以切换到 1.8.4 的版本。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout b447c32fe94c3d62d74c6b9608649c791641c3e5
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C-c C-v</code></td>
+<td>发送图片</td>
+<td><code>brew install pngpaste</code></td>
+</tr>
+<tr>
+<td><code>!</code></td>
+<td>点赞</td>
+<td></td>
+</tr>
+<tr>
+<td><code>C-c C-a</code></td>
+<td>Attachment type</td>
+<td>其中 markup 可以发送 md 等格式</td>
+</tr>
+</tbody>
+</table>
 <pre tabindex="0"><code class="language-nil" data-lang="nil">;;; init-telega.el  --- Custom configuration
 ;;; Commentary
 (require-package &#39;telega)
