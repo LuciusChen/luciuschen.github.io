@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Sep 2022 14:11:23 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Sep 2022 16:03:01 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Wed, 21 Sep 2022 14:11:23 +0800</pubDate>
+      <pubDate>Wed, 21 Sep 2022 16:03:01 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -73,9 +73,26 @@
 <h3 id="note-taking">Note taking</h3>
 <p>输入源分为工作、书籍和文章（来自于 RSS、Newsletter、Twitter 等平台）。</p>
 <h4 id="book">Book</h4>
-<p>PDF 以及 Epub 格式的书籍或者论文通过 Ebib 管理 Bibtex，Ebib 的 <code>ebib-reading-list-file</code> 设置为 Agenda 中的 <code>books.org</code>​，这样就可以很方便在 Agenda View 中看到自己当前在阅读的书籍/论文，并查看进度。</p>
+<p>PDF 以及 Epub 格式的书籍或者论文通过 Ebib 管理 Bibtex，Ebib 的 <code>ebib-reading-list-file</code> 设置为 Agenda 中的 <code>books.org</code>​，这样就可以很方便新建任务到 <code>book.org</code> 在 Agenda View 中看到自己当前在阅读的书籍/论文，并查看进度。</p>
 <p>书籍/论文对应的笔记则是在 <code>references</code> 文件夹下，可以方便笔记中进行引用。</p>
-<h4 id="daily-log">Daily log</h4>
+<p>书籍除了 ebib 管理的 bibtex 汇总可以查看，还通过 Dynamic Table 进行管理，这样可以更加直观的看到书籍的评价以及关联到读书笔记。（其实 ebib 那里也可以关联到笔记，毕竟笔记的创建就是利用 ebib 的命令，连接在 external note 这个字段中。）</p>
+<p>文件顶部这样设置即可，根据自己的情况进行修改适配，其中 <code>file</code> 是指数据源，这里就是将数据源放在与表格同一个文件。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+title</span><span class="c">: Book reviews</span>
+</span></span><span class="line"><span class="cl"><span class="cs">#+COLUMNS</span><span class="c">: %25ITEM(书名) %10AUTHOR(Author) %10CATEGORY(Category) %15STATE(State) %15SCORE(Score) %10VERSION(Version) %15REMARK(Remark) %25NOTELINK(Notelink)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cs">#+BEGIN</span><span class="c">: columnview :hlines 1 :id &#34;file:~/Dropbox/org/references/Book-Reviews.org&#34; :skip-empty-rows t</span>
+</span></span><span class="line"><span class="cl">#+END
+</span></span></code></pre></div><p>统计的 <code>COLUMNS</code> 来自与 Head 的 Properties，两者要一一对应，如此都设置好了之后在表格处（columnview 那里）按 <code>C-c C-c</code> 生成表格，即 Dynamic Table。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="c">:PROPERTIES:
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cs">:Author: 作者
+</span></span></span><span class="line"><span class="cl"><span class="cs">:Category: 分类
+</span></span></span><span class="line"><span class="cl"><span class="cs">:Score: 9.7
+</span></span></span><span class="line"><span class="cl"><span class="cs">:State: Reading
+</span></span></span><span class="line"><span class="cl"><span class="cs">:Version: 版本
+</span></span></span><span class="line"><span class="cl"><span class="cs">:Remark:
+</span></span></span><span class="line"><span class="cl"><span class="cs">:Notelink: [[id:xxx][笔记名称]]
+</span></span></span><span class="line"><span class="cl"><span class="cs"></span><span class="c">:END:</span>
+</span></span></code></pre></div><h4 id="daily-log">Daily log</h4>
 <p>每个 Daily log 文件头部都有 <code>#+ARCHIVE: journal.org::</code> 来控制归档的位置，每天回顾完当天的 log 就归档到 <code>journal.org</code> 文件中，如果后续这个文件太大，还可以按照年份来继续归档。</p>
 <p>而且在 <code>journal.org</code> 中通过 <code>C-c \</code> 可以查看所有的 tags，选择对应的 tag 就可以过滤出想要的内容，其他内容全部收缩。</p>
 <h4 id="articles-work">Articles/Work</h4>
@@ -87,6 +104,9 @@
 <p>输出是 org 的强项，Hugo 方便与人在线分享，PDF/Markdown 离线分享。</p>
 <h4 id="org-roam-ui">org-roam-ui</h4>
 <p>方便的查看笔记之间的关系，进行系统性回顾。</p>
+<h3 id="scanned-document-management">Scanned Document Management</h3>
+<p>扫描件都是通过 <code>org-attach</code> 包辅助管理，主要就是将扫描件的主要内容手工录入，便于后期文件搜索，源文件作为附件用 <code>org-attach</code> 管理，存放在文本同目录下的 <code>data</code> 文件夹下，按照 <code>org-attach</code> 生成的 ID 存放。</p>
+<p>Daily Log 当中一些很长的文件、执行脚本、代码等也可以通过相同的方式进行管理，减少 <code>Journal.org</code> 的体积，减少分割次数。</p>
 <h2 id="personal-settings">Personal Settings</h2>
 <p>目前在 <a href="https://github.com/purcell/emacs.d">purcell</a> 中就增加或修改了这些文件。</p>
 <pre tabindex="0"><code class="language-nil" data-lang="nil">.
