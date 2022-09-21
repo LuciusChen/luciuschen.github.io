@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Sep 2022 16:45:52 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Sep 2022 14:11:23 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Tue, 20 Sep 2022 16:45:52 +0800</pubDate>
+      <pubDate>Wed, 21 Sep 2022 14:11:23 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -107,7 +107,7 @@
     ├── init-org-modern.el
     ├── init-quick-menus.el
     ├── init-tree-sitter.el
-    ├── init-org-enhance.el
+    └── init-org-enhance.el
 </code></pre><h3 id="ligature-dot-el">ligature.el</h3>
 <p><a href="https://github.com/mickeynp/ligature.el">GitHub - mickeynp/ligature.el: Display typographical ligatures in Emacs</a>，这里是将其中的 <code>ligature.el</code> 下载到 <code>.emacs.d/lisp/</code> 目录下，加上下列代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Enable the www ligature in every possible major mode</span>
@@ -800,7 +800,7 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-sis</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-sis.el ends here</span>
 </span></span></code></pre></div><h3 id="init-font-dot-el">init-font.el</h3>
-<p>使用的是 <code>IBM Plex Mono</code> 和 <code>LXGW WenKai</code> 分别作为英文和中文字体，目前唯一的缺点就是不等高。</p>
+<p>使用的是 <code>Iosevka</code> 和 <code>LXGW WenKai</code> 分别作为英文和中文字体，按照 1:1 缩放，偶数字号就可以做到等高等宽。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-font.el --- Dired customisations -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Code:</span>
@@ -809,9 +809,9 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">null</span> <span class="p">(</span><span class="nf">x-list-fonts</span> <span class="nv">font</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">      <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">    <span class="no">t</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">zh-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;LXGW WenKai&#34;</span> <span class="s">&#34;HanaMinB&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">en-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;IBM Plex Mono&#34;</span> <span class="s">&#34;Iosevka&#34;</span> <span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; LXGW WenKai Mono 配合 Iosevka 按照 1:1 偶数字号就可以做到等高等宽。</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">zh-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;LXGW WenKai Mono&#34;</span> <span class="s">&#34;HanaMinB&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">en-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Iosevka&#34;</span> <span class="s">&#34;Fira Code&#34;</span> <span class="s">&#34;IBM Plex Mono&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">qiang-make-font-string</span> <span class="p">(</span><span class="nv">font-name</span> <span class="nv">font-size</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nf">stringp</span> <span class="nv">font-size</span><span class="p">)</span>
@@ -824,7 +824,7 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">                       <span class="nv">chinese-fonts</span>
 </span></span><span class="line"><span class="cl">                       <span class="kp">&amp;optional</span> <span class="nv">chinese-font-scale</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">chinese-font-scale</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">chinese-font-scale</span> <span class="mf">1.2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">chinese-font-scale</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">chinese-font-scale</span> <span class="mi">1</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">face-font-rescale-alist</span>
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">cl-loop</span> <span class="nv">for</span> <span class="nv">x</span> <span class="nv">in</span> <span class="nv">zh-font-list</span>
@@ -849,7 +849,7 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">set-fontset-font</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="no">nil</span> <span class="ss">&#39;font</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                        <span class="nv">charset</span> <span class="nv">zh-font</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">qiang-set-font</span> <span class="nv">en-font-list</span> <span class="mi">12</span> <span class="nv">zh-font-list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">qiang-set-font</span> <span class="nv">en-font-list</span> <span class="mi">14</span> <span class="nv">zh-font-list</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-font</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-font.el ends here</span>
 </span></span></code></pre></div><h3 id="init-ebib-dot-el">init-ebib.el</h3>
@@ -1308,18 +1308,28 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nv">display-graphic-p</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;dimmer-exclusion-predicates</span> <span class="ss">&#39;sanityinc/display-non-graphic-p</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; 设置背景透明度</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">user/change-background-opacity</span> <span class="p">(</span><span class="nv">alpha</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span> <span class="s">&#34;nOpacity: &#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nf">&gt;=</span> <span class="nv">alpha</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nf">&lt;=</span> <span class="nv">alpha</span> <span class="mi">100</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">user/set-background-opacity</span> <span class="nv">alpha</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">format-message</span> <span class="s">&#34;Opacity has to be between 0 and 100 but is %d.&#34;</span> <span class="nv">alpha</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; fake transparency</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; (defun user/change-background-opacity (alpha)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;   (interactive &#34;nOpacity: &#34;)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;   (if (and (&gt;= alpha 0) (&lt;= alpha 100))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;       (user/set-background-opacity alpha)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;     (format-message &#34;Opacity has to be between 0 and 100 but is %d.&#34; alpha)))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">user/set-background-opacity</span> <span class="p">(</span><span class="nv">alpha</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-frame-parameter</span> <span class="p">(</span><span class="nf">selected-frame</span><span class="p">)</span> <span class="ss">&#39;alpha</span> <span class="nv">alpha</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;default-frame-alist</span> <span class="p">(</span><span class="nf">cons</span> <span class="ss">&#39;alpha</span> <span class="nv">alpha</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; (defun user/set-background-opacity (alpha)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;   (set-frame-parameter (selected-frame) &#39;alpha alpha)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;   (add-to-list &#39;default-frame-alist (cons &#39;alpha alpha)))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">user/set-background-opacity</span> <span class="mi">90</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; (user/set-background-opacity 90)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; true transparency</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">kb/toggle-window-transparency</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Toggle transparency.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">alpha-transparency</span> <span class="mi">50</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">pcase</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="no">nil</span> <span class="ss">&#39;alpha-background</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">alpha-transparency</span> <span class="p">(</span><span class="nv">set-frame-parameter</span> <span class="no">nil</span> <span class="ss">&#39;alpha-background</span> <span class="mi">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="no">t</span> <span class="p">(</span><span class="nv">set-frame-parameter</span> <span class="no">nil</span> <span class="ss">&#39;alpha-background</span> <span class="nv">alpha-transparency</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">kb/toggle-window-transparency</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 高亮光标所在的括号内容，提高阅读效率。</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="ss">&#39;highlight-blocks</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">package-install</span> <span class="ss">&#39;highlight-blocks</span><span class="p">))</span>
@@ -1475,32 +1485,31 @@ Entity07 |o--|| Entity08
 </tr>
 </tbody>
 </table>
-<pre tabindex="0"><code class="language-nil" data-lang="nil">;;; init-telega.el  --- Custom configuration
-;;; Commentary
-(require-package &#39;telega)
-(define-key global-map (kbd &#34;C-c t&#34;) telega-prefix-map)
-;; 去除昵称、回复行的背景高亮
-(defun my-telega-chat-mode ()
-  (set-face-attribute &#39;telega-msg-heading nil
-                      :underline &#39;(:style line)
-                      :inherit nil
-                      :background nil)
-  (set-face-attribute &#39;telega-msg-inline-reply nil
-                      :underline &#39;(:style line))
-  (set-face-attribute &#39;telega-msg-self-title nil
-                      :foreground &#34;#FFB11B&#34;
-                      :height 1.1)
-  (set-face-attribute &#39;telega-msg-user-title nil
-                      :weight &#39;bold
-                      :height 1.1)
-  ;; (setf (alist-get 2 telega-avatar-factors-alist) &#39;(0.4 . 0.1))
-)
-(add-hook &#39;telega-chat-mode-hook &#39;my-telega-chat-mode)
-;; 缩小 emoji 显示
-(add-to-list &#39;face-font-rescale-alist &#39;(&#34;Apple Color Emoji&#34; . 0.75))
-(provide &#39;init-telega)
-;;; init-telega.el ends here
-</code></pre><h3 id="init-org-modern-dot-el">init-org-modern.el</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-telega.el  --- Custom configuration</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;telega</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nf">define-key</span> <span class="nv">global-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c t&#34;</span><span class="p">)</span> <span class="nv">telega-prefix-map</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 去除昵称、回复行的背景高亮</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-telega-chat-mode</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-heading</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:inherit</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:background</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-reply</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-self-title</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#FFB11B&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-user-title</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;; (setf (alist-get 2 telega-avatar-factors-alist) &#39;(0.4 . 0.1))</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;; 缩小 emoji 显示，防止头像裂开。</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Apple Color Emoji&#34;</span> <span class="o">.</span> <span class="mf">0.8</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-chat-mode-hook</span> <span class="ss">&#39;my-telega-chat-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-telega</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; init-telega.el ends here</span>
+</span></span></code></pre></div><h3 id="init-org-modern-dot-el">init-org-modern.el</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org-modern.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-modern</span><span class="p">)</span>
