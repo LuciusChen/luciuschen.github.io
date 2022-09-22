@@ -23,7 +23,7 @@
 <meta property="og:url" content="https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-09-22T17:58:55&#43;08:00" />
+  <meta property="article:modified_time" content="2022-09-22T20:01:25&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -56,10 +56,10 @@
   "keywords": [
     
   ],
-  "wordCount" : "10496",
+  "wordCount" : "10594",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-09-22T17:58:55+08:00",
+  "dateModified": "2022-09-22T20:01:25+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -268,9 +268,9 @@ function toggleThemeListener() {
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
   <span>September 22, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>10496 words</span></span><span class="meta-item">
+  <span>10594 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>21 min</span></span>
+  <span>22 min</span></span>
 
       
       
@@ -1899,7 +1899,7 @@ Entity07 |o--|| Entity08
 <p>有几种解决的方案。</p>
 <ol>
 <li>
-<p>使用更纱黑体（字体太丑）。</p>
+<p>使用更纱黑体（字体太丑且并不能兼容那些使用第三点当中提到的特殊字体的情况）。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">telega-buffer-face-mode-variable</span> <span class="p">()</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">make-face</span> <span class="ss">&#39;my-telega-face</span><span class="p">)</span>
@@ -1919,6 +1919,7 @@ Entity07 |o--|| Entity08
 <li>
 <p>在基础字号的基础上（这里是 14）调整昵称和 Reply/Forward 行的高度，这里 <code>Telega-msg-user-title/Telega-msg-self-title</code> 设置为 0.91，​<code>telega-msg-heading</code> 设置为 0.74。这里的 <code>Telega-msg-user-title/Telega-msg-self-title</code> 是继承自 <code>telega-msg_heading</code>​，因此实际上昵称和 Reply/Forward 是缩放到 0.6734。</p>
 <p>当然这里也要设置 <code>(add-to-list 'face-font-rescale-alist '(&quot;Apple Color Emoji&quot; . 0.8))</code> 将 Emoji 设置为 0.8。至此就可以实现所有特殊符号都不会导致头像裂开了。（昵称和 Reply/Forward 字体相对较小）</p>
+<p>到此还没有结束！使用特殊字体字符作为昵称的人会有被提及的时候，这个时候也要对他的昵称进行处理，将 <code>telega-entity-type-mention</code> 的高度设为 0.9。完整代码如下。</p>
 </li>
 </ol>
 <!--listend-->
@@ -1937,16 +1938,19 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">                      <span class="nb">:background</span> <span class="no">nil</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-reply</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                       <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                       <span class="nb">:foreground</span> <span class="s">&#34;#1B813E&#34;</span><span class="p">)</span> <span class="c1">;; 常磐 TOKIWA</span>
+</span></span><span class="line"><span class="cl">                       <span class="nb">:foreground</span> <span class="s">&#34;#7BA23F&#34;</span><span class="p">)</span> <span class="c1">;; 萌黄 MOEGI</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-forward</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                       <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                       <span class="nb">:foreground</span> <span class="s">&#34;#1B813E&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                       <span class="nb">:foreground</span> <span class="s">&#34;#7BA23F&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-self-title</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">0.91</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#FFB11B&#34;</span><span class="p">)</span> <span class="c1">;; 山吹 YAMABUKI</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-user-title</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">0.91</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-entity-type-mention</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">0.9</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; 缩小 emoji 显示，防止头像裂开。</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Apple Color Emoji&#34;</span> <span class="o">.</span> <span class="mf">0.8</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
