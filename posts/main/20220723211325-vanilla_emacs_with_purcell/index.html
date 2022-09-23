@@ -23,7 +23,7 @@
 <meta property="og:url" content="https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-09-23T17:11:08&#43;08:00" />
+  <meta property="article:modified_time" content="2022-09-23T21:59:31&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -56,10 +56,10 @@
   "keywords": [
     
   ],
-  "wordCount" : "10467",
+  "wordCount" : "11072",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-09-23T17:11:08+08:00",
+  "dateModified": "2022-09-23T21:59:31+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -268,9 +268,9 @@ function toggleThemeListener() {
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
   <span>September 23, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>10467 words</span></span><span class="meta-item">
+  <span>11072 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>21 min</span></span>
+  <span>23 min</span></span>
 
       
       
@@ -1207,7 +1207,34 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-sis</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-sis.el ends here</span>
-</span></span></code></pre></div><h3 id="init-font-dot-el">init-font.el<a hidden class="anchor" aria-hidden="true" href="#init-font-dot-el">¶</a></h3>
+</span></span></code></pre></div><p>注：从其他 App 切回 Emacs 后进入 <code>insert mode</code> 之后切换到中文后立刻切换到英文，是因为 MacOS 会帮忙切换输入法，导致覆盖了 sis 的行为。解决办法如下。（问题 <code>emacs -Q</code> 记录视频 <a href="https://imgur.com/a/TKaD3So">Imgur: The magic of the Internet</a>）</p>
+<blockquote>
+<p>是这样的，
+你是从其它应用切回emacs后，
+立刻就 i 进入 insert mode？</p>
+<p>如果稍微延迟一下再 i 进入 insert mode，
+是不是就没这个问题了？</p>
+<p>emacs处理窗口焦点的切换（focus in事件）是有一个延迟的，
+这样操作就导致：</p>
+<p>focus in之后恢复当前buffer的input source（因为离开前为normal状态，所以为english）
+你进入insert mode切换input source（为rime）
+这二者抢占了。</p>
+<p>比较dirty但是直接的办法是，
+你把下面这个函数在自己的配置文件中重新定义一下，让sis不要切换。</p>
+<p><a href="https://github.com/laishulu/emacs-smart-input-source/blob/02777a46a4b7c18c2cd588e6e2f11e83ba2378e4/sis.el#L811">emacs-smart-input-source/sis.el at 02777a46a4b7c18c2cd588e6e2f11e83ba2378e4 ·&hellip;</a></p>
+<p>但是这块也不算是sis的bug，
+sis对于焦点切换也只能做到这一步。
+包治百病的用法就是切回emacs稍微等一下。</p>
+<p>不过我又想到一点，
+macos可以系统配置“自动切换到文稿的输入法”，
+你如果配置了这个，
+在使用GUI Emacs时，应该是不需要sis自己去恢复当前buffer的输入法的。
+那就可以用空函数去覆盖上面那个函数了。
+但是！！！
+macos也会帮你主动地切输入法，就是不知道会不会也有延迟，导致同样的问题</p>
+<p>不过sis针对的是一般情况：非MacOS系统，或没系统设置“自动切换到文稿的输入法”，或用的是Terminal Emacs等等。</p>
+</blockquote>
+<h3 id="init-font-dot-el">init-font.el<a hidden class="anchor" aria-hidden="true" href="#init-font-dot-el">¶</a></h3>
 <p>使用的是 <code>Iosevka</code> 和 <code>LXGW WenKai</code> 分别作为英文和中文字体，按照 1:1 缩放，偶数字号就可以做到等高等宽。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-font.el --- Dired customisations -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
