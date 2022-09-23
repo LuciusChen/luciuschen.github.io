@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 23 Sep 2022 22:04:02 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Sep 2022 22:09:53 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Fri, 23 Sep 2022 22:04:02 +0800</pubDate>
+      <pubDate>Fri, 23 Sep 2022 22:09:53 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -819,7 +819,7 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-sis</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-sis.el ends here</span>
-</span></span></code></pre></div><p>注：从其他 App 切回 Emacs 后进入 <code>insert mode</code> 之后切换到中文后立刻切换到英文，是因为 MacOS 会帮忙切换输入法，导致覆盖了 sis 的行为。解决办法如下。（问题 <code>emacs -Q</code> 记录视频 <a href="https://imgur.com/a/TKaD3So">Imgur: The magic of the Internet</a>）</p>
+</span></span></code></pre></div><p>注：从其他 App 切回 Emacs 后进入 <code>insert mode</code> 之后切换到中文后立刻切换到英文，解决办法如下。（问题 <code>emacs -Q</code> 记录视频 <a href="https://imgur.com/a/TKaD3So">Imgur: The magic of the Internet</a>）</p>
 <blockquote>
 <p>是这样的，
 你是从其它应用切回 emacs 后，
@@ -844,7 +844,7 @@ macos 可以系统配置“自动切换到文稿的输入法”，
 那就可以用空函数去覆盖上面那个函数了。
 但是！！！
 macos 也会帮你主动地切输入法，就是不知道会不会也有延迟，导致同样的问题</p>
-<p>不过 sis 针对的是一般情况：非MacOS系统，或没系统设置“自动切换到文稿的输入法”，或用的是 Terminal Emacs 等等。</p>
+<p>不过 sis 针对的是一般情况：非 MacOS 系统，或没系统设置“自动切换到文稿的输入法”，或用的是 Terminal Emacs 等等。</p>
 </blockquote>
 <h3 id="init-font-dot-el">init-font.el</h3>
 <p>使用的是 <code>Iosevka</code> 和 <code>LXGW WenKai</code> 分别作为英文和中文字体，按照 1:1 缩放，偶数字号就可以做到等高等宽。</p>
