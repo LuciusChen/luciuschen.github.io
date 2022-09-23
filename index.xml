@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 23 Sep 2022 21:59:31 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Sep 2022 22:04:02 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Fri, 23 Sep 2022 21:59:31 +0800</pubDate>
+      <pubDate>Fri, 23 Sep 2022 22:04:02 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -822,29 +822,29 @@ Entity07 |o--|| Entity08
 </span></span></code></pre></div><p>注：从其他 App 切回 Emacs 后进入 <code>insert mode</code> 之后切换到中文后立刻切换到英文，是因为 MacOS 会帮忙切换输入法，导致覆盖了 sis 的行为。解决办法如下。（问题 <code>emacs -Q</code> 记录视频 <a href="https://imgur.com/a/TKaD3So">Imgur: The magic of the Internet</a>）</p>
 <blockquote>
 <p>是这样的，
-你是从其它应用切回emacs后，
+你是从其它应用切回 emacs 后，
 立刻就 i 进入 insert mode？</p>
 <p>如果稍微延迟一下再 i 进入 insert mode，
 是不是就没这个问题了？</p>
-<p>emacs处理窗口焦点的切换（focus in事件）是有一个延迟的，
+<p>emacs 处理窗口焦点的切换（focus in事件）是有一个延迟的，
 这样操作就导致：</p>
-<p>focus in之后恢复当前buffer的input source（因为离开前为normal状态，所以为english）
-你进入insert mode切换input source（为rime）
+<p>focus in 之后恢复当前 buffer 的 input source（因为离开前为 normal 状态，所以为 english）
+你进入 insert mode 切换 input source（为 rime）
 这二者抢占了。</p>
-<p>比较dirty但是直接的办法是，
-你把下面这个函数在自己的配置文件中重新定义一下，让sis不要切换。</p>
+<p>比较 dirty 但是直接的办法是，
+你把下面这个函数在自己的配置文件中重新定义一下，让 sis 不要切换。</p>
 <p><a href="https://github.com/laishulu/emacs-smart-input-source/blob/02777a46a4b7c18c2cd588e6e2f11e83ba2378e4/sis.el#L811">emacs-smart-input-source/sis.el at 02777a46a4b7c18c2cd588e6e2f11e83ba2378e4 ·&hellip;</a></p>
-<p>但是这块也不算是sis的bug，
-sis对于焦点切换也只能做到这一步。
+<p>但是这块也不算是 sis 的 bug，
+sis 对于焦点切换也只能做到这一步。
 包治百病的用法就是切回emacs稍微等一下。</p>
 <p>不过我又想到一点，
-macos可以系统配置“自动切换到文稿的输入法”，
+macos 可以系统配置“自动切换到文稿的输入法”，
 你如果配置了这个，
-在使用GUI Emacs时，应该是不需要sis自己去恢复当前buffer的输入法的。
+在使用 GUI Emacs 时，应该是不需要 sis 自己去恢复当前 buffer 的输入法的。
 那就可以用空函数去覆盖上面那个函数了。
 但是！！！
-macos也会帮你主动地切输入法，就是不知道会不会也有延迟，导致同样的问题</p>
-<p>不过sis针对的是一般情况：非MacOS系统，或没系统设置“自动切换到文稿的输入法”，或用的是Terminal Emacs等等。</p>
+macos 也会帮你主动地切输入法，就是不知道会不会也有延迟，导致同样的问题</p>
+<p>不过 sis 针对的是一般情况：非MacOS系统，或没系统设置“自动切换到文稿的输入法”，或用的是 Terminal Emacs 等等。</p>
 </blockquote>
 <h3 id="init-font-dot-el">init-font.el</h3>
 <p>使用的是 <code>Iosevka</code> 和 <code>LXGW WenKai</code> 分别作为英文和中文字体，按照 1:1 缩放，偶数字号就可以做到等高等宽。</p>
