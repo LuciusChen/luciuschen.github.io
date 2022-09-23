@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Sep 2022 20:01:25 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Sep 2022 17:11:08 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Thu, 22 Sep 2022 20:01:25 +0800</pubDate>
+      <pubDate>Fri, 23 Sep 2022 17:11:08 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -1152,41 +1152,6 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">if</span> <span class="nv">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">string-trim</span> <span class="p">(</span><span class="nf">substring</span> <span class="nv">contents</span> <span class="nv">begin</span> <span class="p">(</span><span class="nf">match-end</span> <span class="mi">0</span><span class="p">))</span> <span class="s">&#34;#\\+[tT][iI][tT][lL][eE]: *&#34;</span> <span class="s">&#34;[\n\t ]+&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">deft-base-filename</span> <span class="nv">file</span><span class="p">))))</span>
-</span></span></code></pre></div><h4 id="vterm">Vterm</h4>
-<p>在 Emacs 中使用终端，首先要在 <code>/.zshrc</code> 中添加如下代码。（编译时需要 CMake）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$INSIDE_EMACS</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s1">&#39;vterm&#39;</span> <span class="o">]]</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> <span class="o">[[</span> -n <span class="si">${</span><span class="nv">EMACS_VTERM_PATH</span><span class="si">}</span> <span class="o">]]</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> <span class="o">[[</span> -f <span class="si">${</span><span class="nv">EMACS_VTERM_PATH</span><span class="si">}</span>/etc/emacs-vterm-zsh.sh <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">source</span> <span class="si">${</span><span class="nv">EMACS_VTERM_PATH</span><span class="si">}</span>/etc/emacs-vterm-zsh.sh
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span></code></pre></div><p>这里为了方便使用需要引入 vterm-toggle</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;vterm</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;vterm-toggle</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">vterm-toggle</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">:when</span> <span class="p">(</span><span class="nf">memq</span> <span class="nf">window-system</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">mac</span> <span class="nv">ns</span> <span class="nv">x</span> <span class="nv">pgtk</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span> <span class="p">(([</span><span class="nv">f8</span><span class="p">]</span> <span class="o">.</span> <span class="nv">vterm-toggle</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">         <span class="p">([</span><span class="nv">f9</span><span class="p">]</span> <span class="o">.</span> <span class="nv">vterm-compile</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">         <span class="nb">:map</span> <span class="nv">vterm-mode-map</span>
-</span></span><span class="line"><span class="cl">         <span class="p">([</span><span class="nv">f8</span><span class="p">]</span> <span class="o">.</span> <span class="nv">vterm-toggle</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">         <span class="p">([(</span><span class="nv">control</span> <span class="nb">return</span><span class="p">)]</span> <span class="o">.</span> <span class="nv">vterm-toggle-insert-cd</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">vterm-toggle-cd-auto-create-buffer</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defvar</span> <span class="nv">vterm-compile-buffer</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defun</span> <span class="nv">vterm-compile</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="s">&#34;Compile the program including the current buffer in </span><span class="ss">`vterm&#39;</span><span class="s">.&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">setq</span> <span class="nv">compile-command</span> <span class="p">(</span><span class="nv">compilation-read-command</span> <span class="nv">compile-command</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">vterm-toggle-use-dedicated-buffer</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nv">vterm-toggle--vterm-dedicated-buffer</span> <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">vterm-toggle--get-window</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                                                    <span class="p">(</span><span class="nv">vterm-toggle-hide</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                                                  <span class="nv">vterm-compile-buffer</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">with-current-buffer</span> <span class="p">(</span><span class="nv">vterm-toggle-cd</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">setq</span> <span class="nv">vterm-compile-buffer</span> <span class="p">(</span><span class="nf">current-buffer</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">rename-buffer</span> <span class="s">&#34;*vterm compilation*&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">compilation-shell-minor-mode</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">vterm-send-M-w</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">vterm-send-string</span> <span class="nv">compile-command</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">vterm-send-return</span><span class="p">)))))</span>
 </span></span></code></pre></div><h4 id="ox-hugo">Ox-hugo</h4>
 <p>导出到 Hugo，方便与他人分享内容。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;ox-hugo</span><span class="p">)</span>
@@ -1529,7 +1494,8 @@ Entity07 |o--|| Entity08
 <li>
 <p>在基础字号的基础上（这里是 14）调整昵称和 Reply/Forward 行的高度，这里 <code>Telega-msg-user-title/Telega-msg-self-title</code> 设置为 0.91，​<code>telega-msg-heading</code> 设置为 0.74。这里的 <code>Telega-msg-user-title/Telega-msg-self-title</code> 是继承自 <code>telega-msg_heading</code>​，因此实际上昵称和 Reply/Forward 是缩放到 0.6734。</p>
 <p>当然这里也要设置 <code>(add-to-list 'face-font-rescale-alist '(&quot;Apple Color Emoji&quot; . 0.8))</code> 将 Emoji 设置为 0.8。至此就可以实现所有特殊符号都不会导致头像裂开了。（昵称和 Reply/Forward 字体相对较小）</p>
-<p>到此还没有结束！使用特殊字体字符作为昵称的人会有被提及的时候，这个时候也要对他的昵称进行处理，将 <code>telega-entity-type-mention</code> 的高度设为 0.9。完整代码如下。</p>
+<p>到此还没有结束！使用特殊字体字符作为昵称的人会有被提及的时候，这个时候也要对他的昵称进行处理，将 <code>telega-entity-type-mention</code> 的高度设为 0.9。</p>
+<p>至此就可以完美解决头像裂开的问题了，完整代码如下。</p>
 </li>
 </ol>
 <!--listend-->
