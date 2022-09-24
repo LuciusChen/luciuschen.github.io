@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 23 Sep 2022 22:09:53 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Sep 2022 12:40:12 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Fri, 23 Sep 2022 22:09:53 +0800</pubDate>
+      <pubDate>Sat, 24 Sep 2022 12:40:12 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -770,7 +770,7 @@ Entity07 |o--|| Entity08
 
 <h3 id="init-sis-dot-el">init-sis.el</h3>
 <p>根据 meow 的 <code>insert mode</code> 切换，同时根据上下文来判断切换输入法；另外在特定 <code>mode</code> 下也切换输入法，使用更加顺滑。</p>
-<p>需要安装 `macism`</p>
+<p>需要安装 <code>macism</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap laishulu/macism
 </span></span><span class="line"><span class="cl">brew install macism
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-sis.el  --- Custom configuration</span>
@@ -1009,6 +1009,22 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-ebib</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-ebib.el ends here</span>
 </span></span></code></pre></div><h3 id="init-meow-dot-el">init-meow.el</h3>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>M-S-&lt;</code></td>
+<td>移动光标到顶部</td>
+<td><code>cmd-shift-&lt;</code></td>
+</tr>
+</tbody>
+</table>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-meow.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;meow</span><span class="p">)</span>
@@ -1497,11 +1513,10 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </tr>
 </tbody>
 </table>
-<p><strong>头像裂开的问题</strong>​：是由于字体高度问题导致的，安装 <code>init-font.el</code> 中的设置，​<code>Iosevka</code> 和 <code>LXGW WenKai</code> 配合，并设置 <code>(add-to-list 'face-font-rescale-alist '(&quot;Apple Color Emoji&quot; . 0.8))</code> 可以实现头像不裂开。但由于 Emoji 以及各种昵称中的特殊字符，比如 Noto Sans Egyptian Hieroglyphs 这种古埃及象形文字，以及 Mathematical 和 STIXGeneral，出现在昵称以及 Reply 行中，都会导致头像裂开。</p>
+<p><strong>头像裂开的问题</strong>​：是由于字体高度问题导致的，安装 <code>init-font.el</code> 中的设置，​<code>Iosevka</code> 和 <code>LXGW WenKai</code> 配合，并设置 <code>(add-to-list 'face-font-rescale-alist '(&quot;Apple Color Emoji&quot; . 0.8))</code> 可以实现头像不裂开。但由于 Emoji 以及各种昵称中的特殊字符，比如 Noto Sans Egyptian Hieroglyphs 这种古埃及象形文字，以及 Noto Sans Kannada 和 STIXGeneral 等字体，出现在昵称以及 Reply 行中，都会导致头像裂开。</p>
 <p>有几种解决的方案。</p>
 <ol>
-<li>
-<p>使用更纱黑体（字体太丑且并不能兼容那些使用第三点当中提到的特殊字体的情况）。</p>
+<li>使用更纱黑体（字体太丑且并不能兼容那些使用第三点当中提到的特殊字体的情况）。
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">telega-buffer-face-mode-variable</span> <span class="p">()</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">make-face</span> <span class="ss">&#39;my-telega-face</span><span class="p">)</span>
@@ -1515,15 +1530,8 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-webpage-mode-hook</span> <span class="ss">&#39;telega-buffer-face-mode-variable</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-chat-mode-hook</span> <span class="ss">&#39;telega-buffer-face-mode-variable</span><span class="p">)</span>
 </span></span></code></pre></div></li>
-<li>
-<p>使用 <code>(setf (alist-get 2 telega-avatar-factors-alist) '(0.5 . 0.1))</code> 来使得本来两行显示的头像缩小至一行显示（头像显示几乎废了）。</p>
-</li>
-<li>
-<p>在基础字号的基础上（这里是 14）调整昵称和 Reply/Forward 行的高度，这里 <code>Telega-msg-user-title/Telega-msg-self-title</code> 设置为 0.91，​<code>telega-msg-heading</code> 设置为 0.74。这里的 <code>Telega-msg-user-title/Telega-msg-self-title</code> 是继承自 <code>telega-msg_heading</code>​，因此实际上昵称和 Reply/Forward 是缩放到 0.6734。</p>
-<p>当然这里也要设置 <code>(add-to-list 'face-font-rescale-alist '(&quot;Apple Color Emoji&quot; . 0.8))</code> 将 Emoji 设置为 0.8。至此就可以实现所有特殊符号都不会导致头像裂开了。（昵称和 Reply/Forward 字体相对较小）</p>
-<p>到此还没有结束！使用特殊字体字符作为昵称的人会有被提及的时候，这个时候也要对他的昵称进行处理，将 <code>telega-entity-type-mention</code> 的高度设为 0.9。</p>
-<p>至此就可以完美解决头像裂开的问题了，完整代码如下。</p>
-</li>
+<li>使用 <code>(setf (alist-get 2 telega-avatar-factors-alist) '(0.5 . 0.1))</code> 来使得本来两行显示的头像缩小至一行显示（头像显示几乎废了）。</li>
+<li>在基础字号的基础上（这里是 14）调整特殊字符/字体的缩放就可以完美解决头像裂开的问题了，完整代码如下。</li>
 </ol>
 <!--listend-->
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-telega.el  --- Custom configuration</span>
@@ -1537,25 +1545,29 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-heading</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:inherit</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">0.74</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:background</span> <span class="no">nil</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-reply</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                       <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                       <span class="nb">:foreground</span> <span class="s">&#34;#7BA23F&#34;</span><span class="p">)</span> <span class="c1">;; 萌黄 MOEGI</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#7BA23F&#34;</span><span class="p">)</span> <span class="c1">;; 萌黄 MOEGI</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-forward</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                       <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                       <span class="nb">:foreground</span> <span class="s">&#34;#7BA23F&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#7BA23F&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-self-title</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">0.91</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#FFB11B&#34;</span><span class="p">)</span> <span class="c1">;; 山吹 YAMABUKI</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-user-title</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">0.91</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-entity-type-mention</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:height</span> <span class="mf">0.9</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">;; 缩小 emoji 显示，防止头像裂开。</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;; 缩小 emoji 及特殊字符/字体显示，防止头像裂开。</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Apple Color Emoji&#34;</span> <span class="o">.</span> <span class="mf">0.8</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Noto Sans Egyptian Hieroglyphs&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;STIXGeneral&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Apple Symbols&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Noto Sans Kannada&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-chat-mode-hook</span> <span class="ss">&#39;my-telega-chat-mode</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
