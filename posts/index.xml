@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Sep 2022 12:49:05 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Sep 2022 14:14:44 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Sat, 24 Sep 2022 12:49:05 +0800</pubDate>
+      <pubDate>Sat, 24 Sep 2022 14:14:44 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -763,7 +763,7 @@ Entity03 }o..o| Entity04
 Entity05 ||--o{ Entity06
 Entity07 |o--|| Entity08
 @enduml
-</code></pre><p>PlantUML 默认的样式比较古老，可以用更加现代一些的样式：<a href="https://github.com/xuanye/plantuml-style-c4">GitHub - xuanye/plantuml-style-c4: 自定义的plantuml 样式</a>。</p>
+</code></pre><p>PlantUML 默认的样式比较古老，可以用更加现代一些的样式：<a href="https://github.com/xuanye/plantuml-style-c4">GitHub - xuanye/plantuml-style-c4: 自定义的plantuml 样式</a>，不过好久没更新了，前面的颜色也是参考的这个：<a href="https://github.com/plantuml-stdlib/C4-PlantUML">GitHub - plantuml-stdlib/C4-PlantUML: C4-PlantUML combines the benefits of Pl&hellip;</a>。</p>
 <figure>
     <img loading="lazy" src="/ox-hugo/ERD-example.jpg"/> 
 </figure>
