@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Sep 2022 14:17:15 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Sep 2022 19:17:18 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Sun, 25 Sep 2022 14:17:15 +0800</pubDate>
+      <pubDate>Sun, 25 Sep 2022 19:17:18 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -1471,7 +1471,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-elfeed</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-elfeed.el ends here</span>
 </span></span></code></pre></div><h3 id="init-telega-dot-el">init-telega.el</h3>
-<h4 id="自行编译">自行编译</h4>
+<h4 id="building-tdlib">Building TDLib</h4>
 <p><code>brew install tdlib</code> 的版本过低，需要自行编译，参考 <a href="https://tdlib.github.io/td/build.html?language=Swift">TDLib build instructions</a> 。这个之后需要 <code>M-x telega-server-build</code> 重新加载 telega-server。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">xcode-select --install
 </span></span><span class="line"><span class="cl">/bin/bash -c <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&#34;</span>
@@ -1488,7 +1488,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">ls -l /usr/local
 </span></span></code></pre></div><p>其中 tblib 的版本当前需要 1.8.4，可以切换到 1.8.4 的版本。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout b447c32fe94c3d62d74c6b9608649c791641c3e5
-</span></span></code></pre></div><h4 id="docker">docker</h4>
+</span></span></code></pre></div><h4 id="running-telega-server-in-docker">Running telega-server in docker</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install --cask docker
 </span></span><span class="line"><span class="cl">brew install ffmpeg
 </span></span><span class="line"><span class="cl">docker pull zevlg/telega-server:latest
