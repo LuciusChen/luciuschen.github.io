@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Sep 2022 19:17:18 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Sep 2022 15:09:38 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Sun, 25 Sep 2022 19:17:18 +0800</pubDate>
+      <pubDate>Mon, 26 Sep 2022 15:09:38 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -111,7 +111,6 @@
 <p>目前在 <a href="https://github.com/purcell/emacs.d">purcell</a> 中就增加或修改了这些文件。</p>
 <pre tabindex="0"><code class="language-nil" data-lang="nil">.
 ├── lisp
-    ├── ligature.el
     ├── init-org.el
     ├── init-sis.el
     ├── init-font.el
@@ -128,25 +127,7 @@
     ├── init-quick-menus.el
     ├── init-tree-sitter.el
     └── init-org-enhance.el
-</code></pre><h3 id="ligature-dot-el">ligature.el</h3>
-<p><a href="https://github.com/mickeynp/ligature.el">GitHub - mickeynp/ligature.el: Display typographical ligatures in Emacs</a>，这里是将其中的 <code>ligature.el</code> 下载到 <code>.emacs.d/lisp/</code> 目录下，加上下列代码。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Enable the www ligature in every possible major mode</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">ligature-set-ligatures</span> <span class="ss">&#39;t</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;www&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; Enable ligatures in programming modes</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">ligature-set-ligatures</span> <span class="ss">&#39;prog-mode</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;www&#34;</span> <span class="s">&#34;**&#34;</span> <span class="s">&#34;***&#34;</span> <span class="s">&#34;**/&#34;</span> <span class="s">&#34;*&gt;&#34;</span> <span class="s">&#34;*/&#34;</span> <span class="s">&#34;\\\\&#34;</span> <span class="s">&#34;\\\\\\&#34;</span> <span class="s">&#34;{-&#34;</span> <span class="s">&#34;::&#34;</span>
-</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;:::&#34;</span> <span class="s">&#34;:=&#34;</span> <span class="s">&#34;!!&#34;</span> <span class="s">&#34;!=&#34;</span> <span class="s">&#34;!==&#34;</span> <span class="s">&#34;-}&#34;</span> <span class="s">&#34;----&#34;</span> <span class="s">&#34;--&gt;&#34;</span> <span class="s">&#34;-&gt;&#34;</span> <span class="s">&#34;-&gt;&gt;&#34;</span>
-</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;-&lt;&#34;</span> <span class="s">&#34;-&lt;&lt;&#34;</span> <span class="s">&#34;-~&#34;</span> <span class="s">&#34;#{&#34;</span> <span class="s">&#34;#[&#34;</span> <span class="s">&#34;##&#34;</span> <span class="s">&#34;###&#34;</span> <span class="s">&#34;####&#34;</span> <span class="s">&#34;#(&#34;</span> <span class="s">&#34;#?&#34;</span> <span class="s">&#34;#_&#34;</span>
-</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;#_(&#34;</span> <span class="s">&#34;.-&#34;</span> <span class="s">&#34;.=&#34;</span> <span class="s">&#34;..&#34;</span> <span class="s">&#34;..&lt;&#34;</span> <span class="s">&#34;...&#34;</span> <span class="s">&#34;?=&#34;</span> <span class="s">&#34;??&#34;</span> <span class="s">&#34;;;&#34;</span> <span class="s">&#34;/*&#34;</span> <span class="s">&#34;/**&#34;</span>
-</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;/=&#34;</span> <span class="s">&#34;/==&#34;</span> <span class="s">&#34;/&gt;&#34;</span> <span class="s">&#34;//&#34;</span> <span class="s">&#34;///&#34;</span> <span class="s">&#34;&amp;&amp;&#34;</span> <span class="s">&#34;||&#34;</span> <span class="s">&#34;||=&#34;</span> <span class="s">&#34;|=&#34;</span> <span class="s">&#34;|&gt;&#34;</span> <span class="s">&#34;^=&#34;</span> <span class="s">&#34;$&gt;&#34;</span>
-</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;++&#34;</span> <span class="s">&#34;+++&#34;</span> <span class="s">&#34;+&gt;&#34;</span> <span class="s">&#34;=:=&#34;</span> <span class="s">&#34;==&#34;</span> <span class="s">&#34;===&#34;</span> <span class="s">&#34;==&gt;&#34;</span> <span class="s">&#34;=&gt;&#34;</span> <span class="s">&#34;=&gt;&gt;&#34;</span> <span class="s">&#34;&lt;=&#34;</span>
-</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;=&lt;&lt;&#34;</span> <span class="s">&#34;=/=&#34;</span> <span class="s">&#34;&gt;-&#34;</span> <span class="s">&#34;&gt;=&#34;</span> <span class="s">&#34;&gt;=&gt;&#34;</span> <span class="s">&#34;&gt;&gt;&#34;</span> <span class="s">&#34;&gt;&gt;-&#34;</span> <span class="s">&#34;&gt;&gt;=&#34;</span> <span class="s">&#34;&gt;&gt;&gt;&#34;</span> <span class="s">&#34;&lt;*&#34;</span>
-</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;&lt;*&gt;&#34;</span> <span class="s">&#34;&lt;|&#34;</span> <span class="s">&#34;&lt;|&gt;&#34;</span> <span class="s">&#34;&lt;$&#34;</span> <span class="s">&#34;&lt;$&gt;&#34;</span> <span class="s">&#34;&lt;!--&#34;</span> <span class="s">&#34;&lt;-&#34;</span> <span class="s">&#34;&lt;--&#34;</span> <span class="s">&#34;&lt;-&gt;&#34;</span> <span class="s">&#34;&lt;+&#34;</span>
-</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;&lt;+&gt;&#34;</span> <span class="s">&#34;&lt;=&#34;</span> <span class="s">&#34;&lt;==&#34;</span> <span class="s">&#34;&lt;=&gt;&#34;</span> <span class="s">&#34;&lt;=&lt;&#34;</span> <span class="s">&#34;&lt;&gt;&#34;</span> <span class="s">&#34;&lt;&lt;&#34;</span> <span class="s">&#34;&lt;&lt;-&#34;</span> <span class="s">&#34;&lt;&lt;=&#34;</span> <span class="s">&#34;&lt;&lt;&lt;&#34;</span>
-</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;&lt;~&#34;</span> <span class="s">&#34;&lt;~~&#34;</span> <span class="s">&#34;&lt;/&#34;</span> <span class="s">&#34;&lt;/&gt;&#34;</span> <span class="s">&#34;~@&#34;</span> <span class="s">&#34;~-&#34;</span> <span class="s">&#34;~&gt;&#34;</span> <span class="s">&#34;~~&#34;</span> <span class="s">&#34;~~&gt;&#34;</span> <span class="s">&#34;%%&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-ligature-mode</span> <span class="ss">&#39;t</span><span class="p">)</span>
-</span></span></code></pre></div><h3 id="init-org-dot-el">init-org.el</h3>
+</code></pre><h3 id="init-org-dot-el">init-org.el</h3>
 <p>org-roam 和 Emacs 自带的 agenda 可以很方便的将笔记和 GTD 结合起来。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org.el --- Org-mode config -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
@@ -817,6 +798,8 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-agenda-todo</span> <span class="nb">:before</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;hydra-org-agenda-menu/body</span> <span class="nb">:after</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; MacOS 上防止进入 insert mode 覆盖要切换的中文状态</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">sis--respect-focus-in-handler</span> <span class="p">())</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-sis</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-sis.el ends here</span>
 </span></span></code></pre></div><p>注：从其他 App 切回 Emacs 后进入 <code>insert mode</code> 之后切换到中文后立刻切换到英文，解决办法如下。（问题 <code>emacs -Q</code> 记录视频 <a href="https://imgur.com/a/TKaD3So">Imgur: The magic of the Internet</a>）</p>
@@ -1337,62 +1320,27 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;dimmer-exclusion-predicates</span> <span class="ss">&#39;sanityinc/display-non-graphic-p</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;; fake transparency</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; (defun user/change-background-opacity (alpha)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;   (interactive &#34;nOpacity: &#34;)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;   (if (and (&gt;= alpha 0) (&lt;= alpha 100))</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;       (user/set-background-opacity alpha)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;     (format-message &#34;Opacity has to be between 0 and 100 but is %d.&#34; alpha)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">user/change-background-opacity</span> <span class="p">(</span><span class="nv">alpha</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span> <span class="s">&#34;nOpacity: &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nf">&gt;=</span> <span class="nv">alpha</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nf">&lt;=</span> <span class="nv">alpha</span> <span class="mi">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">user/set-background-opacity</span> <span class="nv">alpha</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">format-message</span> <span class="s">&#34;Opacity has to be between 0 and 100 but is %d.&#34;</span> <span class="nv">alpha</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; (defun user/set-background-opacity (alpha)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;   (set-frame-parameter (selected-frame) &#39;alpha alpha)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;   (add-to-list &#39;default-frame-alist (cons &#39;alpha alpha)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">user/set-background-opacity</span> <span class="p">(</span><span class="nv">alpha</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-frame-parameter</span> <span class="p">(</span><span class="nf">selected-frame</span><span class="p">)</span> <span class="ss">&#39;alpha</span> <span class="nv">alpha</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;default-frame-alist</span> <span class="p">(</span><span class="nf">cons</span> <span class="ss">&#39;alpha</span> <span class="nv">alpha</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;; (user/set-background-opacity 90)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;; true transparency</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">kb/toggle-window-transparency</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Toggle transparency.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">alpha-transparency</span> <span class="mi">50</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">pcase</span> <span class="p">(</span><span class="nf">frame-parameter</span> <span class="no">nil</span> <span class="ss">&#39;alpha-background</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">alpha-transparency</span> <span class="p">(</span><span class="nv">set-frame-parameter</span> <span class="no">nil</span> <span class="ss">&#39;alpha-background</span> <span class="mi">100</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="no">t</span> <span class="p">(</span><span class="nv">set-frame-parameter</span> <span class="no">nil</span> <span class="ss">&#39;alpha-background</span> <span class="nv">alpha-transparency</span><span class="p">)))))</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">kb/toggle-window-transparency</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; 高亮光标所在的括号内容，提高阅读效率。</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="ss">&#39;highlight-blocks</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">package-install</span> <span class="ss">&#39;highlight-blocks</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;highlight-blocks</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">highlight-blocks--get-bounds</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;Get the bounds of the nested blocks the point is in.
-</span></span></span><span class="line"><span class="cl"><span class="s">The returned value is a list of conses, where car is the start of a
-</span></span></span><span class="line"><span class="cl"><span class="s">block and cdr is the end of a block, starting from the outermost
-</span></span></span><span class="line"><span class="cl"><span class="s">block.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">result</span> <span class="o">&#39;</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">parse-sexp-ignore-comments</span> <span class="no">t</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">condition-case</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">parse-state</span> <span class="p">(</span><span class="nv">syntax-ppss</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">starting-pos</span> <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nf">nth</span> <span class="mi">3</span> <span class="nv">parse-state</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                                     <span class="p">(</span><span class="nf">nth</span> <span class="mi">4</span> <span class="nv">parse-state</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                                 <span class="p">(</span><span class="nf">nth</span> <span class="mi">8</span> <span class="nv">parse-state</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nf">point</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">begins</span> <span class="p">(</span><span class="nf">nreverse</span> <span class="p">(</span><span class="nf">nth</span> <span class="mi">9</span> <span class="nv">parse-state</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">end</span> <span class="nv">starting-pos</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">i</span> <span class="mi">0</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nf">eq</span> <span class="nv">highlight-blocks-max-innermost-block-count</span> <span class="no">t</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                     <span class="p">(</span><span class="nf">&lt;</span> <span class="nv">i</span> <span class="nv">highlight-blocks-max-innermost-block-count</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">setq</span> <span class="nv">end</span> <span class="p">(</span><span class="nf">scan-lists</span> <span class="nv">end</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">push</span> <span class="p">(</span><span class="nf">cons</span> <span class="p">(</span><span class="nb">pop</span> <span class="nv">begins</span><span class="p">)</span> <span class="nv">end</span><span class="p">)</span> <span class="nv">result</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">setq</span> <span class="nv">i</span> <span class="p">(</span><span class="nf">1+</span> <span class="nv">i</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">scan-error</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; 修改下这个函数函数的返回值，可以只高亮当前所在的块</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">last</span> <span class="nv">result</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; Put the mode hooks where you want it, for example</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-lisp-mode-hook</span>       <span class="ss">&#39;highlight-blocks--get-bounds</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; (add-hook &#39;lisp-interaction-mode-hook &#39;highlight-blocks-mode)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; (add-hook &#39;lisp-mode-hook             &#39;highlight-blocks-mode)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; (defun kb/toggle-window-transparency ()</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;   &#34;Toggle transparency.&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;   (interactive)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;   (let ((alpha-transparency 75))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;     (pcase (frame-parameter nil &#39;alpha-background)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;       (alpha-transparency (set-frame-parameter nil &#39;alpha-background 100))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;       (t (set-frame-parameter nil &#39;alpha-background alpha-transparency)))))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; (kb/toggle-window-transparency)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-themes</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-themes.el ends here</span>
 </span></span></code></pre></div><h3 id="init-elfeed-dot-el">init-elfeed.el</h3>
@@ -1570,9 +1518,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Noto Sans Egyptian Hieroglyphs&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;STIXGeneral&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Apple Symbols&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Noto Sans Kannada&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Noto Sans Kannada&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-chat-mode-hook</span> <span class="ss">&#39;my-telega-chat-mode</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-telega</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-telega.el ends here</span>
