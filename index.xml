@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 26 Sep 2022 15:09:38 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Sep 2022 16:52:14 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Mon, 26 Sep 2022 15:09:38 +0800</pubDate>
+      <pubDate>Mon, 26 Sep 2022 16:52:14 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -111,6 +111,7 @@
 <p>目前在 <a href="https://github.com/purcell/emacs.d">purcell</a> 中就增加或修改了这些文件。</p>
 <pre tabindex="0"><code class="language-nil" data-lang="nil">.
 ├── lisp
+    ├── ligature.el
     ├── init-org.el
     ├── init-sis.el
     ├── init-font.el
@@ -127,7 +128,25 @@
     ├── init-quick-menus.el
     ├── init-tree-sitter.el
     └── init-org-enhance.el
-</code></pre><h3 id="init-org-dot-el">init-org.el</h3>
+</code></pre><h3 id="ligature-dot-el">ligature.el</h3>
+<p><a href="https://github.com/mickeynp/ligature.el">GitHub - mickeynp/ligature.el: Display typographical ligatures in Emacs</a>，这里是将其中的 <code>ligature.el</code> 下载到 <code>.emacs.d/lisp/</code> 目录下，加上下列代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Enable the www ligature in every possible major mode</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">ligature-set-ligatures</span> <span class="ss">&#39;t</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;www&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Enable ligatures in programming modes</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">ligature-set-ligatures</span> <span class="ss">&#39;prog-mode</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;www&#34;</span> <span class="s">&#34;**&#34;</span> <span class="s">&#34;***&#34;</span> <span class="s">&#34;**/&#34;</span> <span class="s">&#34;*&gt;&#34;</span> <span class="s">&#34;*/&#34;</span> <span class="s">&#34;\\\\&#34;</span> <span class="s">&#34;\\\\\\&#34;</span> <span class="s">&#34;{-&#34;</span> <span class="s">&#34;::&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;:::&#34;</span> <span class="s">&#34;:=&#34;</span> <span class="s">&#34;!!&#34;</span> <span class="s">&#34;!=&#34;</span> <span class="s">&#34;!==&#34;</span> <span class="s">&#34;-}&#34;</span> <span class="s">&#34;----&#34;</span> <span class="s">&#34;--&gt;&#34;</span> <span class="s">&#34;-&gt;&#34;</span> <span class="s">&#34;-&gt;&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;-&lt;&#34;</span> <span class="s">&#34;-&lt;&lt;&#34;</span> <span class="s">&#34;-~&#34;</span> <span class="s">&#34;#{&#34;</span> <span class="s">&#34;#[&#34;</span> <span class="s">&#34;##&#34;</span> <span class="s">&#34;###&#34;</span> <span class="s">&#34;####&#34;</span> <span class="s">&#34;#(&#34;</span> <span class="s">&#34;#?&#34;</span> <span class="s">&#34;#_&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;#_(&#34;</span> <span class="s">&#34;.-&#34;</span> <span class="s">&#34;.=&#34;</span> <span class="s">&#34;..&#34;</span> <span class="s">&#34;..&lt;&#34;</span> <span class="s">&#34;...&#34;</span> <span class="s">&#34;?=&#34;</span> <span class="s">&#34;??&#34;</span> <span class="s">&#34;;;&#34;</span> <span class="s">&#34;/*&#34;</span> <span class="s">&#34;/**&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;/=&#34;</span> <span class="s">&#34;/==&#34;</span> <span class="s">&#34;/&gt;&#34;</span> <span class="s">&#34;//&#34;</span> <span class="s">&#34;///&#34;</span> <span class="s">&#34;&amp;&amp;&#34;</span> <span class="s">&#34;||&#34;</span> <span class="s">&#34;||=&#34;</span> <span class="s">&#34;|=&#34;</span> <span class="s">&#34;|&gt;&#34;</span> <span class="s">&#34;^=&#34;</span> <span class="s">&#34;$&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;++&#34;</span> <span class="s">&#34;+++&#34;</span> <span class="s">&#34;+&gt;&#34;</span> <span class="s">&#34;=:=&#34;</span> <span class="s">&#34;==&#34;</span> <span class="s">&#34;===&#34;</span> <span class="s">&#34;==&gt;&#34;</span> <span class="s">&#34;=&gt;&#34;</span> <span class="s">&#34;=&gt;&gt;&#34;</span> <span class="s">&#34;&lt;=&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;=&lt;&lt;&#34;</span> <span class="s">&#34;=/=&#34;</span> <span class="s">&#34;&gt;-&#34;</span> <span class="s">&#34;&gt;=&#34;</span> <span class="s">&#34;&gt;=&gt;&#34;</span> <span class="s">&#34;&gt;&gt;&#34;</span> <span class="s">&#34;&gt;&gt;-&#34;</span> <span class="s">&#34;&gt;&gt;=&#34;</span> <span class="s">&#34;&gt;&gt;&gt;&#34;</span> <span class="s">&#34;&lt;*&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;&lt;*&gt;&#34;</span> <span class="s">&#34;&lt;|&#34;</span> <span class="s">&#34;&lt;|&gt;&#34;</span> <span class="s">&#34;&lt;$&#34;</span> <span class="s">&#34;&lt;$&gt;&#34;</span> <span class="s">&#34;&lt;!--&#34;</span> <span class="s">&#34;&lt;-&#34;</span> <span class="s">&#34;&lt;--&#34;</span> <span class="s">&#34;&lt;-&gt;&#34;</span> <span class="s">&#34;&lt;+&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;&lt;+&gt;&#34;</span> <span class="s">&#34;&lt;=&#34;</span> <span class="s">&#34;&lt;==&#34;</span> <span class="s">&#34;&lt;=&gt;&#34;</span> <span class="s">&#34;&lt;=&lt;&#34;</span> <span class="s">&#34;&lt;&gt;&#34;</span> <span class="s">&#34;&lt;&lt;&#34;</span> <span class="s">&#34;&lt;&lt;-&#34;</span> <span class="s">&#34;&lt;&lt;=&#34;</span> <span class="s">&#34;&lt;&lt;&lt;&#34;</span>
+</span></span><span class="line"><span class="cl">                                     <span class="s">&#34;&lt;~&#34;</span> <span class="s">&#34;&lt;~~&#34;</span> <span class="s">&#34;&lt;/&#34;</span> <span class="s">&#34;&lt;/&gt;&#34;</span> <span class="s">&#34;~@&#34;</span> <span class="s">&#34;~-&#34;</span> <span class="s">&#34;~&gt;&#34;</span> <span class="s">&#34;~~&#34;</span> <span class="s">&#34;~~&gt;&#34;</span> <span class="s">&#34;%%&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-ligature-mode</span> <span class="ss">&#39;t</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="init-org-dot-el">init-org.el</h3>
 <p>org-roam 和 Emacs 自带的 agenda 可以很方便的将笔记和 GTD 结合起来。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org.el --- Org-mode config -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
