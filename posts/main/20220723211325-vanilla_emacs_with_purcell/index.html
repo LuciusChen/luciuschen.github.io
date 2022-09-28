@@ -23,7 +23,7 @@
 <meta property="og:url" content="https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2022-09-26T16:52:14&#43;08:00" />
+  <meta property="article:modified_time" content="2022-09-28T16:45:06&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -56,10 +56,10 @@
   "keywords": [
     
   ],
-  "wordCount" : "10718",
+  "wordCount" : "11523",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2022-09-26T16:52:14+08:00",
+  "dateModified": "2022-09-28T16:45:06+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -266,11 +266,11 @@ function toggleThemeListener() {
     <h1 class="post-title">Vanilla Emacs with Purcell</h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>September 26, 2022</span></span><span class="meta-item">
+  <span>September 28, 2022</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>10718 words</span></span><span class="meta-item">
+  <span>11523 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>22 min</span></span>
+  <span>23 min</span></span>
 
       
       
@@ -372,13 +372,17 @@ function toggleThemeListener() {
                     <a href="#running-telega-server-in-docker" aria-label="Running telega-server in docker">Running telega-server in docker</a></li></ul>
                 </li>
                 <li>
+                    <a href="#init-translate-dot-el" aria-label="init-translate.el">init-translate.el</a></li>
+                <li>
                     <a href="#init-org-modern-dot-el" aria-label="init-org-modern.el">init-org-modern.el</a></li>
                 <li>
                     <a href="#init-quick-menus-dot-el" aria-label="init-quick-menus.el">init-quick-menus.el</a></li>
                 <li>
                     <a href="#init-tree-sitter-dot-el" aria-label="init-tree-sitter.el">init-tree-sitter.el</a></li>
                 <li>
-                    <a href="#init-org-enhance-dot-el" aria-label="init-org-enhance.el">init-org-enhance.el</a></li></ul>
+                    <a href="#init-org-enhance-dot-el" aria-label="init-org-enhance.el">init-org-enhance.el</a></li>
+                <li>
+                    <a href="#init-org-transclusion-dot-el" aria-label="init-org-transclusion.el">init-org-transclusion.el</a></li></ul>
                 </li>
                 <li>
                     <a href="#export" aria-label="Export">Export</a><ul>
@@ -472,7 +476,7 @@ function toggleThemeListener() {
 <p>书籍除了 ebib 管理的 bibtex 汇总可以查看，还通过 Dynamic Table 进行管理，这样可以更加直观的看到书籍的评价以及关联到读书笔记。（其实 ebib 那里也可以关联到笔记，毕竟笔记的创建就是利用 ebib 的命令，连接在 external note 这个字段中。）</p>
 <p>文件顶部这样设置即可，根据自己的情况进行修改适配，其中 <code>file</code> 是指数据源，这里就是将数据源放在与表格同一个文件。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+title</span><span class="c">: Book reviews</span>
-</span></span><span class="line"><span class="cl"><span class="cs">#+COLUMNS</span><span class="c">: %25ITEM(书名) %10AUTHOR(Author) %10CATEGORY(Category) %15STATE(State) %15SCORE(Score) %10VERSION(Version) %15REMARK(Remark) %25NOTELINK(Notelink)</span>
+</span></span><span class="line"><span class="cl"><span class="cs">#+COLUMNS</span><span class="c">: %25ITEM(Item) %10AUTHOR(Author) %10CATEGORY(Category) %15STATE(State) %15SCORE(Score) %10VERSION(Version) %15REMARK(Remark) %25NOTELINK(Notelink)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cs">#+BEGIN</span><span class="c">: columnview :hlines 1 :id &#34;file:~/Dropbox/org/references/Book-Reviews.org&#34; :skip-empty-rows t</span>
 </span></span><span class="line"><span class="cl">#+END
@@ -518,10 +522,12 @@ function toggleThemeListener() {
     ├── init-themes.el
     ├── init-elfeed.el
     ├── init-telega.el
+    ├── init-translate.el
     ├── init-org-modern.el
     ├── init-quick-menus.el
     ├── init-tree-sitter.el
-    └── init-org-enhance.el
+    ├── init-org-enhance.el
+    └── init-org-transclusion.el
 </code></pre><h3 id="ligature-dot-el">ligature.el<a hidden class="anchor" aria-hidden="true" href="#ligature-dot-el">¶</a></h3>
 <p><a href="https://github.com/mickeynp/ligature.el">GitHub - mickeynp/ligature.el: Display typographical ligatures in Emacs</a>，这里是将其中的 <code>ligature.el</code> 下载到 <code>.emacs.d/lisp/</code> 目录下，加上下列代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Enable the www ligature in every possible major mode</span>
@@ -895,7 +901,7 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nv">plantuml</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nv">python</span> <span class="o">.</span> <span class="no">t</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span>  <span class="nv">org-plantuml-jar-path</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">expand-file-name</span> <span class="s">&#34;~/Dropbox/org/planuml/plantuml.jar&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">expand-file-name</span> <span class="s">&#34;~/Dropbox/org/plantuml/plantuml.jar&#34;</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; 这里应该就是 .zshrc 里面配置的 python3</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-babel-python-command</span> <span class="s">&#34;python3&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
@@ -1205,8 +1211,8 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">  <span class="c1">;; org title 处切换 Rime，telega 聊天时切换 Rime。</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;sis-context-detectors</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="kp">&amp;rest</span> <span class="nv">_</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nf">eq</span> <span class="nv">major-mode</span> <span class="ss">&#39;org-mode</span><span class="p">)</span> <span class="p">(</span><span class="nv">org-at-heading-p</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nf">eq</span> <span class="nv">major-mode</span> <span class="ss">&#39;telega-chat-mode</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">;; (when (or (and (eq major-mode &#39;org-mode) (org-at-heading-p))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">eq</span> <span class="nv">major-mode</span> <span class="ss">&#39;org-mode</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="ss">&#39;other</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-agenda-todo</span> <span class="nb">:before</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;hydra-org-agenda-menu/body</span> <span class="nb">:after</span> <span class="nf">#&#39;</span><span class="nv">sis-set-english</span><span class="p">)</span>
@@ -1243,7 +1249,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 <p>不过 sis 针对的是一般情况：非 MacOS 系统，或没系统设置“自动切换到文稿的输入法”，或用的是 Terminal Emacs 等等。</p>
 </blockquote>
 <h3 id="init-font-dot-el">init-font.el<a hidden class="anchor" aria-hidden="true" href="#init-font-dot-el">¶</a></h3>
-<p>使用的是 <code>Iosevka</code> 和 <code>LXGW WenKai</code> 分别作为英文和中文字体，按照 1:1 缩放，偶数字号就可以做到等高等宽。</p>
+<p>使用的是 <code>Iosevka</code> 和大多数中文字体配合，按照 1:1 缩放，偶数字号就可以做到等高等宽。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-font.el --- Dired customisations -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Code:</span>
@@ -1252,7 +1258,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">null</span> <span class="p">(</span><span class="nf">x-list-fonts</span> <span class="nv">font</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">      <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">    <span class="no">t</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; LXGW WenKai Mono 配合 Iosevka 按照 1:1 偶数字号就可以做到等高等宽。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; LXGW WenKai Mono 配合 Iosevka 按照 1:1 缩放，偶数字号就可以做到等高等宽。</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">zh-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;LXGW WenKai Mono&#34;</span> <span class="s">&#34;HanaMinB&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">en-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Iosevka&#34;</span> <span class="s">&#34;Fira Code&#34;</span> <span class="s">&#34;IBM Plex Mono&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
@@ -1512,6 +1518,8 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">   <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;&lt;escape&gt;&#34;</span> <span class="o">.</span> <span class="nv">ignore</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">meow-setup</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">meow-global-mode</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 失去焦点时，退出 insert mode。</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;focus-out-hook</span> <span class="ss">&#39;meow-insert-exit</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-meow</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-meow.el ends here</span>
 </span></span></code></pre></div><h3 id="beancount-dot-el">beancount.el<a hidden class="anchor" aria-hidden="true" href="#beancount-dot-el">¶</a></h3>
@@ -1519,7 +1527,126 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;auto-mode-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;\\.beancount\\&#39;&#34;</span> <span class="o">.</span> <span class="nv">beancount-mode</span><span class="p">))</span>
 </span></span></code></pre></div><h3 id="init-epla-dot-el">init-epla.el<a hidden class="anchor" aria-hidden="true" href="#init-epla-dot-el">¶</a></h3>
 <p>增加 <code>use-package</code> 和 <code>straight</code> 的支持</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Bootstrap `use-package&#39;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-elpa.el --- Settings and helpers for package.el -*- lexical-binding: t -*-</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Code:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;cl-lib</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Install into separate package dirs for each Emacs version, to prevent bytecode incompatibility</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">package-user-dir</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">expand-file-name</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;elpa-%s.%s&#34;</span> <span class="nv">emacs-major-version</span> <span class="nv">emacs-minor-version</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="nv">user-emacs-directory</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Standard package repositories</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span> <span class="o">&#39;</span><span class="p">(</span> <span class="s">&#34;melpa&#34;</span> <span class="o">.</span> <span class="s">&#34;https://melpa.org/packages/&#34;</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; Official MELPA Mirror, in case necessary.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;(add-to-list &#39;package-archives (cons &#34;melpa-mirror&#34; (concat proto &#34;://www.mirrorservice.org/sites/melpa.org/packages/&#34;)) t)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Work-around for https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">version&lt;</span> <span class="nv">emacs-version</span> <span class="s">&#34;26.3&#34;</span><span class="p">)</span> <span class="p">(</span><span class="nf">boundp</span> <span class="ss">&#39;libgnutls-version</span><span class="p">)</span> <span class="p">(</span><span class="nf">&gt;=</span> <span class="nv">libgnutls-version</span> <span class="mi">30604</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">gnutls-algorithm-priority</span> <span class="s">&#34;NORMAL:-VERS-TLS1.3&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;;; On-demand installation of packages</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">require-package</span> <span class="p">(</span><span class="nv">package</span> <span class="kp">&amp;optional</span> <span class="nv">min-version</span> <span class="nv">no-refresh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Install given PACKAGE, optionally requiring MIN-VERSION.
+</span></span></span><span class="line"><span class="cl"><span class="s">If NO-REFRESH is non-nil, the available package lists will not be
+</span></span></span><span class="line"><span class="cl"><span class="s">re-downloaded in order to locate PACKAGE.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">stringp</span> <span class="nv">min-version</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">setq</span> <span class="nv">min-version</span> <span class="p">(</span><span class="nv">version-to-list</span> <span class="nv">min-version</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="nv">package</span> <span class="nv">min-version</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">known</span> <span class="p">(</span><span class="nf">cdr</span> <span class="p">(</span><span class="nf">assoc</span> <span class="nv">package</span> <span class="nv">package-archive-contents</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nv">best</span> <span class="p">(</span><span class="nf">car</span> <span class="p">(</span><span class="nf">sort</span> <span class="nv">known</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">a</span> <span class="nv">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                                      <span class="p">(</span><span class="nv">version-list-&lt;=</span> <span class="p">(</span><span class="nv">package-desc-version</span> <span class="nv">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                                                       <span class="p">(</span><span class="nv">package-desc-version</span> <span class="nv">a</span><span class="p">)))))))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">best</span> <span class="p">(</span><span class="nv">version-list-&lt;=</span> <span class="nv">min-version</span> <span class="p">(</span><span class="nv">package-desc-version</span> <span class="nv">best</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">package-install</span> <span class="nv">best</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">if</span> <span class="nv">no-refresh</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="ne">error</span> <span class="s">&#34;No version of %s &gt;= %S is available&#34;</span> <span class="nv">package</span> <span class="nv">min-version</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">package-refresh-contents</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">require-package</span> <span class="nv">package</span> <span class="nv">min-version</span> <span class="no">t</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">package-installed-p</span> <span class="nv">package</span> <span class="nv">min-version</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">maybe-require-package</span> <span class="p">(</span><span class="nv">package</span> <span class="kp">&amp;optional</span> <span class="nv">min-version</span> <span class="nv">no-refresh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Try to install PACKAGE, and return non-nil if successful.
+</span></span></span><span class="line"><span class="cl"><span class="s">In the event of failure, return nil and print a warning message.
+</span></span></span><span class="line"><span class="cl"><span class="s">Optionally require MIN-VERSION.  If NO-REFRESH is non-nil, the
+</span></span></span><span class="line"><span class="cl"><span class="s">available package lists will not be re-downloaded in order to
+</span></span></span><span class="line"><span class="cl"><span class="s">locate PACKAGE.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">condition-case</span> <span class="nv">err</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">require-package</span> <span class="nv">package</span> <span class="nv">min-version</span> <span class="nv">no-refresh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="ne">error</span>
+</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Couldn&#39;t install optional package </span><span class="ss">`%s&#39;</span><span class="s">: %S&#34;</span> <span class="nv">package</span> <span class="nv">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="no">nil</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Fire up package.el</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">package-enable-at-startup</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; package.el updates the saved version of package-selected-packages correctly only</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; after custom-file has been loaded, which is a bug. We work around this by adding</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; the required packages to package-selected-packages after startup is complete.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">sanityinc/required-packages</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">sanityinc/note-selected-package</span> <span class="p">(</span><span class="nv">oldfun</span> <span class="nv">package</span> <span class="kp">&amp;rest</span> <span class="nv">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;If OLDFUN reports PACKAGE was successfully installed, note that fact.
+</span></span></span><span class="line"><span class="cl"><span class="s">The package name is noted by adding it to
+</span></span></span><span class="line"><span class="cl"><span class="s"></span><span class="ss">`sanityinc/required-packages&#39;</span><span class="s">.  This function is used as an
+</span></span></span><span class="line"><span class="cl"><span class="s">advice for </span><span class="ss">`require-package&#39;</span><span class="s">, to which ARGS are passed.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">available</span> <span class="p">(</span><span class="nf">apply</span> <span class="nv">oldfun</span> <span class="nv">package</span> <span class="nv">args</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">prog1</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">available</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nb">when</span> <span class="nv">available</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;sanityinc/required-packages</span> <span class="nv">package</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;require-package</span> <span class="nb">:around</span> <span class="ss">&#39;sanityinc/note-selected-package</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">fboundp</span> <span class="ss">&#39;package--save-selected-packages</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;seq</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;after-init-hook</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">              <span class="p">(</span><span class="nv">package--save-selected-packages</span>
+</span></span><span class="line"><span class="cl">               <span class="p">(</span><span class="nv">seq-uniq</span> <span class="p">(</span><span class="nf">append</span> <span class="nv">sanityinc/required-packages</span> <span class="nv">package-selected-packages</span><span class="p">))))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;fullframe</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">fullframe</span> <span class="nv">list-packages</span> <span class="nv">quit-window</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">package-check-signature</span> <span class="no">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;gnu-elpa-keyring-update</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">sanityinc/set-tabulated-list-column-width</span> <span class="p">(</span><span class="nv">col-name</span> <span class="nv">width</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Set any column with name COL-NAME to the given WIDTH.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">&gt;</span> <span class="nv">width</span> <span class="p">(</span><span class="nf">length</span> <span class="nv">col-name</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">cl-loop</span> <span class="nv">for</span> <span class="nv">column</span> <span class="nv">across</span> <span class="nv">tabulated-list-format</span>
+</span></span><span class="line"><span class="cl">             <span class="nb">when</span> <span class="p">(</span><span class="nv">string=</span> <span class="nv">col-name</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">column</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">             <span class="nb">do</span> <span class="p">(</span><span class="nb">setf</span> <span class="p">(</span><span class="nf">elt</span> <span class="nv">column</span> <span class="mi">1</span><span class="p">)</span> <span class="nv">width</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">sanityinc/maybe-widen-package-menu-columns</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Widen some columns of the package menu table to avoid truncation.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">boundp</span> <span class="ss">&#39;tabulated-list-format</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">sanityinc/set-tabulated-list-column-width</span> <span class="s">&#34;Version&#34;</span> <span class="mi">13</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">longest-archive-name</span> <span class="p">(</span><span class="nf">apply</span> <span class="ss">&#39;max</span> <span class="p">(</span><span class="nf">mapcar</span> <span class="ss">&#39;length</span> <span class="p">(</span><span class="nf">mapcar</span> <span class="ss">&#39;car</span> <span class="nv">package-archives</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">sanityinc/set-tabulated-list-column-width</span> <span class="s">&#34;Archive&#34;</span> <span class="nv">longest-archive-name</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;package-menu-mode-hook</span> <span class="ss">&#39;sanityinc/maybe-widen-package-menu-columns</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">;; Bootstrap `use-package&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="ss">&#39;use-package</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">package-refresh-contents</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">package-install</span> <span class="ss">&#39;use-package</span><span class="p">))</span>
@@ -1545,6 +1672,9 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">goto-char</span> <span class="p">(</span><span class="nf">point-max</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">eval-print-last-sexp</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">load</span> <span class="nv">bootstrap-file</span> <span class="no">nil</span> <span class="ss">&#39;nomessage</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-elpa</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; init-elpa.el ends here</span>
 </span></span></code></pre></div><h3 id="init-local-dot-el">init-local.el<a hidden class="anchor" aria-hidden="true" href="#init-local-dot-el">¶</a></h3>
 <p>在 <code>init.el</code> 中有如下代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Allow users to provide an optional &#34;init-local&#34; containing personal settings</span>
@@ -1677,7 +1807,8 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-corfu</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-corfu.el ends here</span>
-</span></span></code></pre></div><h3 id="init-themes-dot-el">init-themes.el<a hidden class="anchor" aria-hidden="true" href="#init-themes-dot-el">¶</a></h3>
+</span></span></code></pre></div><p>在切换主题的时候，​<code>kind-icon</code> 会有残留，可以执行 <code>M-x kind-icon-reset-cache</code> 清除 cache 即可。</p>
+<h3 id="init-themes-dot-el">init-themes.el<a hidden class="anchor" aria-hidden="true" href="#init-themes-dot-el">¶</a></h3>
 <p>用的 <a href="https://protesilaos.com/emacs/ef-themes-pictures">Screen shots of the Ef themes for GNU Emacs | Protesilaos Stavrou</a>，​<code>ef-spring</code> 作为非编码时的主题，​<code>ef-night</code> 作为编码时的主题。另外设置背景透明以及光标所在代码块按照括号高亮的函数也在放在这里。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-themes.el --- Defaults for themes -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
@@ -1714,7 +1845,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dark</span> <span class="p">()</span>
 </span></span><span class="line"><span class="cl">  <span class="s">&#34;Activate a dark color theme.&#34;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">custom-enabled-themes</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">ef-night</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">custom-enabled-themes</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">ef-dark</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">reapply-themes</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
@@ -1881,7 +2012,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </tr>
 </tbody>
 </table>
-<p><strong>头像裂开的问题</strong>​：是由于字体高度问题导致的，安装 <code>init-font.el</code> 中的设置，​<code>Iosevka</code> 和 <code>LXGW WenKai</code> 配合，并设置 <code>(add-to-list 'face-font-rescale-alist '(&quot;Apple Color Emoji&quot; . 0.8))</code> 可以实现头像不裂开。但由于 Emoji 以及各种昵称中的特殊字符，比如 Noto Sans Egyptian Hieroglyphs 这种古埃及象形文字，以及 Noto Sans Kannada 和 STIXGeneral 等字体，出现在昵称以及 Reply 行中，都会导致头像裂开。</p>
+<p><strong>头像裂开的问题</strong>​：是由于字体高度问题导致的，安装 <code>init-font.el</code> 中的设置，​<code>Iosevka</code> 大多数中文字体配合，并设置 <code>(add-to-list 'face-font-rescale-alist '(&quot;Apple Color Emoji&quot; . 0.8))</code> 可以实现头像不裂开。但由于 Emoji 以及各种昵称中的特殊字符，比如 Noto Sans Egyptian Hieroglyphs 这种古埃及象形文字，以及 Noto Sans Kannada 和 STIXGeneral 等字体，出现在昵称以及 Reply 行中，都会导致头像裂开。</p>
 <p>有几种解决的方案。</p>
 <ol>
 <li>使用更纱黑体（字体太丑且并不能兼容那些使用第三点当中提到的特殊字体的情况）。
@@ -1935,6 +2066,40 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-chat-mode-hook</span> <span class="ss">&#39;my-telega-chat-mode</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-telega</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-telega.el ends here</span>
+</span></span></code></pre></div><h3 id="init-translate-dot-el">init-translate.el<a hidden class="anchor" aria-hidden="true" href="#init-translate-dot-el">¶</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-translate.el  --- Custom configuration</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;go-translate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">go-translate</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span> <span class="p">((</span><span class="s">&#34;C-c t g&#34;</span> <span class="o">.</span> <span class="nv">gts-do-translate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="s">&#34;C-c t p&#34;</span> <span class="o">.</span> <span class="nv">go-translate-at-point</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="s">&#34;C-c t s&#34;</span> <span class="o">.</span> <span class="nv">go-translate-save-kill-ring</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">gts-translate-list</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;en&#34;</span> <span class="s">&#34;zh&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">gts-default-translator</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">gts-translator</span>
+</span></span><span class="line"><span class="cl">         <span class="nb">:picker</span> <span class="p">(</span><span class="nv">gts-prompt-picker</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="nb">:engines</span> <span class="p">(</span><span class="nf">list</span> <span class="p">(</span><span class="nv">gts-bing-engine</span><span class="p">)</span> <span class="p">(</span><span class="nv">gts-google-engine</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="nb">:render</span> <span class="p">(</span><span class="nv">gts-buffer-render</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">;; Pick directly and use Google RPC API to translate</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defun</span> <span class="nv">go-translate-at-point</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">gts-translate</span> <span class="p">(</span><span class="nv">gts-translator</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:picker</span> <span class="p">(</span><span class="nv">gts-noprompt-picker</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:engines</span> <span class="p">(</span><span class="nv">gts-google-rpc-engine</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:render</span> <span class="p">(</span><span class="nv">gts-buffer-render</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">;; Pick directly and add the results into kill-ring</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defun</span> <span class="nv">go-translate-save-kill-ring</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">gts-translate</span> <span class="p">(</span><span class="nv">gts-translator</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:picker</span> <span class="p">(</span><span class="nv">gts-noprompt-picker</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:engines</span> <span class="p">(</span><span class="nv">gts-google-engine</span>
+</span></span><span class="line"><span class="cl">                              <span class="nb">:parser</span> <span class="p">(</span><span class="nv">gts-google-summary-parser</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:render</span> <span class="p">(</span><span class="nv">gts-kill-ring-render</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-translate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; init-translate.el ends here</span>
 </span></span></code></pre></div><h3 id="init-org-modern-dot-el">init-org-modern.el<a hidden class="anchor" aria-hidden="true" href="#init-org-modern-dot-el">¶</a></h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org-modern.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
@@ -1943,10 +2108,16 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="nb">:after</span> <span class="nv">org</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">org-mode</span> <span class="o">.</span> <span class="nv">org-modern-mode</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:init</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-modern-block</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-modern-star</span> <span class="p">[</span><span class="s">&#34;◉&#34;</span> <span class="s">&#34;✜&#34;</span> <span class="s">&#34;✸&#34;</span> <span class="s">&#34;✿&#34;</span> <span class="s">&#34;✤&#34;</span> <span class="s">&#34;○&#34;</span> <span class="s">&#34;◆&#34;</span> <span class="s">&#34;▶&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-table-vertical</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-table-horizontal</span> <span class="mf">0.2</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-list</span> <span class="o">&#39;</span><span class="p">((</span><span class="mi">43</span> <span class="o">.</span> <span class="s">&#34;➤&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">(</span><span class="mi">45</span> <span class="o">.</span> <span class="s">&#34;-&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">(</span><span class="mi">42</span> <span class="o">.</span> <span class="s">&#34;•&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-block</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-radio-target</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-internal-target</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-list</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">;; org-modern-list nil</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">;; org-modern-star nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-timestamp</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">;; org-modern-checkbox nil</span>
@@ -1956,7 +2127,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-priority</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-progress</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-keyword</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">org-modern-table</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">;; org-modern-table nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-tag</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-statistics</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-horizontal-rule</span> <span class="no">nil</span>
@@ -1996,15 +2167,12 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;hydra</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="nv">defhydra</span> <span class="nv">hydra-org-agenda-menu</span> <span class="p">(</span><span class="nb">:color</span> <span class="nv">blue</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="s">&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">  Org-agenda-menu
+</span></span></span><span class="line"><span class="cl"><span class="s">  [--&gt; Org-agenda-menu &lt;--]
 </span></span></span><span class="line"><span class="cl"><span class="s">  ^^^^------------------------------------------------
-</span></span></span><span class="line"><span class="cl"><span class="s">  _i_: inbox     _w_: work      _b_: books     _t_: technical-debt
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">  _a_: agenda    _p_: personal  _n_: note      _s_: someday   _j_: journal
-</span></span></span><span class="line"><span class="cl"><span class="s">  Beancount-menu
+</span></span></span><span class="line"><span class="cl"><span class="s">  _i_: inbox     _w_: work     _b_: books     _t_: technical-debt _a_: agenda     _p_: personal     _n_: note     _s_: someday     _j_: journal
+</span></span></span><span class="line"><span class="cl"><span class="s">  [--&gt; Beancount-menu &lt;--]
 </span></span></span><span class="line"><span class="cl"><span class="s">  ^^^^------------------------------------------------
-</span></span></span><span class="line"><span class="cl"><span class="s">  _c_: 2022      _m_: account   _e_: credit    _u_: insurance
-</span></span></span><span class="line"><span class="cl"><span class="s">  _l_: salary    _h_: house
+</span></span></span><span class="line"><span class="cl"><span class="s">  _c_: 2022     _m_: account     _e_: credit     _u_: insurance     _l_: salary     _h_: house
 </span></span></span><span class="line"><span class="cl"><span class="s">  &#34;</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;i&#34;</span> <span class="nv">org-starter-find-file:inbox</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;w&#34;</span> <span class="nv">org-starter-find-file:work</span><span class="p">)</span>
@@ -2070,7 +2238,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-tree-sitter.el ends here</span>
 </span></span></code></pre></div><h3 id="init-org-enhance-dot-el">init-org-enhance.el<a hidden class="anchor" aria-hidden="true" href="#init-org-enhance-dot-el">¶</a></h3>
 <p>一些增强 org 功能的函数，可以方便使用。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org.el --- Org-mode config -*- lexical-binding: t -*-</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org-enhance.el --- Org-mode config -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; ==============  Org-roam-backlinks-search  ==================</span>
@@ -2482,10 +2650,35 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-roam-node-display-template</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;${type:15} ${doom-hierarchy:80} &#34;</span> <span class="p">(</span><span class="nf">propertize</span> <span class="s">&#34;${tags:*}&#34;</span> <span class="ss">&#39;face</span> <span class="ss">&#39;org-tag</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org-enhance</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org-enhance.el ends here</span>
+</span></span></code></pre></div><h3 id="init-org-transclusion-dot-el">init-org-transclusion.el<a hidden class="anchor" aria-hidden="true" href="#init-org-transclusion-dot-el">¶</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org-transclusion.el  --- Custom configuration</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-transclusion</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-transclusion</span>
+</span></span><span class="line"><span class="cl">              <span class="nb">:after</span> <span class="nv">org</span>
+</span></span><span class="line"><span class="cl">              <span class="nb">:bind</span><span class="p">((</span><span class="s">&#34;C-c n t&#34;</span> <span class="o">.</span> <span class="nv">org-transclusion-mode</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">trival/org-transclusion-select-source</span> <span class="p">(</span><span class="nv">beg</span> <span class="nv">end</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Send transclusion information to kill-ring. See
+</span></span></span><span class="line"><span class="cl"><span class="s">    https://org-roam.discourse.group/t/alpha-org-transclusion/830/122&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span> <span class="s">&#34;r&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">lbeg</span> <span class="p">(</span><span class="nv">line-number-at-pos</span> <span class="nv">beg</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">lend</span> <span class="p">(</span><span class="nv">line-number-at-pos</span> <span class="nv">end</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">filename</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;~/&#34;</span><span class="p">(</span><span class="nv">string-remove-prefix</span> <span class="p">(</span><span class="nv">file-truename</span> <span class="s">&#34;~/&#34;</span><span class="p">)</span> <span class="p">(</span><span class="nf">buffer-file-name</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">with-temp-buffer</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">progn</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nf">insert</span> <span class="s">&#34;#+transclude: [[file:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nf">insert</span> <span class="nv">filename</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nf">insert</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;]] :lines %d-%d&#34;</span> <span class="nv">lbeg</span> <span class="nv">lend</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nv">clipboard-kill-region</span> <span class="p">(</span><span class="nf">point-min</span><span class="p">)</span> <span class="p">(</span><span class="nf">point-max</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;A transcluded link has been sent to your kill-ring.&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org-transclusion</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; init-org-transclusion.el ends here</span>
 </span></span></code></pre></div><h2 id="export">Export<a hidden class="anchor" aria-hidden="true" href="#export">¶</a></h2>
 <p>对于只需要导出某个 header 下的内容的需求，只需要在 header 上加上 <code>:export:</code> 即可。</p>
 <h3 id="markdown-file">Markdown file<a hidden class="anchor" aria-hidden="true" href="#markdown-file">¶</a></h3>
-<p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>， ~M-x org-pandoc-export-as-gfm~算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install pandoc
+</span></span></code></pre></div><p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>，需要先 <code>M-x package-install &lt;RET&gt; ox-pandoc &lt;RET&gt;</code> 进行安装，​<code>M-x org-pandoc-export-as-gfm</code> 算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
 <h3 id="hugo">Hugo<a hidden class="anchor" aria-hidden="true" href="#hugo">¶</a></h3>
 <p>在文件头部添加</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+HUGO_BASE_DIR: ~/Dropbox/hugo/
