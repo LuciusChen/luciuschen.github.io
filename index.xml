@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Sep 2022 23:50:26 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Sep 2022 17:00:13 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Thu, 29 Sep 2022 23:50:26 +0800</pubDate>
+      <pubDate>Fri, 30 Sep 2022 17:00:13 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -928,22 +928,37 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">        <span class="o">&#39;</span><span class="p">(</span><span class="nv">meow-normal-mode-p</span>
 </span></span><span class="line"><span class="cl">          <span class="nv">meow-motion-mode-p</span>
 </span></span><span class="line"><span class="cl">          <span class="nv">meow-keypad-mode-p</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">;; If cursor is in code.</span>
 </span></span><span class="line"><span class="cl">          <span class="nv">rime-predicate-prog-in-code-p</span>
-</span></span><span class="line"><span class="cl">                                  <span class="nv">rime-predicate-after-alphabet-char-p</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">;; If the cursor is after a alphabet character.</span>
+</span></span><span class="line"><span class="cl">          <span class="nv">rime-predicate-after-alphabet-char-p</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">;; If input a punctuation after</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">;; a Chinese charactor with whitespace.</span>
+</span></span><span class="line"><span class="cl">          <span class="nv">rime-predicate-punctuation-after-space-cc-p</span>
+</span></span><span class="line"><span class="cl">          <span class="nv">rime-predicate-special-ascii-line-begin-p</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">rime-inline-predicates</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">;; If cursor is after a whitespace</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">;; which follow a non-ascii character.</span>
 </span></span><span class="line"><span class="cl">        <span class="o">&#39;</span><span class="p">(</span><span class="nv">rime-predicate-space-after-cc-p</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">;; If the current charactor entered is a uppercase letter.</span>
 </span></span><span class="line"><span class="cl">          <span class="nv">rime-predicate-current-uppercase-letter-p</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;;; support shift-l, shift-r, control-l, control-r</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">rime-inline-ascii-trigger</span> <span class="ss">&#39;shift-r</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; meow 进入 insert-mode，且是 org-mode 或</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; telega-chat-mode 时，切换到 Rime。</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;meow-insert-enter-hook</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">lambda</span><span class="p">()</span> <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">derived-mode-p</span> <span class="ss">&#39;org-mode</span> <span class="ss">&#39;telega-chat-mode</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="nv">set-input-method</span> <span class="s">&#34;rime&#34;</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">lambda</span><span class="p">()</span> <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">derived-mode-p</span> <span class="ss">&#39;org-mode</span> <span class="ss">&#39;telega-chat-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="nv">set-input-method</span> <span class="s">&#34;rime&#34;</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; 退出 insert mode 时，恢复英文。</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;meow-insert-exit-hook</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">lambda</span><span class="p">()</span> <span class="p">(</span><span class="nv">set-input-method</span> <span class="no">nil</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nb">lambda</span><span class="p">()</span> <span class="p">(</span><span class="nv">set-input-method</span> <span class="no">nil</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">rime-user-data-dir</span> <span class="s">&#34;~/.emacs.d/Rime&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">rime-predicate-special-ascii-line-begin-p</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;If &#39;/&#39; &#39;#&#39; at the beginning of the line.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nf">&gt;</span> <span class="p">(</span><span class="nf">point</span><span class="p">)</span> <span class="p">(</span><span class="nb">save-excursion</span> <span class="p">(</span><span class="nv">back-to-indentation</span><span class="p">)</span> <span class="p">(</span><span class="nf">point</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nf">string</span> <span class="p">(</span><span class="nf">buffer-substring</span> <span class="p">(</span><span class="nf">point</span><span class="p">)</span> <span class="p">(</span><span class="nf">max</span> <span class="p">(</span><span class="nf">line-beginning-position</span><span class="p">)</span> <span class="p">(</span><span class="nf">-</span> <span class="p">(</span><span class="nf">point</span><span class="p">)</span> <span class="mi">80</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">string-match-p</span> <span class="s">&#34;^[\/#]&#34;</span> <span class="nf">string</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-rime</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-rime.el ends here</span>
 </span></span></code></pre></div><p>其中 <code>(setq rime-inline-ascii-trigger 'shift-r)</code> 需要配合 Rime 中 <code>default.custom.yaml</code> 配置中的 <code>Shift_R: inline_ascii</code> 才可生效。</p>
