@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Sep 2022 17:22:38 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Sep 2022 20:05:37 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Fri, 30 Sep 2022 17:22:38 +0800</pubDate>
+      <pubDate>Fri, 30 Sep 2022 20:05:37 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -970,7 +970,15 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Control_R</span><span class="p">:</span><span class="w"> </span><span class="l">noop</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Shift_L</span><span class="p">:</span><span class="w"> </span><span class="l">commit_code</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Shift_R</span><span class="p">:</span><span class="w"> </span><span class="l">inline_ascii</span><span class="w">
-</span></span></span></code></pre></div><h3 id="init-ebib-dot-el">init-ebib.el</h3>
+</span></span></span></code></pre></div><p>最终实现的效果是。</p>
+<ul>
+<li>进入 meow 的 insert-mode 自动启用 Rime，退出 insert-mode 后关闭 Rime。</li>
+<li>在编程界面，Rime 开启时，代码中自动切换英文，注释中自动切换中文。</li>
+<li>字母及英文字符紧跟后面输入自动切换英文。</li>
+<li>以 <code>#</code> 或 <code>/</code> 开头，则切换英文。</li>
+<li>中文后空格自动切换 inline 模式，输入大写字母自动切换 inline 模式。</li>
+</ul>
+<h3 id="init-ebib-dot-el">init-ebib.el</h3>
 <p>管理 Bibtex 可以方便在文章中引用，以及新增读书笔记，结合 agenda 更好的管理读书条目以及进度。（这部份配置需要精简，目前用的比较简单。）</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-ebib.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
