@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Sep 2022 20:05:37 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 Oct 2022 13:38:00 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Fri, 30 Sep 2022 20:05:37 +0800</pubDate>
+      <pubDate>Tue, 11 Oct 2022 13:38:00 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -862,7 +862,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">      <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">    <span class="no">t</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; LXGW WenKai Mono 配合 Iosevka 按照 1:1 缩放，偶数字号就可以做到等高等宽。</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">zh-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;LXGW WenKai Mono&#34;</span> <span class="s">&#34;HanaMinB&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">zh-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;LXGW WenKai Screen&#34;</span> <span class="s">&#34;HanaMinB&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">en-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Iosevka&#34;</span> <span class="s">&#34;Fira Code&#34;</span> <span class="s">&#34;IBM Plex Mono&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">qiang-make-font-string</span> <span class="p">(</span><span class="nv">font-name</span> <span class="nv">font-size</span><span class="p">)</span>
@@ -925,8 +925,11 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="c1">;; 方案切换选择</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">define-key</span> <span class="nv">rime-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-`&#34;</span><span class="p">)</span> <span class="ss">&#39;rime-send-keybinding</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">rime-disable-predicates</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">;; If cursor is in code.</span>
-</span></span><span class="line"><span class="cl">        <span class="o">&#39;</span><span class="p">(</span><span class="nv">rime-predicate-prog-in-code-p</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&#39;</span><span class="p">(</span><span class="nv">meow-normal-mode-p</span>
+</span></span><span class="line"><span class="cl">                                  <span class="nv">meow-motion-mode-p</span>
+</span></span><span class="line"><span class="cl">                                  <span class="nv">meow-keypad-mode-p</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">;; If cursor is in code.</span>
+</span></span><span class="line"><span class="cl">          <span class="nv">rime-predicate-prog-in-code-p</span>
 </span></span><span class="line"><span class="cl">          <span class="c1">;; If the cursor is after a alphabet character.</span>
 </span></span><span class="line"><span class="cl">          <span class="nv">rime-predicate-after-alphabet-char-p</span>
 </span></span><span class="line"><span class="cl">          <span class="c1">;; If input a punctuation after</span>
@@ -974,10 +977,11 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 <ul>
 <li>进入 meow 的 insert-mode 自动启用 Rime，退出 insert-mode 后关闭 Rime。</li>
 <li>在编程界面，Rime 开启时，代码中自动切换英文，注释中自动切换中文。</li>
-<li>字母及英文字符紧跟后面输入自动切换英文。</li>
+<li>字母及英文字符紧跟后面输入自动切换英文。（遇到以英文在半句或者整句后的情况下，英文后要输入逗号或者句号等中文符号，可以使用 <code>rime-force-enable</code> 来强制中文模式，这样就可以在前面描述的情况下强制输入中文符号。）</li>
 <li>以 <code>#</code> 或 <code>/</code> 开头，则切换英文。</li>
 <li>中文后空格自动切换 inline 模式，输入大写字母自动切换 inline 模式。</li>
 </ul>
+<p>其中在 <code>Isearch</code> 中使用，切换为 Rime 后需要再按一次 <code>M-e</code> 才可以正常使用。</p>
 <h3 id="init-ebib-dot-el">init-ebib.el</h3>
 <p>管理 Bibtex 可以方便在文章中引用，以及新增读书笔记，结合 agenda 更好的管理读书条目以及进度。（这部份配置需要精简，目前用的比较简单。）</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-ebib.el  --- Custom configuration</span>
@@ -998,9 +1002,6 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="nb">:straight</span> <span class="no">t</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:commands</span> <span class="nv">ebib-zotero-protocol-handler</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:init</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;org-protocol</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">push</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;ebib-zotero&#34;</span> <span class="nb">:protocol</span> <span class="s">&#34;ebib-zotero&#34;</span> <span class="nb">:function</span> <span class="nv">ebib-zotero-protocol-handler</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">          <span class="nv">org-protocol-protocol-alist</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">ebib-default-directory</span> <span class="nv">bibtex-file-path</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">ebib-bib-search-dirs</span> <span class="o">`</span><span class="p">(</span><span class="o">,</span><span class="nv">bibtex-file-path</span><span class="p">)</span>
@@ -1012,13 +1013,13 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">        <span class="nv">ebib-file-associations</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;pdf&#34;</span> <span class="o">.</span> <span class="s">&#34;open&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">ebib-index-default-sort</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;timestamp&#34;</span> <span class="o">.</span> <span class="nv">descend</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">ebib-notes-template</span> <span class="s">&#34;:PROPERTIES:
-</span></span></span><span class="line"><span class="cl"><span class="s">                             :ID:       %i
-</span></span></span><span class="line"><span class="cl"><span class="s">                             :ROAM_REFS: @%k
-</span></span></span><span class="line"><span class="cl"><span class="s">                             :END:
-</span></span></span><span class="line"><span class="cl"><span class="s">                             #+title: %t
-</span></span></span><span class="line"><span class="cl"><span class="s">                             #+description: %d
-</span></span></span><span class="line"><span class="cl"><span class="s">                             #+date: %s
-</span></span></span><span class="line"><span class="cl"><span class="s">                             %%?&#34;</span>
+</span></span></span><span class="line"><span class="cl"><span class="s">:ID:       %i
+</span></span></span><span class="line"><span class="cl"><span class="s">:ROAM_REFS: @%k
+</span></span></span><span class="line"><span class="cl"><span class="s">:END:
+</span></span></span><span class="line"><span class="cl"><span class="s">#+title: %t
+</span></span></span><span class="line"><span class="cl"><span class="s">#+description: %d
+</span></span></span><span class="line"><span class="cl"><span class="s">#+date: %s
+</span></span></span><span class="line"><span class="cl"><span class="s">%%?&#34;</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">ebib-notes-template-specifiers</span> <span class="o">&#39;</span><span class="p">((</span><span class="sc">?k</span> <span class="o">.</span> <span class="nv">ebib-create-key</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                                         <span class="p">(</span><span class="sc">?i</span> <span class="o">.</span> <span class="nv">ebib-create-id</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                                         <span class="p">(</span><span class="sc">?t</span> <span class="o">.</span> <span class="nv">ebib-create-org-title</span><span class="p">)</span>
@@ -1038,53 +1039,14 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defun</span> <span class="nv">ebib-create-org-time-stamp</span> <span class="p">(</span><span class="nv">_key</span> <span class="nv">_db</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="s">&#34;Create timestamp for the Org mode note.&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;%s&#34;</span> <span class="p">(</span><span class="nb">with-temp-buffer</span> <span class="p">(</span><span class="nv">org-insert-time-stamp</span> <span class="no">nil</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">;; ebib-zotero</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defcustom</span> <span class="nv">ebib-zotero-translation-server</span> <span class="s">&#34;https://translate.manubot.org&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="s">&#34;The address of Zotero translation server.&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">:group</span> <span class="ss">&#39;ebib</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">:type</span> <span class="ss">&#39;string</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defun</span> <span class="nv">ebib-zotero-translate</span> <span class="p">(</span><span class="nv">item</span> <span class="nv">server-path</span> <span class="kp">&amp;optional</span> <span class="nv">export-format</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="s">&#34;Convert item to EXPORT-FORMAT entry through </span><span class="ss">`ebib-zotero-translation-server&#39;</span><span class="s">.&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">export-format</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">export-format</span>
-</span></span><span class="line"><span class="cl">                             <span class="p">(</span><span class="nf">downcase</span> <span class="p">(</span><span class="nf">symbol-name</span> <span class="p">(</span><span class="nf">intern-soft</span> <span class="nv">bibtex-dialect</span><span class="p">))))))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">shell-command-to-string</span>
-</span></span><span class="line"><span class="cl">       <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;curl -s -d &#39;%s&#39; -H &#39;Content-Type: text/plain&#39; &#39;%s/%s&#39; | curl -s -d @- -H &#39;Content-Type: application/json&#39; &#39;%s/export?format=%s&#39;&#34;</span> <span class="nv">item</span> <span class="nv">ebib-zotero-translation-server</span> <span class="nv">server-path</span> <span class="nv">ebib-zotero-translation-server</span> <span class="nv">export-format</span><span class="p">))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defun</span> <span class="nv">ebib-zotero-import-url</span> <span class="p">(</span><span class="nv">url</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="s">&#34;Fetch a entry from zotero translation server via a URL.
-</span></span></span><span class="line"><span class="cl"><span class="s">The entry is stored in the current database.&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">interactive</span> <span class="s">&#34;MURL: &#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">with-temp-buffer</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">insert</span> <span class="p">(</span><span class="nv">ebib-zotero-translate</span> <span class="nv">url</span> <span class="s">&#34;web&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">when-let</span> <span class="p">((</span><span class="nv">entry-keys</span> <span class="p">(</span><span class="nv">ebib-import-entries</span> <span class="nv">ebib--cur-db</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">ebib--goto-entry-in-index</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">entry-keys</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">ebib--update-entry-buffer</span><span class="p">)))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defun</span> <span class="nv">ebib-zotero-import-identifier</span> <span class="p">(</span><span class="nv">identifier</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="s">&#34;Fetch a entry from zotero translation server via an IDENTIFIER.
-</span></span></span><span class="line"><span class="cl"><span class="s">The entry is stored in the current database,
-</span></span></span><span class="line"><span class="cl"><span class="s">and the identifier can be DOI, ISBN, PMID, or arXiv ID.&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">interactive</span> <span class="s">&#34;MIDENTIFIER: &#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">with-temp-buffer</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">insert</span> <span class="p">(</span><span class="nv">ebib-zotero-translate</span> <span class="nv">identifier</span> <span class="s">&#34;search&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">when-let</span> <span class="p">((</span><span class="nv">entry-keys</span> <span class="p">(</span><span class="nv">ebib-import-entries</span> <span class="nv">ebib--cur-db</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">ebib--goto-entry-in-index</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">entry-keys</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">ebib--update-entry-buffer</span><span class="p">)))))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defun</span> <span class="nv">ebib-zotero-protocol-handler</span> <span class="p">(</span><span class="nv">info</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="s">&#34;Process an org-protocol://ebib-zotero?href= style url with INFO.
-</span></span></span><span class="line"><span class="cl"><span class="s">Calls </span><span class="ss">`ebib-zotero-import-url&#39;</span><span class="s"> with the provided URI to add a
-</span></span></span><span class="line"><span class="cl"><span class="s">new BibTeX entry to the current database.
-</span></span></span><span class="line"><span class="cl"><span class="s">Add the following as a browser bookmark to use:
-</span></span></span><span class="line"><span class="cl"><span class="s">    javascript:location.href = \\=&#39;org-protocol://ebib-zotero?href=\\=&#39;+ \\
-</span></span></span><span class="line"><span class="cl"><span class="s">            encodeURIComponent(location.href)&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nf">plist-get</span> <span class="nv">info</span> <span class="nb">:href</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="ne">user-error</span> <span class="s">&#34;No URI provided&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">ebib</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">ebib-zotero-import-url</span> <span class="p">(</span><span class="nf">plist-get</span> <span class="nv">info</span> <span class="nb">:href</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;%s&#34;</span> <span class="p">(</span><span class="nb">with-temp-buffer</span> <span class="p">(</span><span class="nv">org-insert-time-stamp</span> <span class="no">nil</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;citar</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">citar</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span> <span class="p">((</span><span class="s">&#34;C-c b&#34;</span> <span class="o">.</span> <span class="nv">citar-insert-citation</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="nb">:map</span> <span class="nv">minibuffer-local-map</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="s">&#34;M-b&#34;</span> <span class="o">.</span> <span class="nv">citar-insert-preset</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">citar-bibliography</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;~/Dropbox/org/bib/bibtex.bib&#34;</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-ebib</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-ebib.el ends here</span>
 </span></span></code></pre></div><h3 id="init-meow-dot-el">init-meow.el</h3>
@@ -1720,7 +1682,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="c1">;; telega-msg-inline-reply   ⊆ telega-msg-heading</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; telega-msg-inline-forward ⊆ telega-msg-heading</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-heading</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:inherit</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:background</span> <span class="no">nil</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-reply</span> <span class="no">nil</span>
@@ -1744,40 +1706,41 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-telega</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-telega.el ends here</span>
 </span></span></code></pre></div><h3 id="init-translate-dot-el">init-translate.el</h3>
-<p>#+begin_src elisp
-;;; init-translate.el  &mdash; Custom configuration
-;;; Commentary
-(require-package &lsquo;go-translate)
-(use-package go-translate
-:bind ((&ldquo;C-c t g&rdquo; . gts-do-translate)
-(&ldquo;C-c t p&rdquo; . go-translate-at-point)
-(&ldquo;C-c t s&rdquo; . go-translate-save-kill-ring))
-:config
-(setq gts-translate-list &lsquo;((&ldquo;en&rdquo; &ldquo;zh&rdquo;)))
-(setq gts-default-translator
-(gts-translator
-:picker (gts-prompt-picker)
-:engines (list (gts-bing-engine) (gts-google-engine))
-:render (gts-buffer-render)))</p>
-<p>;; Pick directly and use Google RPC API to translate
-(defun go-translate-at-point ()
-(interactive)
-(gts-translate (gts-translator
-:picker (gts-noprompt-picker)
-:engines (gts-google-rpc-engine)
-:render (gts-buffer-render))))</p>
-<p>;; Pick directly and add the results into kill-ring
-(defun go-translate-save-kill-ring ()
-(interactive)
-(gts-translate (gts-translator
-:picker (gts-noprompt-picker)
-:engines (gts-google-engine
-:parser (gts-google-summary-parser))
-:render (gts-kill-ring-render))))
-(set-face-attribute &lsquo;gts-render-buffer-me-header-backgroud-face nil :background &ldquo;#7BA23F&rdquo;))
-(provide &lsquo;init-translate)
-;;; init-translate.el ends here#+end_src</p>
-<h3 id="init-org-modern-dot-el">init-org-modern.el</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-translate.el  --- Custom configuration</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;go-translate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">go-translate</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:bind</span> <span class="p">((</span><span class="s">&#34;C-c t g&#34;</span> <span class="o">.</span> <span class="nv">gts-do-translate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="s">&#34;C-c t p&#34;</span> <span class="o">.</span> <span class="nv">go-translate-at-point</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="s">&#34;C-c t s&#34;</span> <span class="o">.</span> <span class="nv">go-translate-save-kill-ring</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">:config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">gts-translate-list</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;en&#34;</span> <span class="s">&#34;zh&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">gts-default-translator</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">gts-translator</span>
+</span></span><span class="line"><span class="cl">         <span class="nb">:picker</span> <span class="p">(</span><span class="nv">gts-prompt-picker</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="nb">:engines</span> <span class="p">(</span><span class="nf">list</span> <span class="p">(</span><span class="nv">gts-bing-engine</span><span class="p">)</span> <span class="p">(</span><span class="nv">gts-google-engine</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="nb">:render</span> <span class="p">(</span><span class="nv">gts-buffer-render</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">;; Pick directly and use Google RPC API to translate</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defun</span> <span class="nv">go-translate-at-point</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">gts-translate</span> <span class="p">(</span><span class="nv">gts-translator</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:picker</span> <span class="p">(</span><span class="nv">gts-noprompt-picker</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:engines</span> <span class="p">(</span><span class="nv">gts-google-rpc-engine</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:render</span> <span class="p">(</span><span class="nv">gts-buffer-render</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">;; Pick directly and add the results into kill-ring</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defun</span> <span class="nv">go-translate-save-kill-ring</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">gts-translate</span> <span class="p">(</span><span class="nv">gts-translator</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:picker</span> <span class="p">(</span><span class="nv">gts-noprompt-picker</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:engines</span> <span class="p">(</span><span class="nv">gts-google-engine</span>
+</span></span><span class="line"><span class="cl">                              <span class="nb">:parser</span> <span class="p">(</span><span class="nv">gts-google-summary-parser</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:render</span> <span class="p">(</span><span class="nv">gts-kill-ring-render</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;gts-render-buffer-me-header-backgroud-face</span> <span class="no">nil</span> <span class="nb">:background</span> <span class="s">&#34;#7BA23F&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-translate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; init-translate.el ends here</span>
+</span></span></code></pre></div><h3 id="init-org-modern-dot-el">init-org-modern.el</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org-modern.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-modern</span><span class="p">)</span>
@@ -2325,6 +2288,10 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">                 <span class="nv">separator</span> <span class="nv">title</span><span class="p">)))))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-roam-node-display-template</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;${type:15} ${doom-hierarchy:80} &#34;</span> <span class="p">(</span><span class="nf">propertize</span> <span class="s">&#34;${tags:*}&#34;</span> <span class="ss">&#39;face</span> <span class="ss">&#39;org-tag</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; ========================  iscroll  ==========================</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;iscroll</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org-enhance</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org-enhance.el ends here</span>
 </span></span></code></pre></div><h3 id="init-org-transclusion-dot-el">init-org-transclusion.el</h3>
