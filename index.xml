@@ -6,11 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Oct 2022 13:38:00 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 17 Oct 2022 16:27:38 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Tue, 11 Oct 2022 13:38:00 +0800</pubDate>
+      <pubDate>Mon, 17 Oct 2022 16:27:38 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -508,7 +508,6 @@
 </span></span><span class="line"><span class="cl">  <span class="c1">;; 这里应该就是 .zshrc 里面配置的 python3</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-babel-python-command</span> <span class="s">&#34;python3&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;emacsql-sqlite-builtin</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org-roam</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:ensure</span> <span class="no">t</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">:demand</span> <span class="no">t</span> <span class="c1">;; ensure org-roam is loaded by default</span>
@@ -516,7 +515,6 @@
 </span></span><span class="line"><span class="cl">  <span class="nb">:custom</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-roam-directory</span> <span class="p">(</span><span class="nv">file-truename</span> <span class="s">&#34;~/Dropbox/org/&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; 需要 emacs-plus@29 版本</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-roam-database-connector</span> <span class="ss">&#39;sqlite-builtin</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-roam-db-location</span> <span class="s">&#34;~/Dropbox/org/org.db&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-roam-db-gc-threshold</span> <span class="nv">most-positive-fixnum</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-roam-completion-everywhere</span> <span class="no">t</span><span class="p">)</span>
@@ -852,7 +850,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 <p>不过 sis 针对的是一般情况：非 MacOS 系统，或没系统设置“自动切换到文稿的输入法”，或用的是 Terminal Emacs 等等。</p>
 </blockquote>
 <h3 id="init-font-dot-el">init-font.el</h3>
-<p>使用的是 <code>Iosevka</code> 和大多数中文字体配合，按照 1:1 缩放，偶数字号就可以做到等高等宽。</p>
+<p>使用的是 <code>Iosevka</code> 和大多数中文字体配合，按照 1:1 缩放，偶数字号就可以做到等高等宽。这是选择 <code>LXGW WenKai Screen</code> 而不是 <code>LXGW WenKai Mono</code> 是因为后者的粗体非常不明显，作为文档文字不好区分。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-font.el --- Dired customisations -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Code:</span>
@@ -1617,8 +1615,8 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
 </span></span><span class="line"><span class="cl">ls -l /usr/local
-</span></span></code></pre></div><p>其中 tblib 的版本当前需要 1.8.4，可以切换到 1.8.4 的版本。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout b447c32fe94c3d62d74c6b9608649c791641c3e5
+</span></span></code></pre></div><p>其中 tblib 的版本当前需要 1.8.6，可以切换到 1.8.6 的版本。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout 68d6c43
 </span></span></code></pre></div><h4 id="running-telega-server-in-docker">Running telega-server in docker</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install --cask docker
 </span></span><span class="line"><span class="cl">brew install ffmpeg
@@ -1675,7 +1673,9 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-telega.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;telega</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">telega-use-docker</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; (setq telega-use-docker t)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; (setq telega-debug t)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">telega-autoplay-mode</span> <span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nf">define-key</span> <span class="nv">global-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c t&#34;</span><span class="p">)</span> <span class="nv">telega-prefix-map</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 去除昵称、回复行的背景高亮</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-telega-chat-mode</span> <span class="p">()</span>
@@ -1696,6 +1696,13 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-entity-type-mention</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-button</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#7BA23F&#34;</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:box</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:line-width</span> <span class="p">(</span><span class="mi">-2</span> <span class="o">.</span> <span class="mi">-2</span><span class="p">)</span> <span class="nb">:color</span> <span class="s">&#34;#7BA23F&#34;</span> <span class="nb">:style</span> <span class="no">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-button-active</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#ffffff&#34;</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:background</span> <span class="s">&#34;#7BA23F&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">telega-chat-prompt-format</span> <span class="s">&#34;🏄🏻〉 &#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; 缩小 emoji 及特殊字符/字体显示，防止头像裂开。</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; (add-to-list &#39;face-font-rescale-alist &#39;(&#34;Apple Color Emoji&#34; . 0.8))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Noto Sans Egyptian Hieroglyphs&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
@@ -2292,6 +2299,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="c1">;; ========================  iscroll  ==========================</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;iscroll</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-mode-hook</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">iscroll-mode</span> <span class="mi">1</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org-enhance</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org-enhance.el ends here</span>
 </span></span></code></pre></div><h3 id="init-org-transclusion-dot-el">init-org-transclusion.el</h3>
