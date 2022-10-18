@@ -2,11 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://sheerwill.live/posts/main/20220607104757-hugo/</loc>
+    <lastmod>2022-10-18T16:46:28+08:00</lastmod>
+  </url><url>
     <loc>https://sheerwill.live/</loc>
-    <lastmod>2022-10-17T16:27:38+08:00</lastmod>
+    <lastmod>2022-10-18T16:46:28+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/</loc>
-    <lastmod>2022-10-17T16:27:38+08:00</lastmod>
+    <lastmod>2022-10-18T16:46:28+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</loc>
     <lastmod>2022-10-17T16:27:38+08:00</lastmod>
@@ -70,9 +73,6 @@
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220629203733-vscode/</loc>
     <lastmod>2022-06-29T22:51:37+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220607104757-hugo/</loc>
-    <lastmod>2022-06-29T19:10:14+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</loc>
     <lastmod>2022-06-29T16:42:16+08:00</lastmod>
