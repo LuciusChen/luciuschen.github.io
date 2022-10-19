@@ -6,11 +6,11 @@
     <description>Recent content in distributed on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Oct 2022 14:22:18 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/distributed/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Oct 2022 14:27:59 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/distributed/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vector clocks</title>
       <link>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Wed, 19 Oct 2022 14:22:18 +0800</pubDate>
+      <pubDate>Wed, 19 Oct 2022 14:27:59 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</guid>
       <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \l</description>
@@ -80,7 +80,7 @@
 <p>\(\cup\) 并集的意思，\(\cap\) 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3">
-<p>集合的描述方法，描述格式为 \({x | P(x)\)，\(x ∈ Ω}\)。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>集合的描述方法，描述格式为 \({x | P(x), x ∈ Ω}\)。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
