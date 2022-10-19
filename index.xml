@@ -6,104 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Oct 2022 16:46:28 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Hugo</title>
-      <link>https://sheerwill.live/posts/main/20220607104757-hugo/</link>
-      <pubDate>Tue, 18 Oct 2022 16:46:28 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220607104757-hugo/</guid>
-      <description>Install brew install hugo Add backlink 在 themes/xxx/layouts/partials/ 下新增 backlink.html​，内容如下。 {{ $re := $.File.BaseFileName }} {{ $backlinks := slice }} {{ range .Site.AllPages }} {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }} {{ $backlinks = $backlinks | append . }} {{ end }} {{ end }}</description>
-      <content:encoded><![CDATA[<h2 id="install">Install</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install hugo
-</span></span></code></pre></div><h2 id="add-backlink">Add backlink</h2>
-<p>在 <code>themes/xxx/layouts/partials/</code> 下新增 <code>backlink.html</code>​，内容如下。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ $re := $.File.BaseFileName }}
-</span></span><span class="line"><span class="cl">{{ $backlinks := slice }}
-</span></span><span class="line"><span class="cl">{{ range .Site.AllPages }}
-</span></span><span class="line"><span class="cl">   {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }}
-</span></span><span class="line"><span class="cl">          {{ $backlinks = $backlinks | append . }}
-</span></span><span class="line"><span class="cl">   {{ end }}
-</span></span><span class="line"><span class="cl">{{ end }}
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">{{ if gt (len $backlinks) 0 }}
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Links to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;backlinks&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">           {{ range $backlinks }}
-</span></span><span class="line"><span class="cl">                  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .RelPermalink }}&#34;</span><span class="p">&gt;</span>{{ .Title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">           {{ end }}
-</span></span><span class="line"><span class="cl">         <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ else  }}
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>No notes link to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ end }}
-</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/_default/single.html</code> 中增加下面代码，放到合适的地方。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;backlinks.html&#34; . }}
-</span></span></code></pre></div><p>放在文章下方的话可以插入如下位置</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post-content&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    {{- if not (.Param &#34;disableAnchoredHeadings&#34;) }}
-</span></span><span class="line"><span class="cl">    {{- partial &#34;anchored_headings.html&#34; .Content -}}
-</span></span><span class="line"><span class="cl">    {{- else }}{{ .Content }}{{ end }}
-</span></span><span class="line"><span class="cl">    {{ partial &#34;backlinks.html&#34; . }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span></code></pre></div><h2 id="mathjax-support">MathJax support</h2>
-<h3 id="方案1">方案1</h3>
-<p>在 <code>themes/xxx/layouts/_default/single.html</code> 中 <code>header</code> 中增加下面代码。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span></code></pre></div><h3 id="方案2">方案2</h3>
-<p>增加 <code>themes/xxx/layouts/partials/mathjax.html</code> 文件，并在其中增加下面代码，实现即便是页面间的跳转，也可以实时渲染公式。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">MathJax</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">tex</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">inlineMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\(&#39;</span><span class="p">,</span> <span class="s1">&#39;\\)&#39;</span><span class="p">]],</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">displayMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$$&#39;</span><span class="p">,</span><span class="s1">&#39;$$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\[&#39;</span><span class="p">,</span> <span class="s1">&#39;\\]&#39;</span><span class="p">]],</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">processEscapes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">processEnvironments</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">skipHtmlTags</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;noscript&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;pre&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&#34;mjx-container&#34;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">x</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">classList</span> <span class="o">+=</span> <span class="s1">&#39;has-jax&#39;</span><span class="p">})</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://polyfill.io/v3/polyfill.min.js?features=es6&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;MathJax-script&#34;</span> <span class="na">async</span>
-</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">code</span><span class="p">.</span><span class="nc">has-jax</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">font</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">border</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="mh">#515151</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/_default/header.html</code> 中增加下面代码，放到合适的地方。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;mathjax.html&#34; . }}
-</span></span></code></pre></div><p>如果不想所有页面都加载 MathJax，就添加下面代码。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ if .Params.mathjax }}{{ partial &#34;mathjax.html&#34; . }}{{ end }}
-</span></span></code></pre></div><p>并通过 <a href="https://ox-hugo.scripter.co/doc/custom-front-matter/">Custom Front-matter Parameters</a> 设置 <code>mathjax: true</code>​。具体是添加下面代码到需要导出并用 MathJax 展示的 org 文件头部，导出后就是 <code>.md</code> 文件中的 metadata。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+HUGO_CUSTOM_FRONT_MATTER</span><span class="c">: :mathjax true</span>
-</span></span></code></pre></div>]]></content:encoded>
-    </item>
-    
+    <lastBuildDate>Wed, 19 Oct 2022 14:22:42 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Mon, 17 Oct 2022 16:27:38 +0800</pubDate>
+      <pubDate>Wed, 19 Oct 2022 14:22:42 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -214,6 +121,7 @@
     ├── beancount.el
     ├── init-elpa.el
     ├── init-local.el
+    ├── init-latex.el
     ├── init-corfu.el
     ├── init-themes.el
     ├── init-elfeed.el
@@ -1466,20 +1374,32 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="c">#+begin_mark</span>
 </span></span><span class="line"><span class="cl">marked text
 </span></span><span class="line"><span class="cl"><span class="c">#+end_mark</span>
-</span></span></code></pre></div><h4 id="latex--auctex-plus-cdlatex">Latex(auctex + cdlatex)</h4>
+</span></span></code></pre></div><h3 id="init-latex-dot-el">init-latex.el</h3>
 <p>离线分享的时候最大程度的保持原貌的方法就是 PDF。</p>
 <p>需要安装 <code>texlive</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install texlive
 </span></span></code></pre></div><p>Latex 语法可以参考：<a href="/posts/main/20220616162256-latex/">Latex</a></p>
+<h4 id="导出">导出</h4>
 <p>导出含有中文时是需要配置 CJK，<a href="https://github.com/ElegantLaTeX/ElegantPaper/blob/master/elegantpaper.cls">ElegantPaper</a> 可以跨过这一步设置，只需要将 <code>elegantpaper.cls</code> 放到需要导出 PDF 的目录下，同时安装依赖。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install pygments
 </span></span></code></pre></div><p>在导出文件头部增加</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+LATEX_COMPILER</span><span class="c">: xelatex</span>
 </span></span><span class="line"><span class="cl"><span class="cs">#+LATEX_CLASS</span><span class="c">: elegantpaper</span>
 </span></span><span class="line"><span class="cl"><span class="cs">#+OPTIONS</span><span class="c">: prop:t</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;auctex</span><span class="p">)</span>
+</span></span></code></pre></div><h4 id="预览">预览</h4>
+<p>预览需要安装 <a href="https://github.com/firamath/firamath">firamath</a> 字体，可以有更好的展示效果。另外 <code>dvisvgm</code> 应该在 <code>texlive</code> 中已经包含才对，但是依旧找不到。这里我重新从<a href="https://github.com/mgieseki/dvisvgm">源码</a>编译了一份。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-latex.el  --- Custom configuration</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;auctex</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;cdlatex</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;LaTeX-mode-hook</span> <span class="ss">&#39;turn-on-cdlatex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 导出中文 PDF</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 需要将 elegantpaper.cls 文件放在 org 目录下</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 需要安装依赖 brew install pygments</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; org 文件头部增加</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; #+LATEX_COMPILER: xelatex</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; #+LATEX_CLASS: elegantpaper</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; #+OPTIONS: prop:t</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;ox-latex</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; http://orgmode.org/worg/org-faq.html#using-xelatex-for-pdf-export</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; latexmk runs pdflatex/xelatex (whatever is specified) multiple times</span>
@@ -1498,6 +1418,29 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="s">&#34;\\subparagraph{%s}&#34;</span> <span class="o">.</span> <span class="s">&#34;\\subparagraph*{%s}&#34;</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-latex-listings</span> <span class="ss">&#39;minted</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;org-latex-packages-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;&#34;</span> <span class="s">&#34;minted&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-preview-latex-default-process</span> <span class="ss">&#39;dvisvgm</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-latex-packages-alist</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;mathrm=sym&#34;</span> <span class="s">&#34;unicode-math&#34;</span> <span class="no">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="s">&#34;&#34;</span> <span class="s">&#34;firamath-otf&#34;</span> <span class="no">t</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-preview-latex-process-alist</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&#39;</span><span class="p">((</span><span class="nv">dvisvgm</span> <span class="nb">:programs</span>
+</span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="s">&#34;xelatex&#34;</span> <span class="s">&#34;dvisvgm&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                 <span class="nb">:description</span> <span class="s">&#34;xdv &gt; svg&#34;</span> <span class="nb">:message</span> <span class="s">&#34;you need to install the programs: xelatex and dvisvgm.&#34;</span> <span class="nb">:use-xcolor</span> <span class="no">t</span> <span class="nb">:image-input-type</span> <span class="s">&#34;xdv&#34;</span> <span class="nb">:image-output-type</span> <span class="s">&#34;svg&#34;</span> <span class="nb">:image-size-adjust</span>
+</span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="mf">2.5</span> <span class="o">.</span> <span class="mf">2.2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                 <span class="nb">:latex-compiler</span>
+</span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="s">&#34;xelatex -no-pdf -interaction nonstopmode -output-directory %o %f&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                 <span class="nb">:image-converter</span>
+</span></span><span class="line"><span class="cl">                 <span class="p">(</span><span class="s">&#34;dvisvgm %f -n -b min -c %S -o %O&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">imagemagick</span> <span class="nb">:programs</span>
+</span></span><span class="line"><span class="cl">                     <span class="p">(</span><span class="s">&#34;xelatex&#34;</span> <span class="s">&#34;convert&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                     <span class="nb">:description</span> <span class="s">&#34;pdf &gt; png&#34;</span> <span class="nb">:message</span> <span class="s">&#34;you need to install the programs: xelatex and imagemagick.&#34;</span> <span class="nb">:use-xcolor</span> <span class="no">t</span> <span class="nb">:image-input-type</span> <span class="s">&#34;pdf&#34;</span> <span class="nb">:image-output-type</span> <span class="s">&#34;png&#34;</span> <span class="nb">:image-size-adjust</span>
+</span></span><span class="line"><span class="cl">                     <span class="p">(</span><span class="mf">1.0</span> <span class="o">.</span> <span class="mf">1.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                     <span class="nb">:latex-compiler</span>
+</span></span><span class="line"><span class="cl">                     <span class="p">(</span><span class="s">&#34;xelatex -interaction nonstopmode -output-directory %o %f&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                     <span class="nb">:image-converter</span>
+</span></span><span class="line"><span class="cl">                     <span class="p">(</span><span class="s">&#34;convert -density %D -trim -antialias %f -quality 100 %O&#34;</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-latex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;; init-latex.el ends here</span>
 </span></span></code></pre></div><h3 id="init-corfu-dot-el">init-corfu.el</h3>
 <p>增加了 <code>kind-icon</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-corfu.el --- Interactive completion in buffers -*- lexical-binding: t -*-</span>
@@ -1802,7 +1745,27 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;STIXGeneral&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Apple Symbols&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Noto Sans Kannada&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-chat-mode-hook</span> <span class="ss">&#39;my-telega-chat-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-unmuted-count</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#FFB11B&#34;</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-muted-count</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#E87A90&#34;</span> <span class="c1">;; 薄红 USUBENI</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 多加一条横线在输入和聊天页面之间</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">telega-symbol-underline-bar</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">propertize</span> <span class="s">&#34; &#34;</span> <span class="ss">&#39;face</span> <span class="ss">&#39;telega-webpage-strike-through</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">lg-telega-root-mode</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">hl-line-mode</span> <span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">lg-telega-chat-update</span> <span class="p">(</span><span class="nv">chat</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">with-telega-root-buffer</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">hl-line-highlight</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-chat-update-hook</span> <span class="ss">&#39;lg-telega-chat-update</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-root-mode-hook</span> <span class="ss">&#39;lg-telega-root-mode</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-telega</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-telega.el ends here</span>
 </span></span></code></pre></div><h3 id="init-translate-dot-el">init-translate.el</h3>
@@ -2483,6 +2446,179 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </ol>
 </div>
 ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Vector clocks</title>
+      <link>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</link>
+      <pubDate>Wed, 19 Oct 2022 14:22:18 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</guid>
+      <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \l</description>
+      <content:encoded><![CDATA[<p>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
+<ul>
+<li>假定分布式系统中有 \(n\) 个节点，\(N = \langle​N_{1}, N_{2}, &hellip;, N_{n}\rangle\)</li>
+<li><strong>事件 \(a\)</strong> 的向量时间戳写成 \(V(a) = \langle​t_{1}, t_{2}, &hellip;, t_{n}\rangle\)</li>
+<li>\(t_{i}\) 是 \(N_{i}\) 节点发生时间的数量</li>
+<li>每个​<strong>节点</strong>​都有一个当前的向量时间戳 \(T\)</li>
+<li>节点 \(N_{i}\) 上的事件，向量时间戳 \(T[i]\) 递增。</li>
+<li>每个消息都附带上向量时间戳</li>
+<li>接收者将消息中的向量时间戳合并到本地</li>
+</ul>
+<p>除了标量和向量之间的区别之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
+<h2 id="vector-clocks-algorithm">Vector clocks algorithm</h2>
+<blockquote>
+<p><strong>on</strong> initialisation at node \(N_{i}\) <strong>do</strong> <br />
+\(\qquad T := \langle0, 0, &hellip;, 0\rangle\) ▻ local variable at node \(N_{i}\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> any event occurring at node \(N_{i}\) <strong>do</strong> <br />
+\(\qquad T[i] = T[i] + 1\) <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> request to send message \(m\) at node N<sub>i</sub> <strong>do</strong> <br />
+\(\qquad T[i] := T[i] + 1\); send \((T, m)\) via network <br />
+<strong>end on</strong></p>
+<p><strong>on</strong> receiving \((T&rsquo;, m)\) at node \(N_{i}\) via the network <strong>do</strong> <br />
+\(\qquad T[j] := max(T[j], T&rsquo;[j])\) for every \(j \in {1, &hellip;, n}\) <br />
+\(\qquad T[i] := T[i] + 1\); deliver \(m\) to the application <br />
+<strong>end on</strong></p>
+</blockquote>
+<h2 id="vector-clocks-example">Vector clocks example</h2>
+<p>假定节点向量是 \(N = \langle​A, B, C\rangle\):</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/vector-example.png"
+         alt="Figure 1: vector-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>vector-example</p>
+        </figcaption>
+</figure>
+
+<p>事件 \(e\) 的向量时间戳是一系列事件的集合， \(e\) 和它的因果以来：\({e} \cup {a | a \rightarrow e}\)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>​<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>比如，\(\langle2, 2, 0\rangle\)，第一个 2 是表示来自于 \(A\) 的两个事件，第二个 2 是表示来自于 \(B\) 的两个事件，并且没有来自于 \(C\) 的事件。</p>
+<h2 id="vector-clocks-ordering">Vector clocks ordering</h2>
+<p>Define the following order on vector timestamps(in a system with \(n\) nodes):</p>
+<ul>
+<li>\(T = T&rsquo; \iff T[i] = T&rsquo;[i]\) for all \(i \in {1, &hellip;, n}\)</li>
+<li>\(T \le T&rsquo; \iff T[i] \le T&rsquo;[i]\) for all \(\in {1, &hellip;, n}\)</li>
+<li>\(T &lt; T&rsquo; \iff T \le T&rsquo;\) and \(T \neq T&rsquo;\)</li>
+<li>\(T || T&rsquo; \iff T &gt; T&rsquo;\) and \(T&rsquo; &gt; T\)</li>
+</ul>
+<p>\(V(a) \le V(b) \iff ({a} \cup {e | e \rightarrow a}) ⊆ ({b} \cup{} {e | e \rightarrow b})\)</p>
+<p>Properties of this order:</p>
+<ul>
+<li>\((V(a) &lt; V(b)) \iff (a \rightarrow b)\)</li>
+<li>\((V(a) = V(b)) \iff (a = b)\)</li>
+<li>\((V(a) \rVert V(b)) \iff (a \rVert b)\)</li>
+</ul>
+<p>然后，我们对向量的时间戳进行部分排序。如果第一个向量的每个元素都小于或等于第二个向量的相应元素，我们就说一个向量小于或等于另一个向量。如果一个向量小于或等于另一个向量，并且它们至少有一个元素是不同的，那么这个向量就严格小于另一个向量。然而，如果一个向量在一个元素中的值较大，而另一个向量在另一个元素中的值较大，那么这两个向量是不可比的。例如，\(T = \langle2, 2, 0\rangle\) 和 \(T&rsquo; = \langle0, 0, 1\rangle\) 是不可比的，因为 \(T[1] &gt; T&rsquo;[1]\) 但 \(T[3] &lt; T&rsquo;[3]\)。</p>
+<p>向量时间戳的部分顺序与发生之前关系所定义的部分顺序完全对应。因此，向量时钟算法为我们提供了一种在实践中计算发生前关系的机制。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>\(\cup\) 并集的意思，\(\cap\) 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>集合的描述方法，描述格式为 \({x | P(x)\)，\(x ∈ Ω}\)。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://sheerwill.live/posts/main/20220607104757-hugo/</link>
+      <pubDate>Tue, 18 Oct 2022 16:46:28 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220607104757-hugo/</guid>
+      <description>Install brew install hugo Add backlink 在 themes/xxx/layouts/partials/ 下新增 backlink.html​，内容如下。 {{ $re := $.File.BaseFileName }} {{ $backlinks := slice }} {{ range .Site.AllPages }} {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }} {{ $backlinks = $backlinks | append . }} {{ end }} {{ end }}</description>
+      <content:encoded><![CDATA[<h2 id="install">Install</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install hugo
+</span></span></code></pre></div><h2 id="add-backlink">Add backlink</h2>
+<p>在 <code>themes/xxx/layouts/partials/</code> 下新增 <code>backlink.html</code>​，内容如下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ $re := $.File.BaseFileName }}
+</span></span><span class="line"><span class="cl">{{ $backlinks := slice }}
+</span></span><span class="line"><span class="cl">{{ range .Site.AllPages }}
+</span></span><span class="line"><span class="cl">   {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }}
+</span></span><span class="line"><span class="cl">          {{ $backlinks = $backlinks | append . }}
+</span></span><span class="line"><span class="cl">   {{ end }}
+</span></span><span class="line"><span class="cl">{{ end }}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{{ if gt (len $backlinks) 0 }}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Links to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;backlinks&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">           {{ range $backlinks }}
+</span></span><span class="line"><span class="cl">                  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .RelPermalink }}&#34;</span><span class="p">&gt;</span>{{ .Title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">           {{ end }}
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{ else  }}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>No notes link to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{ end }}
+</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/_default/single.html</code> 中增加下面代码，放到合适的地方。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;backlinks.html&#34; . }}
+</span></span></code></pre></div><p>放在文章下方的话可以插入如下位置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post-content&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {{- if not (.Param &#34;disableAnchoredHeadings&#34;) }}
+</span></span><span class="line"><span class="cl">    {{- partial &#34;anchored_headings.html&#34; .Content -}}
+</span></span><span class="line"><span class="cl">    {{- else }}{{ .Content }}{{ end }}
+</span></span><span class="line"><span class="cl">    {{ partial &#34;backlinks.html&#34; . }}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h2 id="mathjax-support">MathJax support</h2>
+<h3 id="方案1">方案1</h3>
+<p>在 <code>themes/xxx/layouts/_default/single.html</code> 中 <code>header</code> 中增加下面代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h3 id="方案2">方案2</h3>
+<p>增加 <code>themes/xxx/layouts/partials/mathjax.html</code> 文件，并在其中增加下面代码，实现即便是页面间的跳转，也可以实时渲染公式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">MathJax</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">tex</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">inlineMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\(&#39;</span><span class="p">,</span> <span class="s1">&#39;\\)&#39;</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">displayMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$$&#39;</span><span class="p">,</span><span class="s1">&#39;$$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\[&#39;</span><span class="p">,</span> <span class="s1">&#39;\\]&#39;</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">processEscapes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">processEnvironments</span><span class="o">:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">skipHtmlTags</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;noscript&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;pre&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&#34;mjx-container&#34;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">x</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">classList</span> <span class="o">+=</span> <span class="s1">&#39;has-jax&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://polyfill.io/v3/polyfill.min.js?features=es6&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;MathJax-script&#34;</span> <span class="na">async</span>
+</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">code</span><span class="p">.</span><span class="nc">has-jax</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="mh">#515151</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/_default/header.html</code> 中增加下面代码，放到合适的地方。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;mathjax.html&#34; . }}
+</span></span></code></pre></div><p>如果不想所有页面都加载 MathJax，就添加下面代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ if .Params.mathjax }}{{ partial &#34;mathjax.html&#34; . }}{{ end }}
+</span></span></code></pre></div><p>并通过 <a href="https://ox-hugo.scripter.co/doc/custom-front-matter/">Custom Front-matter Parameters</a> 设置 <code>mathjax: true</code>​。具体是添加下面代码到需要导出并用 MathJax 展示的 org 文件头部，导出后就是 <code>.md</code> 文件中的 metadata。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+HUGO_CUSTOM_FRONT_MATTER</span><span class="c">: :mathjax true</span>
+</span></span></code></pre></div>]]></content:encoded>
     </item>
     
     <item>
@@ -5358,89 +5494,6 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 <ul>
 <li><a href="https://github.com/zsh-users/zsh-autosuggestions">zsh-autosuggestions</a></li>
 </ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Vector clocks</title>
-      <link>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Tue, 12 Jul 2022 12:03:15 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</guid>
-      <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \l</description>
-      <content:encoded><![CDATA[<p>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
-<ul>
-<li>假定分布式系统中有 \(n\) 个节点，\(N = \langle​N_{1}, N_{2}, &hellip;, N_{n}\rangle\)</li>
-<li><strong>事件 \(a\)</strong> 的向量时间戳写成 \(V(a) = \langle​t_{1}, t_{2}, &hellip;, t_{n}\rangle\)</li>
-<li>\(t_{i}\) 是 \(N_{i}\) 节点发生时间的数量</li>
-<li>每个​<strong>节点</strong>​都有一个当前的向量时间戳 \(T\)</li>
-<li>节点 \(N_{i}\) 上的事件，向量时间戳 \(T[i]\) 递增。</li>
-<li>每个消息都附带上向量时间戳</li>
-<li>接收者将消息中的向量时间戳合并到本地</li>
-</ul>
-<p>除了标量和向量之间的区别之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
-<h2 id="vector-clocks-algorithm">Vector clocks algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad T := \langle0, 0, &hellip;, 0\rangle\) ▻ local variable at node \(N_{i}\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> any event occurring at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad T[i] = T[i] + 1\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> request to send message \(m\) at node N<sub>i</sub> <strong>do</strong> <br />
-\(\qquad T[i] := T[i] + 1\); send \((T, m)\) via network <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> receiving \((T&rsquo;, m)\) at node \(N_{i}\) via the network <strong>do</strong> <br />
-\(\qquad T[j] := max(T[j], T&rsquo;[j])\) for every \(j \in {1, &hellip;, n}\) <br />
-\(\qquad T[i] := T[i] + 1\); deliver \(m\) to the application <br />
-<strong>end on</strong></p>
-</blockquote>
-<h2 id="vector-clocks-example">Vector clocks example</h2>
-<p>假定节点向量是 \(N = \langle​A, B, C\rangle\):</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/vector-example.png"
-         alt="Figure 1: vector-example"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>vector-example</p>
-        </figcaption>
-</figure>
-
-<p>事件 \(e\) 的向量时间戳是一系列事件的集合， \(e\) 和它的因果以来：\({e} \cup {a | a \rightarrow e}\)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup>, </sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
-<p>比如，\(\langle2, 2, 0\rangle\)，第一个 2 是表示来自于 \(A\) 的两个事件，第二个 2 是表示来自于 \(B\) 的两个事件，并且没有来自于 \(C\) 的事件。</p>
-<h2 id="vector-clocks-ordering">Vector clocks ordering</h2>
-<p>Define the following order on vector timestamps(in a system with \(n\) nodes):</p>
-<ul>
-<li>\(T = T&rsquo;\) iff \(T[i] = T&rsquo;[i]\) for all \(i \in {1, &hellip;, n}\)<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></li>
-<li>\(T \le T&rsquo;\) iff \(T[i] \le T&rsquo;[i]\) for all $ ∈ {1, &hellip;, n}$</li>
-<li>\(T &lt; T&rsquo;\) iff \(T \le T&rsquo;\) and \(T \neq T&rsquo;\)</li>
-<li>\(T || T&rsquo;\) iff \(T &gt; T&rsquo;\) and \(T&rsquo; &gt; T\)</li>
-</ul>
-<p>\(V(a) \le V(b)\) iff \(({a} \cup {e | e \rightarrow a}) ⊆ ({b} \cup{} {e | e \rightarrow b})\)</p>
-<p>Properties of this order:</p>
-<ul>
-<li>\((V(a) &lt; V(b)) \iff (a \rightarrow b)\)</li>
-<li>\((V(a) = V(b)) \iff (a = b)\)</li>
-<li>\((V(a) \rVert V(b)) \iff (a \rVert b)\)</li>
-</ul>
-<p>然后，我们对向量的时间戳进行部分排序。如果第一个向量的每个元素都小于或等于第二个向量的相应元素，我们就说一个向量小于或等于另一个向量。如果一个向量小于或等于另一个向量，并且它们至少有一个元素是不同的，那么这个向量就严格小于另一个向量。然而，如果一个向量在一个元素中的值较大，而另一个向量在另一个元素中的值较大，那么这两个向量是不可比的。例如，\(T = \langle2, 2, 0\rangle\) 和 \(T&rsquo; = \langle0, 0, 1\rangle\) 是不可比的，因为 \(T[1] &gt; T&rsquo;[1]\) 但 \(T[3] &lt; T&rsquo;[3]\)。</p>
-<p>向量时间戳的部分顺序与发生之前关系所定义的部分顺序完全对应。因此，向量时钟算法为我们提供了一种在实践中计算发生前关系的机制。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>\(\cup\) 并集的意思，\(\cap\) 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>集合的描述方法，描述格式为 \({x | P(x)，x ∈ Ω}\)。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4">
-<p>if and only if，相当于 \(\iff\)，其 Latex 写作 <code>\iff</code>​。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
 ]]></content:encoded>
     </item>
     
