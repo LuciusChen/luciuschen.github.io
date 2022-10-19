@@ -6,97 +6,16 @@
     <description>Recent content in newsletter on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Jun 2022 16:42:16 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/newsletter/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>How I Take Notes</title>
-      <link>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</link>
-      <pubDate>Wed, 29 Jun 2022 16:42:16 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</guid>
-      <description>Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>最先接触到 <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettlekasten</a> (German: &ldquo;slip box&rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、Notion、Obsidian（当时还不知道 Backlinks），都觉得不太合适，尤其是第一步文件夹的分类就让我头疼，很多内容是互相交叉的，并不是简单的可以归在一个分类下面，若是细分的分类过多，又会过于混乱，最后的结果就是“垃圾场”。</p>
-<ul>
-<li>根据 Zettlekasten 衍生出来的各种 APP 中的 Backlinks 将笔记串联起来，作为一个草稿箱，定期去整理回顾形成自己的知识。</li>
-</ul>
-<p>另外一个极为吸引我的就是 Daily Notes 或者 Journals，非常适合我当前的工作场景。「生产问题」或者「零碎的需求」会不断从打断我的工作，有时候会非常紧急需要优先处理「需求」或者「生产问题」，解决后会有两种情况。</p>
-<ul>
-<li>
-<p>问题或需求解决后，要花一些时间梳理之前在做的事情才能够重新接续之前的思路继续工作。</p>
-</li>
-<li>
-<p>问题解决后几个月遇到相同或类似的问题，虽然记得解决过，但是当时解决的思路以及细节需要注意的地方就模糊不清了。通常为了万无一失需要重复上次的工作，仔细查看过代码结合业务后，才能作出正确的判断，确保干净利落地解决问题。</p>
-</li>
-</ul>
-<p>上面两种情况完全可以用 Journals 记录解决问题前的工作思路，记录解决问题后的思路，来避免上述两种情况发生。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
-         alt="Figure 1: take-notes-sankey"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>take-notes-sankey</p>
-        </figcaption>
-</figure>
-
-<p>信息大爆炸的副作用就是信噪比降低，通过分阶段的信息处理，不断地归纳、处理形成自己的想法，并将其固化下来，作为知识库。</p>
-<h2 id="流程设计">流程设计</h2>
-<ol>
-<li>
-<p>图中的流程其实就是多层的过滤器。</p>
-<p>从最初的信息源处到 Logseq 的过程，只需要考虑这个信息源是否值得读，是否值得扩展，答案确定则大胆地记入 Logseq。其中零散的思绪及文章阅读记录在 Journals 中，书籍这类大部头则在 page 中记录，前者因为零散在 Journals 中，需要加 page 的双链或 Tag。</p>
-<p>Logseq 中 Journals 中的事件重要的会被我移到 Org-roam 中的 Journals.org 文件中，这个文件类似于日记的作用，并不是每天都会记录，记录多了之后按照年份进行分割。</p>
-<p>从 Logseq 到 Org-roam 则是知识固化的过程，需要考虑该知识是否以后会被自己再次用到，是否值得扩展，答案确定则精炼后记入，并标明灵感来源，引用材料。因此，Logseq 中记录的都只能算是草稿，需要再次的整合，提高信噪比。</p>
-</li>
-<li>
-<p>对信息源处理时，可以用 Excalidraw 进行流程图、思维图等图的草稿绘制。后续有时间的时候再用 Figma 重新绘制，视觉和逻辑上的重新设计，使得阐述的内容更加直观。</p>
-<p>对于产品来说，通过<a href="/posts/main/20220503145636-build_diagram/">设计降低理解门槛和使用门槛</a>，是一件挺重要的事情。输出文章同样如此。</p>
-</li>
-<li>
-<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 <a href="/posts/main/20220505220832-emacs/">Emacs</a> 中做了一些设置。</p>
-</li>
-<li>
-<p>Org-roam-ui 非常优秀，不管是 UI 还是操作性，可以明晰的查看笔记之间的关联，知识是否形成闭环，哪些知识还需要进行拓展阅读。</p>
-</li>
-</ol>
-<h2 id="准则">准则</h2>
-<ul>
-<li>
-<p>卡片应该具有原子性。这点和编程的原则很像，一个方法只做一件事，在这里也就是只记录一个主题的内容。</p>
-</li>
-<li>
-<p>卡片内容应该具有独立性。这点和上面并不冲突，设想一下，为了保持每个卡片的纯净，X 和 Y 之间的关系，你可能会用 Z 去链接他们。但回顾的时候，没有 Z，单纯回顾 X 或 Y 无法得知两者之间的关联。所以这里不管在 X 或者 Y 中去描述与对方的关系都是可以的，一点点内容的冗余可以使得内容更加独立。</p>
-</li>
-<li>
-<p>遵守奥卡姆剃刀原则。对新工具充分调研，是否满足自己的需求后再考虑替换或增加到现有工作流当中。</p>
-</li>
-<li>
-<p>Literature Notes 需要及时回顾，在一两天内转化为 Permanent Notes 或者直接删掉。</p>
-</li>
-</ul>
-<h2 id="误区">误区</h2>
-<ul>
-<li>
-<p>All-In-One 的思想。Markdown 的扩展语法实现并不统一，扩展语法的内容导出时经常要手动兼容，或不可再用。云端服务的不可持续性，互联网这么多年已经太多的云端服务用着用着就停掉了。</p>
-</li>
-<li>
-<p>Permanent Notes 并不是不需要回顾和修改了。</p>
-</li>
-<li>
-<p>记太多的内容。从资料中复制大量的原文。笔记应该是对所读内容的提炼：用自己的话改写观点和概念有助于加强理解。</p>
-</li>
-<li>
-<p>太复杂的笔记流程。复杂的工作流通常需要自动化，但自动化不利于笔记的整理，形成最重笔记时应该慎重考虑哪些是需要保留的，否则知识库就会变成垃圾场。</p>
-</li>
-</ul>
-]]></content:encoded>
-    </item>
-    
+    <lastBuildDate>Wed, 19 Oct 2022 19:28:36 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/newsletter/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Implementation Intention GTD</title>
       <link>https://sheerwill.live/posts/article/20220503143427-gtd/</link>
-      <pubDate>Sat, 11 Jun 2022 11:39:58 +0800</pubDate>
+      <pubDate>Wed, 19 Oct 2022 19:28:36 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/article/20220503143427-gtd/</guid>
-      <description>Introduction 2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omni</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+      <description>ID: 1d28a46a-0a67-4633-863a-a0acf49b17c0 Introduction 2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Om</description>
+      <content:encoded><![CDATA[<p>ID: 1d28a46a-0a67-4633-863a-a0acf49b17c0</p>
+<h2 id="introduction">Introduction</h2>
 <p>2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Omnifocus、Things 等等。</p>
 <p>一直不明白问题出在哪里，一天下来不管是 Today 还是 Inbox 当中的 To-Do 不仅没有变少，甚至更多了。自我怀疑、自我谴责让自己觉得是拖延症、懒造成了 To-Do 积压。</p>
 <p>回顾过去几年中，除了 Things 以外，我还使用了 Due 和 Fantastical 这两款软件。前者是吃药的时候，循环提醒该吃药了；后者是今天或者未来某天必须要做的事情，为了不让我忘记这个事情，哪怕我不确定这个事情在当天的哪个时间段做，都会给它加一个提醒，这样即便是过了时间，只要没有 checked 就会一直在锁屏或者下拉通知内，这样我就可以*不断地被提醒，找到合适的时间段去完成这件事情*​。</p>
@@ -140,7 +59,6 @@
 <blockquote>
 <p>note-taking and knowledge creation will always require large amounts of brain work. On the other hand, GTD makes task management a simple, effortless process.</p>
 </blockquote>
-<p>对比我在 <a href="/posts/article/20220505162419-how_i_take_notes/">How I Take Notes</a> 中写的笔记的工作流，To-Do 和 Note-Taking 确实存在区别。</p>
 <p>GTD 中 Capture 是最不需要思考的，有什么东西直接记录到 Inbox 当中，清空当前的灵感，专注眼前的事情。例如，Things 中快速呼出 Inbox 的输入框；Org-roam 中写在 <code>.org</code> 文件中的 To-Do 都会集中在 Agenda 中；Logseq 中写在 Journals 中的 To-Do 也可以在 Pages 中按照自己的需求定制查询（复杂的查询有些门槛）。后续处理，按照执行意图的方法去评估 To-Do 适合的情景；较大的任务需要进行拆分成若干小任务，甚至形成一个专门的项目分为不同阶段去完成。</p>
 <p>Note-Taking 相反，从阅读就开始思考，随后各种灵感迸发，记录下来进行整理，去芜存菁后继续扩展，定期回顾后形成自己的知识并输出，这个时候的写作反而是最不需要动脑的部分了。以下的 Heat Map 表示不同阶段思考的程度。</p>
 <figure>
@@ -161,6 +79,91 @@
 <h2 id="conclusion">Conclusion</h2>
 <p>警惕 All-In-One 的想法，并不是所有场景都有统一的解决方案。工作和生活分开管理 To-Do 还有个好处，休假的时候你完全可以屏蔽掉工作的内容。</p>
 <p>另外不管工作和生活中，长期计划用甘特图来管理还是非常不错的，确立里程碑，控制进度，把握长期计划的走向。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>How I Take Notes</title>
+      <link>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</link>
+      <pubDate>Wed, 19 Oct 2022 19:27:55 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</guid>
+      <description>ID: 46dfdbc7-24f6-4edc-9e61-dab01aa185a1 ROAM_REFS: https://jethrokuan.github.io/org-roam-guide/ Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、B</description>
+      <content:encoded><![CDATA[<p>ID: 46dfdbc7-24f6-4edc-9e61-dab01aa185a1</p>
+<pre><code>ROAM_REFS: https://jethrokuan.github.io/org-roam-guide/
+</code></pre>
+<h2 id="introduction">Introduction</h2>
+<p>最先接触到 <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettlekasten</a> (German: &ldquo;slip box&rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、Notion、Obsidian（当时还不知道 Backlinks），都觉得不太合适，尤其是第一步文件夹的分类就让我头疼，很多内容是互相交叉的，并不是简单的可以归在一个分类下面，若是细分的分类过多，又会过于混乱，最后的结果就是“垃圾场”。</p>
+<ul>
+<li>根据 Zettlekasten 衍生出来的各种 APP 中的 Backlinks 将笔记串联起来，作为一个草稿箱，定期去整理回顾形成自己的知识。</li>
+</ul>
+<p>另外一个极为吸引我的就是 Daily Notes 或者 Journals，非常适合我当前的工作场景。「生产问题」或者「零碎的需求」会不断从打断我的工作，有时候会非常紧急需要优先处理「需求」或者「生产问题」，解决后会有两种情况。</p>
+<ul>
+<li>
+<p>问题或需求解决后，要花一些时间梳理之前在做的事情才能够重新接续之前的思路继续工作。</p>
+</li>
+<li>
+<p>问题解决后几个月遇到相同或类似的问题，虽然记得解决过，但是当时解决的思路以及细节需要注意的地方就模糊不清了。通常为了万无一失需要重复上次的工作，仔细查看过代码结合业务后，才能作出正确的判断，确保干净利落地解决问题。</p>
+</li>
+</ul>
+<p>上面两种情况完全可以用 Journals 记录解决问题前的工作思路，记录解决问题后的思路，来避免上述两种情况发生。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
+         alt="Figure 1: take-notes-sankey"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>take-notes-sankey</p>
+        </figcaption>
+</figure>
+
+<p>信息大爆炸的副作用就是信噪比降低，通过分阶段的信息处理，不断地归纳、处理形成自己的想法，并将其固化下来，作为知识库。</p>
+<h2 id="流程设计">流程设计</h2>
+<ol>
+<li>
+<p>图中的流程其实就是多层的过滤器。</p>
+<p>从最初的信息源处到 Logseq 的过程，只需要考虑这个信息源是否值得读，是否值得扩展，答案确定则大胆地记入 Logseq。其中零散的思绪及文章阅读记录在 Journals 中，书籍这类大部头则在 page 中记录，前者因为零散在 Journals 中，需要加 page 的双链或 Tag。</p>
+<p>Logseq 中 Journals 中的事件重要的会被我移到 Org-roam 中的 Journals.org 文件中，这个文件类似于日记的作用，并不是每天都会记录，记录多了之后按照年份进行分割。</p>
+<p>从 Logseq 到 Org-roam 则是知识固化的过程，需要考虑该知识是否以后会被自己再次用到，是否值得扩展，答案确定则精炼后记入，并标明灵感来源，引用材料。因此，Logseq 中记录的都只能算是草稿，需要再次的整合，提高信噪比。</p>
+</li>
+<li>
+<p>对信息源处理时，可以用 Excalidraw 进行流程图、思维图等图的草稿绘制。后续有时间的时候再用 Figma 重新绘制，视觉和逻辑上的重新设计，使得阐述的内容更加直观。</p>
+<p>对于产品来说，通过<a href="/posts/main/20220503145636-build_diagram/">设计降低理解门槛和使用门槛</a>，是一件挺重要的事情。输出文章同样如此。</p>
+</li>
+<li>
+<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 <a href="/posts/main/20220505220832-doom_emacs/">Emacs</a> 中做了一些设置。</p>
+</li>
+<li>
+<p>Org-roam-ui 非常优秀，不管是 UI 还是操作性，可以明晰的查看笔记之间的关联，知识是否形成闭环，哪些知识还需要进行拓展阅读。</p>
+</li>
+</ol>
+<h2 id="准则">准则</h2>
+<ul>
+<li>
+<p>卡片应该具有原子性。这点和编程的原则很像，一个方法只做一件事，在这里也就是只记录一个主题的内容。</p>
+</li>
+<li>
+<p>卡片内容应该具有独立性。这点和上面并不冲突，设想一下，为了保持每个卡片的纯净，X 和 Y 之间的关系，你可能会用 Z 去链接他们。但回顾的时候，没有 Z，单纯回顾 X 或 Y 无法得知两者之间的关联。所以这里不管在 X 或者 Y 中去描述与对方的关系都是可以的，一点点内容的冗余可以使得内容更加独立。</p>
+</li>
+<li>
+<p>遵守奥卡姆剃刀原则。对新工具充分调研，是否满足自己的需求后再考虑替换或增加到现有工作流当中。</p>
+</li>
+<li>
+<p>Literature Notes 需要及时回顾，在一两天内转化为 Permanent Notes 或者直接删掉。</p>
+</li>
+</ul>
+<h2 id="误区">误区</h2>
+<ul>
+<li>
+<p>All-In-One 的思想。Markdown 的扩展语法实现并不统一，扩展语法的内容导出时经常要手动兼容，或不可再用。云端服务的不可持续性，互联网这么多年已经太多的云端服务用着用着就停掉了。</p>
+</li>
+<li>
+<p>Permanent Notes 并不是不需要回顾和修改了。</p>
+</li>
+<li>
+<p>记太多的内容。从资料中复制大量的原文。笔记应该是对所读内容的提炼：用自己的话改写观点和概念有助于加强理解。</p>
+</li>
+<li>
+<p>太复杂的笔记流程。复杂的工作流通常需要自动化，但自动化不利于笔记的整理，形成最重笔记时应该慎重考虑哪些是需要保留的，否则知识库就会变成垃圾场。</p>
+</li>
+</ul>
 ]]></content:encoded>
     </item>
     

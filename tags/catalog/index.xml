@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>catalog on Lucius | Braindump</title>
+    <link>https://sheerwill.live/tags/catalog/</link>
+    <description>Recent content in catalog on Lucius | Braindump</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Oct 2022 19:33:13 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/catalog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Refactoring Code</title>
+      <link>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</link>
+      <pubDate>Wed, 19 Oct 2022 19:33:13 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</guid>
+      <description>Refactoring Code How To Find Time Complexity Of An Algorithm
+JavaScript Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await Refactoring Code examples Callback Hell </description>
+      <content:encoded><![CDATA[<h2 id="refactoring-code">Refactoring Code</h2>
+<p><a href="/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">How To Find Time Complexity Of An Algorithm</a></p>
+<h3 id="javascript">JavaScript</h3>
+<h4 id="refactoring-tips">Refactoring Tips</h4>
+<ol>
+<li><a href="/posts/main/20220506193520-refactoring_condition_statements/">Refactoring Condition statements</a></li>
+<li><a href="/posts/main/20220506193545-converting_callbacks_to_promises/">Converting callbacks to promises</a></li>
+<li><a href="/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">Refactoring Promise chains with async/await</a></li>
+</ol>
+<h4 id="refactoring-code-examples">Refactoring Code examples</h4>
+<ul>
+<li><a href="/posts/main/20220616092944-callback_hell/">Callback Hell</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Database</title>
+      <link>https://sheerwill.live/posts/main/20220530185321-database/</link>
+      <pubDate>Wed, 19 Oct 2022 19:29:46 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220530185321-database/</guid>
+      <description>Index MVCC Troubleshoot Issues in MySQL </description>
+      <content:encoded><![CDATA[<h2 id="index--20221008125127-index-dot-md"><a href="/posts/main/20221008125127-index/">Index</a></h2>
+<h2 id="mvcc--20221019183132-mvcc-dot-md"><a href="/posts/main/20221019183132-mvcc/">MVCC</a></h2>
+<h2 id="troubleshoot-issues-in-mysql--20220530180443-troubleshoot-issues-in-mysql-dot-md"><a href="/posts/main/20220530180443-troubleshoot_issues_in_mysql/">Troubleshoot Issues in MySQL</a></h2>
+]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>
