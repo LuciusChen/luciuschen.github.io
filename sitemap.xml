@@ -3,10 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://sheerwill.live/</loc>
-    <lastmod>2022-10-19T19:36:06+08:00</lastmod>
+    <lastmod>2022-10-20T15:40:49+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/</loc>
-    <lastmod>2022-10-19T19:36:06+08:00</lastmod>
+    <lastmod>2022-10-20T15:40:49+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</loc>
+    <lastmod>2022-10-20T15:40:49+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220629203733-vscode/</loc>
     <lastmod>2022-10-19T19:36:06+08:00</lastmod>
@@ -148,9 +151,6 @@
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220616132407-causal_broadcast/</loc>
     <lastmod>2022-10-19T19:26:51+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</loc>
-    <lastmod>2022-10-19T19:26:42+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/archives/</loc>
   </url><url>
