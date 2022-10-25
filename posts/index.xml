@@ -6,7 +6,267 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Oct 2022 15:40:49 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Oct 2022 15:31:08 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blending Modes(Figma)</title>
+      <link>https://sheerwill.live/posts/main/20221025101809-blending_modes_figma/</link>
+      <pubDate>Tue, 25 Oct 2022 15:31:08 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20221025101809-blending_modes_figma/</guid>
+      <description>平时使用这个功能的时候都是逐个点击各个「混合模式（blending modes)」试看效果。下面就解释一下各个「混合模式」的工作原理。 Figure 1: DanHollick-1583080119068807168-20221020_205807-img1 简</description>
+      <content:encoded><![CDATA[<p>平时使用这个功能的时候都是逐个点击各个「混合模式（blending modes)」试看效果。下面就解释一下各个「混合模式」的工作原理。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080119068807168-20221020_205807-img1.png"
+         alt="Figure 1: DanHollick-1583080119068807168-20221020_205807-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>DanHollick-1583080119068807168-20221020_205807-img1</p>
+        </figcaption>
+</figure>
+
+<p>简单来说，「混合模式」是基于两种输入颜色，输出新颜色的方法。这里输入颜色被分为了「前景（混合色）」和「背景（基础色）」。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080127629430787-20221020_205809-img1.jpg"
+         alt="Figure 2: DanHollick-1583080127629430787-20221020_205809-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>DanHollick-1583080127629430787-20221020_205809-img1</p>
+        </figcaption>
+</figure>
+
+<p>其中最简单的就是 Darken 和 Lighten，</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080139973283841-20221020_205812-img1.jpg"
+         alt="Figure 3: DanHollick-1583080139973283841-20221020_205812-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 3: </span>DanHollick-1583080139973283841-20221020_205812-img1</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080139973283841-20221020_205812-img2.jpg"
+         alt="Figure 4: DanHollick-1583080139973283841-20221020_205812-img2"/> <figcaption>
+            <p><span class="figure-number">Figure 4: </span>DanHollick-1583080139973283841-20221020_205812-img2</p>
+        </figcaption>
+</figure>
+
+<p>Darken 是分别比较前后景的 RGB 通道的值，选择最暗的值组成新的 RGB 颜色。RGB 通道的值范围在 0-255 之间，数字越小，颜色越暗。</p>
+<p>\begin{gather*}
+C = min(A, B)
+\end{gather*}</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080146923180032-20221020_205813-img1.png"
+         alt="Figure 5: DanHollick-1583080146923180032-20221020_205813-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 5: </span>DanHollick-1583080146923180032-20221020_205813-img1</p>
+        </figcaption>
+</figure>
+
+<p>Lighten 和 Darken 原理一样，只不过选择最亮的颜色，也就是数字更大的 RGB 通道值组成新的颜色。</p>
+<p>\begin{gather*}
+C = max(A, B)
+\end{gather*}</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080154439352320-20221020_205815-img1.png"
+         alt="Figure 6: DanHollick-1583080154439352320-20221020_205815-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 6: </span>DanHollick-1583080154439352320-20221020_205815-img1</p>
+        </figcaption>
+</figure>
+
+<p>Multiply 和 Screen 与 Darken 和 Lighten 产生类似的效果，但是更加优雅。当有了 Multiply 和 Screen 后，就没有理由去使用 Darken 和 Lighten 了。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080166774824962-20221020_205818-img1.jpg"
+         alt="Figure 7: DanHollick-1583080166774824962-20221020_205818-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 7: </span>DanHollick-1583080166774824962-20221020_205818-img1</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080166774824962-20221020_205818-img2.jpg"
+         alt="Figure 8: DanHollick-1583080166774824962-20221020_205818-img2"/> <figcaption>
+            <p><span class="figure-number">Figure 8: </span>DanHollick-1583080166774824962-20221020_205818-img2</p>
+        </figcaption>
+</figure>
+
+<p>Multiply 顾名思义，就是将每个通道的数值相乘。</p>
+<p>可以发现这里的数值不是 0-255 而是 0-1，这里是将 0-255 映射到 0-1 后计算。因为数值都是在 0-1 之间，所以乘积总是比原始值更暗。也因此，白色表现出透明（任何数值和 1 相乘都不变），黑色会一直存在（任何数值和 0 相乘都是 0）。</p>
+<p>\begin{gather*}
+C=\frac{A}{255}\times\frac{B}{255}\times255=\frac{AB}{255}
+\end{gather*}</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080173980696576-20221020_205820-img1.png"
+         alt="Figure 9: DanHollick-1583080173980696576-20221020_205820-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 9: </span>DanHollick-1583080173980696576-20221020_205820-img1</p>
+        </figcaption>
+</figure>
+
+<p>Screen 实际上和 Multiply 相似，但是它是先将各通道颜色反相后相乘，相乘的结果再反相后得到更浅的颜色。</p>
+<p>\begin{gather*}
+C=(1-(1-\frac{A}{255})(1-\frac{B}{255}))\times255 = 255-\frac{(255-A)(255-B)}{255}
+\end{gather*}</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080181740158976-20221020_205822-img1.png"
+         alt="Figure 10: DanHollick-1583080181740158976-20221020_205822-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 10: </span>DanHollick-1583080181740158976-20221020_205822-img1</p>
+        </figcaption>
+</figure>
+
+<p>最后一对是 Color Burn 和 Color Dodge，可以看到明显的步进，所以结果颜色会更加饱和。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080194952208385-20221020_205825-img1.jpg"
+         alt="Figure 11: DanHollick-1583080194952208385-20221020_205825-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 11: </span>DanHollick-1583080194952208385-20221020_205825-img1</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080194952208385-20221020_205825-img2.png"
+         alt="Figure 12: DanHollick-1583080194952208385-20221020_205825-img2"/> <figcaption>
+            <p><span class="figure-number">Figure 12: </span>DanHollick-1583080194952208385-20221020_205825-img2</p>
+        </figcaption>
+</figure>
+
+<p>Color Burn 的原理是对背景反相后除以前景，再将结果反相得到最终的颜色。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080203634417664-20221020_205827-img1.png"
+         alt="Figure 13: DanHollick-1583080203634417664-20221020_205827-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 13: </span>DanHollick-1583080203634417664-20221020_205827-img1</p>
+        </figcaption>
+</figure>
+
+<p>Color Dodge 类似，是将前景反相，除以背景。</p>
+<p>\begin{gather*}
+C=\frac{(1-A)}{B}
+\end{gather*}</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080211129651200-20221020_205829-img1.png"
+         alt="Figure 14: DanHollick-1583080211129651200-20221020_205829-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 14: </span>DanHollick-1583080211129651200-20221020_205829-img1</p>
+        </figcaption>
+</figure>
+
+<p>Overlay、Soft Light 和 Hard Light 被称为「对比度混合模式」，可以让亮部更亮，暗部更暗。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080223775416323-20221020_205832-img1.jpg"
+         alt="Figure 15: DanHollick-1583080223775416323-20221020_205832-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 15: </span>DanHollick-1583080223775416323-20221020_205832-img1</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080223775416323-20221020_205832-img2.jpg"
+         alt="Figure 16: DanHollick-1583080223775416323-20221020_205832-img2"/> <figcaption>
+            <p><span class="figure-number">Figure 16: </span>DanHollick-1583080223775416323-20221020_205832-img2</p>
+        </figcaption>
+</figure>
+
+<p>如果背景是浅色（&gt;127.5），就以一半的强度参与 Screen 计算，使得最终颜色变浅；</p>
+<p>\begin{gather*}
+C=(1-(1-\frac{A}{255})(1-\frac{B}{255})\times2)\times255 = 255-\frac{(255-A)(255-B)}{127.5}
+\end{gather*}</p>
+<p>如果背景是暗色，也以一半的强度参与 Multiply 计算，使得最终颜色变深。</p>
+<p>\begin{gather*}
+C=\frac{A}{255}\times(\frac{B}{255}\times2)\times255=\frac{AB}{127.5}
+\end{gather*}</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080231170023424-20221020_205833-img1.png"
+         alt="Figure 17: DanHollick-1583080231170023424-20221020_205833-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 17: </span>DanHollick-1583080231170023424-20221020_205833-img1</p>
+        </figcaption>
+</figure>
+
+<p>Hard Light 和 Overlay 一样，只不过判断的依据换成了前景。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080238753337344-20221020_205835-img1.png"
+         alt="Figure 18: DanHollick-1583080238753337344-20221020_205835-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 18: </span>DanHollick-1583080238753337344-20221020_205835-img1</p>
+        </figcaption>
+</figure>
+
+<p>Soft Light 是标准混合模式中最复杂的一种。它产生的效果和 Overlay 相似，但更加微妙。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080246802194437-20221020_205837-img1.png"
+         alt="Figure 19: DanHollick-1583080246802194437-20221020_205837-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 19: </span>DanHollick-1583080246802194437-20221020_205837-img1</p>
+        </figcaption>
+</figure>
+
+<p>Difference 和 Exclusion 的结果几乎就是其中一个输入颜色的反相，所以称为反相混合模式，</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080260442107906-20221020_205840-img1.jpg"
+         alt="Figure 20: DanHollick-1583080260442107906-20221020_205840-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 20: </span>DanHollick-1583080260442107906-20221020_205840-img1</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080260442107906-20221020_205840-img2.jpg"
+         alt="Figure 21: DanHollick-1583080260442107906-20221020_205840-img2"/> <figcaption>
+            <p><span class="figure-number">Figure 21: </span>DanHollick-1583080260442107906-20221020_205840-img2</p>
+        </figcaption>
+</figure>
+
+<p>Difference 顾名思义，用前景减去背景的通道颜色值并取绝对值。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080267622670336-20221020_205842-img1.png"
+         alt="Figure 22: DanHollick-1583080267622670336-20221020_205842-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 22: </span>DanHollick-1583080267622670336-20221020_205842-img1</p>
+        </figcaption>
+</figure>
+
+<p>Exclusion 也产生类似的效果，但方式要复杂的多。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080275096965121-20221020_205844-img1.png"
+         alt="Figure 23: DanHollick-1583080275096965121-20221020_205844-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 23: </span>DanHollick-1583080275096965121-20221020_205844-img1</p>
+        </figcaption>
+</figure>
+
+<p>Hue、Saturation、Color 和 Luminosity 与其他模式不同，它们操作的是 Hue、Saturation 和 Luminosity，而不是 RGB 通道值。</p>
+<p>它们通过结合两个输入的 HSL 值得出一种新的颜色。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080288610983936-20221020_205847-img1.jpg"
+         alt="Figure 24: DanHollick-1583080288610983936-20221020_205847-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 24: </span>DanHollick-1583080288610983936-20221020_205847-img1</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080288610983936-20221020_205847-img2.jpg"
+         alt="Figure 25: DanHollick-1583080288610983936-20221020_205847-img2"/> <figcaption>
+            <p><span class="figure-number">Figure 25: </span>DanHollick-1583080288610983936-20221020_205847-img2</p>
+        </figcaption>
+</figure>
+
+<p>Hue 从前景提取 Hue 值，从背景中提取 Saturation 和 Luminosity 值，组成新的颜色。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080296018083840-20221020_205849-img1.jpg"
+         alt="Figure 26: DanHollick-1583080296018083840-20221020_205849-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 26: </span>DanHollick-1583080296018083840-20221020_205849-img1</p>
+        </figcaption>
+</figure>
+
+<p>Saturation 从前景提取 Saturation 值，从背景中提取 Hue 和 Luminosity 值，组成新的颜色。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080303626620930-20221020_205851-img1.jpg"
+         alt="Figure 27: DanHollick-1583080303626620930-20221020_205851-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 27: </span>DanHollick-1583080303626620930-20221020_205851-img1</p>
+        </figcaption>
+</figure>
+
+<p>Color 从前景提取 Hue 和 Saturation 值，从背景中提取 Luminosity 值，组成新的颜色。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080311188910080-20221020_205853-img1.jpg"
+         alt="Figure 28: DanHollick-1583080311188910080-20221020_205853-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 28: </span>DanHollick-1583080311188910080-20221020_205853-img1</p>
+        </figcaption>
+</figure>
+
+<p>Luminosity 从前景提取 Luminosity 值，从背景中提取 Hue 和 Saturation 值，组成新的颜色。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080318516355075-20221020_205854-img1.jpg"
+         alt="Figure 29: DanHollick-1583080318516355075-20221020_205854-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 29: </span>DanHollick-1583080318516355075-20221020_205854-img1</p>
+        </figcaption>
+</figure>
+
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
