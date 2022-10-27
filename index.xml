@@ -6,7 +6,122 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Oct 2022 15:31:08 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Oct 2022 16:14:14 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pinboard</title>
+      <link>https://sheerwill.live/posts/main/20220506185941-pinboard/</link>
+      <pubDate>Tue, 25 Oct 2022 16:14:14 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220506185941-pinboard/</guid>
+      <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Wi-Phi – Wireless Philosophy 很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学</description>
+      <content:encoded><![CDATA[<h2 id="misc">Misc</h2>
+<ol>
+<li>
+<p><a href="https://www.templatemaker.nl/zh-cn/">Templatemaker</a></p>
+<p>制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。</p>
+</li>
+<li>
+<p><a href="https://www.wi-phi.com/">Wi-Phi – Wireless Philosophy</a></p>
+<p>很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学网站，致力于以轻松有趣的动画形式阐释哲学问题及哲学思维方式。建于2013年，现在已经有105个哲学动画上线了。</p>
+</li>
+</ol>
+<h2 id="writing">Writing</h2>
+<ol>
+<li>
+<p><a href="https://github.com/doocs/md">WeChat Markdown Editor</a></p>
+<p>一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性。</p>
+</li>
+</ol>
+<h3 id="查找-citations-的网站">查找 citations 的网站</h3>
+<ol>
+<li>
+<p><a href="https://zbib.org/">zoterobib</a></p>
+<p>Your bibliography is empty. To add a source, paste or type its URL, ISBN, DOI, PMID, arXiv ID, or title into the search box above</p>
+</li>
+<li>
+<p><a href="https://www.doi2bib.org/">doi2bib</a></p>
+<p>give us a DOI and we will do our best to get you the BibTeX entry</p>
+</li>
+<li>
+<p><a href="https://www.bibsonomy.org/">BibSonomy</a></p>
+<p>The easy way to manage scientific publications and bookmarks</p>
+<p>BibSonomy helps you to manage your publications and bookmarks, to collaborate with your colleagues and to find new interesting material for your research.</p>
+</li>
+<li>
+<p><a href="http://www.bibtexsearch.com/">BibTeX Search</a></p>
+<p>You&rsquo;re searching over millions of BibTeX records&hellip;</p>
+</li>
+<li>
+<p><a href="https://scholar.google.com/">Google Scholar</a></p>
+<p>站在巨人的肩膀上</p>
+</li>
+</ol>
+<h4 id="book">Book</h4>
+<p>For books I usually use a site, where it is possible to get Bibtex citations from Amazon.com articles. This is very good for books, and some inproceedings and incollections might be found here as well.</p>
+<ol>
+<li><a href="https://lead.to/amazon/com/">Amazon</a></li>
+</ol>
+<h4 id="article">Article</h4>
+<p>As a Software Engineer I quite often have to deal with technical papers from ACM or IEEE. Both their catalogs provide Bibtex export capabilities.</p>
+<ol>
+<li>
+<p><a href="https://dl.acm.org/">ACM</a></p>
+</li>
+<li>
+<p><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a></p>
+<p>Advancing Technology for Humanity</p>
+</li>
+</ol>
+<h2 id="book">Book</h2>
+<ol>
+<li>
+<p><a href="http://libgen.rs/">Library Genesis</a></p>
+<p>电子书资源查找，中英文都有，英文相对较多。</p>
+</li>
+<li>
+<p><a href="https://www.loudreader.com/">Ebook Reader for web</a></p>
+<p>在线阅读 PDF、azw3、epub、mobi 几种格式。</p>
+</li>
+</ol>
+<h2 id="video">Video</h2>
+<ol>
+<li>
+<p><a href="https://sound-effects.bbcrewind.co.uk/">BBC Sound effects</a></p>
+<p>BBC 提供的免费下载的音效的网站。</p>
+</li>
+</ol>
+<h2 id="medicine">Medicine</h2>
+<ol>
+<li>
+<p><a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a></p>
+<p>顾名思义，权威的诊疗查询手册。</p>
+</li>
+</ol>
+<h2 id="design">Design</h2>
+<h3 id="color-picker">Color Picker</h3>
+<ul>
+<li>
+<p><a href="https://nipponcolors.com/">日本の伝統色</a></p>
+<p>日本的一个颜色拾取网站，很漂亮。</p>
+</li>
+</ul>
+<h3 id="plantuml">PlantUML</h3>
+<ul>
+<li>
+<p><a href="https://real-world-plantuml.com/">Real World PlantUML</a></p>
+<p>PlantUML 例子</p>
+</li>
+</ul>
+<h2 id="front-end">Front-End</h2>
+<ol>
+<li>
+<p><a href="https://codepen.io/">codepen</a></p>
+<p>The best place to build, test, and discover front-end code</p>
+</li>
+</ol>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Blending Modes(Figma)</title>
       <link>https://sheerwill.live/posts/main/20221025101809-blending_modes_figma/</link>
@@ -3665,121 +3780,6 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
 <p>在分布式系统中，冗余数据是保证可靠性的手段，因此冗余数据的一致性维护就非常重要。一般而言，一个写操作必须要对所有的冗余数据都更新完成了，才能称为成功结束。比如一份数据在5台设备上有冗余，因为不知道读数据会落在哪一台设备上，那么一次写操作，必须5台设备都更新完成，写操作才能返回。</p>
 <p>对于写操作比较频繁的系统，这个操作的瓶颈非常大。Quorum 算法可以让写操作只要写完3台就返回。剩下的由系统内部缓慢同步完成。而读操作，则需要也至少读3台，才能保证至少可以读到一个最新的数据。</p>
 <p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 \(V_{w}\) 越大，则读票数 \(V_{r}\) 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Pinboard</title>
-      <link>https://sheerwill.live/posts/main/20220506185941-pinboard/</link>
-      <pubDate>Wed, 19 Oct 2022 19:32:26 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220506185941-pinboard/</guid>
-      <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Wi-Phi – Wireless Philosophy 很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学</description>
-      <content:encoded><![CDATA[<h2 id="misc">Misc</h2>
-<ol>
-<li>
-<p><a href="https://www.templatemaker.nl/zh-cn/">Templatemaker</a></p>
-<p>制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。</p>
-</li>
-<li>
-<p><a href="https://www.wi-phi.com/">Wi-Phi – Wireless Philosophy</a></p>
-<p>很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学网站，致力于以轻松有趣的动画形式阐释哲学问题及哲学思维方式。建于2013年，现在已经有105个哲学动画上线了。</p>
-</li>
-</ol>
-<h2 id="writing">Writing</h2>
-<ol>
-<li>
-<p><a href="https://github.com/doocs/md">WeChat Markdown Editor</a></p>
-<p>一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性。</p>
-</li>
-</ol>
-<h3 id="查找-citations-的网站">查找 citations 的网站</h3>
-<ol>
-<li>
-<p><a href="https://zbib.org/">zoterobib</a></p>
-<p>Your bibliography is empty. To add a source, paste or type its URL, ISBN, DOI, PMID, arXiv ID, or title into the search box above</p>
-</li>
-<li>
-<p><a href="https://www.doi2bib.org/">doi2bib</a></p>
-<p>give us a DOI and we will do our best to get you the BibTeX entry</p>
-</li>
-<li>
-<p><a href="https://www.bibsonomy.org/">BibSonomy</a></p>
-<p>The easy way to manage scientific publications and bookmarks</p>
-<p>BibSonomy helps you to manage your publications and bookmarks, to collaborate with your colleagues and to find new interesting material for your research.</p>
-</li>
-<li>
-<p><a href="http://www.bibtexsearch.com/">BibTeX Search</a></p>
-<p>You&rsquo;re searching over millions of BibTeX records&hellip;</p>
-</li>
-<li>
-<p><a href="https://scholar.google.com/">Google Scholar</a></p>
-<p>站在巨人的肩膀上</p>
-</li>
-</ol>
-<h4 id="book">Book</h4>
-<p>For books I usually use a site, where it is possible to get Bibtex citations from Amazon.com articles. This is very good for books, and some inproceedings and incollections might be found here as well.</p>
-<ol>
-<li><a href="https://lead.to/amazon/com/">Amazon</a></li>
-</ol>
-<h4 id="article">Article</h4>
-<p>As a Software Engineer I quite often have to deal with technical papers from ACM or IEEE. Both their catalogs provide Bibtex export capabilities.</p>
-<ol>
-<li>
-<p><a href="https://dl.acm.org/">ACM</a></p>
-</li>
-<li>
-<p><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a></p>
-<p>Advancing Technology for Humanity</p>
-</li>
-</ol>
-<h2 id="book">Book</h2>
-<ol>
-<li>
-<p><a href="http://libgen.rs/">Library Genesis</a></p>
-<p>电子书资源查找，中英文都有，英文相对较多。</p>
-</li>
-<li>
-<p><a href="https://www.loudreader.com/">Ebook Reader for web</a></p>
-<p>在线阅读 PDF、azw3、epub、mobi 几种格式。</p>
-</li>
-</ol>
-<h2 id="video">Video</h2>
-<ol>
-<li>
-<p><a href="https://sound-effects.bbcrewind.co.uk/">BBC Sound effects</a></p>
-<p>BBC 提供的免费下载的音效的网站。</p>
-</li>
-</ol>
-<h2 id="medicine">Medicine</h2>
-<ol>
-<li>
-<p><a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a></p>
-<p>顾名思义，权威的诊疗查询手册。</p>
-</li>
-</ol>
-<h2 id="design">Design</h2>
-<h3 id="color-picker">Color Picker</h3>
-<ul>
-<li>
-<p><a href="https://nipponcolors.com/">日本の伝統色</a></p>
-<p>日本的一个颜色拾取网站，很漂亮。</p>
-</li>
-</ul>
-<h3 id="plantuml">PlantUML</h3>
-<ul>
-<li>
-<p><a href="https://real-world-plantuml.com/">Real World PlantUML</a></p>
-<p>PlantUML 例子</p>
-</li>
-</ul>
-<h2 id="front-end">Front-End</h2>
-<ol>
-<li>
-<p><a href="https://codepen.io/">codepen</a></p>
-<p>The best place to build, test, and discover front-end code</p>
-</li>
-</ol>
 ]]></content:encoded>
     </item>
     
