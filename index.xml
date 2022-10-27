@@ -6,386 +6,11 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Oct 2022 16:14:14 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Pinboard</title>
-      <link>https://sheerwill.live/posts/main/20220506185941-pinboard/</link>
-      <pubDate>Tue, 25 Oct 2022 16:14:14 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220506185941-pinboard/</guid>
-      <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Wi-Phi – Wireless Philosophy 很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学</description>
-      <content:encoded><![CDATA[<h2 id="misc">Misc</h2>
-<ol>
-<li>
-<p><a href="https://www.templatemaker.nl/zh-cn/">Templatemaker</a></p>
-<p>制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。</p>
-</li>
-<li>
-<p><a href="https://www.wi-phi.com/">Wi-Phi – Wireless Philosophy</a></p>
-<p>很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学网站，致力于以轻松有趣的动画形式阐释哲学问题及哲学思维方式。建于2013年，现在已经有105个哲学动画上线了。</p>
-</li>
-</ol>
-<h2 id="writing">Writing</h2>
-<ol>
-<li>
-<p><a href="https://github.com/doocs/md">WeChat Markdown Editor</a></p>
-<p>一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性。</p>
-</li>
-</ol>
-<h3 id="查找-citations-的网站">查找 citations 的网站</h3>
-<ol>
-<li>
-<p><a href="https://zbib.org/">zoterobib</a></p>
-<p>Your bibliography is empty. To add a source, paste or type its URL, ISBN, DOI, PMID, arXiv ID, or title into the search box above</p>
-</li>
-<li>
-<p><a href="https://www.doi2bib.org/">doi2bib</a></p>
-<p>give us a DOI and we will do our best to get you the BibTeX entry</p>
-</li>
-<li>
-<p><a href="https://www.bibsonomy.org/">BibSonomy</a></p>
-<p>The easy way to manage scientific publications and bookmarks</p>
-<p>BibSonomy helps you to manage your publications and bookmarks, to collaborate with your colleagues and to find new interesting material for your research.</p>
-</li>
-<li>
-<p><a href="http://www.bibtexsearch.com/">BibTeX Search</a></p>
-<p>You&rsquo;re searching over millions of BibTeX records&hellip;</p>
-</li>
-<li>
-<p><a href="https://scholar.google.com/">Google Scholar</a></p>
-<p>站在巨人的肩膀上</p>
-</li>
-</ol>
-<h4 id="book">Book</h4>
-<p>For books I usually use a site, where it is possible to get Bibtex citations from Amazon.com articles. This is very good for books, and some inproceedings and incollections might be found here as well.</p>
-<ol>
-<li><a href="https://lead.to/amazon/com/">Amazon</a></li>
-</ol>
-<h4 id="article">Article</h4>
-<p>As a Software Engineer I quite often have to deal with technical papers from ACM or IEEE. Both their catalogs provide Bibtex export capabilities.</p>
-<ol>
-<li>
-<p><a href="https://dl.acm.org/">ACM</a></p>
-</li>
-<li>
-<p><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a></p>
-<p>Advancing Technology for Humanity</p>
-</li>
-</ol>
-<h2 id="book">Book</h2>
-<ol>
-<li>
-<p><a href="http://libgen.rs/">Library Genesis</a></p>
-<p>电子书资源查找，中英文都有，英文相对较多。</p>
-</li>
-<li>
-<p><a href="https://www.loudreader.com/">Ebook Reader for web</a></p>
-<p>在线阅读 PDF、azw3、epub、mobi 几种格式。</p>
-</li>
-</ol>
-<h2 id="video">Video</h2>
-<ol>
-<li>
-<p><a href="https://sound-effects.bbcrewind.co.uk/">BBC Sound effects</a></p>
-<p>BBC 提供的免费下载的音效的网站。</p>
-</li>
-</ol>
-<h2 id="medicine">Medicine</h2>
-<ol>
-<li>
-<p><a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a></p>
-<p>顾名思义，权威的诊疗查询手册。</p>
-</li>
-</ol>
-<h2 id="design">Design</h2>
-<h3 id="color-picker">Color Picker</h3>
-<ul>
-<li>
-<p><a href="https://nipponcolors.com/">日本の伝統色</a></p>
-<p>日本的一个颜色拾取网站，很漂亮。</p>
-</li>
-</ul>
-<h3 id="plantuml">PlantUML</h3>
-<ul>
-<li>
-<p><a href="https://real-world-plantuml.com/">Real World PlantUML</a></p>
-<p>PlantUML 例子</p>
-</li>
-</ul>
-<h2 id="front-end">Front-End</h2>
-<ol>
-<li>
-<p><a href="https://codepen.io/">codepen</a></p>
-<p>The best place to build, test, and discover front-end code</p>
-</li>
-</ol>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Blending Modes(Figma)</title>
-      <link>https://sheerwill.live/posts/main/20221025101809-blending_modes_figma/</link>
-      <pubDate>Tue, 25 Oct 2022 15:31:08 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20221025101809-blending_modes_figma/</guid>
-      <description>平时使用这个功能的时候都是逐个点击各个「混合模式（blending modes)」试看效果。下面就解释一下各个「混合模式」的工作原理。 Figure 1: DanHollick-1583080119068807168-20221020_205807-img1 简</description>
-      <content:encoded><![CDATA[<p>平时使用这个功能的时候都是逐个点击各个「混合模式（blending modes)」试看效果。下面就解释一下各个「混合模式」的工作原理。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080119068807168-20221020_205807-img1.png"
-         alt="Figure 1: DanHollick-1583080119068807168-20221020_205807-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>DanHollick-1583080119068807168-20221020_205807-img1</p>
-        </figcaption>
-</figure>
-
-<p>简单来说，「混合模式」是基于两种输入颜色，输出新颜色的方法。这里输入颜色被分为了「前景（混合色）」和「背景（基础色）」。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080127629430787-20221020_205809-img1.jpg"
-         alt="Figure 2: DanHollick-1583080127629430787-20221020_205809-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>DanHollick-1583080127629430787-20221020_205809-img1</p>
-        </figcaption>
-</figure>
-
-<p>其中最简单的就是 Darken 和 Lighten，</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080139973283841-20221020_205812-img1.jpg"
-         alt="Figure 3: DanHollick-1583080139973283841-20221020_205812-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 3: </span>DanHollick-1583080139973283841-20221020_205812-img1</p>
-        </figcaption>
-</figure>
-
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080139973283841-20221020_205812-img2.jpg"
-         alt="Figure 4: DanHollick-1583080139973283841-20221020_205812-img2"/> <figcaption>
-            <p><span class="figure-number">Figure 4: </span>DanHollick-1583080139973283841-20221020_205812-img2</p>
-        </figcaption>
-</figure>
-
-<p>Darken 是分别比较前后景的 RGB 通道的值，选择最暗的值组成新的 RGB 颜色。RGB 通道的值范围在 0-255 之间，数字越小，颜色越暗。</p>
-<p>\begin{gather*}
-C = min(A, B)
-\end{gather*}</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080146923180032-20221020_205813-img1.png"
-         alt="Figure 5: DanHollick-1583080146923180032-20221020_205813-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 5: </span>DanHollick-1583080146923180032-20221020_205813-img1</p>
-        </figcaption>
-</figure>
-
-<p>Lighten 和 Darken 原理一样，只不过选择最亮的颜色，也就是数字更大的 RGB 通道值组成新的颜色。</p>
-<p>\begin{gather*}
-C = max(A, B)
-\end{gather*}</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080154439352320-20221020_205815-img1.png"
-         alt="Figure 6: DanHollick-1583080154439352320-20221020_205815-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 6: </span>DanHollick-1583080154439352320-20221020_205815-img1</p>
-        </figcaption>
-</figure>
-
-<p>Multiply 和 Screen 与 Darken 和 Lighten 产生类似的效果，但是更加优雅。当有了 Multiply 和 Screen 后，就没有理由去使用 Darken 和 Lighten 了。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080166774824962-20221020_205818-img1.jpg"
-         alt="Figure 7: DanHollick-1583080166774824962-20221020_205818-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 7: </span>DanHollick-1583080166774824962-20221020_205818-img1</p>
-        </figcaption>
-</figure>
-
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080166774824962-20221020_205818-img2.jpg"
-         alt="Figure 8: DanHollick-1583080166774824962-20221020_205818-img2"/> <figcaption>
-            <p><span class="figure-number">Figure 8: </span>DanHollick-1583080166774824962-20221020_205818-img2</p>
-        </figcaption>
-</figure>
-
-<p>Multiply 顾名思义，就是将每个通道的数值相乘。</p>
-<p>可以发现这里的数值不是 0-255 而是 0-1，这里是将 0-255 映射到 0-1 后计算。因为数值都是在 0-1 之间，所以乘积总是比原始值更暗。也因此，白色表现出透明（任何数值和 1 相乘都不变），黑色会一直存在（任何数值和 0 相乘都是 0）。</p>
-<p>\begin{gather*}
-C=\frac{A}{255}\times\frac{B}{255}\times255=\frac{AB}{255}
-\end{gather*}</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080173980696576-20221020_205820-img1.png"
-         alt="Figure 9: DanHollick-1583080173980696576-20221020_205820-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 9: </span>DanHollick-1583080173980696576-20221020_205820-img1</p>
-        </figcaption>
-</figure>
-
-<p>Screen 实际上和 Multiply 相似，但是它是先将各通道颜色反相后相乘，相乘的结果再反相后得到更浅的颜色。</p>
-<p>\begin{gather*}
-C=(1-(1-\frac{A}{255})(1-\frac{B}{255}))\times255 = 255-\frac{(255-A)(255-B)}{255}
-\end{gather*}</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080181740158976-20221020_205822-img1.png"
-         alt="Figure 10: DanHollick-1583080181740158976-20221020_205822-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 10: </span>DanHollick-1583080181740158976-20221020_205822-img1</p>
-        </figcaption>
-</figure>
-
-<p>最后一对是 Color Burn 和 Color Dodge，可以看到明显的步进，所以结果颜色会更加饱和。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080194952208385-20221020_205825-img1.jpg"
-         alt="Figure 11: DanHollick-1583080194952208385-20221020_205825-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 11: </span>DanHollick-1583080194952208385-20221020_205825-img1</p>
-        </figcaption>
-</figure>
-
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080194952208385-20221020_205825-img2.png"
-         alt="Figure 12: DanHollick-1583080194952208385-20221020_205825-img2"/> <figcaption>
-            <p><span class="figure-number">Figure 12: </span>DanHollick-1583080194952208385-20221020_205825-img2</p>
-        </figcaption>
-</figure>
-
-<p>Color Burn 的原理是对背景反相后除以前景，再将结果反相得到最终的颜色。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080203634417664-20221020_205827-img1.png"
-         alt="Figure 13: DanHollick-1583080203634417664-20221020_205827-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 13: </span>DanHollick-1583080203634417664-20221020_205827-img1</p>
-        </figcaption>
-</figure>
-
-<p>Color Dodge 类似，是将前景反相，除以背景。</p>
-<p>\begin{gather*}
-C=\frac{(1-A)}{B}
-\end{gather*}</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080211129651200-20221020_205829-img1.png"
-         alt="Figure 14: DanHollick-1583080211129651200-20221020_205829-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 14: </span>DanHollick-1583080211129651200-20221020_205829-img1</p>
-        </figcaption>
-</figure>
-
-<p>Overlay、Soft Light 和 Hard Light 被称为「对比度混合模式」，可以让亮部更亮，暗部更暗。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080223775416323-20221020_205832-img1.jpg"
-         alt="Figure 15: DanHollick-1583080223775416323-20221020_205832-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 15: </span>DanHollick-1583080223775416323-20221020_205832-img1</p>
-        </figcaption>
-</figure>
-
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080223775416323-20221020_205832-img2.jpg"
-         alt="Figure 16: DanHollick-1583080223775416323-20221020_205832-img2"/> <figcaption>
-            <p><span class="figure-number">Figure 16: </span>DanHollick-1583080223775416323-20221020_205832-img2</p>
-        </figcaption>
-</figure>
-
-<p>如果背景是浅色（&gt;127.5），就以一半的强度参与 Screen 计算，使得最终颜色变浅；</p>
-<p>\begin{gather*}
-C=(1-(1-\frac{A}{255})(1-\frac{B}{255})\times2)\times255 = 255-\frac{(255-A)(255-B)}{127.5}
-\end{gather*}</p>
-<p>如果背景是暗色，也以一半的强度参与 Multiply 计算，使得最终颜色变深。</p>
-<p>\begin{gather*}
-C=\frac{A}{255}\times(\frac{B}{255}\times2)\times255=\frac{AB}{127.5}
-\end{gather*}</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080231170023424-20221020_205833-img1.png"
-         alt="Figure 17: DanHollick-1583080231170023424-20221020_205833-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 17: </span>DanHollick-1583080231170023424-20221020_205833-img1</p>
-        </figcaption>
-</figure>
-
-<p>Hard Light 和 Overlay 一样，只不过判断的依据换成了前景。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080238753337344-20221020_205835-img1.png"
-         alt="Figure 18: DanHollick-1583080238753337344-20221020_205835-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 18: </span>DanHollick-1583080238753337344-20221020_205835-img1</p>
-        </figcaption>
-</figure>
-
-<p>Soft Light 是标准混合模式中最复杂的一种。它产生的效果和 Overlay 相似，但更加微妙。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080246802194437-20221020_205837-img1.png"
-         alt="Figure 19: DanHollick-1583080246802194437-20221020_205837-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 19: </span>DanHollick-1583080246802194437-20221020_205837-img1</p>
-        </figcaption>
-</figure>
-
-<p>Difference 和 Exclusion 的结果几乎就是其中一个输入颜色的反相，所以称为反相混合模式，</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080260442107906-20221020_205840-img1.jpg"
-         alt="Figure 20: DanHollick-1583080260442107906-20221020_205840-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 20: </span>DanHollick-1583080260442107906-20221020_205840-img1</p>
-        </figcaption>
-</figure>
-
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080260442107906-20221020_205840-img2.jpg"
-         alt="Figure 21: DanHollick-1583080260442107906-20221020_205840-img2"/> <figcaption>
-            <p><span class="figure-number">Figure 21: </span>DanHollick-1583080260442107906-20221020_205840-img2</p>
-        </figcaption>
-</figure>
-
-<p>Difference 顾名思义，用前景减去背景的通道颜色值并取绝对值。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080267622670336-20221020_205842-img1.png"
-         alt="Figure 22: DanHollick-1583080267622670336-20221020_205842-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 22: </span>DanHollick-1583080267622670336-20221020_205842-img1</p>
-        </figcaption>
-</figure>
-
-<p>Exclusion 也产生类似的效果，但方式要复杂的多。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080275096965121-20221020_205844-img1.png"
-         alt="Figure 23: DanHollick-1583080275096965121-20221020_205844-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 23: </span>DanHollick-1583080275096965121-20221020_205844-img1</p>
-        </figcaption>
-</figure>
-
-<p>Hue、Saturation、Color 和 Luminosity 与其他模式不同，它们操作的是 Hue、Saturation 和 Luminosity，而不是 RGB 通道值。</p>
-<p>它们通过结合两个输入的 HSL 值得出一种新的颜色。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080288610983936-20221020_205847-img1.jpg"
-         alt="Figure 24: DanHollick-1583080288610983936-20221020_205847-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 24: </span>DanHollick-1583080288610983936-20221020_205847-img1</p>
-        </figcaption>
-</figure>
-
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080288610983936-20221020_205847-img2.jpg"
-         alt="Figure 25: DanHollick-1583080288610983936-20221020_205847-img2"/> <figcaption>
-            <p><span class="figure-number">Figure 25: </span>DanHollick-1583080288610983936-20221020_205847-img2</p>
-        </figcaption>
-</figure>
-
-<p>Hue 从前景提取 Hue 值，从背景中提取 Saturation 和 Luminosity 值，组成新的颜色。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080296018083840-20221020_205849-img1.jpg"
-         alt="Figure 26: DanHollick-1583080296018083840-20221020_205849-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 26: </span>DanHollick-1583080296018083840-20221020_205849-img1</p>
-        </figcaption>
-</figure>
-
-<p>Saturation 从前景提取 Saturation 值，从背景中提取 Hue 和 Luminosity 值，组成新的颜色。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080303626620930-20221020_205851-img1.jpg"
-         alt="Figure 27: DanHollick-1583080303626620930-20221020_205851-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 27: </span>DanHollick-1583080303626620930-20221020_205851-img1</p>
-        </figcaption>
-</figure>
-
-<p>Color 从前景提取 Hue 和 Saturation 值，从背景中提取 Luminosity 值，组成新的颜色。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080311188910080-20221020_205853-img1.jpg"
-         alt="Figure 28: DanHollick-1583080311188910080-20221020_205853-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 28: </span>DanHollick-1583080311188910080-20221020_205853-img1</p>
-        </figcaption>
-</figure>
-
-<p>Luminosity 从前景提取 Luminosity 值，从背景中提取 Hue 和 Saturation 值，组成新的颜色。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/DanHollick-1583080318516355075-20221020_205854-img1.jpg"
-         alt="Figure 29: DanHollick-1583080318516355075-20221020_205854-img1"/> <figcaption>
-            <p><span class="figure-number">Figure 29: </span>DanHollick-1583080318516355075-20221020_205854-img1</p>
-        </figcaption>
-</figure>
-
-]]></content:encoded>
-    </item>
-    
+    <lastBuildDate>Thu, 27 Oct 2022 10:33:33 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Thu, 20 Oct 2022 15:40:49 +0800</pubDate>
+      <pubDate>Thu, 27 Oct 2022 10:33:33 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Workflow Figure 1: workflow 如上图所示，融</description>
@@ -2087,7 +1712,17 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span></code></pre></div><p>使用 <code>straight</code> 的话如下。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="nb">:straight</span> <span class="p">(</span><span class="nb">:host</span> <span class="nv">github</span> <span class="nb">:repo</span> <span class="s">&#34;zevlg/telega.el&#34;</span>
 </span></span><span class="line"><span class="cl">           <span class="nb">:files</span> <span class="p">(</span><span class="nb">:defaults</span> <span class="s">&#34;contrib&#34;</span><span class="p">))</span>
-</span></span></code></pre></div><p>最后总的配置如下。</p>
+</span></span></code></pre></div><h4 id="animated-stickers">Animated Stickers</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/zevlg/tgs2png.git
+</span></span><span class="line"><span class="cl">git submodule init
+</span></span><span class="line"><span class="cl">git submodule update
+</span></span><span class="line"><span class="cl">mkdir build
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> build
+</span></span><span class="line"><span class="cl">cmake ..
+</span></span><span class="line"><span class="cl">make
+</span></span><span class="line"><span class="cl">copy tgs2png somewhere into <span class="nv">$PATH</span>
+</span></span></code></pre></div><p>这里我编译完就已经是可用的了。</p>
+<p>最后总的配置如下。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-telega.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;telega</span><span class="p">)</span>
@@ -2102,20 +1737,24 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;telega-url-shorten</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-telega-mnz-mode</span> <span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-telega-url-shorten-mode</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">telega-adblock-mode</span> <span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; https://github.com/zevlg/telega.el/blob/master/contrib/telega-url-shorten.el</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;telega-url-shorten-regexps</span>
 </span></span><span class="line"><span class="cl">             <span class="o">`</span><span class="p">(</span><span class="nv">emacs-china</span>
 </span></span><span class="line"><span class="cl">               <span class="nb">:regexp</span> <span class="s">&#34;^https?://emacs-china.org/t/\\(.+\\)&#34;</span>
-</span></span><span class="line"><span class="cl">               <span class="nb">:symbol</span> <span class="o">,</span><span class="p">(</span><span class="nv">all-the-icons-fileicon</span> <span class="s">&#34;emacs&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">               <span class="nb">:symbol</span> <span class="o">,</span><span class="p">(</span><span class="nv">all-the-icons-octicon</span> <span class="s">&#34;link-external&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">               <span class="nb">:replace</span> <span class="s">&#34;\\1/\\2&#34;</span>
 </span></span><span class="line"><span class="cl">               <span class="nb">:svg-icon</span> <span class="p">(</span><span class="s">&#34;fa-brands/emacs-china.svg&#34;</span> <span class="nb">:scale</span> <span class="mi">1</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;telega-url-shorten-regexps</span>
 </span></span><span class="line"><span class="cl">             <span class="o">`</span><span class="p">(</span><span class="nv">github-pages</span>
-</span></span><span class="line"><span class="cl">               <span class="nb">:regexp</span> <span class="s">&#34;^https?://\\w+.\\github.io/\\(.+\\)&#34;</span>
-</span></span><span class="line"><span class="cl">               <span class="nb">:symbol</span> <span class="o">,</span><span class="p">(</span><span class="nv">all-the-icons-faicon</span> <span class="s">&#34;github&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">               <span class="nb">:regexp</span> <span class="s">&#34;^https?://\\(\\w+.\\)\\{0,2\\}github.io/\\(.+\\)&#34;</span>
+</span></span><span class="line"><span class="cl">               <span class="nb">:symbol</span> <span class="o">,</span><span class="p">(</span><span class="nv">all-the-icons-octicon</span> <span class="s">&#34;link-external&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">               <span class="nb">:replace</span> <span class="s">&#34;\\1/\\2&#34;</span>
 </span></span><span class="line"><span class="cl">               <span class="nb">:svg-icon</span> <span class="p">(</span><span class="s">&#34;fa-brands/github.svg&#34;</span> <span class="nb">:scale</span> <span class="mf">0.85</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;telega-url-shorten-regexps</span>
+</span></span><span class="line"><span class="cl">             <span class="o">`</span><span class="p">(</span><span class="nv">github-pages</span>
+</span></span><span class="line"><span class="cl">               <span class="nb">:regexp</span> <span class="s">&#34;^https?://\\(\\w+.\\)\\{0,2\\}zhihu.com/\\(.+\\)&#34;</span>
+</span></span><span class="line"><span class="cl">               <span class="nb">:symbol</span> <span class="o">,</span><span class="p">(</span><span class="nv">all-the-icons-octicon</span> <span class="s">&#34;link-external&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">               <span class="nb">:replace</span> <span class="s">&#34;Zhihu#\\2&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; (setq telega-debug t)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 自动播放 gif</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">telega-autoplay-mode</span> <span class="mi">1</span><span class="p">)</span>
@@ -2129,25 +1768,26 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">                      <span class="nb">:inherit</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:background</span> <span class="no">nil</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-reply</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#7BA23F&#34;</span><span class="p">)</span> <span class="c1">;; 萌黄 MOEGI</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#86C166&#34;</span><span class="p">)</span> <span class="c1">;; 苗 NAE</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-inline-forward</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#7BA23F&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-self-title</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#FFB11B&#34;</span><span class="p">)</span> <span class="c1">;; 山吹 YAMABUKI</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-user-title</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#86C166&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-entity-type-mention</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:underline</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:style</span> <span class="nv">line</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-self-title</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#E2943B&#34;</span><span class="p">)</span> <span class="c1">;; 朽葉 KUCHIBA</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-msg-user-title</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-button</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#7BA23F&#34;</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:box</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:line-width</span> <span class="p">(</span><span class="mi">-2</span> <span class="o">.</span> <span class="mi">-2</span><span class="p">)</span> <span class="nb">:color</span> <span class="s">&#34;#7BA23F&#34;</span> <span class="nb">:style</span> <span class="no">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#86C166&#34;</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:box</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:line-width</span> <span class="p">(</span><span class="mi">-2</span> <span class="o">.</span> <span class="mi">-2</span><span class="p">)</span> <span class="nb">:color</span> <span class="s">&#34;#86C166&#34;</span> <span class="nb">:style</span> <span class="no">nil</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-button-active</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#ffffff&#34;</span>
-</span></span><span class="line"><span class="cl">                      <span class="nb">:background</span> <span class="s">&#34;#7BA23F&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="nb">:background</span> <span class="s">&#34;#86C166&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">telega-chat-prompt-format</span> <span class="s">&#34;🏄🏻〉 &#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; 缩小 emoji 及特殊字符/字体显示，防止头像裂开。</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; (add-to-list &#39;face-font-rescale-alist &#39;(&#34;Apple Color Emoji&#34; . 0.8))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;HanaMinA&#34;</span> <span class="o">.</span> <span class="mf">0.9</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Noto Sans Egyptian Hieroglyphs&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;STIXGeneral&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Apple Symbols&#34;</span> <span class="o">.</span> <span class="mf">0.675</span><span class="p">))</span>
@@ -2158,7 +1798,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">                    <span class="nb">:foreground</span> <span class="s">&#34;#FFB11B&#34;</span>
 </span></span><span class="line"><span class="cl">                    <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-muted-count</span> <span class="no">nil</span>
-</span></span><span class="line"><span class="cl">                    <span class="nb">:foreground</span> <span class="s">&#34;#E87A90&#34;</span> <span class="c1">;; 薄红 USUBENI</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:foreground</span> <span class="s">&#34;#86C166&#34;</span>
 </span></span><span class="line"><span class="cl">                    <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 多加一条横线在输入和聊天页面之间</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">telega-symbol-underline-bar</span>
@@ -2258,7 +1898,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">                   <span class="nb">:files</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/inbox.org&#34;</span>                <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;i&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/work.org&#34;</span>                 <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;w&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/technical-debt.org&#34;</span>       <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;t&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/technical.org&#34;</span>       <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;t&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/personal.org&#34;</span>             <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;p&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/books.org&#34;</span>                <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;b&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/someday.org&#34;</span>              <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;s&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
@@ -2272,33 +1912,33 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;beancount/salary.beancount&#34;</span>      <span class="nb">:agenda</span> <span class="no">nil</span> <span class="nb">:key</span> <span class="s">&#34;l&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;beancount/house.beancount&#34;</span>       <span class="nb">:agenda</span> <span class="no">nil</span> <span class="nb">:key</span> <span class="s">&#34;h&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; hydra</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;hydra</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="nv">defhydra</span> <span class="nv">hydra-org-agenda-menu</span> <span class="p">(</span><span class="nb">:color</span> <span class="nv">blue</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;
+</span></span><span class="line"><span class="cl">  <span class="c1">;; hydra</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;hydra</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">defhydra</span> <span class="nv">hydra-org-agenda-menu</span> <span class="p">(</span><span class="nb">:color</span> <span class="nv">blue</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">  [--&gt; Org-agenda-menu &lt;--]
 </span></span></span><span class="line"><span class="cl"><span class="s">  ^^^^------------------------------------------------
-</span></span></span><span class="line"><span class="cl"><span class="s">  _i_: inbox     _w_: work     _b_: books     _t_: technical-debt _a_: agenda     _p_: personal     _n_: note     _s_: someday     _j_: journal
+</span></span></span><span class="line"><span class="cl"><span class="s">  _i_: inbox     _w_: work     _b_: books     _t_: technical     _a_: agenda     _p_: personal     _n_: note     _s_: someday     _j_: journal
 </span></span></span><span class="line"><span class="cl"><span class="s">  [--&gt; Beancount-menu &lt;--]
 </span></span></span><span class="line"><span class="cl"><span class="s">  ^^^^------------------------------------------------
 </span></span></span><span class="line"><span class="cl"><span class="s">  _c_: 2022     _m_: account     _e_: credit     _u_: insurance     _l_: salary     _h_: house
 </span></span></span><span class="line"><span class="cl"><span class="s">  &#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;i&#34;</span> <span class="nv">org-starter-find-file:inbox</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;w&#34;</span> <span class="nv">org-starter-find-file:work</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;t&#34;</span> <span class="nv">org-starter-find-file:technical-debt</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;p&#34;</span> <span class="nv">org-starter-find-file:personal</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;b&#34;</span> <span class="nv">org-starter-find-file:books</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;n&#34;</span> <span class="nv">org-starter-find-file:note</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;s&#34;</span> <span class="nv">org-starter-find-file:someday</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;a&#34;</span> <span class="nv">org-starter-find-file:agenda</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;j&#34;</span> <span class="nv">org-starter-find-file:journal</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;c&#34;</span> <span class="nv">org-starter-find-file:2022</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;m&#34;</span> <span class="nv">org-starter-find-file:account</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;e&#34;</span> <span class="nv">org-starter-find-file:credit</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;u&#34;</span> <span class="nv">org-starter-find-file:insurance</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;l&#34;</span> <span class="nv">org-starter-find-file:salary</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="s">&#34;h&#34;</span> <span class="nv">org-starter-find-file:house</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="nb">:bind</span><span class="p">(</span><span class="s">&#34;C-c e&#34;</span> <span class="o">.</span> <span class="nv">hydra-org-agenda-menu/body</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;i&#34;</span> <span class="nv">org-starter-find-file:inbox</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;w&#34;</span> <span class="nv">org-starter-find-file:work</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;t&#34;</span> <span class="nv">org-starter-find-file:technical</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;p&#34;</span> <span class="nv">org-starter-find-file:personal</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;b&#34;</span> <span class="nv">org-starter-find-file:books</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;n&#34;</span> <span class="nv">org-starter-find-file:note</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;s&#34;</span> <span class="nv">org-starter-find-file:someday</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;a&#34;</span> <span class="nv">org-starter-find-file:agenda</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;j&#34;</span> <span class="nv">org-starter-find-file:journal</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;c&#34;</span> <span class="nv">org-starter-find-file:2022</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;m&#34;</span> <span class="nv">org-starter-find-file:account</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;e&#34;</span> <span class="nv">org-starter-find-file:credit</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;u&#34;</span> <span class="nv">org-starter-find-file:insurance</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;l&#34;</span> <span class="nv">org-starter-find-file:salary</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;h&#34;</span> <span class="nv">org-starter-find-file:house</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="nb">:bind</span><span class="p">(</span><span class="s">&#34;C-c e&#34;</span> <span class="o">.</span> <span class="nv">hydra-org-agenda-menu/body</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-quick-menus</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-quick-menus.el ends here</span>
 </span></span></code></pre></div><h3 id="init-tree-sitter-dot-el">init-tree-sitter.el</h3>
@@ -2333,15 +1973,6 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">tree-sitter-require</span> <span class="ss">&#39;rust</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">tree-sitter-require</span> <span class="ss">&#39;python</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">tree-sitter-require</span> <span class="ss">&#39;javascript</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">;; Add Emacs-Lisp for tree-sitter:</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;;</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; 1. git clone https://github.com/Wilfred/tree-sitter-elisp</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; 2. gcc ./src/parser.c -fPIC -I./ --shared -o elisp.so</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; 3. cp ./elisp.so ~/.tree-sitter-langs/bin (~/.tree-sitter-langs/bin is path of your tree-sitter-langs repo)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">tree-sitter-load</span> <span class="ss">&#39;elisp</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;tree-sitter-major-mode-language-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">emacs-lisp-mode</span> <span class="o">.</span> <span class="nv">elisp</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;tree-sitter-major-mode-language-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">inferior-emacs-lisp-mode</span> <span class="o">.</span> <span class="nv">elisp</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-tree-sitter</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-tree-sitter.el ends here</span>
@@ -2851,6 +2482,381 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </li>
 </ol>
 </div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Pinboard</title>
+      <link>https://sheerwill.live/posts/main/20220506185941-pinboard/</link>
+      <pubDate>Tue, 25 Oct 2022 16:14:14 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220506185941-pinboard/</guid>
+      <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Wi-Phi – Wireless Philosophy 很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学</description>
+      <content:encoded><![CDATA[<h2 id="misc">Misc</h2>
+<ol>
+<li>
+<p><a href="https://www.templatemaker.nl/zh-cn/">Templatemaker</a></p>
+<p>制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。</p>
+</li>
+<li>
+<p><a href="https://www.wi-phi.com/">Wi-Phi – Wireless Philosophy</a></p>
+<p>很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学网站，致力于以轻松有趣的动画形式阐释哲学问题及哲学思维方式。建于2013年，现在已经有105个哲学动画上线了。</p>
+</li>
+</ol>
+<h2 id="writing">Writing</h2>
+<ol>
+<li>
+<p><a href="https://github.com/doocs/md">WeChat Markdown Editor</a></p>
+<p>一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性。</p>
+</li>
+</ol>
+<h3 id="查找-citations-的网站">查找 citations 的网站</h3>
+<ol>
+<li>
+<p><a href="https://zbib.org/">zoterobib</a></p>
+<p>Your bibliography is empty. To add a source, paste or type its URL, ISBN, DOI, PMID, arXiv ID, or title into the search box above</p>
+</li>
+<li>
+<p><a href="https://www.doi2bib.org/">doi2bib</a></p>
+<p>give us a DOI and we will do our best to get you the BibTeX entry</p>
+</li>
+<li>
+<p><a href="https://www.bibsonomy.org/">BibSonomy</a></p>
+<p>The easy way to manage scientific publications and bookmarks</p>
+<p>BibSonomy helps you to manage your publications and bookmarks, to collaborate with your colleagues and to find new interesting material for your research.</p>
+</li>
+<li>
+<p><a href="http://www.bibtexsearch.com/">BibTeX Search</a></p>
+<p>You&rsquo;re searching over millions of BibTeX records&hellip;</p>
+</li>
+<li>
+<p><a href="https://scholar.google.com/">Google Scholar</a></p>
+<p>站在巨人的肩膀上</p>
+</li>
+</ol>
+<h4 id="book">Book</h4>
+<p>For books I usually use a site, where it is possible to get Bibtex citations from Amazon.com articles. This is very good for books, and some inproceedings and incollections might be found here as well.</p>
+<ol>
+<li><a href="https://lead.to/amazon/com/">Amazon</a></li>
+</ol>
+<h4 id="article">Article</h4>
+<p>As a Software Engineer I quite often have to deal with technical papers from ACM or IEEE. Both their catalogs provide Bibtex export capabilities.</p>
+<ol>
+<li>
+<p><a href="https://dl.acm.org/">ACM</a></p>
+</li>
+<li>
+<p><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a></p>
+<p>Advancing Technology for Humanity</p>
+</li>
+</ol>
+<h2 id="book">Book</h2>
+<ol>
+<li>
+<p><a href="http://libgen.rs/">Library Genesis</a></p>
+<p>电子书资源查找，中英文都有，英文相对较多。</p>
+</li>
+<li>
+<p><a href="https://www.loudreader.com/">Ebook Reader for web</a></p>
+<p>在线阅读 PDF、azw3、epub、mobi 几种格式。</p>
+</li>
+</ol>
+<h2 id="video">Video</h2>
+<ol>
+<li>
+<p><a href="https://sound-effects.bbcrewind.co.uk/">BBC Sound effects</a></p>
+<p>BBC 提供的免费下载的音效的网站。</p>
+</li>
+</ol>
+<h2 id="medicine">Medicine</h2>
+<ol>
+<li>
+<p><a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a></p>
+<p>顾名思义，权威的诊疗查询手册。</p>
+</li>
+</ol>
+<h2 id="design">Design</h2>
+<h3 id="color-picker">Color Picker</h3>
+<ul>
+<li>
+<p><a href="https://nipponcolors.com/">日本の伝統色</a></p>
+<p>日本的一个颜色拾取网站，很漂亮。</p>
+</li>
+</ul>
+<h3 id="plantuml">PlantUML</h3>
+<ul>
+<li>
+<p><a href="https://real-world-plantuml.com/">Real World PlantUML</a></p>
+<p>PlantUML 例子</p>
+</li>
+</ul>
+<h2 id="front-end">Front-End</h2>
+<ol>
+<li>
+<p><a href="https://codepen.io/">codepen</a></p>
+<p>The best place to build, test, and discover front-end code</p>
+</li>
+</ol>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Blending Modes(Figma)</title>
+      <link>https://sheerwill.live/posts/main/20221025101809-blending_modes_figma/</link>
+      <pubDate>Tue, 25 Oct 2022 15:31:08 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20221025101809-blending_modes_figma/</guid>
+      <description>平时使用这个功能的时候都是逐个点击各个「混合模式（blending modes)」试看效果。下面就解释一下各个「混合模式」的工作原理。 Figure 1: DanHollick-1583080119068807168-20221020_205807-img1 简</description>
+      <content:encoded><![CDATA[<p>平时使用这个功能的时候都是逐个点击各个「混合模式（blending modes)」试看效果。下面就解释一下各个「混合模式」的工作原理。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080119068807168-20221020_205807-img1.png"
+         alt="Figure 1: DanHollick-1583080119068807168-20221020_205807-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>DanHollick-1583080119068807168-20221020_205807-img1</p>
+        </figcaption>
+</figure>
+
+<p>简单来说，「混合模式」是基于两种输入颜色，输出新颜色的方法。这里输入颜色被分为了「前景（混合色）」和「背景（基础色）」。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080127629430787-20221020_205809-img1.jpg"
+         alt="Figure 2: DanHollick-1583080127629430787-20221020_205809-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>DanHollick-1583080127629430787-20221020_205809-img1</p>
+        </figcaption>
+</figure>
+
+<p>其中最简单的就是 Darken 和 Lighten，</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080139973283841-20221020_205812-img1.jpg"
+         alt="Figure 3: DanHollick-1583080139973283841-20221020_205812-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 3: </span>DanHollick-1583080139973283841-20221020_205812-img1</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080139973283841-20221020_205812-img2.jpg"
+         alt="Figure 4: DanHollick-1583080139973283841-20221020_205812-img2"/> <figcaption>
+            <p><span class="figure-number">Figure 4: </span>DanHollick-1583080139973283841-20221020_205812-img2</p>
+        </figcaption>
+</figure>
+
+<p>Darken 是分别比较前后景的 RGB 通道的值，选择最暗的值组成新的 RGB 颜色。RGB 通道的值范围在 0-255 之间，数字越小，颜色越暗。</p>
+<p>\begin{gather*}
+C = min(A, B)
+\end{gather*}</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080146923180032-20221020_205813-img1.png"
+         alt="Figure 5: DanHollick-1583080146923180032-20221020_205813-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 5: </span>DanHollick-1583080146923180032-20221020_205813-img1</p>
+        </figcaption>
+</figure>
+
+<p>Lighten 和 Darken 原理一样，只不过选择最亮的颜色，也就是数字更大的 RGB 通道值组成新的颜色。</p>
+<p>\begin{gather*}
+C = max(A, B)
+\end{gather*}</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080154439352320-20221020_205815-img1.png"
+         alt="Figure 6: DanHollick-1583080154439352320-20221020_205815-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 6: </span>DanHollick-1583080154439352320-20221020_205815-img1</p>
+        </figcaption>
+</figure>
+
+<p>Multiply 和 Screen 与 Darken 和 Lighten 产生类似的效果，但是更加优雅。当有了 Multiply 和 Screen 后，就没有理由去使用 Darken 和 Lighten 了。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080166774824962-20221020_205818-img1.jpg"
+         alt="Figure 7: DanHollick-1583080166774824962-20221020_205818-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 7: </span>DanHollick-1583080166774824962-20221020_205818-img1</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080166774824962-20221020_205818-img2.jpg"
+         alt="Figure 8: DanHollick-1583080166774824962-20221020_205818-img2"/> <figcaption>
+            <p><span class="figure-number">Figure 8: </span>DanHollick-1583080166774824962-20221020_205818-img2</p>
+        </figcaption>
+</figure>
+
+<p>Multiply 顾名思义，就是将每个通道的数值相乘。</p>
+<p>可以发现这里的数值不是 0-255 而是 0-1，这里是将 0-255 映射到 0-1 后计算。因为数值都是在 0-1 之间，所以乘积总是比原始值更暗。也因此，白色表现出透明（任何数值和 1 相乘都不变），黑色会一直存在（任何数值和 0 相乘都是 0）。</p>
+<p>\begin{gather*}
+C=\frac{A}{255}\times\frac{B}{255}\times255=\frac{AB}{255}
+\end{gather*}</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080173980696576-20221020_205820-img1.png"
+         alt="Figure 9: DanHollick-1583080173980696576-20221020_205820-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 9: </span>DanHollick-1583080173980696576-20221020_205820-img1</p>
+        </figcaption>
+</figure>
+
+<p>Screen 实际上和 Multiply 相似，但是它是先将各通道颜色反相后相乘，相乘的结果再反相后得到更浅的颜色。</p>
+<p>\begin{gather*}
+C=(1-(1-\frac{A}{255})(1-\frac{B}{255}))\times255 = 255-\frac{(255-A)(255-B)}{255}
+\end{gather*}</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080181740158976-20221020_205822-img1.png"
+         alt="Figure 10: DanHollick-1583080181740158976-20221020_205822-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 10: </span>DanHollick-1583080181740158976-20221020_205822-img1</p>
+        </figcaption>
+</figure>
+
+<p>最后一对是 Color Burn 和 Color Dodge，可以看到明显的步进，所以结果颜色会更加饱和。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080194952208385-20221020_205825-img1.jpg"
+         alt="Figure 11: DanHollick-1583080194952208385-20221020_205825-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 11: </span>DanHollick-1583080194952208385-20221020_205825-img1</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080194952208385-20221020_205825-img2.png"
+         alt="Figure 12: DanHollick-1583080194952208385-20221020_205825-img2"/> <figcaption>
+            <p><span class="figure-number">Figure 12: </span>DanHollick-1583080194952208385-20221020_205825-img2</p>
+        </figcaption>
+</figure>
+
+<p>Color Burn 的原理是对背景反相后除以前景，再将结果反相得到最终的颜色。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080203634417664-20221020_205827-img1.png"
+         alt="Figure 13: DanHollick-1583080203634417664-20221020_205827-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 13: </span>DanHollick-1583080203634417664-20221020_205827-img1</p>
+        </figcaption>
+</figure>
+
+<p>Color Dodge 类似，是将前景反相，除以背景。</p>
+<p>\begin{gather*}
+C=\frac{(1-A)}{B}
+\end{gather*}</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080211129651200-20221020_205829-img1.png"
+         alt="Figure 14: DanHollick-1583080211129651200-20221020_205829-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 14: </span>DanHollick-1583080211129651200-20221020_205829-img1</p>
+        </figcaption>
+</figure>
+
+<p>Overlay、Soft Light 和 Hard Light 被称为「对比度混合模式」，可以让亮部更亮，暗部更暗。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080223775416323-20221020_205832-img1.jpg"
+         alt="Figure 15: DanHollick-1583080223775416323-20221020_205832-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 15: </span>DanHollick-1583080223775416323-20221020_205832-img1</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080223775416323-20221020_205832-img2.jpg"
+         alt="Figure 16: DanHollick-1583080223775416323-20221020_205832-img2"/> <figcaption>
+            <p><span class="figure-number">Figure 16: </span>DanHollick-1583080223775416323-20221020_205832-img2</p>
+        </figcaption>
+</figure>
+
+<p>如果背景是浅色（&gt;127.5），就以一半的强度参与 Screen 计算，使得最终颜色变浅；</p>
+<p>\begin{gather*}
+C=(1-(1-\frac{A}{255})(1-\frac{B}{255})\times2)\times255 = 255-\frac{(255-A)(255-B)}{127.5}
+\end{gather*}</p>
+<p>如果背景是暗色，也以一半的强度参与 Multiply 计算，使得最终颜色变深。</p>
+<p>\begin{gather*}
+C=\frac{A}{255}\times(\frac{B}{255}\times2)\times255=\frac{AB}{127.5}
+\end{gather*}</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080231170023424-20221020_205833-img1.png"
+         alt="Figure 17: DanHollick-1583080231170023424-20221020_205833-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 17: </span>DanHollick-1583080231170023424-20221020_205833-img1</p>
+        </figcaption>
+</figure>
+
+<p>Hard Light 和 Overlay 一样，只不过判断的依据换成了前景。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080238753337344-20221020_205835-img1.png"
+         alt="Figure 18: DanHollick-1583080238753337344-20221020_205835-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 18: </span>DanHollick-1583080238753337344-20221020_205835-img1</p>
+        </figcaption>
+</figure>
+
+<p>Soft Light 是标准混合模式中最复杂的一种。它产生的效果和 Overlay 相似，但更加微妙。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080246802194437-20221020_205837-img1.png"
+         alt="Figure 19: DanHollick-1583080246802194437-20221020_205837-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 19: </span>DanHollick-1583080246802194437-20221020_205837-img1</p>
+        </figcaption>
+</figure>
+
+<p>Difference 和 Exclusion 的结果几乎就是其中一个输入颜色的反相，所以称为反相混合模式，</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080260442107906-20221020_205840-img1.jpg"
+         alt="Figure 20: DanHollick-1583080260442107906-20221020_205840-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 20: </span>DanHollick-1583080260442107906-20221020_205840-img1</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080260442107906-20221020_205840-img2.jpg"
+         alt="Figure 21: DanHollick-1583080260442107906-20221020_205840-img2"/> <figcaption>
+            <p><span class="figure-number">Figure 21: </span>DanHollick-1583080260442107906-20221020_205840-img2</p>
+        </figcaption>
+</figure>
+
+<p>Difference 顾名思义，用前景减去背景的通道颜色值并取绝对值。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080267622670336-20221020_205842-img1.png"
+         alt="Figure 22: DanHollick-1583080267622670336-20221020_205842-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 22: </span>DanHollick-1583080267622670336-20221020_205842-img1</p>
+        </figcaption>
+</figure>
+
+<p>Exclusion 也产生类似的效果，但方式要复杂的多。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080275096965121-20221020_205844-img1.png"
+         alt="Figure 23: DanHollick-1583080275096965121-20221020_205844-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 23: </span>DanHollick-1583080275096965121-20221020_205844-img1</p>
+        </figcaption>
+</figure>
+
+<p>Hue、Saturation、Color 和 Luminosity 与其他模式不同，它们操作的是 Hue、Saturation 和 Luminosity，而不是 RGB 通道值。</p>
+<p>它们通过结合两个输入的 HSL 值得出一种新的颜色。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080288610983936-20221020_205847-img1.jpg"
+         alt="Figure 24: DanHollick-1583080288610983936-20221020_205847-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 24: </span>DanHollick-1583080288610983936-20221020_205847-img1</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080288610983936-20221020_205847-img2.jpg"
+         alt="Figure 25: DanHollick-1583080288610983936-20221020_205847-img2"/> <figcaption>
+            <p><span class="figure-number">Figure 25: </span>DanHollick-1583080288610983936-20221020_205847-img2</p>
+        </figcaption>
+</figure>
+
+<p>Hue 从前景提取 Hue 值，从背景中提取 Saturation 和 Luminosity 值，组成新的颜色。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080296018083840-20221020_205849-img1.jpg"
+         alt="Figure 26: DanHollick-1583080296018083840-20221020_205849-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 26: </span>DanHollick-1583080296018083840-20221020_205849-img1</p>
+        </figcaption>
+</figure>
+
+<p>Saturation 从前景提取 Saturation 值，从背景中提取 Hue 和 Luminosity 值，组成新的颜色。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080303626620930-20221020_205851-img1.jpg"
+         alt="Figure 27: DanHollick-1583080303626620930-20221020_205851-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 27: </span>DanHollick-1583080303626620930-20221020_205851-img1</p>
+        </figcaption>
+</figure>
+
+<p>Color 从前景提取 Hue 和 Saturation 值，从背景中提取 Luminosity 值，组成新的颜色。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080311188910080-20221020_205853-img1.jpg"
+         alt="Figure 28: DanHollick-1583080311188910080-20221020_205853-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 28: </span>DanHollick-1583080311188910080-20221020_205853-img1</p>
+        </figcaption>
+</figure>
+
+<p>Luminosity 从前景提取 Luminosity 值，从背景中提取 Hue 和 Saturation 值，组成新的颜色。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/DanHollick-1583080318516355075-20221020_205854-img1.jpg"
+         alt="Figure 29: DanHollick-1583080318516355075-20221020_205854-img1"/> <figcaption>
+            <p><span class="figure-number">Figure 29: </span>DanHollick-1583080318516355075-20221020_205854-img1</p>
+        </figcaption>
+</figure>
+
 ]]></content:encoded>
     </item>
     
