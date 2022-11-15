@@ -2,11 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://sheerwill.live/tags/distributed/</loc>
+    <lastmod>2022-11-15T18:32:04+08:00</lastmod>
+  </url><url>
     <loc>https://sheerwill.live/</loc>
-    <lastmod>2022-10-27T10:33:33+08:00</lastmod>
+    <lastmod>2022-11-15T18:32:04+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/</loc>
-    <lastmod>2022-10-27T10:33:33+08:00</lastmod>
+    <lastmod>2022-11-15T18:32:04+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/tags/</loc>
+    <lastmod>2022-11-15T18:32:04+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</loc>
+    <lastmod>2022-11-15T18:32:04+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</loc>
+    <lastmod>2022-11-15T18:30:15+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</loc>
+    <lastmod>2022-11-15T18:16:52+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220616105609-fifo_broadcast/</loc>
+    <lastmod>2022-11-15T09:36:14+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</loc>
+    <lastmod>2022-11-08T14:20:39+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/tags/newsletter/</loc>
+    <lastmod>2022-11-08T14:20:39+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220503145636-build_diagram/</loc>
+    <lastmod>2022-11-08T14:20:37+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20221013221348-photoshop_techniques/</loc>
+    <lastmod>2022-11-07T11:25:59+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220503154744-figma/</loc>
+    <lastmod>2022-11-07T11:13:36+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</loc>
     <lastmod>2022-10-27T10:33:33+08:00</lastmod>
@@ -28,12 +61,6 @@
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220508195206-toolbox/</loc>
     <lastmod>2022-10-19T19:35:34+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/tags/distributed/</loc>
-    <lastmod>2022-10-19T19:34:53+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/tags/</loc>
-    <lastmod>2022-10-19T19:34:53+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220602202247-the_two_generals_problem/</loc>
     <lastmod>2022-10-19T19:34:53+08:00</lastmod>
@@ -71,9 +98,6 @@
     <loc>https://sheerwill.live/posts/main/20220615143721-quorum/</loc>
     <lastmod>2022-10-19T19:32:37+08:00</lastmod>
   </url><url>
-    <loc>https://sheerwill.live/posts/main/20221013221348-photoshop_techniques/</loc>
-    <lastmod>2022-10-19T19:32:17+08:00</lastmod>
-  </url><url>
     <loc>https://sheerwill.live/posts/main/20221019183132-mvcc/</loc>
     <lastmod>2022-10-19T19:32:08+08:00</lastmod>
   </url><url>
@@ -82,9 +106,6 @@
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220616162256-latex/</loc>
     <lastmod>2022-10-19T19:31:47+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</loc>
-    <lastmod>2022-10-19T19:31:36+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220805101927-karabiner_elements/</loc>
     <lastmod>2022-10-19T19:31:18+08:00</lastmod>
@@ -104,12 +125,6 @@
     <loc>https://sheerwill.live/posts/main/20220503160055-git_skills/</loc>
     <lastmod>2022-10-19T19:30:27+08:00</lastmod>
   </url><url>
-    <loc>https://sheerwill.live/posts/main/20220503154744-figma/</loc>
-    <lastmod>2022-10-19T19:30:20+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220616105609-fifo_broadcast/</loc>
-    <lastmod>2022-10-19T19:30:08+08:00</lastmod>
-  </url><url>
     <loc>https://sheerwill.live/posts/main/20220505220832-doom_emacs/</loc>
     <lastmod>2022-10-19T19:29:57+08:00</lastmod>
   </url><url>
@@ -119,14 +134,8 @@
     <loc>https://sheerwill.live/posts/main/20220506193545-converting_callbacks_to_promises/</loc>
     <lastmod>2022-10-19T19:29:39+08:00</lastmod>
   </url><url>
-    <loc>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</loc>
-    <lastmod>2022-10-19T19:29:29+08:00</lastmod>
-  </url><url>
     <loc>https://sheerwill.live/posts/main/20220616092944-callback_hell/</loc>
     <lastmod>2022-10-19T19:29:16+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220503145636-build_diagram/</loc>
-    <lastmod>2022-10-19T19:29:08+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220821223012-beancount/</loc>
     <lastmod>2022-10-19T19:28:54+08:00</lastmod>
@@ -137,20 +146,11 @@
     <loc>https://sheerwill.live/posts/article/20220503143427-gtd/</loc>
     <lastmod>2022-10-19T19:28:36+08:00</lastmod>
   </url><url>
-    <loc>https://sheerwill.live/tags/newsletter/</loc>
-    <lastmod>2022-10-19T19:28:36+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</loc>
-    <lastmod>2022-10-19T19:27:55+08:00</lastmod>
-  </url><url>
     <loc>https://sheerwill.live/posts/main/20220602202933-distribution_system/</loc>
     <lastmod>2022-10-19T19:27:05+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/tags/top/</loc>
     <lastmod>2022-10-19T19:27:05+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</loc>
-    <lastmod>2022-10-19T19:26:58+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220616132407-causal_broadcast/</loc>
     <lastmod>2022-10-19T19:26:51+08:00</lastmod>

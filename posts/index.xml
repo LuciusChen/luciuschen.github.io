@@ -6,7 +6,451 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Oct 2022 10:33:33 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Nov 2022 18:32:04 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vector clocks</title>
+      <link>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</link>
+      <pubDate>Tue, 15 Nov 2022 18:32:04 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</guid>
+      <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \l</description>
+      <content:encoded><![CDATA[<p>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
+<ul>
+<li>假定分布式系统中有 \(n\) 个节点，\(N = \langle​N_{1}, N_{2}, &hellip;, N_{n}\rangle\)</li>
+<li><strong>事件 \(a\)</strong> 的向量时间戳写成 \(V(a) = \langle​t_{1}, t_{2}, &hellip;, t_{n}\rangle\)</li>
+<li>\(t_{i}\) 是 \(N_{i}\) 节点发生时间的数量</li>
+<li>每个​<strong>节点</strong>​都有一个当前的向量时间戳 \(T\)</li>
+<li>节点 \(N_{i}\) 上的事件，向量时间戳 \(T[i]\) 递增。</li>
+<li>每个消息都附带上向量时间戳</li>
+<li>接收者将消息中的向量时间戳合并到本地</li>
+</ul>
+<p>除了标量和向量之间的区别之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
+<h2 id="vector-clocks-algorithm">Vector clocks algorithm</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/latex-vector-clocks-algorithm.svg"
+         alt="Figure 1: latex-vector-clocks-algorithm"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>latex-vector-clocks-algorithm</p>
+        </figcaption>
+</figure>
+
+<h2 id="vector-clocks-example">Vector clocks example</h2>
+<p>假定节点向量是 \(N = \langle​A, B, C\rangle\):</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/vector-example.png"
+         alt="Figure 2: vector-example"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>vector-example</p>
+        </figcaption>
+</figure>
+
+<p>事件 \(e\) 的向量时间戳是一系列事件的集合， \(e\) 和它的因果以来：\({e} \cup {a | a \rightarrow e}\)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>​<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>比如，\(\langle2, 2, 0\rangle\)，第一个 2 是表示来自于 \(A\) 的两个事件，第二个 2 是表示来自于 \(B\) 的两个事件，并且没有来自于 \(C\) 的事件。</p>
+<h2 id="vector-clocks-ordering">Vector clocks ordering</h2>
+<p>Define the following order on vector timestamps(in a system with \(n\) nodes):</p>
+<ul>
+<li>\(T = T&rsquo; \iff T[i] = T&rsquo;[i]\) for all \(i \in {1, &hellip;, n}\)</li>
+<li>\(T \le T&rsquo; \iff T[i] \le T&rsquo;[i]\) for all \(\in {1, &hellip;, n}\)</li>
+<li>\(T &lt; T&rsquo; \iff T \le T&rsquo;\) and \(T \neq T&rsquo;\)</li>
+<li>\(T || T&rsquo; \iff T &gt; T&rsquo;\) and \(T&rsquo; &gt; T\)</li>
+</ul>
+<p>\(V(a) \le V(b) \iff ({a} \cup {e | e \rightarrow a}) ⊆ ({b} \cup{} {e | e \rightarrow b})\)</p>
+<p>Properties of this order:</p>
+<ul>
+<li>\((V(a) &lt; V(b)) \iff (a \rightarrow b)\)</li>
+<li>\((V(a) = V(b)) \iff (a = b)\)</li>
+<li>\((V(a) \rVert V(b)) \iff (a \rVert b)\)</li>
+</ul>
+<p>然后，我们对向量的时间戳进行部分排序。如果第一个向量的每个元素都小于或等于第二个向量的相应元素，我们就说一个向量小于或等于另一个向量。如果一个向量小于或等于另一个向量，并且它们至少有一个元素是不同的，那么这个向量就严格小于另一个向量。然而，如果一个向量在一个元素中的值较大，而另一个向量在另一个元素中的值较大，那么这两个向量是不可比的。例如，\(T = \langle2, 2, 0\rangle\) 和 \(T&rsquo; = \langle0, 0, 1\rangle\) 是不可比的，因为 \(T[1] &gt; T&rsquo;[1]\) 但 \(T[3] &lt; T&rsquo;[3]\)。</p>
+<p>向量时间戳的部分顺序与发生之前关系所定义的部分顺序完全对应。因此，向量时钟算法为我们提供了一种在实践中计算发生前关系的机制。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>\(\cup\) 并集的意思，\(\cap\) 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>集合的描述方法，描述格式为 \({x | P(x), x ∈ Ω}\)。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Lamport clocks</title>
+      <link>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</link>
+      <pubDate>Tue, 15 Nov 2022 18:30:15 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</guid>
+      <description>Lamport clocks algorithm Figure 1: latex-lamport-clocks-algorithm Lamport clocks in words Figure 2: lamport-example-simple 每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。 增长后的值设为 \(L(e)\) 发送消息时附带上当前的计数</description>
+      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/latex-lamport-clocks-algorithm.svg"
+         alt="Figure 1: latex-lamport-clocks-algorithm"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>latex-lamport-clocks-algorithm</p>
+        </figcaption>
+</figure>
+
+<h2 id="lamport-clocks-in-words">Lamport clocks in words</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
+         alt="Figure 2: lamport-example-simple"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>lamport-example-simple</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。</li>
+<li>增长后的值设为 \(L(e)\)</li>
+<li>发送消息时附带上当前的计数 \(t\)</li>
+<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
+</ul>
+<p>Properties of this scheme:</p>
+<ul>
+<li>if \(a \rightarrow b\) then \(L(e) &lt; L(b)\)</li>
+<li>However, \(L(a) &lt; L(b)\) does not imply \(a \rightarrow b\)</li>
+<li>Possible that \(L(a) = L(b)\) for \(a \ne b\)</li>
+</ul>
+<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
+<h2 id="lamport-clocks-example">Lamport clocks example</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example.png"
+         alt="Figure 3: lamport-example"/> <figcaption>
+            <p><span class="figure-number">Figure 3: </span>lamport-example</p>
+        </figcaption>
+</figure>
+
+<p>Let \(N(e)\) be the node at which event \(e\) occurred.</p>
+<p>Then the pair \((L(e), N(e))\) <strong>uniquely identiﬁes</strong> event \(e\).</p>
+<p>Deﬁne a <strong>total order</strong> \(≺\) using Lamport timestamps:</p>
+<p>\((a ≺ b) \iff (L(a) &lt; L(b) ∨[fn:1] (L(a) = L(b) ∧ N(a) &lt; N(b)))\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>This order is <strong>causal</strong>: \((a → b) \Longrightarrow (a ≺ b)\)</p>
+<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
+<p>对于任何两个事件 \(a \ne b\)，那么既不是 \(a ≺ b\) 也不是 \(b ≺ a\)。只要 \(a → b\)，我们就有 \(a ≺ b\)，换句话说，\(≺\) 是局部顺序 \(\rightarrow\) 的线性扩展。然而，如果 \(a \rVert b\)，我们可以有 \(a ≺ b\) 或 \(b ≺ a\)，所以两个事件的顺序是由算法任意决定的。 比如 \((1, A)\) 和 \((1, C)\) 两个事件是平行的，按照 Lamport 的算法，\((1, A)\) 必然是在 \((1, C)\) 之前的，但实际情况可能是 \((1, C)\) 在前。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>\(∨\) is logical or, \(∧\) is logical and.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Causality and Happen-before relation</title>
+      <link>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</link>
+      <pubDate>Tue, 15 Nov 2022 18:16:52 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
+      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
+      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
+<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
+<p>event a <strong>happens before</strong> event b, written a → b.</p>
+<p>那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前：</p>
+<ul>
+<li>
+<p>a 和 b 发生在相同节点，并且按照本地节点的执行顺序，a 发生在 b 之前。</p>
+</li>
+<li>
+<p>事件 a 是发送消息 m，事件 b 是接收相同的消息 m（假定发送的消息都是唯一的）。</p>
+</li>
+<li>
+<p>有这么一个时间 c 满足，a → c 且 c → b。</p>
+<p>happens-before relation 是局部的顺序：有可能存在既不满足 a → b 也不满足 b → a，这样 a 和 b 就是并行的，写作 a || b。</p>
+</li>
+</ul>
+<h3 id="happen-before-relation-example">Happen-before relation example</h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
+         alt="Figure 1: happens-before-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>a → b, c → d, and e → f due to process order</li>
+<li>b → c and d → f due to messages m1 and m2</li>
+<li>a → c, a → d, a → f, b → d, b → f, and c → f due to transitivity</li>
+<li>a || e, b || e, c || e, and d || e</li>
+</ul>
+<h2 id="causality">Causality</h2>
+<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
+<ul>
+<li>当 a → b, 那么 a 可能是 b 的因。</li>
+<li>当 a || b, a 和 b 之间不存在因果关系。</li>
+</ul>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causality.png"
+         alt="Figure 2: causality"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>causality</p>
+        </figcaption>
+</figure>
+
+<p>Let ≺ be a strict total order on events.</p>
+<p>如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
+<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
+<p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>FIFO broadcast</title>
+      <link>https://sheerwill.live/posts/main/20220616105609-fifo_broadcast/</link>
+      <pubDate>Tue, 15 Nov 2022 09:36:14 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220616105609-fifo_broadcast/</guid>
+      <description>Definition 最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之</description>
+      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
+<p>最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之前被传递，因为它们都是由 \(A\) 发送的。然而，\(m_{2}\) 可以在 \(m_{1}\) 和 \(m_{3}\) 之前、之间或之后的任何时间被传递。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/FIFO-broadcast.png"
+         alt="Figure 1: FIFO-broadcast"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>FIFO-broadcast</p>
+        </figcaption>
+</figure>
+
+<p>同一个节点发送的消息必须要按照发送的顺序传递，不同节点发送的消息可以是任意的顺序，比如 \((m_{2}, m_{1}, m_{3})\)，\((m_{1}, m_{2}, m_{3})\) 或者 \((m_{1}, m_{3}, m_{2})\)。</p>
+<p>关于这些广播协议的另一个细节：我们假设每当一个节点广播一个消息时，它也会将该消息传递给自己（在上图中用回环箭头表示）。一个节点知道它自己广播了什么消息，所以传递给自己看似没有必要，但在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中是需要这个步骤。</p>
+<p>上图中的执行示例是有效的先进先出「广播」，但它违反了因果性：虽然 \(B\) 在接收了 \(m_{1}\) 之后才广播的 \(m_{2}\)，但节点 \(C\) 在 \(m_{1}\) 之前就传递了 \(m_{2}\)。<a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 提供了一个比 FIFO broadcast  更严格的排序属性。顾名思义，它确保信息按因果顺序传递：也就是说，如果一条信息的广播发生在另一条信息的广播之前，那么所有节点必须按这个顺序传递这两条信息。如果两个消息是同时广播的，一个节点可以按任何一个顺序传递它们。</p>
+<h2 id="fifo-broadcast-algorithm">FIFO broadcast algorithm</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/latex-FFIO-broadcast-algorithm.svg"
+         alt="Figure 2: latex-FFIO-broadcast-algorithm"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>latex-FFIO-broadcast-algorithm</p>
+        </figcaption>
+</figure>
+
+<p>节点 \(N_{i}\) 发送的每个 FIFO broadcast 消息都会附带发送节点编号 \(i\) 和一个序列号（该节点发送消息对应的序列号，第一条消息对应为 0，第二条消息对应为 1）。每个节点的本地状态由序列号 \(sendSeq\)（计算该节点广播的消息数量）、\(delivered\)（一个向量，每个节点有一个条目，统计了每个节点发送消息并传递到该节点的数量）和 \(buﬀer\)（一个缓存，用于保留消息直到它们准备好被传递给 Application，也就是 <a href="/posts/main/20220602202933-distribution_system/#receiving-versus-delivering">Receiving versus delivering</a> 中提到的 deliver 阶段）组成。该算法检查来自任何发送者的与预期的下一个序列号相匹配的消息，然后递增该序列号，确保来自每个特定发送者的消息按照序列号递增的顺序被传递。</p>
+<h2 id="summary">Summary</h2>
+<p>FIFO broadcast 的保持消息顺序的原理和 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport clocks</a> 很相似，都是用递增的整数来确定同一个节点上的消息传递的顺序，\(deliver\) 是个存放着所有节点 \(sendSeq\) 的向量，存放于每个节点，配合 \(sendSeq\) 控制来自同一个节点的消息传递的顺序。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>How I Take Notes</title>
+      <link>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</link>
+      <pubDate>Tue, 08 Nov 2022 14:20:39 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</guid>
+      <description>ID: 46dfdbc7-24f6-4edc-9e61-dab01aa185a1 ROAM_REFS: https://jethrokuan.github.io/org-roam-guide/ Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、B</description>
+      <content:encoded><![CDATA[<p>ID: 46dfdbc7-24f6-4edc-9e61-dab01aa185a1</p>
+<pre><code>ROAM_REFS: https://jethrokuan.github.io/org-roam-guide/
+</code></pre>
+<h2 id="introduction">Introduction</h2>
+<p>最先接触到 <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettlekasten</a> (German: &ldquo;slip box&rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、Notion、Obsidian（当时还不知道 Backlinks），都觉得不太合适，尤其是第一步文件夹的分类就让我头疼，很多内容是互相交叉的，并不是简单的可以归在一个分类下面，若是细分的分类过多，又会过于混乱，最后的结果就是“垃圾场”。</p>
+<ul>
+<li>根据 Zettlekasten 衍生出来的各种 APP 中的 Backlinks 将笔记串联起来，作为一个草稿箱，定期去整理回顾形成自己的知识。</li>
+</ul>
+<p>另外一个极为吸引我的就是 Daily Notes 或者 Journals，非常适合我当前的工作场景。「生产问题」或者「零碎的需求」会不断从打断我的工作，有时候会非常紧急需要优先处理「需求」或者「生产问题」，解决后会有两种情况。</p>
+<ul>
+<li>
+<p>问题或需求解决后，要花一些时间梳理之前在做的事情才能够重新接续之前的思路继续工作。</p>
+</li>
+<li>
+<p>问题解决后几个月遇到相同或类似的问题，虽然记得解决过，但是当时解决的思路以及细节需要注意的地方就模糊不清了。通常为了万无一失需要重复上次的工作，仔细查看过代码结合业务后，才能作出正确的判断，确保干净利落地解决问题。</p>
+</li>
+</ul>
+<p>上面两种情况完全可以用 Journals 记录解决问题前的工作思路，记录解决问题后的思路，来避免上述两种情况发生。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
+         alt="Figure 1: take-notes-sankey"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>take-notes-sankey</p>
+        </figcaption>
+</figure>
+
+<p>信息大爆炸的副作用就是信噪比降低，通过分阶段的信息处理，不断地归纳、处理形成自己的想法，并将其固化下来，作为知识库。</p>
+<h2 id="流程设计">流程设计</h2>
+<ol>
+<li>
+<p>图中的流程其实就是多层的过滤器。</p>
+<p>从最初的信息源处到 Logseq 的过程，只需要考虑这个信息源是否值得读，是否值得扩展，答案确定则大胆地记入 Logseq。其中零散的思绪及文章阅读记录在 Journals 中，书籍这类大部头则在 page 中记录，前者因为零散在 Journals 中，需要加 page 的双链或 Tag。</p>
+<p>Logseq 中 Journals 中的事件重要的会被我移到 Org-roam 中的 Journals.org 文件中，这个文件类似于日记的作用，并不是每天都会记录，记录多了之后按照年份进行分割。</p>
+<p>从 Logseq 到 Org-roam 则是知识固化的过程，需要考虑该知识是否以后会被自己再次用到，是否值得扩展，答案确定则精炼后记入，并标明灵感来源，引用材料。因此，Logseq 中记录的都只能算是草稿，需要再次的整合，提高信噪比。</p>
+</li>
+<li>
+<p>对信息源处理时，可以用 Excalidraw 进行流程图、思维图等图的草稿绘制。后续有时间的时候再用 Figma 重新绘制，视觉和逻辑上的重新设计，使得阐述的内容更加直观。</p>
+<p>对于产品来说，通过<a href="/posts/main/20220503145636-build_diagram/">设计降低理解门槛和使用门槛</a>，是一件挺重要的事情。输出文章同样如此。</p>
+</li>
+<li>
+<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 <a href="/posts/main/20220505220832-doom_emacs/">Emacs</a> 中做了一些设置。</p>
+</li>
+<li>
+<p>Org-roam-ui 非常优秀，不管是 UI 还是操作性，可以明晰的查看笔记之间的关联，知识是否形成闭环，哪些知识还需要进行拓展阅读。</p>
+</li>
+</ol>
+<h2 id="准则">准则</h2>
+<ul>
+<li>
+<p>卡片应该具有原子性。这点和编程的原则很像，一个方法只做一件事，在这里也就是只记录一个主题的内容。</p>
+</li>
+<li>
+<p>卡片内容应该具有独立性。这点和上面并不冲突，设想一下，为了保持每个卡片的纯净，X 和 Y 之间的关系，你可能会用 Z 去链接他们。但回顾的时候，没有 Z，单纯回顾 X 或 Y 无法得知两者之间的关联。所以这里不管在 X 或者 Y 中去描述与对方的关系都是可以的，一点点内容的冗余可以使得内容更加独立。</p>
+</li>
+<li>
+<p>遵守奥卡姆剃刀原则。对新工具充分调研，是否满足自己的需求后再考虑替换或增加到现有工作流当中。</p>
+</li>
+<li>
+<p>Literature Notes 需要及时回顾，在一两天内转化为 Permanent Notes 或者直接删掉。</p>
+</li>
+</ul>
+<h2 id="误区">误区</h2>
+<ul>
+<li>
+<p>All-In-One 的思想。Markdown 的扩展语法实现并不统一，扩展语法的内容导出时经常要手动兼容，或不可再用。云端服务的不可持续性，互联网这么多年已经太多的云端服务用着用着就停掉了。</p>
+</li>
+<li>
+<p>Permanent Notes 并不是不需要回顾和修改了。</p>
+</li>
+<li>
+<p>记太多的内容。从资料中复制大量的原文。笔记应该是对所读内容的提炼：用自己的话改写观点和概念有助于加强理解。</p>
+</li>
+<li>
+<p>太复杂的笔记流程。复杂的工作流通常需要自动化，但自动化不利于笔记的整理，形成最重笔记时应该慎重考虑哪些是需要保留的，否则知识库就会变成垃圾场。</p>
+</li>
+</ul>
+<blockquote>
+<p>\begin{document}
+\begin{algorithm}
+\caption{Vector clocks algorithm}
+\While{initialisation at node $Ni$}
+{T := \langle0, 0, &hellip;, 0\rangle$ \tcp{local variable at node $N_{i}$}}
+\While{any event occurring at node $N_{i}$}
+{$T[i] = T[i] + 1$}
+\While{request to send message $m$ at node $N_{i}$}
+{$T[i] := T[i] + 1$\;
+send $(T, m)$ via network}
+\While{receiving $(T&rsquo;, m)$ at node $N_{i}$ via the network}
+{$T[j] := \max(T[j], T&rsquo;[j])$ for every $j \in {1, &hellip;, n}$\;
+$T[i] := T[i] + 1$\;
+deliver $m$ to the application}
+\end{algorithm}
+\end{document}</p>
+</blockquote>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Build Diagram</title>
+      <link>https://sheerwill.live/posts/main/20220503145636-build_diagram/</link>
+      <pubDate>Tue, 08 Nov 2022 14:20:37 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220503145636-build_diagram/</guid>
+      <description>Sankey diagram 使用软件：Figma Plugin: Sankey Connect 展现数据流动的利器 案例：工作流描述 初始的思路是按照流程图来画，用 Excalidraw 插件画起来很快，但不够明晰。工作流也是处理数</description>
+      <content:encoded><![CDATA[<h2 id="sankey-diagram">Sankey diagram</h2>
+<ul>
+<li>使用软件：<a href="/posts/main/20220503154744-figma/">Figma</a>
+<ul>
+<li>Plugin: Sankey Connect</li>
+</ul>
+</li>
+<li>展现数据流动的利器</li>
+<li>案例：工作流描述
+<ul>
+<li>
+<p>初始的思路是按照流程图来画，用 Excalidraw 插件画起来很快，但不够明晰。工作流也是处理数据流动的过程，适合用 Sankey diagram 来展示。</p>
+</li>
+<li>
+<p>对比</p>
+<figure>
+            <img loading="lazy" src="/ox-hugo/take-notes-draft.png"
+                 alt="Figure 1: take-notes-draft"/> <figcaption>
+                    <p><span class="figure-number">Figure 1: </span>take-notes-draft</p>
+                </figcaption>
+        </figure>
+
+<figure>
+            <img loading="lazy" src="/ox-hugo/take-notes-draft_1.png"
+                 alt="Figure 2: take-notes-draft_1"/> <figcaption>
+                    <p><span class="figure-number">Figure 2: </span>take-notes-draft_1</p>
+                </figcaption>
+        </figure>
+
+<figure>
+            <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
+                 alt="Figure 3: take-notes-sankey"/> <figcaption>
+                    <p><span class="figure-number">Figure 3: </span>take-notes-sankey</p>
+                </figcaption>
+        </figure>
+
+</li>
+<li>
+<p>技巧</p>
+<ul>
+<li>Connect 的渐变色是将颜色从 Solid 改为 Linear，然后把两端的色块拖动到 Node 处并改为对应 Node 的颜色。</li>
+<li>Connect 要尽量弧度舒缓，有美感；留白要均匀。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="heat-map">Heat Map</h2>
+<ul>
+<li>
+<p>使用软件：Figma</p>
+</li>
+<li>
+<p>展现过程中频次高低</p>
+</li>
+<li>
+<p>案例：描述 GTD 和 Note-Taking 过程中思考频次高低。</p>
+<figure>
+        <img loading="lazy" src="/ox-hugo/gtd_note_taking_dark.png"
+             alt="Figure 4: gtd_note_taking_dark"/> <figcaption>
+                <p><span class="figure-number">Figure 4: </span>gtd_note_taking_dark</p>
+            </figcaption>
+    </figure>
+
+<figure>
+        <img loading="lazy" src="/ox-hugo/gtd_note_taking_light.png"
+             alt="Figure 5: gtd_note_taking_light"/> <figcaption>
+                <p><span class="figure-number">Figure 5: </span>gtd_note_taking_light</p>
+            </figcaption>
+    </figure>
+
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Photoshop Techniques</title>
+      <link>https://sheerwill.live/posts/main/20221013221348-photoshop_techniques/</link>
+      <pubDate>Mon, 07 Nov 2022 11:25:59 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20221013221348-photoshop_techniques/</guid>
+      <description>去除双下巴 钢笔将需要去除的双下巴以及下巴下方的脖子部分圈取出来 CMD+Enter 将路径转为选区。 根据实际情况适当羽化几个像素 CMD+j 复制两层 选中复制出的两个图层中</description>
+      <content:encoded><![CDATA[<h2 id="去除双下巴">去除双下巴</h2>
+<ul>
+<li>钢笔将需要去除的双下巴以及下巴下方的脖子部分圈取出来</li>
+<li><code>CMD+Enter</code> 将路径转为选区。</li>
+<li>根据实际情况适当羽化几个像素</li>
+<li><code>CMD+j</code> 复制两层</li>
+<li>选中复制出的两个图层中的上面一个，​<code>CMD+Alt+g</code> 将上方图层用「剪贴蒙版」的形式置入下方图层。</li>
+<li>对上方图层 <code>CMD+T</code> 执行「变换」，鼠标右键选择「变形（Warp)」后，往上拖动路径，直到双下巴消失，边缘平滑后按 <code>Enter</code> 确定。</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Figma</title>
+      <link>https://sheerwill.live/posts/main/20220503154744-figma/</link>
+      <pubDate>Mon, 07 Nov 2022 11:13:36 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220503154744-figma/</guid>
+      <description>Plugin Scale Scale any frame, it’s contents, and all effects to any defined width or height. Sankey Connect Sankey Diagram Connect. </description>
+      <content:encoded><![CDATA[<h2 id="plugin">Plugin</h2>
+<ul>
+<li><a href="https://www.figma.com/community/plugin/836326694968364056/Scale">Scale</a> Scale any frame, it’s contents, and all effects to any defined width or height.</li>
+<li><a href="https://www.figma.com/community/plugin/991975059967102509/Sankey-Connect">Sankey Connect</a> Sankey Diagram Connect.</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
@@ -3790,25 +4234,6 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
     </item>
     
     <item>
-      <title>Photoshop Techniques</title>
-      <link>https://sheerwill.live/posts/main/20221013221348-photoshop_techniques/</link>
-      <pubDate>Wed, 19 Oct 2022 19:32:17 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20221013221348-photoshop_techniques/</guid>
-      <description>去除双下巴 钢笔将需要去除的双下巴以及下巴下方的脖子部分圈取出来 CMD+Enter 将路径转为选区。 根据实际情况适当羽化几个像素 CMD+j 复制两层 选中复制出的两个图层中</description>
-      <content:encoded><![CDATA[<h2 id="去除双下巴">去除双下巴</h2>
-<ul>
-<li>钢笔将需要去除的双下巴以及下巴下方的脖子部分圈取出来</li>
-<li><code>CMD+Enter</code> 将路径转为选区。</li>
-<li>根据实际情况适当羽化几个像素</li>
-<li><code>CMD+j</code> 复制两层</li>
-<li>选中复制出的两个图层中的上面一个，​<code>CMD+Alt+g</code> 将上方图层用「剪贴蒙版」的形式置入下方图层。</li>
-<li>对上方图层 <code>CMD+T</code> 执行「变换」，鼠标右键选择「变形（Warp)」后，往上拖动路径，直到双下巴消失，边缘平滑后按 <code>Enter</code> 确定。</li>
-</ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>MVCC</title>
       <link>https://sheerwill.live/posts/main/20221019183132-mvcc/</link>
       <pubDate>Wed, 19 Oct 2022 19:32:08 +0800</pubDate>
@@ -4373,79 +4798,6 @@ JavaScript Refactoring Tips Refactoring Condition statements Converting callback
 </tr>
 </tbody>
 </table>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Lamport clocks</title>
-      <link>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</link>
-      <pubDate>Wed, 19 Oct 2022 19:31:36 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</guid>
-      <description>Lamport clocks algorithm on initialisation do \(\qquad t := 0\) ▻ each node has its own local variable t end on on any event occurring at the local node do \(\qquad t := t + 1\) end on on request to send message \(m\) do \(\qquad t := t + 1\); send \((t, m)\) via the underlying network link end on on receiving \((t′, m)\)</description>
-      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation <strong>do</strong> <br />
-\(\qquad t := 0\) ▻ each node has its own local variable t <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> any event occurring at the local node <strong>do</strong> <br />
-\(\qquad t := t + 1\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> request to send message \(m\) <strong>do</strong> <br />
-\(\qquad t := t + 1\); send \((t, m)\) via the underlying network link <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> receiving \((t′, m)\) via the underlying network link <strong>do</strong> <br />
-\(\qquad t := max(t, t′) + 1\) <br />
-\(\qquad\)​deliver \(m\) to the application <br />
-<strong>end on</strong></p>
-</blockquote>
-<h2 id="lamport-clocks-in-words">Lamport clocks in words</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
-         alt="Figure 1: lamport-example-simple"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
-        </figcaption>
-</figure>
-
-<ul>
-<li>每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。</li>
-<li>增长后的值设为 \(L(e)\)</li>
-<li>发送消息时附带上当前的计数 \(t\)</li>
-<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
-</ul>
-<p>Properties of this scheme:</p>
-<ul>
-<li>if \(a \rightarrow b\) then \(L(e) &lt; L(b)\)</li>
-<li>However, \(L(a) &lt; L(b)\) does not imply \(a \rightarrow b\)</li>
-<li>Possible that \(L(a) = L(b)\) for \(a \ne b\)</li>
-</ul>
-<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
-<h2 id="lamport-clocks-example">Lamport clocks example</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example.png"
-         alt="Figure 2: lamport-example"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
-        </figcaption>
-</figure>
-
-<p>Let \(N(e)\) be the node at which event \(e\) occurred.</p>
-<p>Then the pair \((L(e), N(e))\) <strong>uniquely identiﬁes</strong> event \(e\).</p>
-<p>Deﬁne a <strong>total order</strong> \(≺\) using Lamport timestamps:</p>
-<p>\((a ≺ b) \iff (L(a) &lt; L(b) ∨ (L(a) = L(b) ∧ N(a) &lt; N(b)))\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<p>This order is <strong>causal</strong>: \((a → b) \Longrightarrow (a ≺ b)\)</p>
-<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
-<p>对于任何两个事件 \(a \ne b\)，那么既不是 \(a ≺ b\) 也不是 \(b ≺ a\)。只要 \(a → b\)，我们就有 \(a ≺ b\)，换句话说，\(≺\) 是局部顺序 \(\rightarrow\) 的线性扩展。然而，如果 \(a \rVert b\)，我们可以有 \(a ≺ b\) 或 \(b ≺ a\)，所以两个事件的顺序是由算法任意决定的。 比如 \((1, A)\) 和 \((1, C)\) 两个事件是平行的，按照 Lamport 的算法，\((1, A)\) 必然是在 \((1, C)\) 之前的，但实际情况可能是 \((1, C)\) 在前。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>\(\iff\) is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>\(∨\) is logical or, \(∧\) is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
 ]]></content:encoded>
     </item>
     
@@ -5246,71 +5598,6 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     </item>
     
     <item>
-      <title>Figma</title>
-      <link>https://sheerwill.live/posts/main/20220503154744-figma/</link>
-      <pubDate>Wed, 19 Oct 2022 19:30:20 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220503154744-figma/</guid>
-      <description>Plugin Scale Scale any frame, it’s contents, and all effects to any defined width or height. Sankey Connect Sankey Diagram Connect. </description>
-      <content:encoded><![CDATA[<h2 id="plugin">Plugin</h2>
-<ul>
-<li><a href="https://www.figma.com/community/plugin/836326694968364056/Scale">Scale</a> Scale any frame, it’s contents, and all effects to any defined width or height.</li>
-<li><a href="https://www.figma.com/community/plugin/991975059967102509/Sankey-Connect">Sankey Connect</a> Sankey Diagram Connect.</li>
-</ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>FIFO broadcast</title>
-      <link>https://sheerwill.live/posts/main/20220616105609-fifo_broadcast/</link>
-      <pubDate>Wed, 19 Oct 2022 19:30:08 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220616105609-fifo_broadcast/</guid>
-      <description>Definition 最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之</description>
-      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
-<p>最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之前被传递，因为它们都是由 \(A\) 发送的。然而，\(m_{2}\) 可以在 \(m_{1}\) 和 \(m_{3}\) 之前、之间或之后的任何时间被传递。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/FIFO-broadcast.png"
-         alt="Figure 1: FIFO-broadcast"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>FIFO-broadcast</p>
-        </figcaption>
-</figure>
-
-<p>同一个节点发送的消息必须要按照发送的顺序传递，不同节点发送的消息可以是任意的顺序，比如 \((m_{2}, m_{1}, m_{3})\)，\((m_{1}, m_{2}, m_{3})\) 或者 \((m_{1}, m_{3}, m_{2})\)。</p>
-<p>关于这些广播协议的另一个细节：我们假设每当一个节点广播一个消息时，它也会将该消息传递给自己（在上图中用回环箭头表示）。一个节点知道它自己广播了什么消息，所以传递给自己看似没有必要，但在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中是需要这个步骤。</p>
-<p>上图中的执行示例是有效的先进先出「广播」，但它违反了因果性：虽然 \(B\) 在接收了 \(m_{1}\) 之后才广播的 \(m_{2}\)，但节点 \(C\) 在 \(m_{1}\) 之前就传递了 \(m_{2}\)。<a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 提供了一个比 FIFO broadcast  更严格的排序属性。顾名思义，它确保信息按因果顺序传递：也就是说，如果一条信息的广播发生在另一条信息的广播之前，那么所有节点必须按这个顺序传递这两条信息。如果两个消息是同时广播的，一个节点可以按任何一个顺序传递它们。</p>
-<h2 id="fifo-broadcast-algorithm">FIFO broadcast algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation <strong>do</strong> <br />
-\(\qquad sendSeq := 0; delivered := \langle0, 0, &hellip;, 0\rangle; buﬀer := \{\}\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> request to broadcast \(m\) at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad\)​send \((i, sendSeq, m)\) via reliable broadcast <br />
-\(\qquad sendSeq := sendSeq + 1\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> receiving \(msg\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> from reliable broadcast at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad buﬀer := buﬀer ∪ {msg}\) <br />
-\(\qquad\)​<strong>while</strong> \(∃sender, m. (sender, delivered[sender], m) ∈ buﬀer\) <strong>do</strong> <br />
-\(\qquad\qquad\)​deliver \(m\) to the application <br />
-\(\qquad\qquad delivered[sender] := delivered[sender] + 1\) <br />
-\(\qquad\)​<strong>end while</strong> <br />
-<strong>end on</strong></p>
-</blockquote>
-<p>节点 \(N_{i}\) 发送的每个 FIFO broadcast 消息都会附带发送节点编号 \(i\) 和一个序列号（该节点发送消息对应的序列号，第一条消息对应为 0，第二条消息对应为 1）。每个节点的本地状态由序列号 \(sendSeq\)（计算该节点广播的消息数量）、\(delivered\)（一个向量，每个节点有一个条目，统计了每个节点发送消息并传递到该节点的数量）和 \(buﬀer\)（一个缓存，用于保留消息直到它们准备好被传递给 Application，也就是 <a href="/posts/main/20220602202933-distribution_system/#receiving-versus-delivering">Receiving versus delivering</a> 中提到的 deliver 阶段）组成。该算法检查来自任何发送者的与预期的下一个序列号相匹配的消息，然后递增该序列号，确保来自每个特定发送者的消息按照序列号递增的顺序被传递。</p>
-<h2 id="summary">Summary</h2>
-<p>FIFO broadcast 的保持消息顺序的原理和 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport clocks</a> 很相似，都是用递增的整数来确定同一个节点上的消息传递的顺序，\(deliver\) 是个存放着所有节点 \(sendSeq\) 的向量，存放于每个节点，配合 \(sendSeq\) 控制来自同一个节点的消息传递的顺序。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>\(msg\) 就是 \((i, sendSeq, m)\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Doom Emacs</title>
       <link>https://sheerwill.live/posts/main/20220505220832-doom_emacs/</link>
       <pubDate>Wed, 19 Oct 2022 19:29:57 +0800</pubDate>
@@ -5423,63 +5710,6 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
 </span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span></code></pre></div>]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Causality and Happen-before relation</title>
-      <link>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</link>
-      <pubDate>Wed, 19 Oct 2022 19:29:29 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
-      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event a happens before event b, written a → b. 那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前： a 和 b 发生在相同节</description>
-      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
-<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
-<p>event a <strong>happens before</strong> event b, written a → b.</p>
-<p>那么在分布式，有三种情况，满足其中一条，则 a 是发生在 b 之前：</p>
-<ul>
-<li>
-<p>a 和 b 发生在相同节点，并且按照本地节点的执行顺序，a 发生在 b 之前。</p>
-</li>
-<li>
-<p>事件 a 是发送消息 m，事件 b 是接收相同的消息 m（假定发送的消息都是唯一的）。</p>
-</li>
-<li>
-<p>有这么一个时间 c 满足，a → c 且 c → b。</p>
-<p>happens-before relation 是局部的顺序：有可能存在既不满足 a → b 也不满足 b → a，这样 a 和 b 就是并行的，写作 a || b。</p>
-</li>
-</ul>
-<h3 id="happen-before-relation-example">Happen-before relation example</h3>
-<figure>
-    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
-         alt="Figure 1: happens-before-example"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
-        </figcaption>
-</figure>
-
-<ul>
-<li>a → b, c → d, and e → f due to process order</li>
-<li>b → c and d → f due to messages m1 and m2</li>
-<li>a → c, a → d, a → f, b → d, b → f, and c → f due to transitivity</li>
-<li>a || e, b || e, c || e, and d || e</li>
-</ul>
-<h2 id="causality">Causality</h2>
-<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
-<ul>
-<li>当 a → b, 那么 a 可能是 b 的因。</li>
-<li>当 a || b, a 和 b 之间不存在因果关系。</li>
-</ul>
-<figure>
-    <img loading="lazy" src="/ox-hugo/causality.png"
-         alt="Figure 2: causality"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>causality</p>
-        </figcaption>
-</figure>
-
-<p>Let ≺ be a strict total order on events.</p>
-<p>如果 (a → b) ⇒ (a ≺ b) 符号 ≺ 就是所谓的因果顺序。</p>
-<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 A 和事件 B 在空间上相距很远，但是在时间上相距很近，那么从事件 A 发出的信号不可能在事件 B 之前到达 B 的位置，反之亦然。因此 A 和 B 是肯定没有因果关系的。</p>
-<p>一个在空间上离 A 很近，时间上距离 A 很远的事件 C，将在 A 的光锥内，也就是说 A 的信号有可能到达 C，因此 A 可能影响 C。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
-]]></content:encoded>
     </item>
     
     <item>
@@ -6279,89 +6509,6 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
     </item>
     
     <item>
-      <title>Build Diagram</title>
-      <link>https://sheerwill.live/posts/main/20220503145636-build_diagram/</link>
-      <pubDate>Wed, 19 Oct 2022 19:29:08 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220503145636-build_diagram/</guid>
-      <description>Sankey diagram 使用软件：Figma Plugin: Sankey Connect 展现数据流动的利器 案例：工作流描述 初始的思路是按照流程图来画，用 Excalidraw 插件画起来很快，但不够明晰。工作流也是处理数</description>
-      <content:encoded><![CDATA[<h2 id="sankey-diagram">Sankey diagram</h2>
-<ul>
-<li>使用软件：<a href="/posts/main/20220503154744-figma/">Figma</a>
-<ul>
-<li>Plugin: Sankey Connect</li>
-</ul>
-</li>
-<li>展现数据流动的利器</li>
-<li>案例：工作流描述
-<ul>
-<li>
-<p>初始的思路是按照流程图来画，用 Excalidraw 插件画起来很快，但不够明晰。工作流也是处理数据流动的过程，适合用 Sankey diagram 来展示。</p>
-</li>
-<li>
-<p>对比</p>
-<figure>
-            <img loading="lazy" src="/ox-hugo/take-notes-draft.png"
-                 alt="Figure 1: take-notes-draft"/> <figcaption>
-                    <p><span class="figure-number">Figure 1: </span>take-notes-draft</p>
-                </figcaption>
-        </figure>
-
-<figure>
-            <img loading="lazy" src="/ox-hugo/take-notes-draft_1.png"
-                 alt="Figure 2: take-notes-draft_1"/> <figcaption>
-                    <p><span class="figure-number">Figure 2: </span>take-notes-draft_1</p>
-                </figcaption>
-        </figure>
-
-<figure>
-            <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
-                 alt="Figure 3: take-notes-sankey"/> <figcaption>
-                    <p><span class="figure-number">Figure 3: </span>take-notes-sankey</p>
-                </figcaption>
-        </figure>
-
-</li>
-<li>
-<p>技巧</p>
-<ul>
-<li>Connect 的渐变色是将颜色从 Solid 改为 Linear，然后把两端的色块拖动到 Node 处并改为对应 Node 的颜色。</li>
-<li>Connect 要尽量弧度舒缓，有美感；留白要均匀。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="heat-map">Heat Map</h2>
-<ul>
-<li>
-<p>使用软件：Figma</p>
-</li>
-<li>
-<p>展现过程中频次高低</p>
-</li>
-<li>
-<p>案例：描述 GTD 和 Note-Taking 过程中思考频次高低。</p>
-<figure>
-        <img loading="lazy" src="/ox-hugo/gtd_note_taking_dark.png"
-             alt="Figure 4: gtd_note_taking_dark"/> <figcaption>
-                <p><span class="figure-number">Figure 4: </span>gtd_note_taking_dark</p>
-            </figcaption>
-    </figure>
-
-<figure>
-        <img loading="lazy" src="/ox-hugo/gtd_note_taking_light.png"
-             alt="Figure 5: gtd_note_taking_light"/> <figcaption>
-                <p><span class="figure-number">Figure 5: </span>gtd_note_taking_light</p>
-            </figcaption>
-    </figure>
-
-</li>
-</ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Beancount</title>
       <link>https://sheerwill.live/posts/main/20220821223012-beancount/</link>
       <pubDate>Wed, 19 Oct 2022 19:28:54 +0800</pubDate>
@@ -6581,91 +6728,6 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
 <h2 id="conclusion">Conclusion</h2>
 <p>警惕 All-In-One 的想法，并不是所有场景都有统一的解决方案。工作和生活分开管理 To-Do 还有个好处，休假的时候你完全可以屏蔽掉工作的内容。</p>
 <p>另外不管工作和生活中，长期计划用甘特图来管理还是非常不错的，确立里程碑，控制进度，把握长期计划的走向。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>How I Take Notes</title>
-      <link>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</link>
-      <pubDate>Wed, 19 Oct 2022 19:27:55 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/article/20220505162419-how_i_take_notes/</guid>
-      <description>ID: 46dfdbc7-24f6-4edc-9e61-dab01aa185a1 ROAM_REFS: https://jethrokuan.github.io/org-roam-guide/ Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、B</description>
-      <content:encoded><![CDATA[<p>ID: 46dfdbc7-24f6-4edc-9e61-dab01aa185a1</p>
-<pre><code>ROAM_REFS: https://jethrokuan.github.io/org-roam-guide/
-</code></pre>
-<h2 id="introduction">Introduction</h2>
-<p>最先接触到 <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettlekasten</a> (German: &ldquo;slip box&rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、Bear、Notion、Obsidian（当时还不知道 Backlinks），都觉得不太合适，尤其是第一步文件夹的分类就让我头疼，很多内容是互相交叉的，并不是简单的可以归在一个分类下面，若是细分的分类过多，又会过于混乱，最后的结果就是“垃圾场”。</p>
-<ul>
-<li>根据 Zettlekasten 衍生出来的各种 APP 中的 Backlinks 将笔记串联起来，作为一个草稿箱，定期去整理回顾形成自己的知识。</li>
-</ul>
-<p>另外一个极为吸引我的就是 Daily Notes 或者 Journals，非常适合我当前的工作场景。「生产问题」或者「零碎的需求」会不断从打断我的工作，有时候会非常紧急需要优先处理「需求」或者「生产问题」，解决后会有两种情况。</p>
-<ul>
-<li>
-<p>问题或需求解决后，要花一些时间梳理之前在做的事情才能够重新接续之前的思路继续工作。</p>
-</li>
-<li>
-<p>问题解决后几个月遇到相同或类似的问题，虽然记得解决过，但是当时解决的思路以及细节需要注意的地方就模糊不清了。通常为了万无一失需要重复上次的工作，仔细查看过代码结合业务后，才能作出正确的判断，确保干净利落地解决问题。</p>
-</li>
-</ul>
-<p>上面两种情况完全可以用 Journals 记录解决问题前的工作思路，记录解决问题后的思路，来避免上述两种情况发生。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/take-notes-sankey.png"
-         alt="Figure 1: take-notes-sankey"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>take-notes-sankey</p>
-        </figcaption>
-</figure>
-
-<p>信息大爆炸的副作用就是信噪比降低，通过分阶段的信息处理，不断地归纳、处理形成自己的想法，并将其固化下来，作为知识库。</p>
-<h2 id="流程设计">流程设计</h2>
-<ol>
-<li>
-<p>图中的流程其实就是多层的过滤器。</p>
-<p>从最初的信息源处到 Logseq 的过程，只需要考虑这个信息源是否值得读，是否值得扩展，答案确定则大胆地记入 Logseq。其中零散的思绪及文章阅读记录在 Journals 中，书籍这类大部头则在 page 中记录，前者因为零散在 Journals 中，需要加 page 的双链或 Tag。</p>
-<p>Logseq 中 Journals 中的事件重要的会被我移到 Org-roam 中的 Journals.org 文件中，这个文件类似于日记的作用，并不是每天都会记录，记录多了之后按照年份进行分割。</p>
-<p>从 Logseq 到 Org-roam 则是知识固化的过程，需要考虑该知识是否以后会被自己再次用到，是否值得扩展，答案确定则精炼后记入，并标明灵感来源，引用材料。因此，Logseq 中记录的都只能算是草稿，需要再次的整合，提高信噪比。</p>
-</li>
-<li>
-<p>对信息源处理时，可以用 Excalidraw 进行流程图、思维图等图的草稿绘制。后续有时间的时候再用 Figma 重新绘制，视觉和逻辑上的重新设计，使得阐述的内容更加直观。</p>
-<p>对于产品来说，通过<a href="/posts/main/20220503145636-build_diagram/">设计降低理解门槛和使用门槛</a>，是一件挺重要的事情。输出文章同样如此。</p>
-</li>
-<li>
-<p>Org-roam 中也有收集想法的地方，Inbox.org，定期会进行清理。 notes 中 outline 结构是由 <code>*</code> 实现的，导出时是标题格式，为了随时可以导出发布，要注意 outline 结构。输出是通过 Org-export-dispatch 来转为 .md 或 .html 文件，为了更符合使用的格式，在 <a href="/posts/main/20220505220832-doom_emacs/">Emacs</a> 中做了一些设置。</p>
-</li>
-<li>
-<p>Org-roam-ui 非常优秀，不管是 UI 还是操作性，可以明晰的查看笔记之间的关联，知识是否形成闭环，哪些知识还需要进行拓展阅读。</p>
-</li>
-</ol>
-<h2 id="准则">准则</h2>
-<ul>
-<li>
-<p>卡片应该具有原子性。这点和编程的原则很像，一个方法只做一件事，在这里也就是只记录一个主题的内容。</p>
-</li>
-<li>
-<p>卡片内容应该具有独立性。这点和上面并不冲突，设想一下，为了保持每个卡片的纯净，X 和 Y 之间的关系，你可能会用 Z 去链接他们。但回顾的时候，没有 Z，单纯回顾 X 或 Y 无法得知两者之间的关联。所以这里不管在 X 或者 Y 中去描述与对方的关系都是可以的，一点点内容的冗余可以使得内容更加独立。</p>
-</li>
-<li>
-<p>遵守奥卡姆剃刀原则。对新工具充分调研，是否满足自己的需求后再考虑替换或增加到现有工作流当中。</p>
-</li>
-<li>
-<p>Literature Notes 需要及时回顾，在一两天内转化为 Permanent Notes 或者直接删掉。</p>
-</li>
-</ul>
-<h2 id="误区">误区</h2>
-<ul>
-<li>
-<p>All-In-One 的思想。Markdown 的扩展语法实现并不统一，扩展语法的内容导出时经常要手动兼容，或不可再用。云端服务的不可持续性，互联网这么多年已经太多的云端服务用着用着就停掉了。</p>
-</li>
-<li>
-<p>Permanent Notes 并不是不需要回顾和修改了。</p>
-</li>
-<li>
-<p>记太多的内容。从资料中复制大量的原文。笔记应该是对所读内容的提炼：用自己的话改写观点和概念有助于加强理解。</p>
-</li>
-<li>
-<p>太复杂的笔记流程。复杂的工作流通常需要自动化，但自动化不利于笔记的整理，形成最重笔记时应该慎重考虑哪些是需要保留的，否则知识库就会变成垃圾场。</p>
-</li>
-</ul>
 ]]></content:encoded>
     </item>
     
@@ -7007,86 +7069,6 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
 </li>
 <li id="fn:6">
 <p>向上去整&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Vector clocks</title>
-      <link>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Wed, 19 Oct 2022 19:26:58 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</guid>
-      <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \l</description>
-      <content:encoded><![CDATA[<p>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
-<ul>
-<li>假定分布式系统中有 \(n\) 个节点，\(N = \langle​N_{1}, N_{2}, &hellip;, N_{n}\rangle\)</li>
-<li><strong>事件 \(a\)</strong> 的向量时间戳写成 \(V(a) = \langle​t_{1}, t_{2}, &hellip;, t_{n}\rangle\)</li>
-<li>\(t_{i}\) 是 \(N_{i}\) 节点发生时间的数量</li>
-<li>每个​<strong>节点</strong>​都有一个当前的向量时间戳 \(T\)</li>
-<li>节点 \(N_{i}\) 上的事件，向量时间戳 \(T[i]\) 递增。</li>
-<li>每个消息都附带上向量时间戳</li>
-<li>接收者将消息中的向量时间戳合并到本地</li>
-</ul>
-<p>除了标量和向量之间的区别之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
-<h2 id="vector-clocks-algorithm">Vector clocks algorithm</h2>
-<blockquote>
-<p><strong>on</strong> initialisation at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad T := \langle0, 0, &hellip;, 0\rangle\) ▻ local variable at node \(N_{i}\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> any event occurring at node \(N_{i}\) <strong>do</strong> <br />
-\(\qquad T[i] = T[i] + 1\) <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> request to send message \(m\) at node N<sub>i</sub> <strong>do</strong> <br />
-\(\qquad T[i] := T[i] + 1\); send \((T, m)\) via network <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> receiving \((T&rsquo;, m)\) at node \(N_{i}\) via the network <strong>do</strong> <br />
-\(\qquad T[j] := max(T[j], T&rsquo;[j])\) for every \(j \in {1, &hellip;, n}\) <br />
-\(\qquad T[i] := T[i] + 1\); deliver \(m\) to the application <br />
-<strong>end on</strong></p>
-</blockquote>
-<h2 id="vector-clocks-example">Vector clocks example</h2>
-<p>假定节点向量是 \(N = \langle​A, B, C\rangle\):</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/vector-example.png"
-         alt="Figure 1: vector-example"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>vector-example</p>
-        </figcaption>
-</figure>
-
-<p>事件 \(e\) 的向量时间戳是一系列事件的集合， \(e\) 和它的因果以来：\({e} \cup {a | a \rightarrow e}\)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>​<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
-<p>比如，\(\langle2, 2, 0\rangle\)，第一个 2 是表示来自于 \(A\) 的两个事件，第二个 2 是表示来自于 \(B\) 的两个事件，并且没有来自于 \(C\) 的事件。</p>
-<h2 id="vector-clocks-ordering">Vector clocks ordering</h2>
-<p>Define the following order on vector timestamps(in a system with \(n\) nodes):</p>
-<ul>
-<li>\(T = T&rsquo; \iff T[i] = T&rsquo;[i]\) for all \(i \in {1, &hellip;, n}\)</li>
-<li>\(T \le T&rsquo; \iff T[i] \le T&rsquo;[i]\) for all \(\in {1, &hellip;, n}\)</li>
-<li>\(T &lt; T&rsquo; \iff T \le T&rsquo;\) and \(T \neq T&rsquo;\)</li>
-<li>\(T || T&rsquo; \iff T &gt; T&rsquo;\) and \(T&rsquo; &gt; T\)</li>
-</ul>
-<p>\(V(a) \le V(b) \iff ({a} \cup {e | e \rightarrow a}) ⊆ ({b} \cup{} {e | e \rightarrow b})\)</p>
-<p>Properties of this order:</p>
-<ul>
-<li>\((V(a) &lt; V(b)) \iff (a \rightarrow b)\)</li>
-<li>\((V(a) = V(b)) \iff (a = b)\)</li>
-<li>\((V(a) \rVert V(b)) \iff (a \rVert b)\)</li>
-</ul>
-<p>然后，我们对向量的时间戳进行部分排序。如果第一个向量的每个元素都小于或等于第二个向量的相应元素，我们就说一个向量小于或等于另一个向量。如果一个向量小于或等于另一个向量，并且它们至少有一个元素是不同的，那么这个向量就严格小于另一个向量。然而，如果一个向量在一个元素中的值较大，而另一个向量在另一个元素中的值较大，那么这两个向量是不可比的。例如，\(T = \langle2, 2, 0\rangle\) 和 \(T&rsquo; = \langle0, 0, 1\rangle\) 是不可比的，因为 \(T[1] &gt; T&rsquo;[1]\) 但 \(T[3] &lt; T&rsquo;[3]\)。</p>
-<p>向量时间戳的部分顺序与发生之前关系所定义的部分顺序完全对应。因此，向量时钟算法为我们提供了一种在实践中计算发生前关系的机制。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>\(\cup\) 并集的意思，\(\cap\) 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>集合的描述方法，描述格式为 \({x | P(x), x ∈ Ω}\)。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
