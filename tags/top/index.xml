@@ -6,11 +6,11 @@
     <description>Recent content in top on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Oct 2022 19:27:05 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Nov 2022 16:26:22 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/top/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://sheerwill.live/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Wed, 19 Oct 2022 19:27:05 +0800</pubDate>
+      <pubDate>Tue, 29 Nov 2022 16:26:22 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
