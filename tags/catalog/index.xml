@@ -6,11 +6,11 @@
     <description>Recent content in catalog on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Nov 2022 16:26:21 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/catalog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Dec 2022 14:12:31 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/catalog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Database</title>
       <link>https://sheerwill.live/posts/main/20220530185321-database/</link>
-      <pubDate>Tue, 29 Nov 2022 16:26:21 +0800</pubDate>
+      <pubDate>Fri, 02 Dec 2022 14:12:31 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220530185321-database/</guid>
       <description>Index MVCC Troubleshoot Issues in MySQL </description>
@@ -23,7 +23,7 @@
     <item>
       <title>Refactoring Code</title>
       <link>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</link>
-      <pubDate>Tue, 29 Nov 2022 16:26:20 +0800</pubDate>
+      <pubDate>Fri, 02 Dec 2022 14:12:30 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</guid>
       <description>Refactoring Code How To Find Time Complexity Of An Algorithm
