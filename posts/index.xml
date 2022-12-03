@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Dec 2022 12:16:27 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Dec 2022 12:20:49 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Sat, 03 Dec 2022 12:16:27 +0800</pubDate>
+      <pubDate>Sat, 03 Dec 2022 12:20:49 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on Ubuntu git clone git://git.sv.gnu.org/emacs.git sudo apt install build-essential</description>
@@ -98,8 +98,8 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+title</span><span class="c">: Book reviews</span>
 </span></span><span class="line"><span class="cl"><span class="cs">#+COLUMNS</span><span class="c">: %25ITEM(Item) %10AUTHOR(Author) %10CATEGORY(Category) %15STATE(State) %15SCORE(Score) %10VERSION(Version) %15REMARK(Remark) %25NOTELINK(Notelink)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="cs">#+BEGIN</span><span class="c">: columnview :hlines 1 :id &#34;file:~/Dropbox/org/references/Book-Reviews.org&#34; :skip-empty-rows t</span>
-</span></span><span class="line"><span class="cl">#+END
+</span></span><span class="line"><span class="cl"><span class="c">#+BEGIN: </span><span class="cs">columnview</span><span class="c"> :hlines 1 :id &#34;file:~/Dropbox/org/references/Book-Reviews.org&#34; :skip-empty-rows t
+</span></span></span><span class="line"><span class="cl"><span class="c">#+END:</span>
 </span></span></code></pre></div><p>统计的 <code>COLUMNS</code> 来自与 Head 的 Properties，两者要一一对应，如此都设置好了之后在表格处（columnview 那里）按 <code>C-c C-c</code> 生成表格，即 Dynamic Table。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="c">:PROPERTIES:
 </span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cs">:Author: 作者
