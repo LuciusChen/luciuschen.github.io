@@ -3,10 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://sheerwill.live/</loc>
-    <lastmod>2022-12-02T16:44:34+08:00</lastmod>
+    <lastmod>2022-12-03T12:16:27+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/</loc>
-    <lastmod>2022-12-02T16:44:34+08:00</lastmod>
+    <lastmod>2022-12-03T12:16:27+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</loc>
+    <lastmod>2022-12-03T12:16:27+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</loc>
     <lastmod>2022-12-02T16:44:34+08:00</lastmod>
@@ -39,9 +42,6 @@
     <lastmod>2022-12-02T14:12:53+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/tags/</loc>
-    <lastmod>2022-12-02T14:12:53+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</loc>
     <lastmod>2022-12-02T14:12:53+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220706112803-anki/</loc>
