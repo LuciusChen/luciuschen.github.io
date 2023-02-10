@@ -6,7 +6,36 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Feb 2023 14:28:37 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Feb 2023 14:55:12 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Left-Prefix Index Rule is determined by the B&#43;tree structure</title>
+      <link>https://sheerwill.live/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/</link>
+      <pubDate>Fri, 10 Feb 2023 14:55:12 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/</guid>
+      <description>联合索引遵循「最左匹配原则」，MySQL 联合索引创建的时候会对 (a, b) 其中的 a 先进行排序，再在 a 的基础上对 b 进行排序。如果是 (a, b, c) 也是一样的方式</description>
+      <content:encoded><![CDATA[<p>联合索引遵循「最左匹配原则」，MySQL 联合索引创建的时候会对 (a, b) 其中的 a 先进行排序，再在 a 的基础上对 b 进行排序。如果是 (a, b, c) 也是一样的方式。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/concatenated-index.png"
+         alt="Figure 1: concatenated-indexes"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>concatenated-indexes</p>
+        </figcaption>
+</figure>
+
+<p>因此，判断是否符合「最左匹配原则」，是否能够使用索引，可以根据底层的索引实现逻辑来进行判断。即，按照创建索引时的顺序，联合索引中的第一个字段是有序的，一旦第一个字段确定值，那么第二个字段也是有序的，以此类推，有序即可用索引，否则不行。</p>
+<ul>
+<li><code>&lt;,&gt;</code> 和 <code>BETWEEN</code> 可以用索引，但是按照上述的逻辑，范围查询字段后的索引字段就无法用上索引，因为范围查询字段的值并没有确定，后续的字段就是无序的。</li>
+<li><code>LIKE</code> 在 <code>&quot;a%&quot;</code> 这种右匹配时，会在索引是按照字母排序的情况下用上索引（% 左侧字符合适的情况下也可以建立前缀索引）。至于左匹配和全匹配，按照上述的逻辑，完全是无序的，无法使用索引。</li>
+<li><code>WHERE b = ? AND a = ? AND c = ?</code> 这种颠倒了顺序的 SQL 是不影响「最左匹配原则」的，数据库执行前，解释器会对其重新排序优化。</li>
+</ul>
+<p>理解组合索引，需要先理解堆表和索引组织表结构。</p>
+<ul>
+<li><a href="/posts/main/evd-heap_table/">Heap Table</a></li>
+<li><a href="/posts/main/evd-clustered_indexes_index_organized_tables_iot/">Clustered Indexes / Index Organized Tables (IOT)</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>The difference between B-tree and B&#43;tree</title>
       <link>https://sheerwill.live/posts/main/clm-the_difference_between_b_tree_and_b&#43;tree/</link>
@@ -138,35 +167,6 @@
 <li>可以节省堆表占用的空间</li>
 <li>访问聚簇索引可以直接获取数据（即「覆盖索引」）</li>
 <li>二级索引需要回表，即需要根据二级索引的叶节点内的主键，再对主键形成的聚簇索引进行遍历，查找到具体的记录。</li>
-</ul>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>The Left-Prefix Index Rule is determined by the B&#43;tree structure</title>
-      <link>https://sheerwill.live/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/</link>
-      <pubDate>Fri, 10 Feb 2023 14:27:01 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/</guid>
-      <description>联合索引遵循「最左匹配原则」，MySQL 联合索引创建的时候会对 (a, b) 其中的 a 先进行排序，再在 a 的基础上对 b 进行排序。如果是 (a, b, c) 也是一样的方式</description>
-      <content:encoded><![CDATA[<p>联合索引遵循「最左匹配原则」，MySQL 联合索引创建的时候会对 (a, b) 其中的 a 先进行排序，再在 a 的基础上对 b 进行排序。如果是 (a, b, c) 也是一样的方式。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/concatenated-index.png"
-         alt="Figure 1: concatenated-indexes"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>concatenated-indexes</p>
-        </figcaption>
-</figure>
-
-<p>因此，判断是否符合「最左匹配原则」，是否能够使用索引，可以根据底层的索引实现逻辑来进行判断。即，按照创建索引时的顺序，联合索引中的第一个字段是有序的，一旦第一个字段确定值，那么第二个字段也是有序的，以此类推，有序即可用索引，否则不行。</p>
-<ul>
-<li><code>&lt;,&gt;</code> 和 <code>BETWEEN</code> 可以用索引，但是按照上述的逻辑，范围查询字段后的索引字段就无法用上索引，因为范围查询字段的值并没有确定，后续的字段就是无序的。</li>
-<li><code>LIKE</code> 在 <code>&quot;a%&quot;</code> 这种右匹配时，会在索引是按照字母排序的情况下用上索引（% 左侧字符合适的情况下也可以建立前缀索引）。至于左匹配和全匹配，按照上述的逻辑，完全是无序的，无法使用索引。</li>
-<li><code>WHERE b = ? AND a = ? AND c = ?</code> 这种颠倒了顺序的 SQL 是不影响「最左匹配原则」的，数据库执行前，解释器会对其重新排序优化。</li>
-</ul>
-<p>理解组合索引，需要先理解堆表和索引组织表结构。</p>
-<ul>
-<li><a href="/posts/main/evd-heap_table/">EVD - Heap Table</a></li>
-<li><a href="/posts/main/evd-clustered_indexes_index_organized_tables_iot/">EVD - Clustered Indexes / Index Organized Tables (IOT)</a></li>
 </ul>
 ]]></content:encoded>
     </item>
