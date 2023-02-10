@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>wiki on Lucius | Braindump</title>
+    <link>https://sheerwill.live/tags/wiki/</link>
+    <description>Recent content in wiki on Lucius | Braindump</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Feb 2023 14:19:11 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/wiki/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaScript Refactoring</title>
+      <link>https://sheerwill.live/posts/main/20230208145009-javascript_refactoring/</link>
+      <pubDate>Fri, 10 Feb 2023 14:19:11 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20230208145009-javascript_refactoring/</guid>
+      <description>Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await Refactoring Code examples Callback Hell </description>
+      <content:encoded><![CDATA[<h2 id="refactoring-tips">Refactoring Tips</h2>
+<ul>
+<li><a href="/posts/main/20220506193520-refactoring_condition_statements/">Refactoring Condition statements</a></li>
+<li><a href="/posts/main/20220506193545-converting_callbacks_to_promises/">Converting callbacks to promises</a></li>
+<li><a href="/posts/main/20220506193624-refactoring_promise_chains_with_async_await/">Refactoring Promise chains with async/await</a></li>
+</ul>
+<h2 id="refactoring-code-examples">Refactoring Code examples</h2>
+<ul>
+<li><a href="/posts/main/20220616092944-callback_hell/">Callback Hell</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>

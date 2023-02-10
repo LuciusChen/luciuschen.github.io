@@ -6,11 +6,11 @@
     <description>Recent content in top on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Dec 2022 14:12:32 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Feb 2023 14:17:56 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/top/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
       <link>https://sheerwill.live/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Fri, 02 Dec 2022 14:12:32 +0800</pubDate>
+      <pubDate>Fri, 10 Feb 2023 14:17:56 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
@@ -58,7 +58,7 @@
 <p>分布式系统中经常涉及到需要测量时间，比如：</p>
 <ul>
 <li>Schedulers, timeouts, failure detectors, retry timers</li>
-<li>Performance measurements, statistics, profiling (performance analysis也称为profiling)</li>
+<li>Performance measurements, statistics, profiling (performance analysis 也称为 profiling)</li>
 <li>Log files &amp; databases: record when an event occurred</li>
 <li>Data with time-limited validity (e.g. cache entries)</li>
 <li><strong>Determining order of events across several nodes</strong></li>
@@ -213,7 +213,7 @@
 </li>
 <li>
 <p><strong>Multi-value register</strong>:</p>
-<p>采用 Vector clocks 时，\(t_{2 }\gt t_{1}\) 则保留 \(v_{2}\) 丢弃 \(v_{1}\); \(t_{2} \rVert t_{1}\) 则 \(\{v_{1}, v_{2}\}\) 都保留。</p>
+<p>采用 Vector clocks 时，\(t_{2 } &gt; t_{1}\) 则保留 \(v_{2}\) 丢弃 \(v_{1}\); \(t_{2} \rVert t_{1}\) 则 \(\{v_{1}, v_{2}\}\) 都保留。</p>
 </li>
 </ul>
 <p>向量时钟的缺点是它们会变得很昂贵：每个客户端都需要在向量中输入一个条目，在有大量客户端的系统中（或者客户端每次重启都会有新的身份），这些向量会变得很大，可能会比数据本身占用更多内存。更多类型的逻辑时钟，如点状版本向量（Dotted version vectors）<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>，已经被开发出来以优化这种类型的系统。</p>
@@ -236,7 +236,7 @@
         </figcaption>
 </figure>
 
-<p>通过使用三个副本可以解决这个难题<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。将每个读写请求发送到所有三个副本，但只要收到 \(≥2\) 个响应，就认为请求成功。在这个例子中，写在复制体 \(B\) 和 \(C\) 上成功，而读在副本 \(A\) 和 \(B\) 上成功。对读和写都采用 &ldquo;三选二 &ldquo;的策略，可以保证至少有一个对读的响应来自看到最近写的副本（在这个例子中，这是副本 \(B\)）。</p>
+<p>通过使用三个副本可以解决这个难题<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。将每个读写请求发送到所有三个副本，但只要收到 \(\geq2\) 个响应，就认为请求成功。在这个例子中，写在复制体 \(B\) 和 \(C\) 上成功，而读在副本 \(A\) 和 \(B\) 上成功。对读和写都采用 &ldquo;三选二 &ldquo;的策略，可以保证至少有一个对读的响应来自看到最近写的副本（在这个例子中，这是副本 \(B\)）。</p>
 <p>对于同一个请求，不同的副本可能会返回不同的响应：在上图中，\(A\) 处读取会返回初始值 \((t_{0}, v_{0})\)，而 \(B\) 处的读取会返回该客户端之前写入的 \((t_{1}, v_{1})\)。利用时间戳，客户端可以知道哪个响应是最近的，将 \(v_{1}\) 返回给 Application。</p>
 <p>在这个例子中，响应写请求的副本集合 \((B, C)\) 是一个 write quorum，而响应读请求的集合 \((A, B)\) 是一个 read quorum。一般来说，quorum 是一个最小的节点集合，它必须对某个请求作出响应才能成功。为了确保读写一致性，write quorum 和 read quorum 必须有一个非空的交集：换句话说，read quorum 必须包含至少一个已经被承认的 write quorum。</p>
 <p>在分布式系统中，常见的 majority quorum 是由超过半数的节点组成的任意子集。在三个节点的系统 \(\{A, B, C\}\) 中，majority quorum 可以是 \(\{A, B\}\)、\(\{A, C\}\) 和 \(\{B, C\}\)。通常来讲，奇数节点的系统，\(\frac{n+1}{2}\) 大小的任意子集就是 majority quorum，偶数节点的系统，需要四舍五入 \(\left \lceil \frac{n+1}{2} \right \rceil = \frac{n+2}{2}\)<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>。majority quorum 有个特性：任意两个 quorums 至少有一个共同的元素，也就是交集至少有一个节点。</p>
@@ -262,14 +262,13 @@
 </ul>
 <p>利用 FIFO-total order broadcast 很容易建立一个复制系统：将每个更新请求广播给副本，副本基于传递的每个消息更新其状态。副本作为一个状态机，其输入是消息的传递，这种就叫做 state machine replication (SMR)。只要更新逻辑是确定的：任何两个处于相同状态的复制体，被赋予相同的输入，最终必须处于相同的下一个状态。甚至错误也必须是确定的：如果一个副本的更新成功了，但在另一个副本上失败了，它们就会变得不一致。</p>
 <p>SMR 的一个优秀特点是，从一个状态到下一个状态只要是确定的，其中的逻辑可以任意复杂。例如，可以处理具有任意业务逻辑的整个数据库事务，而这个逻辑可以同时依赖于广播信息和数据库的当前状态。一些分布式数据库以每个副本独立执行相同的确定性交易代码（这被称为主动复制）来实现复制。这一原则也是区块链、加密货币和分布式账本的基础：区块链中的 &ldquo;区块链 &ldquo;无非是由 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 传递的消息序列，每个副本都确定性地执行这些区块中描述的交易，以确定账本的状态（例如，谁拥有哪些钱）。一个 &ldquo;智能合约 &ldquo;只是一个确定的程序，当一个特定的消息被传递时，副本会执行这个程序。</p>
-<blockquote>
-<p><strong>on</strong> request to perform update \(u\) <strong>do</strong> <br />
-\(\qquad\)​send \(u\) via FIFO-total order broadcast <br />
-<strong>end on</strong></p>
-<p><strong>on</strong> delivering \(u\) through FIFO-total order broadcast <strong>do</strong> <br />
-\(\qquad\)​update state using arbitrary deterministic logic! <br />
-<strong>end on</strong></p>
-</blockquote>
+<figure>
+    <img loading="lazy" src="/ox-hugo/state-machine-replication.svg"
+         alt="Figure 9: state-machine-replication"/> <figcaption>
+            <p><span class="figure-number">Figure 9: </span>state-machine-replication</p>
+        </figcaption>
+</figure>
+
 <p>密切相关的概念：</p>
 <ul>
 <li>可序列化事务（按传递顺序执行）</li>
@@ -313,8 +312,8 @@
 <p>用来保证多个节点 atomic commitment 最常用的算法是 two-phase commit protocol (2PC)，也有 three-phase commit protocol，但这里不做研究。</p>
 <figure>
     <img loading="lazy" src="/ox-hugo/Two-phase%20commit%20%282PC%29.png"
-         alt="Figure 9: Two-phase commit (2PC)"/> <figcaption>
-            <p><span class="figure-number">Figure 9: </span>Two-phase commit (2PC)</p>
+         alt="Figure 10: Two-phase commit (2PC)"/> <figcaption>
+            <p><span class="figure-number">Figure 10: </span>Two-phase commit (2PC)</p>
         </figcaption>
 </figure>
 
@@ -329,7 +328,7 @@
 <hr>
 <ol>
 <li id="fn:1">
-<p>if \(a \rVert b\) we could have either \(a ≺ b\) or \(b ≺ a\), so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>if \(a \rVert b\) we could have either \(a \prec b\) or \(b \prec a\), so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2">
 <p>replication 翻译成「复制」，名词；replica 翻译成「副本」，名词。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
