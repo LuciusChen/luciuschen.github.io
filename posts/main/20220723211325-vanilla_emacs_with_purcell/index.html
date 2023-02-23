@@ -23,7 +23,7 @@
 <meta property="og:url" content="https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/" />
 <meta property="article:section" content="posts" />
   
-  <meta property="article:modified_time" content="2023-02-20T22:37:22&#43;08:00" />
+  <meta property="article:modified_time" content="2023-02-23T17:54:52&#43;08:00" />
 
 
 <script type="application/ld+json">
@@ -56,10 +56,10 @@
   "keywords": [
     
   ],
-  "wordCount" : "12082",
+  "wordCount" : "12141",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
-  "dateModified": "2023-02-20T22:37:22+08:00",
+  "dateModified": "2023-02-23T17:54:52+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -265,9 +265,9 @@ function toggleThemeListener() {
     <h1 class="post-title">Vanilla Emacs with Purcell</h1>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>February 20, 2023</span></span><span class="meta-item">
+  <span>February 23, 2023</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>12082 words</span></span><span class="meta-item">
+  <span>12141 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
   <span>25 min</span></span>
 
@@ -922,7 +922,19 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">  <span class="c1">;; (setq org-id-track-globally t)</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; M-x org-id-update-id-locations</span>
 </span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 解决 org-roam-node-find 时，内容局限于 buffer 宽度。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; https://github.com/org-roam/org-roam/issues/2066</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my/org-roam-node-read--to-candidate</span> <span class="p">(</span><span class="nv">node</span> <span class="nv">template</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Return a minibuffer completion candidate given NODE.
+</span></span></span><span class="line"><span class="cl"><span class="s">TEMPLATE is the processed template used to format the entry.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">candidate-main</span> <span class="p">(</span><span class="nv">org-roam-node--format-entry</span>
+</span></span><span class="line"><span class="cl">                         <span class="nv">template</span>
+</span></span><span class="line"><span class="cl">                         <span class="nv">node</span>
+</span></span><span class="line"><span class="cl">                         <span class="p">(</span><span class="nf">1-</span> <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">minibufferp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                                 <span class="p">(</span><span class="nv">window-width</span><span class="p">)</span> <span class="p">(</span><span class="nv">frame-width</span><span class="p">))))))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">cons</span> <span class="p">(</span><span class="nf">propertize</span> <span class="nv">candidate-main</span> <span class="ss">&#39;node</span> <span class="nv">node</span><span class="p">)</span> <span class="nv">node</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-roam-node-read--to-candidate</span> <span class="nb">:override</span> <span class="nf">#&#39;</span><span class="nv">my/org-roam-node-read--to-candidate</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 在记录的时候创建新的 node 时不退出当前状态，保存新建的 node。</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">org-roam-node-insert-immediate</span> <span class="p">(</span><span class="nv">arg</span> <span class="kp">&amp;rest</span> <span class="nv">args</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span> <span class="s">&#34;P&#34;</span><span class="p">)</span>
@@ -2304,7 +2316,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-button-active</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:foreground</span> <span class="s">&#34;#ffffff&#34;</span>
 </span></span><span class="line"><span class="cl">                      <span class="nb">:background</span> <span class="s">&#34;#986DB2&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">telega-chat-prompt-format</span> <span class="s">&#34;🏄🏻〉 &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">;; (setq telega-chat-prompt-format &#34;🏄🏻〉 &#34;)</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; 缩小 emoji 及特殊字符/字体显示，防止头像裂开。</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; (add-to-list &#39;face-font-rescale-alist &#39;(&#34;Apple Color Emoji&#34; . 0.8))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;HanaMinA&#34;</span> <span class="o">.</span> <span class="mf">0.9</span><span class="p">))</span>
@@ -2937,7 +2949,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">                 <span class="nv">separator</span> <span class="p">(</span><span class="nf">propertize</span> <span class="p">(</span><span class="nv">string-join</span> <span class="nv">olp</span> <span class="s">&#34; &gt; &#34;</span><span class="p">)</span> <span class="ss">&#39;face</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">shadow</span> <span class="nv">italic</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                 <span class="nv">separator</span> <span class="nv">title</span><span class="p">)))))</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-roam-node-display-template</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;${type:15} ${doom-hierarchy:80} &#34;</span> <span class="p">(</span><span class="nf">propertize</span> <span class="s">&#34;${tags:*}&#34;</span> <span class="ss">&#39;face</span> <span class="ss">&#39;org-tag</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-roam-node-display-template</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;${type:10} ${doom-hierarchy:120} &#34;</span> <span class="p">(</span><span class="nf">propertize</span> <span class="s">&#34;${tags:*}&#34;</span> <span class="ss">&#39;face</span> <span class="ss">&#39;org-tag</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; ========================  iscroll  ==========================</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; =============================================================</span>
