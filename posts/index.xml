@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Feb 2023 11:40:53 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Feb 2023 15:22:24 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Mon, 27 Feb 2023 11:40:53 +0800</pubDate>
+      <pubDate>Mon, 27 Feb 2023 15:22:24 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on UbuntuLucius&amp;rsquo;s Workflow git clone git://git.sv.gnu.org/emacs.git sudo apt install</description>
@@ -1558,6 +1558,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span></code></pre></div><p>在切换主题的时候，​<code>kind-icon</code> 会有残留，可以执行 <code>M-x kind-icon-reset-cache</code> 清除 cache 即可。</p>
 <h3 id="init-bibtex-dot-el">init-bibtex.el</h3>
 <p>管理 Bibtex 可以方便在文章中引用，以及新增读书笔记，结合 agenda 更好的管理读书条目以及进度。</p>
+<p>其中自定义了笔记模板和读书列表模板，前者是增加了 citation key 作为 roam ref，org ID 的生成以及时间戳；后者则是将默认的 <code>TODO</code> 关键字换成了 <code>PROJECT</code> 关键字，并将 active timestamps 改为 inactive timestamps，方便计算每个 <code>PROJECT</code> 创建了多长时间展示在 agenda 当中。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-ebib.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">bibtex</span>
@@ -1913,7 +1914,8 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">slot</span> <span class="o">.</span> <span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">dedicated</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nf">window-parameters</span> <span class="o">.</span> <span class="p">((</span><span class="nv">no-other-window</span> <span class="o">.</span> <span class="no">t</span><span class="p">)))))))</span>
-</span></span></code></pre></div><p>最后总的配置如下。</p>
+</span></span></code></pre></div><p>上述代码除了 <code>dedicated</code> 属性，都是由 ChatGPT Plus 生成。不设置该字段为 <code>nil</code> 会导致从 Telega 列表进入聊天 buffer 后重新打开新的 buffer，具体原因参照 <code>dedicated</code> 字段的解释参见 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Displaying-Buffers-in-Side-Windows.html">Displaying Buffers in Side Windows (GNU Emacs Lisp Reference Manual)</a>。</p>
+<p>最后总的配置如下。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-telega.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;telega</span><span class="p">)</span>
@@ -2006,7 +2008,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">setcdr</span> <span class="p">(</span><span class="nf">assq</span> <span class="no">t</span> <span class="nv">org-file-apps-gnu</span><span class="p">)</span> <span class="ss">&#39;browse-url-default-macosx-browser</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">setcdr</span> <span class="p">(</span><span class="nf">assq</span> <span class="no">t</span> <span class="nv">org-file-apps-gnu</span><span class="p">)</span> <span class="ss">&#39;browse-url-xdg-open</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">telega-open-file-function</span> <span class="ss">&#39;org-open-file</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">;; 固定 telega 窗口在左侧</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 固定 telega 窗口在右侧</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-mode-hook</span>
 </span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
 </span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">display-buffer</span> <span class="p">(</span><span class="nf">current-buffer</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">((</span><span class="nv">display-buffer-in-side-window</span><span class="p">)))))</span>
