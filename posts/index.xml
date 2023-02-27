@@ -6,11 +6,11 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Feb 2023 17:54:52 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Feb 2023 11:40:53 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Thu, 23 Feb 2023 17:54:52 +0800</pubDate>
+      <pubDate>Mon, 27 Feb 2023 11:40:53 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on UbuntuLucius&amp;rsquo;s Workflow git clone git://git.sv.gnu.org/emacs.git sudo apt install</description>
@@ -65,6 +65,7 @@
     ├── init-quick-menus.el
     ├── init-tree-sitter.el
     ├── init-org-enhance.el
+    ├── telega-bridge-bot.el
     └── init-org-transclusion.el
 </code></pre><h3 id="ligature-dot-el">ligature.el</h3>
 <p><a href="https://github.com/mickeynp/ligature.el">GitHub - mickeynp/ligature.el: Display typographical ligatures in Emacs</a>，这里是将其中的 <code>ligature.el</code> 下载到 <code>.emacs.d/lisp/</code> 目录下，加上下列代码。</p>
@@ -115,6 +116,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">maybe-require-package</span> <span class="ss">&#39;org-cliplink</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 图片宽度</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-image-actual-width</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-mode-hook</span> <span class="ss">&#39;org-indent-mode</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; 去除代码块内的缩进</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-edit-src-content-indentation</span> <span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">org-src-preserve-indentation</span> <span class="no">t</span><span class="p">)</span>
@@ -336,6 +338,10 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-agenda-mode-hook</span> <span class="ss">&#39;hl-line-mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-refile</span> <span class="nb">:after</span> <span class="ss">&#39;org-save-all-org-buffers</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-archive</span> <span class="nb">:after</span> <span class="ss">&#39;org-save-all-org-buffers</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-capture-after-finalize-hook</span> <span class="ss">&#39;org-save-all-org-buffers</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;org-capture-refile</span> <span class="nb">:after</span> <span class="ss">&#39;org-save-all-org-buffers</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Org clock</span>
@@ -458,8 +464,6 @@
 </span></span><span class="line"><span class="cl">   <span class="o">&#39;</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="s">&#34;d&#34;</span> <span class="s">&#34;default&#34;</span> <span class="nv">entry</span> <span class="s">&#34;** %&lt;%H:%M&gt; %?&#34;</span>
 </span></span><span class="line"><span class="cl">      <span class="nb">:if-new</span> <span class="p">(</span><span class="nv">file+head+olp</span> <span class="s">&#34;%&lt;%Y-%m-%d&gt;.org&#34;</span> <span class="s">&#34;#+title: %&lt;%Y-%m-%d&gt;\n#+ARCHIVE: journal.org::\n&#34;</span> <span class="p">(</span><span class="s">&#34;%&lt;%Y-%m-%d&gt;&#34;</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="s">&#34;f&#34;</span> <span class="s">&#34;reflections&#34;</span> <span class="nv">entry</span> <span class="s">&#34;*** %?&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">:if-new</span> <span class="p">(</span><span class="nv">file+head+olp</span> <span class="s">&#34;%&lt;%Y-%m-%d&gt;.org&#34;</span> <span class="s">&#34;#+title: %&lt;%Y-%m-%d&gt;\n#+ARCHIVE: journal.org::\n&#34;</span> <span class="p">(</span><span class="s">&#34;%&lt;%Y-%m-%d&gt;&#34;</span> <span class="s">&#34;Reflections&#34;</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="s">&#34;r&#34;</span> <span class="s">&#34;read&#34;</span> <span class="nv">entry</span> <span class="s">&#34;*** %?&#34;</span>
 </span></span><span class="line"><span class="cl">      <span class="nb">:if-new</span> <span class="p">(</span><span class="nv">file+head+olp</span> <span class="s">&#34;%&lt;%Y-%m-%d&gt;.org&#34;</span> <span class="s">&#34;#+title: %&lt;%Y-%m-%d&gt;\n#+ARCHIVE: journal.org::\n&#34;</span> <span class="p">(</span><span class="s">&#34;%&lt;%Y-%m-%d&gt;&#34;</span> <span class="s">&#34;What I read? :read:&#34;</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">     <span class="p">(</span><span class="s">&#34;t&#34;</span> <span class="s">&#34;tasks&#34;</span> <span class="nv">entry</span> <span class="s">&#34;*** %?&#34;</span>
@@ -787,7 +791,7 @@ Entity07 |o--|| Entity08
 </span></span><span class="line"><span class="cl">  <span class="c1">;; (sis-global-inline-mode t)</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">;; not delete the head spaces</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">sis-inline-tighten-head-rule</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">sis-default-cursor-color</span> <span class="s">&#34;brown3&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">sis-default-cursor-color</span> <span class="s">&#34;#FE6DB3&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">sis-other-cursor-color</span> <span class="s">&#34;orange&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">sis-prefix-override-keys</span> <span class="p">(</span><span class="nf">list</span> <span class="s">&#34;C-c&#34;</span> <span class="s">&#34;C-x&#34;</span> <span class="s">&#34;C-h&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
@@ -846,7 +850,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">    <span class="no">t</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; LXGW WenKai Mono 配合 Iosevka 按照 1:1 缩放，偶数字号就可以做到等高等宽。</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">zh-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;LXGW WenKai Screen&#34;</span> <span class="s">&#34;FZSongKeBenXiuKai-R-GBK&#34;</span> <span class="s">&#34;HanaMinB&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">en-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Latin Modern Mono&#34;</span> <span class="s">&#34;Iosevka&#34;</span> <span class="s">&#34;Fira Code&#34;</span> <span class="s">&#34;IBM Plex Mono&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">en-font-list</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Iosevka&#34;</span> <span class="s">&#34;Latin Modern Mono&#34;</span> <span class="s">&#34;Fira Code&#34;</span> <span class="s">&#34;IBM Plex Mono&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">qiang-make-font-string</span> <span class="p">(</span><span class="nv">font-name</span> <span class="nv">font-size</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nf">stringp</span> <span class="nv">font-size</span><span class="p">)</span>
@@ -1204,17 +1208,18 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;package-menu-mode-hook</span> <span class="ss">&#39;sanityinc/maybe-widen-package-menu-columns</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;; Bootstrap `use-package&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="ss">&#39;use-package</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">package-refresh-contents</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">package-install</span> <span class="ss">&#39;use-package</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">eval-and-compile</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-always-ensure</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-always-defer</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-always-demand</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-expand-minimally</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-enable-imenu-support</span> <span class="no">t</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">eval-when-compile</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;use-package</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">version&lt;</span> <span class="nv">emacs-version</span> <span class="s">&#34;29.0&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="ss">&#39;use-package</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">package-refresh-contents</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">package-install</span> <span class="ss">&#39;use-package</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">eval-and-compile</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-always-ensure</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-always-defer</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-always-demand</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-expand-minimally</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">setq</span> <span class="nv">use-package-enable-imenu-support</span> <span class="no">t</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">eval-when-compile</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;use-package</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">;; Install straight.el</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">bootstrap-version</span><span class="p">)</span>
@@ -1895,7 +1900,20 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">make
 </span></span><span class="line"><span class="cl">copy tgs2png somewhere into <span class="nv">$PATH</span>
 </span></span></code></pre></div><p>这里我编译完就已经是可用的了。</p>
-<p>最后总的配置如下。</p>
+<h4 id="display-buffer-alist">display-buffer-alist</h4>
+<p>每次打开 telega 都是占了 emacs 窗口的一半（emacs 我都是全屏使用），需要手动去调整 telega 的窗口。这里设置了一下 <code>display-buffer-alist</code> 之后就可以固定 telega 的窗口在右侧，并且占据窗口的 35% 的宽度。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-mode-hook</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">display-buffer</span> <span class="p">(</span><span class="nf">current-buffer</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">((</span><span class="nv">display-buffer-in-side-window</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">display-buffer-alist</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;\\*Telega Root\\*&#34;</span> <span class="o">.</span> <span class="p">((</span><span class="nv">display-buffer-in-side-window</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">window-width</span> <span class="o">.</span> <span class="mf">0.35</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">side</span> <span class="o">.</span> <span class="nv">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">slot</span> <span class="o">.</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">dedicated</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nf">window-parameters</span> <span class="o">.</span> <span class="p">((</span><span class="nv">no-other-window</span> <span class="o">.</span> <span class="no">t</span><span class="p">)))))))</span>
+</span></span></code></pre></div><p>最后总的配置如下。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-telega.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;telega</span><span class="p">)</span>
@@ -1956,6 +1974,8 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-unmuted-count</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                    <span class="nb">:foreground</span> <span class="s">&#34;#FFB11B&#34;</span>
 </span></span><span class="line"><span class="cl">                    <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-mention-count</span> <span class="no">nil</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">:foreground</span> <span class="s">&#34;#FE6DB3&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;telega-muted-count</span> <span class="no">nil</span>
 </span></span><span class="line"><span class="cl">                    <span class="nb">:foreground</span> <span class="s">&#34;#86C166&#34;</span>
 </span></span><span class="line"><span class="cl">                    <span class="nb">:weight</span> <span class="ss">&#39;bold</span><span class="p">)</span>
@@ -1986,6 +2006,19 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nf">setcdr</span> <span class="p">(</span><span class="nf">assq</span> <span class="no">t</span> <span class="nv">org-file-apps-gnu</span><span class="p">)</span> <span class="ss">&#39;browse-url-default-macosx-browser</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nf">setcdr</span> <span class="p">(</span><span class="nf">assq</span> <span class="no">t</span> <span class="nv">org-file-apps-gnu</span><span class="p">)</span> <span class="ss">&#39;browse-url-xdg-open</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">telega-open-file-function</span> <span class="ss">&#39;org-open-file</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">;; 固定 telega 窗口在左侧</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-mode-hook</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="nv">display-buffer</span> <span class="p">(</span><span class="nf">current-buffer</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">((</span><span class="nv">display-buffer-in-side-window</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">display-buffer-alist</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;\\*Telega Root\\*&#34;</span> <span class="o">.</span> <span class="p">((</span><span class="nv">display-buffer-in-side-window</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">window-width</span> <span class="o">.</span> <span class="mf">0.35</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">side</span> <span class="o">.</span> <span class="nv">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">slot</span> <span class="o">.</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">dedicated</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nf">window-parameters</span> <span class="o">.</span> <span class="p">((</span><span class="nv">no-other-window</span> <span class="o">.</span> <span class="no">t</span><span class="p">)))))))</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-telega</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-telega.el ends here</span>
 </span></span></code></pre></div><h3 id="init-translate-dot-el">init-translate.el</h3>
@@ -2042,8 +2075,8 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">        <span class="nv">org-insert-heading-respect-content</span> <span class="no">t</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-table-horizontal</span> <span class="mf">0.2</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-modern-list</span> <span class="o">&#39;</span><span class="p">((</span><span class="mi">43</span> <span class="o">.</span> <span class="s">&#34;➤&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                          <span class="p">(</span><span class="mi">45</span> <span class="o">.</span> <span class="s">&#34;-&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                          <span class="p">(</span><span class="mi">42</span> <span class="o">.</span> <span class="s">&#34;•&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">(</span><span class="mi">45</span> <span class="o">.</span> <span class="s">&#34;▻&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">(</span><span class="mi">42</span> <span class="o">.</span> <span class="s">&#34;►&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-ellipsis</span> <span class="s">&#34;[+]&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">modify-all-frames-parameters</span>
 </span></span><span class="line"><span class="cl">   <span class="o">&#39;</span><span class="p">((</span><span class="nv">right-divider-width</span> <span class="o">.</span> <span class="mi">5</span><span class="p">)</span>
@@ -2060,6 +2093,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org-modern</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org-modern.el ends here</span>
 </span></span></code></pre></div><h3 id="init-quick-menus-dot-el">init-quick-menus.el</h3>
+<p>Daily Log 是按照每天的日期生成，并不是固定的文件名，因此这里写了自定义方法去跳转到今天/昨天的 Daily Log，方便用来回顾。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-quick-menus.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;; org-starter</span>
@@ -2072,7 +2106,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">                   <span class="nb">:files</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/inbox.org&#34;</span>                <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;i&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/work.org&#34;</span>                 <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;w&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/tech-debt.org&#34;</span>            <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;t&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/tech-debt.org&#34;</span>            <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;d&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/personal.org&#34;</span>             <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;p&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/books.org&#34;</span>                <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;b&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="s">&#34;agenda/someday.org&#34;</span>              <span class="nb">:agenda</span> <span class="no">t</span>   <span class="nb">:key</span> <span class="s">&#34;s&#34;</span> <span class="nb">:refile</span> <span class="p">(</span><span class="nb">:maxlevel</span> <span class="o">.</span> <span class="mi">2</span><span class="p">))</span>
@@ -2098,18 +2132,29 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nv">find-file</span> <span class="nv">file-path</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Journal file not found for today.&#34;</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">defun</span> <span class="nv">open-yesterday-journal-file</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;Open journal file for yesterday.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">yesterday-time</span> <span class="p">(</span><span class="nf">time-subtract</span> <span class="p">(</span><span class="nf">current-time</span><span class="p">)</span> <span class="p">(</span><span class="nv">days-to-time</span> <span class="mi">1</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">file-name</span> <span class="p">(</span><span class="nf">format-time-string</span> <span class="s">&#34;%Y-%m-%d.org&#34;</span> <span class="nv">yesterday-time</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="p">(</span><span class="nv">file-path</span> <span class="p">(</span><span class="nf">concat</span> <span class="s">&#34;~/Dropbox/org/daily/&#34;</span> <span class="nv">file-name</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">file-exists-p</span> <span class="nv">file-path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">find-file</span> <span class="nv">file-path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Journal file not found for yesterday.&#34;</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">defhydra</span> <span class="nv">hydra-org-agenda-menu</span> <span class="p">(</span><span class="nb">:color</span> <span class="nv">blue</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="s">&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">  [--&gt; Org-agenda-menu &lt;--]
 </span></span></span><span class="line"><span class="cl"><span class="s">  ^^^^------------------------------------------------
-</span></span></span><span class="line"><span class="cl"><span class="s">  _i_: inbox     _w_: work     _b_: books     _t_: tech-debt     _a_: agenda     _p_: personal     _n_: note     _s_: someday     _j_: journal  _t_: today
+</span></span></span><span class="line"><span class="cl"><span class="s">  _i_: inbox     _w_: work       _b_: books     _d_: tech-debt     _a_: agenda     _p_: personal
+</span></span></span><span class="line"><span class="cl"><span class="s">  _n_: note      _s_: someday    _j_: journal   _t_: today         _y_: yesterday
 </span></span></span><span class="line"><span class="cl"><span class="s">  [--&gt; Beancount-menu &lt;--]
 </span></span></span><span class="line"><span class="cl"><span class="s">  ^^^^------------------------------------------------
 </span></span></span><span class="line"><span class="cl"><span class="s">  _c_: 2022     _m_: account     _e_: credit     _u_: insurance     _l_: salary     _h_: house
 </span></span></span><span class="line"><span class="cl"><span class="s">  &#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;i&#34;</span> <span class="nv">org-starter-find-file:inbox</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;w&#34;</span> <span class="nv">org-starter-find-file:work</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;t&#34;</span> <span class="nv">org-starter-find-file:tech-debt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;d&#34;</span> <span class="nv">org-starter-find-file:tech-debt</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;p&#34;</span> <span class="nv">org-starter-find-file:personal</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;b&#34;</span> <span class="nv">org-starter-find-file:books</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;n&#34;</span> <span class="nv">org-starter-find-file:note</span><span class="p">)</span>
@@ -2117,6 +2162,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;a&#34;</span> <span class="nv">org-starter-find-file:agenda</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;j&#34;</span> <span class="nv">org-starter-find-file:journal</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;t&#34;</span> <span class="p">(</span><span class="nv">open-today-journal-file</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;y&#34;</span> <span class="p">(</span><span class="nv">open-yesterday-journal-file</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;c&#34;</span> <span class="nv">org-starter-find-file:2022</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;m&#34;</span> <span class="nv">org-starter-find-file:account</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s">&#34;e&#34;</span> <span class="nv">org-starter-find-file:credit</span><span class="p">)</span>
@@ -2595,7 +2641,9 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">   <span class="nb">:shell-pipe</span> <span class="s">&#34;swift -&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org-enhance</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org-enhance.el ends here</span>
-</span></span></code></pre></div><h3 id="init-org-transclusion-dot-el">init-org-transclusion.el</h3>
+</span></span></code></pre></div><h3 id="telega-bridge-bot-dot-el">telega-bridge-bot.el</h3>
+<p>用来改善 Matrix 机器人在 TG 中转发的消息展示，包括头像、用户名等。具体源码参见 <a href="https://gitee.com/blindingdark/BEmacs/blob/master/vendor/telega-bridge-bot.el">vendor/telega-bridge-bot.el · BlindingDark/BEmacs - Gitee.com</a>。</p>
+<h3 id="init-org-transclusion-dot-el">init-org-transclusion.el</h3>
 <p>过滤的条件的具体细节见 <a href="https://nobiot.github.io/org-transclusion/#Usage">Org-transclusion User Manual</a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org-transclusion.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
