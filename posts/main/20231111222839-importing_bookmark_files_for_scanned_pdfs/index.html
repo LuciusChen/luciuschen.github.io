@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Importing Bookmark Files for Scanned PDFs | Lucius | Braindump</title>
+<meta name="keywords" content="">
+<meta name="description" content="从 FreeMdict Forum 下载的扫描电子书，发帖人提到了书签文件可以用来查找，这个想法是我之前没有想到的。尝试用 pdftk-java 来导入书签文件。 brew install pdftk-java 书签文件如下的格式，相同">
+<meta name="author" content="Lucius Chen">
+<link rel="canonical" href="https://sheerwill.live/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.8dd6f57454653644cba6929524e195dff93a26fa61dce2b3b2629e50b8d12816.css" integrity="sha256-jdb1dFRlNkTLppKVJOGV3/k6Jvph3OKzsmKeULjRKBY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://sheerwill.live/favicon.ico">
+<link rel="apple-touch-icon" href="https://sheerwill.live/apple-touch-icon.png">
+<script async defer data-website-id="f4e3ad0a-7fc1-4f18-b08c-9be77b60cdd5" src="https://oishii.reorx.com/oishii.js"></script>
+
+<meta name="twitter:title" content="Importing Bookmark Files for Scanned PDFs | Lucius | Braindump" />
+<meta name="twitter:description" content="从 FreeMdict Forum 下载的扫描电子书，发帖人提到了书签文件可以用来查找，这个想法是我之前没有想到的。尝试用 pdftk-java 来导入书签文件。 brew install pdftk-java 书签文件如下的格式，相同" />
+<meta property="og:title" content="Importing Bookmark Files for Scanned PDFs | Lucius | Braindump" />
+<meta property="og:description" content="从 FreeMdict Forum 下载的扫描电子书，发帖人提到了书签文件可以用来查找，这个想法是我之前没有想到的。尝试用 pdftk-java 来导入书签文件。 brew install pdftk-java 书签文件如下的格式，相同" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sheerwill.live/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/" />
+<meta property="article:section" content="posts" />
+  
+  <meta property="article:modified_time" content="2023-11-12T11:43:55&#43;08:00" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://sheerwill.live/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Importing Bookmark Files for Scanned PDFs",
+      "item": "https://sheerwill.live/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Importing Bookmark Files for Scanned PDFs | Lucius | Braindump",
+  "name": "Importing Bookmark Files for Scanned PDFs",
+  "description": "从 FreeMdict Forum 下载的扫描电子书，发帖人提到了书签文件可以用来查找，这个想法是我之前没有想到的。尝试用 pdftk-java 来导入书签文件。 brew install pdftk-java 书签文件如下的格式，相同",
+  "keywords": [
+    
+  ],
+  "wordCount" : "1064",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "2023-11-12T11:43:55+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "Lucius Chen"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sheerwill.live/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lucius | Braindump",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sheerwill.live/favicon.ico"
+    }
+  }
+}
+</script><style>
+  #icons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2em;
+  }
+  #icons .item {
+    width: 80px;
+    height: 50px;
+    margin: 10px;
+  }
+  #icons .item .name {
+    font-size: 12px;
+    user-select: all;
+    text-align: center;
+  }
+  #icons .item .icon {
+    display: flex;
+    justify-content: center;
+  }
+  #icons .item svg {
+    width: 30px;
+    height: 30px;
+  }
+</style>
+
+
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary-bg: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list-page {
+                background: var(--theme);
+            }
+
+            .list-page:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list-page:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+</head>
+
+<body class=" type-posts kind-page layout-" id="top"><script data-no-instant>
+function switchTheme(theme) {
+  switch (theme) {
+    case 'light':
+      document.body.classList.remove('dark');
+      break;
+    case 'dark':
+      document.body.classList.add('dark');
+      break;
+    
+    default:
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+      }
+  }
+}
+
+function isDarkTheme() {
+  return document.body.className.includes("dark");
+}
+
+function getPrefTheme() {
+  return localStorage.getItem("pref-theme");
+}
+
+function setPrefTheme(theme) {
+  switchTheme(theme)
+  localStorage.setItem("pref-theme", theme);
+}
+
+const toggleThemeCallbacks = {}
+toggleThemeCallbacks['main'] = (isDark) => {
+  
+  if (isDark) {
+    setPrefTheme('light');
+  } else {
+    setPrefTheme('dark');
+  }
+}
+
+
+
+
+window.addEventListener('toggle-theme', function() {
+  
+  const isDark = isDarkTheme()
+  for (const key in toggleThemeCallbacks) {
+    toggleThemeCallbacks[key](isDark)
+  }
+});
+
+
+function toggleThemeListener() {
+  
+  window.dispatchEvent(new CustomEvent('toggle-theme'));
+}
+
+</script>
+<script>
+  
+  (function() {
+    const defaultTheme = 'auto';
+    const prefTheme = getPrefTheme();
+    const theme = prefTheme ? prefTheme : defaultTheme;
+
+    switchTheme(theme);
+  })();
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://sheerwill.live/" accesskey="h" title="Lucius | Braindump (Alt + H)">Lucius | Braindump</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://sheerwill.live/tags/" title="Tags"
+                >Tags
+                </a>
+            </li>
+            <li>
+                <a href="https://sheerwill.live/archives/" title="Archive"
+                >Archive
+                </a>
+            </li>
+            <li>
+                <a href="https://sheerwill.live/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
+                >Search
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main post">
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">Importing Bookmark Files for Scanned PDFs</h1>
+    <div class="post-meta"><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
+  <span>November 12, 2023</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
+  <span>1064 words</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
+  <span>3 min</span></span>
+
+      
+      
+    </div>
+  </header> 
+
+  <div class="post-content"><p>从 <a href="https://forum.freemdict.com/">FreeMdict Forum</a> 下载的扫描电子书，发帖人提到了书签文件可以用来查找，这个想法是我之前没有想到的。尝试用 pdftk-java 来导入书签文件。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install pdftk-java
+</span></span></code></pre></div><p>书签文件如下的格式，相同页码的单词数字相同。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">@	1
+</span></span><span class="line"><span class="cl">a or an	1
+</span></span><span class="line"><span class="cl">a-/an-	2
+</span></span><span class="line"><span class="cl">-a	2
+</span></span><span class="line"><span class="cl">a fortiori	3
+</span></span><span class="line"><span class="cl">à la	3
+</span></span><span class="line"><span class="cl">à la carte	4
+</span></span><span class="line"><span class="cl">a posteriori	4
+</span></span><span class="line"><span class="cl">a priori	4
+</span></span><span class="line"><span class="cl">abacus	4
+</span></span><span class="line"><span class="cl">abbreviations	4
+</span></span><span class="line"><span class="cl">abide and abode	6
+</span></span><span class="line"><span class="cl">-ability	6
+</span></span><span class="line"><span class="cl">ablative	6
+</span></span><span class="line"><span class="cl">able and able to	7
+</span></span><span class="line"><span class="cl">-able/-ible	7
+</span></span><span class="line"><span class="cl">abled	8
+</span></span><span class="line"><span class="cl">abolition or abolishment	8
+</span></span><span class="line"><span class="cl">Aboriginal and Aborigine	8
+</span></span><span class="line"><span class="cl">about, about to, and not about to	9
+</span></span><span class="line"><span class="cl">about face or about turn	9
+</span></span><span class="line"><span class="cl">abridgement or abridgment	9
+</span></span><span class="line"><span class="cl">abscissa	9
+</span></span><span class="line"><span class="cl">absent	10
+</span></span><span class="line"><span class="cl">absolute	10
+</span></span><span class="line"><span class="cl">abstract nouns	11
+</span></span><span class="line"><span class="cl">academia, academe and academy	11
+</span></span><span class="line"><span class="cl">accents and diacritics	12
+</span></span><span class="line"><span class="cl">acceptance or acceptation	13
+</span></span><span class="line"><span class="cl">accessory or accessary	13
+</span></span><span class="line"><span class="cl">accidentally or accidently	13
+</span></span><span class="line"><span class="cl">acclaim	13
+</span></span><span class="line"><span class="cl">accommodation, accomodation and accommodations	14
+</span></span><span class="line"><span class="cl">accompanist or accompanyist	14
+</span></span><span class="line"><span class="cl">accusative	14
+</span></span><span class="line"><span class="cl">ACE	14
+</span></span><span class="line"><span class="cl">-acious/-aceous	14
+</span></span><span class="line"><span class="cl">acknowledgement or acknowledgment	14
+</span></span><span class="line"><span class="cl">acro-	15
+</span></span><span class="line"><span class="cl">acronyms	15
+</span></span><span class="line"><span class="cl">active verbs	16
+</span></span><span class="line"><span class="cl">acuity or acuteness	16
+</span></span><span class="line"><span class="cl">acute accents	16
+</span></span><span class="line"><span class="cl">ad or advert	16
+</span></span><span class="line"><span class="cl">AD or A.D.	17
+</span></span><span class="line"><span class="cl">ad hoc, ad-hoc and adhoc	17
+</span></span><span class="line"><span class="cl">ad hominem	18
+</span></span><span class="line"><span class="cl">ad infinitum	18
+</span></span><span class="line"><span class="cl">ad lib, ad-lib or adlib	18
+</span></span><span class="line"><span class="cl">ad personam	18
+</span></span><span class="line"><span class="cl">ad rem	18
+</span></span><span class="line"><span class="cl">adage	18
+</span></span><span class="line"><span class="cl">adaptation or adaption	18
+</span></span><span class="line"><span class="cl">adapter or adaptor	19
+</span></span><span class="line"><span class="cl">addendum	19
+</span></span><span class="line"><span class="cl">addition or additive	19
+</span></span><span class="line"><span class="cl">addresses	19
+</span></span><span class="line"><span class="cl">adherence or adhesion	19
+</span></span><span class="line"><span class="cl">adieu	19
+</span></span><span class="line"><span class="cl">adjacent, adjoining and adjunct	20
+</span></span></code></pre></div><p>在实际处理中发现几个问题</p>
+<ul>
+<li>导入的书签一页只能对应一个书签</li>
+</ul>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 请将 &#39;input.txt&#39; 替换为你的输入文件名</span>
+</span></span><span class="line"><span class="cl"><span class="n">input_file_name</span> <span class="o">=</span> <span class="s1">&#39;input.txt&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 请将 &#39;output.txt&#39; 替换为你的输出文件名</span>
+</span></span><span class="line"><span class="cl"><span class="n">output_file_name</span> <span class="o">=</span> <span class="s1">&#39;output.txt&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">merge_lines_with_same_number</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">merged_lines</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">text</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="n">parts</span>
+</span></span><span class="line"><span class="cl">            <span class="n">number</span> <span class="o">=</span> <span class="n">number</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">merged_lines</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">merged_lines</span><span class="p">[</span><span class="n">number</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">merged_lines</span><span class="p">[</span><span class="n">number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">text</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">merged_lines</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">write_merged_lines_to_file</span><span class="p">(</span><span class="n">merged_lines</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">texts</span> <span class="ow">in</span> <span class="n">merged_lines</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="n">merged_text</span> <span class="o">=</span> <span class="s1">&#39; | &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">merged_text</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file_name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lines</span> <span class="o">=</span> <span class="n">input_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">merged_lines</span> <span class="o">=</span> <span class="n">merge_lines_with_same_number</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">write_merged_lines_to_file</span><span class="p">(</span><span class="n">merged_lines</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;已将每行后面数字相同的英文内容合并，并用&#39;|&#39;分隔，并保存为&#39;</span><span class="si">{</span><span class="n">output_file_name</span><span class="si">}</span><span class="s2">&#39;&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li>导出的内容需要处理成以下格式，其中 <code>PageMediaBegin</code> 往下的内容都不是必须的，头部的信息是必须的，是我在 PDF Expert 中添加了一个书签后导出的格式。
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">InfoBegin
+</span></span><span class="line"><span class="cl">InfoKey: ModDate
+</span></span><span class="line"><span class="cl">InfoValue: D:20231110091307+08&amp;apos;00&amp;apos;
+</span></span><span class="line"><span class="cl">InfoBegin
+</span></span><span class="line"><span class="cl">InfoKey: CreationDate
+</span></span><span class="line"><span class="cl">InfoValue: D:20231107093455Z
+</span></span><span class="line"><span class="cl">InfoBegin
+</span></span><span class="line"><span class="cl">InfoKey: Producer
+</span></span><span class="line"><span class="cl">InfoValue: macOS Version 13.6.1 (Build 22G313) Quartz PDFContext, AppendMode 1.1
+</span></span><span class="line"><span class="cl">PdfID0: 27ee54f1394bde6950015ebab5958d48
+</span></span><span class="line"><span class="cl">PdfID1: a0546a75c44ec4b30b12873737127f5b
+</span></span><span class="line"><span class="cl">NumberOfPages: 793
+</span></span><span class="line"><span class="cl">BookmarkBegin
+</span></span><span class="line"><span class="cl">BookmarkTitle: My Bookmarks
+</span></span><span class="line"><span class="cl">BookmarkLevel: 1
+</span></span><span class="line"><span class="cl">BookmarkPageNumber: 0
+</span></span><span class="line"><span class="cl">BookmarkBegin
+</span></span><span class="line"><span class="cl">BookmarkTitle: also
+</span></span><span class="line"><span class="cl">BookmarkLevel: 2
+</span></span><span class="line"><span class="cl">BookmarkPageNumber: 54
+</span></span><span class="line"><span class="cl">PageMediaBegin
+</span></span><span class="line"><span class="cl">PageMediaNumber: 1
+</span></span><span class="line"><span class="cl">PageMediaRotation: 0
+</span></span><span class="line"><span class="cl">PageMediaRect: 0 0 3,500 5,325.673
+</span></span><span class="line"><span class="cl">PageMediaDimensions: 3,500 5,325.673
+</span></span></code></pre></div></li>
+<li>上面书签的格式和论坛提供的书签不一致，需要处理成这样的格式。
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 请将 &#39;input.txt&#39; 替换为你的输入文件名</span>
+</span></span><span class="line"><span class="cl"><span class="n">input_file_name</span> <span class="o">=</span> <span class="s1">&#39;input.txt&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 请将 &#39;output.txt&#39; 替换为你的输出文件名</span>
+</span></span><span class="line"><span class="cl"><span class="n">output_file_name</span> <span class="o">=</span> <span class="s1">&#39;output.txt&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">convert_to_bookmark</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">page_number</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 格式化为Bookmark文本</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&#34;BookmarkBegin</span><span class="se">\n</span><span class="s2">BookmarkTitle: </span><span class="si">{</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">BookmarkLevel: 2</span><span class="se">\n</span><span class="s2">BookmarkPageNumber: </span><span class="si">{</span><span class="n">page_number</span><span class="si">}</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file_name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lines</span> <span class="o">=</span> <span class="n">input_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bookmarks</span> <span class="o">=</span> <span class="p">[</span><span class="n">convert_to_bookmark</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output_file</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">bookmarks</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;已将每一行转换为Bookmark格式，并保存为&#39;</span><span class="si">{</span><span class="n">output_file_name</span><span class="si">}</span><span class="s2">&#39;&#34;</span><span class="p">)</span>
+</span></span></code></pre></div></li>
+<li>书签导入并不会按照对应的页码，这里我开始意识到和我理解的 bookmarks 不是一个东西， <code>pdftk-java</code> 添加的应该是 <code>Ouline</code>​。因此需要将错位的条目校对好以及填充好头部，这样才会让 Outline 与页面一一对应。
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">封面       1
+</span></span><span class="line"><span class="cl">封面黑白       2
+</span></span><span class="line"><span class="cl">出版信息       3
+</span></span><span class="line"><span class="cl">目录       4
+</span></span><span class="line"><span class="cl">出版说明       5
+</span></span><span class="line"><span class="cl">编译者序       6
+</span></span><span class="line"><span class="cl">编译者序       7
+</span></span><span class="line"><span class="cl">著者前言       8
+</span></span><span class="line"><span class="cl">著者前言       9
+</span></span><span class="line"><span class="cl">著者前言       10
+</span></span><span class="line"><span class="cl">内容提要、体例及查询方法         11
+</span></span><span class="line"><span class="cl">内容提要、体例及查询方法       12
+</span></span><span class="line"><span class="cl">空白页       13
+</span></span><span class="line"><span class="cl">@ | a or an	14
+</span></span><span class="line"><span class="cl">a-/an- | -a	15
+</span></span><span class="line"><span class="cl">a fortiori | à la	16
+</span></span><span class="line"><span class="cl">à la carte | a posteriori | a priori | abacus | abbreviations	17
+</span></span><span class="line"><span class="cl">abbreviations       18
+</span></span><span class="line"><span class="cl">abide and abode | -ability | ablative	19
+</span></span><span class="line"><span class="cl">able and able to | -able/-ible	20
+</span></span><span class="line"><span class="cl">abled | abolition or abolishment | Aboriginal and Aborigine	21
+</span></span><span class="line"><span class="cl">about, about to, and not about to | about face or about turn | abridgement or abridgment | abscissa	22
+</span></span><span class="line"><span class="cl">absent | absolute	23
+</span></span></code></pre></div>最终处理后的结果是，可以非常方便地检索扫描件当中的内容了。</li>
+</ul>
+<figure>
+    <img loading="lazy" src="/ox-hugo/pdf-java-example.png"
+         alt="Figure 1: pdf-java-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>pdf-java-example</p>
+        </figcaption>
+</figure>
+
+
+
+    
+
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+<hr>
+
+  <div class="bl-section">
+	<h4 style="color: var(--secondary);">No notes link to this note</h4>
+  </div>
+
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="next" href="https://sheerwill.live/posts/main/20230801192723-note_taking_and_gtd_with_emacs/">
+    <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
+    </span>
+    <br>
+    <span>Note-taking and GTD with Emacs</span>
+  </a>
+</nav>
+
+  </footer>
+    <div class="comments-separator"></div>
+</article>
+    </main>
+    
+<footer class="footer">
+  <span>&copy; 2023 <a href="https://sheerwill.live/">Lucius | Braindump</a></span><span style="display: inline-block; margin-left: 1em;">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
+  </span>
+  <span style="display: inline-block; margin-left: 1em;">
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
+  </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+    <path d="M12 6H0l6-6z" />
+  </svg>
+</a>
+
+<script>
+  (function() {
+     
+    const disableThemeToggle = '' == '1';
+    if (disableThemeToggle) {
+      return;
+    }
+
+    let button = document.getElementById("theme-toggle")
+    
+    button.removeEventListener('click', toggleThemeListener)
+    
+    button.addEventListener('click', toggleThemeListener)
+  })();
+</script>
+
+<script>
+  (function () {
+    let menu = document.getElementById('menu')
+    if (menu) {
+      menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+      menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+      }
+    }
+
+    const disableSmoothScroll = '' == '1';
+    const enableInstantClick = '1' == '1';
+    
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || disableSmoothScroll || enableInstantClick) {
+      return;
+    }
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        var id = this.getAttribute("href").substr(1);
+        document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+          behavior: "smooth"
+        });
+        if (id === "top") {
+          history.replaceState(null, null, " ");
+        } else {
+          history.pushState(null, null, `#${id}`);
+        }
+      });
+    });
+  })();
+</script>
+<script>
+  var mybutton = document.getElementById("top-link");
+  window.onscroll = function () {
+    if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+      mybutton.style.visibility = "visible";
+      mybutton.style.opacity = "1";
+    } else {
+      mybutton.style.visibility = "hidden";
+      mybutton.style.opacity = "0";
+    }
+  };
+</script>
+<script>
+  if (window.scrollListeners) {
+    
+    for (const listener of scrollListeners) {
+      window.removeEventListener('scroll', listener)
+    }
+  }
+  window.scrollListeners = []
+</script>
+
+
+
+<script src="/js/medium-zoom.min.js" data-no-instant
+></script>
+<script>
+  document.querySelectorAll('pre > code').forEach((codeblock) => {
+    const container = codeblock.parentNode.parentNode;
+
+    const copybutton = document.createElement('button');
+    copybutton.classList.add('copy-code');
+    copybutton.innerText = 'copy';
+
+    function copyingDone() {
+      copybutton.innerText = 'copied!';
+      setTimeout(() => {
+        copybutton.innerText = 'copy';
+      }, 2000);
+    }
+
+    copybutton.addEventListener('click', (cb) => {
+      if ('clipboard' in navigator) {
+        navigator.clipboard.writeText(codeblock.textContent);
+        copyingDone();
+        return;
+      }
+
+      const range = document.createRange();
+      range.selectNodeContents(codeblock);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      try {
+        document.execCommand('copy');
+        copyingDone();
+      } catch (e) { };
+      selection.removeRange(range);
+    });
+
+    if (container.classList.contains("highlight")) {
+      container.appendChild(copybutton);
+    } else if (container.parentNode.firstChild == container) {
+      
+    } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+      
+      codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+    } else {
+      
+      codeblock.parentNode.appendChild(copybutton);
+    }
+  });
+</script>
+
+
+
+
+<script>
+  
+  
+  (function() {
+    const enableTocScroll = '1' == '1'
+    if (!enableTocScroll) {
+      return
+    }
+    if (!document.querySelector('.toc')) {
+      console.log('no toc found, ignore toc scroll')
+      return
+    }
+    
+
+    
+    const scrollListeners = window.scrollListeners
+    const headings = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id]');
+    const activeClass = 'active';
+
+    
+    let activeHeading = headings[0];
+    getLinkByHeading(activeHeading).classList.add(activeClass);
+
+    const onScroll = () => {
+      const passedHeadings = [];
+      for (const h of headings) {
+        
+        if (getOffsetTop(h) < 5) {
+          passedHeadings.push(h)
+        } else {
+          break;
+        }
+      }
+      if (passedHeadings.length > 0) {
+        newActiveHeading = passedHeadings[passedHeadings.length - 1];
+      } else {
+        newActiveHeading = headings[0];
+      }
+      if (activeHeading != newActiveHeading) {
+        getLinkByHeading(activeHeading).classList.remove(activeClass);
+        activeHeading = newActiveHeading;
+        getLinkByHeading(activeHeading).classList.add(activeClass);
+      }
+    }
+
+    let timer = null;
+    const scrollListener = () => {
+      if (timer !== null) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(onScroll, 50)
+    }
+    window.addEventListener('scroll', scrollListener, false);
+    scrollListeners.push(scrollListener)
+
+    function getLinkByHeading(heading) {
+      const id = encodeURI(heading.getAttribute('id')).toLowerCase();
+      return document.querySelector(`.toc ul li a[href="#${id}"]`);
+    }
+
+    function getOffsetTop(heading) {
+      if (!heading.getClientRects().length) {
+        return 0;
+      }
+      let rect = heading.getBoundingClientRect();
+      return rect.top
+    }
+  })();
+  </script>
+<script>
+  mediumZoom('.entry-cover img');
+  mediumZoom('.post-content img:not([no-zoom])');
+</script>
+
+<script src="/js/instantclick.min.js" data-no-instant
+></script>
+<script data-no-instant>
+  
+  
+  
+  
+  
+  
+  InstantClick.init();
+</script>
+</body>
+
+</html>

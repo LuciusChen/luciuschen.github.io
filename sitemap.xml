@@ -2,14 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://sheerwill.live/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/</loc>
+    <lastmod>2023-11-12T11:43:55+08:00</lastmod>
+  </url><url>
     <loc>https://sheerwill.live/</loc>
-    <lastmod>2023-02-27T15:22:24+08:00</lastmod>
+    <lastmod>2023-11-12T11:43:55+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/</loc>
-    <lastmod>2023-02-27T15:22:24+08:00</lastmod>
+    <lastmod>2023-11-12T11:43:55+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20230801192723-note_taking_and_gtd_with_emacs/</loc>
+    <lastmod>2023-08-03T17:26:45+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220506185941-pinboard/</loc>
+    <lastmod>2023-08-03T11:40:13+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20230210155015-clustered_indexes_index_organized_tables_iot/</loc>
+    <lastmod>2023-05-14T13:02:40+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20230210235436-secondary_indexes/</loc>
+    <lastmod>2023-05-14T12:55:24+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20230211000136-table_access_by_index_rowid/</loc>
+    <lastmod>2023-05-14T12:54:45+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20230211001746-covering_index/</loc>
+    <lastmod>2023-05-14T12:54:40+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</loc>
+    <lastmod>2023-03-29T09:31:04+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220607104757-hugo/</loc>
+    <lastmod>2023-03-23T10:29:03+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</loc>
-    <lastmod>2023-02-27T15:22:24+08:00</lastmod>
+    <lastmod>2023-02-28T13:51:10+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/tags/clm/</loc>
     <lastmod>2023-02-10T14:55:12+08:00</lastmod>
@@ -56,9 +83,6 @@
     <loc>https://sheerwill.live/posts/main/20220706112803-anki/</loc>
     <lastmod>2023-02-10T14:18:05+08:00</lastmod>
   </url><url>
-    <loc>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</loc>
-    <lastmod>2023-02-10T14:18:05+08:00</lastmod>
-  </url><url>
     <loc>https://sheerwill.live/posts/main/20220629204553-terminal/</loc>
     <lastmod>2023-02-10T14:18:05+08:00</lastmod>
   </url><url>
@@ -85,9 +109,6 @@
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220615143721-quorum/</loc>
     <lastmod>2023-02-10T14:17:58+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220607104757-hugo/</loc>
-    <lastmod>2023-02-10T14:17:57+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</loc>
     <lastmod>2023-02-10T14:17:57+08:00</lastmod>
@@ -153,9 +174,6 @@
     <lastmod>2023-02-10T14:17:52+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</loc>
-    <lastmod>2023-02-10T14:17:52+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220506185941-pinboard/</loc>
     <lastmod>2023-02-10T14:17:52+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220506193054-refactoring_code/</loc>

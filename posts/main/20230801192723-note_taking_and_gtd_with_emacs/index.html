@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Note-taking and GTD with Emacs | Lucius | Braindump</title>
+<meta name="keywords" content="">
+<meta name="description" content="得益于 Emacs 的扩展性，丰富的插件生态，我构建的笔记和 GTD 流程是杂糅在一起的。并没有完全遵照「卡片笔记法」或 GTD 的流程，其中也有不完善的地方，在不断地">
+<meta name="author" content="Lucius Chen">
+<link rel="canonical" href="https://sheerwill.live/posts/main/20230801192723-note_taking_and_gtd_with_emacs/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.8dd6f57454653644cba6929524e195dff93a26fa61dce2b3b2629e50b8d12816.css" integrity="sha256-jdb1dFRlNkTLppKVJOGV3/k6Jvph3OKzsmKeULjRKBY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://sheerwill.live/favicon.ico">
+<link rel="apple-touch-icon" href="https://sheerwill.live/apple-touch-icon.png">
+<script async defer data-website-id="f4e3ad0a-7fc1-4f18-b08c-9be77b60cdd5" src="https://oishii.reorx.com/oishii.js"></script>
+
+<meta name="twitter:title" content="Note-taking and GTD with Emacs | Lucius | Braindump" />
+<meta name="twitter:description" content="得益于 Emacs 的扩展性，丰富的插件生态，我构建的笔记和 GTD 流程是杂糅在一起的。并没有完全遵照「卡片笔记法」或 GTD 的流程，其中也有不完善的地方，在不断地" />
+<meta property="og:title" content="Note-taking and GTD with Emacs | Lucius | Braindump" />
+<meta property="og:description" content="得益于 Emacs 的扩展性，丰富的插件生态，我构建的笔记和 GTD 流程是杂糅在一起的。并没有完全遵照「卡片笔记法」或 GTD 的流程，其中也有不完善的地方，在不断地" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sheerwill.live/posts/main/20230801192723-note_taking_and_gtd_with_emacs/" />
+<meta property="article:section" content="posts" />
+  
+  <meta property="article:modified_time" content="2023-08-03T17:26:45&#43;08:00" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://sheerwill.live/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Note-taking and GTD with Emacs",
+      "item": "https://sheerwill.live/posts/main/20230801192723-note_taking_and_gtd_with_emacs/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Note-taking and GTD with Emacs | Lucius | Braindump",
+  "name": "Note-taking and GTD with Emacs",
+  "description": "得益于 Emacs 的扩展性，丰富的插件生态，我构建的笔记和 GTD 流程是杂糅在一起的。并没有完全遵照「卡片笔记法」或 GTD 的流程，其中也有不完善的地方，在不断地",
+  "keywords": [
+    
+  ],
+  "wordCount" : "2792",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "2023-08-03T17:26:45+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "Lucius Chen"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sheerwill.live/posts/main/20230801192723-note_taking_and_gtd_with_emacs/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lucius | Braindump",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sheerwill.live/favicon.ico"
+    }
+  }
+}
+</script><style>
+  #icons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2em;
+  }
+  #icons .item {
+    width: 80px;
+    height: 50px;
+    margin: 10px;
+  }
+  #icons .item .name {
+    font-size: 12px;
+    user-select: all;
+    text-align: center;
+  }
+  #icons .item .icon {
+    display: flex;
+    justify-content: center;
+  }
+  #icons .item svg {
+    width: 30px;
+    height: 30px;
+  }
+</style>
+
+
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary-bg: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list-page {
+                background: var(--theme);
+            }
+
+            .list-page:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list-page:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+</head>
+
+<body class=" type-posts kind-page layout-" id="top"><script data-no-instant>
+function switchTheme(theme) {
+  switch (theme) {
+    case 'light':
+      document.body.classList.remove('dark');
+      break;
+    case 'dark':
+      document.body.classList.add('dark');
+      break;
+    
+    default:
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+      }
+  }
+}
+
+function isDarkTheme() {
+  return document.body.className.includes("dark");
+}
+
+function getPrefTheme() {
+  return localStorage.getItem("pref-theme");
+}
+
+function setPrefTheme(theme) {
+  switchTheme(theme)
+  localStorage.setItem("pref-theme", theme);
+}
+
+const toggleThemeCallbacks = {}
+toggleThemeCallbacks['main'] = (isDark) => {
+  
+  if (isDark) {
+    setPrefTheme('light');
+  } else {
+    setPrefTheme('dark');
+  }
+}
+
+
+
+
+window.addEventListener('toggle-theme', function() {
+  
+  const isDark = isDarkTheme()
+  for (const key in toggleThemeCallbacks) {
+    toggleThemeCallbacks[key](isDark)
+  }
+});
+
+
+function toggleThemeListener() {
+  
+  window.dispatchEvent(new CustomEvent('toggle-theme'));
+}
+
+</script>
+<script>
+  
+  (function() {
+    const defaultTheme = 'auto';
+    const prefTheme = getPrefTheme();
+    const theme = prefTheme ? prefTheme : defaultTheme;
+
+    switchTheme(theme);
+  })();
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://sheerwill.live/" accesskey="h" title="Lucius | Braindump (Alt + H)">Lucius | Braindump</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://sheerwill.live/tags/" title="Tags"
+                >Tags
+                </a>
+            </li>
+            <li>
+                <a href="https://sheerwill.live/archives/" title="Archive"
+                >Archive
+                </a>
+            </li>
+            <li>
+                <a href="https://sheerwill.live/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
+                >Search
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main post">
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">Note-taking and GTD with Emacs</h1>
+    <div class="post-meta"><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
+  <span>August 3, 2023</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
+  <span>2792 words</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
+  <span>6 min</span></span>
+
+      
+      
+    </div>
+  </header> 
+
+  <div class="post-content"><p>得益于 Emacs 的扩展性，丰富的插件生态，我构建的笔记和 GTD 流程是杂糅在一起的。并没有完全遵照「卡片笔记法」或 GTD 的流程，其中也有不完善的地方，在不断地使用中对流程进行改动，细微处调整。</p>
+<p>笔记流程和 GTD 杂糅在一起，就意味着他们必须能够循环自洽，其中自动的步骤是黏合剂，手动的部分是思考的平台。</p>
+<p>输入先不谈杂七杂八的各种途径，比较规整的输入途径有 RSS 和书籍。其中 RSS 可以订阅各类博客、YouTube 等，Podcast 其实也可以在 Emacs 当中听，但一般都是在非工作时间才会听 Podcast，这里略过不谈。</p>
+<p>博客就单纯通过 <a href="https://github.com/skeeto/elfeed">elfeed</a> 订阅，elfeed 本身没有查看订阅列表以及每个订阅源最近的更新时间，但是 Emacs 最自由的就是可以通过自定义函数实现。其中我根据不同的 tag 加了不同的 face，可以理解成 CSS 当中对于页面元素添加了样式，这样可以更为专注地分类阅读。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/elfeed-list.png"
+         alt="Figure 1: elfeed-list"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>elfeed-list</p>
+        </figcaption>
+</figure>
+
+<p>在这之前书籍和 RSS 的处理是通过 <a href="https://readwise.io/maneetpaul-reader/">Readwise Reader</a> 来进行处理的，原因有二。</p>
+<ol>
+<li>统一了 PDF 和 ePub 的阅读体验</li>
+<li>可以配合 <a href="https://github.com/immersive-translate/immersive-translate">immersive-translate</a> 快速的阅读英文文章和书籍，决定是否需要精读。（不看好 GPT 的总结，以及总结本身就是思考的过程，这一步不应该被 AI 替代。）</li>
+</ol>
+<p>但也有一些缺点，导出的自定义并不能满足细分场景，跟官方沟通后无果，就动了迁移的心思。刚好 Emacs 有个插件 <a href="https://github.com/Elilif/emacs-immersive-translate">emacs-immersive-translate</a> 可以实现类似浏览器中「沉浸式翻译」的效果，因此 RSS 和书籍都重新迁移到 Emacs 当中。emacs-immersive-translate 我使用的是 OpenAI 的 API 进行翻译，感觉更加自然准确一点。</p>
+<p>另外巧合发现 Karthink 的另外一个包 <a href="https://github.com/karthink/elfeed-tube">elfeed-tube</a> 可以增强 elfeed 中订阅 YouTube 的体验，通过 <code>elfeed-tube-fetch</code> 按照时间顺序拉取字幕，配合 emacs-immersive-translate 就可以快速的浏览视频内容，再决定哪部分需要详细观看。详细观看时，不需要打开浏览器，拉到对应的时间观看。只需要开启 <code>elfeed-tube-mpv-follow-mode</code> 并用 <code>elfeed-tube-mpv</code> 打开视频观看，这些都可以快速的用键盘操作完成，点击对应的字幕就可以跳转到需要详细观看的部分。</p>
+<p>接下来，不管是 YouTube 还是博客文章，处理过程都是一致的。「摘录-笔记」的结构写在 daily log 文件中（成体系的系列视频或者文章参考下面书籍的处理办法），比如写作日期的当天就是 <code>2023-08-02.org</code> 这个 org 文件。这个文件当中分为了几个部分。</p>
+<ul>
+<li><code>Task</code> 是当天完成的 To-Dos</li>
+<li><code>What I read?</code> 阅读文章的笔记</li>
+<li>log 的主题，包含了工作问题的解决思路，备忘（会加 tag 方便检索），Fleeting Notes 等等，每一条的前面都会有记录的时间点。</li>
+</ul>
+<p>每天结束的时候，都会重新回顾一下当天的 daily log 文件，记录阅读的文章以及记录的工作内容时都会根据内容添加 tag，在遇到相同类别的内容需要整理时，才会整理到具体的笔记当中。不管需不需要整理出具体的笔记，当天的 log 文件都会按照当前的结构归档（结构归档就是按照原来文件内的排版结构，具体到在某个标题下的 To-Dos 归档后依旧在对应的标题下）到 journal.org 文件中，即当前年的 log 是归档到 journal.org；过去一年后，比如过去的 2022 年，就有一个 2022.org 文件，未来还会有 2023.org 等。</p>
+<p>至此，RSS 讲完，书籍（包含 PDF/ePub）都是用 <a href="https://joostkremers.github.io/ebib/">Ebib</a> 进行管理，Ebib 主要是管理 bibtex 的包，其中可以添加对应书籍的位置，因此也可以用来管理书籍，与很多人常用的 <a href="https://www.zotero.org/">Zotero</a> 在功能上很像。不需要作笔记的书籍就随便很多，不管是在 Kindle 还是微信读书，或 iOS 自带的 iBook 都可以阅读。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ebib-list.png"
+         alt="Figure 2: elfeed-list"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>elfeed-list</p>
+        </figcaption>
+</figure>
+
+<p>这里的 bibtex 来源可以是 Zotero 拉取的，也可以是手动下面网站拉取的。</p>
+<ul>
+<li>
+<p><a href="https://lead.to/amazon/com/">Lead2Amazon.com</a></p>
+</li>
+<li>
+<p><a href="https://zbib.org/">ZoteroBib</a></p>
+</li>
+<li>
+<p><a href="https://www.doi2bib.org/">doi2bib</a></p>
+</li>
+<li>
+<p><a href="https://www.bibsonomy.org/">BibSonomy</a></p>
+</li>
+<li>
+<p><a href="http://www.bibtexsearch.com/">BibTeX Search</a></p>
+</li>
+<li>
+<p><a href="https://scholar.google.com/">Google Scholar</a></p>
+</li>
+<li>
+<p><a href="https://dl.acm.org/">ACM</a></p>
+</li>
+<li>
+<p><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a></p>
+<p>ebib 当中可以通过 <code>ebib-add-reading-list-item</code> 添加具体的书目到 books.org 当中，books.org 是一个 org 文件，纳入到 org-agenda 文件下。这里解释一下，GTD 事项管理物理上分为两大部分，inbox.org 和 books.org 等按照事项不同分类的文件（比如还有 work.org）。</p>
+<p>books.org 当中也按照书籍不同的分类，通过 refile 调整到不同的标题下。ebib 当中可以自定义很多东西，比如添加到 books.org 中的书目的待办事项关键字默认是 <code>TODO</code>​，我自定义成 <code>PROJECT</code> 关键字。将书籍的目录手动复制到待办事项下，以 checkbox 的形式存在，这样读完一个章节可以勾去一条，同时在事项的最后会有百分比显示进度。</p>
+</li>
+</ul>
+<figure>
+    <img loading="lazy" src="/ox-hugo/todo-item.png"
+         alt="Figure 3: todo-item"/> <figcaption>
+            <p><span class="figure-number">Figure 3: </span>todo-item</p>
+        </figcaption>
+</figure>
+
+<p>这里的读书书目，并不是每个都会添加到 agenda view 当中，只有添加了 reading tag 的书目才会显示，agenda view 也是有相当高的自定义空间的。为了更方便的查看某书目的阅读已经创建了多久，自定义了函数，在 agenda view 中会在前显示已创建的时长，比如下图的 11.7M，M 是 Month 的含义。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/agenda-view.png"
+         alt="Figure 4: agenda-view"/> <figcaption>
+            <p><span class="figure-number">Figure 4: </span>agenda-view</p>
+        </figcaption>
+</figure>
+
+<p>回到 ebib 上来，通过 <code>ebib-popup-note</code> 可以创建对应书籍的笔记，这里笔记的创建模板也是做了自定义的，更加符合个人的习惯。笔记内容同样是手动复制的目录，按照「总结-摘抄-笔记」的结构。摘抄-笔记的结构好理解，总结就是读完一本书，会针对内容进行总结，形式是 QUE-Question，CLM-Claim，EVD-Evidence，同时也参考了「卡片笔记法」，对于会被其他笔记引用多次的内容会从中抽离出来，单独成卡。</p>
+<figure>
+    <img loading="lazy" src="assets/discourse-graph-example.webp"
+         alt="Figure 5: discourse-graph-example"/> <figcaption>
+            <p><span class="figure-number">Figure 5: </span>discourse-graph-example</p>
+        </figcaption>
+</figure>
+
+<p>笔记使用的是 <a href="https://github.com/org-roam/org-roam">org-roam</a>，更类似于 obsidian 的组织方式；阅读 PDF 的工具是 <a href="https://github.com/vedang/pdf-tools">pdf-tools</a>，ePub 的工具是 <a href="https://depp.brause.cc/nov.el/">nov.el</a>，后者也可以通过 emacs-immersive-translate 进行翻译，阅读英文书籍的速度就提高了很多。其中 nov.el 阅读 ePub 时，尤其是有批注的经典文学作品，我就很喜欢在 Calibre 内用正则替换一下原有的批注 HTML 标签，改为『』包裹，在 nov-mode 下根据 font-lock 设置不同于正文的样式，就很好区分正文和批注了，不会看上去都是黑色的字体。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/nov-font-lock.png"
+         alt="Figure 6: nov-font-lock"/> <figcaption>
+            <p><span class="figure-number">Figure 6: </span>nov-font-lock</p>
+        </figcaption>
+</figure>
+
+<p>笔记的漫游，是交给了 <a href="https://github.com/org-roam/org-roam-ui">org-roam-ui</a>，当初入坑 Emacs 就是因为这个包，逐渐建立起来了现在的一整套流程，可以算作从尾巴推全局了。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/org-roam-ui.png"
+         alt="Figure 7: org-roam-ui"/> <figcaption>
+            <p><span class="figure-number">Figure 7: </span>org-roam-ui</p>
+        </figcaption>
+</figure>
+
+<p>「杂七杂八的输入源」以及手机端和稍后读目前都是通过 Telegram 的 Saved messages，不管是文章、视频还是书籍，处理的逻辑都与上面相同。</p>
+<p>下面来着重讲一下上面提到的 GTD 部分。通过快捷键，Emacs 无论处于哪个工作流程，都可以快速的记录 To-Dos 到 inbox.org 中，然后整理到各自分类的 org 文件当中，这些文件都在 org-agenda 管辖当中。</p>
+<p>不管是 books.org 还是各种 To-Dos 分类的 org 文件，在完成后（关键字变成 DONE）都会自动复制到当天的 daily log 中的 <code>Task</code> 标题下，方便一天结束的时候进行回顾。这些完成的 To-Dos 放在文件中其实也会搅扰到视觉，因此我会手动归档到同目录的子文件夹下的同名 org 文件中，同样的是按照结构归档。</p>
+<p>对于跨度小，一天内能完成的 To-Dos 通常会进行计时，这里也做了自定义。需要开始做一个 To-Do 时，通过 <code>org-clock-in</code> 开始计时，同时关键字由 <code>TODO</code> 自动切换成 <code>NEXT</code>​，完成时切换关键字 <code>NEXT</code> 为 <code>DONE</code> 时自动结束计时。如果不需要计时，正常的关键字切换流程也不影响。</p>
+<p>额外的一些在办公室能够完成的习惯跟踪，我也写在 agenda 当中，绿色代表完成，黄色和红色是未完成。黄色是指距离上次完成还不远，只是警告的含义。</p>
+<p>其实在 Emacs 传教作笔记以及 GTD 的时候，很多人最多提出的质疑就是和手机端的联动。笔记方面我使用的是 <a href="https://plainorg.com/">Plain Org for iOS</a>，可以方便的查看 Dropbox 同步的内容。To-Dos 的同步则是用的 <a href="https://beorgapp.com/">beorg</a>，从 Mac 端同步到 iOS 后，继而同步到 Calendar 中，Fantastical 当中就可以展示，同时 iCloud 的同步下 Mac 端的 Fantastical 也可以同步展示。</p>
+<p>从 iOS 端到 Mac 端，也可以通过 beorg 来添加内容到 inbox.org，同步到 Mac 后再 refile 分配到其他分类的 org 文件。（iOS 端其实也可以很方便的直接把 To-Dos 创建到对应分类 org 的某个标题下。）如此这样就形成了闭环。</p>
+
+
+    
+
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+<hr>
+
+  <div class="bl-section">
+	<h4 style="color: var(--secondary);">No notes link to this note</h4>
+  </div>
+
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="prev" href="https://sheerwill.live/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/">
+    <span class="title">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;Prev Page</span>
+    <br>
+    <span>Importing Bookmark Files for Scanned PDFs</span>
+  </a>
+  <a class="next" href="https://sheerwill.live/posts/main/20220506185941-pinboard/">
+    <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
+    </span>
+    <br>
+    <span>Pinboard</span>
+  </a>
+</nav>
+
+  </footer>
+    <div class="comments-separator"></div>
+</article>
+    </main>
+    
+<footer class="footer">
+  <span>&copy; 2023 <a href="https://sheerwill.live/">Lucius | Braindump</a></span><span style="display: inline-block; margin-left: 1em;">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
+  </span>
+  <span style="display: inline-block; margin-left: 1em;">
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
+  </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+    <path d="M12 6H0l6-6z" />
+  </svg>
+</a>
+
+<script>
+  (function() {
+     
+    const disableThemeToggle = '' == '1';
+    if (disableThemeToggle) {
+      return;
+    }
+
+    let button = document.getElementById("theme-toggle")
+    
+    button.removeEventListener('click', toggleThemeListener)
+    
+    button.addEventListener('click', toggleThemeListener)
+  })();
+</script>
+
+<script>
+  (function () {
+    let menu = document.getElementById('menu')
+    if (menu) {
+      menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+      menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+      }
+    }
+
+    const disableSmoothScroll = '' == '1';
+    const enableInstantClick = '1' == '1';
+    
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || disableSmoothScroll || enableInstantClick) {
+      return;
+    }
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        var id = this.getAttribute("href").substr(1);
+        document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+          behavior: "smooth"
+        });
+        if (id === "top") {
+          history.replaceState(null, null, " ");
+        } else {
+          history.pushState(null, null, `#${id}`);
+        }
+      });
+    });
+  })();
+</script>
+<script>
+  var mybutton = document.getElementById("top-link");
+  window.onscroll = function () {
+    if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+      mybutton.style.visibility = "visible";
+      mybutton.style.opacity = "1";
+    } else {
+      mybutton.style.visibility = "hidden";
+      mybutton.style.opacity = "0";
+    }
+  };
+</script>
+<script>
+  if (window.scrollListeners) {
+    
+    for (const listener of scrollListeners) {
+      window.removeEventListener('scroll', listener)
+    }
+  }
+  window.scrollListeners = []
+</script>
+
+
+
+<script src="/js/medium-zoom.min.js" data-no-instant
+></script>
+<script>
+  document.querySelectorAll('pre > code').forEach((codeblock) => {
+    const container = codeblock.parentNode.parentNode;
+
+    const copybutton = document.createElement('button');
+    copybutton.classList.add('copy-code');
+    copybutton.innerText = 'copy';
+
+    function copyingDone() {
+      copybutton.innerText = 'copied!';
+      setTimeout(() => {
+        copybutton.innerText = 'copy';
+      }, 2000);
+    }
+
+    copybutton.addEventListener('click', (cb) => {
+      if ('clipboard' in navigator) {
+        navigator.clipboard.writeText(codeblock.textContent);
+        copyingDone();
+        return;
+      }
+
+      const range = document.createRange();
+      range.selectNodeContents(codeblock);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      try {
+        document.execCommand('copy');
+        copyingDone();
+      } catch (e) { };
+      selection.removeRange(range);
+    });
+
+    if (container.classList.contains("highlight")) {
+      container.appendChild(copybutton);
+    } else if (container.parentNode.firstChild == container) {
+      
+    } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+      
+      codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+    } else {
+      
+      codeblock.parentNode.appendChild(copybutton);
+    }
+  });
+</script>
+
+
+
+
+<script>
+  
+  
+  (function() {
+    const enableTocScroll = '1' == '1'
+    if (!enableTocScroll) {
+      return
+    }
+    if (!document.querySelector('.toc')) {
+      console.log('no toc found, ignore toc scroll')
+      return
+    }
+    
+
+    
+    const scrollListeners = window.scrollListeners
+    const headings = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id]');
+    const activeClass = 'active';
+
+    
+    let activeHeading = headings[0];
+    getLinkByHeading(activeHeading).classList.add(activeClass);
+
+    const onScroll = () => {
+      const passedHeadings = [];
+      for (const h of headings) {
+        
+        if (getOffsetTop(h) < 5) {
+          passedHeadings.push(h)
+        } else {
+          break;
+        }
+      }
+      if (passedHeadings.length > 0) {
+        newActiveHeading = passedHeadings[passedHeadings.length - 1];
+      } else {
+        newActiveHeading = headings[0];
+      }
+      if (activeHeading != newActiveHeading) {
+        getLinkByHeading(activeHeading).classList.remove(activeClass);
+        activeHeading = newActiveHeading;
+        getLinkByHeading(activeHeading).classList.add(activeClass);
+      }
+    }
+
+    let timer = null;
+    const scrollListener = () => {
+      if (timer !== null) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(onScroll, 50)
+    }
+    window.addEventListener('scroll', scrollListener, false);
+    scrollListeners.push(scrollListener)
+
+    function getLinkByHeading(heading) {
+      const id = encodeURI(heading.getAttribute('id')).toLowerCase();
+      return document.querySelector(`.toc ul li a[href="#${id}"]`);
+    }
+
+    function getOffsetTop(heading) {
+      if (!heading.getClientRects().length) {
+        return 0;
+      }
+      let rect = heading.getBoundingClientRect();
+      return rect.top
+    }
+  })();
+  </script>
+<script>
+  mediumZoom('.entry-cover img');
+  mediumZoom('.post-content img:not([no-zoom])');
+</script>
+
+<script src="/js/instantclick.min.js" data-no-instant
+></script>
+<script data-no-instant>
+  
+  
+  
+  
+  
+  
+  InstantClick.init();
+</script>
+</body>
+
+</html>

@@ -6,11 +6,786 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Feb 2023 15:22:24 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Nov 2023 11:43:55 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Importing Bookmark Files for Scanned PDFs</title>
+      <link>https://sheerwill.live/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/</link>
+      <pubDate>Sun, 12 Nov 2023 11:43:55 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/</guid>
+      <description>从 FreeMdict Forum 下载的扫描电子书，发帖人提到了书签文件可以用来查找，这个想法是我之前没有想到的。尝试用 pdftk-java 来导入书签文件。 brew install pdftk-java 书签文件如下的格式，相同</description>
+      <content:encoded><![CDATA[<p>从 <a href="https://forum.freemdict.com/">FreeMdict Forum</a> 下载的扫描电子书，发帖人提到了书签文件可以用来查找，这个想法是我之前没有想到的。尝试用 pdftk-java 来导入书签文件。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install pdftk-java
+</span></span></code></pre></div><p>书签文件如下的格式，相同页码的单词数字相同。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">@	1
+</span></span><span class="line"><span class="cl">a or an	1
+</span></span><span class="line"><span class="cl">a-/an-	2
+</span></span><span class="line"><span class="cl">-a	2
+</span></span><span class="line"><span class="cl">a fortiori	3
+</span></span><span class="line"><span class="cl">à la	3
+</span></span><span class="line"><span class="cl">à la carte	4
+</span></span><span class="line"><span class="cl">a posteriori	4
+</span></span><span class="line"><span class="cl">a priori	4
+</span></span><span class="line"><span class="cl">abacus	4
+</span></span><span class="line"><span class="cl">abbreviations	4
+</span></span><span class="line"><span class="cl">abide and abode	6
+</span></span><span class="line"><span class="cl">-ability	6
+</span></span><span class="line"><span class="cl">ablative	6
+</span></span><span class="line"><span class="cl">able and able to	7
+</span></span><span class="line"><span class="cl">-able/-ible	7
+</span></span><span class="line"><span class="cl">abled	8
+</span></span><span class="line"><span class="cl">abolition or abolishment	8
+</span></span><span class="line"><span class="cl">Aboriginal and Aborigine	8
+</span></span><span class="line"><span class="cl">about, about to, and not about to	9
+</span></span><span class="line"><span class="cl">about face or about turn	9
+</span></span><span class="line"><span class="cl">abridgement or abridgment	9
+</span></span><span class="line"><span class="cl">abscissa	9
+</span></span><span class="line"><span class="cl">absent	10
+</span></span><span class="line"><span class="cl">absolute	10
+</span></span><span class="line"><span class="cl">abstract nouns	11
+</span></span><span class="line"><span class="cl">academia, academe and academy	11
+</span></span><span class="line"><span class="cl">accents and diacritics	12
+</span></span><span class="line"><span class="cl">acceptance or acceptation	13
+</span></span><span class="line"><span class="cl">accessory or accessary	13
+</span></span><span class="line"><span class="cl">accidentally or accidently	13
+</span></span><span class="line"><span class="cl">acclaim	13
+</span></span><span class="line"><span class="cl">accommodation, accomodation and accommodations	14
+</span></span><span class="line"><span class="cl">accompanist or accompanyist	14
+</span></span><span class="line"><span class="cl">accusative	14
+</span></span><span class="line"><span class="cl">ACE	14
+</span></span><span class="line"><span class="cl">-acious/-aceous	14
+</span></span><span class="line"><span class="cl">acknowledgement or acknowledgment	14
+</span></span><span class="line"><span class="cl">acro-	15
+</span></span><span class="line"><span class="cl">acronyms	15
+</span></span><span class="line"><span class="cl">active verbs	16
+</span></span><span class="line"><span class="cl">acuity or acuteness	16
+</span></span><span class="line"><span class="cl">acute accents	16
+</span></span><span class="line"><span class="cl">ad or advert	16
+</span></span><span class="line"><span class="cl">AD or A.D.	17
+</span></span><span class="line"><span class="cl">ad hoc, ad-hoc and adhoc	17
+</span></span><span class="line"><span class="cl">ad hominem	18
+</span></span><span class="line"><span class="cl">ad infinitum	18
+</span></span><span class="line"><span class="cl">ad lib, ad-lib or adlib	18
+</span></span><span class="line"><span class="cl">ad personam	18
+</span></span><span class="line"><span class="cl">ad rem	18
+</span></span><span class="line"><span class="cl">adage	18
+</span></span><span class="line"><span class="cl">adaptation or adaption	18
+</span></span><span class="line"><span class="cl">adapter or adaptor	19
+</span></span><span class="line"><span class="cl">addendum	19
+</span></span><span class="line"><span class="cl">addition or additive	19
+</span></span><span class="line"><span class="cl">addresses	19
+</span></span><span class="line"><span class="cl">adherence or adhesion	19
+</span></span><span class="line"><span class="cl">adieu	19
+</span></span><span class="line"><span class="cl">adjacent, adjoining and adjunct	20
+</span></span></code></pre></div><p>在实际处理中发现几个问题</p>
+<ul>
+<li>导入的书签一页只能对应一个书签</li>
+</ul>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 请将 &#39;input.txt&#39; 替换为你的输入文件名</span>
+</span></span><span class="line"><span class="cl"><span class="n">input_file_name</span> <span class="o">=</span> <span class="s1">&#39;input.txt&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 请将 &#39;output.txt&#39; 替换为你的输出文件名</span>
+</span></span><span class="line"><span class="cl"><span class="n">output_file_name</span> <span class="o">=</span> <span class="s1">&#39;output.txt&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">merge_lines_with_same_number</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">merged_lines</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">text</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="n">parts</span>
+</span></span><span class="line"><span class="cl">            <span class="n">number</span> <span class="o">=</span> <span class="n">number</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">merged_lines</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">merged_lines</span><span class="p">[</span><span class="n">number</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">merged_lines</span><span class="p">[</span><span class="n">number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">text</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">merged_lines</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">write_merged_lines_to_file</span><span class="p">(</span><span class="n">merged_lines</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">texts</span> <span class="ow">in</span> <span class="n">merged_lines</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="n">merged_text</span> <span class="o">=</span> <span class="s1">&#39; | &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">merged_text</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file_name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lines</span> <span class="o">=</span> <span class="n">input_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">merged_lines</span> <span class="o">=</span> <span class="n">merge_lines_with_same_number</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">write_merged_lines_to_file</span><span class="p">(</span><span class="n">merged_lines</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;已将每行后面数字相同的英文内容合并，并用&#39;|&#39;分隔，并保存为&#39;</span><span class="si">{</span><span class="n">output_file_name</span><span class="si">}</span><span class="s2">&#39;&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li>导出的内容需要处理成以下格式，其中 <code>PageMediaBegin</code> 往下的内容都不是必须的，头部的信息是必须的，是我在 PDF Expert 中添加了一个书签后导出的格式。
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">InfoBegin
+</span></span><span class="line"><span class="cl">InfoKey: ModDate
+</span></span><span class="line"><span class="cl">InfoValue: D:20231110091307+08&amp;apos;00&amp;apos;
+</span></span><span class="line"><span class="cl">InfoBegin
+</span></span><span class="line"><span class="cl">InfoKey: CreationDate
+</span></span><span class="line"><span class="cl">InfoValue: D:20231107093455Z
+</span></span><span class="line"><span class="cl">InfoBegin
+</span></span><span class="line"><span class="cl">InfoKey: Producer
+</span></span><span class="line"><span class="cl">InfoValue: macOS Version 13.6.1 (Build 22G313) Quartz PDFContext, AppendMode 1.1
+</span></span><span class="line"><span class="cl">PdfID0: 27ee54f1394bde6950015ebab5958d48
+</span></span><span class="line"><span class="cl">PdfID1: a0546a75c44ec4b30b12873737127f5b
+</span></span><span class="line"><span class="cl">NumberOfPages: 793
+</span></span><span class="line"><span class="cl">BookmarkBegin
+</span></span><span class="line"><span class="cl">BookmarkTitle: My Bookmarks
+</span></span><span class="line"><span class="cl">BookmarkLevel: 1
+</span></span><span class="line"><span class="cl">BookmarkPageNumber: 0
+</span></span><span class="line"><span class="cl">BookmarkBegin
+</span></span><span class="line"><span class="cl">BookmarkTitle: also
+</span></span><span class="line"><span class="cl">BookmarkLevel: 2
+</span></span><span class="line"><span class="cl">BookmarkPageNumber: 54
+</span></span><span class="line"><span class="cl">PageMediaBegin
+</span></span><span class="line"><span class="cl">PageMediaNumber: 1
+</span></span><span class="line"><span class="cl">PageMediaRotation: 0
+</span></span><span class="line"><span class="cl">PageMediaRect: 0 0 3,500 5,325.673
+</span></span><span class="line"><span class="cl">PageMediaDimensions: 3,500 5,325.673
+</span></span></code></pre></div></li>
+<li>上面书签的格式和论坛提供的书签不一致，需要处理成这样的格式。
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 请将 &#39;input.txt&#39; 替换为你的输入文件名</span>
+</span></span><span class="line"><span class="cl"><span class="n">input_file_name</span> <span class="o">=</span> <span class="s1">&#39;input.txt&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 请将 &#39;output.txt&#39; 替换为你的输出文件名</span>
+</span></span><span class="line"><span class="cl"><span class="n">output_file_name</span> <span class="o">=</span> <span class="s1">&#39;output.txt&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">convert_to_bookmark</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">page_number</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 格式化为Bookmark文本</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&#34;BookmarkBegin</span><span class="se">\n</span><span class="s2">BookmarkTitle: </span><span class="si">{</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">BookmarkLevel: 2</span><span class="se">\n</span><span class="s2">BookmarkPageNumber: </span><span class="si">{</span><span class="n">page_number</span><span class="si">}</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file_name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lines</span> <span class="o">=</span> <span class="n">input_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bookmarks</span> <span class="o">=</span> <span class="p">[</span><span class="n">convert_to_bookmark</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output_file</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">bookmarks</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;已将每一行转换为Bookmark格式，并保存为&#39;</span><span class="si">{</span><span class="n">output_file_name</span><span class="si">}</span><span class="s2">&#39;&#34;</span><span class="p">)</span>
+</span></span></code></pre></div></li>
+<li>书签导入并不会按照对应的页码，这里我开始意识到和我理解的 bookmarks 不是一个东西， <code>pdftk-java</code> 添加的应该是 <code>Ouline</code>​。因此需要将错位的条目校对好以及填充好头部，这样才会让 Outline 与页面一一对应。
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">封面       1
+</span></span><span class="line"><span class="cl">封面黑白       2
+</span></span><span class="line"><span class="cl">出版信息       3
+</span></span><span class="line"><span class="cl">目录       4
+</span></span><span class="line"><span class="cl">出版说明       5
+</span></span><span class="line"><span class="cl">编译者序       6
+</span></span><span class="line"><span class="cl">编译者序       7
+</span></span><span class="line"><span class="cl">著者前言       8
+</span></span><span class="line"><span class="cl">著者前言       9
+</span></span><span class="line"><span class="cl">著者前言       10
+</span></span><span class="line"><span class="cl">内容提要、体例及查询方法         11
+</span></span><span class="line"><span class="cl">内容提要、体例及查询方法       12
+</span></span><span class="line"><span class="cl">空白页       13
+</span></span><span class="line"><span class="cl">@ | a or an	14
+</span></span><span class="line"><span class="cl">a-/an- | -a	15
+</span></span><span class="line"><span class="cl">a fortiori | à la	16
+</span></span><span class="line"><span class="cl">à la carte | a posteriori | a priori | abacus | abbreviations	17
+</span></span><span class="line"><span class="cl">abbreviations       18
+</span></span><span class="line"><span class="cl">abide and abode | -ability | ablative	19
+</span></span><span class="line"><span class="cl">able and able to | -able/-ible	20
+</span></span><span class="line"><span class="cl">abled | abolition or abolishment | Aboriginal and Aborigine	21
+</span></span><span class="line"><span class="cl">about, about to, and not about to | about face or about turn | abridgement or abridgment | abscissa	22
+</span></span><span class="line"><span class="cl">absent | absolute	23
+</span></span></code></pre></div>最终处理后的结果是，可以非常方便地检索扫描件当中的内容了。</li>
+</ul>
+<figure>
+    <img loading="lazy" src="/ox-hugo/pdf-java-example.png"
+         alt="Figure 1: pdf-java-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>pdf-java-example</p>
+        </figcaption>
+</figure>
+
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Note-taking and GTD with Emacs</title>
+      <link>https://sheerwill.live/posts/main/20230801192723-note_taking_and_gtd_with_emacs/</link>
+      <pubDate>Thu, 03 Aug 2023 17:26:45 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20230801192723-note_taking_and_gtd_with_emacs/</guid>
+      <description>得益于 Emacs 的扩展性，丰富的插件生态，我构建的笔记和 GTD 流程是杂糅在一起的。并没有完全遵照「卡片笔记法」或 GTD 的流程，其中也有不完善的地方，在不断地</description>
+      <content:encoded><![CDATA[<p>得益于 Emacs 的扩展性，丰富的插件生态，我构建的笔记和 GTD 流程是杂糅在一起的。并没有完全遵照「卡片笔记法」或 GTD 的流程，其中也有不完善的地方，在不断地使用中对流程进行改动，细微处调整。</p>
+<p>笔记流程和 GTD 杂糅在一起，就意味着他们必须能够循环自洽，其中自动的步骤是黏合剂，手动的部分是思考的平台。</p>
+<p>输入先不谈杂七杂八的各种途径，比较规整的输入途径有 RSS 和书籍。其中 RSS 可以订阅各类博客、YouTube 等，Podcast 其实也可以在 Emacs 当中听，但一般都是在非工作时间才会听 Podcast，这里略过不谈。</p>
+<p>博客就单纯通过 <a href="https://github.com/skeeto/elfeed">elfeed</a> 订阅，elfeed 本身没有查看订阅列表以及每个订阅源最近的更新时间，但是 Emacs 最自由的就是可以通过自定义函数实现。其中我根据不同的 tag 加了不同的 face，可以理解成 CSS 当中对于页面元素添加了样式，这样可以更为专注地分类阅读。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/elfeed-list.png"
+         alt="Figure 1: elfeed-list"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>elfeed-list</p>
+        </figcaption>
+</figure>
+
+<p>在这之前书籍和 RSS 的处理是通过 <a href="https://readwise.io/maneetpaul-reader/">Readwise Reader</a> 来进行处理的，原因有二。</p>
+<ol>
+<li>统一了 PDF 和 ePub 的阅读体验</li>
+<li>可以配合 <a href="https://github.com/immersive-translate/immersive-translate">immersive-translate</a> 快速的阅读英文文章和书籍，决定是否需要精读。（不看好 GPT 的总结，以及总结本身就是思考的过程，这一步不应该被 AI 替代。）</li>
+</ol>
+<p>但也有一些缺点，导出的自定义并不能满足细分场景，跟官方沟通后无果，就动了迁移的心思。刚好 Emacs 有个插件 <a href="https://github.com/Elilif/emacs-immersive-translate">emacs-immersive-translate</a> 可以实现类似浏览器中「沉浸式翻译」的效果，因此 RSS 和书籍都重新迁移到 Emacs 当中。emacs-immersive-translate 我使用的是 OpenAI 的 API 进行翻译，感觉更加自然准确一点。</p>
+<p>另外巧合发现 Karthink 的另外一个包 <a href="https://github.com/karthink/elfeed-tube">elfeed-tube</a> 可以增强 elfeed 中订阅 YouTube 的体验，通过 <code>elfeed-tube-fetch</code> 按照时间顺序拉取字幕，配合 emacs-immersive-translate 就可以快速的浏览视频内容，再决定哪部分需要详细观看。详细观看时，不需要打开浏览器，拉到对应的时间观看。只需要开启 <code>elfeed-tube-mpv-follow-mode</code> 并用 <code>elfeed-tube-mpv</code> 打开视频观看，这些都可以快速的用键盘操作完成，点击对应的字幕就可以跳转到需要详细观看的部分。</p>
+<p>接下来，不管是 YouTube 还是博客文章，处理过程都是一致的。「摘录-笔记」的结构写在 daily log 文件中（成体系的系列视频或者文章参考下面书籍的处理办法），比如写作日期的当天就是 <code>2023-08-02.org</code> 这个 org 文件。这个文件当中分为了几个部分。</p>
+<ul>
+<li><code>Task</code> 是当天完成的 To-Dos</li>
+<li><code>What I read?</code> 阅读文章的笔记</li>
+<li>log 的主题，包含了工作问题的解决思路，备忘（会加 tag 方便检索），Fleeting Notes 等等，每一条的前面都会有记录的时间点。</li>
+</ul>
+<p>每天结束的时候，都会重新回顾一下当天的 daily log 文件，记录阅读的文章以及记录的工作内容时都会根据内容添加 tag，在遇到相同类别的内容需要整理时，才会整理到具体的笔记当中。不管需不需要整理出具体的笔记，当天的 log 文件都会按照当前的结构归档（结构归档就是按照原来文件内的排版结构，具体到在某个标题下的 To-Dos 归档后依旧在对应的标题下）到 journal.org 文件中，即当前年的 log 是归档到 journal.org；过去一年后，比如过去的 2022 年，就有一个 2022.org 文件，未来还会有 2023.org 等。</p>
+<p>至此，RSS 讲完，书籍（包含 PDF/ePub）都是用 <a href="https://joostkremers.github.io/ebib/">Ebib</a> 进行管理，Ebib 主要是管理 bibtex 的包，其中可以添加对应书籍的位置，因此也可以用来管理书籍，与很多人常用的 <a href="https://www.zotero.org/">Zotero</a> 在功能上很像。不需要作笔记的书籍就随便很多，不管是在 Kindle 还是微信读书，或 iOS 自带的 iBook 都可以阅读。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ebib-list.png"
+         alt="Figure 2: elfeed-list"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>elfeed-list</p>
+        </figcaption>
+</figure>
+
+<p>这里的 bibtex 来源可以是 Zotero 拉取的，也可以是手动下面网站拉取的。</p>
+<ul>
+<li>
+<p><a href="https://lead.to/amazon/com/">Lead2Amazon.com</a></p>
+</li>
+<li>
+<p><a href="https://zbib.org/">ZoteroBib</a></p>
+</li>
+<li>
+<p><a href="https://www.doi2bib.org/">doi2bib</a></p>
+</li>
+<li>
+<p><a href="https://www.bibsonomy.org/">BibSonomy</a></p>
+</li>
+<li>
+<p><a href="http://www.bibtexsearch.com/">BibTeX Search</a></p>
+</li>
+<li>
+<p><a href="https://scholar.google.com/">Google Scholar</a></p>
+</li>
+<li>
+<p><a href="https://dl.acm.org/">ACM</a></p>
+</li>
+<li>
+<p><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a></p>
+<p>ebib 当中可以通过 <code>ebib-add-reading-list-item</code> 添加具体的书目到 books.org 当中，books.org 是一个 org 文件，纳入到 org-agenda 文件下。这里解释一下，GTD 事项管理物理上分为两大部分，inbox.org 和 books.org 等按照事项不同分类的文件（比如还有 work.org）。</p>
+<p>books.org 当中也按照书籍不同的分类，通过 refile 调整到不同的标题下。ebib 当中可以自定义很多东西，比如添加到 books.org 中的书目的待办事项关键字默认是 <code>TODO</code>​，我自定义成 <code>PROJECT</code> 关键字。将书籍的目录手动复制到待办事项下，以 checkbox 的形式存在，这样读完一个章节可以勾去一条，同时在事项的最后会有百分比显示进度。</p>
+</li>
+</ul>
+<figure>
+    <img loading="lazy" src="/ox-hugo/todo-item.png"
+         alt="Figure 3: todo-item"/> <figcaption>
+            <p><span class="figure-number">Figure 3: </span>todo-item</p>
+        </figcaption>
+</figure>
+
+<p>这里的读书书目，并不是每个都会添加到 agenda view 当中，只有添加了 reading tag 的书目才会显示，agenda view 也是有相当高的自定义空间的。为了更方便的查看某书目的阅读已经创建了多久，自定义了函数，在 agenda view 中会在前显示已创建的时长，比如下图的 11.7M，M 是 Month 的含义。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/agenda-view.png"
+         alt="Figure 4: agenda-view"/> <figcaption>
+            <p><span class="figure-number">Figure 4: </span>agenda-view</p>
+        </figcaption>
+</figure>
+
+<p>回到 ebib 上来，通过 <code>ebib-popup-note</code> 可以创建对应书籍的笔记，这里笔记的创建模板也是做了自定义的，更加符合个人的习惯。笔记内容同样是手动复制的目录，按照「总结-摘抄-笔记」的结构。摘抄-笔记的结构好理解，总结就是读完一本书，会针对内容进行总结，形式是 QUE-Question，CLM-Claim，EVD-Evidence，同时也参考了「卡片笔记法」，对于会被其他笔记引用多次的内容会从中抽离出来，单独成卡。</p>
+<figure>
+    <img loading="lazy" src="assets/discourse-graph-example.webp"
+         alt="Figure 5: discourse-graph-example"/> <figcaption>
+            <p><span class="figure-number">Figure 5: </span>discourse-graph-example</p>
+        </figcaption>
+</figure>
+
+<p>笔记使用的是 <a href="https://github.com/org-roam/org-roam">org-roam</a>，更类似于 obsidian 的组织方式；阅读 PDF 的工具是 <a href="https://github.com/vedang/pdf-tools">pdf-tools</a>，ePub 的工具是 <a href="https://depp.brause.cc/nov.el/">nov.el</a>，后者也可以通过 emacs-immersive-translate 进行翻译，阅读英文书籍的速度就提高了很多。其中 nov.el 阅读 ePub 时，尤其是有批注的经典文学作品，我就很喜欢在 Calibre 内用正则替换一下原有的批注 HTML 标签，改为『』包裹，在 nov-mode 下根据 font-lock 设置不同于正文的样式，就很好区分正文和批注了，不会看上去都是黑色的字体。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/nov-font-lock.png"
+         alt="Figure 6: nov-font-lock"/> <figcaption>
+            <p><span class="figure-number">Figure 6: </span>nov-font-lock</p>
+        </figcaption>
+</figure>
+
+<p>笔记的漫游，是交给了 <a href="https://github.com/org-roam/org-roam-ui">org-roam-ui</a>，当初入坑 Emacs 就是因为这个包，逐渐建立起来了现在的一整套流程，可以算作从尾巴推全局了。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/org-roam-ui.png"
+         alt="Figure 7: org-roam-ui"/> <figcaption>
+            <p><span class="figure-number">Figure 7: </span>org-roam-ui</p>
+        </figcaption>
+</figure>
+
+<p>「杂七杂八的输入源」以及手机端和稍后读目前都是通过 Telegram 的 Saved messages，不管是文章、视频还是书籍，处理的逻辑都与上面相同。</p>
+<p>下面来着重讲一下上面提到的 GTD 部分。通过快捷键，Emacs 无论处于哪个工作流程，都可以快速的记录 To-Dos 到 inbox.org 中，然后整理到各自分类的 org 文件当中，这些文件都在 org-agenda 管辖当中。</p>
+<p>不管是 books.org 还是各种 To-Dos 分类的 org 文件，在完成后（关键字变成 DONE）都会自动复制到当天的 daily log 中的 <code>Task</code> 标题下，方便一天结束的时候进行回顾。这些完成的 To-Dos 放在文件中其实也会搅扰到视觉，因此我会手动归档到同目录的子文件夹下的同名 org 文件中，同样的是按照结构归档。</p>
+<p>对于跨度小，一天内能完成的 To-Dos 通常会进行计时，这里也做了自定义。需要开始做一个 To-Do 时，通过 <code>org-clock-in</code> 开始计时，同时关键字由 <code>TODO</code> 自动切换成 <code>NEXT</code>​，完成时切换关键字 <code>NEXT</code> 为 <code>DONE</code> 时自动结束计时。如果不需要计时，正常的关键字切换流程也不影响。</p>
+<p>额外的一些在办公室能够完成的习惯跟踪，我也写在 agenda 当中，绿色代表完成，黄色和红色是未完成。黄色是指距离上次完成还不远，只是警告的含义。</p>
+<p>其实在 Emacs 传教作笔记以及 GTD 的时候，很多人最多提出的质疑就是和手机端的联动。笔记方面我使用的是 <a href="https://plainorg.com/">Plain Org for iOS</a>，可以方便的查看 Dropbox 同步的内容。To-Dos 的同步则是用的 <a href="https://beorgapp.com/">beorg</a>，从 Mac 端同步到 iOS 后，继而同步到 Calendar 中，Fantastical 当中就可以展示，同时 iCloud 的同步下 Mac 端的 Fantastical 也可以同步展示。</p>
+<p>从 iOS 端到 Mac 端，也可以通过 beorg 来添加内容到 inbox.org，同步到 Mac 后再 refile 分配到其他分类的 org 文件。（iOS 端其实也可以很方便的直接把 To-Dos 创建到对应分类 org 的某个标题下。）如此这样就形成了闭环。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Pinboard</title>
+      <link>https://sheerwill.live/posts/main/20220506185941-pinboard/</link>
+      <pubDate>Thu, 03 Aug 2023 11:40:13 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220506185941-pinboard/</guid>
+      <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Wi-Phi – Wireless Philosophy 很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学</description>
+      <content:encoded><![CDATA[<h2 id="misc">Misc</h2>
+<ol>
+<li>
+<p><a href="https://www.templatemaker.nl/zh-cn/">Templatemaker</a></p>
+<p>制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。</p>
+</li>
+<li>
+<p><a href="https://www.wi-phi.com/">Wi-Phi – Wireless Philosophy</a></p>
+<p>很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学网站，致力于以轻松有趣的动画形式阐释哲学问题及哲学思维方式。建于2013年，现在已经有105个哲学动画上线了。</p>
+</li>
+<li>
+<p><a href="https://animagraffs.com/">Animagraffs - Animated infographics about everything.</a></p>
+<p>设计师和艺术家 Jacob O’Neal，把平面设计、3D 动画、充满趣味的表现手法、对各种事物运行原理的极大好奇，全部融进了他的作品。</p>
+</li>
+</ol>
+<h2 id="writing">Writing</h2>
+<ol>
+<li>
+<p><a href="https://github.com/doocs/md">WeChat Markdown Editor</a></p>
+<p>一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性。</p>
+</li>
+</ol>
+<h3 id="查找-citations-的网站">查找 citations 的网站</h3>
+<ol>
+<li>
+<p><a href="https://zbib.org/">zoterobib</a></p>
+<p>Your bibliography is empty. To add a source, paste or type its URL, ISBN, DOI, PMID, arXiv ID, or title into the search box above</p>
+</li>
+<li>
+<p><a href="https://www.doi2bib.org/">doi2bib</a></p>
+<p>give us a DOI and we will do our best to get you the BibTeX entry</p>
+</li>
+<li>
+<p><a href="https://www.bibsonomy.org/">BibSonomy</a></p>
+<p>The easy way to manage scientific publications and bookmarks</p>
+<p>BibSonomy helps you to manage your publications and bookmarks, to collaborate with your colleagues and to find new interesting material for your research.</p>
+</li>
+<li>
+<p><a href="http://www.bibtexsearch.com/">BibTeX Search</a></p>
+<p>You&rsquo;re searching over millions of BibTeX records&hellip;</p>
+</li>
+<li>
+<p><a href="https://scholar.google.com/">Google Scholar</a></p>
+<p>站在巨人的肩膀上</p>
+</li>
+</ol>
+<h4 id="book">Book</h4>
+<p>For books I usually use a site, where it is possible to get Bibtex citations from Amazon.com articles. This is very good for books, and some inproceedings and incollections might be found here as well.</p>
+<ol>
+<li><a href="https://lead.to/amazon/com/">Amazon</a></li>
+</ol>
+<h4 id="article">Article</h4>
+<p>As a Software Engineer I quite often have to deal with technical papers from ACM or IEEE. Both their catalogs provide Bibtex export capabilities.</p>
+<ol>
+<li>
+<p><a href="https://dl.acm.org/">ACM</a></p>
+</li>
+<li>
+<p><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a></p>
+<p>Advancing Technology for Humanity</p>
+</li>
+</ol>
+<h2 id="book">Book</h2>
+<ol>
+<li>
+<p><a href="http://libgen.rs/">Library Genesis</a></p>
+<p>电子书资源查找，中英文都有，英文相对较多。</p>
+</li>
+<li>
+<p><a href="https://www.loudreader.com/">Ebook Reader for web</a></p>
+<p>在线阅读 PDF、azw3、epub、mobi 几种格式。</p>
+</li>
+<li>
+<p><a href="http://www.xn--5rtnx620bw5s.tw/index.php">漢川草廬</a></p>
+<p>一個文史哲愛好者所建立的繁體中文古籍網站</p>
+</li>
+<li>
+<p><a href="https://ctext.org/">Chinese Text Project</a></p>
+<p>可以看到原文图片</p>
+</li>
+<li>
+<p><a href="https://new.shuge.org/">书格</a></p>
+<p>有品格的数字古籍图书馆, 书格</p>
+</li>
+<li>
+<p><a href="https://zi.tools/">zi.tools 字統网</a></p>
+<p>字典</p>
+</li>
+<li>
+<p><a href="https://www.moedict.tw/">萌典 – 教育部國語、臺語、客語辭典民間版</a></p>
+<p>字典</p>
+</li>
+</ol>
+<h2 id="video">Video</h2>
+<ol>
+<li>
+<p><a href="https://sound-effects.bbcrewind.co.uk/">BBC Sound effects</a></p>
+<p>BBC 提供的免费下载的音效的网站。</p>
+</li>
+</ol>
+<h2 id="medicine">Medicine</h2>
+<ol>
+<li>
+<p><a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a></p>
+<p>顾名思义，权威的诊疗查询手册。</p>
+</li>
+</ol>
+<h2 id="design">Design</h2>
+<h3 id="color-picker">Color Picker</h3>
+<ul>
+<li>
+<p><a href="https://nipponcolors.com/">日本の伝統色</a></p>
+<p>日本的一个颜色拾取网站，很漂亮。</p>
+</li>
+</ul>
+<h3 id="plantuml">PlantUML</h3>
+<ul>
+<li>
+<p><a href="https://real-world-plantuml.com/">Real World PlantUML</a></p>
+<p>PlantUML 例子</p>
+</li>
+</ul>
+<h2 id="front-end">Front-End</h2>
+<ol>
+<li>
+<p><a href="https://codepen.io/">codepen</a></p>
+<p>The best place to build, test, and discover front-end code</p>
+</li>
+</ol>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Clustered Indexes / Index Organized Tables (IOT)</title>
+      <link>https://sheerwill.live/posts/main/20230210155015-clustered_indexes_index_organized_tables_iot/</link>
+      <pubDate>Sun, 14 May 2023 13:02:40 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20230210155015-clustered_indexes_index_organized_tables_iot/</guid>
+      <description>Some databases can indeed use an index as primary table store. The Oracle database calls this concept index-organized tables (IOT), other databases use the term clustered index. In this section, both terms are used to either put the emphasis on the table or the index characteristics as needed. An index-organized table is thus a B-tree index without a heap table. This results in two benefits: (1) it saves the space</description>
+      <content:encoded><![CDATA[<blockquote>
+<p>Some databases can indeed use an index as primary table store. The Oracle database calls this concept index-organized tables (IOT), other databases use the term clustered index. In this section, both terms are used to either put the emphasis on the table or the index characteristics as needed.</p>
+<p>An index-organized table is thus a B-tree index without a heap table. This results in two benefits: (1) it saves the space for the heap structure; (2) every access on a clustered index is automatically an index-only scan.</p>
+</blockquote>
+<p>索引组织表以主键顺序组织物理数据存储，索引结构中的每个叶节点（Leaf Nodes）都存储着完整的行数据。对应的主键被称为聚簇索引（Clustered Indexes）（若没有定义主键，则第一个 <code>NOT NULL UNIQUE</code> 列是聚集索引；若没有 <code>NOT NULL UNIQUE</code> 列，InnoDB 会创建一个隐藏的 row-id 作为聚集索引。），除此之外的索引称为二级索引（<a href="/posts/main/20230210235436-secondary_indexes/">Secondary Indexes</a>）。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/b-tree-structure.png"
+         alt="Figure 1: b-tree-structure"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>b-tree-structure</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img loading="lazy" src="/ox-hugo/index-based-access-on-a-heap-table.png"
+         alt="Figure 2: index-based-access-on-a-heap-table"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>index-based-access-on-a-heap-table</p>
+        </figcaption>
+</figure>
+
+<p>B-Tree 的上级 leaf nodes 存储的是下级 leaf nodes 中列值的最大值，可以从图中看出最底层的 leaf nodes 存储的是 ROWID，可以据此查找到堆表中的位置。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/secondary-index-on-an-IOT.png"
+         alt="Figure 3: secondary-index-on-an-IOT"/> <figcaption>
+            <p><span class="figure-number">Figure 3: </span>secondary-index-on-an-IOT</p>
+        </figcaption>
+</figure>
+
+<h2 id="索引组织表的缺点">索引组织表的缺点</h2>
+<p>图 <code>secondary-index-on-an-IOT</code> 就是索引组织表中，二级索引获取数据的流程。这个流程在中文中叫做「回表（<a href="/posts/main/20230211000136-table_access_by_index_rowid/">Table access by index rowid</a>）」。</p>
+<h2 id="索引组织表的好处">索引组织表的好处</h2>
+<ul>
+<li>可以节省堆表占用的空间</li>
+<li>访问聚簇索引可以直接获取数据（即「覆盖索引（<a href="/posts/main/20230211001746-covering_index/">covering index</a>）」）</li>
+<li>二级索引需要回表，即需要根据二级索引的叶节点内的主键，再对主键形成的聚簇索引进行遍历，查找到具体的记录。</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Secondary Indexes</title>
+      <link>https://sheerwill.live/posts/main/20230210235436-secondary_indexes/</link>
+      <pubDate>Sun, 14 May 2023 12:55:24 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20230210235436-secondary_indexes/</guid>
+      <description>除主键外的其他列上新建的索引都是二级索引。 二级索引的排序与物理记录的排序不一致，存储的是该列本身排序后的值和主键。</description>
+      <content:encoded><![CDATA[<ul>
+<li>除主键外的其他列上新建的索引都是二级索引。</li>
+<li>二级索引的排序与物理记录的排序不一致，存储的是该列本身排序后的值和主键。</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Table access by index rowid</title>
+      <link>https://sheerwill.live/posts/main/20230211000136-table_access_by_index_rowid/</link>
+      <pubDate>Sun, 14 May 2023 12:54:45 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20230211000136-table_access_by_index_rowid/</guid>
+      <description>遍历二级索引树找到对应的主键后，再从索引组织表中查找数据所在的叶节点叫做「回表」。在英文中没有特定的词表示这个过程，叫做 table access by index rowidi</description>
+      <content:encoded><![CDATA[<p>遍历二级索引树找到对应的主键后，再从索引组织表中查找数据所在的叶节点叫做「回表」。在英文中没有特定的词表示这个过程，叫做 table access by index rowidi。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>covering index</title>
+      <link>https://sheerwill.live/posts/main/20230211001746-covering_index/</link>
+      <pubDate>Sun, 14 May 2023 12:54:40 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20230211001746-covering_index/</guid>
+      <description>即可以直接通过遍历聚簇索引获取到非主键列数据的场景，即不需要「回表（Table access by index rowid）」操作。覆盖索引一般出现在「联合索引」中，因</description>
+      <content:encoded><![CDATA[<p>即可以直接通过遍历聚簇索引获取到非主键列数据的场景，即不需要「回表（<a href="/posts/main/20230211000136-table_access_by_index_rowid/">Table access by index rowid</a>）」操作。覆盖索引一般出现在「联合索引」中，因为叶节点中会存储「联合索引」所有列的数据（索引即数据）。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Raft consensus algorithm</title>
+      <link>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</link>
+      <pubDate>Wed, 29 Mar 2023 09:31:04 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</guid>
+      <description>Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其</description>
+      <content:encoded><![CDATA[<figure>
+    <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
+         alt="Figure 1: node-state-transitions-in-raft"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>node-state-transitions-in-raft</p>
+        </figcaption>
+</figure>
+
+<p>一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。</p>
+<p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
+<p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
+<h2 id="initialisation">Initialisation</h2>
+<div class="equation-container">
+<span class="equation">
+\begin{document}
+\begin{algorithm}
+\caption{Initialisation}
+\FnOn{\textsf{\upshape initialisation}}
+{\textsf{\upshape \(currentTerm\) := 0; \(votedFor\) := null}\;
+\textsf{\upshape\(log := \langle\rangle; commitLength\) := 0}\;
+\textsf{\upshape\(currentRole\) := follower; \(curentLeader\) := null}\;
+\(votesReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\)}
+<p>\FnOn{\textsf{\upshape recovery from crash}}
+{\textsf{\upshape (currentRole) := follower};
+\textsf{\upshape (currentLeader) := null};
+(votedReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle)}</p>
+<p>\FnOn{\textsf{\upshape node (nodeId) suspects leader has failed, or on election timeout}}
+{\textsf{\upshape (currentTerm := currentTerm + 1; currentRole) := candidate};
+\textsf{\upshape (votedFor := nodeId; votesReceived := { nodeId } ; lastTerm := 0)};
+\If{\textsf{\upshape (log).length &gt; 0}}{\textsf{\upshape (lastTerm) := (log[log).length − 1(]).term;}}
+\textsf{\upshape (msg) := (VoteRequest, (nodeId), (currentTerm), (log).length, (lastTerm))};
+\For{\textsf{\upshape each (node \in nodes)}}{\KwSend \textsf{\upshape (msg) to (node)}}
+\textsf{\upshape start election timer}}
+\end{algorithm}
+\end{document}</p>
+</span>
+<span class="equation-label">
+1
+</span>
+</div>
+<figure>
+    <img loading="lazy" src="/ox-hugo/raft-initialisation.svg"
+         alt="Figure 2: raft-initialisation"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>raft-initialisation</p>
+        </figcaption>
+</figure>
+
+<p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
+<p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
+<p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
+<h2 id="voting-on-a-new-leader">Voting on a new leader</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/raft-voting-on-a-new-leader.svg"
+         alt="Figure 3: raft-voting-on-a-new-leader"/> <figcaption>
+            <p><span class="figure-number">Figure 3: </span>raft-voting-on-a-new-leader</p>
+        </figcaption>
+</figure>
+
+<p>如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。</p>
+<p>votedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及当前的 term。</p>
+<h2 id="collecting-votes">Collecting votes</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/raft-collecting-votes.svg"
+         alt="Figure 4: raft-collecting-votes"/> <figcaption>
+            <p><span class="figure-number">Figure 4: </span>raft-collecting-votes</p>
+        </figcaption>
+</figure>
+
+<p>回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。</p>
+<p>如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。</p>
+<p>sentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。</p>
+<h2 id="broadcasting-messages">Broadcasting messages</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/raft-broadcasting-messages.svg"
+         alt="Figure 5: raft-broadcasting-messages"/> <figcaption>
+            <p><span class="figure-number">Figure 5: </span>raft-broadcasting-messages</p>
+        </figcaption>
+</figure>
+
+<p>以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。</p>
+<p>leader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。</p>
+<h2 id="replicating-from-leader-to-followers">Replicating from leader to followers</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/raft-replicating-from-leader-to-followers.svg"
+         alt="Figure 6: raft-replicating-from-leader-to-followers"/> <figcaption>
+            <p><span class="figure-number">Figure 6: </span>raft-replicating-from-leader-to-followers</p>
+        </figcaption>
+</figure>
+
+<p>ReplicateLog 方法是从 leader 利用 followerId 发送任何新的 log 条目给 follower。prefixLen 是已经发送给 follower 消息的数量，suffix 就是还没有发送给 follower 的消息。所以当 sentLength[follower] = log.length 时，suffix 是一个空数组。</p>
+<h2 id="followers-receiving-messages">Followers receiving messages</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/raft-followers-receiving-messages.svg"
+         alt="Figure 7: raft-followers-receiving-messages"/> <figcaption>
+            <p><span class="figure-number">Figure 7: </span>raft-followers-receiving-messages</p>
+        </figcaption>
+</figure>
+
+<p>首先，如果消息的 term 比 follower 当前的 term 高，则更新当前的 term，并接受消息的发送者为 leader。相等的时候，也会和之前一样的逻辑，承认发送者为 leader。</p>
+<p>prefixLen 为 suffix 包含 log 条目之前的条目数量，follower 要求自己当前的 log 长度要大于等于 prefixLen，并且 prefixLen 长度前的最后一个 log 条目中的 term 要与 leader 的 prefixTerm 相同<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。Raft 算法保证两个节点相同下标对应的 log 条目中的 term 相同，那么在这之前的 log 都是相同。</p>
+<p>以上条件满足就会调用 AppendEntries 将 suffix 添加到自己的 log 当中。</p>
+<h2 id="updating-followers-logs">Updating followers&rsquo; logs</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/raft-updating-followers-logs.svg"
+         alt="Figure 8: raft-updating-followers-logs"/> <figcaption>
+            <p><span class="figure-number">Figure 8: </span>raft-updating-followers-logs</p>
+        </figcaption>
+</figure>
+
+<p>follower 利用该函数讲从 leader 那里收到的条目扩充到 log 当中。如果节点本地的 log 长度大于 leader 发来消息中的 prefixLen，那么我们就要检查差异的这部份 log 条目是否与 suffix 中的条目一致。如果不一致，我们则需要舍弃这部份差异，只保留 prefixLen 长度的 log。这种情况发生在前一个 leader 发送的 log 已经被合并到节点本地 log 当中，而同时因为一些原因新的 leader 发送来新的 log。</p>
+<p>然后，任何新的 log 都会被追加到 follower 本地的 log 当中，即便是消息重复的情况下，这个操作也是幂等的。follower 检查 leaderCommit 是否大于本地的 commitLength，满足条件则可以将 log 当中的 msg 传递给 application，并对本地 commitLength 更新。</p>
+<h2 id="leader-receiving-log-acknowledgements">Leader receiving log acknowledgements</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/raft-leader-receiving-log-acknowledgements.svg"
+         alt="Figure 9: raft-leader-receiving-log-acknowledgements"/> <figcaption>
+            <p><span class="figure-number">Figure 9: </span>raft-leader-receiving-log-acknowledgements</p>
+        </figcaption>
+</figure>
+
+<p>这里回到 leader 这边。leader 会检查发送者的 term：如果发送者的 term 大于接收者的 term，那么意味着新 leader 选举已经开始，所以当前的 leader 会变为 follower 的状态。</p>
+<p>如果 term 相同，并且详细中的 success 为 true，则更新 sendLength 和 ackedLength，记录 follower 确认过的 log 数量，然后调用 CommitLogEntries 函数。如果 success 为 false，则 follower 没有接收消息，这个时候 leader 会递减 sendLength，并嗲用 ReplicateLog 重新发送 LogRequest 消息<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<h2 id="leader-committing-log-entries">Leader committing log entries</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/raft-leader-committing-log-entries.svg"
+         alt="Figure 10: raft-leader-committing-log-entries"/> <figcaption>
+            <p><span class="figure-number">Figure 10: </span>raft-leader-committing-log-entries</p>
+        </figcaption>
+</figure>
+
+<p>被 quorum 确认过的 log 条目就可以被 leader 提交，当 log 条目被提交，消息就被传递给 Application。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>参考上一个步骤中 prefixTerm 的来源&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>这里算法是可以优化的，来减少重试次数。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://sheerwill.live/posts/main/20220607104757-hugo/</link>
+      <pubDate>Thu, 23 Mar 2023 10:29:03 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220607104757-hugo/</guid>
+      <description>Install brew install hugo Add backlink 在 themes/xxx/layouts/partials/ 下新增 backlink.html​，内容如下。 {{ $re := $.File.BaseFileName }} {{ $backlinks := slice }} {{ range .Site.AllPages }} {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }} {{ $backlinks = $backlinks | append . }} {{ end }} {{ end }}</description>
+      <content:encoded><![CDATA[<h2 id="install">Install</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install hugo
+</span></span></code></pre></div><h2 id="add-backlink">Add backlink</h2>
+<p>在 <code>themes/xxx/layouts/partials/</code> 下新增 <code>backlink.html</code>​，内容如下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ $re := $.File.BaseFileName }}
+</span></span><span class="line"><span class="cl">{{ $backlinks := slice }}
+</span></span><span class="line"><span class="cl">{{ range .Site.AllPages }}
+</span></span><span class="line"><span class="cl">   {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }}
+</span></span><span class="line"><span class="cl">	  {{ $backlinks = $backlinks | append . }}
+</span></span><span class="line"><span class="cl">   {{ end }}
+</span></span><span class="line"><span class="cl">{{ end }}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{{ if gt (len $backlinks) 0 }}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Links to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;backlinks&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	   {{ range $backlinks }}
+</span></span><span class="line"><span class="cl">		  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .RelPermalink }}&#34;</span><span class="p">&gt;</span>{{ .Title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	   {{ end }}
+</span></span><span class="line"><span class="cl">	 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{ else  }}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>No notes link to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{ end }}
+</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/_default/single.html</code> 中增加下面代码，放到合适的地方。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;backlinks.html&#34; . }}
+</span></span></code></pre></div><p>放在文章下方的话可以插入如下位置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post-content&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {{- if not (.Param &#34;disableAnchoredHeadings&#34;) }}
+</span></span><span class="line"><span class="cl">    {{- partial &#34;anchored_headings.html&#34; .Content -}}
+</span></span><span class="line"><span class="cl">    {{- else }}{{ .Content }}{{ end }}
+</span></span><span class="line"><span class="cl">    {{ partial &#34;backlinks.html&#34; . }}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h2 id="mathjax-support">MathJax support</h2>
+<h3 id="方案1">方案1</h3>
+<p>在 <code>themes/xxx/layouts/_default/single.html</code> 中 <code>header</code> 中增加下面代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h3 id="方案2">方案2</h3>
+<p>增加 <code>themes/xxx/layouts/partials/mathjax.html</code> 文件，并在其中增加下面代码，实现即便是页面间的跳转，也可以实时渲染公式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">MathJax</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">tex</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">inlineMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\(&#39;</span><span class="p">,</span> <span class="s1">&#39;\\)&#39;</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">displayMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$$&#39;</span><span class="p">,</span><span class="s1">&#39;$$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\[&#39;</span><span class="p">,</span> <span class="s1">&#39;\\]&#39;</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">processEscapes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">processEnvironments</span><span class="o">:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">skipHtmlTags</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;noscript&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;pre&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&#34;mjx-container&#34;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">x</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">classList</span> <span class="o">+=</span> <span class="s1">&#39;has-jax&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://polyfill.io/v3/polyfill.min.js?features=es6&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;MathJax-script&#34;</span> <span class="na">async</span>
+</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">code</span><span class="p">.</span><span class="nc">has-jax</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="mh">#515151</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/partials/header.html</code> 中增加下面代码，放到合适的地方。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;mathjax.html&#34; . }}
+</span></span></code></pre></div><p>如果不想所有页面都加载 MathJax，就添加下面代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ if .Params.mathjax }}{{ partial &#34;mathjax.html&#34; . }}{{ end }}
+</span></span></code></pre></div><p>并通过 <a href="https://ox-hugo.scripter.co/doc/custom-front-matter/">Custom Front-matter Parameters</a> 设置 <code>mathjax: true</code>​。具体是添加下面代码到需要导出并用 MathJax 展示的 org 文件头部，导出后就是 <code>.md</code> 文件中的 metadata。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+HUGO_CUSTOM_FRONT_MATTER</span><span class="c">: :mathjax true</span>
+</span></span></code></pre></div><p>另外对于一些用到额外包以及复杂的块 Latex，MathJax 的支持并不是很好。可以将块导出为 svg，即在头部增加 <code>#+options: tex:dvisvgm</code> 就可以了。</p>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Vanilla Emacs with Purcell</title>
       <link>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
-      <pubDate>Mon, 27 Feb 2023 15:22:24 +0800</pubDate>
+      <pubDate>Tue, 28 Feb 2023 13:51:10 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on UbuntuLucius&amp;rsquo;s Workflow git clone git://git.sv.gnu.org/emacs.git sudo apt install</description>
@@ -1912,8 +2687,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">window-width</span> <span class="o">.</span> <span class="mf">0.35</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">side</span> <span class="o">.</span> <span class="nv">right</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">slot</span> <span class="o">.</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">dedicated</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nf">window-parameters</span> <span class="o">.</span> <span class="p">((</span><span class="nv">no-other-window</span> <span class="o">.</span> <span class="no">t</span><span class="p">)))))))</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">dedicated</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)))))</span>
 </span></span></code></pre></div><p>上述代码除了 <code>dedicated</code> 属性，都是由 ChatGPT Plus 生成。不设置该字段为 <code>nil</code> 会导致从 Telega 列表进入聊天 buffer 后重新打开新的 buffer，具体原因参照 <code>dedicated</code> 字段的解释参见 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Displaying-Buffers-in-Side-Windows.html">Displaying Buffers in Side Windows (GNU Emacs Lisp Reference Manual)</a>。</p>
 <p>最后总的配置如下。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-telega.el  --- Custom configuration</span>
@@ -2018,8 +2792,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">window-width</span> <span class="o">.</span> <span class="mf">0.35</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">side</span> <span class="o">.</span> <span class="nv">right</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">slot</span> <span class="o">.</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">dedicated</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nf">window-parameters</span> <span class="o">.</span> <span class="p">((</span><span class="nv">no-other-window</span> <span class="o">.</span> <span class="no">t</span><span class="p">)))))))</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">(</span><span class="nv">dedicated</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)))))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-telega</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-telega.el ends here</span>
@@ -2069,7 +2842,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">menu-bar-mode</span> <span class="mi">-1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">tool-bar-mode</span> <span class="mi">-1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">scroll-bar-mode</span> <span class="mi">-1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-modern-star</span> <span class="p">[</span><span class="s">&#34;➤&#34;</span> <span class="s">&#34;✦&#34;</span> <span class="s">&#34;✜&#34;</span> <span class="s">&#34;✲&#34;</span> <span class="s">&#34;✸&#34;</span> <span class="s">&#34;❅&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nb">setq</span> <span class="nv">org-modern-star</span> <span class="p">[</span><span class="s">&#34;➫&#34;</span> <span class="s">&#34;✦&#34;</span> <span class="s">&#34;✜&#34;</span> <span class="s">&#34;✲&#34;</span> <span class="s">&#34;✸&#34;</span> <span class="s">&#34;❅&#34;</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-hide-emphasis-markers</span> <span class="no">t</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-tags-column</span> <span class="mi">0</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">org-catch-invisible-edits</span> <span class="ss">&#39;show-and-error</span>
@@ -3627,128 +4400,6 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">#</span><span class="nn">back-extra1</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div>]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Raft consensus algorithm</title>
-      <link>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</link>
-      <pubDate>Fri, 10 Feb 2023 14:18:05 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</guid>
-      <description>Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其</description>
-      <content:encoded><![CDATA[<figure>
-    <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
-         alt="Figure 1: node-state-transitions-in-raft"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>node-state-transitions-in-raft</p>
-        </figcaption>
-</figure>
-
-<p>一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。</p>
-<p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
-<p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
-<h2 id="initialisation">Initialisation</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-initialisation.svg"
-         alt="Figure 2: raft-initialisation"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>raft-initialisation</p>
-        </figcaption>
-</figure>
-
-<p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
-<p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
-<p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
-<h2 id="voting-on-a-new-leader">Voting on a new leader</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-voting-on-a-new-leader.svg"
-         alt="Figure 3: raft-voting-on-a-new-leader"/> <figcaption>
-            <p><span class="figure-number">Figure 3: </span>raft-voting-on-a-new-leader</p>
-        </figcaption>
-</figure>
-
-<p>如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。</p>
-<p>votedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及当前的 term。</p>
-<h2 id="collecting-votes">Collecting votes</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-collecting-votes.svg"
-         alt="Figure 4: raft-collecting-votes"/> <figcaption>
-            <p><span class="figure-number">Figure 4: </span>raft-collecting-votes</p>
-        </figcaption>
-</figure>
-
-<p>回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。</p>
-<p>如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。</p>
-<p>sentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。</p>
-<h2 id="broadcasting-messages">Broadcasting messages</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-broadcasting-messages.svg"
-         alt="Figure 5: raft-broadcasting-messages"/> <figcaption>
-            <p><span class="figure-number">Figure 5: </span>raft-broadcasting-messages</p>
-        </figcaption>
-</figure>
-
-<p>以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。</p>
-<p>leader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。</p>
-<h2 id="replicating-from-leader-to-followers">Replicating from leader to followers</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-replicating-from-leader-to-followers.svg"
-         alt="Figure 6: raft-replicating-from-leader-to-followers"/> <figcaption>
-            <p><span class="figure-number">Figure 6: </span>raft-replicating-from-leader-to-followers</p>
-        </figcaption>
-</figure>
-
-<p>ReplicateLog 方法是从 leader 利用 followerId 发送任何新的 log 条目给 follower。prefixLen 是已经发送给 follower 消息的数量，suffix 就是还没有发送给 follower 的消息。所以当 sentLength[follower] = log.length 时，suffix 是一个空数组。</p>
-<h2 id="followers-receiving-messages">Followers receiving messages</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-followers-receiving-messages.svg"
-         alt="Figure 7: raft-followers-receiving-messages"/> <figcaption>
-            <p><span class="figure-number">Figure 7: </span>raft-followers-receiving-messages</p>
-        </figcaption>
-</figure>
-
-<p>首先，如果消息的 term 比 follower 当前的 term 高，则更新当前的 term，并接受消息的发送者为 leader。相等的时候，也会和之前一样的逻辑，承认发送者为 leader。</p>
-<p>prefixLen 为 suffix 包含 log 条目之前的条目数量，follower 要求自己当前的 log 长度要大于等于 prefixLen，并且 prefixLen 长度前的最后一个 log 条目中的 term 要与 leader 的 prefixTerm 相同<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。Raft 算法保证两个节点相同下标对应的 log 条目中的 term 相同，那么在这之前的 log 都是相同。</p>
-<p>以上条件满足就会调用 AppendEntries 将 suffix 添加到自己的 log 当中。</p>
-<h2 id="updating-followers-logs">Updating followers&rsquo; logs</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-updating-followers-logs.svg"
-         alt="Figure 8: raft-updating-followers-logs"/> <figcaption>
-            <p><span class="figure-number">Figure 8: </span>raft-updating-followers-logs</p>
-        </figcaption>
-</figure>
-
-<p>follower 利用该函数讲从 leader 那里收到的条目扩充到 log 当中。如果节点本地的 log 长度大于 leader 发来消息中的 prefixLen，那么我们就要检查差异的这部份 log 条目是否与 suffix 中的条目一致。如果不一致，我们则需要舍弃这部份差异，只保留 prefixLen 长度的 log。这种情况发生在前一个 leader 发送的 log 已经被合并到节点本地 log 当中，而同时因为一些原因新的 leader 发送来新的 log。</p>
-<p>然后，任何新的 log 都会被追加到 follower 本地的 log 当中，即便是消息重复的情况下，这个操作也是幂等的。follower 检查 leaderCommit 是否大于本地的 commitLength，满足条件则可以将 log 当中的 msg 传递给 application，并对本地 commitLength 更新。</p>
-<h2 id="leader-receiving-log-acknowledgements">Leader receiving log acknowledgements</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-leader-receiving-log-acknowledgements.svg"
-         alt="Figure 9: raft-leader-receiving-log-acknowledgements"/> <figcaption>
-            <p><span class="figure-number">Figure 9: </span>raft-leader-receiving-log-acknowledgements</p>
-        </figcaption>
-</figure>
-
-<p>这里回到 leader 这边。leader 会检查发送者的 term：如果发送者的 term 大于接收者的 term，那么意味着新 leader 选举已经开始，所以当前的 leader 会变为 follower 的状态。</p>
-<p>如果 term 相同，并且详细中的 success 为 true，则更新 sendLength 和 ackedLength，记录 follower 确认过的 log 数量，然后调用 CommitLogEntries 函数。如果 success 为 false，则 follower 没有接收消息，这个时候 leader 会递减 sendLength，并嗲用 ReplicateLog 重新发送 LogRequest 消息<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
-<h2 id="leader-committing-log-entries">Leader committing log entries</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-leader-committing-log-entries.svg"
-         alt="Figure 10: raft-leader-committing-log-entries"/> <figcaption>
-            <p><span class="figure-number">Figure 10: </span>raft-leader-committing-log-entries</p>
-        </figcaption>
-</figure>
-
-<p>被 quorum 确认过的 log 条目就可以被 leader 提交，当 log 条目被提交，消息就被传递给 Application。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>参考上一个步骤中 prefixTerm 的来源&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>这里算法是可以优化的，来减少重试次数。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
     </item>
     
     <item>
@@ -5324,99 +5975,6 @@ delivered[sender] := delivered[sender] + 1}}
 <p>对于写操作比较频繁的系统，这个操作的瓶颈非常大。Quorum 算法可以让写操作只要写完3台就返回。剩下的由系统内部缓慢同步完成。而读操作，则需要也至少读3台，才能保证至少可以读到一个最新的数据。</p>
 <p>Quorum 的读写最小票数可以用来做为系统在读、写性能方面的一个可调节参数。写票数 \(V_{w}\) 越大，则读票数 \(V_{r}\) 越小，这时候系统读的开销就小。反之则写的开销就小。</p>
 ]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Hugo</title>
-      <link>https://sheerwill.live/posts/main/20220607104757-hugo/</link>
-      <pubDate>Fri, 10 Feb 2023 14:17:57 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220607104757-hugo/</guid>
-      <description>Install brew install hugo Add backlink 在 themes/xxx/layouts/partials/ 下新增 backlink.html​，内容如下。 {{ $re := $.File.BaseFileName }} {{ $backlinks := slice }} {{ range .Site.AllPages }} {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }} {{ $backlinks = $backlinks | append . }} {{ end }} {{ end }}</description>
-      <content:encoded><![CDATA[<h2 id="install">Install</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install hugo
-</span></span></code></pre></div><h2 id="add-backlink">Add backlink</h2>
-<p>在 <code>themes/xxx/layouts/partials/</code> 下新增 <code>backlink.html</code>​，内容如下。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ $re := $.File.BaseFileName }}
-</span></span><span class="line"><span class="cl">{{ $backlinks := slice }}
-</span></span><span class="line"><span class="cl">{{ range .Site.AllPages }}
-</span></span><span class="line"><span class="cl">   {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }}
-</span></span><span class="line"><span class="cl">	  {{ $backlinks = $backlinks | append . }}
-</span></span><span class="line"><span class="cl">   {{ end }}
-</span></span><span class="line"><span class="cl">{{ end }}
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">{{ if gt (len $backlinks) 0 }}
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Links to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;backlinks&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	   {{ range $backlinks }}
-</span></span><span class="line"><span class="cl">		  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .RelPermalink }}&#34;</span><span class="p">&gt;</span>{{ .Title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	   {{ end }}
-</span></span><span class="line"><span class="cl">	 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ else  }}
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>No notes link to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ end }}
-</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/_default/single.html</code> 中增加下面代码，放到合适的地方。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;backlinks.html&#34; . }}
-</span></span></code></pre></div><p>放在文章下方的话可以插入如下位置</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post-content&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    {{- if not (.Param &#34;disableAnchoredHeadings&#34;) }}
-</span></span><span class="line"><span class="cl">    {{- partial &#34;anchored_headings.html&#34; .Content -}}
-</span></span><span class="line"><span class="cl">    {{- else }}{{ .Content }}{{ end }}
-</span></span><span class="line"><span class="cl">    {{ partial &#34;backlinks.html&#34; . }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span></code></pre></div><h2 id="mathjax-support">MathJax support</h2>
-<h3 id="方案1">方案1</h3>
-<p>在 <code>themes/xxx/layouts/_default/single.html</code> 中 <code>header</code> 中增加下面代码。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span></code></pre></div><h3 id="方案2">方案2</h3>
-<p>增加 <code>themes/xxx/layouts/partials/mathjax.html</code> 文件，并在其中增加下面代码，实现即便是页面间的跳转，也可以实时渲染公式。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">MathJax</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">tex</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">inlineMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\(&#39;</span><span class="p">,</span> <span class="s1">&#39;\\)&#39;</span><span class="p">]],</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">displayMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$$&#39;</span><span class="p">,</span><span class="s1">&#39;$$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\[&#39;</span><span class="p">,</span> <span class="s1">&#39;\\]&#39;</span><span class="p">]],</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">processEscapes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">processEnvironments</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">skipHtmlTags</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;noscript&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;pre&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&#34;mjx-container&#34;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">x</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">classList</span> <span class="o">+=</span> <span class="s1">&#39;has-jax&#39;</span><span class="p">})</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://polyfill.io/v3/polyfill.min.js?features=es6&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;MathJax-script&#34;</span> <span class="na">async</span>
-</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">code</span><span class="p">.</span><span class="nc">has-jax</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">font</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">border</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="mh">#515151</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/partials/header.html</code> 中增加下面代码，放到合适的地方。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;mathjax.html&#34; . }}
-</span></span></code></pre></div><p>如果不想所有页面都加载 MathJax，就添加下面代码。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ if .Params.mathjax }}{{ partial &#34;mathjax.html&#34; . }}{{ end }}
-</span></span></code></pre></div><p>并通过 <a href="https://ox-hugo.scripter.co/doc/custom-front-matter/">Custom Front-matter Parameters</a> 设置 <code>mathjax: true</code>​。具体是添加下面代码到需要导出并用 MathJax 展示的 org 文件头部，导出后就是 <code>.md</code> 文件中的 metadata。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+HUGO_CUSTOM_FRONT_MATTER</span><span class="c">: :mathjax true</span>
-</span></span></code></pre></div>]]></content:encoded>
     </item>
     
     <item>
@@ -7030,125 +7588,6 @@ for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loo
 </span></span></code></pre></div><p>Is N * log ( N ). The running time consists of N loops (iterative or recursive) that are logarithmic, thus the algorithm is a combination of linear and logarithmic.</p>
 <p>In general, doing something with every item in one dimension is linear, doing something with every item in two dimensions is quadratic, and dividing the working area in half is logarithmic. There are other Big O measures such as cubic, exponential, and square root, but they&rsquo;re not nearly as common. Big O notation is described as O ( ) where is the measure. The quicksort algorithm would be described as O ( N * log ( N ) ).</p>
 <p>Note that none of this has taken into account best, average, and worst case measures. Each would have its own Big O notation. Also note that this is a VERY simplistic explanation. Big O is the most common, but it&rsquo;s also more complex that I&rsquo;ve shown. There are also other notations such as big omega, little o, and big theta. You probably won&rsquo;t encounter them outside of an algorithm analysis course. ;)</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Pinboard</title>
-      <link>https://sheerwill.live/posts/main/20220506185941-pinboard/</link>
-      <pubDate>Fri, 10 Feb 2023 14:17:52 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220506185941-pinboard/</guid>
-      <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Wi-Phi – Wireless Philosophy 很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学</description>
-      <content:encoded><![CDATA[<h2 id="misc">Misc</h2>
-<ol>
-<li>
-<p><a href="https://www.templatemaker.nl/zh-cn/">Templatemaker</a></p>
-<p>制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。</p>
-</li>
-<li>
-<p><a href="https://www.wi-phi.com/">Wi-Phi – Wireless Philosophy</a></p>
-<p>很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学网站，致力于以轻松有趣的动画形式阐释哲学问题及哲学思维方式。建于2013年，现在已经有105个哲学动画上线了。</p>
-</li>
-<li>
-<p><a href="https://animagraffs.com/">Animagraffs - Animated infographics about everything.</a></p>
-<p>设计师和艺术家 Jacob O’Neal，把平面设计、3D 动画、充满趣味的表现手法、对各种事物运行原理的极大好奇，全部融进了他的作品。</p>
-</li>
-</ol>
-<h2 id="writing">Writing</h2>
-<ol>
-<li>
-<p><a href="https://github.com/doocs/md">WeChat Markdown Editor</a></p>
-<p>一款高度简洁的微信 Markdown 编辑器：支持 Markdown 语法、色盘取色、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性。</p>
-</li>
-</ol>
-<h3 id="查找-citations-的网站">查找 citations 的网站</h3>
-<ol>
-<li>
-<p><a href="https://zbib.org/">zoterobib</a></p>
-<p>Your bibliography is empty. To add a source, paste or type its URL, ISBN, DOI, PMID, arXiv ID, or title into the search box above</p>
-</li>
-<li>
-<p><a href="https://www.doi2bib.org/">doi2bib</a></p>
-<p>give us a DOI and we will do our best to get you the BibTeX entry</p>
-</li>
-<li>
-<p><a href="https://www.bibsonomy.org/">BibSonomy</a></p>
-<p>The easy way to manage scientific publications and bookmarks</p>
-<p>BibSonomy helps you to manage your publications and bookmarks, to collaborate with your colleagues and to find new interesting material for your research.</p>
-</li>
-<li>
-<p><a href="http://www.bibtexsearch.com/">BibTeX Search</a></p>
-<p>You&rsquo;re searching over millions of BibTeX records&hellip;</p>
-</li>
-<li>
-<p><a href="https://scholar.google.com/">Google Scholar</a></p>
-<p>站在巨人的肩膀上</p>
-</li>
-</ol>
-<h4 id="book">Book</h4>
-<p>For books I usually use a site, where it is possible to get Bibtex citations from Amazon.com articles. This is very good for books, and some inproceedings and incollections might be found here as well.</p>
-<ol>
-<li><a href="https://lead.to/amazon/com/">Amazon</a></li>
-</ol>
-<h4 id="article">Article</h4>
-<p>As a Software Engineer I quite often have to deal with technical papers from ACM or IEEE. Both their catalogs provide Bibtex export capabilities.</p>
-<ol>
-<li>
-<p><a href="https://dl.acm.org/">ACM</a></p>
-</li>
-<li>
-<p><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE Xplore</a></p>
-<p>Advancing Technology for Humanity</p>
-</li>
-</ol>
-<h2 id="book">Book</h2>
-<ol>
-<li>
-<p><a href="http://libgen.rs/">Library Genesis</a></p>
-<p>电子书资源查找，中英文都有，英文相对较多。</p>
-</li>
-<li>
-<p><a href="https://www.loudreader.com/">Ebook Reader for web</a></p>
-<p>在线阅读 PDF、azw3、epub、mobi 几种格式。</p>
-</li>
-</ol>
-<h2 id="video">Video</h2>
-<ol>
-<li>
-<p><a href="https://sound-effects.bbcrewind.co.uk/">BBC Sound effects</a></p>
-<p>BBC 提供的免费下载的音效的网站。</p>
-</li>
-</ol>
-<h2 id="medicine">Medicine</h2>
-<ol>
-<li>
-<p><a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a></p>
-<p>顾名思义，权威的诊疗查询手册。</p>
-</li>
-</ol>
-<h2 id="design">Design</h2>
-<h3 id="color-picker">Color Picker</h3>
-<ul>
-<li>
-<p><a href="https://nipponcolors.com/">日本の伝統色</a></p>
-<p>日本的一个颜色拾取网站，很漂亮。</p>
-</li>
-</ul>
-<h3 id="plantuml">PlantUML</h3>
-<ul>
-<li>
-<p><a href="https://real-world-plantuml.com/">Real World PlantUML</a></p>
-<p>PlantUML 例子</p>
-</li>
-</ul>
-<h2 id="front-end">Front-End</h2>
-<ol>
-<li>
-<p><a href="https://codepen.io/">codepen</a></p>
-<p>The best place to build, test, and discover front-end code</p>
-</li>
-</ol>
 ]]></content:encoded>
     </item>
     
