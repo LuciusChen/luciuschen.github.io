@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>setting up pass on git with a gpg key | Lucius | Braindump</title>
+<meta name="keywords" content="">
+<meta name="description" content="References pass : 密码管理本不复杂 - Nayuki&rsquo;s Archive Home · mssun/passforios Wiki · GitHub https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store Source: Setting up pass on git with a gpg key · GitHub Setup The following shell transcript shows how to: Create a GPG key Create a pass database Add git support to the pass database Create a remote git repository Push the pass database to the remote git repository">
+<meta name="author" content="Lucius Chen">
+<link rel="canonical" href="https://sheerwill.live/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.8dd6f57454653644cba6929524e195dff93a26fa61dce2b3b2629e50b8d12816.css" integrity="sha256-jdb1dFRlNkTLppKVJOGV3/k6Jvph3OKzsmKeULjRKBY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://sheerwill.live/favicon.ico">
+<link rel="apple-touch-icon" href="https://sheerwill.live/apple-touch-icon.png">
+<script async defer data-website-id="f4e3ad0a-7fc1-4f18-b08c-9be77b60cdd5" src="https://oishii.reorx.com/oishii.js"></script>
+
+<meta name="twitter:title" content="setting up pass on git with a gpg key | Lucius | Braindump" />
+<meta name="twitter:description" content="References pass : 密码管理本不复杂 - Nayuki&rsquo;s Archive Home · mssun/passforios Wiki · GitHub https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store Source: Setting up pass on git with a gpg key · GitHub Setup The following shell transcript shows how to: Create a GPG key Create a pass database Add git support to the pass database Create a remote git repository Push the pass database to the remote git repository" />
+<meta property="og:title" content="setting up pass on git with a gpg key | Lucius | Braindump" />
+<meta property="og:description" content="References pass : 密码管理本不复杂 - Nayuki&rsquo;s Archive Home · mssun/passforios Wiki · GitHub https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store Source: Setting up pass on git with a gpg key · GitHub Setup The following shell transcript shows how to: Create a GPG key Create a pass database Add git support to the pass database Create a remote git repository Push the pass database to the remote git repository" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sheerwill.live/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/" />
+<meta property="article:section" content="posts" />
+  
+  <meta property="article:modified_time" content="2024-01-15T21:07:02&#43;08:00" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://sheerwill.live/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "setting up pass on git with a gpg key",
+      "item": "https://sheerwill.live/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "setting up pass on git with a gpg key | Lucius | Braindump",
+  "name": "setting up pass on git with a gpg key",
+  "description": "References pass : 密码管理本不复杂 - Nayuki\u0026rsquo;s Archive Home · mssun/passforios Wiki · GitHub https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store Source: Setting up pass on git with a gpg key · GitHub Setup The following shell transcript shows how to: Create a GPG key Create a pass database Add git support to the pass database Create a remote git repository Push the pass database to the remote git repository",
+  "keywords": [
+    
+  ],
+  "wordCount" : "1286",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "2024-01-15T21:07:02+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "Lucius Chen"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sheerwill.live/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lucius | Braindump",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sheerwill.live/favicon.ico"
+    }
+  }
+}
+</script><style>
+  #icons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2em;
+  }
+  #icons .item {
+    width: 80px;
+    height: 50px;
+    margin: 10px;
+  }
+  #icons .item .name {
+    font-size: 12px;
+    user-select: all;
+    text-align: center;
+  }
+  #icons .item .icon {
+    display: flex;
+    justify-content: center;
+  }
+  #icons .item svg {
+    width: 30px;
+    height: 30px;
+  }
+</style>
+
+
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary-bg: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list-page {
+                background: var(--theme);
+            }
+
+            .list-page:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list-page:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+</head>
+
+<body class=" type-posts kind-page layout-" id="top"><script data-no-instant>
+function switchTheme(theme) {
+  switch (theme) {
+    case 'light':
+      document.body.classList.remove('dark');
+      break;
+    case 'dark':
+      document.body.classList.add('dark');
+      break;
+    
+    default:
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+      }
+  }
+}
+
+function isDarkTheme() {
+  return document.body.className.includes("dark");
+}
+
+function getPrefTheme() {
+  return localStorage.getItem("pref-theme");
+}
+
+function setPrefTheme(theme) {
+  switchTheme(theme)
+  localStorage.setItem("pref-theme", theme);
+}
+
+const toggleThemeCallbacks = {}
+toggleThemeCallbacks['main'] = (isDark) => {
+  
+  if (isDark) {
+    setPrefTheme('light');
+  } else {
+    setPrefTheme('dark');
+  }
+}
+
+
+
+
+window.addEventListener('toggle-theme', function() {
+  
+  const isDark = isDarkTheme()
+  for (const key in toggleThemeCallbacks) {
+    toggleThemeCallbacks[key](isDark)
+  }
+});
+
+
+function toggleThemeListener() {
+  
+  window.dispatchEvent(new CustomEvent('toggle-theme'));
+}
+
+</script>
+<script>
+  
+  (function() {
+    const defaultTheme = 'auto';
+    const prefTheme = getPrefTheme();
+    const theme = prefTheme ? prefTheme : defaultTheme;
+
+    switchTheme(theme);
+  })();
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://sheerwill.live/" accesskey="h" title="Lucius | Braindump (Alt + H)">Lucius | Braindump</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://sheerwill.live/tags/" title="Tags"
+                >Tags
+                </a>
+            </li>
+            <li>
+                <a href="https://sheerwill.live/archives/" title="Archive"
+                >Archive
+                </a>
+            </li>
+            <li>
+                <a href="https://sheerwill.live/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
+                >Search
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main post">
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">setting up pass on git with a gpg key</h1>
+    <div class="post-meta"><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
+  <span>January 15, 2024</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
+  <span>1286 words</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
+  <span>3 min</span></span>
+
+      
+      
+    </div>
+  </header> <div class="toc side right">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#references" aria-label="References">References</a></li>
+                <li>
+                    <a href="#source-setting-up-pass-on-git-with-a-gpg-key-github" aria-label="Source: Setting up pass on git with a gpg key · GitHub">Source: <a href="https://gist.github.com/flbuddymooreiv/a4f24da7e0c3552942ff">Setting up pass on git with a gpg key · GitHub</a></a></li>
+                <li>
+                    <a href="#setup" aria-label="Setup">Setup</a><ul>
+                        
+                <li>
+                    <a href="#create-a-gpg-key" aria-label="Create a GPG key">Create a GPG key</a></li>
+                <li>
+                    <a href="#create-a-pass-database" aria-label="Create a pass database">Create a pass database</a></li>
+                <li>
+                    <a href="#add-git-support-to-the-pass-database" aria-label="Add git support to the pass database">Add git support to the pass database</a></li>
+                <li>
+                    <a href="#create-a-remote-git-repository" aria-label="Create a remote git repository">Create a remote git repository</a></li>
+                <li>
+                    <a href="#push-the-pass-database-to-the-remote-git-repository" aria-label="Push the pass database to the remote git repository">Push the pass database to the remote git repository</a></li>
+                <li>
+                    <a href="#fetch-and-display-passwords-from-another-computer" aria-label="Fetch and display passwords from another computer">Fetch and display passwords from another computer</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%96%b0%e7%94%b5%e8%84%91%e8%ae%be%e7%bd%ae" aria-label="新电脑设置">新电脑设置</a></li>
+                <li>
+                    <a href="#remarks" aria-label="Remarks">Remarks</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="references">References<a hidden class="anchor" aria-hidden="true" href="#references">¶</a></h2>
+<ul>
+<li><a href="https://nyk.ma/posts/password-store/#pass-%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">pass : 密码管理本不复杂 - Nayuki&rsquo;s Archive</a></li>
+<li><a href="https://github.com/mssun/passforios/wiki#importing-keys">Home · mssun/passforios Wiki · GitHub</a></li>
+<li><a href="https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store">https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store</a></li>
+</ul>
+<h2 id="source-setting-up-pass-on-git-with-a-gpg-key-github">Source: <a href="https://gist.github.com/flbuddymooreiv/a4f24da7e0c3552942ff">Setting up pass on git with a gpg key · GitHub</a><a hidden class="anchor" aria-hidden="true" href="#source-setting-up-pass-on-git-with-a-gpg-key-github">¶</a></h2>
+<h2 id="setup">Setup<a hidden class="anchor" aria-hidden="true" href="#setup">¶</a></h2>
+<p>The following shell transcript shows how to:</p>
+<ul>
+<li>Create a GPG key</li>
+<li>Create a pass database</li>
+<li>Add git support to the pass database</li>
+<li>Create a remote git repository</li>
+<li>Push the pass database to the remote git repository</li>
+<li>Fetch and display your passwords from another host</li>
+</ul>
+<p>It is assumed that the <code>pass</code> package has been installed on both the
+first and second computers.</p>
+<h3 id="create-a-gpg-key">Create a GPG key<a hidden class="anchor" aria-hidden="true" href="#create-a-gpg-key">¶</a></h3>
+<div class="html">
+<p>&lt;pre&gt;
+&lt;b&gt;user@host:~$ gpg &ndash;gen-key&lt;/b&gt;
+gpg (GnuPG) 1.4.18; Copyright (C) 2014 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.</p>
+<p>Please select what kind of key you want:
+(1) RSA and RSA (default)
+(2) DSA and Elgamal
+(3) DSA (sign only)
+(4) RSA (sign only)
+&lt;b&gt;Your selection? 1&lt;/b&gt;
+RSA keys may be between 1024 and 4096 bits long.
+&lt;b&gt;What keysize do you want? (2048) 4096&lt;/b&gt;
+Requested keysize is 4096 bits
+Please specify how long the key should be valid.
+0 = key does not expire
+&amp;lt;n&amp;gt;  = key expires in n days
+&amp;lt;n&amp;gt;w = key expires in n weeks
+&amp;lt;n&amp;gt;m = key expires in n months
+&amp;lt;n&amp;gt;y = key expires in n years
+&lt;b&gt;Key is valid for? (0) &lt;/b&gt;
+Key does not expire at all
+&lt;b&gt;Is this correct? (y/N) y&lt;/b&gt;</p>
+<p>You need a user ID to identify your key; the software constructs the user ID
+from the Real Name, Comment and Email Address in this form:
+&ldquo;Heinrich Heine (Der Dichter) &amp;lt;heinrichh@duesseldorf.de&amp;gt;&rdquo;</p>
+<p>&lt;b&gt;Real name: First Middle Last Suffix&lt;/b&gt;
+&lt;b&gt;Email address: <a href="mailto:first.last@host.tld">first.last@host.tld</a>&lt;/b&gt;
+Comment:
+You selected this USER-ID:
+&ldquo;First Middle Last Suffix &amp;lt;first.last@host.tld&amp;gt;&rdquo;</p>
+<p>&lt;b&gt;Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O&lt;/b&gt;
+You need a Passphrase to protect your secret key.</p>
+<p>We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.</p>
+<p>Not enough random bytes available.  Please do some other work to give
+the OS a chance to collect more entropy! (Need 172 more bytes)
+&hellip;&hellip;&hellip;&hellip;+++++</p>
+<p>Not enough random bytes available.  Please do some other work to give
+the OS a chance to collect more entropy! (Need 198 more bytes)
+&hellip;&hellip;&hellip;&hellip;..+++++
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.</p>
+<p>Not enough random bytes available.  Please do some other work to give
+the OS a chance to collect more entropy! (Need 250 more bytes)
+&hellip;&hellip;&hellip;.+++++</p>
+<p>Not enough random bytes available.  Please do some other work to give
+the OS a chance to collect more entropy! (Need 249 more bytes)
+&hellip;&hellip;+++++
+gpg: key 68214821 marked as ultimately trusted
+public and secret key created and signed.</p>
+<p>gpg: checking the trustdb
+gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+pub   4096R/68214821 2015-06-24
+Key fingerprint = A5C2 96E8 AC41 0889 60D9  2D1F 0F6D B722 6821 4821
+uid                  First Middle Last Suffix &amp;lt;first.last@host.tld&amp;gt;
+sub   4096R/36A6F06D 2015-06-24
+&lt;/pre&gt;</p>
+</div>
+<h3 id="create-a-pass-database">Create a pass database<a hidden class="anchor" aria-hidden="true" href="#create-a-pass-database">¶</a></h3>
+<div class="html">
+<p>&lt;pre&gt;
+&lt;b&gt;user@host:~$ gpg &ndash;list-keys&lt;/b&gt;
+<em>home/user</em>.gnupg/pubring.gpg</p>
+<hr>
+<p>pub   4096R/68214821 2015-06-24
+uid                  First Middle Last Suffix &amp;lt;first.last@host.tld&amp;gt;
+sub   4096R/36A6F06D 2015-06-24</p>
+<p>&lt;b&gt;user@host:~$ pass init 68214821&lt;/b&gt;
+mkdir: created directory ‘/home/user/.password-store/’
+Password store initialized for 68214821
+&lt;/pre&gt;</p>
+</div>
+<h3 id="add-git-support-to-the-pass-database">Add git support to the pass database<a hidden class="anchor" aria-hidden="true" href="#add-git-support-to-the-pass-database">¶</a></h3>
+<div class="html">
+<p>&lt;pre&gt;
+&lt;b&gt;user@host:~$ pass git init&lt;/b&gt;
+Initialized empty Git repository in <em>home/user</em>.password-store/.git/
+[master (root-commit) c343a0c] Add current contents of password store.
+1 file changed, 1 insertion(<del>)
+create mode 100644 .gpg-id
+[master edaf464] Configure git repository for gpg file diff.
+1 file changed, 1 insertion(</del>)
+create mode 100644 .gitattributes</p>
+<p>&lt;b&gt;user@host:~$ pass generate <a href="mailto:serviceprovider/account.name@service.tld">serviceprovider/account.name@service.tld</a> 21&lt;/b&gt;
+mkdir: created directory ‘/home/user/.password-store/gmail’
+[master e6a1974] Add generated password for <a href="mailto:serviceprovider/account.name@service.tld">serviceprovider/account.name@service.tld</a>.
+1 file changed, 0 insertions(+), 0 deletions(-)
+create mode 100644 <a href="mailto:serviceprovider/account.name@service.tld.gpg">serviceprovider/account.name@service.tld.gpg</a>
+The generated password for <a href="mailto:serviceprovider/account.name@service.tld">serviceprovider/account.name@service.tld</a> is:
+;J&amp;E_2A55&amp;lt;%=&amp;lt;KxoEDZuL
+&lt;/pre&gt;</p>
+</div>
+<h3 id="create-a-remote-git-repository">Create a remote git repository<a hidden class="anchor" aria-hidden="true" href="#create-a-remote-git-repository">¶</a></h3>
+<div class="html">
+<p>&lt;pre&gt;
+&lt;b&gt;user@host:~$ ssh <a href="mailto:user@gitrepo.org">user@gitrepo.org</a> -p gitport \
+&ldquo;git init &ndash;bare <em>path/to/git/user-password</em>&quot;&lt;/b&gt;
+&lt;b&gt;user@gitrepo.org&rsquo;s password: &lt;/b&gt;
+Initialized empty Git repository in <em>path/to/version_systems/git/user-password</em>
+&lt;/pre&gt;</p>
+</div>
+<h3 id="push-the-pass-database-to-the-remote-git-repository">Push the pass database to the remote git repository<a hidden class="anchor" aria-hidden="true" href="#push-the-pass-database-to-the-remote-git-repository">¶</a></h3>
+<div class="html">
+<p>&lt;pre&gt;
+&lt;b&gt;user@host:~$ pass git remote add origin \
+ssh://user@gitrepo.org:gitport/path/to/git/user-password/&lt;/b&gt;</p>
+<p>&lt;b&gt;user@host:~$ pass git push -u &ndash;all&lt;/b&gt;
+&lt;b&gt;user@gitrepo.org&rsquo;s password: &lt;/b&gt;
+Counting objects: 10, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (10/10), 1.38 KiB | 0 bytes/s, done.
+Total 10 (delta 1), reused 0 (delta 0)
+To ssh://user@gitrepo.org:gitport/path/to/git/user-password/</p>
+<ul>
+<li>[new branch]      master -&amp;gt; master</li>
+</ul>
+<p>Branch master set up to track remote branch master from origin.
+&lt;/pre&gt;</p>
+</div>
+<h3 id="fetch-and-display-passwords-from-another-computer">Fetch and display passwords from another computer<a hidden class="anchor" aria-hidden="true" href="#fetch-and-display-passwords-from-another-computer">¶</a></h3>
+<p>It is assumed here that your GPG key has been migrated to the second
+computer.</p>
+<div class="html">
+<p>&lt;pre&gt;
+&lt;b&gt;user@host:~$ gpg &ndash;list-keys&lt;/b&gt;
+<em>home/user</em>.gnupg/pubring.gpg</p>
+<hr>
+<p>pub   4096R/68214821 2015-06-24
+uid                  First Middle Last Suffix &amp;lt;first.last@host.tld&amp;gt;
+sub   4096R/36A6F06D 2015-06-24</p>
+<p>&lt;b&gt;user@host:~$ pass init 68214821&lt;/b&gt;
+mkdir: created directory ‘/home/user/.password-store/’
+Password store initialized for 68214821</p>
+<p>&lt;b&gt;user@host:~$ pass git init&lt;/b&gt;
+Initialized empty Git repository in <em>home/user</em>.password-store/.git/
+[master (root-commit) c343a0c] Add current contents of password store.
+1 file changed, 1 insertion(<del>)
+create mode 100644 .gpg-id
+[master edaf464] Configure git repository for gpg file diff.
+1 file changed, 1 insertion(</del>)
+create mode 100644 .gitattributes</p>
+<p>&lt;b&gt;user@host:~$ pass git remote add origin \
+ssh://user@gitrepo.org:gitport/path/to/git/user-password/&lt;/b&gt;</p>
+<p>&lt;b&gt;user@host:~$ git reset origin/master&lt;/b&gt;</p>
+<p>&lt;b&gt;user@host:~$ pass git fetch&lt;/b&gt;
+&lt;b&gt;user@gitrepo.org&rsquo;s password: &lt;/b&gt;
+warning: no common commits
+remote: Counting objects: 10, done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 10 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (10/10), done.
+From ssh://user@gitrepo.org:gitport/path/to/git/user-password/</p>
+<ul>
+<li>[new branch]      master     -&amp;gt; origin/master</li>
+</ul>
+<p>&lt;b&gt;user@host:~$ pass git rebase origin/master&lt;/b&gt;
+First, rewinding head to replay your work on top of it&hellip;</p>
+<p>&lt;b&gt;user@host:~$ pass show <a href="mailto:serviceprovider/account.name@service.tld">serviceprovider/account.name@service.tld</a>&lt;/b&gt;
+gpg: WARNING: The GNOME keyring manager hijacked the GnuPG agent.
+gpg: WARNING: GnuPG will not work properly - please configure that tool to not interfere with the GnuPG system!
+;J&amp;E_2A55&amp;lt;%=&amp;lt;KxoEDZuL
+&lt;/pre&gt;</p>
+</div>
+<h2 id="新电脑设置">新电脑设置<a hidden class="anchor" aria-hidden="true" href="#新电脑设置">¶</a></h2>
+<p>导入密钥 &ndash;&gt; <code>gpg --import gpg_key</code>​，当导入新的密钥后出现以下提示</p>
+<blockquote>
+<p>It is NOT certain that the key belongs to the person named
+in the user ID.  If you <strong>really</strong> know what you are doing,
+you may answer the next question with yes.</p>
+</blockquote>
+<p>可以通过以下步骤验证信任</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gpg --edit-key YOUR@KEY.ID
+</span></span><span class="line"><span class="cl">gpg&gt; trust
+</span></span><span class="line"><span class="cl">Please decide how far you trust this user to correctly verify other users<span class="s1">&#39; keys
+</span></span></span><span class="line"><span class="cl"><span class="s1">(by looking at passports, checking fingerprints from different sources, etc.)
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">  1 = I don&#39;</span>t know or won<span class="err">&#39;</span>t say
+</span></span><span class="line"><span class="cl">  <span class="nv">2</span> <span class="o">=</span> I <span class="k">do</span> NOT trust
+</span></span><span class="line"><span class="cl">  <span class="nv">3</span> <span class="o">=</span> I trust marginally
+</span></span><span class="line"><span class="cl">  <span class="nv">4</span> <span class="o">=</span> I trust fully
+</span></span><span class="line"><span class="cl">  <span class="nv">5</span> <span class="o">=</span> I trust ultimately
+</span></span><span class="line"><span class="cl">  <span class="nv">m</span> <span class="o">=</span> back to the main menu
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Your decision? <span class="m">5</span>
+</span></span><span class="line"><span class="cl">Do you really want to <span class="nb">set</span> this key to ultimate trust? <span class="o">(</span>y/N<span class="o">)</span> y
+</span></span></code></pre></div><h2 id="remarks">Remarks<a hidden class="anchor" aria-hidden="true" href="#remarks">¶</a></h2>
+<p>当提示 <code>gpg: waiting for lock (held by 5175)</code> 可以用 <code>$ ls -l ~/.gnupg/*.lock</code> 查看相关的锁文件，删除即可。</p>
+
+
+    
+
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+<hr>
+
+  <div class="bl-section">
+	<h4 style="color: var(--secondary);">No notes link to this note</h4>
+  </div>
+
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="next" href="https://sheerwill.live/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/">
+    <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
+    </span>
+    <br>
+    <span>Importing Bookmark Files for Scanned PDFs</span>
+  </a>
+</nav>
+
+  </footer>
+    <div class="comments-separator"></div>
+</article>
+    </main>
+    
+<footer class="footer">
+  <span>&copy; 2024 <a href="https://sheerwill.live/">Lucius | Braindump</a></span><span style="display: inline-block; margin-left: 1em;">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
+  </span>
+  <span style="display: inline-block; margin-left: 1em;">
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
+  </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+    <path d="M12 6H0l6-6z" />
+  </svg>
+</a>
+
+<script>
+  (function() {
+     
+    const disableThemeToggle = '' == '1';
+    if (disableThemeToggle) {
+      return;
+    }
+
+    let button = document.getElementById("theme-toggle")
+    
+    button.removeEventListener('click', toggleThemeListener)
+    
+    button.addEventListener('click', toggleThemeListener)
+  })();
+</script>
+
+<script>
+  (function () {
+    let menu = document.getElementById('menu')
+    if (menu) {
+      menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+      menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+      }
+    }
+
+    const disableSmoothScroll = '' == '1';
+    const enableInstantClick = '1' == '1';
+    
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || disableSmoothScroll || enableInstantClick) {
+      return;
+    }
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        var id = this.getAttribute("href").substr(1);
+        document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+          behavior: "smooth"
+        });
+        if (id === "top") {
+          history.replaceState(null, null, " ");
+        } else {
+          history.pushState(null, null, `#${id}`);
+        }
+      });
+    });
+  })();
+</script>
+<script>
+  var mybutton = document.getElementById("top-link");
+  window.onscroll = function () {
+    if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+      mybutton.style.visibility = "visible";
+      mybutton.style.opacity = "1";
+    } else {
+      mybutton.style.visibility = "hidden";
+      mybutton.style.opacity = "0";
+    }
+  };
+</script>
+<script>
+  if (window.scrollListeners) {
+    
+    for (const listener of scrollListeners) {
+      window.removeEventListener('scroll', listener)
+    }
+  }
+  window.scrollListeners = []
+</script>
+
+
+
+<script src="/js/medium-zoom.min.js" data-no-instant
+></script>
+<script>
+  document.querySelectorAll('pre > code').forEach((codeblock) => {
+    const container = codeblock.parentNode.parentNode;
+
+    const copybutton = document.createElement('button');
+    copybutton.classList.add('copy-code');
+    copybutton.innerText = 'copy';
+
+    function copyingDone() {
+      copybutton.innerText = 'copied!';
+      setTimeout(() => {
+        copybutton.innerText = 'copy';
+      }, 2000);
+    }
+
+    copybutton.addEventListener('click', (cb) => {
+      if ('clipboard' in navigator) {
+        navigator.clipboard.writeText(codeblock.textContent);
+        copyingDone();
+        return;
+      }
+
+      const range = document.createRange();
+      range.selectNodeContents(codeblock);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      try {
+        document.execCommand('copy');
+        copyingDone();
+      } catch (e) { };
+      selection.removeRange(range);
+    });
+
+    if (container.classList.contains("highlight")) {
+      container.appendChild(copybutton);
+    } else if (container.parentNode.firstChild == container) {
+      
+    } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+      
+      codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+    } else {
+      
+      codeblock.parentNode.appendChild(copybutton);
+    }
+  });
+</script>
+
+
+
+
+<script>
+  
+  
+  (function() {
+    const enableTocScroll = '1' == '1'
+    if (!enableTocScroll) {
+      return
+    }
+    if (!document.querySelector('.toc')) {
+      console.log('no toc found, ignore toc scroll')
+      return
+    }
+    
+
+    
+    const scrollListeners = window.scrollListeners
+    const headings = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id]');
+    const activeClass = 'active';
+
+    
+    let activeHeading = headings[0];
+    getLinkByHeading(activeHeading).classList.add(activeClass);
+
+    const onScroll = () => {
+      const passedHeadings = [];
+      for (const h of headings) {
+        
+        if (getOffsetTop(h) < 5) {
+          passedHeadings.push(h)
+        } else {
+          break;
+        }
+      }
+      if (passedHeadings.length > 0) {
+        newActiveHeading = passedHeadings[passedHeadings.length - 1];
+      } else {
+        newActiveHeading = headings[0];
+      }
+      if (activeHeading != newActiveHeading) {
+        getLinkByHeading(activeHeading).classList.remove(activeClass);
+        activeHeading = newActiveHeading;
+        getLinkByHeading(activeHeading).classList.add(activeClass);
+      }
+    }
+
+    let timer = null;
+    const scrollListener = () => {
+      if (timer !== null) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(onScroll, 50)
+    }
+    window.addEventListener('scroll', scrollListener, false);
+    scrollListeners.push(scrollListener)
+
+    function getLinkByHeading(heading) {
+      const id = encodeURI(heading.getAttribute('id')).toLowerCase();
+      return document.querySelector(`.toc ul li a[href="#${id}"]`);
+    }
+
+    function getOffsetTop(heading) {
+      if (!heading.getClientRects().length) {
+        return 0;
+      }
+      let rect = heading.getBoundingClientRect();
+      return rect.top
+    }
+  })();
+  </script>
+<script>
+  mediumZoom('.entry-cover img');
+  mediumZoom('.post-content img:not([no-zoom])');
+</script>
+
+<script src="/js/instantclick.min.js" data-no-instant
+></script>
+<script data-no-instant>
+  
+  
+  
+  
+  
+  
+  InstantClick.init();
+</script>
+</body>
+
+</html>

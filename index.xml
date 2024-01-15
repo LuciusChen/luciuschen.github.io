@@ -6,11 +6,236 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Nov 2023 11:43:55 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Jan 2024 21:07:02 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>setting up pass on git with a gpg key</title>
+      <link>https://sheerwill.live/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/</link>
+      <pubDate>Mon, 15 Jan 2024 21:07:02 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/</guid>
+      <description>References pass : 密码管理本不复杂 - Nayuki&amp;rsquo;s Archive Home · mssun/passforios Wiki · GitHub https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store Source: Setting up pass on git with a gpg key · GitHub Setup The following shell transcript shows how to: Create a GPG key Create a pass database Add git support to the pass database Create a remote git repository Push the pass database to the remote git repository</description>
+      <content:encoded><![CDATA[<h2 id="references">References</h2>
+<ul>
+<li><a href="https://nyk.ma/posts/password-store/#pass-%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">pass : 密码管理本不复杂 - Nayuki&rsquo;s Archive</a></li>
+<li><a href="https://github.com/mssun/passforios/wiki#importing-keys">Home · mssun/passforios Wiki · GitHub</a></li>
+<li><a href="https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store">https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store</a></li>
+</ul>
+<h2 id="source-setting-up-pass-on-git-with-a-gpg-key-github">Source: <a href="https://gist.github.com/flbuddymooreiv/a4f24da7e0c3552942ff">Setting up pass on git with a gpg key · GitHub</a></h2>
+<h2 id="setup">Setup</h2>
+<p>The following shell transcript shows how to:</p>
+<ul>
+<li>Create a GPG key</li>
+<li>Create a pass database</li>
+<li>Add git support to the pass database</li>
+<li>Create a remote git repository</li>
+<li>Push the pass database to the remote git repository</li>
+<li>Fetch and display your passwords from another host</li>
+</ul>
+<p>It is assumed that the <code>pass</code> package has been installed on both the
+first and second computers.</p>
+<h3 id="create-a-gpg-key">Create a GPG key</h3>
+<div class="html">
+<p>&lt;pre&gt;
+&lt;b&gt;user@host:~$ gpg &ndash;gen-key&lt;/b&gt;
+gpg (GnuPG) 1.4.18; Copyright (C) 2014 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.</p>
+<p>Please select what kind of key you want:
+(1) RSA and RSA (default)
+(2) DSA and Elgamal
+(3) DSA (sign only)
+(4) RSA (sign only)
+&lt;b&gt;Your selection? 1&lt;/b&gt;
+RSA keys may be between 1024 and 4096 bits long.
+&lt;b&gt;What keysize do you want? (2048) 4096&lt;/b&gt;
+Requested keysize is 4096 bits
+Please specify how long the key should be valid.
+0 = key does not expire
+&amp;lt;n&amp;gt;  = key expires in n days
+&amp;lt;n&amp;gt;w = key expires in n weeks
+&amp;lt;n&amp;gt;m = key expires in n months
+&amp;lt;n&amp;gt;y = key expires in n years
+&lt;b&gt;Key is valid for? (0) &lt;/b&gt;
+Key does not expire at all
+&lt;b&gt;Is this correct? (y/N) y&lt;/b&gt;</p>
+<p>You need a user ID to identify your key; the software constructs the user ID
+from the Real Name, Comment and Email Address in this form:
+&ldquo;Heinrich Heine (Der Dichter) &amp;lt;heinrichh@duesseldorf.de&amp;gt;&rdquo;</p>
+<p>&lt;b&gt;Real name: First Middle Last Suffix&lt;/b&gt;
+&lt;b&gt;Email address: <a href="mailto:first.last@host.tld">first.last@host.tld</a>&lt;/b&gt;
+Comment:
+You selected this USER-ID:
+&ldquo;First Middle Last Suffix &amp;lt;first.last@host.tld&amp;gt;&rdquo;</p>
+<p>&lt;b&gt;Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O&lt;/b&gt;
+You need a Passphrase to protect your secret key.</p>
+<p>We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.</p>
+<p>Not enough random bytes available.  Please do some other work to give
+the OS a chance to collect more entropy! (Need 172 more bytes)
+&hellip;&hellip;&hellip;&hellip;+++++</p>
+<p>Not enough random bytes available.  Please do some other work to give
+the OS a chance to collect more entropy! (Need 198 more bytes)
+&hellip;&hellip;&hellip;&hellip;..+++++
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.</p>
+<p>Not enough random bytes available.  Please do some other work to give
+the OS a chance to collect more entropy! (Need 250 more bytes)
+&hellip;&hellip;&hellip;.+++++</p>
+<p>Not enough random bytes available.  Please do some other work to give
+the OS a chance to collect more entropy! (Need 249 more bytes)
+&hellip;&hellip;+++++
+gpg: key 68214821 marked as ultimately trusted
+public and secret key created and signed.</p>
+<p>gpg: checking the trustdb
+gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+pub   4096R/68214821 2015-06-24
+Key fingerprint = A5C2 96E8 AC41 0889 60D9  2D1F 0F6D B722 6821 4821
+uid                  First Middle Last Suffix &amp;lt;first.last@host.tld&amp;gt;
+sub   4096R/36A6F06D 2015-06-24
+&lt;/pre&gt;</p>
+</div>
+<h3 id="create-a-pass-database">Create a pass database</h3>
+<div class="html">
+<p>&lt;pre&gt;
+&lt;b&gt;user@host:~$ gpg &ndash;list-keys&lt;/b&gt;
+<em>home/user</em>.gnupg/pubring.gpg</p>
+<hr>
+<p>pub   4096R/68214821 2015-06-24
+uid                  First Middle Last Suffix &amp;lt;first.last@host.tld&amp;gt;
+sub   4096R/36A6F06D 2015-06-24</p>
+<p>&lt;b&gt;user@host:~$ pass init 68214821&lt;/b&gt;
+mkdir: created directory ‘/home/user/.password-store/’
+Password store initialized for 68214821
+&lt;/pre&gt;</p>
+</div>
+<h3 id="add-git-support-to-the-pass-database">Add git support to the pass database</h3>
+<div class="html">
+<p>&lt;pre&gt;
+&lt;b&gt;user@host:~$ pass git init&lt;/b&gt;
+Initialized empty Git repository in <em>home/user</em>.password-store/.git/
+[master (root-commit) c343a0c] Add current contents of password store.
+1 file changed, 1 insertion(<del>)
+create mode 100644 .gpg-id
+[master edaf464] Configure git repository for gpg file diff.
+1 file changed, 1 insertion(</del>)
+create mode 100644 .gitattributes</p>
+<p>&lt;b&gt;user@host:~$ pass generate <a href="mailto:serviceprovider/account.name@service.tld">serviceprovider/account.name@service.tld</a> 21&lt;/b&gt;
+mkdir: created directory ‘/home/user/.password-store/gmail’
+[master e6a1974] Add generated password for <a href="mailto:serviceprovider/account.name@service.tld">serviceprovider/account.name@service.tld</a>.
+1 file changed, 0 insertions(+), 0 deletions(-)
+create mode 100644 <a href="mailto:serviceprovider/account.name@service.tld.gpg">serviceprovider/account.name@service.tld.gpg</a>
+The generated password for <a href="mailto:serviceprovider/account.name@service.tld">serviceprovider/account.name@service.tld</a> is:
+;J&amp;E_2A55&amp;lt;%=&amp;lt;KxoEDZuL
+&lt;/pre&gt;</p>
+</div>
+<h3 id="create-a-remote-git-repository">Create a remote git repository</h3>
+<div class="html">
+<p>&lt;pre&gt;
+&lt;b&gt;user@host:~$ ssh <a href="mailto:user@gitrepo.org">user@gitrepo.org</a> -p gitport \
+&ldquo;git init &ndash;bare <em>path/to/git/user-password</em>&quot;&lt;/b&gt;
+&lt;b&gt;user@gitrepo.org&rsquo;s password: &lt;/b&gt;
+Initialized empty Git repository in <em>path/to/version_systems/git/user-password</em>
+&lt;/pre&gt;</p>
+</div>
+<h3 id="push-the-pass-database-to-the-remote-git-repository">Push the pass database to the remote git repository</h3>
+<div class="html">
+<p>&lt;pre&gt;
+&lt;b&gt;user@host:~$ pass git remote add origin \
+ssh://user@gitrepo.org:gitport/path/to/git/user-password/&lt;/b&gt;</p>
+<p>&lt;b&gt;user@host:~$ pass git push -u &ndash;all&lt;/b&gt;
+&lt;b&gt;user@gitrepo.org&rsquo;s password: &lt;/b&gt;
+Counting objects: 10, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (10/10), 1.38 KiB | 0 bytes/s, done.
+Total 10 (delta 1), reused 0 (delta 0)
+To ssh://user@gitrepo.org:gitport/path/to/git/user-password/</p>
+<ul>
+<li>[new branch]      master -&amp;gt; master</li>
+</ul>
+<p>Branch master set up to track remote branch master from origin.
+&lt;/pre&gt;</p>
+</div>
+<h3 id="fetch-and-display-passwords-from-another-computer">Fetch and display passwords from another computer</h3>
+<p>It is assumed here that your GPG key has been migrated to the second
+computer.</p>
+<div class="html">
+<p>&lt;pre&gt;
+&lt;b&gt;user@host:~$ gpg &ndash;list-keys&lt;/b&gt;
+<em>home/user</em>.gnupg/pubring.gpg</p>
+<hr>
+<p>pub   4096R/68214821 2015-06-24
+uid                  First Middle Last Suffix &amp;lt;first.last@host.tld&amp;gt;
+sub   4096R/36A6F06D 2015-06-24</p>
+<p>&lt;b&gt;user@host:~$ pass init 68214821&lt;/b&gt;
+mkdir: created directory ‘/home/user/.password-store/’
+Password store initialized for 68214821</p>
+<p>&lt;b&gt;user@host:~$ pass git init&lt;/b&gt;
+Initialized empty Git repository in <em>home/user</em>.password-store/.git/
+[master (root-commit) c343a0c] Add current contents of password store.
+1 file changed, 1 insertion(<del>)
+create mode 100644 .gpg-id
+[master edaf464] Configure git repository for gpg file diff.
+1 file changed, 1 insertion(</del>)
+create mode 100644 .gitattributes</p>
+<p>&lt;b&gt;user@host:~$ pass git remote add origin \
+ssh://user@gitrepo.org:gitport/path/to/git/user-password/&lt;/b&gt;</p>
+<p>&lt;b&gt;user@host:~$ git reset origin/master&lt;/b&gt;</p>
+<p>&lt;b&gt;user@host:~$ pass git fetch&lt;/b&gt;
+&lt;b&gt;user@gitrepo.org&rsquo;s password: &lt;/b&gt;
+warning: no common commits
+remote: Counting objects: 10, done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 10 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (10/10), done.
+From ssh://user@gitrepo.org:gitport/path/to/git/user-password/</p>
+<ul>
+<li>[new branch]      master     -&amp;gt; origin/master</li>
+</ul>
+<p>&lt;b&gt;user@host:~$ pass git rebase origin/master&lt;/b&gt;
+First, rewinding head to replay your work on top of it&hellip;</p>
+<p>&lt;b&gt;user@host:~$ pass show <a href="mailto:serviceprovider/account.name@service.tld">serviceprovider/account.name@service.tld</a>&lt;/b&gt;
+gpg: WARNING: The GNOME keyring manager hijacked the GnuPG agent.
+gpg: WARNING: GnuPG will not work properly - please configure that tool to not interfere with the GnuPG system!
+;J&amp;E_2A55&amp;lt;%=&amp;lt;KxoEDZuL
+&lt;/pre&gt;</p>
+</div>
+<h2 id="新电脑设置">新电脑设置</h2>
+<p>导入密钥 &ndash;&gt; <code>gpg --import gpg_key</code>​，当导入新的密钥后出现以下提示</p>
+<blockquote>
+<p>It is NOT certain that the key belongs to the person named
+in the user ID.  If you <strong>really</strong> know what you are doing,
+you may answer the next question with yes.</p>
+</blockquote>
+<p>可以通过以下步骤验证信任</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gpg --edit-key YOUR@KEY.ID
+</span></span><span class="line"><span class="cl">gpg&gt; trust
+</span></span><span class="line"><span class="cl">Please decide how far you trust this user to correctly verify other users<span class="s1">&#39; keys
+</span></span></span><span class="line"><span class="cl"><span class="s1">(by looking at passports, checking fingerprints from different sources, etc.)
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">  1 = I don&#39;</span>t know or won<span class="err">&#39;</span>t say
+</span></span><span class="line"><span class="cl">  <span class="nv">2</span> <span class="o">=</span> I <span class="k">do</span> NOT trust
+</span></span><span class="line"><span class="cl">  <span class="nv">3</span> <span class="o">=</span> I trust marginally
+</span></span><span class="line"><span class="cl">  <span class="nv">4</span> <span class="o">=</span> I trust fully
+</span></span><span class="line"><span class="cl">  <span class="nv">5</span> <span class="o">=</span> I trust ultimately
+</span></span><span class="line"><span class="cl">  <span class="nv">m</span> <span class="o">=</span> back to the main menu
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Your decision? <span class="m">5</span>
+</span></span><span class="line"><span class="cl">Do you really want to <span class="nb">set</span> this key to ultimate trust? <span class="o">(</span>y/N<span class="o">)</span> y
+</span></span></code></pre></div><h2 id="remarks">Remarks</h2>
+<p>当提示 <code>gpg: waiting for lock (held by 5175)</code> 可以用 <code>$ ls -l ~/.gnupg/*.lock</code> 查看相关的锁文件，删除即可。</p>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Importing Bookmark Files for Scanned PDFs</title>
       <link>https://sheerwill.live/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/</link>
-      <pubDate>Sun, 12 Nov 2023 11:43:55 +0800</pubDate>
+      <pubDate>Tue, 14 Nov 2023 09:14:48 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/</guid>
       <description>从 FreeMdict Forum 下载的扫描电子书，发帖人提到了书签文件可以用来查找，这个想法是我之前没有想到的。尝试用 pdftk-java 来导入书签文件。 brew install pdftk-java 书签文件如下的格式，相同</description>
@@ -197,6 +422,9 @@
         </figcaption>
 </figure>
 
+<p>Source: <a href="https://opensource.com/article/22/1/pdf-metadata-pdftk">Create bookmarks for your PDF with pdftk | Opensource.com</a></p>
+<p>2023-11-13 更新</p>
+<p>原来是可以都设置成一级 bookmark，同时对于开始的位置作设置。</p>
 ]]></content:encoded>
     </item>
     
