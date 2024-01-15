@@ -6,19 +6,20 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Jan 2024 21:19:10 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Jan 2024 22:11:24 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>setting up pass on git with a gpg key</title>
       <link>https://sheerwill.live/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/</link>
-      <pubDate>Mon, 15 Jan 2024 21:19:10 +0800</pubDate>
+      <pubDate>Mon, 15 Jan 2024 22:11:24 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/</guid>
-      <description>References pass : 密码管理本不复杂 - Nayuki&amp;rsquo;s Archive Home · mssun/passforios Wiki · GitHub https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store Source: Setting up pass on git with a gpg key · GitHub 新电脑设置 导入密钥 &amp;ndash;&amp;gt; gpg --import gpg_key​，当导入新的密钥后出现以下提示 It is</description>
+      <description>References pass : 密码管理本不复杂 - Nayuki&amp;rsquo;s Archive Home · mssun/passforios Wiki · GitHub https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store Pass: The Standard Unix Password Manager Source: Setting up pass on git with a gpg key · GitHub 新电脑设置 导入密钥 &amp;ndash;&amp;gt; gpg --import gpg_key​，当导入新的密钥后出现</description>
       <content:encoded><![CDATA[<h2 id="references">References</h2>
 <ul>
 <li><a href="https://nyk.ma/posts/password-store/#pass-%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">pass : 密码管理本不复杂 - Nayuki&rsquo;s Archive</a></li>
 <li><a href="https://github.com/mssun/passforios/wiki#importing-keys">Home · mssun/passforios Wiki · GitHub</a></li>
 <li><a href="https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store">https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store</a></li>
+<li><a href="https://www.passwordstore.org/">Pass: The Standard Unix Password Manager</a></li>
 </ul>
 <h2 id="source-setting-up-pass-on-git-with-a-gpg-key-github">Source: <a href="https://gist.github.com/flbuddymooreiv/a4f24da7e0c3552942ff">Setting up pass on git with a gpg key · GitHub</a></h2>
 <h2 id="新电脑设置">新电脑设置</h2>
