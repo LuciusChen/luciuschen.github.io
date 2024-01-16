@@ -6,14 +6,14 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Jan 2024 22:11:24 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Jan 2024 09:15:17 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>setting up pass on git with a gpg key</title>
       <link>https://sheerwill.live/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/</link>
-      <pubDate>Mon, 15 Jan 2024 22:11:24 +0800</pubDate>
+      <pubDate>Tue, 16 Jan 2024 09:15:17 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/</guid>
-      <description>References pass : 密码管理本不复杂 - Nayuki&amp;rsquo;s Archive Home · mssun/passforios Wiki · GitHub https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store Pass: The Standard Unix Password Manager Source: Setting up pass on git with a gpg key · GitHub 新电脑设置 导入密钥 &amp;ndash;&amp;gt; gpg --import gpg_key​，当导入新的密钥后出现</description>
+      <description>References pass : 密码管理本不复杂 - Nayuki&amp;rsquo;s Archive Home · mssun/passforios Wiki · GitHub https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store Pass: The Standard Unix Password Manager Source: Setting up pass on git with a gpg key · GitHub Pass for iOS private repos 需要用 SSH Key 来访问。参考 Generating a new SSH key and adding it to the ssh-agent - GitHub Docs 生</description>
       <content:encoded><![CDATA[<h2 id="references">References</h2>
 <ul>
 <li><a href="https://nyk.ma/posts/password-store/#pass-%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">pass : 密码管理本不复杂 - Nayuki&rsquo;s Archive</a></li>
@@ -22,6 +22,11 @@
 <li><a href="https://www.passwordstore.org/">Pass: The Standard Unix Password Manager</a></li>
 </ul>
 <h2 id="source-setting-up-pass-on-git-with-a-gpg-key-github">Source: <a href="https://gist.github.com/flbuddymooreiv/a4f24da7e0c3552942ff">Setting up pass on git with a gpg key · GitHub</a></h2>
+<h2 id="pass-for-ios">Pass for iOS</h2>
+<p>private repos 需要用 SSH Key 来访问。参考 <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH key and adding it to the ssh-agent - GitHub Docs</a> 生成后使用 <code>pbcopy &lt; ~/.ssh/id_ed25519.pub</code> 命令复制公钥配置到 GitHub。刚刚同时生成的 <code>id_ed25519</code> 导入到 Pass for iOS 中拉取 repo。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gpg --export-secret-keys -a &lt;pub_key&gt; &gt; gpg_key
+</span></span><span class="line"><span class="cl">gpg --export -a &lt;pub_key&gt; &gt; gpg_key.pub
+</span></span></code></pre></div><p>根据上述命令导出公私钥，导入到 Pass for iOS。</p>
 <h2 id="新电脑设置">新电脑设置</h2>
 <p>导入密钥 &ndash;&gt; <code>gpg --import gpg_key</code>​，当导入新的密钥后出现以下提示</p>
 <blockquote>
