@@ -6,16 +6,18 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Mar 2024 11:28:45 +0800</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Mar 2024 13:22:09 +0800</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Algebraic Math (Rational Polynomials) and Set Theory</title>
       <link>http://localhost:1313/posts/main/algebraandlogic/</link>
-      <pubDate>Sun, 03 Mar 2024 11:28:45 +0800</pubDate>
+      <pubDate>Sun, 03 Mar 2024 13:22:09 +0800</pubDate>
       
       <guid>http://localhost:1313/posts/main/algebraandlogic/</guid>
-      <description>Rational Exponents Terminology A Rational Number is one that can be expressed in the form of \(\frac{x}{y}\) wherein x and y are both integers and y is a non-zero value In other words, a Rational Number is an Integer that can be expressed as a Fraction A Radical is a term written as \(\sqrt[x]{y}\) where x is a positive Integer that is \(\geq2\) Therefore, a Rational Exponent is an Exponent that is expressed as a Fraction: \(x^{\frac{y}{z}}\) How to evaluate Rational Exponents The denominator of the exponent will be made into the nth number that we will take the root of the base of; \[x^{\frac{y}{z}}=\sqrt[z]{x}\] If your numerator is 1, then taking the nth root of your base in this case is simply the solution If your numerator is something other than 1, then raise the product of taking your base&amp;rsquo;s nth root to the numerator; \(x^{\frac{y}{z}}=\left(\sqrt[z]{x}\right)^{y}\) Example 1 \[16^{\frac{-1}{4}}\]</description>
+      <description>Rational Exponents Terminology \[1\]
+A Rational Number is one that can be expressed in the form of \(\frac{x}{y}\) wherein x and y are both integers and y is a non-zero value In other words, a Rational Number is an Integer that can be expressed as a Fraction A Radical is a term written as \(\sqrt[x]{y}\) where x is a positive Integer that is \(\geq2\) Therefore, a Rational Exponent is an Exponent that is expressed as a Fraction: \(x^{\frac{y}{z}}\) How to evaluate Rational Exponents The denominator of the exponent will be made into the nth number that we will take the root of the base of; \[x^{\frac{y}{z}}=\sqrt[z]{x}\] If your numerator is 1, then taking the nth root of your base in this case is simply the solution If your numerator is something other than 1, then raise the product of taking your base&amp;rsquo;s nth root to the numerator; \(x^{\frac{y}{z}}=\left(\sqrt[z]{x}\right)^{y}\) Example 1 \[16^{\frac{-1}{4}}\]</description>
       <content:encoded><![CDATA[<h2 id="rational-exponents">Rational Exponents</h2>
 <h3 id="terminology">Terminology</h3>
+<p>\[1\]</p>
 <ul>
 <li>A Rational Number is one that can be expressed in the form of \(\frac{x}{y}\) wherein x and y are both integers and y is a non-zero value
 <ul>
