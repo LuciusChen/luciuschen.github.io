@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Top on Lucius | Braindump</title>
-    <link>https://sheerwill.live/tags/top/</link>
+    <link>http://localhost:1313/tags/top/</link>
     <description>Recent content in Top on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Feb 2023 14:17:56 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/top/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Feb 2023 14:17:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/top/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Distribution System</title>
-      <link>https://sheerwill.live/posts/main/20220602202933-distribution_system/</link>
+      <link>http://localhost:1313/posts/main/20220602202933-distribution_system/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:56 +0800</pubDate>
       
-      <guid>https://sheerwill.live/posts/main/20220602202933-distribution_system/</guid>
+      <guid>http://localhost:1313/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
       <content:encoded><![CDATA[<h2 id="remote-procedure-call">Remote Procedure Call</h2>
 <p><a href="/posts/main/20220603220847-remote_procedure_call_rpc/">Remote Procedure Call (RPC)</a> 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎么办？</p>

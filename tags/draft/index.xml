@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Draft on Lucius | Braindump</title>
-    <link>https://sheerwill.live/tags/draft/</link>
+    <link>http://localhost:1313/tags/draft/</link>
     <description>Recent content in Draft on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Feb 2023 14:21:52 +0800</lastBuildDate><atom:link href="https://sheerwill.live/tags/draft/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Feb 2023 14:21:52 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/draft/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Lucius&#39;s Workflow</title>
-      <link>https://sheerwill.live/posts/main/20221204112118-lucius_s_workflow/</link>
+      <link>http://localhost:1313/posts/main/20221204112118-lucius_s_workflow/</link>
       <pubDate>Fri, 10 Feb 2023 14:21:52 +0800</pubDate>
       
-      <guid>https://sheerwill.live/posts/main/20221204112118-lucius_s_workflow/</guid>
+      <guid>http://localhost:1313/posts/main/20221204112118-lucius_s_workflow/</guid>
       <description>Figure 1: workflow 如上图所示，融合了笔记和 GTD 管理。 GTD Capture To-Dos 分为的来源分为六种： Habit Track: 即对于重复事件的循环，有利于习惯的养成。 Cyclic Tasks: 需要循环的任务。 生日提醒 周报</description>
       <content:encoded><![CDATA[<figure>
     <img loading="lazy" src="/ox-hugo/workflow.png"
@@ -102,10 +102,10 @@
     
     <item>
       <title>Excalidraw</title>
-      <link>https://sheerwill.live/posts/main/20221208143127-excalidraw/</link>
+      <link>http://localhost:1313/posts/main/20221208143127-excalidraw/</link>
       <pubDate>Fri, 10 Feb 2023 14:19:40 +0800</pubDate>
       
-      <guid>https://sheerwill.live/posts/main/20221208143127-excalidraw/</guid>
+      <guid>http://localhost:1313/posts/main/20221208143127-excalidraw/</guid>
       <description>在 Obsidian 中可以通过 command palette 中搜索 Insert LaTeX formula 就可以弹出弹框输入 \(\textsc{LaTeX}\) 表达式了。其中的 \color{} 可以指定生成文本的颜色。</description>
       <content:encoded><![CDATA[<p>在 Obsidian 中可以通过 <code>command palette</code> 中搜索 <code>Insert LaTeX formula</code> 就可以弹出弹框输入 \(\textsc{LaTeX}\) 表达式了。其中的 <code>\color{}</code> 可以指定生成文本的颜色。</p>
 ]]></content:encoded>
@@ -113,10 +113,10 @@
     
     <item>
       <title>Replace text in Calibre</title>
-      <link>https://sheerwill.live/posts/main/20221123120104-replace_text_in_calibre/</link>
+      <link>http://localhost:1313/posts/main/20221123120104-replace_text_in_calibre/</link>
       <pubDate>Sun, 04 Dec 2022 11:09:01 +0800</pubDate>
       
-      <guid>https://sheerwill.live/posts/main/20221123120104-replace_text_in_calibre/</guid>
+      <guid>http://localhost:1313/posts/main/20221123120104-replace_text_in_calibre/</guid>
       <description>Readwise Reader 中无法识别中文批注版本 Epub 中的行内批注，为了更好的在 Readwise Reader 中阅读，以及当初在 Calibre 中阅读时批注，不好将批注内容很好的分地复制出来，所以需要将批注</description>
       <content:encoded><![CDATA[<p>Readwise Reader 中无法识别中文批注版本 Epub 中的行内批注，为了更好的在 Readwise Reader 中阅读，以及当初在 Calibre 中阅读时批注，不好将批注内容很好的分地复制出来，所以需要将批注的格式进行修改。</p>
 <p>通过正则匹配替换内容，保留批注正文。</p>
