@@ -6,137 +6,49 @@
     <description>Recent content on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Mar 2024 22:32:34 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Mar 2024 22:23:23 +0800</lastBuildDate><atom:link href="https://sheerwill.live/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Algebraic Math (Rational Polynomials) and Set Theory</title>
-      <link>https://sheerwill.live/posts/main/algebraandlogic/</link>
-      <pubDate>Mon, 04 Mar 2024 22:32:34 +0800</pubDate>
+      <link>https://sheerwill.live/posts/main/algebra/</link>
+      <pubDate>Tue, 05 Mar 2024 22:23:23 +0800</pubDate>
       
-      <guid>https://sheerwill.live/posts/main/algebraandlogic/</guid>
-      <description>Rational Exponents </description>
+      <guid>https://sheerwill.live/posts/main/algebra/</guid>
+      <description>Rational Exponents Terminology A Rational Number is one that can be expressed in the form of wherein x and y are both integers and y is a non-zero value In other words, a Rational Number is an Integer that can be expressed as a Fraction A Radical is a term written as where x is a positive Integer that is ≥2 Therefore, a Rational Exponent is an Exponent that is expressed as a Fraction: How to evaluate Rational Exponents The denominator of the exponent will be made into the nth number that we will take the root of the base of; If your numerator is 1, then taking the nth root of your base in this case is simply the solution If your numerator is something other than 1, then raise the product of taking your base&amp;rsquo;s nth root to the numerator; Example 1 As mentioned, we will begin by taking 16s 4th root</description>
       <content:encoded><![CDATA[<h2 id="rational-exponents">Rational Exponents</h2>
-<div class="equation-container">
-<span class="equation">
-<img src="/ltximg/5cfc8896fb5.svg" alt="\begin{algorithm}[H]
-\SetKwProg{FnOn}{on}{ do}{end}
-\caption{Lamport clocks algorithm}
-\FnOn{\textsf{\upshape initialisation}}
-{$t := 0$ \tcp{each node has its own local variable t}}
-\FnOn{\textsf{\upshape any event occurring at the local node}}
-{$t := t + 1$}
-\FnOn{\textsf{\upshape request to send message $m$}}
-{$t := t + 1$\;
-\textsf{\upshape send $(t, m)$ via the underlying network link}}
-\FnOn{\textsf{\upshape receiving $(t', m)$ via the underlying network link}}
-{$t := \max(t, t') + 1$\;
-\textsf{\upshape deliver $m$ to the application}}
-\end{algorithm}
-" style="height: 15.1062em; vertical-align: -7.3081em; display: inline-block" class="org-latex org-latex-inline" />
-</span>
-</div>
-<div class="equation-container">
-<span class="equation">
-<img src="/ltximg/afc48ce2035.svg" alt="\begin{algorithm}[H]
-\caption{Simulation-optimization heuristic}\label{algorithm}
-\KwData{current period $t$, initial inventory $I_{t-1}$, initial capital $B_{t-1}$, demand samples}
-\KwResult{Optimal order quantity $Q^{\ast}_{t}$}
-$r\leftarrow t$\;
-$\Delta B^{\ast}\leftarrow -\infty$\;
-\While{$\Delta B\leq \Delta B^{\ast}$ and $r\leq T$}{$Q\leftarrow\arg\max_{Q\geq 0}\Delta B^{Q}_{t,r}(I_{t-1},B_{t-1})$\;
-$\Delta B\leftarrow \Delta B^{Q}_{t,r}(I_{t-1},B_{t-1})/(r-t+1)$\;
-\If{$\Delta B\geq \Delta B^{\ast}$}{$Q^{\ast}\leftarrow Q$\;
-$\Delta B^{\ast}\leftarrow \Delta B$\;}
-$r\leftarrow r+1$\;}
-\end{algorithm}
-" style="height: 16.5874em; vertical-align: -8.0487em; display: inline-block" class="org-latex org-latex-inline" />
-</span>
-</div>
-<div class="equation-container">
-<span class="equation">
-<img src="/ltximg/8cae86708e4.svg" alt="\begin{algorithm}[H]
-\renewcommand{\thealgocf}{}
-\SetKwRepeat{Do}{do}{while}%
-  \KwData{this text}
-  \KwResult{how to write algorithm with \LaTeX2e }
-  initialization\;
-  \While{not at end of this document}{
-    read current\;
-    \Repeat{this end condition}{
-      do these things\;
-    }
-    \eIf{understand}{
-      go to next section\;
-      current section becomes this one\;
-    }{
-      go back to the beginning of current section\;
-    }
-    \Do{this end condition}{
-      do these things\;
-    }
-  }
-  \caption{How to write algorithms}
-\end{algorithm}
-" style="height: 22.0928em; vertical-align: -10.8014em; display: inline-block" class="org-latex org-latex-inline" />
-</span>
-</div>
-<div class="equation-container">
-<span class="equation">
-<img src="/ltximg/e4fa2144ddc.svg" alt="\begin{algorithm}[H]
-\renewcommand{\thealgocf}{}
-\SetKwProg{FnOn}{on}{ do}{end}
-\SetKw{KwSend}{send}
-\SetKw{KwDeliver}{deliver}
-\caption{Causal broadcast algorithm}
-\FnOn{\textsf{\upshape initialisation}}
-{$sendSeq := 0; delivered := \langle0, 0, . . ., 0\rangle; buﬀer := \{\}$}
-<p>\FnOn{\textsf{\upshape request to broadcast $m$ at node $N_{i}$}}
-{$deps := delivered; deps[i] := sendSeq$;
-\KwSend \textsf{\upshape ($i, deps, m$) via reliable broadcast};
-$sendSeq := sendSeq + 1$}</p>
-<p>\FnOn{\textsf{\upshape receiving $msg$ from reliable broadcast at node $N_{i}$}}
-{$buffer := buffer \cup {msg}$;
-\While{$\exists(sender, deps, m) \in buffer.deps \leq delivered$}
-{\KwDeliver \textsf{\upshape $m$ to the application};
-$buffer := buffer \textbackslash {(sender, deps, m)}$ \tcp*{delete ${(sender, deps, m)}$ from $buffer$}
-$delivered[sender] := delivered[sender] + 1$}}
-\end{algorithm}
-&quot; style=&ldquo;height: 17.7250em; vertical-align: -8.6175em; display: inline-block&rdquo; class=&ldquo;org-latex org-latex-inline&rdquo; /&gt;
-</span></p>
-</div>
 <h3 id="terminology">Terminology</h3>
 <ul>
-<li>A Rational Number is one that can be expressed in the form of <img src="/ltximg/d69ae76f3ae.svg" alt="\(\frac{x}{y}\)" style="height: 1.2509em; vertical-align: -0.5205em; display: inline-block" class="org-latex org-latex-inline" /> wherein x and y are both integers and y is a non-zero value
+<li>A Rational Number is one that can be expressed in the form of <img src="/ltximg/c0f1fd1f285.svg" alt="\(\frac{x}{y}\)" style="height: 1.2509em; vertical-align: -0.5205em; display: inline-block" class="org-latex org-latex-inline" /> wherein x and y are both integers and y is a non-zero value
 <ul>
 <li>In other words, a Rational Number is an Integer that can be expressed as a Fraction</li>
 </ul>
 </li>
-<li>A Radical is a term written as <img src="/ltximg/b308e072248.svg" alt="\(\sqrt[x]{y}\)" style="height: 1.1176em; vertical-align: -0.3794em; display: inline-block" class="org-latex org-latex-inline" /> where x is a <em>positive</em> Integer that is <img src="/ltximg/dd6eb0246e0.svg" alt="\(\geq2\)" style="height: 0.8632em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Therefore, a Rational Exponent is an Exponent that is expressed as a Fraction: <img src="/ltximg/80413bbd138.svg" alt="\(x^{\frac{y}{z}}\)" style="height: 0.9817em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>A Radical is a term written as <img src="/ltximg/ef7da8a1bbf.svg" alt="\(\sqrt[x]{y}\)" style="height: 1.1176em; vertical-align: -0.3794em; display: inline-block" class="org-latex org-latex-inline" /> where x is a <em>positive</em> Integer that is ≥2</li>
+<li>Therefore, a Rational Exponent is an Exponent that is expressed as a Fraction: <img src="/ltximg/d207e19bae3.svg" alt="\(x^{\frac{y}{z}}\)" style="height: 0.9817em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 <h3 id="how-to-evaluate-rational-exponents">How to evaluate Rational Exponents</h3>
 <ul>
-<li>The denominator of the exponent will be made into the nth number that we will take the root of the base of; <img src="/ltximg/5d185444a90.svg" alt="$$x^{\frac{y}{z}}=\sqrt[z]{x}$$" style="height: 1.4615em; display: block" class="org-latex org-latex-block" />
+<li>The denominator of the exponent will be made into the nth number that we will take the root of the base of; <img src="/ltximg/2d0d9247032.svg" alt="\(x^{\frac{y}{z}}=\sqrt[z]{x}\)" style="height: 1.2167em; vertical-align: -0.2841em; display: inline-block" class="org-latex org-latex-inline" />
 <ul>
 <li>If your numerator is 1, then taking the nth root of your base in this case is simply the solution</li>
 </ul>
 </li>
-<li>If your numerator is something other than 1, then raise the product of taking your base&rsquo;s nth root to the numerator; <img src="/ltximg/0c3f64c282e.svg" alt="\(x^{\frac{y}{z}}=\left(\sqrt[z]{x}\right)^{y}\)" style="height: 1.2267em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>If your numerator is something other than 1, then raise the product of taking your base&rsquo;s nth root to the numerator; <img src="/ltximg/a22ecf91642.svg" alt="\(x^{\frac{y}{z}}=\left(\sqrt[z]{x}\right)^{y}\)" style="height: 1.2267em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 <h4 id="example-1">Example 1</h4>
-<img src="/ltximg/7aeba6feb93.svg" alt="\[16^{\frac{-1}{4}}\]" style="height: 1.2744em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/5b1fffeb975.svg" alt="\[16^{\frac{-1}{4}}\]" style="height: 1.2744em; display: block" class="org-latex org-latex-block" />
 <p>As mentioned, we will begin by taking 16s 4th root</p>
-<img src="/ltximg/12b690270c8.svg" alt="\[\left(\sqrt[4]{16}\right)^{-1}\]" style="height: 2.1602em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/48a36da2a3d.svg" alt="\[\left(\sqrt[4]{16}\right)^{-1}\]" style="height: 2.1602em; display: block" class="org-latex org-latex-block" />
 <p>This is the same as asking &ldquo;What number multiplied by itself 4 times gives us 16?&rdquo; It&rsquo;s very similar to Square Roots which you&rsquo;ve already grown used to (and possibly Cube Roots too) just to a higher degree</p>
-<img src="/ltximg/184b494e270.svg" alt="\[=\pm2^{-1}\]" style="height: 1.3560em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/e4a0c2dd249.svg" alt="\[=\pm2^{-1}\]" style="height: 1.3560em; display: block" class="org-latex org-latex-block" />
 <p>Now, if you remember your exponent rules from Grade 10, you&rsquo;ll know that something raised to a negative exponent is just the same end result as if it were a positive, but you get it&rsquo;s reciprocal</p>
-<img src="/ltximg/2f26acb37fc.svg" alt="\[=\frac{1}{\pm2}\]" style="height: 2.2448em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/dac62267a02.svg" alt="\[=\frac{1}{\pm2}\]" style="height: 2.2448em; display: block" class="org-latex org-latex-block" />
 <p>(The Plus-Minus simply represents how taking the nth root of a number when n is an even number can result in a plus <em>or</em> a minus; this will not be included further than this point unless explicitly needed)</p>
 <h4 id="example-2">Example 2</h4>
-<img src="/ltximg/a854a57ab25.svg" alt="\[\left(-\frac{8}{125}\right)^{\frac{-4}{3}}\]" style="height: 2.9359em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/c3fba08e5b9.svg" alt="\[\left(-\frac{8}{125}\right)^{\frac{-4}{3}}\]" style="height: 2.9359em; display: block" class="org-latex org-latex-block" />
 <p>Here it should be noted that you can also begin by doing the numerator of the exponent and you will get the same result; in fact why don&rsquo;t we try that?</p>
-<img src="/ltximg/c14f9a02c9e.svg" alt="\[=\sqrt[3]{-\frac{244140625}{4096}}\]" style="height: 2.5876em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/e8d2952dbd4.svg" alt="\[=\sqrt[3]{-\frac{244140625}{4096}}\]" style="height: 2.5876em; display: block" class="org-latex org-latex-block" />
 <p>As you can see, doing that will ordinarily give you very large numbers which is why doing the Radical first is often preferred. The way we evaluate this now is getting the Cube Root of the Numerator and Denominator separately</p>
-<img src="/ltximg/3ba15570d43.svg" alt="\[=-\frac{625}{16}\]" style="height: 2.1631em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/1099ffb469f.svg" alt="\[=-\frac{625}{16}\]" style="height: 2.1631em; display: block" class="org-latex org-latex-block" />
 <h3 id="how-to-calculate-radicals-to-custom-degrees-on-many-calculators">How to Calculate Radicals to custom Degrees on many Calculators</h3>
 <ul>
 <li>On most Scientific Calculators, there will be a dedicated button to take the Square Root of a number</li>
@@ -146,7 +58,7 @@ $delivered[sender] := delivered[sender] + 1$}}
 <li>Likely the Shift/2nd functionality of each button will be written above the button directly onto the case of the calculator</li>
 </ul>
 </li>
-<li>It is likely that Cube Roots have their own second layer Function button, likely marked as <img src="/ltximg/b7cf2eeb365.svg" alt="\(\sqrt[3]{}\)" style="height: 1.1176em; vertical-align: -0.4951em; display: inline-block" class="org-latex org-latex-inline" /> whilst a Custom degree Radical button may also exist, likely marked as <img src="/ltximg/13192aef4ec.svg" alt="\(\sqrt[x]{}\)" style="height: 1.1176em; vertical-align: -0.4951em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>It is likely that Cube Roots have their own second layer Function button, likely marked as <img src="/ltximg/56756b876dc.svg" alt="\(\sqrt[3]{}\)" style="height: 1.1176em; vertical-align: -0.4951em; display: inline-block" class="org-latex org-latex-inline" /> whilst a Custom degree Radical button may also exist, likely marked as <img src="/ltximg/cbdcf2f0b7a.svg" alt="\(\sqrt[x]{}\)" style="height: 1.1176em; vertical-align: -0.4951em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 <h2 id="simplifying-rational-expressions">Simplifying Rational Expressions</h2>
 <ul>
@@ -156,37 +68,37 @@ $delivered[sender] := delivered[sender] + 1$}}
 </ul>
 <h3 id="simplifying-fractions-a-strategy-besides-using-the-greatest-common-factor">Simplifying Fractions: A strategy besides using the Greatest Common Factor</h3>
 <ul>
-<li>For how we Simplify Expressions such as <img src="/ltximg/d06829f0442.svg" alt="\(\frac{x^{2}-9x+20}{2x-10}\)" style="height: 1.5154em; vertical-align: -0.4688em; display: inline-block" class="org-latex org-latex-inline" />, first we must start somewhere much simpler that we have explored already long ago; fractions that only involve numbers</li>
-<li>Take the fraction <img src="/ltximg/d8276d68e5d.svg" alt="\(\frac{64}{24}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /> for instance; by using your GCF mind, you would instinctively think to divide these by 2, or maybe you&rsquo;d be astute enough to instantly see that the GCF is 8, but there is another way to do this</li>
+<li>For how we Simplify Expressions such as <img src="/ltximg/73e1d91494d.svg" alt="\(\frac{x^{2}-9x+20}{2x-10}\)" style="height: 1.5154em; vertical-align: -0.4688em; display: inline-block" class="org-latex org-latex-inline" />, first we must start somewhere much simpler that we have explored already long ago; fractions that only involve numbers</li>
+<li>Take the fraction <img src="/ltximg/338ffdc054b.svg" alt="\(\frac{64}{24}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /> for instance; by using your GCF mind, you would instinctively think to divide these by 2, or maybe you&rsquo;d be astute enough to instantly see that the GCF is 8, but there is another way to do this</li>
 <li>By making the numerator and the denominator into Factors, we can cancel out certain parts of the Numerator and Denominator. So for instance, 64 is divisible by 2 which means another way to write it is 2⋅32</li>
-<li>Taking this further gets us <img src="/ltximg/fb4551dcb59.svg" alt="\(2(2\cdot16)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, then to 2(2(2⋅8)), then 2(2(2(2⋅4))), and finally, just quite simply 2⋅2⋅2⋅2⋅2⋅2 or <img src="/ltximg/a0a939a9976.svg" alt="\(2^{6}\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />; we have now brought 64 to it&rsquo;s <em>prime factor</em>; it cannot be factored any further</li>
+<li>Taking this further gets us 2(2⋅16), then to 2(2(2⋅8)), then 2(2(2(2⋅4))), and finally, just quite simply 2⋅2⋅2⋅2⋅2⋅2 or <img src="/ltximg/06e79eb6c45.svg" alt="\(2^{6}\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />; we have now brought 64 to it&rsquo;s <em>prime factor</em>; it cannot be factored any further</li>
 <li>The same applies to 24; it will eventually bring us to 2⋅2⋅2⋅3 before we reach only Prime numbers that cannot be divided anymore</li>
-<li>And so this entire fraction can be rewritten as <img src="/ltximg/79439e75ba9.svg" alt="\(\frac{2\cdot2\cdot2\cdot2\cdot2\cdot2}{2\cdot2\cdot2\cdot3}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /> but where does that get us? Well, notice that we are multiplying a lot of 2s and also dividing a lot of 2s; these cancel out</li>
-<li>Since there are 3 2s on the denominator, we can cancel out 3 2s on the numerator as well getting us <img src="/ltximg/48d4b1cb5ec.svg" alt="\(\frac{2\cdot2\cdot2}{3}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" />, or <img src="/ltximg/d065e52d8a9.svg" alt="\(\frac{8}{3}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" />, which is our final simplified version of <img src="/ltximg/d8276d68e5d.svg" alt="\(\frac{64}{24}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>And so this entire fraction can be rewritten as <img src="/ltximg/c30b96c6aa9.svg" alt="\(\frac{2\cdot2\cdot2\cdot2\cdot2\cdot2}{2\cdot2\cdot2\cdot3}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /> but where does that get us? Well, notice that we are multiplying a lot of 2s and also dividing a lot of 2s; these cancel out</li>
+<li>Since there are 3 2s on the denominator, we can cancel out 3 2s on the numerator as well getting us <img src="/ltximg/e678e183274.svg" alt="\(\frac{2\cdot2\cdot2}{3}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" />, or <img src="/ltximg/90ac7f80701.svg" alt="\(\frac{8}{3}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" />, which is our final simplified version of <img src="/ltximg/338ffdc054b.svg" alt="\(\frac{64}{24}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /></li>
 <li>Therefore, <strong>we can maximally factor our numerators and denominators and cancel out like terms on each</strong></li>
 </ul>
 <h3 id="example-1">Example 1</h3>
-<img src="/ltximg/68396c0ccff.svg" alt="\[\frac{15x^{2}y}{6xy^{2}}\]" style="height: 2.5199em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/9e5c0756980.svg" alt="\[\frac{15x^{2}y}{6xy^{2}}\]" style="height: 2.5199em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>Since this is a monomial over a monomial, you will want to apply some exponent rules to speed up solving this. This is a valid route to go down, but let&rsquo;s try it with our newly discovered strategy instead</li>
-<li>On the numerator, 15 can be factored into 3⋅5, and that <img src="/ltximg/9607afe7e19.svg" alt="\(x^{2}\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> can be factored into x⋅ x giving us <img src="/ltximg/06e605f5033.svg" alt="\(3\cdot5\left(x\cdot x\right)y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>On the denominator, we can factor 6 into 2⋅3, and <img src="/ltximg/41bf223d5c3.svg" alt="\(y^{2}\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> into y⋅ y giving us <img src="/ltximg/56afcfb2252.svg" alt="\(2\cdot3\left(x\right)y\cdot y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> with an end result of <img src="/ltximg/64c1f598ed8.svg" alt="\(\frac{3\cdot5\left(x\cdot x\right)y}{2\cdot3\left(x\right)y\cdot y}\)" style="height: 1.5976em; vertical-align: -0.5586em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Now here, we have a 3 on the numerator <em>and</em> denominator, an x on the numerator and denominator, and a y on the numerator and denominator. We can cancel out all of these: <img src="/ltximg/404a9bce026.svg" alt="\(\frac{5x}{2y}\)" style="height: 1.3976em; vertical-align: -0.5205em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>On the numerator, 15 can be factored into 3⋅5, and that <img src="/ltximg/ee19d35e8d2.svg" alt="\(x^{2}\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> can be factored into x⋅ x giving us <img src="/ltximg/34d5347359b.svg" alt="\(3\cdot5\left(x\cdot x\right)y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>On the denominator, we can factor 6 into 2⋅3, and <img src="/ltximg/233818bb271.svg" alt="\(y^{2}\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> into y⋅ y giving us <img src="/ltximg/e4c963fa9b6.svg" alt="\(2\cdot3\left(x\right)y\cdot y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> with an end result of <img src="/ltximg/84324705e54.svg" alt="\(\frac{3\cdot5\left(x\cdot x\right)y}{2\cdot3\left(x\right)y\cdot y}\)" style="height: 1.5976em; vertical-align: -0.5586em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Now here, we have a 3 on the numerator <em>and</em> denominator, an x on the numerator and denominator, and a y on the numerator and denominator. We can cancel out all of these: <img src="/ltximg/a905e452416.svg" alt="\(\frac{5x}{2y}\)" style="height: 1.3976em; vertical-align: -0.5205em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 <h3 id="example-2">Example 2</h3>
-<img src="/ltximg/5c7c4968ab8.svg" alt="\[\frac{x^{2}-9x+20}{2x-10}\]" style="height: 2.4110em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/6b37327e49c.svg" alt="\[\frac{x^{2}-9x+20}{2x-10}\]" style="height: 2.4110em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>Here we have no options other than the strategy we just discovered to use since the numerator is a trinomial and the denominator is a binomial. We must factor these as far as they will go and cancel out like terms</li>
-<li>The numerator is a Simple trinomial and can be factored into <img src="/ltximg/a3374104a39.svg" alt="\(\left(x-5\right)\left(x-4\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, and the denominator is a binomial which has a common factor of 2: <img src="/ltximg/2956036bb57.svg" alt="\(\left(2\right)\left(x-5\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> giving us <img src="/ltximg/0b266a0083b.svg" alt="\(\frac{\left(x-5\right)\left(x-4\right)}{\left(2\right)\left(x-5\right)}\)" style="height: 1.5976em; vertical-align: -0.5586em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>The numerator is a Simple trinomial and can be factored into <img src="/ltximg/8c8ec30d24f.svg" alt="\(\left(x-5\right)\left(x-4\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, and the denominator is a binomial which has a common factor of 2: <img src="/ltximg/6a10d1a9439.svg" alt="\(\left(2\right)\left(x-5\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> giving us <img src="/ltximg/43bb93713bd.svg" alt="\(\frac{\left(x-5\right)\left(x-4\right)}{\left(2\right)\left(x-5\right)}\)" style="height: 1.5976em; vertical-align: -0.5586em; display: inline-block" class="org-latex org-latex-inline" /></li>
 <li>You must essentially think of each bracket as it&rsquo;s own term here; along the numerator we can only cancel out the entirety of x-5 or the entirety of x-4; we cannot only cancel out the x&rsquo;s or the -4 or the -5</li>
-<li>This means that we have a common term of x-5 we can cancel out which gives us <img src="/ltximg/1e9075c08d7.svg" alt="\(\frac{x-4}{2}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>This means that we have a common term of x-5 we can cancel out which gives us <img src="/ltximg/7689c343ec1.svg" alt="\(\frac{x-4}{2}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 <h4 id="a-small-problem-regarding-this-example">A Small Problem regarding this example</h4>
 <ul>
-<li>If you noticed, along the way to getting our final simplified answer, we got the expression <img src="/ltximg/0b266a0083b.svg" alt="\(\frac{\left(x-5\right)\left(x-4\right)}{\left(2\right)\left(x-5\right)}\)" style="height: 1.5976em; vertical-align: -0.5586em; display: inline-block" class="org-latex org-latex-inline" />, except if done right, this expression can give us some hell</li>
+<li>If you noticed, along the way to getting our final simplified answer, we got the expression <img src="/ltximg/43bb93713bd.svg" alt="\(\frac{\left(x-5\right)\left(x-4\right)}{\left(2\right)\left(x-5\right)}\)" style="height: 1.5976em; vertical-align: -0.5586em; display: inline-block" class="org-latex org-latex-inline" />, except if done right, this expression can give us some hell</li>
 <li>If we were to make x=5, then the denominator would simplify into 0. But Math does not allow us to divide things by 0; the concept of divisions by zero does not work. What do we do here?</li>
 <li>We need a way of stating alongside our final simplified expression that x can be equal to anything <em>except</em> the number 5 for this expression to work&hellip; Well, this is where <strong>Sets</strong> and <strong>Restrictions</strong> come into play</li>
-<li>Sets will be focused on later in this unit, but for now you may state your restriction as <img src="/ltximg/7daf6defe87.svg" alt="\(\therefore \frac{x-4}{2},x\neq5\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Sets will be focused on later in this unit, but for now you may state your restriction as <img src="/ltximg/a65fad5f3a6.svg" alt="\(\therefore \frac{x-4}{2},x\neq5\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 <h2 id="multiplying-and-dividing-rational-expressions">Multiplying and Dividing Rational Expressions</h2>
 <ul>
@@ -197,11 +109,11 @@ $delivered[sender] := delivered[sender] + 1$}}
 </li>
 </ul>
 <h3 id="example-1">Example 1</h3>
-<img src="/ltximg/9cfbb1c56d5.svg" alt="\[\frac{12a^{2}b}{15}\cdot\frac{5ab}{8b^{2}}\]" style="height: 2.3293em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/322ccd68421.svg" alt="\[\frac{12a^{2}b}{15}\cdot\frac{5ab}{8b^{2}}\]" style="height: 2.3293em; display: block" class="org-latex org-latex-block" />
 <p>Here, since we&rsquo;re working with all only Monomials, we can simply multiply the numerators and denominators together as we always would:</p>
 <div class="equation-container">
 <span class="equation">
-<img src="/ltximg/47fcf613ac8.svg" alt="\begin{align*}
+<img src="/ltximg/d85adfb89c1.svg" alt="\begin{align*}
 &amp;amp;=\frac{60a^{3}b^{2}}{120b^{2}} \\
 &amp;amp;\therefore \frac{a^{3}}{2},b\neq0
 \end{align*}
@@ -209,16 +121,16 @@ $delivered[sender] := delivered[sender] + 1$}}
 </span>
 </div>
 <h3 id="example-2">Example 2</h3>
-<img src="/ltximg/ac9666bad25.svg" alt="\[\frac{2x+6}{x^{2}+7x+10}\cdot\frac{x^{2}+3x-10}{x^{2}-4}\]" style="height: 2.4110em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/0f28514c190.svg" alt="\[\frac{2x+6}{x^{2}+7x+10}\cdot\frac{x^{2}+3x-10}{x^{2}-4}\]" style="height: 2.4110em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>Okay let&rsquo;s finally get into something more than a Monomial</li>
 <li>Here, no exponent rules apply which means there is no clean way to deal with any of this; we must simply factor what we can first</li>
 </ul>
-<img src="/ltximg/4ac4f1b7ba5.svg" alt="\[=\frac{\left(2\right)\left(x+3\right)}{\left(x+5\right)\left(x+2\right)}\cdot\frac{\left(x+5\right)\left(x-2\right)}{\left(x-2\right)\left(x+2\right)}\]" style="height: 2.5116em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/1fef38a1bd4.svg" alt="\[=\frac{\left(2\right)\left(x+3\right)}{\left(x+5\right)\left(x+2\right)}\cdot\frac{\left(x+5\right)\left(x-2\right)}{\left(x-2\right)\left(x+2\right)}\]" style="height: 2.5116em; display: block" class="org-latex org-latex-block" />
 <p>We can essentially merge these fractions into 1 now, which would reveal that we can cancel out (x+5) and (x-2)</p>
 <div class="equation-container">
 <span class="equation">
-<img src="/ltximg/a5f640de378.svg" alt="\begin{align*}
+<img src="/ltximg/16e21b62833.svg" alt="\begin{align*}
 &amp;amp;=\frac{2x+6}{\left(x+2\right)\left(x+2\right)} \\
 &amp;amp;\therefore \frac{2x+6}{x^{2}+4x+4},x\neq2,-5,2
 \end{align*}
@@ -226,7 +138,7 @@ $delivered[sender] := delivered[sender] + 1$}}
 </span>
 </div>
 <h3 id="example-3">Example 3</h3>
-<img src="/ltximg/ab1cd26c8bc.svg" alt="\[\frac{x^{2}+5x-14}{x^{2}+8x+7}\div\frac{x^{2}-5x+6}{3x^{2}-6x}\]" style="height: 2.4110em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/4e46872d530.svg" alt="\[\frac{x^{2}+5x-14}{x^{2}+8x+7}\div\frac{x^{2}-5x+6}{3x^{2}-6x}\]" style="height: 2.4110em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>Okay now we have a Division which means we must get the reciprocal of the second Fraction and <em>then</em> multiply our two fractions. In doing so however, we skip a step
 <ul>
@@ -237,7 +149,7 @@ $delivered[sender] := delivered[sender] + 1$}}
 </ul>
 <div class="equation-container">
 <span class="equation">
-<img src="/ltximg/94577dd4fd4.svg" alt="\begin{align*}
+<img src="/ltximg/cdfc8aa1cc4.svg" alt="\begin{align*}
 &amp;amp;=\frac{x^{2}+5x-14}{x^{2}+8x+7}\cdot\frac{3x^{2}-6x}{x^{2}-5x+6} \\
 &amp;amp;=\frac{\left(x+7\right)\left(x-2\right)}{\left(x+7\right)\left(x+1\right)}\cdot\frac{\left(3x\right)\left(x-2\right)}{\left(x-3\right)\left(x-2\right)} \\
 &amp;amp;=\frac{3x^{2}-6x}{\left(x+1\right)\left(x-3\right)} \\
@@ -247,11 +159,11 @@ $delivered[sender] := delivered[sender] + 1$}}
 </span>
 </div>
 <h3 id="example-4">Example 4</h3>
-<img src="/ltximg/95de19d652e.svg" alt="\[\frac{13xy^{2}}{x^{2}+3x-18}\cdot\frac{x^{2}-9}{26x^{4}y^{2}}\]" style="height: 2.5199em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/ff1c9e232e8.svg" alt="\[\frac{13xy^{2}}{x^{2}+3x-18}\cdot\frac{x^{2}-9}{26x^{4}y^{2}}\]" style="height: 2.5199em; display: block" class="org-latex org-latex-block" />
 <p>Lots and lots of stuff to do here; start by factoring what you can, and leaving alone what you cannot</p>
-<img src="/ltximg/ead4bb2c1bb.svg" alt="\[=\frac{13xy^{2}}{\left(x+6\right)\left(x-3\right)}\cdot\frac{\left(x+3\right)\left(x-3\right)}{26x^{4}y^{2}}\]" style="height: 2.5743em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/38d9935a0b6.svg" alt="\[=\frac{13xy^{2}}{\left(x+6\right)\left(x-3\right)}\cdot\frac{\left(x+3\right)\left(x-3\right)}{26x^{4}y^{2}}\]" style="height: 2.5743em; display: block" class="org-latex org-latex-block" />
 <ul>
-<li>Okay so now from what we see based on what we&rsquo;ve learned so far, only the (x-3) cancels out&hellip; Except we have 2 Monomial groups here; the <img src="/ltximg/c6c144787b3.svg" alt="\(13xy^{2}\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and the <img src="/ltximg/ecda0919de8.svg" alt="\(26x^{4}y^{2}\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />
+<li>Okay so now from what we see based on what we&rsquo;ve learned so far, only the (x-3) cancels out&hellip; Except we have 2 Monomial groups here; the <img src="/ltximg/044aea7d3d8.svg" alt="\(13xy^{2}\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and the <img src="/ltximg/18d4a6f4bff.svg" alt="\(26x^{4}y^{2}\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />
 <ul>
 <li>Little known fact; you can actually divide these like you <em>normally</em> would divide monomials!!!</li>
 </ul>
@@ -259,7 +171,7 @@ $delivered[sender] := delivered[sender] + 1$}}
 </ul>
 <div class="equation-container">
 <span class="equation">
-<img src="/ltximg/41e39c19b5a.svg" alt="\begin{align*}
+<img src="/ltximg/f5617e68848.svg" alt="\begin{align*}
 &amp;amp;=\frac{\left(x+3\right)\left(x-3\right)}{\left(x+6\right)\left(x-3\right)\left(2x^{3}\right)} \\
 &amp;amp;\therefore \frac{x+3}{2x^{4}+12x^{3}},x\neq-6,3,0
 \end{align*}
@@ -267,20 +179,20 @@ $delivered[sender] := delivered[sender] + 1$}}
 </span>
 </div>
 <h3 id="example-5">Example 5</h3>
-<img src="/ltximg/95f756aff1e.svg" alt="\[\frac{6m^{2}-18mn}{m^{2}-5mn+6n^{2}}\cdot\frac{m^{2}+2mn-8n^{2}}{8m^{2}+32mn}\]" style="height: 2.4110em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/9ed48192369.svg" alt="\[\frac{6m^{2}-18mn}{m^{2}-5mn+6n^{2}}\cdot\frac{m^{2}+2mn-8n^{2}}{8m^{2}+32mn}\]" style="height: 2.4110em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>So this is a rather large example which I will treat as somewhat of the pinnacle of multiplying Rational Expressions</li>
 <li>Our first step is to factor whatever we can in both the numerator and denominator up to it&rsquo;s prime factors so we can see if anything can cancel out</li>
 </ul>
-<img src="/ltximg/f7acddd55e5.svg" alt="\[=\frac{\left(6m\right)\underline{\left(m-3n\right)}}{\underline{\left(m-3n\right)\left(m-2n\right)}}\cdot\frac{\underline{\left(m+4n\right)\left(m-2n\right)}}{\left(8m\right)\underline{\left(m+4n\right)}}\]" style="height: 2.8678em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/f4ec63781e5.svg" alt="\[=\frac{\left(6m\right)\underline{\left(m-3n\right)}}{\underline{\left(m-3n\right)\left(m-2n\right)}}\cdot\frac{\underline{\left(m+4n\right)\left(m-2n\right)}}{\left(8m\right)\underline{\left(m+4n\right)}}\]" style="height: 2.8678em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>Now we may essentially combine these two fractions into one which reveals the redundancy of the terms m-3n, m-2n, and m+4n as they&rsquo;re being divided <em>and</em> multiplied so they can essentially just cancel out</li>
 </ul>
-<img src="/ltximg/fdce62a7d5d.svg" alt="\[\frac{6m}{8m}\]" style="height: 2.1631em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/6ae00b24815.svg" alt="\[\frac{6m}{8m}\]" style="height: 2.1631em; display: block" class="org-latex org-latex-block" />
 <ul>
-<li>This reveals a division of 2 monomials which means our division rules can now apply to completely cancel out the m variable, leaving <img src="/ltximg/b8363d41310.svg" alt="\(\frac{6}{8}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /> which can be reduced finally</li>
+<li>This reveals a division of 2 monomials which means our division rules can now apply to completely cancel out the m variable, leaving <img src="/ltximg/2f3252a04a6.svg" alt="\(\frac{6}{8}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /> which can be reduced finally</li>
 </ul>
-<img src="/ltximg/ef668e6bad1.svg" alt="\[\therefore\frac{3}{4},m\neq3n,2n,0,-4n\]" style="height: 2.1631em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/44546b2c602.svg" alt="\[\therefore\frac{3}{4},m\neq3n,2n,0,-4n\]" style="height: 2.1631em; display: block" class="org-latex org-latex-block" />
 <h2 id="adding-and-subtracting-rational-expressions">Adding and Subtracting Rational Expressions</h2>
 <ul>
 <li>Adding and subtracting Rational Expressions is very much like adding and subtracting regular old Fractions
@@ -290,24 +202,24 @@ $delivered[sender] := delivered[sender] + 1$}}
 </li>
 </ul>
 <h3 id="example-1">Example 1</h3>
-<img src="/ltximg/05a7df47119.svg" alt="\[\frac{7a}{2a-10}+\frac{4a}{3a-15}\]" style="height: 2.2448em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/7d74b041e6c.svg" alt="\[\frac{7a}{2a-10}+\frac{4a}{3a-15}\]" style="height: 2.2448em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>If we had Monomials as our Denominators, the approach we&rsquo;d take would be to break each down into their Prime Factors and then make a Lowest Common Denominator out of those
 <ul>
-<li>So for instance, if we had the Denominators <img src="/ltximg/5eee2b60369.svg" alt="\(m^{2}n\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/ef3ec7bcfd2.svg" alt="\(m\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> then our Common Factor would be <img src="/ltximg/5eee2b60369.svg" alt="\(m^{2}n\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>This can be found by factoring both Denominators into <img src="/ltximg/2bfbeeb9cb1.svg" alt="\(m\cdot m\cdot n\)" style="height: 0.5339em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/ef3ec7bcfd2.svg" alt="\(m\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> which tells us we need a minimum of 2 m&rsquo;s and 1 n</li>
+<li>So for instance, if we had the Denominators <img src="/ltximg/75390c6e212.svg" alt="\(m^{2}n\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/da66a9fc542.svg" alt="\(m\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> then our Common Factor would be <img src="/ltximg/75390c6e212.svg" alt="\(m^{2}n\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>This can be found by factoring both Denominators into <img src="/ltximg/adfb45cf1ba.svg" alt="\(m\cdot m\cdot n\)" style="height: 0.5339em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/da66a9fc542.svg" alt="\(m\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> which tells us we need a minimum of 2 m&rsquo;s and 1 n</li>
 </ul>
 </li>
 <li>We can do very much the same thing with Polynomials; just factor to find the Lowest Common Factor!</li>
 </ul>
-<img src="/ltximg/f8bbba57e2b.svg" alt="\[\frac{7a}{\left(2\right)\left(a-5\right)}+\frac{4a}{\left(3\right)\left(a-5\right)}\]" style="height: 2.4081em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/dc8de993806.svg" alt="\[\frac{7a}{\left(2\right)\left(a-5\right)}+\frac{4a}{\left(3\right)\left(a-5\right)}\]" style="height: 2.4081em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>Okay so now we can see that both Denominators have the Binomial a-5
 <ul>
 <li>Otherwise, there is a 2 and a 3 which make a 6</li>
 </ul>
 </li>
-<li>Therefore, our Lowest Common Factor is <img src="/ltximg/f3f853f8b2c.svg" alt="\(\left(6\right)\left(a-5\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
+<li>Therefore, our Lowest Common Factor is <img src="/ltximg/edc979f5e8a.svg" alt="\(\left(6\right)\left(a-5\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
 <ul>
 <li>We must multiply the Numerators <em>and</em> Denominators by the same thing to get to this Factor</li>
 </ul>
@@ -315,7 +227,7 @@ $delivered[sender] := delivered[sender] + 1$}}
 </ul>
 <div class="equation-container">
 <span class="equation">
-<img src="/ltximg/7ae96bd0e01.svg" alt="\begin{align*}
+<img src="/ltximg/1e7018c1d70.svg" alt="\begin{align*}
 &amp;amp;=\frac{7a\left(3\right)}{\left(6\right)\left(a-5\right)}+\frac{4a\left(2\right)}{\left(6\right)\left(a-5\right)} \\
 &amp;amp;=\frac{21a+8a}{\left(6\right)\left(a-5\right)} \\
 &amp;amp;\therefore \frac{29a}{6a-30},a\neq5
@@ -324,21 +236,21 @@ $delivered[sender] := delivered[sender] + 1$}}
 </span>
 </div>
 <h3 id="example-2">Example 2</h3>
-<img src="/ltximg/c45fce47fec.svg" alt="\[\frac{2a}{a^{2}-6a+8}+\frac{7a}{a^{2}-a-12}\]" style="height: 2.2448em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/e52c8c3fbf4.svg" alt="\[\frac{2a}{a^{2}-6a+8}+\frac{7a}{a^{2}-a-12}\]" style="height: 2.2448em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>We still work with the same concept except now our Denominators are Trinomials and we must factor them first</li>
 </ul>
-<img src="/ltximg/418ddafaf7d.svg" alt="\[=\frac{2a}{\left(a-4\right)\left(a-2\right)}+\frac{7a}{\left(a-4\right)\left(a+3\right)}\]" style="height: 2.4081em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/16749976d60.svg" alt="\[=\frac{2a}{\left(a-4\right)\left(a-2\right)}+\frac{7a}{\left(a-4\right)\left(a+3\right)}\]" style="height: 2.4081em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>This tells us our LCD must have an a-4, an a-2, another a-4, and an a+3
 <ul>
-<li>Since there are 2 a-4&rsquo;s we can just count that as redundant and only count one which makes our LCD <img src="/ltximg/80e4827ad20.svg" alt="\(\left(a-2\right)\left(a-4\right)\left(a+3\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Since there are 2 a-4&rsquo;s we can just count that as redundant and only count one which makes our LCD <img src="/ltximg/c24718d06e4.svg" alt="\(\left(a-2\right)\left(a-4\right)\left(a+3\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 </li>
 </ul>
 <div class="equation-container">
 <span class="equation">
-<img src="/ltximg/9f6b78e6261.svg" alt="\begin{align*}
+<img src="/ltximg/412e3493e66.svg" alt="\begin{align*}
 &amp;amp;=\frac{2a\left(a+3\right)}{\left(a-4\right)\left(a-2\right)\left(a+3\right)}+\frac{7a\left(a-2\right)}{\left(a-4\right)\left(a-2\right)\left(a+3\right)} \\
 &amp;amp;=\frac{2a^{2}+6a+7a^{2}-14a}{\left(a-4\right)\left(a-2\right)\left(a+3\right)} \\
 &amp;amp;\therefore \frac{9a^{2}-8a}{\left(a-4\right)\left(a-2\right)\left(a+3\right)},a\neq4,2,-3
@@ -347,14 +259,14 @@ $delivered[sender] := delivered[sender] + 1$}}
 </span>
 </div>
 <h3 id="example-3">Example 3</h3>
-<img src="/ltximg/4d7a7e65a2a.svg" alt="\[\frac{3}{x-4}-\frac{x-9}{x^{2}-16}\]" style="height: 2.2448em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/c7bc6d756d0.svg" alt="\[\frac{3}{x-4}-\frac{x-9}{x^{2}-16}\]" style="height: 2.2448em; display: block" class="org-latex org-latex-block" />
 <ul>
-<li>Here, we&rsquo;re <em>subtracting</em> fractions but all it really means is &ldquo;multiply the numerator of the 2nd fraction by -1, then add&rdquo; which means this can be rewritten as <img src="/ltximg/d614df9ae04.svg" alt="\(\frac{3}{x-4}+\frac{-x+9}{x^{2}-16}\)" style="height: 1.3459em; vertical-align: -0.4688em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Here, we&rsquo;re <em>subtracting</em> fractions but all it really means is &ldquo;multiply the numerator of the 2nd fraction by -1, then add&rdquo; which means this can be rewritten as <img src="/ltximg/ca142e9679c.svg" alt="\(\frac{3}{x-4}+\frac{-x+9}{x^{2}-16}\)" style="height: 1.3459em; vertical-align: -0.4688em; display: inline-block" class="org-latex org-latex-inline" /></li>
 <li>From there, you know what to do</li>
 </ul>
 <div class="equation-container">
 <span class="equation">
-<img src="/ltximg/83e2867cdc2.svg" alt="\begin{align*}
+<img src="/ltximg/cec1017c441.svg" alt="\begin{align*}
 &amp;amp;=\frac{3}{x-4}+\frac{-x+9}{\left(x-4\right)\left(x+4\right)} \\
 &amp;amp;=\frac{3x+12}{\left(x-4\right)\left(x+4\right)}+\frac{-x+9}{\left(x-4\right)\left(x+4\right)} \\
 &amp;amp;\therefore \frac{2x+21}{\left(x-4\right)\left(x+4\right)},x\neq4,-4
@@ -378,14 +290,14 @@ $delivered[sender] := delivered[sender] + 1$}}
 <li>These <em>things</em> are, of course, most often numbers, and the things that Sets contain are called <strong>elements</strong> of the Set</li>
 </ul>
 </li>
-<li><img src="/ltximg/6d9d62d3746.svg" alt="\(B=\{4,5,6\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> here, B is the name of a Set that contains the numbers 4, 5, and 6
+<li><img src="/ltximg/6f936bece0b.svg" alt="\(B=\{4,5,6\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> here, B is the name of a Set that contains the numbers 4, 5, and 6
 <ul>
 <li>Sets can have single names to represent them and are described within Curly Braces</li>
 <li>B is the name of a Set that contains Elements 4, 5, and 6</li>
 </ul>
 </li>
 <li>What we can use Sets for at this moment primarily has to do with setting Restrictions in a more complete way</li>
-<li>In <a href="#example-3">the previous example</a>, we determined that our Restrictions are <img src="/ltximg/06bf2b979cb.svg" alt="\(x\neq4,-4\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, and within Set Notation, we would preferably write this as <img src="/ltximg/16e19653a81.svg" alt="\(\{x\in\mathbb{R} \mid x\neq4,-4\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> to be as specific as possible</li>
+<li>In <a href="#example-3">the previous example</a>, we determined that our Restrictions are <img src="/ltximg/342daad25dc.svg" alt="\(x\neq4,-4\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, and within Set Notation, we would preferably write this as <img src="/ltximg/e7dadc09ff1.svg" alt="\(\{x\in\mathbb{R} \mid x\neq4,-4\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> to be as specific as possible</li>
 </ul>
 <h3 id="breaking-that-down">Breaking that down</h3>
 <ul>
@@ -393,10 +305,10 @@ $delivered[sender] := delivered[sender] + 1$}}
 <li>The left side of that vertical line uses 2 fancy symbols to state that x can be any number within the Real Number system</li>
 <li>The vertical line itself stands for and should be read as &ldquo;such that&rdquo;</li>
 <li>This whole thing, therefore, should be read as &ldquo;x is an element of the Real number system such that x isn&rsquo;t equal to 4 or -4&rdquo; or &ldquo;x is in the Real Number system in such a way that it isn&rsquo;t equal to 4 or -4&rdquo;</li>
-<li>The difference between this and setting our Restrictions the normal way, therefore, is we state both what x <em>cannot</em> be (4 and -4) as well as what x <em>can</em> be (any <em>other</em> number in <img src="/ltximg/f3605ff4036.svg" alt="\(\mathbb{R}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />)</li>
+<li>The difference between this and setting our Restrictions the normal way, therefore, is we state both what x <em>cannot</em> be (4 and -4) as well as what x <em>can</em> be (any <em>other</em> number in <img src="/ltximg/f141049eee1.svg" alt="\(\mathbb{R}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />)</li>
 <li>This also goes to demonstrate the wide variety of forms that Sets can be written in; they don&rsquo;t have to be an explicit list of Elements, they can instead simply describe the conditions that all Elements in the Set must meet
 <ul>
-<li>We can have the Set <img src="/ltximg/57dca1b6a79.svg" alt="\(A=\{x\in\mathbb{Z} \mid x^{2}\geq0\}\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> for instance which states &ldquo;A is the Set of all Integers such that when we square them, they are greater than or equal to 0&rdquo;</li>
+<li>We can have the Set <img src="/ltximg/dc41a5a1a6f.svg" alt="\(A=\{x\in\mathbb{Z} \mid x^{2}\geq0\}\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> for instance which states &ldquo;A is the Set of all Integers such that when we square them, they are greater than or equal to 0&rdquo;</li>
 <li>Here, even though we haven&rsquo;t listed all Numbers in our Set, we know what numbers are in our Set; in this case being, well, every Integer in existence since there is no Integer which <em>doesn&rsquo;t</em> follow our condition/Restriction</li>
 </ul>
 </li>
@@ -407,59 +319,59 @@ $delivered[sender] := delivered[sender] + 1$}}
 <li>This section aims to briefly summarize each symbol&rsquo;s meaning and use</li>
 </ul>
 <h4 id="an-element-of-not-an-element-of">An Element of, Not an Element of</h4>
-<img src="/ltximg/f80d060ef9d.svg" alt="\[\in,\notin\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/1587cf61fa6.svg" alt="\[\in,\notin\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
 <ul>
-<li>If working within the Set <img src="/ltximg/c6acac7f527.svg" alt="\(A=\{1,2,3\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we could say that <img src="/ltximg/0566308c6f8.svg" alt="\(3 \in A\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to say that the number 3 exists within/is an element of the Set A</li>
-<li>Conversely, we could say that <img src="/ltximg/c0446366a22.svg" alt="\(4 \notin A\)" style="height: 0.8717em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to say that the number 4 doesn&rsquo;t exist in/isn&rsquo;t an element of the Set A</li>
+<li>If working within the Set <img src="/ltximg/f517605d49d.svg" alt="\(A=\{1,2,3\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we could say that <img src="/ltximg/1056e6e9e3b.svg" alt="\(3 \in A\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to say that the number 3 exists within/is an element of the Set A</li>
+<li>Conversely, we could say that <img src="/ltximg/6582e0cf8ff.svg" alt="\(4 \notin A\)" style="height: 0.8717em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to say that the number 4 doesn&rsquo;t exist in/isn&rsquo;t an element of the Set A</li>
 </ul>
 <h4 id="a-subset-of-not-a-subset-of">A Subset of, Not a Subset of</h4>
-<img src="/ltximg/43fb1a5b16e.svg" alt="\[\subset,\not\subset,\subseteq,\not\subseteq\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/faf73cd89d5.svg" alt="\[\subset,\not\subset,\subseteq,\not\subseteq\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>This group of symbols is actually a way to state the <em>relationship</em> between 2 different Sets</li>
-<li>If working with the Set <img src="/ltximg/5ba06247733.svg" alt="\(A=\{1,2,3,4\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and the Set <img src="/ltximg/335d87a2805.svg" alt="\(B=\{2,3,4\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we could say that <img src="/ltximg/64571198eaa.svg" alt="\(B \subset A\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to state that every Element of B is also in A, and so &ldquo;B is a subset of A&rdquo;</li>
-<li>Conversely, if also working with the Set <img src="/ltximg/40dc936376d.svg" alt="\(C=\{5,6,7\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we could say that <img src="/ltximg/6bb47404483.svg" alt="\(C \not\subset A\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> to state that &ldquo;C is not a subset of A&rdquo;</li>
+<li>If working with the Set <img src="/ltximg/915c7d3eb38.svg" alt="\(A=\{1,2,3,4\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and the Set <img src="/ltximg/9431ad676b4.svg" alt="\(B=\{2,3,4\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we could say that <img src="/ltximg/321421109d8.svg" alt="\(B \subset A\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to state that every Element of B is also in A, and so &ldquo;B is a subset of A&rdquo;</li>
+<li>Conversely, if also working with the Set <img src="/ltximg/bcd119d19b2.svg" alt="\(C=\{5,6,7\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we could say that <img src="/ltximg/d28708c69b9.svg" alt="\(C \not\subset A\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> to state that &ldquo;C is not a subset of A&rdquo;</li>
 <li>The Subset symbols are where things get a little conflicting unfortunately
 <ul>
-<li>Some Authors use the symbol <img src="/ltximg/911442ecbc8.svg" alt="\(\subseteq\)" style="height: 0.8549em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" /> to mean &ldquo;is a subset of and <span class="underline">may</span> be equal to&rdquo; while other Authors using <img src="/ltximg/c58926a6b1b.svg" alt="\(\subset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to represent &ldquo;is a subset of and <span class="underline">may not</span> be equal to&rdquo;</li>
-<li>The trouble comes from the fact that then <em>other</em> Authors simply use <img src="/ltximg/c58926a6b1b.svg" alt="\(\subset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to mean &ldquo;is a subset of and <span class="underline">may</span> be equal to&rdquo; and completely then omit the use of <img src="/ltximg/911442ecbc8.svg" alt="\(\subseteq\)" style="height: 0.8549em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Some Authors use the symbol <img src="/ltximg/e288806da14.svg" alt="\(\subseteq\)" style="height: 0.8549em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" /> to mean &ldquo;is a subset of and <span class="underline">may</span> be equal to&rdquo; while other Authors using <img src="/ltximg/6ebcc631ea4.svg" alt="\(\subset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to represent &ldquo;is a subset of and <span class="underline">may not</span> be equal to&rdquo;</li>
+<li>The trouble comes from the fact that then <em>other</em> Authors simply use <img src="/ltximg/6ebcc631ea4.svg" alt="\(\subset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to mean &ldquo;is a subset of and <span class="underline">may</span> be equal to&rdquo; and completely then omit the use of <img src="/ltximg/e288806da14.svg" alt="\(\subseteq\)" style="height: 0.8549em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 </li>
-<li>As a standard, I personally will use <img src="/ltximg/c58926a6b1b.svg" alt="\(\subset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> <em>only</em> as I find a small redundancy in using <img src="/ltximg/911442ecbc8.svg" alt="\(\subseteq\)" style="height: 0.8549em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" /> at all; to me, <img src="/ltximg/c58926a6b1b.svg" alt="\(\subset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> simply means &ldquo;is a subset of and possibly also equal to&rdquo; and that is how it should be read</li>
-<li>One final thing to note is the symbols <img src="/ltximg/eb712cbfdcf.svg" alt="\(\supset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/7b8cab7f5d4.svg" alt="\(\not\supset\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> which simply go in the opposite direction; the &gt; to &lt; for Sets
+<li>As a standard, I personally will use <img src="/ltximg/6ebcc631ea4.svg" alt="\(\subset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> <em>only</em> as I find a small redundancy in using <img src="/ltximg/e288806da14.svg" alt="\(\subseteq\)" style="height: 0.8549em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" /> at all; to me, <img src="/ltximg/6ebcc631ea4.svg" alt="\(\subset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> simply means &ldquo;is a subset of and possibly also equal to&rdquo; and that is how it should be read</li>
+<li>One final thing to note is the symbols <img src="/ltximg/158155b5930.svg" alt="\(\supset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/3612f02ca09.svg" alt="\(\not\supset\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> which simply go in the opposite direction; the &gt; to &lt; for Sets
 <ul>
-<li>So, with the Sets A, B, and C that we have already defined in this section, we could state that <img src="/ltximg/64bb6290032.svg" alt="\(A \supset B\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to say exactly the same thing as <img src="/ltximg/64571198eaa.svg" alt="\(B \subset A\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>So, with the Sets A, B, and C that we have already defined in this section, we could state that <img src="/ltximg/d11ee60c039.svg" alt="\(A \supset B\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to say exactly the same thing as <img src="/ltximg/321421109d8.svg" alt="\(B \subset A\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /></li>
 <li>The symbol facing <em>this</em> direction is not called the Subset symbol, but rather the <em>Superset</em> symbol as we are stating &ldquo;A is a Superset of B&rdquo;</li>
 </ul>
 </li>
 </ul>
 <h4 id="a-union-and-intersection-of-sets">A Union and Intersection of Sets</h4>
-<img src="/ltximg/e14da5c6a04.svg" alt="\[\cup,\cap\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/8500d8480e2.svg" alt="\[\cup,\cap\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>This group of symbols is actually a way to state some <em>operations</em> one can do to 2 different Sets</li>
-<li>If working with the Set <img src="/ltximg/c6acac7f527.svg" alt="\(A=\{1,2,3\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and the Set <img src="/ltximg/33e04ea8e65.svg" alt="\(B=\{2,3,4,5,6\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we could do <img src="/ltximg/cc1923a927c.svg" alt="\(A \cup B=\{1,2,3,4,5,6\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
+<li>If working with the Set <img src="/ltximg/f517605d49d.svg" alt="\(A=\{1,2,3\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and the Set <img src="/ltximg/37014a626ce.svg" alt="\(B=\{2,3,4,5,6\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we could do <img src="/ltximg/2ab07ca4576.svg" alt="\(A \cup B=\{1,2,3,4,5,6\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
 <ul>
 <li>This is a <strong>Union</strong> of the Sets; it simply means to combine all the Elements within each Set into a new combined one</li>
 <li>Be careful here, however; <strong>never create a Set with duplicate Elements inside it</strong></li>
 <li>One of the only real things that Sets are defined with is that they cannot contain more than one of the same Element</li>
 </ul>
 </li>
-<li>Now, we could also do <img src="/ltximg/8ef0863cbb0.svg" alt="\(A \cap B=\{2,3\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> for an <strong>Intersection</strong> of Sets which just takes all common Elements from both Sets and puts them into one new Set</li>
-<li>Something interesting to note is that when a pair of Sets intersecting produces an Empty Set (denoted by <img src="/ltximg/fa3fadeeb15.svg" alt="\(\emptyset\)" style="height: 0.8878em; vertical-align: -0.1036em; display: inline-block" class="org-latex org-latex-inline" />) meaning they have <em>no</em> common Elements, the Sets are <em>disjointed</em> from each other</li>
+<li>Now, we could also do <img src="/ltximg/a4ba2044e5e.svg" alt="\(A \cap B=\{2,3\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> for an <strong>Intersection</strong> of Sets which just takes all common Elements from both Sets and puts them into one new Set</li>
+<li>Something interesting to note is that when a pair of Sets intersecting produces an Empty Set (denoted by <img src="/ltximg/d1b1e3ab6c5.svg" alt="\(\emptyset\)" style="height: 0.8878em; vertical-align: -0.1036em; display: inline-block" class="org-latex org-latex-inline" />) meaning they have <em>no</em> common Elements, the Sets are <em>disjointed</em> from each other</li>
 </ul>
 <h4 id="a-difference-of-sets">A Difference of Sets</h4>
-<img src="/ltximg/0c175199863.svg" alt="\[\setminus\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/70d4bd28f99.svg" alt="\[\setminus\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>This symbol essentially stands for a Subtraction operation slightly modified to work with Sets</li>
-<li>If working with the Set <img src="/ltximg/595f268ea95.svg" alt="\(A=\{1,2,3,4,5,6,7,8,9,10\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and the Set <img src="/ltximg/acc164a02fc.svg" alt="\(B=\{5,6,7\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> we could do <img src="/ltximg/c176e8c9ca6.svg" alt="\(A \setminus B=\{1,2,3,4,8,9,10\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>If working with the Set <img src="/ltximg/ba28a86c261.svg" alt="\(A=\{1,2,3,4,5,6,7,8,9,10\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and the Set <img src="/ltximg/660ff013d3c.svg" alt="\(B=\{5,6,7\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> we could do <img src="/ltximg/005fb540a28.svg" alt="\(A \setminus B=\{1,2,3,4,8,9,10\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 <h4 id="a-complement-of-a-set">A Complement of a Set</h4>
-<img src="/ltximg/c0ec84a9e4c.svg" alt="\[\complement\]" style="height: 1.2744em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/9197f773cbf.svg" alt="\[\complement\]" style="height: 1.2744em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>This symbol is a way to speak about all Elements in existence that <em>aren&rsquo;t</em> in a given Set</li>
-<li>If working with the Set <img src="/ltximg/008d1deed9c.svg" alt="\(A\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, it doesn&rsquo;t matter what the Elements of <img src="/ltximg/008d1deed9c.svg" alt="\(A\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are, when we do <img src="/ltximg/6e5fb5bd08a.svg" alt="\(A^{\complement}\)" style="height: 1.0198em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> we are describing a set that goes <img src="/ltximg/70df16fb906.svg" alt="\(\{x\in\mathbb{C} \mid x\notin A\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>If working with the Set <img src="/ltximg/1670829c528.svg" alt="\(A\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, it doesn&rsquo;t matter what the Elements of <img src="/ltximg/1670829c528.svg" alt="\(A\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are, when we do <img src="/ltximg/3db4c654b34.svg" alt="\(A^{\complement}\)" style="height: 1.0198em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> we are describing a set that goes <img src="/ltximg/a29732d2839.svg" alt="\(\{x\in\mathbb{C} \mid x\notin A\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 <h4 id="or-and">Or, And</h4>
-<img src="/ltximg/bdd48d42f66.svg" alt="\[\lor,\land\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/c4e89321ddf.svg" alt="\[\lor,\land\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>Out of all of these, you will see me use these two the most and their use is not necessarily just limited to Sets</li>
 <li>These are the Logical Symbols representing &ldquo;or&rdquo; as well as &ldquo;and&rdquo; quite simply
@@ -467,15 +379,15 @@ $delivered[sender] := delivered[sender] + 1$}}
 <li>These are both just ways of saying the two different words without writing them out and using Symbols instead</li>
 </ul>
 </li>
-<li>When presenting the Roots to a Quadratic, one can write <img src="/ltximg/69ec12f1e70.svg" alt="\(\therefore x=4 \lor x=5\)" style="height: 0.7768em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for instance to mean &ldquo;Therefore, x is equal to 4 <em>or</em> x is equal to 5&rdquo;</li>
+<li>When presenting the Roots to a Quadratic, one can write <img src="/ltximg/50c0352f3b8.svg" alt="\(\therefore x=4 \lor x=5\)" style="height: 0.7768em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for instance to mean &ldquo;Therefore, x is equal to 4 <em>or</em> x is equal to 5&rdquo;</li>
 </ul>
 <h4 id="for-all">For all</h4>
-<img src="/ltximg/1eab808355b.svg" alt="\[\forall\]" style="height: 1.2744em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/627bbf2a618.svg" alt="\[\forall\]" style="height: 1.2744em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>Yep, it&rsquo;s just A upside down</li>
 <li>This symbol represents &ldquo;for all&rdquo; or &ldquo;for every&rdquo; and is used as something like the following</li>
 </ul>
-<img src="/ltximg/577fb7c477f.svg" alt="\[\forall x\in\mathbb{R}, x^{2}\geq0\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/f71bcc2bb2c.svg" alt="\[\forall x\in\mathbb{R}, x^{2}\geq0\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>&ldquo;For all numbers in the Real Number System, their squares are greater than or equal to 0&rdquo;
 <ul>
@@ -496,62 +408,62 @@ $delivered[sender] := delivered[sender] + 1$}}
 </li>
 </ul>
 <h4 id="there-exists-there-doesn-t-exist-there-exists-one-and-only-one">There Exists, There Doesn&rsquo;t Exist, There Exists One and Only One</h4>
-<img src="/ltximg/9a664585c1b.svg" alt="\[\exists,\nexists,\exists!\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/94fcc8a6836.svg" alt="\[\exists,\nexists,\exists!\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
 <ul>
-<li>This is quite similar to <img src="/ltximg/3fc5b4144c2.svg" alt="\(\forall\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> except for a <img src="/ltximg/6e934ff5287.svg" alt="\(\exists\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> statement to work, it only needs to be true <em>at least once</em> rather than in every possible instance</li>
+<li>This is quite similar to <img src="/ltximg/548acc45d4b.svg" alt="\(\forall\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> except for a <img src="/ltximg/21313f27a39.svg" alt="\(\exists\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> statement to work, it only needs to be true <em>at least once</em> rather than in every possible instance</li>
 <li>Let me show you what I mean:</li>
 </ul>
-<img src="/ltximg/62823067cf4.svg" alt="\[\exists x\in\mathbb{R},x^{2}=1\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/83a546f2cba.svg" alt="\[\exists x\in\mathbb{R},x^{2}=1\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>&ldquo;There exists a number in the Real Number System whose square is equal to 1&rdquo;</li>
 <li>This is true, because inside the Real Number System, there is at least one number which abides by this condition, being 1 of course</li>
-<li>This would be different if we instead wrote <img src="/ltximg/951a0df6aef.svg" alt="\(\forall x\in\mathbb{R},x^{2}=1\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> which would now be false because not <em>every</em> number in the Real Number System is equal to 1 when squared</li>
-<li>And of course, conversely to <img src="/ltximg/6e934ff5287.svg" alt="\(\exists\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we have <img src="/ltximg/6d2f0a16f5f.svg" alt="\(\nexists\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for a statement such as <img src="/ltximg/3ef55db1e47.svg" alt="\(\nexists x\in\mathbb{R},x^{2}=-1\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>This would be different if we instead wrote <img src="/ltximg/b91cde0734c.svg" alt="\(\forall x\in\mathbb{R},x^{2}=1\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> which would now be false because not <em>every</em> number in the Real Number System is equal to 1 when squared</li>
+<li>And of course, conversely to <img src="/ltximg/21313f27a39.svg" alt="\(\exists\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we have <img src="/ltximg/7727bc622d4.svg" alt="\(\nexists\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for a statement such as <img src="/ltximg/73a0d7681c0.svg" alt="\(\nexists x\in\mathbb{R},x^{2}=-1\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /></li>
 <li>One last symbol to talk about is when we explicitly want to say &ldquo;This condition is true <em>only</em> in one instance&rdquo;
 <ul>
-<li>For a statement like <img src="/ltximg/43049b70afc.svg" alt="\(\exists x\in\mathbb{R},x&amp;gt;2\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, there are very many instances of this condition being true</li>
-<li>However, for a statement like <img src="/ltximg/4c71142b604.svg" alt="\(\exists x\in\mathbb{R},x^{2}=1\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> as we wrote above, there is only a singular instance of this statement being true, which is when x is equal to 1</li>
-<li>So a way we can explicitly state this is with <img src="/ltximg/c03438c057a.svg" alt="\(\exists! x\in\mathbb{R},x^{2}=1\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> which means &ldquo;There exists only one instance of a Real Number whose square is equal to 1&rdquo;</li>
+<li>For a statement like <img src="/ltximg/fbee0bc79d7.svg" alt="\(\exists x\in\mathbb{R},x&amp;gt;2\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, there are very many instances of this condition being true</li>
+<li>However, for a statement like <img src="/ltximg/256b550d553.svg" alt="\(\exists x\in\mathbb{R},x^{2}=1\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> as we wrote above, there is only a singular instance of this statement being true, which is when x is equal to 1</li>
+<li>So a way we can explicitly state this is with <img src="/ltximg/1deedab6270.svg" alt="\(\exists! x\in\mathbb{R},x^{2}=1\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> which means &ldquo;There exists only one instance of a Real Number whose square is equal to 1&rdquo;</li>
 </ul>
 </li>
 </ul>
 <h4 id="true-false">True, False</h4>
-<img src="/ltximg/ccfdff1332b.svg" alt="\[\mathbb{T},\mathbb{F}\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/f70ed2b828e.svg" alt="\[\mathbb{T},\mathbb{F}\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>As I explained earlier, Logical Mathematics expressions are not like Equations a lot of the time; they are not equal to a tangible value, but rather equal to the Booleans True or False</li>
-<li>For this reason, we can instead of writing something like <img src="/ltximg/e6305bcb1d6.svg" alt="\(\exists x\in\mathbb{R} \mid x^{2}=1=True\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we can simply write <img src="/ltximg/0c297c7cdbb.svg" alt="\(\exists x\in\mathbb{R} \mid x^{2}=1=\mathbb{T}\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> to be able to use 1 single symbol for True and for False</li>
+<li>For this reason, we can instead of writing something like <img src="/ltximg/4b59fb21c20.svg" alt="\(\exists x\in\mathbb{R} \mid x^{2}=1=True\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we can simply write <img src="/ltximg/02cabc1951b.svg" alt="\(\exists x\in\mathbb{R} \mid x^{2}=1=\mathbb{T}\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> to be able to use 1 single symbol for True and for False</li>
 </ul>
 <h3 id="a-review-of-number-systems">A Review of Number Systems</h3>
 <ul>
 <li>Number Systems are used quite a lot when creating and describing Sets, often to state that our Set can contain any number from that Number Set provided certain Restrictions</li>
-<li>All Number Systems also have symbols used to represent them such as <img src="/ltximg/f3605ff4036.svg" alt="\(\mathbb{R}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for Real Numbers as seen before</li>
+<li>All Number Systems also have symbols used to represent them such as <img src="/ltximg/f141049eee1.svg" alt="\(\mathbb{R}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for Real Numbers as seen before</li>
 </ul>
 <h4 id="natural-numbers">Natural Numbers</h4>
 <ul>
 <li>Natural Numbers are all Integers (numbers without decimals/Rational components) that are greater than 0</li>
 <li>A good way to think of Natural Numbers is that they are the Numbers you count things with; you begin with 1 and go up from there</li>
-<li>The symbol used to represent the Natural Number System is the variation of N written as <img src="/ltximg/7b213dcb478.svg" alt="\(\mathbb{N}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>The symbol used to represent the Natural Number System is the variation of N written as <img src="/ltximg/775f7da6c67.svg" alt="\(\mathbb{N}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 <h4 id="whole-numbers">Whole Numbers</h4>
 <ul>
 <li>Whole Numbers are all Integers (numbers without decimals/Rational components) that are greater than <em>or equal to</em> 0</li>
 <li>Basically, they are the same as Natural Numbers except they <em>include</em> the number 0 rather than <em>excluding</em> it</li>
-<li>The symbol used to represent the Whole Number System is the variation of W written as <img src="/ltximg/60f70a0d929.svg" alt="\(\mathbb{W}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Notice that <img src="/ltximg/2d79d592a42.svg" alt="\(\mathbb{N} \subset \mathbb{W}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> since all Natural Numbers are included in the Whole Number system</li>
+<li>The symbol used to represent the Whole Number System is the variation of W written as <img src="/ltximg/97816f6c925.svg" alt="\(\mathbb{W}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Notice that <img src="/ltximg/0073f16d0c1.svg" alt="\(\mathbb{N} \subset \mathbb{W}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> since all Natural Numbers are included in the Whole Number system</li>
 </ul>
 <h4 id="integers">Integers</h4>
 <ul>
 <li>Integers are all numbers without a Rational Component</li>
 <li>Basically, they are every number that doesn&rsquo;t have a decimal, <em>including</em> negative numbers</li>
-<li>The symbol used to represent Integers is the variation of Z written as <img src="/ltximg/ab2de2b2057.svg" alt="\(\mathbb{Z}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Notice that <img src="/ltximg/9281d5b0378.svg" alt="\(\mathbb{W} \subset \mathbb{Z}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> since all Whole Numbers are included in the Integer System</li>
+<li>The symbol used to represent Integers is the variation of Z written as <img src="/ltximg/5271d92248e.svg" alt="\(\mathbb{Z}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Notice that <img src="/ltximg/f64f43e7402.svg" alt="\(\mathbb{W} \subset \mathbb{Z}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> since all Whole Numbers are included in the Integer System</li>
 </ul>
 <h4 id="prime-numbers">Prime Numbers</h4>
 <ul>
 <li>Prime Numbers are a more specialized Number System that you will see less often</li>
-<li>Every element in this Number System has no divisors except 1 and themselves that produce a Quotient within <img src="/ltximg/ab2de2b2057.svg" alt="\(\mathbb{Z}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>The symbol used to represent Prime Numbers is the variation of P written as <img src="/ltximg/a023decedc3.svg" alt="\(\mathbb{P}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Notice that <img src="/ltximg/ef632d31a02.svg" alt="\(\mathbb{Z} \supset \mathbb{P}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> since all Prime Numbers are included in the Integer System</li>
+<li>Every element in this Number System has no divisors except 1 and themselves that produce a Quotient within <img src="/ltximg/5271d92248e.svg" alt="\(\mathbb{Z}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>The symbol used to represent Prime Numbers is the variation of P written as <img src="/ltximg/888f7f214f9.svg" alt="\(\mathbb{P}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Notice that <img src="/ltximg/03f10f4230c.svg" alt="\(\mathbb{Z} \supset \mathbb{P}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> since all Prime Numbers are included in the Integer System</li>
 </ul>
 <h4 id="rational-numbers">Rational Numbers</h4>
 <ul>
@@ -560,8 +472,8 @@ $delivered[sender] := delivered[sender] + 1$}}
 <li>This number system includes everything that is tangible</li>
 </ul>
 </li>
-<li>The symbol used to represent Rational Numbers is the variation of Q written as <img src="/ltximg/4c430682606.svg" alt="\(\mathbb{Q}\)" style="height: 0.9368em; vertical-align: -0.2125em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Notice that <img src="/ltximg/05ac31254dc.svg" alt="\(\mathbb{Z}\subset\mathbb{Q}\)" style="height: 0.9368em; vertical-align: -0.2125em; display: inline-block" class="org-latex org-latex-inline" /> since all Integers are included in the Rational Number System</li>
+<li>The symbol used to represent Rational Numbers is the variation of Q written as <img src="/ltximg/3f01282615e.svg" alt="\(\mathbb{Q}\)" style="height: 0.9368em; vertical-align: -0.2125em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Notice that <img src="/ltximg/8562744b61a.svg" alt="\(\mathbb{Z}\subset\mathbb{Q}\)" style="height: 0.9368em; vertical-align: -0.2125em; display: inline-block" class="org-latex org-latex-inline" /> since all Integers are included in the Rational Number System</li>
 </ul>
 <h4 id="irrational-numbers">Irrational Numbers</h4>
 <ul>
@@ -570,49 +482,49 @@ $delivered[sender] := delivered[sender] + 1$}}
 <li>These are numbers with decimals that go on forever without any sensible pattern of repetition to them</li>
 </ul>
 </li>
-<li>Examples include <img src="/ltximg/b233f49d79b.svg" alt="\(\pi \land e\)" style="height: 0.6428em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (Pi and Euler&rsquo;s Constant)</li>
-<li>Interestingly, there is no universally agreed upon symbol for the Irrational Number System, making it even more distinct to every other Number System, but the consensus seems to be something along the lines of <img src="/ltximg/496f219b262.svg" alt="\(\mathbb{R}-\mathbb{Q}\)" style="height: 0.9368em; vertical-align: -0.2125em; display: inline-block" class="org-latex org-latex-inline" />
+<li>Examples include <img src="/ltximg/c46124ded31.svg" alt="\(\pi \land e\)" style="height: 0.6428em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (Pi and Euler&rsquo;s Constant)</li>
+<li>Interestingly, there is no universally agreed upon symbol for the Irrational Number System, making it even more distinct to every other Number System, but the consensus seems to be something along the lines of <img src="/ltximg/48fe7cddf09.svg" alt="\(\mathbb{R}-\mathbb{Q}\)" style="height: 0.9368em; vertical-align: -0.2125em; display: inline-block" class="org-latex org-latex-inline" />
 <ul>
-<li>Essentially, any way of representing &ldquo;Real numbers except for all Rational Numbers&rdquo; will do; in a set you could even use something such as <img src="/ltximg/cc859583f0c.svg" alt="\(\{x \mid x\in\mathbb{R} \land x\notin\mathbb{Q}\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Essentially, any way of representing &ldquo;Real numbers except for all Rational Numbers&rdquo; will do; in a set you could even use something such as <img src="/ltximg/c7f584c2f3f.svg" alt="\(\{x \mid x\in\mathbb{R} \land x\notin\mathbb{Q}\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 </li>
 </ul>
 <h4 id="real-numbers">Real Numbers</h4>
 <ul>
 <li>Real Numbers are, well, a combination of every Number System we&rsquo;ve talked about so far</li>
-<li>The symbol to represent Real Numbers is the Author&rsquo;s choice of the following variations of R: <img src="/ltximg/040f8be597f.svg" alt="\(\Re \lor \mathbb{R}\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>The symbol to represent Real Numbers is the Author&rsquo;s choice of the following variations of R: <img src="/ltximg/8caf374f1fb.svg" alt="\(\Re \lor \mathbb{R}\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 <h4 id="imaginary-numbers">Imaginary Numbers</h4>
 <ul>
-<li>Imaginary Numbers will be discussed further in the next Unit, but they are essentially numbers with the coefficient of <img src="/ltximg/2967dbeb9de.svg" alt="\(i \lor \sqrt{-1}\)" style="height: 1.1176em; vertical-align: -0.2201em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>The symbol to represent Imaginary Numbers is the variation of I written as <img src="/ltximg/66fafeb1878.svg" alt="\(\mathbb{I}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (not to be confused with the Roman Numeral II)</li>
+<li>Imaginary Numbers will be discussed further in the next Unit, but they are essentially numbers with the coefficient of <img src="/ltximg/0530236a142.svg" alt="\(i \lor \sqrt{-1}\)" style="height: 1.1176em; vertical-align: -0.2201em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>The symbol to represent Imaginary Numbers is the variation of I written as <img src="/ltximg/9944aaeab64.svg" alt="\(\mathbb{I}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (not to be confused with the Roman Numeral II)</li>
 </ul>
 <h4 id="complex-numbers">Complex Numbers</h4>
 <ul>
 <li>Finally, the Complex Numbers System is a Union of the Real and Imaginary Number Systems</li>
-<li>It exists so that one can say <img src="/ltximg/58953d7095d.svg" alt="\(\{x\in\mathbb{C}\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> to specify that their number may or may not be Imaginary</li>
-<li>As you just saw, the symbol to represent Complex Numbers is the variation of C written as <img src="/ltximg/cae03bbf45e.svg" alt="\(\mathbb{C}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/e8b93b6df2c.svg" alt="\(\mathbb{R} \cup \mathbb{I} = \mathbb{C}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>It exists so that one can say <img src="/ltximg/6d93b88a860.svg" alt="\(\{x\in\mathbb{C}\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> to specify that their number may or may not be Imaginary</li>
+<li>As you just saw, the symbol to represent Complex Numbers is the variation of C written as <img src="/ltximg/d9878e9a40c.svg" alt="\(\mathbb{C}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/5a944ffcb5f.svg" alt="\(\mathbb{R} \cup \mathbb{I} = \mathbb{C}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 <h4 id="the-empty-set">The Empty Set</h4>
 <ul>
 <li>A sort of extra Set is the Set that contains absolutely nothing and has no Elements</li>
-<li>This Set is called the Empty Set and is written by the symbol <img src="/ltximg/fa3fadeeb15.svg" alt="\(\emptyset\)" style="height: 0.8878em; vertical-align: -0.1036em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>This Set is called the Empty Set and is written by the symbol <img src="/ltximg/d1b1e3ab6c5.svg" alt="\(\emptyset\)" style="height: 0.8878em; vertical-align: -0.1036em; display: inline-block" class="org-latex org-latex-inline" /></li>
 <li>
-<img src="/ltximg/e89fdb2a4c8.svg" alt="\(\emptyset=\{\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
+<img src="/ltximg/95542a03d68.svg" alt="\(\emptyset=\{\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
 </li>
 </ul>
 <h3 id="examples-and-working-with-set-theory">Examples and working with Set Theory</h3>
 <h4 id="example-1">Example 1</h4>
-<img src="/ltximg/a9d750803f1.svg" alt="\[A=\{x\in\mathbb{Z} \mid x^{2}&amp;lt;10\}\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/870e8bdc084.svg" alt="\[A=\{x\in\mathbb{Z} \mid x^{2}&amp;lt;10\}\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>This is a Set named A that contains all Integers which are equal to less than 10 when raised to degree 2</li>
-<li>This is a very small set of numbers which we can write out: <img src="/ltximg/3c5901e4789.svg" alt="\(A=\{0,-1,1,-2,2,-3,3\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Notice that the Number System we&rsquo;ve specified matters; if we specified x to be in <img src="/ltximg/4c430682606.svg" alt="\(\mathbb{Q}\)" style="height: 0.9368em; vertical-align: -0.2125em; display: inline-block" class="org-latex org-latex-inline" />, for example, our Set would be infinitely larger as now fractional numbers would be valid to use</li>
+<li>This is a very small set of numbers which we can write out: <img src="/ltximg/61181a19699.svg" alt="\(A=\{0,-1,1,-2,2,-3,3\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Notice that the Number System we&rsquo;ve specified matters; if we specified x to be in <img src="/ltximg/3f01282615e.svg" alt="\(\mathbb{Q}\)" style="height: 0.9368em; vertical-align: -0.2125em; display: inline-block" class="org-latex org-latex-inline" />, for example, our Set would be infinitely larger as now fractional numbers would be valid to use</li>
 </ul>
 <h4 id="example-2">Example 2</h4>
 <div class="equation-container">
 <span class="equation">
-<img src="/ltximg/ad5190fa68b.svg" alt="\begin{align*}
+<img src="/ltximg/86a6015bf20.svg" alt="\begin{align*}
 A&amp;amp;=\{-2,-1,0,1,2\} \\
 B&amp;amp;=\{x \in A \mid 2x\}
 \end{align*}
@@ -627,20 +539,20 @@ B&amp;amp;=\{x \in A \mid 2x\}
 </li>
 <li>We are stating that B&rsquo;s Elements are all of A&rsquo;s Elements doubled</li>
 </ul>
-<img src="/ltximg/6c4645270c0.svg" alt="\[\therefore B=\{-4,-2,0,2,4\}\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/7cfd78de564.svg" alt="\[\therefore B=\{-4,-2,0,2,4\}\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
 <h4 id="example-3">Example 3</h4>
-<img src="/ltximg/146c3189f0f.svg" alt="\[\forall x\in\mathbb{Z},\exists y\in\mathbb{Z} \mid x&amp;lt;y\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/3fd4e82e3ae.svg" alt="\[\forall x\in\mathbb{Z},\exists y\in\mathbb{Z} \mid x&amp;lt;y\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>Now we have not only Quantifiers, but <em>double</em> Quantifiers</li>
 <li>This translates roughly to &ldquo;For every x integer, there exists a y integer such that x is less than y&rdquo;</li>
-<li>This is <img src="/ltximg/0b95629dab9.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> because this statement is structured such that every x value can have a <em>corresponding</em> y value
+<li>This is <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> because this statement is structured such that every x value can have a <em>corresponding</em> y value
 <ul>
-<li>If it was structured as <img src="/ltximg/c79c5d79f33.svg" alt="\(\forall x\in\mathbb{Z} \mid \exists y\in\mathbb{Z} \land x&amp;lt;y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, this would not be true and this statement would be <img src="/ltximg/32f3ff5bffd.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>If it was structured as <img src="/ltximg/8da04f04fbb.svg" alt="\(\forall x\in\mathbb{Z} \mid \exists y\in\mathbb{Z} \land x&amp;lt;y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, this would not be true and this statement would be <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 </li>
 </ul>
 <h4 id="example-4">Example 4</h4>
-<img src="/ltximg/bbdcd750541.svg" alt="\[\forall x\in\emptyset,x&amp;gt;0\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/504beecfd73.svg" alt="\[\forall x\in\emptyset,x&amp;gt;0\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>Here, we are stating that every Element in the Empty Set is greater than 0</li>
 <li>To work with the Empty Set in the case of Quantifiers, we need to go back to the fundamental way that Quantifiers work</li>
@@ -654,12 +566,12 @@ B&amp;amp;=\{x \in A \mid 2x\}
 <li>Again, since there are no Elements to check, we cannot necessarily find anything that disproves this statement</li>
 </ul>
 </li>
-<li>Therefore, this statement is <img src="/ltximg/0b95629dab9.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Therefore, this statement is <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
 <li>This essentially boils down to &ldquo;This statement is true because I cannot necessarily prove it to be false&rdquo;</li>
 <li>This same logic applies to <em>every</em> For All statement that utilizes the Empty Set; regardless of what the Condition is, it will always be true since we cannot prove it false</li>
 </ul>
 <h4 id="example-5">Example 5</h4>
-<img src="/ltximg/eee9522cad2.svg" alt="\[\exists x\in\emptyset \mid x&amp;gt;0\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/a2af578a3e7.svg" alt="\[\exists x\in\emptyset \mid x&amp;gt;0\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>So let&rsquo;s try this exact thing with the <em>other</em> Quantifier we have</li>
 <li>This statement says &ldquo;There exists at least 1 Element in the Empty Set that is positive&rdquo;</li>
@@ -668,7 +580,7 @@ B&amp;amp;=\{x \in A \mid 2x\}
 <li>Here we cannot that because our Set has <em>no</em> Elements</li>
 </ul>
 </li>
-<li>There is no other checks we need to do with an <img src="/ltximg/6e934ff5287.svg" alt="\(\exists\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> statement, and so this is <img src="/ltximg/32f3ff5bffd.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>There is no other checks we need to do with an <img src="/ltximg/21313f27a39.svg" alt="\(\exists\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> statement, and so this is <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
 <li>This same logic applies to <em>every</em> There Exists statement that utilizes the Empty Set; regardless of what the Condition is, it will always be false since we cannot prove it true</li>
 </ul>
 <h2 id="conditional-statements">Conditional Statements</h2>
@@ -678,31 +590,31 @@ B&amp;amp;=\{x \in A \mid 2x\}
 <li>If you&rsquo;ve dabbled in Computer Science and Programming and Object Oriented Languages, you&rsquo;ll have used these in the form of If statements already</li>
 </ul>
 </li>
-<li>These statements are written often as &ldquo;If x, then y&rdquo; or <img src="/ltximg/8b0ce5693e2.svg" alt="\(x \implies y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> (x implies y)
+<li>These statements are written often as &ldquo;If x, then y&rdquo; or <img src="/ltximg/c6da12d6b6f.svg" alt="\(x \implies y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> (x implies y)
 <ul>
 <li>Basically these are written as and should be processed as &ldquo;if this applies, then so too does this&rdquo;</li>
-<li>So, in the statement <img src="/ltximg/8b0ce5693e2.svg" alt="\(x \implies y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, if x is a statement that is <img src="/ltximg/0b95629dab9.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, then we are saying y must also be a statement that is <img src="/ltximg/0b95629dab9.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>However, when x is <img src="/ltximg/32f3ff5bffd.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we are saying that y is not necessarily <em>also</em> <img src="/ltximg/32f3ff5bffd.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />; all that a Conditional Statement checks for is &ldquo;if this is true, so is this&rdquo;, not &ldquo;if this is <em>false</em>, so is this&rdquo;</li>
-<li>And so, essentially, when x is proven <img src="/ltximg/32f3ff5bffd.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we no longer care about y because the Conditional Statement&rsquo;s purpose ends there</li>
+<li>So, in the statement <img src="/ltximg/c6da12d6b6f.svg" alt="\(x \implies y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, if x is a statement that is <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, then we are saying y must also be a statement that is <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>However, when x is <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we are saying that y is not necessarily <em>also</em> <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />; all that a Conditional Statement checks for is &ldquo;if this is true, so is this&rdquo;, not &ldquo;if this is <em>false</em>, so is this&rdquo;</li>
+<li>And so, essentially, when x is proven <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we no longer care about y because the Conditional Statement&rsquo;s purpose ends there</li>
 </ul>
 </li>
 </ul>
 <h3 id="example-1">Example 1</h3>
-<img src="/ltximg/284e9b5f110.svg" alt="\[x\in\mathbb{R} \land x&amp;gt;10 \implies x&amp;gt;6\]" style="height: 1.3127em; display: block" class="org-latex org-latex-block" />
+<img src="/ltximg/2961592f28f.svg" alt="\[x\in\mathbb{R} \land x&amp;gt;10 \implies x&amp;gt;6\]" style="height: 1.3127em; display: block" class="org-latex org-latex-block" />
 <ul>
 <li>Here we are saying &ldquo;x is any Real Number and if x is greater than 10, x is greater than 6 also&rdquo;
 <ul>
-<li>This is clearly <img src="/ltximg/0b95629dab9.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />; if we plug in any <img src="/ltximg/f3605ff4036.svg" alt="\(\mathbb{R}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> value for x that is greater than 10, it is also greater than 6</li>
+<li>This is clearly <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />; if we plug in any <img src="/ltximg/f141049eee1.svg" alt="\(\mathbb{R}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> value for x that is greater than 10, it is also greater than 6</li>
 </ul>
 </li>
-<li>However, as mentioned before, the first condition in the Conditional being <img src="/ltximg/32f3ff5bffd.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> does not also necessarily make the second condition <img src="/ltximg/32f3ff5bffd.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
+<li>However, as mentioned before, the first condition in the Conditional being <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> does not also necessarily make the second condition <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
 <ul>
-<li>For example, if we make <img src="/ltximg/86289a50f9c.svg" alt="\(x=8\)" style="height: 0.7299em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, well now the first Condition in our Conditional is <img src="/ltximg/32f3ff5bffd.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> as 8 is <em>not</em> greater than 10, but the second Condition is <img src="/ltximg/0b95629dab9.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> still as 8 <em>is</em> greater than 6</li>
+<li>For example, if we make <img src="/ltximg/3efaa8293b0.svg" alt="\(x=8\)" style="height: 0.7299em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, well now the first Condition in our Conditional is <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> as 8 is <em>not</em> greater than 10, but the second Condition is <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> still as 8 <em>is</em> greater than 6</li>
 </ul>
 </li>
 </ul>
 <h3 id="example-2">Example 2</h3>
-<p>Assume we know <img src="/ltximg/358d7d7abab.svg" alt="\(A\subset\mathbb{R} \land x \in A \implies x&amp;gt;0\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />; what can be concluded if:</p>
+<p>Assume we know <img src="/ltximg/9245e35ed24.svg" alt="\(A\subset\mathbb{R} \land x \in A \implies x&amp;gt;0\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />; what can be concluded if:</p>
 <h4 id="x-and-notin-a">x ∉ A</h4>
 <ul>
 <li>Well, what we <em>know</em> is that A is a Set which exists within the Real Set, and that a number existing in A implies it&rsquo;s positive</li>
@@ -721,9 +633,9 @@ B&amp;amp;=\{x \in A \mid 2x\}
 <li>Our initial statement tells us that if a number is in Set A, it is implied to be Positive</li>
 <li>Therefore, if a number is 0 or negative, we at least know for sure that it is <em>not</em> in Set A</li>
 </ul>
-<img src="/ltximg/984c4118f1b.svg" alt="\(\therefore x \notin A\)" style="height: 0.8717em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />
+<img src="/ltximg/477b3b9a898.svg" alt="\(\therefore x \notin A\)" style="height: 0.8717em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />
 <h3 id="example-3">Example 3</h3>
-<img src="/ltximg/4d9584063f4.svg" alt="\(\text{Let}\ n\in\mathbb{Z}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />
+<img src="/ltximg/cf0ac2ddad9.svg" alt="\(\text{Let}\ n\in\mathbb{Z}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />
 <ul>
 <li>We have just made variable n be an Element of Integers</li>
 <li>This means that when n is an even number, n+1 is an odd number
@@ -736,35 +648,35 @@ B&amp;amp;=\{x \in A \mid 2x\}
 <li>So we can also write n is even ⇐ n+1 is odd</li>
 </ul>
 </li>
-<li>In instances of a Conditional Statement where both sides imply each other, we can use symbol <img src="/ltximg/35fe292d822.svg" alt="\(\iff\)" style="height: 0.4579em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>In instances of a Conditional Statement where both sides imply each other, we can use symbol <img src="/ltximg/aaead913001.svg" alt="\(\iff\)" style="height: 0.4579em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
-<p>∴ n is even <img src="/ltximg/35fe292d822.svg" alt="\(\iff\)" style="height: 0.4579em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> n+1 is odd</p>
+<p>∴ n is even <img src="/ltximg/aaead913001.svg" alt="\(\iff\)" style="height: 0.4579em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> n+1 is odd</p>
 <ul>
-<li>Symbol <img src="/ltximg/35fe292d822.svg" alt="\(\iff\)" style="height: 0.4579em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is read as &ldquo;if and only if&rdquo; and is abbreviated to &ldquo;IFF&rdquo; quite a lot</li>
-<li>So when writing <img src="/ltximg/47393c415bd.svg" alt="\(x \iff y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, we mean both <img src="/ltximg/471138f45ca.svg" alt="\(x \Rightarrow y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/e5aea9a682a.svg" alt="\(y \Rightarrow x\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> or that x and y are <em>Equivalent</em></li>
-<li>And so in conclusion <img src="/ltximg/47393c415bd.svg" alt="\(x \iff y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> means both x and y must either be <img src="/ltximg/0b95629dab9.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="/ltximg/32f3ff5bffd.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>Symbol <img src="/ltximg/aaead913001.svg" alt="\(\iff\)" style="height: 0.4579em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is read as &ldquo;if and only if&rdquo; and is abbreviated to &ldquo;IFF&rdquo; quite a lot</li>
+<li>So when writing <img src="/ltximg/a09587a022f.svg" alt="\(x \iff y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, we mean both <img src="/ltximg/229036e9313.svg" alt="\(x \Rightarrow y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/663d5dca73b.svg" alt="\(y \Rightarrow x\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> or that x and y are <em>Equivalent</em></li>
+<li>And so in conclusion <img src="/ltximg/a09587a022f.svg" alt="\(x \iff y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> means both x and y must either be <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
 </ul>
 <h3 id="negating-conditional-statements">Negating Conditional Statements</h3>
 <ul>
-<li>The symbol <img src="/ltximg/4ac8b980706.svg" alt="\(\neg\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> means the Negation of something and should be read as &ldquo;Not&rdquo;</li>
-<li>Say we have Set A and <img src="/ltximg/a3cc65b5fb1.svg" alt="\(A\subset\mathbb{R}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />, well now if we have the statement <img src="/ltximg/a36427a38d5.svg" alt="\(\neg\left(x\in A \implies x&amp;gt;0\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> then that would be the negation of <img src="/ltximg/e0d607eb947.svg" alt="\(x\in A \Rightarrow x&amp;gt;0\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /></li>
+<li>The symbol <img src="/ltximg/1dc542cfc1c.svg" alt="\(\neg\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> means the Negation of something and should be read as &ldquo;Not&rdquo;</li>
+<li>Say we have Set A and <img src="/ltximg/69275ba57a4.svg" alt="\(A\subset\mathbb{R}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />, well now if we have the statement <img src="/ltximg/0474ae57588.svg" alt="\(\neg\left(x\in A \implies x&amp;gt;0\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> then that would be the negation of <img src="/ltximg/57cf77af24a.svg" alt="\(x\in A \Rightarrow x&amp;gt;0\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /></li>
 <li>To figure out what the Negation of this Conditional is, we must consider what the possibilities are for a number interacting with this Conditional. Either:
 <ul>
 <li>
-<img src="/ltximg/151c079291a.svg" alt="\(x\in A \land x&amp;gt;0\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />
+<img src="/ltximg/06c85a27b93.svg" alt="\(x\in A \land x&amp;gt;0\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />
 </li>
 <li>
-<img src="/ltximg/27207ddf64c.svg" alt="\(x\notin A \land x&amp;gt;0\)" style="height: 0.8717em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />
+<img src="/ltximg/c32925a2423.svg" alt="\(x\notin A \land x&amp;gt;0\)" style="height: 0.8717em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />
 </li>
 <li>
-<img src="/ltximg/c26ee889998.svg" alt="\(x\notin A \land x\leq0\)" style="height: 0.9666em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" />
+<img src="/ltximg/7da60b1309f.svg" alt="\(x\notin A \land x\leq0\)" style="height: 0.9666em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" />
 </li>
 </ul>
 </li>
 <li>A number being ran through this Conditional and this situation can fit into any of the following models</li>
 <li>So therefore, the Negation of this Conditional must be a statement wherein <em>none</em> of these models apply</li>
 <li>
-<img src="/ltximg/07010d8a070.svg" alt="\(\therefore \neg\left(x \in A \implies x&amp;gt;0\right)=\exists x\in\mathbb{R} \mid x \in A \land x\leq0\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
+<img src="/ltximg/d5f0e61a4dd.svg" alt="\(\therefore \neg\left(x \in A \implies x&amp;gt;0\right)=\exists x\in\mathbb{R} \mid x \in A \land x\leq0\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
 </li>
 <li>You see, the Negation of Conditionals are themselves never Conditionals; they are always &ldquo;There exists&rdquo; Quantifiers</li>
 </ul>
@@ -777,7 +689,7 @@ B&amp;amp;=\{x \in A \mid 2x\}
 </span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 </span></span></code></pre></div><div class="equation-container">
 <span class="equation">
-<img src="/ltximg/8a02cd777f7.svg" alt="\begin{align*}
+<img src="/ltximg/81663400729.svg" alt="\begin{align*}
 \text{Let}\ &amp;amp;A=\{x\in\mathbb{Z} \mid 0&amp;lt;x\leq10\}\ \land\ f\left(x\right)=x \\
 \forall\ x \in &amp;amp;A,\ f\left(x\right)&amp;gt;10 \implies x \notin A
 \end{align*}
@@ -791,6 +703,65 @@ B&amp;amp;=\{x \in A \mid 2x\}
 </ul>
 </li>
 </ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Raft consensus algorithm</title>
+      <link>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</link>
+      <pubDate>Tue, 05 Mar 2024 13:44:50 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</guid>
+      <description>Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其</description>
+      <content:encoded><![CDATA[<figure>
+    <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
+         alt="Figure 1: node-state-transitions-in-raft"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>node-state-transitions-in-raft</p>
+        </figcaption>
+</figure>
+
+<p>一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。</p>
+<p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
+<p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
+<h2 id="initialisation">Initialisation</h2>
+<p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
+<p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
+<p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
+<h2 id="voting-on-a-new-leader">Voting on a new leader</h2>
+<p>如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。</p>
+<p>votedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及当前的 term。</p>
+<h2 id="collecting-votes">Collecting votes</h2>
+<p>回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。</p>
+<p>如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。</p>
+<p>sentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。</p>
+<h2 id="broadcasting-messages">Broadcasting messages</h2>
+<p>以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。</p>
+<p>leader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。</p>
+<h2 id="replicating-from-leader-to-followers">Replicating from leader to followers</h2>
+<p>ReplicateLog 方法是从 leader 利用 followerId 发送任何新的 log 条目给 follower。prefixLen 是已经发送给 follower 消息的数量，suffix 就是还没有发送给 follower 的消息。所以当 sentLength[follower] = log.length 时，suffix 是一个空数组。</p>
+<h2 id="followers-receiving-messages">Followers receiving messages</h2>
+<p>首先，如果消息的 term 比 follower 当前的 term 高，则更新当前的 term，并接受消息的发送者为 leader。相等的时候，也会和之前一样的逻辑，承认发送者为 leader。</p>
+<p>prefixLen 为 suffix 包含 log 条目之前的条目数量，follower 要求自己当前的 log 长度要大于等于 prefixLen，并且 prefixLen 长度前的最后一个 log 条目中的 term 要与 leader 的 prefixTerm 相同<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。Raft 算法保证两个节点相同下标对应的 log 条目中的 term 相同，那么在这之前的 log 都是相同。</p>
+<p>以上条件满足就会调用 AppendEntries 将 suffix 添加到自己的 log 当中。</p>
+<h2 id="updating-followers-logs">Updating followers&rsquo; logs</h2>
+<p>follower 利用该函数讲从 leader 那里收到的条目扩充到 log 当中。如果节点本地的 log 长度大于 leader 发来消息中的 prefixLen，那么我们就要检查差异的这部份 log 条目是否与 suffix 中的条目一致。如果不一致，我们则需要舍弃这部份差异，只保留 prefixLen 长度的 log。这种情况发生在前一个 leader 发送的 log 已经被合并到节点本地 log 当中，而同时因为一些原因新的 leader 发送来新的 log。</p>
+<p>然后，任何新的 log 都会被追加到 follower 本地的 log 当中，即便是消息重复的情况下，这个操作也是幂等的。follower 检查 leaderCommit 是否大于本地的 commitLength，满足条件则可以将 log 当中的 msg 传递给 application，并对本地 commitLength 更新。</p>
+<h2 id="leader-receiving-log-acknowledgements">Leader receiving log acknowledgements</h2>
+<p>这里回到 leader 这边。leader 会检查发送者的 term：如果发送者的 term 大于接收者的 term，那么意味着新 leader 选举已经开始，所以当前的 leader 会变为 follower 的状态。</p>
+<p>如果 term 相同，并且详细中的 success 为 true，则更新 sendLength 和 ackedLength，记录 follower 确认过的 log 数量，然后调用 CommitLogEntries 函数。如果 success 为 false，则 follower 没有接收消息，这个时候 leader 会递减 sendLength，并嗲用 ReplicateLog 重新发送 LogRequest 消息<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<h2 id="leader-committing-log-entries">Leader committing log entries</h2>
+<p>被 quorum 确认过的 log 条目就可以被 leader 提交，当 log 条目被提交，消息就被传递给 Application。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>参考上一个步骤中 prefixTerm 的来源&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>这里算法是可以优化的，来减少重试次数。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
 ]]></content:encoded>
     </item>
     
@@ -1372,156 +1343,6 @@ you may answer the next question with yes.</p>
       <guid>https://sheerwill.live/posts/main/20230211001746-covering_index/</guid>
       <description>即可以直接通过遍历聚簇索引获取到非主键列数据的场景，即不需要「回表（Table access by index rowid）」操作。覆盖索引一般出现在「联合索引」中，因</description>
       <content:encoded><![CDATA[<p>即可以直接通过遍历聚簇索引获取到非主键列数据的场景，即不需要「回表（<a href="/posts/main/20230211000136-table_access_by_index_rowid/">Table access by index rowid</a>）」操作。覆盖索引一般出现在「联合索引」中，因为叶节点中会存储「联合索引」所有列的数据（索引即数据）。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Raft consensus algorithm</title>
-      <link>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</link>
-      <pubDate>Wed, 29 Mar 2023 09:31:04 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</guid>
-      <description>Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其</description>
-      <content:encoded><![CDATA[<figure>
-    <img loading="lazy" src="/ox-hugo/node-state-transitions-in-raft.png"
-         alt="Figure 1: node-state-transitions-in-raft"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>node-state-transitions-in-raft</p>
-        </figcaption>
-</figure>
-
-<p>一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。</p>
-<p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
-<p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
-<h2 id="initialisation">Initialisation</h2>
-<div class="equation-container">
-<span class="equation">
-\begin{document}
-\begin{algorithm}
-\caption{Initialisation}
-\FnOn{\textsf{\upshape initialisation}}
-{\textsf{\upshape \(currentTerm\) := 0; \(votedFor\) := null}\;
-\textsf{\upshape\(log := \langle\rangle; commitLength\) := 0}\;
-\textsf{\upshape\(currentRole\) := follower; \(curentLeader\) := null}\;
-\(votesReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle\)}
-<p>\FnOn{\textsf{\upshape recovery from crash}}
-{\textsf{\upshape (currentRole) := follower};
-\textsf{\upshape (currentLeader) := null};
-(votedReceived := {}; sentLength := \langle\rangle; ackedLength := \langle\rangle)}</p>
-<p>\FnOn{\textsf{\upshape node (nodeId) suspects leader has failed, or on election timeout}}
-{\textsf{\upshape (currentTerm := currentTerm + 1; currentRole) := candidate};
-\textsf{\upshape (votedFor := nodeId; votesReceived := { nodeId } ; lastTerm := 0)};
-\If{\textsf{\upshape (log).length &gt; 0}}{\textsf{\upshape (lastTerm) := (log[log).length − 1(]).term;}}
-\textsf{\upshape (msg) := (VoteRequest, (nodeId), (currentTerm), (log).length, (lastTerm))};
-\For{\textsf{\upshape each (node \in nodes)}}{\KwSend \textsf{\upshape (msg) to (node)}}
-\textsf{\upshape start election timer}}
-\end{algorithm}
-\end{document}</p>
-</span>
-<span class="equation-label">
-1
-</span>
-</div>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-initialisation.svg"
-         alt="Figure 2: raft-initialisation"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>raft-initialisation</p>
-        </figcaption>
-</figure>
-
-<p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
-<p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
-<p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
-<h2 id="voting-on-a-new-leader">Voting on a new leader</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-voting-on-a-new-leader.svg"
-         alt="Figure 3: raft-voting-on-a-new-leader"/> <figcaption>
-            <p><span class="figure-number">Figure 3: </span>raft-voting-on-a-new-leader</p>
-        </figcaption>
-</figure>
-
-<p>如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。</p>
-<p>votedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及当前的 term。</p>
-<h2 id="collecting-votes">Collecting votes</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-collecting-votes.svg"
-         alt="Figure 4: raft-collecting-votes"/> <figcaption>
-            <p><span class="figure-number">Figure 4: </span>raft-collecting-votes</p>
-        </figcaption>
-</figure>
-
-<p>回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。</p>
-<p>如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。</p>
-<p>sentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。</p>
-<h2 id="broadcasting-messages">Broadcasting messages</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-broadcasting-messages.svg"
-         alt="Figure 5: raft-broadcasting-messages"/> <figcaption>
-            <p><span class="figure-number">Figure 5: </span>raft-broadcasting-messages</p>
-        </figcaption>
-</figure>
-
-<p>以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。</p>
-<p>leader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。</p>
-<h2 id="replicating-from-leader-to-followers">Replicating from leader to followers</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-replicating-from-leader-to-followers.svg"
-         alt="Figure 6: raft-replicating-from-leader-to-followers"/> <figcaption>
-            <p><span class="figure-number">Figure 6: </span>raft-replicating-from-leader-to-followers</p>
-        </figcaption>
-</figure>
-
-<p>ReplicateLog 方法是从 leader 利用 followerId 发送任何新的 log 条目给 follower。prefixLen 是已经发送给 follower 消息的数量，suffix 就是还没有发送给 follower 的消息。所以当 sentLength[follower] = log.length 时，suffix 是一个空数组。</p>
-<h2 id="followers-receiving-messages">Followers receiving messages</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-followers-receiving-messages.svg"
-         alt="Figure 7: raft-followers-receiving-messages"/> <figcaption>
-            <p><span class="figure-number">Figure 7: </span>raft-followers-receiving-messages</p>
-        </figcaption>
-</figure>
-
-<p>首先，如果消息的 term 比 follower 当前的 term 高，则更新当前的 term，并接受消息的发送者为 leader。相等的时候，也会和之前一样的逻辑，承认发送者为 leader。</p>
-<p>prefixLen 为 suffix 包含 log 条目之前的条目数量，follower 要求自己当前的 log 长度要大于等于 prefixLen，并且 prefixLen 长度前的最后一个 log 条目中的 term 要与 leader 的 prefixTerm 相同<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。Raft 算法保证两个节点相同下标对应的 log 条目中的 term 相同，那么在这之前的 log 都是相同。</p>
-<p>以上条件满足就会调用 AppendEntries 将 suffix 添加到自己的 log 当中。</p>
-<h2 id="updating-followers-logs">Updating followers&rsquo; logs</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-updating-followers-logs.svg"
-         alt="Figure 8: raft-updating-followers-logs"/> <figcaption>
-            <p><span class="figure-number">Figure 8: </span>raft-updating-followers-logs</p>
-        </figcaption>
-</figure>
-
-<p>follower 利用该函数讲从 leader 那里收到的条目扩充到 log 当中。如果节点本地的 log 长度大于 leader 发来消息中的 prefixLen，那么我们就要检查差异的这部份 log 条目是否与 suffix 中的条目一致。如果不一致，我们则需要舍弃这部份差异，只保留 prefixLen 长度的 log。这种情况发生在前一个 leader 发送的 log 已经被合并到节点本地 log 当中，而同时因为一些原因新的 leader 发送来新的 log。</p>
-<p>然后，任何新的 log 都会被追加到 follower 本地的 log 当中，即便是消息重复的情况下，这个操作也是幂等的。follower 检查 leaderCommit 是否大于本地的 commitLength，满足条件则可以将 log 当中的 msg 传递给 application，并对本地 commitLength 更新。</p>
-<h2 id="leader-receiving-log-acknowledgements">Leader receiving log acknowledgements</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-leader-receiving-log-acknowledgements.svg"
-         alt="Figure 9: raft-leader-receiving-log-acknowledgements"/> <figcaption>
-            <p><span class="figure-number">Figure 9: </span>raft-leader-receiving-log-acknowledgements</p>
-        </figcaption>
-</figure>
-
-<p>这里回到 leader 这边。leader 会检查发送者的 term：如果发送者的 term 大于接收者的 term，那么意味着新 leader 选举已经开始，所以当前的 leader 会变为 follower 的状态。</p>
-<p>如果 term 相同，并且详细中的 success 为 true，则更新 sendLength 和 ackedLength，记录 follower 确认过的 log 数量，然后调用 CommitLogEntries 函数。如果 success 为 false，则 follower 没有接收消息，这个时候 leader 会递减 sendLength，并嗲用 ReplicateLog 重新发送 LogRequest 消息<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
-<h2 id="leader-committing-log-entries">Leader committing log entries</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/raft-leader-committing-log-entries.svg"
-         alt="Figure 10: raft-leader-committing-log-entries"/> <figcaption>
-            <p><span class="figure-number">Figure 10: </span>raft-leader-committing-log-entries</p>
-        </figcaption>
-</figure>
-
-<p>被 quorum 确认过的 log 条目就可以被 leader 提交，当 log 条目被提交，消息就被传递给 Application。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>参考上一个步骤中 prefixTerm 的来源&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>这里算法是可以优化的，来减少重试次数。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
 ]]></content:encoded>
     </item>
     

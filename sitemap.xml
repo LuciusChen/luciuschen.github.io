@@ -2,14 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://sheerwill.live/posts/main/algebraandlogic/</loc>
-    <lastmod>2024-03-04T22:32:34+08:00</lastmod>
+    <loc>https://sheerwill.live/posts/main/algebra/</loc>
+    <lastmod>2024-03-05T22:23:23+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/</loc>
-    <lastmod>2024-03-04T22:32:34+08:00</lastmod>
+    <lastmod>2024-03-05T22:23:23+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/</loc>
-    <lastmod>2024-03-04T22:32:34+08:00</lastmod>
+    <lastmod>2024-03-05T22:23:23+08:00</lastmod>
+  </url><url>
+    <loc>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</loc>
+    <lastmod>2024-03-05T13:44:50+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/</loc>
     <lastmod>2024-01-16T09:15:17+08:00</lastmod>
@@ -34,9 +37,6 @@
   </url><url>
     <loc>https://sheerwill.live/posts/main/20230211001746-covering_index/</loc>
     <lastmod>2023-05-14T12:54:40+08:00</lastmod>
-  </url><url>
-    <loc>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</loc>
-    <lastmod>2023-03-29T09:31:04+08:00</lastmod>
   </url><url>
     <loc>https://sheerwill.live/posts/main/20220607104757-hugo/</loc>
     <lastmod>2023-03-23T10:29:03+08:00</lastmod>
