@@ -6,710 +6,657 @@
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 Mar 2024 22:23:23 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Mar 2024 10:14:03 +0800</lastBuildDate><atom:link href="https://sheerwill.live/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Algebraic Math (Rational Polynomials) and Set Theory</title>
-      <link>https://sheerwill.live/posts/main/algebra/</link>
-      <pubDate>Tue, 05 Mar 2024 22:23:23 +0800</pubDate>
+      <title>Vector clocks</title>
+      <link>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</link>
+      <pubDate>Fri, 08 Mar 2024 10:14:03 +0800</pubDate>
       
-      <guid>https://sheerwill.live/posts/main/algebra/</guid>
-      <description>Rational Exponents Terminology A Rational Number is one that can be expressed in the form of wherein x and y are both integers and y is a non-zero value In other words, a Rational Number is an Integer that can be expressed as a Fraction A Radical is a term written as where x is a positive Integer that is ≥2 Therefore, a Rational Exponent is an Exponent that is expressed as a Fraction: How to evaluate Rational Exponents The denominator of the exponent will be made into the nth number that we will take the root of the base of; If your numerator is 1, then taking the nth root of your base in this case is simply the solution If your numerator is something other than 1, then raise the product of taking your base&amp;rsquo;s nth root to the numerator; Example 1 As mentioned, we will begin by taking 16s 4th root</description>
-      <content:encoded><![CDATA[<h2 id="rational-exponents">Rational Exponents</h2>
-<h3 id="terminology">Terminology</h3>
+      <guid>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</guid>
+      <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \langle N_{1},</description>
+      <content:encoded><![CDATA[<p>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
 <ul>
-<li>A Rational Number is one that can be expressed in the form of <img src="/ltximg/c0f1fd1f285.svg" alt="\(\frac{x}{y}\)" style="height: 1.2509em; vertical-align: -0.5205em; display: inline-block" class="org-latex org-latex-inline" /> wherein x and y are both integers and y is a non-zero value
-<ul>
-<li>In other words, a Rational Number is an Integer that can be expressed as a Fraction</li>
+<li>假定分布式系统中有 \(n\) 个节点，\(N = \langle N_{1}, N_{2},&hellip;, N_{n}\rangle\)</li>
+<li><strong>事件 \(a\)</strong> 的向量时间戳写成 \(V(a) = \langle t_{1}, t_{2},&hellip;, t_{n} \rangle\)</li>
+<li>\(t_{i}\) 是 \(N_{i}\) 节点发生时间的数量</li>
+<li>每个​<strong>节点</strong>​都有一个当前的向量时间戳 \(T\)</li>
+<li>节点 \(N_{i}\) 上的事件，向量时间戳 \(T[i]\) 递增。</li>
+<li>每个消息都附带上向量时间戳</li>
+<li>接收者将消息中的向量时间戳合并到本地</li>
 </ul>
+<p>除了标量和向量之间的区别之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
+<h2 id="vector-clocks-algorithm">Vector clocks algorithm</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/vector-clocks-algorithm.svg"/> 
+</figure>
+
+<h2 id="vector-clocks-example">Vector clocks example</h2>
+<p>假定节点向量是 \(N = \langle A, B, C \rangle\):</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/vector-example.png"
+         alt="Figure 1: vector-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>vector-example</p>
+        </figcaption>
+</figure>
+
+<p>事件 \(e\) 的向量时间戳是一系列事件的集合， \(e\) 和它的因果以来：\({e} \cup {a | a \rightarrow e}\)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>​<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>比如，\(\langle2, 2, 0\rangle\)，第一个 2 是表示来自于 \(A\) 的两个事件，第二个 2 是表示来自于 \(B\) 的两个事件，并且没有来自于 \(C\) 的事件。</p>
+<h2 id="vector-clocks-ordering">Vector clocks ordering</h2>
+<p>Define the following order on vector timestamps(in a system with \(n\) nodes):</p>
+<ul>
+<li>\(T = T&rsquo; \iff T[i] = T&rsquo;[i]\) for all \(i \in {1, &hellip;, n}\)</li>
+<li>\(T \le T&rsquo; \iff T[i] \le T&rsquo;[i]\) for all \(\in {1, &hellip;, n}\)</li>
+<li>\(T &lt; T&rsquo; \iff T \le T&rsquo;\) and \(T \neq T&rsquo;\)</li>
+<li>\(T || T&rsquo; \iff T &gt; T&rsquo;\) and \(T&rsquo; &gt; T\)</li>
+</ul>
+<p>\(V(a) \le V(b) \iff ({a} \cup {e | e \rightarrow a}) \subseteq ({b} \cup{} {e | e \rightarrow b})\)</p>
+<p>Properties of this order:</p>
+<ul>
+<li>\((V(a) &lt; V(b)) \iff (a \rightarrow b)\)</li>
+<li>\((V(a) = V(b)) \iff (a = b)\)</li>
+<li>\((V(a) \rVert V(b)) \iff (a \rVert b)\)</li>
+</ul>
+<p>然后，我们对向量的时间戳进行部分排序。如果第一个向量的每个元素都小于或等于第二个向量的相应元素，我们就说一个向量小于或等于另一个向量。如果一个向量小于或等于另一个向量，并且它们至少有一个元素是不同的，那么这个向量就严格小于另一个向量。然而，如果一个向量在一个元素中的值较大，而另一个向量在另一个元素中的值较大，那么这两个向量是不可比的。例如，\(T = \langle2, 2, 0\rangle\) 和 \(T&rsquo; = \langle0, 0, 1\rangle\) 是不可比的，因为 \(T[1] &gt; T&rsquo;[1]\) 但 \(T[3] &lt; T&rsquo;[3]\)。</p>
+<p>向量时间戳的部分顺序与发生之前关系所定义的部分顺序完全对应。因此，向量时钟算法为我们提供了一种在实践中计算发生前关系的机制。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li>A Radical is a term written as <img src="/ltximg/ef7da8a1bbf.svg" alt="\(\sqrt[x]{y}\)" style="height: 1.1176em; vertical-align: -0.3794em; display: inline-block" class="org-latex org-latex-inline" /> where x is a <em>positive</em> Integer that is ≥2</li>
-<li>Therefore, a Rational Exponent is an Exponent that is expressed as a Fraction: <img src="/ltximg/d207e19bae3.svg" alt="\(x^{\frac{y}{z}}\)" style="height: 0.9817em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<h3 id="how-to-evaluate-rational-exponents">How to evaluate Rational Exponents</h3>
-<ul>
-<li>The denominator of the exponent will be made into the nth number that we will take the root of the base of; <img src="/ltximg/2d0d9247032.svg" alt="\(x^{\frac{y}{z}}=\sqrt[z]{x}\)" style="height: 1.2167em; vertical-align: -0.2841em; display: inline-block" class="org-latex org-latex-inline" />
-<ul>
-<li>If your numerator is 1, then taking the nth root of your base in this case is simply the solution</li>
-</ul>
+<li id="fn:2">
+<p>\(\cup\) 并集的意思，\(\cap\) 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li>If your numerator is something other than 1, then raise the product of taking your base&rsquo;s nth root to the numerator; <img src="/ltximg/a22ecf91642.svg" alt="\(x^{\frac{y}{z}}=\left(\sqrt[z]{x}\right)^{y}\)" style="height: 1.2267em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<h4 id="example-1">Example 1</h4>
-<img src="/ltximg/5b1fffeb975.svg" alt="\[16^{\frac{-1}{4}}\]" style="height: 1.2744em; display: block" class="org-latex org-latex-block" />
-<p>As mentioned, we will begin by taking 16s 4th root</p>
-<img src="/ltximg/48a36da2a3d.svg" alt="\[\left(\sqrt[4]{16}\right)^{-1}\]" style="height: 2.1602em; display: block" class="org-latex org-latex-block" />
-<p>This is the same as asking &ldquo;What number multiplied by itself 4 times gives us 16?&rdquo; It&rsquo;s very similar to Square Roots which you&rsquo;ve already grown used to (and possibly Cube Roots too) just to a higher degree</p>
-<img src="/ltximg/e4a0c2dd249.svg" alt="\[=\pm2^{-1}\]" style="height: 1.3560em; display: block" class="org-latex org-latex-block" />
-<p>Now, if you remember your exponent rules from Grade 10, you&rsquo;ll know that something raised to a negative exponent is just the same end result as if it were a positive, but you get it&rsquo;s reciprocal</p>
-<img src="/ltximg/dac62267a02.svg" alt="\[=\frac{1}{\pm2}\]" style="height: 2.2448em; display: block" class="org-latex org-latex-block" />
-<p>(The Plus-Minus simply represents how taking the nth root of a number when n is an even number can result in a plus <em>or</em> a minus; this will not be included further than this point unless explicitly needed)</p>
-<h4 id="example-2">Example 2</h4>
-<img src="/ltximg/c3fba08e5b9.svg" alt="\[\left(-\frac{8}{125}\right)^{\frac{-4}{3}}\]" style="height: 2.9359em; display: block" class="org-latex org-latex-block" />
-<p>Here it should be noted that you can also begin by doing the numerator of the exponent and you will get the same result; in fact why don&rsquo;t we try that?</p>
-<img src="/ltximg/e8d2952dbd4.svg" alt="\[=\sqrt[3]{-\frac{244140625}{4096}}\]" style="height: 2.5876em; display: block" class="org-latex org-latex-block" />
-<p>As you can see, doing that will ordinarily give you very large numbers which is why doing the Radical first is often preferred. The way we evaluate this now is getting the Cube Root of the Numerator and Denominator separately</p>
-<img src="/ltximg/1099ffb469f.svg" alt="\[=-\frac{625}{16}\]" style="height: 2.1631em; display: block" class="org-latex org-latex-block" />
-<h3 id="how-to-calculate-radicals-to-custom-degrees-on-many-calculators">How to Calculate Radicals to custom Degrees on many Calculators</h3>
-<ul>
-<li>On most Scientific Calculators, there will be a dedicated button to take the Square Root of a number</li>
-<li>Things get complicated when we get onto Cube and nth roots, however as there is no universal standard to Calculators</li>
-<li>If you are using a Scientific Calculator, it likely has a 2nd Function or Shift button which re-purposes some of the pre-existing Function buttons
-<ul>
-<li>Likely the Shift/2nd functionality of each button will be written above the button directly onto the case of the calculator</li>
-</ul>
+<li id="fn:3">
+<p>集合的描述方法，描述格式为 \({x | P(x), x \in \Omega}\)。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li>It is likely that Cube Roots have their own second layer Function button, likely marked as <img src="/ltximg/56756b876dc.svg" alt="\(\sqrt[3]{}\)" style="height: 1.1176em; vertical-align: -0.4951em; display: inline-block" class="org-latex org-latex-inline" /> whilst a Custom degree Radical button may also exist, likely marked as <img src="/ltximg/cbdcf2f0b7a.svg" alt="\(\sqrt[x]{}\)" style="height: 1.1176em; vertical-align: -0.4951em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<h2 id="simplifying-rational-expressions">Simplifying Rational Expressions</h2>
-<ul>
-<li>Similar to how any expression that can be written as a multiplication is Factorable, any expression that can be written as a Division is Rational</li>
-<li>A Rational Expression is an Algebraic expression that can be written as a quotient of 2 Polynomials</li>
-<li>Just like regular old Arithmetic Fractions, these always should be simplified into their lowest terms as good standard</li>
-</ul>
-<h3 id="simplifying-fractions-a-strategy-besides-using-the-greatest-common-factor">Simplifying Fractions: A strategy besides using the Greatest Common Factor</h3>
-<ul>
-<li>For how we Simplify Expressions such as <img src="/ltximg/73e1d91494d.svg" alt="\(\frac{x^{2}-9x+20}{2x-10}\)" style="height: 1.5154em; vertical-align: -0.4688em; display: inline-block" class="org-latex org-latex-inline" />, first we must start somewhere much simpler that we have explored already long ago; fractions that only involve numbers</li>
-<li>Take the fraction <img src="/ltximg/338ffdc054b.svg" alt="\(\frac{64}{24}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /> for instance; by using your GCF mind, you would instinctively think to divide these by 2, or maybe you&rsquo;d be astute enough to instantly see that the GCF is 8, but there is another way to do this</li>
-<li>By making the numerator and the denominator into Factors, we can cancel out certain parts of the Numerator and Denominator. So for instance, 64 is divisible by 2 which means another way to write it is 2⋅32</li>
-<li>Taking this further gets us 2(2⋅16), then to 2(2(2⋅8)), then 2(2(2(2⋅4))), and finally, just quite simply 2⋅2⋅2⋅2⋅2⋅2 or <img src="/ltximg/06e79eb6c45.svg" alt="\(2^{6}\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />; we have now brought 64 to it&rsquo;s <em>prime factor</em>; it cannot be factored any further</li>
-<li>The same applies to 24; it will eventually bring us to 2⋅2⋅2⋅3 before we reach only Prime numbers that cannot be divided anymore</li>
-<li>And so this entire fraction can be rewritten as <img src="/ltximg/c30b96c6aa9.svg" alt="\(\frac{2\cdot2\cdot2\cdot2\cdot2\cdot2}{2\cdot2\cdot2\cdot3}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /> but where does that get us? Well, notice that we are multiplying a lot of 2s and also dividing a lot of 2s; these cancel out</li>
-<li>Since there are 3 2s on the denominator, we can cancel out 3 2s on the numerator as well getting us <img src="/ltximg/e678e183274.svg" alt="\(\frac{2\cdot2\cdot2}{3}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" />, or <img src="/ltximg/90ac7f80701.svg" alt="\(\frac{8}{3}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" />, which is our final simplified version of <img src="/ltximg/338ffdc054b.svg" alt="\(\frac{64}{24}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Therefore, <strong>we can maximally factor our numerators and denominators and cancel out like terms on each</strong></li>
-</ul>
-<h3 id="example-1">Example 1</h3>
-<img src="/ltximg/9e5c0756980.svg" alt="\[\frac{15x^{2}y}{6xy^{2}}\]" style="height: 2.5199em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>Since this is a monomial over a monomial, you will want to apply some exponent rules to speed up solving this. This is a valid route to go down, but let&rsquo;s try it with our newly discovered strategy instead</li>
-<li>On the numerator, 15 can be factored into 3⋅5, and that <img src="/ltximg/ee19d35e8d2.svg" alt="\(x^{2}\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> can be factored into x⋅ x giving us <img src="/ltximg/34d5347359b.svg" alt="\(3\cdot5\left(x\cdot x\right)y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>On the denominator, we can factor 6 into 2⋅3, and <img src="/ltximg/233818bb271.svg" alt="\(y^{2}\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> into y⋅ y giving us <img src="/ltximg/e4c963fa9b6.svg" alt="\(2\cdot3\left(x\right)y\cdot y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> with an end result of <img src="/ltximg/84324705e54.svg" alt="\(\frac{3\cdot5\left(x\cdot x\right)y}{2\cdot3\left(x\right)y\cdot y}\)" style="height: 1.5976em; vertical-align: -0.5586em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Now here, we have a 3 on the numerator <em>and</em> denominator, an x on the numerator and denominator, and a y on the numerator and denominator. We can cancel out all of these: <img src="/ltximg/a905e452416.svg" alt="\(\frac{5x}{2y}\)" style="height: 1.3976em; vertical-align: -0.5205em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<h3 id="example-2">Example 2</h3>
-<img src="/ltximg/6b37327e49c.svg" alt="\[\frac{x^{2}-9x+20}{2x-10}\]" style="height: 2.4110em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>Here we have no options other than the strategy we just discovered to use since the numerator is a trinomial and the denominator is a binomial. We must factor these as far as they will go and cancel out like terms</li>
-<li>The numerator is a Simple trinomial and can be factored into <img src="/ltximg/8c8ec30d24f.svg" alt="\(\left(x-5\right)\left(x-4\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, and the denominator is a binomial which has a common factor of 2: <img src="/ltximg/6a10d1a9439.svg" alt="\(\left(2\right)\left(x-5\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> giving us <img src="/ltximg/43bb93713bd.svg" alt="\(\frac{\left(x-5\right)\left(x-4\right)}{\left(2\right)\left(x-5\right)}\)" style="height: 1.5976em; vertical-align: -0.5586em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>You must essentially think of each bracket as it&rsquo;s own term here; along the numerator we can only cancel out the entirety of x-5 or the entirety of x-4; we cannot only cancel out the x&rsquo;s or the -4 or the -5</li>
-<li>This means that we have a common term of x-5 we can cancel out which gives us <img src="/ltximg/7689c343ec1.svg" alt="\(\frac{x-4}{2}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<h4 id="a-small-problem-regarding-this-example">A Small Problem regarding this example</h4>
-<ul>
-<li>If you noticed, along the way to getting our final simplified answer, we got the expression <img src="/ltximg/43bb93713bd.svg" alt="\(\frac{\left(x-5\right)\left(x-4\right)}{\left(2\right)\left(x-5\right)}\)" style="height: 1.5976em; vertical-align: -0.5586em; display: inline-block" class="org-latex org-latex-inline" />, except if done right, this expression can give us some hell</li>
-<li>If we were to make x=5, then the denominator would simplify into 0. But Math does not allow us to divide things by 0; the concept of divisions by zero does not work. What do we do here?</li>
-<li>We need a way of stating alongside our final simplified expression that x can be equal to anything <em>except</em> the number 5 for this expression to work&hellip; Well, this is where <strong>Sets</strong> and <strong>Restrictions</strong> come into play</li>
-<li>Sets will be focused on later in this unit, but for now you may state your restriction as <img src="/ltximg/a65fad5f3a6.svg" alt="\(\therefore \frac{x-4}{2},x\neq5\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<h2 id="multiplying-and-dividing-rational-expressions">Multiplying and Dividing Rational Expressions</h2>
-<ul>
-<li>Multiplications and Divisions can be done essentially exactly the same as with regular Fractions as well
-<ul>
-<li>We simply may need to Factor at certain points</li>
-</ul>
-</li>
-</ul>
-<h3 id="example-1">Example 1</h3>
-<img src="/ltximg/322ccd68421.svg" alt="\[\frac{12a^{2}b}{15}\cdot\frac{5ab}{8b^{2}}\]" style="height: 2.3293em; display: block" class="org-latex org-latex-block" />
-<p>Here, since we&rsquo;re working with all only Monomials, we can simply multiply the numerators and denominators together as we always would:</p>
-<div class="equation-container">
-<span class="equation">
-<img src="/ltximg/d85adfb89c1.svg" alt="\begin{align*}
-&amp;amp;=\frac{60a^{3}b^{2}}{120b^{2}} \\
-&amp;amp;\therefore \frac{a^{3}}{2},b\neq0
-\end{align*}
-" style="height: 4.8542em; vertical-align: -0.7214em; display: inline-block" class="org-latex org-latex-inline" />
-</span>
+</ol>
 </div>
-<h3 id="example-2">Example 2</h3>
-<img src="/ltximg/0f28514c190.svg" alt="\[\frac{2x+6}{x^{2}+7x+10}\cdot\frac{x^{2}+3x-10}{x^{2}-4}\]" style="height: 2.4110em; display: block" class="org-latex org-latex-block" />
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>FIFO broadcast</title>
+      <link>https://sheerwill.live/posts/main/20220616105609-fifo_broadcast/</link>
+      <pubDate>Fri, 08 Mar 2024 10:13:14 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220616105609-fifo_broadcast/</guid>
+      <description>Definition 最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之</description>
+      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
+<p>最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之前被传递，因为它们都是由 \(A\) 发送的。然而，\(m_{2}\) 可以在 \(m_{1}\) 和 \(m_{3}\) 之前、之间或之后的任何时间被传递。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/FIFO-broadcast.png"
+         alt="Figure 1: FIFO-broadcast"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>FIFO-broadcast</p>
+        </figcaption>
+</figure>
+
+<p>同一个节点发送的消息必须要按照发送的顺序传递，不同节点发送的消息可以是任意的顺序，比如 \((m_{2}, m_{1}, m_{3})\)，\((m_{1}, m_{2}, m_{3})\) 或者 \((m_{1}, m_{3}, m_{2})\)。</p>
+<p>关于这些广播协议的另一个细节：我们假设每当一个节点广播一个消息时，它也会将该消息传递给自己（在上图中用回环箭头表示）。一个节点知道它自己广播了什么消息，所以传递给自己看似没有必要，但在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中是需要这个步骤。</p>
+<p>上图中的执行示例是有效的先进先出「广播」，但它违反了因果性：虽然 \(B\) 在接收了 \(m_{1}\) 之后才广播的 \(m_{2}\)，但节点 \(C\) 在 \(m_{1}\) 之前就传递了 \(m_{2}\)。<a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 提供了一个比 FIFO broadcast  更严格的排序属性。顾名思义，它确保信息按因果顺序传递：也就是说，如果一条信息的广播发生在另一条信息的广播之前，那么所有节点必须按这个顺序传递这两条信息。如果两个消息是同时广播的，一个节点可以按任何一个顺序传递它们。</p>
+<h2 id="fifo-broadcast-algorithm">FIFO broadcast algorithm</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/FIFO-broadcast-algorithm.svg"/> 
+</figure>
+
+<p>节点 \(N_{i}\) 发送的每个 FIFO broadcast 消息都会附带发送节点编号 \(i\) 和一个序列号（该节点发送消息对应的序列号，第一条消息对应为 0，第二条消息对应为 1）。每个节点的本地状态由序列号 \(sendSeq\)（计算该节点广播的消息数量）、\(delivered\)（一个向量，每个节点有一个条目，统计了每个节点发送消息并传递到该节点的数量）和 \(buﬀer\)（一个缓存，用于保留消息直到它们准备好被传递给 Application，也就是 <a href="/posts/main/20220602202933-distribution_system/#receiving-versus-delivering">Receiving versus delivering</a> 中提到的 deliver 阶段）组成。该算法检查来自任何发送者的与预期的下一个序列号相匹配的消息，然后递增该序列号，确保来自每个特定发送者的消息按照序列号递增的顺序被传递。</p>
+<h2 id="summary">Summary</h2>
+<p>FIFO broadcast 的保持消息顺序的原理和 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport clocks</a> 很相似，都是用递增的整数来确定同一个节点上的消息传递的顺序，\(deliver\) 是个存放着所有节点 \(sendSeq\) 的向量，存放于每个节点，配合 \(sendSeq\) 控制来自同一个节点的消息传递的顺序。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Total order broadcast</title>
+      <link>https://sheerwill.live/posts/main/20220616135058-total_order_broadcast/</link>
+      <pubDate>Fri, 08 Mar 2024 10:11:31 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220616135058-total_order_broadcast/</guid>
+      <description>Definition 总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。FIFO broadcast 和 Causal broadcast 允许不同的节点以不同</description>
+      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
+<p>总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。<a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 和 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 允许不同的节点以不同的顺序传递信息，total order broadcast 在各节点之间强制执行一致性，确保所有节点以相同的顺序传递信息。精确的传递顺序没有规定，只要它在所有节点上都是一样的。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/total-order-broadcast-1.png"
+         alt="Figure 1: total-order-broadcast-1"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>total-order-broadcast-1</p>
+        </figcaption>
+</figure>
+
+<p>所有三个节点都按照 \(m_{1}\), \(m_{2}\), \(m_{3}\) 的顺序传递消息</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/total-order-broadcast-2.png"
+         alt="Figure 2: total-order-broadcast-2"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>total-order-broadcast-2</p>
+        </figcaption>
+</figure>
+
+<p>所有三个节点都按照 \(m_{1}\), \(m_{3}\), \(m_{2}\) 的顺序传递信息。只要节点同意，这两种执行方式都是有效的。</p>
+<p>与 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 一样，节点可能需要保留消息，等待其他需要首先传递的消息。例如，节点 \(C\) 可以按任一顺序接收消息 \(m_{2}\) 和 \(m_{3}\)。如果算法确定 \(m_{3}\) 应该在 \(m_{2}\) 之前传递，但如果节点 \(C\) 首先收到 \(m_{2}\)，那么 \(C\) 将需要保留 \(m_{2}\)，直到收到 \(m_{3}\) 之后。</p>
+<p>在这些图上可以看到另一个重要的细节：在 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 和 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是这样：例如，在 图<sub>total-order-broadcast-1</sub> 上，\(m_{2}\) 需要在 \(m_{3}\) 之前被传递，所以节点 \(A\) 向自己传递 \(m_{3}\) 必须等到 \(A\) 从 \(B\) 那里收到 \(m_{2}\) 之后。</p>
+<p>最后，FIFO-total order broadcast 和 total order broadcast 很像，多了一个先进先出的要求，即同一节点广播的任何消息都按其发送的顺序交付。实际上图<sub>total-order-broadcast-1</sub> 和图<sub>total-order-broadcast-2</sub> 的例子就是有效的 FIFO-total order broadcast，因为 \(m_{1}\) 都是在 \(m_{3}\) 之前被传递的。</p>
+<h2 id="total-order-broadcast-algorithms">Total order broadcast algorithms</h2>
+<blockquote>
+<p><strong>Single leader</strong> approach:</p>
 <ul>
-<li>Okay let&rsquo;s finally get into something more than a Monomial</li>
-<li>Here, no exponent rules apply which means there is no clean way to deal with any of this; we must simply factor what we can first</li>
+<li>指定一个节点为 leader</li>
+<li>想要广播消息，将其发送给 leader，leader 再将其通过 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 广播给其他节点。</li>
+<li>Problem: leader 崩溃 \(\Longrightarrow\) 没有消息被传递</li>
+<li>安全地更换 leader 很困难</li>
 </ul>
-<img src="/ltximg/1fef38a1bd4.svg" alt="\[=\frac{\left(2\right)\left(x+3\right)}{\left(x+5\right)\left(x+2\right)}\cdot\frac{\left(x+5\right)\left(x-2\right)}{\left(x-2\right)\left(x+2\right)}\]" style="height: 2.5116em; display: block" class="org-latex org-latex-block" />
-<p>We can essentially merge these fractions into 1 now, which would reveal that we can cancel out (x+5) and (x-2)</p>
-<div class="equation-container">
-<span class="equation">
-<img src="/ltximg/16e21b62833.svg" alt="\begin{align*}
-&amp;amp;=\frac{2x+6}{\left(x+2\right)\left(x+2\right)} \\
-&amp;amp;\therefore \frac{2x+6}{x^{2}+4x+4},x\neq2,-5,2
-\end{align*}
-" style="height: 4.8486em; vertical-align: -0.8031em; display: inline-block" class="org-latex org-latex-inline" />
-</span>
+<p><a href="/posts/main/20220609201658-lamport_clocks/">Lamport clocks</a> approach:</p>
+<ul>
+<li>每条消息附带上 lamport 时间戳</li>
+<li>按照时间戳的总顺序传递消息</li>
+<li>Problem: 无法知道是否收到了所有时间戳小于 \(T\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 的消息，需要在缓存中缓存来自每个节点时间戳大于等于 \(T\) 的消息。</li>
+</ul>
+</blockquote>
+<p>上述两个方法，都不具有容错性。单个节点崩溃以及 leader 节点崩溃都会使得其他节点无法传递消息。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>当前节点的时间戳 \(T\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
 </div>
-<h3 id="example-3">Example 3</h3>
-<img src="/ltximg/4e46872d530.svg" alt="\[\frac{x^{2}+5x-14}{x^{2}+8x+7}\div\frac{x^{2}-5x+6}{3x^{2}-6x}\]" style="height: 2.4110em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>Okay now we have a Division which means we must get the reciprocal of the second Fraction and <em>then</em> multiply our two fractions. In doing so however, we skip a step
-<ul>
-<li>Knowing that we have skipped a step is important because the numerator we end up with will have had the potential to have been the denominator at some point</li>
-<li>This means even in the numerator of the second fraction, we must consider all possibilities where this could&rsquo;ve resulted in a db0, and explicitly restrict this</li>
-</ul>
-</li>
-</ul>
-<div class="equation-container">
-<span class="equation">
-<img src="/ltximg/cdfc8aa1cc4.svg" alt="\begin{align*}
-&amp;amp;=\frac{x^{2}+5x-14}{x^{2}+8x+7}\cdot\frac{3x^{2}-6x}{x^{2}-5x+6} \\
-&amp;amp;=\frac{\left(x+7\right)\left(x-2\right)}{\left(x+7\right)\left(x+1\right)}\cdot\frac{\left(3x\right)\left(x-2\right)}{\left(x-3\right)\left(x-2\right)} \\
-&amp;amp;=\frac{3x^{2}-6x}{\left(x+1\right)\left(x-3\right)} \\
-&amp;amp;\therefore \frac{3x^{2}-6x}{x^{2}-2x-3},x\neq-7,-1,3,2,0
-\end{align*}
-" style="height: 10.4947em; vertical-align: -0.8031em; display: inline-block" class="org-latex org-latex-inline" />
-</span>
-</div>
-<h3 id="example-4">Example 4</h3>
-<img src="/ltximg/ff1c9e232e8.svg" alt="\[\frac{13xy^{2}}{x^{2}+3x-18}\cdot\frac{x^{2}-9}{26x^{4}y^{2}}\]" style="height: 2.5199em; display: block" class="org-latex org-latex-block" />
-<p>Lots and lots of stuff to do here; start by factoring what you can, and leaving alone what you cannot</p>
-<img src="/ltximg/38d9935a0b6.svg" alt="\[=\frac{13xy^{2}}{\left(x+6\right)\left(x-3\right)}\cdot\frac{\left(x+3\right)\left(x-3\right)}{26x^{4}y^{2}}\]" style="height: 2.5743em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>Okay so now from what we see based on what we&rsquo;ve learned so far, only the (x-3) cancels out&hellip; Except we have 2 Monomial groups here; the <img src="/ltximg/044aea7d3d8.svg" alt="\(13xy^{2}\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and the <img src="/ltximg/18d4a6f4bff.svg" alt="\(26x^{4}y^{2}\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />
-<ul>
-<li>Little known fact; you can actually divide these like you <em>normally</em> would divide monomials!!!</li>
-</ul>
-</li>
-</ul>
-<div class="equation-container">
-<span class="equation">
-<img src="/ltximg/f5617e68848.svg" alt="\begin{align*}
-&amp;amp;=\frac{\left(x+3\right)\left(x-3\right)}{\left(x+6\right)\left(x-3\right)\left(2x^{3}\right)} \\
-&amp;amp;\therefore \frac{x+3}{2x^{4}+12x^{3}},x\neq-6,3,0
-\end{align*}
-" style="height: 4.9520em; vertical-align: -0.8031em; display: inline-block" class="org-latex org-latex-inline" />
-</span>
-</div>
-<h3 id="example-5">Example 5</h3>
-<img src="/ltximg/9ed48192369.svg" alt="\[\frac{6m^{2}-18mn}{m^{2}-5mn+6n^{2}}\cdot\frac{m^{2}+2mn-8n^{2}}{8m^{2}+32mn}\]" style="height: 2.4110em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>So this is a rather large example which I will treat as somewhat of the pinnacle of multiplying Rational Expressions</li>
-<li>Our first step is to factor whatever we can in both the numerator and denominator up to it&rsquo;s prime factors so we can see if anything can cancel out</li>
-</ul>
-<img src="/ltximg/f4ec63781e5.svg" alt="\[=\frac{\left(6m\right)\underline{\left(m-3n\right)}}{\underline{\left(m-3n\right)\left(m-2n\right)}}\cdot\frac{\underline{\left(m+4n\right)\left(m-2n\right)}}{\left(8m\right)\underline{\left(m+4n\right)}}\]" style="height: 2.8678em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>Now we may essentially combine these two fractions into one which reveals the redundancy of the terms m-3n, m-2n, and m+4n as they&rsquo;re being divided <em>and</em> multiplied so they can essentially just cancel out</li>
-</ul>
-<img src="/ltximg/6ae00b24815.svg" alt="\[\frac{6m}{8m}\]" style="height: 2.1631em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>This reveals a division of 2 monomials which means our division rules can now apply to completely cancel out the m variable, leaving <img src="/ltximg/2f3252a04a6.svg" alt="\(\frac{6}{8}\)" style="height: 1.2643em; vertical-align: -0.3871em; display: inline-block" class="org-latex org-latex-inline" /> which can be reduced finally</li>
-</ul>
-<img src="/ltximg/44546b2c602.svg" alt="\[\therefore\frac{3}{4},m\neq3n,2n,0,-4n\]" style="height: 2.1631em; display: block" class="org-latex org-latex-block" />
-<h2 id="adding-and-subtracting-rational-expressions">Adding and Subtracting Rational Expressions</h2>
-<ul>
-<li>Adding and subtracting Rational Expressions is very much like adding and subtracting regular old Fractions
-<ul>
-<li>That is to say you must multiply the Denominators to make them identical (you must multiply the Numerator by the same thing) and then you can simply add the Numerators</li>
-</ul>
-</li>
-</ul>
-<h3 id="example-1">Example 1</h3>
-<img src="/ltximg/7d74b041e6c.svg" alt="\[\frac{7a}{2a-10}+\frac{4a}{3a-15}\]" style="height: 2.2448em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>If we had Monomials as our Denominators, the approach we&rsquo;d take would be to break each down into their Prime Factors and then make a Lowest Common Denominator out of those
-<ul>
-<li>So for instance, if we had the Denominators <img src="/ltximg/75390c6e212.svg" alt="\(m^{2}n\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/da66a9fc542.svg" alt="\(m\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> then our Common Factor would be <img src="/ltximg/75390c6e212.svg" alt="\(m^{2}n\)" style="height: 0.8961em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>This can be found by factoring both Denominators into <img src="/ltximg/adfb45cf1ba.svg" alt="\(m\cdot m\cdot n\)" style="height: 0.5339em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/da66a9fc542.svg" alt="\(m\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> which tells us we need a minimum of 2 m&rsquo;s and 1 n</li>
-</ul>
-</li>
-<li>We can do very much the same thing with Polynomials; just factor to find the Lowest Common Factor!</li>
-</ul>
-<img src="/ltximg/dc8de993806.svg" alt="\[\frac{7a}{\left(2\right)\left(a-5\right)}+\frac{4a}{\left(3\right)\left(a-5\right)}\]" style="height: 2.4081em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>Okay so now we can see that both Denominators have the Binomial a-5
-<ul>
-<li>Otherwise, there is a 2 and a 3 which make a 6</li>
-</ul>
-</li>
-<li>Therefore, our Lowest Common Factor is <img src="/ltximg/edc979f5e8a.svg" alt="\(\left(6\right)\left(a-5\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
-<ul>
-<li>We must multiply the Numerators <em>and</em> Denominators by the same thing to get to this Factor</li>
-</ul>
-</li>
-</ul>
-<div class="equation-container">
-<span class="equation">
-<img src="/ltximg/1e7018c1d70.svg" alt="\begin{align*}
-&amp;amp;=\frac{7a\left(3\right)}{\left(6\right)\left(a-5\right)}+\frac{4a\left(2\right)}{\left(6\right)\left(a-5\right)} \\
-&amp;amp;=\frac{21a+8a}{\left(6\right)\left(a-5\right)} \\
-&amp;amp;\therefore \frac{29a}{6a-30},a\neq5
-\end{align*}
-" style="height: 7.5558em; vertical-align: -0.8031em; display: inline-block" class="org-latex org-latex-inline" />
-</span>
-</div>
-<h3 id="example-2">Example 2</h3>
-<img src="/ltximg/e52c8c3fbf4.svg" alt="\[\frac{2a}{a^{2}-6a+8}+\frac{7a}{a^{2}-a-12}\]" style="height: 2.2448em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>We still work with the same concept except now our Denominators are Trinomials and we must factor them first</li>
-</ul>
-<img src="/ltximg/16749976d60.svg" alt="\[=\frac{2a}{\left(a-4\right)\left(a-2\right)}+\frac{7a}{\left(a-4\right)\left(a+3\right)}\]" style="height: 2.4081em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>This tells us our LCD must have an a-4, an a-2, another a-4, and an a+3
-<ul>
-<li>Since there are 2 a-4&rsquo;s we can just count that as redundant and only count one which makes our LCD <img src="/ltximg/c24718d06e4.svg" alt="\(\left(a-2\right)\left(a-4\right)\left(a+3\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-</li>
-</ul>
-<div class="equation-container">
-<span class="equation">
-<img src="/ltximg/412e3493e66.svg" alt="\begin{align*}
-&amp;amp;=\frac{2a\left(a+3\right)}{\left(a-4\right)\left(a-2\right)\left(a+3\right)}+\frac{7a\left(a-2\right)}{\left(a-4\right)\left(a-2\right)\left(a+3\right)} \\
-&amp;amp;=\frac{2a^{2}+6a+7a^{2}-14a}{\left(a-4\right)\left(a-2\right)\left(a+3\right)} \\
-&amp;amp;\therefore \frac{9a^{2}-8a}{\left(a-4\right)\left(a-2\right)\left(a+3\right)},a\neq4,2,-3
-\end{align*}
-" style="height: 8.0514em; vertical-align: -0.9664em; display: inline-block" class="org-latex org-latex-inline" />
-</span>
-</div>
-<h3 id="example-3">Example 3</h3>
-<img src="/ltximg/c7bc6d756d0.svg" alt="\[\frac{3}{x-4}-\frac{x-9}{x^{2}-16}\]" style="height: 2.2448em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>Here, we&rsquo;re <em>subtracting</em> fractions but all it really means is &ldquo;multiply the numerator of the 2nd fraction by -1, then add&rdquo; which means this can be rewritten as <img src="/ltximg/ca142e9679c.svg" alt="\(\frac{3}{x-4}+\frac{-x+9}{x^{2}-16}\)" style="height: 1.3459em; vertical-align: -0.4688em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>From there, you know what to do</li>
-</ul>
-<div class="equation-container">
-<span class="equation">
-<img src="/ltximg/cec1017c441.svg" alt="\begin{align*}
-&amp;amp;=\frac{3}{x-4}+\frac{-x+9}{\left(x-4\right)\left(x+4\right)} \\
-&amp;amp;=\frac{3x+12}{\left(x-4\right)\left(x+4\right)}+\frac{-x+9}{\left(x-4\right)\left(x+4\right)} \\
-&amp;amp;\therefore \frac{2x+21}{\left(x-4\right)\left(x+4\right)},x\neq4,-4
-\end{align*}
-" style="height: 7.6157em; vertical-align: -0.9664em; display: inline-block" class="org-latex org-latex-inline" />
-</span>
-</div>
-<h2 id="introduction-to-sets-and-logic">Introduction to Sets and Logic</h2>
-<ul>
-<li>This entire topic <strong>was not actually taught to us</strong> within this unit; everything from this point forward is beyond the scope of the Functions course for Unit 1
-<ul>
-<li>The Author personally just saw a good point to transition to it from within the content of this unit</li>
-<li>If you know the Author personally you&rsquo;d know he&rsquo;s a sucker for more Advanced the theoretical Mathematics so of course he took himself up on this</li>
-<li>Moreover, however, this is <em>very introductory level content</em> and even more so for Logical Mathematics; there is a stronger emphasis on introducing Set Theory in this section specifically</li>
-<li>Set Theory falls <em>under</em> the category of Logical Mathematics which is it&rsquo;s own entire branch of Mathematics</li>
-<li>If the reader feels inclined or sees an interest in Set Theory or Logical Math, the Author highly recommends they pursue it themselves</li>
-</ul>
-</li>
-<li>Sets are simply defined in Math as &ldquo;a collection of things&rdquo;
-<ul>
-<li>These <em>things</em> are, of course, most often numbers, and the things that Sets contain are called <strong>elements</strong> of the Set</li>
-</ul>
-</li>
-<li><img src="/ltximg/6f936bece0b.svg" alt="\(B=\{4,5,6\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> here, B is the name of a Set that contains the numbers 4, 5, and 6
-<ul>
-<li>Sets can have single names to represent them and are described within Curly Braces</li>
-<li>B is the name of a Set that contains Elements 4, 5, and 6</li>
-</ul>
-</li>
-<li>What we can use Sets for at this moment primarily has to do with setting Restrictions in a more complete way</li>
-<li>In <a href="#example-3">the previous example</a>, we determined that our Restrictions are <img src="/ltximg/342daad25dc.svg" alt="\(x\neq4,-4\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, and within Set Notation, we would preferably write this as <img src="/ltximg/e7dadc09ff1.svg" alt="\(\{x\in\mathbb{R} \mid x\neq4,-4\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> to be as specific as possible</li>
-</ul>
-<h3 id="breaking-that-down">Breaking that down</h3>
-<ul>
-<li>The right side of that vertical line within the Curly Braces is identical to what we wrote previously; it is simply stating what x <em>cannot</em> be</li>
-<li>The left side of that vertical line uses 2 fancy symbols to state that x can be any number within the Real Number system</li>
-<li>The vertical line itself stands for and should be read as &ldquo;such that&rdquo;</li>
-<li>This whole thing, therefore, should be read as &ldquo;x is an element of the Real number system such that x isn&rsquo;t equal to 4 or -4&rdquo; or &ldquo;x is in the Real Number system in such a way that it isn&rsquo;t equal to 4 or -4&rdquo;</li>
-<li>The difference between this and setting our Restrictions the normal way, therefore, is we state both what x <em>cannot</em> be (4 and -4) as well as what x <em>can</em> be (any <em>other</em> number in <img src="/ltximg/f141049eee1.svg" alt="\(\mathbb{R}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />)</li>
-<li>This also goes to demonstrate the wide variety of forms that Sets can be written in; they don&rsquo;t have to be an explicit list of Elements, they can instead simply describe the conditions that all Elements in the Set must meet
-<ul>
-<li>We can have the Set <img src="/ltximg/dc41a5a1a6f.svg" alt="\(A=\{x\in\mathbb{Z} \mid x^{2}\geq0\}\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> for instance which states &ldquo;A is the Set of all Integers such that when we square them, they are greater than or equal to 0&rdquo;</li>
-<li>Here, even though we haven&rsquo;t listed all Numbers in our Set, we know what numbers are in our Set; in this case being, well, every Integer in existence since there is no Integer which <em>doesn&rsquo;t</em> follow our condition/Restriction</li>
-</ul>
-</li>
-</ul>
-<h3 id="logical-and-set-notation">Logical and Set Notation</h3>
-<ul>
-<li>When making Sets, a variety of different symbols and Notation are used to represent and state different things</li>
-<li>This section aims to briefly summarize each symbol&rsquo;s meaning and use</li>
-</ul>
-<h4 id="an-element-of-not-an-element-of">An Element of, Not an Element of</h4>
-<img src="/ltximg/1587cf61fa6.svg" alt="\[\in,\notin\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>If working within the Set <img src="/ltximg/f517605d49d.svg" alt="\(A=\{1,2,3\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we could say that <img src="/ltximg/1056e6e9e3b.svg" alt="\(3 \in A\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to say that the number 3 exists within/is an element of the Set A</li>
-<li>Conversely, we could say that <img src="/ltximg/6582e0cf8ff.svg" alt="\(4 \notin A\)" style="height: 0.8717em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to say that the number 4 doesn&rsquo;t exist in/isn&rsquo;t an element of the Set A</li>
-</ul>
-<h4 id="a-subset-of-not-a-subset-of">A Subset of, Not a Subset of</h4>
-<img src="/ltximg/faf73cd89d5.svg" alt="\[\subset,\not\subset,\subseteq,\not\subseteq\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>This group of symbols is actually a way to state the <em>relationship</em> between 2 different Sets</li>
-<li>If working with the Set <img src="/ltximg/915c7d3eb38.svg" alt="\(A=\{1,2,3,4\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and the Set <img src="/ltximg/9431ad676b4.svg" alt="\(B=\{2,3,4\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we could say that <img src="/ltximg/321421109d8.svg" alt="\(B \subset A\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to state that every Element of B is also in A, and so &ldquo;B is a subset of A&rdquo;</li>
-<li>Conversely, if also working with the Set <img src="/ltximg/bcd119d19b2.svg" alt="\(C=\{5,6,7\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we could say that <img src="/ltximg/d28708c69b9.svg" alt="\(C \not\subset A\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> to state that &ldquo;C is not a subset of A&rdquo;</li>
-<li>The Subset symbols are where things get a little conflicting unfortunately
-<ul>
-<li>Some Authors use the symbol <img src="/ltximg/e288806da14.svg" alt="\(\subseteq\)" style="height: 0.8549em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" /> to mean &ldquo;is a subset of and <span class="underline">may</span> be equal to&rdquo; while other Authors using <img src="/ltximg/6ebcc631ea4.svg" alt="\(\subset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to represent &ldquo;is a subset of and <span class="underline">may not</span> be equal to&rdquo;</li>
-<li>The trouble comes from the fact that then <em>other</em> Authors simply use <img src="/ltximg/6ebcc631ea4.svg" alt="\(\subset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to mean &ldquo;is a subset of and <span class="underline">may</span> be equal to&rdquo; and completely then omit the use of <img src="/ltximg/e288806da14.svg" alt="\(\subseteq\)" style="height: 0.8549em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-</li>
-<li>As a standard, I personally will use <img src="/ltximg/6ebcc631ea4.svg" alt="\(\subset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> <em>only</em> as I find a small redundancy in using <img src="/ltximg/e288806da14.svg" alt="\(\subseteq\)" style="height: 0.8549em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" /> at all; to me, <img src="/ltximg/6ebcc631ea4.svg" alt="\(\subset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> simply means &ldquo;is a subset of and possibly also equal to&rdquo; and that is how it should be read</li>
-<li>One final thing to note is the symbols <img src="/ltximg/158155b5930.svg" alt="\(\supset\)" style="height: 0.6650em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/3612f02ca09.svg" alt="\(\not\supset\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> which simply go in the opposite direction; the &gt; to &lt; for Sets
-<ul>
-<li>So, with the Sets A, B, and C that we have already defined in this section, we could state that <img src="/ltximg/d11ee60c039.svg" alt="\(A \supset B\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> to say exactly the same thing as <img src="/ltximg/321421109d8.svg" alt="\(B \subset A\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>The symbol facing <em>this</em> direction is not called the Subset symbol, but rather the <em>Superset</em> symbol as we are stating &ldquo;A is a Superset of B&rdquo;</li>
-</ul>
-</li>
-</ul>
-<h4 id="a-union-and-intersection-of-sets">A Union and Intersection of Sets</h4>
-<img src="/ltximg/8500d8480e2.svg" alt="\[\cup,\cap\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>This group of symbols is actually a way to state some <em>operations</em> one can do to 2 different Sets</li>
-<li>If working with the Set <img src="/ltximg/f517605d49d.svg" alt="\(A=\{1,2,3\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and the Set <img src="/ltximg/37014a626ce.svg" alt="\(B=\{2,3,4,5,6\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we could do <img src="/ltximg/2ab07ca4576.svg" alt="\(A \cup B=\{1,2,3,4,5,6\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
-<ul>
-<li>This is a <strong>Union</strong> of the Sets; it simply means to combine all the Elements within each Set into a new combined one</li>
-<li>Be careful here, however; <strong>never create a Set with duplicate Elements inside it</strong></li>
-<li>One of the only real things that Sets are defined with is that they cannot contain more than one of the same Element</li>
-</ul>
-</li>
-<li>Now, we could also do <img src="/ltximg/a4ba2044e5e.svg" alt="\(A \cap B=\{2,3\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> for an <strong>Intersection</strong> of Sets which just takes all common Elements from both Sets and puts them into one new Set</li>
-<li>Something interesting to note is that when a pair of Sets intersecting produces an Empty Set (denoted by <img src="/ltximg/d1b1e3ab6c5.svg" alt="\(\emptyset\)" style="height: 0.8878em; vertical-align: -0.1036em; display: inline-block" class="org-latex org-latex-inline" />) meaning they have <em>no</em> common Elements, the Sets are <em>disjointed</em> from each other</li>
-</ul>
-<h4 id="a-difference-of-sets">A Difference of Sets</h4>
-<img src="/ltximg/70d4bd28f99.svg" alt="\[\setminus\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>This symbol essentially stands for a Subtraction operation slightly modified to work with Sets</li>
-<li>If working with the Set <img src="/ltximg/ba28a86c261.svg" alt="\(A=\{1,2,3,4,5,6,7,8,9,10\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> and the Set <img src="/ltximg/660ff013d3c.svg" alt="\(B=\{5,6,7\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> we could do <img src="/ltximg/005fb540a28.svg" alt="\(A \setminus B=\{1,2,3,4,8,9,10\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<h4 id="a-complement-of-a-set">A Complement of a Set</h4>
-<img src="/ltximg/9197f773cbf.svg" alt="\[\complement\]" style="height: 1.2744em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>This symbol is a way to speak about all Elements in existence that <em>aren&rsquo;t</em> in a given Set</li>
-<li>If working with the Set <img src="/ltximg/1670829c528.svg" alt="\(A\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, it doesn&rsquo;t matter what the Elements of <img src="/ltximg/1670829c528.svg" alt="\(A\)" style="height: 0.7680em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> are, when we do <img src="/ltximg/3db4c654b34.svg" alt="\(A^{\complement}\)" style="height: 1.0198em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> we are describing a set that goes <img src="/ltximg/a29732d2839.svg" alt="\(\{x\in\mathbb{C} \mid x\notin A\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<h4 id="or-and">Or, And</h4>
-<img src="/ltximg/c4e89321ddf.svg" alt="\[\lor,\land\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>Out of all of these, you will see me use these two the most and their use is not necessarily just limited to Sets</li>
-<li>These are the Logical Symbols representing &ldquo;or&rdquo; as well as &ldquo;and&rdquo; quite simply
-<ul>
-<li>These are both just ways of saying the two different words without writing them out and using Symbols instead</li>
-</ul>
-</li>
-<li>When presenting the Roots to a Quadratic, one can write <img src="/ltximg/50c0352f3b8.svg" alt="\(\therefore x=4 \lor x=5\)" style="height: 0.7768em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for instance to mean &ldquo;Therefore, x is equal to 4 <em>or</em> x is equal to 5&rdquo;</li>
-</ul>
-<h4 id="for-all">For all</h4>
-<img src="/ltximg/627bbf2a618.svg" alt="\[\forall\]" style="height: 1.2744em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>Yep, it&rsquo;s just A upside down</li>
-<li>This symbol represents &ldquo;for all&rdquo; or &ldquo;for every&rdquo; and is used as something like the following</li>
-</ul>
-<img src="/ltximg/f71bcc2bb2c.svg" alt="\[\forall x\in\mathbb{R}, x^{2}\geq0\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>&ldquo;For all numbers in the Real Number System, their squares are greater than or equal to 0&rdquo;
-<ul>
-<li>This is one of 2 main <strong>Quantifiers</strong> used in Logical Mathematics; the other one being described next</li>
-<li>What this statement is telling us is that every single number that exists within the Real Number System is greater than or equal to 0</li>
-</ul>
-</li>
-<li>Statements like these also introduce us to the very Binary way that Logical Mathematics tends to work in; statements are either True or False, and if they are neither, then they must not be valid Logical Statements
-<ul>
-<li>This Quantifier can be tricky because, while in a case like this, we must just consider how degree 2 exponents work for a moment to know that this statement is True, sometimes it is not so clean</li>
-</ul>
-</li>
-<li>Sometimes you will need to literally print out every single number that your variable <em>can</em> be given what the Statement says and check if they follow the conditions that the statement puts forth</li>
-<li>So therefore, to prove a For All statement true, you need to verify that all Elements in a given set satisfy the Condition(s)
-<ul>
-<li>Conversely, to prove a For All statement false, you need to find a single Element in the given set that doesn&rsquo;t satisfy the Conditions(s)</li>
-</ul>
-</li>
-</ul>
-<h4 id="there-exists-there-doesn-t-exist-there-exists-one-and-only-one">There Exists, There Doesn&rsquo;t Exist, There Exists One and Only One</h4>
-<img src="/ltximg/94fcc8a6836.svg" alt="\[\exists,\nexists,\exists!\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>This is quite similar to <img src="/ltximg/548acc45d4b.svg" alt="\(\forall\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> except for a <img src="/ltximg/21313f27a39.svg" alt="\(\exists\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> statement to work, it only needs to be true <em>at least once</em> rather than in every possible instance</li>
-<li>Let me show you what I mean:</li>
-</ul>
-<img src="/ltximg/83a546f2cba.svg" alt="\[\exists x\in\mathbb{R},x^{2}=1\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>&ldquo;There exists a number in the Real Number System whose square is equal to 1&rdquo;</li>
-<li>This is true, because inside the Real Number System, there is at least one number which abides by this condition, being 1 of course</li>
-<li>This would be different if we instead wrote <img src="/ltximg/b91cde0734c.svg" alt="\(\forall x\in\mathbb{R},x^{2}=1\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> which would now be false because not <em>every</em> number in the Real Number System is equal to 1 when squared</li>
-<li>And of course, conversely to <img src="/ltximg/21313f27a39.svg" alt="\(\exists\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we have <img src="/ltximg/7727bc622d4.svg" alt="\(\nexists\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for a statement such as <img src="/ltximg/73a0d7681c0.svg" alt="\(\nexists x\in\mathbb{R},x^{2}=-1\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>One last symbol to talk about is when we explicitly want to say &ldquo;This condition is true <em>only</em> in one instance&rdquo;
-<ul>
-<li>For a statement like <img src="/ltximg/fbee0bc79d7.svg" alt="\(\exists x\in\mathbb{R},x&amp;gt;2\)" style="height: 0.9695em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, there are very many instances of this condition being true</li>
-<li>However, for a statement like <img src="/ltximg/256b550d553.svg" alt="\(\exists x\in\mathbb{R},x^{2}=1\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> as we wrote above, there is only a singular instance of this statement being true, which is when x is equal to 1</li>
-<li>So a way we can explicitly state this is with <img src="/ltximg/1deedab6270.svg" alt="\(\exists! x\in\mathbb{R},x^{2}=1\)" style="height: 1.0866em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> which means &ldquo;There exists only one instance of a Real Number whose square is equal to 1&rdquo;</li>
-</ul>
-</li>
-</ul>
-<h4 id="true-false">True, False</h4>
-<img src="/ltximg/f70ed2b828e.svg" alt="\[\mathbb{T},\mathbb{F}\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>As I explained earlier, Logical Mathematics expressions are not like Equations a lot of the time; they are not equal to a tangible value, but rather equal to the Booleans True or False</li>
-<li>For this reason, we can instead of writing something like <img src="/ltximg/4b59fb21c20.svg" alt="\(\exists x\in\mathbb{R} \mid x^{2}=1=True\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, we can simply write <img src="/ltximg/02cabc1951b.svg" alt="\(\exists x\in\mathbb{R} \mid x^{2}=1=\mathbb{T}\)" style="height: 1.1411em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> to be able to use 1 single symbol for True and for False</li>
-</ul>
-<h3 id="a-review-of-number-systems">A Review of Number Systems</h3>
-<ul>
-<li>Number Systems are used quite a lot when creating and describing Sets, often to state that our Set can contain any number from that Number Set provided certain Restrictions</li>
-<li>All Number Systems also have symbols used to represent them such as <img src="/ltximg/f141049eee1.svg" alt="\(\mathbb{R}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> for Real Numbers as seen before</li>
-</ul>
-<h4 id="natural-numbers">Natural Numbers</h4>
-<ul>
-<li>Natural Numbers are all Integers (numbers without decimals/Rational components) that are greater than 0</li>
-<li>A good way to think of Natural Numbers is that they are the Numbers you count things with; you begin with 1 and go up from there</li>
-<li>The symbol used to represent the Natural Number System is the variation of N written as <img src="/ltximg/775f7da6c67.svg" alt="\(\mathbb{N}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<h4 id="whole-numbers">Whole Numbers</h4>
-<ul>
-<li>Whole Numbers are all Integers (numbers without decimals/Rational components) that are greater than <em>or equal to</em> 0</li>
-<li>Basically, they are the same as Natural Numbers except they <em>include</em> the number 0 rather than <em>excluding</em> it</li>
-<li>The symbol used to represent the Whole Number System is the variation of W written as <img src="/ltximg/97816f6c925.svg" alt="\(\mathbb{W}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Notice that <img src="/ltximg/0073f16d0c1.svg" alt="\(\mathbb{N} \subset \mathbb{W}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> since all Natural Numbers are included in the Whole Number system</li>
-</ul>
-<h4 id="integers">Integers</h4>
-<ul>
-<li>Integers are all numbers without a Rational Component</li>
-<li>Basically, they are every number that doesn&rsquo;t have a decimal, <em>including</em> negative numbers</li>
-<li>The symbol used to represent Integers is the variation of Z written as <img src="/ltximg/5271d92248e.svg" alt="\(\mathbb{Z}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Notice that <img src="/ltximg/f64f43e7402.svg" alt="\(\mathbb{W} \subset \mathbb{Z}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> since all Whole Numbers are included in the Integer System</li>
-</ul>
-<h4 id="prime-numbers">Prime Numbers</h4>
-<ul>
-<li>Prime Numbers are a more specialized Number System that you will see less often</li>
-<li>Every element in this Number System has no divisors except 1 and themselves that produce a Quotient within <img src="/ltximg/5271d92248e.svg" alt="\(\mathbb{Z}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>The symbol used to represent Prime Numbers is the variation of P written as <img src="/ltximg/888f7f214f9.svg" alt="\(\mathbb{P}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Notice that <img src="/ltximg/03f10f4230c.svg" alt="\(\mathbb{Z} \supset \mathbb{P}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /> since all Prime Numbers are included in the Integer System</li>
-</ul>
-<h4 id="rational-numbers">Rational Numbers</h4>
-<ul>
-<li>Rational Numbers are all numbers that can be expressed as a fraction or a division
-<ul>
-<li>This number system includes everything that is tangible</li>
-</ul>
-</li>
-<li>The symbol used to represent Rational Numbers is the variation of Q written as <img src="/ltximg/3f01282615e.svg" alt="\(\mathbb{Q}\)" style="height: 0.9368em; vertical-align: -0.2125em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Notice that <img src="/ltximg/8562744b61a.svg" alt="\(\mathbb{Z}\subset\mathbb{Q}\)" style="height: 0.9368em; vertical-align: -0.2125em; display: inline-block" class="org-latex org-latex-inline" /> since all Integers are included in the Rational Number System</li>
-</ul>
-<h4 id="irrational-numbers">Irrational Numbers</h4>
-<ul>
-<li>Irrational Numbers are a smaller Number System of numbers that cannot be expressed as a fraction
-<ul>
-<li>These are numbers with decimals that go on forever without any sensible pattern of repetition to them</li>
-</ul>
-</li>
-<li>Examples include <img src="/ltximg/c46124ded31.svg" alt="\(\pi \land e\)" style="height: 0.6428em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (Pi and Euler&rsquo;s Constant)</li>
-<li>Interestingly, there is no universally agreed upon symbol for the Irrational Number System, making it even more distinct to every other Number System, but the consensus seems to be something along the lines of <img src="/ltximg/48fe7cddf09.svg" alt="\(\mathbb{R}-\mathbb{Q}\)" style="height: 0.9368em; vertical-align: -0.2125em; display: inline-block" class="org-latex org-latex-inline" />
-<ul>
-<li>Essentially, any way of representing &ldquo;Real numbers except for all Rational Numbers&rdquo; will do; in a set you could even use something such as <img src="/ltximg/c7f584c2f3f.svg" alt="\(\{x \mid x\in\mathbb{R} \land x\notin\mathbb{Q}\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-</li>
-</ul>
-<h4 id="real-numbers">Real Numbers</h4>
-<ul>
-<li>Real Numbers are, well, a combination of every Number System we&rsquo;ve talked about so far</li>
-<li>The symbol to represent Real Numbers is the Author&rsquo;s choice of the following variations of R: <img src="/ltximg/8caf374f1fb.svg" alt="\(\Re \lor \mathbb{R}\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<h4 id="imaginary-numbers">Imaginary Numbers</h4>
-<ul>
-<li>Imaginary Numbers will be discussed further in the next Unit, but they are essentially numbers with the coefficient of <img src="/ltximg/0530236a142.svg" alt="\(i \lor \sqrt{-1}\)" style="height: 1.1176em; vertical-align: -0.2201em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>The symbol to represent Imaginary Numbers is the variation of I written as <img src="/ltximg/9944aaeab64.svg" alt="\(\mathbb{I}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> (not to be confused with the Roman Numeral II)</li>
-</ul>
-<h4 id="complex-numbers">Complex Numbers</h4>
-<ul>
-<li>Finally, the Complex Numbers System is a Union of the Real and Imaginary Number Systems</li>
-<li>It exists so that one can say <img src="/ltximg/6d93b88a860.svg" alt="\(\{x\in\mathbb{C}\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> to specify that their number may or may not be Imaginary</li>
-<li>As you just saw, the symbol to represent Complex Numbers is the variation of C written as <img src="/ltximg/d9878e9a40c.svg" alt="\(\mathbb{C}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/5a944ffcb5f.svg" alt="\(\mathbb{R} \cup \mathbb{I} = \mathbb{C}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<h4 id="the-empty-set">The Empty Set</h4>
-<ul>
-<li>A sort of extra Set is the Set that contains absolutely nothing and has no Elements</li>
-<li>This Set is called the Empty Set and is written by the symbol <img src="/ltximg/d1b1e3ab6c5.svg" alt="\(\emptyset\)" style="height: 0.8878em; vertical-align: -0.1036em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>
-<img src="/ltximg/95542a03d68.svg" alt="\(\emptyset=\{\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
-</li>
-</ul>
-<h3 id="examples-and-working-with-set-theory">Examples and working with Set Theory</h3>
-<h4 id="example-1">Example 1</h4>
-<img src="/ltximg/870e8bdc084.svg" alt="\[A=\{x\in\mathbb{Z} \mid x^{2}&amp;lt;10\}\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>This is a Set named A that contains all Integers which are equal to less than 10 when raised to degree 2</li>
-<li>This is a very small set of numbers which we can write out: <img src="/ltximg/61181a19699.svg" alt="\(A=\{0,-1,1,-2,2,-3,3\}\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>Notice that the Number System we&rsquo;ve specified matters; if we specified x to be in <img src="/ltximg/3f01282615e.svg" alt="\(\mathbb{Q}\)" style="height: 0.9368em; vertical-align: -0.2125em; display: inline-block" class="org-latex org-latex-inline" />, for example, our Set would be infinitely larger as now fractional numbers would be valid to use</li>
-</ul>
-<h4 id="example-2">Example 2</h4>
-<div class="equation-container">
-<span class="equation">
-<img src="/ltximg/86a6015bf20.svg" alt="\begin{align*}
-A&amp;amp;=\{-2,-1,0,1,2\} \\
-B&amp;amp;=\{x \in A \mid 2x\}
-\end{align*}
-" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
-</span>
-</div>
-<ul>
-<li>Here we are using other Sets in the description of Sets
-<ul>
-<li>These may be called something along the lines of Composite Sets</li>
-</ul>
-</li>
-<li>We are stating that B&rsquo;s Elements are all of A&rsquo;s Elements doubled</li>
-</ul>
-<img src="/ltximg/7cfd78de564.svg" alt="\[\therefore B=\{-4,-2,0,2,4\}\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
-<h4 id="example-3">Example 3</h4>
-<img src="/ltximg/3fd4e82e3ae.svg" alt="\[\forall x\in\mathbb{Z},\exists y\in\mathbb{Z} \mid x&amp;lt;y\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>Now we have not only Quantifiers, but <em>double</em> Quantifiers</li>
-<li>This translates roughly to &ldquo;For every x integer, there exists a y integer such that x is less than y&rdquo;</li>
-<li>This is <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> because this statement is structured such that every x value can have a <em>corresponding</em> y value
-<ul>
-<li>If it was structured as <img src="/ltximg/8da04f04fbb.svg" alt="\(\forall x\in\mathbb{Z} \mid \exists y\in\mathbb{Z} \land x&amp;lt;y\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />, this would not be true and this statement would be <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-</li>
-</ul>
-<h4 id="example-4">Example 4</h4>
-<img src="/ltximg/504beecfd73.svg" alt="\[\forall x\in\emptyset,x&amp;gt;0\]" style="height: 1.4649em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>Here, we are stating that every Element in the Empty Set is greater than 0</li>
-<li>To work with the Empty Set in the case of Quantifiers, we need to go back to the fundamental way that Quantifiers work</li>
-<li>To prove this statement true, we must check all Elements in the given set satisfy our Condition
-<ul>
-<li>This is easy to do; since in an Empty Set, there are no Elements to check, we can assume our Condition is true</li>
-</ul>
-</li>
-<li>We must also check if there is at least one Element in the Set that <em>doesn&rsquo;t</em> match our Condition
-<ul>
-<li>Again, since there are no Elements to check, we cannot necessarily find anything that disproves this statement</li>
-</ul>
-</li>
-<li>Therefore, this statement is <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>This essentially boils down to &ldquo;This statement is true because I cannot necessarily prove it to be false&rdquo;</li>
-<li>This same logic applies to <em>every</em> For All statement that utilizes the Empty Set; regardless of what the Condition is, it will always be true since we cannot prove it false</li>
-</ul>
-<h4 id="example-5">Example 5</h4>
-<img src="/ltximg/a2af578a3e7.svg" alt="\[\exists x\in\emptyset \mid x&amp;gt;0\]" style="height: 1.5194em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>So let&rsquo;s try this exact thing with the <em>other</em> Quantifier we have</li>
-<li>This statement says &ldquo;There exists at least 1 Element in the Empty Set that is positive&rdquo;</li>
-<li>To prove this statement true, we must find at least 1 Element in the given set that satisfies our Condition
-<ul>
-<li>Here we cannot that because our Set has <em>no</em> Elements</li>
-</ul>
-</li>
-<li>There is no other checks we need to do with an <img src="/ltximg/21313f27a39.svg" alt="\(\exists\)" style="height: 0.7789em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> statement, and so this is <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>This same logic applies to <em>every</em> There Exists statement that utilizes the Empty Set; regardless of what the Condition is, it will always be false since we cannot prove it true</li>
-</ul>
-<h2 id="conditional-statements">Conditional Statements</h2>
-<ul>
-<li>Conditional Statements are another portion of Logical Mathematics where our Statements use the word &ldquo;If&rdquo;
-<ul>
-<li>If you&rsquo;ve dabbled in Computer Science and Programming and Object Oriented Languages, you&rsquo;ll have used these in the form of If statements already</li>
-</ul>
-</li>
-<li>These statements are written often as &ldquo;If x, then y&rdquo; or <img src="/ltximg/c6da12d6b6f.svg" alt="\(x \implies y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> (x implies y)
-<ul>
-<li>Basically these are written as and should be processed as &ldquo;if this applies, then so too does this&rdquo;</li>
-<li>So, in the statement <img src="/ltximg/c6da12d6b6f.svg" alt="\(x \implies y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, if x is a statement that is <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, then we are saying y must also be a statement that is <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>However, when x is <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we are saying that y is not necessarily <em>also</em> <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />; all that a Conditional Statement checks for is &ldquo;if this is true, so is this&rdquo;, not &ldquo;if this is <em>false</em>, so is this&rdquo;</li>
-<li>And so, essentially, when x is proven <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, we no longer care about y because the Conditional Statement&rsquo;s purpose ends there</li>
-</ul>
-</li>
-</ul>
-<h3 id="example-1">Example 1</h3>
-<img src="/ltximg/2961592f28f.svg" alt="\[x\in\mathbb{R} \land x&amp;gt;10 \implies x&amp;gt;6\]" style="height: 1.3127em; display: block" class="org-latex org-latex-block" />
-<ul>
-<li>Here we are saying &ldquo;x is any Real Number and if x is greater than 10, x is greater than 6 also&rdquo;
-<ul>
-<li>This is clearly <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />; if we plug in any <img src="/ltximg/f141049eee1.svg" alt="\(\mathbb{R}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> value for x that is greater than 10, it is also greater than 6</li>
-</ul>
-</li>
-<li>However, as mentioned before, the first condition in the Conditional being <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> does not also necessarily make the second condition <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />
-<ul>
-<li>For example, if we make <img src="/ltximg/3efaa8293b0.svg" alt="\(x=8\)" style="height: 0.7299em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" />, well now the first Condition in our Conditional is <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> as 8 is <em>not</em> greater than 10, but the second Condition is <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> still as 8 <em>is</em> greater than 6</li>
-</ul>
-</li>
-</ul>
-<h3 id="example-2">Example 2</h3>
-<p>Assume we know <img src="/ltximg/9245e35ed24.svg" alt="\(A\subset\mathbb{R} \land x \in A \implies x&amp;gt;0\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />; what can be concluded if:</p>
-<h4 id="x-and-notin-a">x ∉ A</h4>
-<ul>
-<li>Well, what we <em>know</em> is that A is a Set which exists within the Real Set, and that a number existing in A implies it&rsquo;s positive</li>
-<li>If we therefore have a number that <em>isn&rsquo;t</em> in Set A, we know nothing about it really</li>
-</ul>
-<p>∴ No Conclusion.</p>
-<h4 id="x-0">x&gt;0</h4>
-<ul>
-<li>Once again, a number being greater than 0 does not tell us anything</li>
-<li>We know that for a number to be in Set A it must be positive, but we cannot know that x being positive necessarily means it&rsquo;s in A</li>
-</ul>
-<p>∴ No Conclusion.</p>
-<h4 id="x-and-le-0">x ≤ 0</h4>
-<ul>
-<li><em>Now</em> we can draw some conclusions</li>
-<li>Our initial statement tells us that if a number is in Set A, it is implied to be Positive</li>
-<li>Therefore, if a number is 0 or negative, we at least know for sure that it is <em>not</em> in Set A</li>
-</ul>
-<img src="/ltximg/477b3b9a898.svg" alt="\(\therefore x \notin A\)" style="height: 0.8717em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />
-<h3 id="example-3">Example 3</h3>
-<img src="/ltximg/cf0ac2ddad9.svg" alt="\(\text{Let}\ n\in\mathbb{Z}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />
-<ul>
-<li>We have just made variable n be an Element of Integers</li>
-<li>This means that when n is an even number, n+1 is an odd number
-<ul>
-<li>So we can write n is even ⇒ n+1 is odd</li>
-</ul>
-</li>
-<li>However, the same is true in reverse; when n+1 is odd, n is even
-<ul>
-<li>So we can also write n is even ⇐ n+1 is odd</li>
-</ul>
-</li>
-<li>In instances of a Conditional Statement where both sides imply each other, we can use symbol <img src="/ltximg/aaead913001.svg" alt="\(\iff\)" style="height: 0.4579em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<p>∴ n is even <img src="/ltximg/aaead913001.svg" alt="\(\iff\)" style="height: 0.4579em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> n+1 is odd</p>
-<ul>
-<li>Symbol <img src="/ltximg/aaead913001.svg" alt="\(\iff\)" style="height: 0.4579em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> is read as &ldquo;if and only if&rdquo; and is abbreviated to &ldquo;IFF&rdquo; quite a lot</li>
-<li>So when writing <img src="/ltximg/a09587a022f.svg" alt="\(x \iff y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" />, we mean both <img src="/ltximg/229036e9313.svg" alt="\(x \Rightarrow y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> and <img src="/ltximg/663d5dca73b.svg" alt="\(y \Rightarrow x\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> or that x and y are <em>Equivalent</em></li>
-<li>And so in conclusion <img src="/ltximg/a09587a022f.svg" alt="\(x \iff y\)" style="height: 0.7109em; vertical-align: -0.2397em; display: inline-block" class="org-latex org-latex-inline" /> means both x and y must either be <img src="/ltximg/52adee0afae.svg" alt="\(\mathbb{T}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> or <img src="/ltximg/e8295764788.svg" alt="\(\mathbb{F}\)" style="height: 0.7735em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /></li>
-</ul>
-<h3 id="negating-conditional-statements">Negating Conditional Statements</h3>
-<ul>
-<li>The symbol <img src="/ltximg/1dc542cfc1c.svg" alt="\(\neg\)" style="height: 0.5203em; vertical-align: -0.0492em; display: inline-block" class="org-latex org-latex-inline" /> means the Negation of something and should be read as &ldquo;Not&rdquo;</li>
-<li>Say we have Set A and <img src="/ltximg/69275ba57a4.svg" alt="\(A\subset\mathbb{R}\)" style="height: 0.8118em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />, well now if we have the statement <img src="/ltximg/0474ae57588.svg" alt="\(\neg\left(x\in A \implies x&amp;gt;0\right)\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" /> then that would be the negation of <img src="/ltximg/57cf77af24a.svg" alt="\(x\in A \Rightarrow x&amp;gt;0\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" /></li>
-<li>To figure out what the Negation of this Conditional is, we must consider what the possibilities are for a number interacting with this Conditional. Either:
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Distribution System</title>
+      <link>https://sheerwill.live/posts/main/20220602202933-distribution_system/</link>
+      <pubDate>Fri, 08 Mar 2024 10:10:28 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220602202933-distribution_system/</guid>
+      <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
+      <content:encoded><![CDATA[<h2 id="remote-procedure-call">Remote Procedure Call</h2>
+<p><a href="/posts/main/20220603220847-remote_procedure_call_rpc/">Remote Procedure Call (RPC)</a> 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎么办？</p>
+<ol>
+<li>如果在函数调用过程中，服务挂了？</li>
+<li>如果消息丢失了？</li>
+<li>如果消息延迟了？</li>
+<li>如果出了问题，回复消息是否安全？</li>
+</ol>
+<p>要解决这些问题，就需要将网络以及节点之间的情况抽象出来，以及时序的问题。在设计分布式算法时，需要更加抽象一点，以便更好的推理整个过程。</p>
+<h2 id="system-model">System model</h2>
+<h3 id="network-behaviour">Network behaviour</h3>
+<p><a href="/posts/main/20220602202247-the_two_generals_problem/">The two generals problem</a> 描述了网络通信丢失的场景。</p>
+<p>假设两个节点之是间双向的点对点的通信。</p>
+<h4 id="reliable-links">Reliable links</h4>
+<p>一条消息只会在被一个节点发送的时候才会收到，并且消息是可以重新排序的。</p>
+<p>中间没有伪造消息等行为，发送了就一定会被收到。</p>
+<h4 id="fair-loss-links">Fair-loss links</h4>
+<p>消息可能会丢失、重复或重新排序，如果你一直重新发送，消息终将会传递过去。</p>
+<p>每次发送消息成功的概率都是非零，这个时候只要一直重试，我们就假设消息一定会传递到另外一个节点。</p>
+<p><strong>Fair-lose links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</strong></p>
+<h4 id="arbitrary-links">Arbitrary links</h4>
+<p>可能传递过程中会有恶意的第三方对消息进行干预。</p>
+<p>比如公共场合的公共 WiFi 就会出现这种情况。</p>
+<p><strong>Arbitrary links 通过 TLS 的加持，就可以达到 Fair-loss links 的效果。</strong></p>
+<h3 id="nodes-behaviour">Nodes behaviour</h3>
+<p><a href="/posts/main/20220602202317-the_byzantine_generals_problem/">The Byzantine generals problem</a> 描述了节点出错，导致全体协作策略失败以及容错率的问题。</p>
+<p>假设每个节点都执行指定的算法，假设有以下情况。</p>
+<h4 id="crash-stop--fail-stop">Crash-stop (fail-stop)</h4>
+<p>如果一个节点出现问题挂了，并且在这之后永远停机。</p>
+<h4 id="crash-recovery--fail-recovery">Crash-recovery (fail-recovery)</h4>
+<p>一个节点挂了，并丢失了内存状态，但会在过段时间后恢复。</p>
+<h4 id="byzantine-fail-arbitrary">Byzantine （fail-arbitrary)</h4>
+<p>节点偏离了原本的算法，可能会发生任何事情，包括崩溃或者恶意的行为。</p>
+<h3 id="synchrony--timing--assumption">Synchrony (timing) assumption</h3>
+<h4 id="synchronous">Synchronous</h4>
+<p>消息延迟不超过已知的上限。到达这个上限后，消息要么被传递，要么丢失。节点以已知的速度执行算法。每一步代码的执行都有执行时间的上限。</p>
+<h4 id="partically-synchronous">Partically synchronous</h4>
+<p>系统中一部分时间内是异步的，另一部分是同步的。</p>
+<h4 id="asynchronous">Asynchronous</h4>
+<p>消息可以任意地被延迟，节点可以任意地暂停，并没有时序上的保证。</p>
+<h2 id="clocks-and-time-in-distributed-systems">Clocks and time in distributed systems</h2>
+<p>分布式系统中经常涉及到需要测量时间，比如：</p>
+<ul>
+<li>Schedulers, timeouts, failure detectors, retry timers</li>
+<li>Performance measurements, statistics, profiling (performance analysis 也称为 profiling)</li>
+<li>Log files &amp; databases: record when an event occurred</li>
+<li>Data with time-limited validity (e.g. cache entries)</li>
+<li><strong>Determining order of events across several nodes</strong></li>
+</ul>
+<p>分布式系统中会遇到两种类型的时钟：</p>
+<ul>
+<li>physical clocks: count number of seconds elapsed</li>
+<li>logical clocks: count events, e.g. messages sent</li>
+</ul>
+<h3 id="clock-synchronisation">Clock synchronisation</h3>
+<p>物理时钟会有时间上的偏移，通常是通过和电脑、手机、电视等相对准确的地方来校准物理时钟的时间，比如手表，老式的钟摆。</p>
+<p>电脑上的时间同样会有偏移，是通过 <a href="/posts/main/20220602202411-network_time_protocol_ntp/">Network Time Protocol(NTP)</a> 来校准电脑的时间，也就是物理时钟的校准。</p>
+<h2 id="broadcast-protocols-and-logical-time">Broadcast protocols and logical time</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/ordering-of-messages.png"
+         alt="Figure 1: ordering-of-messages"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>ordering-of-messages</p>
+        </figcaption>
+</figure>
+
+<p>\(m_{1}\) = &ldquo;A says: The moon is made of cheese!&rdquo;</p>
+<p>\(m_{2}\) = &ldquo;B says: Oh no it isn&rsquo;t!&rdquo;</p>
+<p>User C sees \(m_{2}\) first, \(m_{1}\) second, even though logically \(m_{1}\) <a href="/posts/main/20220602202832-causality_and_happen_before_relation/">happened before</a> \(m_{2}\).</p>
+<p><strong>Problem</strong>: even with synced clocks, \(t_{2 }&lt; t_{1}\) is possible. Timestamp order is inconsistent with expected order!</p>
+<p>即便我们已经通过 NTP 尽量保证物理时钟上的同步，但这个时候依旧会发生因果关系不一致的情况，所以这个时候就需要逻辑时钟。</p>
+<p>逻辑时钟是在分布式系统中专门用于捕获系统中发生事件之间的因果关系，因此逻辑时钟其实就是一种计数器，每次事件发生的时候都会往前递增，所以随着事件的发生它会随着时间向前移动，但它和物理时间并没有实际的关系。</p>
+<h3 id="logical-time">Logical time</h3>
+<p>Logical clocks: designed to <strong>capture causal dependencies</strong>.</p>
+<p>\((e_{1} \rightarrow e_{2}) \Longrightarrow (T(e_{1}) &lt; T(e_{2}))\)</p>
+<p>当事件1发生在事件2之前，那么事件1的时间戳应该小于事件2的时间戳，这是逻辑时钟要保证的最基本的原则。</p>
+<p>下面将研究一下两种逻辑时钟：</p>
 <ul>
 <li>
-<img src="/ltximg/06c85a27b93.svg" alt="\(x\in A \land x&amp;gt;0\)" style="height: 0.8063em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />
+<p><a href="/posts/main/20220609201658-lamport_clocks/">Lamprot clocks</a> 是在分布式系统中的每个节点都维护一个计数器，每一个当前节点事件 \(e\) 发生时自增 ；发送消息时，也会附带上当前节点的计数 \(t\) ，消息接收者收到消息后，取出消息中的计数器与当前节点计数器比较，去最大值后自增 1。</p>
+<p>这样可以实现局部顺序，再加上节点名称，形成(时间戳，节点名称)的组合后，就可以扩展为全局顺序。</p>
+<p>但这样也有缺点，算法在时间戳相同，节点名称不同的平行事件的顺序判定时，会出现与实际情况不符的情况。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 </li>
 <li>
-<img src="/ltximg/c32925a2423.svg" alt="\(x\notin A \land x&amp;gt;0\)" style="height: 0.8717em; vertical-align: -0.0875em; display: inline-block" class="org-latex org-latex-inline" />
-</li>
-<li>
-<img src="/ltximg/7da60b1309f.svg" alt="\(x\notin A \land x\leq0\)" style="height: 0.9666em; vertical-align: -0.1824em; display: inline-block" class="org-latex org-latex-inline" />
+<p><a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 除了是向量之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目</p>
+<p>这样就可以弥补 Lamport 的缺点，可以完全确定每个事件的因果顺序。</p>
 </li>
 </ul>
-</li>
-<li>A number being ran through this Conditional and this situation can fit into any of the following models</li>
-<li>So therefore, the Negation of this Conditional must be a statement wherein <em>none</em> of these models apply</li>
-<li>
-<img src="/ltximg/d5f0e61a4dd.svg" alt="\(\therefore \neg\left(x \in A \implies x&amp;gt;0\right)=\exists x\in\mathbb{R} \mid x \in A \land x\leq0\)" style="height: 1.0784em; vertical-align: -0.2942em; display: inline-block" class="org-latex org-latex-inline" />
-</li>
-<li>You see, the Negation of Conditionals are themselves never Conditionals; they are always &ldquo;There exists&rdquo; Quantifiers</li>
-</ul>
-<h3 id="silly-application-of-logic-making-a-for-loop">Silly application of Logic: Making a For Loop</h3>
+<h3 id="delivery-order-in-broadcast-protocols">Delivery order in broadcast protocols</h3>
+<p>许多网络提供点对点（单播）的信息传递，其中一个信息有一个特定的收件人。广播协议对网络进行了概括，使一条信息被发送到某个组的所有节点。组的成员可能是固定的，或者系统可能提供节点加入和离开组的机制。</p>
+<p>一些局域网在硬件层面提供组播或广播（例如，IP 组播），但互联网上的通信通常只允许单播。此外，硬件级的组播通常是在 best-effort 基础上提供的，允许消息被丢弃；要使其可靠，需要类似于这里讨论的重传协议。</p>
+<p>上面提到的 node behaviour 和 synchrony 的系统模型假设直接延伸到广播组。</p>
+<h4 id="broadcast-protocols">Broadcast protocols</h4>
+<p>Broadcast (multicast) is <strong>group communication</strong>:</p>
 <ul>
-<li>We will now create a statement using a Set definition and a Quantifier to emulate the following:</li>
+<li>一个节点发送消息，所有组内节点传递。</li>
+<li>组内成为可以是固定的也可以是动态的</li>
+<li>如果一个节点发生错误，剩余的组内成员顶上。</li>
+<li>Note: 这个观念比 IP 组播更加普遍</li>
 </ul>
-<!--listend-->
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-</span></span></code></pre></div><div class="equation-container">
-<span class="equation">
-<img src="/ltximg/81663400729.svg" alt="\begin{align*}
-\text{Let}\ &amp;amp;A=\{x\in\mathbb{Z} \mid 0&amp;lt;x\leq10\}\ \land\ f\left(x\right)=x \\
-\forall\ x \in &amp;amp;A,\ f\left(x\right)&amp;gt;10 \implies x \notin A
-\end{align*}
-" style="height: 3.0972em; vertical-align: -0.4020em; display: inline-block" class="org-latex org-latex-inline" />
-</span>
+<p>建立在之前讲到的系统模型上：</p>
+<ul>
+<li>可以是 <strong>best-effort</strong> (可能会丢失消息) 或者 <strong>reliable</strong> (非故障节点传递每条消息，重传丢失的消息。)</li>
+<li>Asynchronous / partially synchronous timing model \(\Longrightarrow\) 消息延迟​<strong>没有上限</strong></li>
+</ul>
+<h4 id="receiving-versus-delivering">Receiving versus delivering</h4>
+<figure>
+    <img loading="lazy" src="/ox-hugo/receive-versus-deliver.png"
+         alt="Figure 2: receive-versus-deliver"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>receive-versus-deliver</p>
+        </figcaption>
+</figure>
+
+<p>假定网络提供点对点的发送/接收，在广播算法​从网络中​<strong>收到</strong>​消息后，传递给应用前会在缓存或者队列当中。</p>
+<p>下面将研究三种不同形式的「广播」。所有这些都是可靠的：每条消息最终都会被传递到每个非故障节点，但没有时间上的保证。然而，它们在每个节点上传递信息的顺序方面存在差异。事实证明，这种顺序上的差异对实现广播的算法有非常根本的影响。</p>
+<h4 id="forms-of-reliable-broadcast">Forms of reliable broadcast</h4>
+<ul>
+<li>
+<p><a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a></p>
+<p>如果 \(m_{1}\) 和 \(m_{2}\) 从相同的节点广播，并且 broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\))，那么 \(m_{1}\) 必然在 \(m_{2}\) 之前被传递。</p>
+</li>
+<li>
+<p><a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a></p>
+<p>如果 broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) 那么 \(m_{1}\) 必然在 \(m_{2}\) 之前被传递。</p>
+</li>
+<li>
+<p><a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a></p>
+<p>如果在同一个节点 \(m_{1}\) 在 \(m_{2}\) 之前被传递，那么所有节点 \(m_{1}\) 必然在 \(m_{2}\) 之前被传递。</p>
+</li>
+<li>
+<p><strong>FIFO-total order broadcast</strong></p>
+<p>是 FIFO broadcast 和 Total order broadcast 的结合</p>
+</li>
+</ul>
+<h4 id="relationships-between-broadcast-models">Relationships between broadcast models</h4>
+<figure>
+    <img loading="lazy" src="/ox-hugo/broadcast-models-relationship.png"
+         alt="Figure 3: broadcast-models-relationship"/> <figcaption>
+            <p><span class="figure-number">Figure 3: </span>broadcast-models-relationship</p>
+        </figcaption>
+</figure>
+
+<p>FIFO-total order broadcast 是一个严格意义上比因果广播更强的模型；换句话说，每个有效的 FIFO-total order broadcast 协议也是一个有效的 causal broadcast 协议（反过来就不是了），其他协议也是如此。</p>
+<h3 id="broadcast-algorithms">Broadcast algorithms</h3>
+<p>实现广播算法，简单来说，涉及到两个步骤。</p>
+<ol>
+<li>确保每个节点都能收到每天消息</li>
+<li>以正确的顺序传递这些消息</li>
+</ol>
+<p>首先研究如何可靠地传递消息，当一个节点想要广播一条消息时，它就单独向其他每个节点发送消息，使用上面提到过的 reliable links。但很可能一条消息丢失，发送的节点在重新发送前就崩溃了，这种情况下，丢失的这条消息对应的节点就无法接收到这条消息。</p>
+<p>为了提高可靠性，可以让其他节点帮忙。例如，当一个节点第一次收到一个特定消息时，它就把消息转发给其他每个节点（这种被称为急性可靠广播（Eager reliable broadcast））。这种算法确保了即使一些节点崩溃，所有剩下的非故障的节点都会收到每条消息。然而，这种算法很低效：在没有故障的情况下，每条消息在由 \(n\) 个节点组成的小组中要发送 \(O(n^{2})\) 次，每个节点要收到每条消息 \(n-1\) 次，意味着占用了大量的带宽。</p>
+<p>eager reliable broadcast 的变体沿着不同维度（比如容错性、所有节点接收消息的时间和被使用的带宽）优化，其中最常见的是流言协议（Gossip protocols，也被叫做流行病协议（Epidemic protocols））。在这些协议中，一个想广播消息的节点将其发送给随机选择的少量固定数量的节点。第一次收到信息时，一个节点会将其转发给固定数量的随机选择的节点。这类似于流言、谣言或传染病在人群中的传播方式。</p>
+<p>Gossip protocols 并不能保证所有节点都能收到消息：在随机选择节点时，有可能总是遗漏了一些节点。然而，如果算法的参数选择得当，信息不被传递的概率很小。Gossip protocols 很有吸引力，在正确的参数下，对消息丢失和节点崩溃有很强的弹性，同时还能保持高效。其实核裂变的发生过程，也类似于这种协议。</p>
+<p>可以在 eager reliable broadcast 或 gossip protocol 的基础上，建立 FIFO、causal 或者 total order broadcast。</p>
+<ul>
+<li><a href="/posts/main/20220616105609-fifo_broadcast/#fifo-broadcast-algorithm">FIFO broadcast algorithm</a></li>
+<li><a href="/posts/main/20220616132407-causal_broadcast/#causal-broadcast-algorithm">Causal broadcast algorithm</a></li>
+<li><a href="/posts/main/20220616135058-total_order_broadcast/#total-order-broadcast-algorithms">Total order broadcast algorithms</a></li>
+</ul>
+<h2 id="replication">Replication</h2>
+<p>现在要讨论的是复制的问题，也就是在多个节点上维护相同数据的复制体，每个节点被称为副本。复制是许多分布式数据库、文件系统和其他存储系统的一个标准特征。它是我们实现容错的主要机制之一：如果一个副本出现故障，我们可以继续访问其他副本上的数据副本。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<ul>
+<li>在不同节点维护相同数据的副本</li>
+<li>数据库、文件系统、缓存等等</li>
+<li>维护相同数据的节点叫做副本</li>
+<li>如果一些副本出错，其他副本依旧是可访问的。</li>
+<li>将负载分散到多个副本</li>
+<li>如果数据没有变化，维护很简单，只需要复制。</li>
+<li>专注于数据变化</li>
+</ul>
+<p>相较于 <a href="https://zh.wikipedia.org/zh-cn/RAID">RAID</a> (Redundant Array of Independent Disks)：在单个计算机内复制。</p>
+<ul>
+<li>RAID 只有一个控制器；在分布式系统中，每个节点都是独立的。</li>
+<li>副本可以在全世界靠近用户的地方分布（CDN 本质其实是一种大规模分布式多级缓存系统）</li>
+</ul>
+<h3 id="manipulating-remote-state">Manipulating remote state</h3>
+<p>在更新不同节点数据时，丢失数据或者丢失 TCP 返回的 \(ACK\)<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 时，就会使得不同节点之间的副本不一致，不满足幂等性（Idempotent）。为了解决这个问题，可以给每次更新操作都加上一个逻辑时间戳，并将其作为数据存储在数据库当中；当需要删除这条记录时，实际上并没有删除，而是写入一个特殊的值（称为墓碑 tombstone），将其标记为删除。（其实就类似于软删除）</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/reconciling-replicas.png"
+         alt="Figure 4: reconciling-replicas"/> <figcaption>
+            <p><span class="figure-number">Figure 4: </span>reconciling-replicas</p>
+        </figcaption>
+</figure>
+
+<p>在许多副本系统中，副本运行一个协议来检测和调和任何差异（这被称为反熵 anti-entropy），以便副本最终持有相同数据的一致副本。由于有了 tombstone，反熵过程可以分辨出已经被删除的记录和尚未被创建的记录之间的差异。由于有了逻辑时间戳，可以分辨出一条记录的哪个版本比较老，哪个版本比较新。然后，反熵过程会保留较新的记录并丢弃较旧的记录。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/concurrent-reconciling-replicas.png"
+         alt="Figure 5: concurrent-reconciling-replicas"/> <figcaption>
+            <p><span class="figure-number">Figure 5: </span>concurrent-reconciling-replicas</p>
+        </figcaption>
+</figure>
+
+<p>如果同时两个请求分别想把两个副本的 \(x\) 的值进行修改。</p>
+<ul>
+<li>
+<p><strong>Last writer wins</strong> (LWW):</p>
+<p>采用 Lamport clocks 时，$t<sub>2</sub> &gt; t<sub>1</sub>$则保留 \(v_{2}\) 丢弃 \(v_{1}\)。</p>
+</li>
+<li>
+<p><strong>Multi-value register</strong>:</p>
+<p>采用 Vector clocks 时，\(t_{2 } &gt; t_{1}\) 则保留 \(v_{2}\) 丢弃 \(v_{1}\); \(t_{2} \rVert t_{1}\) 则 \(\{v_{1}, v_{2}\}\) 都保留。</p>
+</li>
+</ul>
+<p>向量时钟的缺点是它们会变得很昂贵：每个客户端都需要在向量中输入一个条目，在有大量客户端的系统中（或者客户端每次重启都会有新的身份），这些向量会变得很大，可能会比数据本身占用更多内存。更多类型的逻辑时钟，如点状版本向量（Dotted version vectors）<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>，已经被开发出来以优化这种类型的系统。</p>
+<h3 id="quorums">Quorums</h3>
+<p>具体如何进行复制的细节对系统的可靠性有很大影响。如果没有容错，拥有多个副本会使可靠性变差：副本越多，任何一个副本在任何时候出现故障的概率就越大（假设故障不是完全相关的）。然而，如果系统在一些有问题的复制体中仍然继续工作，那么可靠性就会提高：所有副本在同一时间出现问题的概率要比一个副本出现问题的概率低很多。</p>
+<h4 id="read-after-write-consistency">Read-after-write consistency</h4>
+<figure>
+    <img loading="lazy" src="/ox-hugo/read-after-write-consistency.png"
+         alt="Figure 6: read-after-write-consistency"/> <figcaption>
+            <p><span class="figure-number">Figure 6: </span>read-after-write-consistency</p>
+        </figcaption>
+</figure>
+
+<p>一个副本写入了数据，从另外一个副本读取，用户并没有读取到他刚刚提交的内容。如果要保持读写一致性（read-after-write consistency），则要两个节点都同时写入和读取，一旦有一个不可访问就会破坏读写一致性，没有任何容错率可言。</p>
+<h4 id="quorum--2-out-of-3">Quorum (2 out of 3)</h4>
+<figure>
+    <img loading="lazy" src="/ox-hugo/quorum.png"
+         alt="Figure 7: quorum"/> <figcaption>
+            <p><span class="figure-number">Figure 7: </span>quorum</p>
+        </figcaption>
+</figure>
+
+<p>通过使用三个副本可以解决这个难题<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。将每个读写请求发送到所有三个副本，但只要收到 \(\geq2\) 个响应，就认为请求成功。在这个例子中，写在复制体 \(B\) 和 \(C\) 上成功，而读在副本 \(A\) 和 \(B\) 上成功。对读和写都采用 &ldquo;三选二 &ldquo;的策略，可以保证至少有一个对读的响应来自看到最近写的副本（在这个例子中，这是副本 \(B\)）。</p>
+<p>对于同一个请求，不同的副本可能会返回不同的响应：在上图中，\(A\) 处读取会返回初始值 \((t_{0}, v_{0})\)，而 \(B\) 处的读取会返回该客户端之前写入的 \((t_{1}, v_{1})\)。利用时间戳，客户端可以知道哪个响应是最近的，将 \(v_{1}\) 返回给 Application。</p>
+<p>在这个例子中，响应写请求的副本集合 \((B, C)\) 是一个 write quorum，而响应读请求的集合 \((A, B)\) 是一个 read quorum。一般来说，quorum 是一个最小的节点集合，它必须对某个请求作出响应才能成功。为了确保读写一致性，write quorum 和 read quorum 必须有一个非空的交集：换句话说，read quorum 必须包含至少一个已经被承认的 write quorum。</p>
+<p>在分布式系统中，常见的 majority quorum 是由超过半数的节点组成的任意子集。在三个节点的系统 \(\{A, B, C\}\) 中，majority quorum 可以是 \(\{A, B\}\)、\(\{A, C\}\) 和 \(\{B, C\}\)。通常来讲，奇数节点的系统，\(\frac{n+1}{2}\) 大小的任意子集就是 majority quorum，偶数节点的系统，需要四舍五入 \(\left \lceil \frac{n+1}{2} \right \rceil = \frac{n+2}{2}\)<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>。majority quorum 有个特性：任意两个 quorums 至少有一个共同的元素，也就是交集至少有一个节点。</p>
+<p>只要不超过 \(n-w\) 个副本不可用（\(w\) 是 write quorum 的数量），系统就可以正常的处理更新；同样的，只要不超过 \(n-r\) 个副本不可以（\(r\) 是 read quorum 的数量），系统就可以正常的处理读请求。对于 majority quorum 来说，三个副本的系统可以容错一个节点，五个副本的系统可以容错两个节点，以此类推。</p>
+<p>在这种基于 quorum 的方法下，一些副本会错过一些更新。上图中，副本 \(A\) 错过了 \((t_{1}, v_{1})\)。让副本互相同步使其数据一致的方法上面提到过，叫做反熵（anti-entropy）。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/read-repair.png"
+         alt="Figure 8: read-repair"/> <figcaption>
+            <p><span class="figure-number">Figure 8: </span>read-repair</p>
+        </figcaption>
+</figure>
+
+<p>另外一个方法是让客户端帮助完成传播更新的过程。例如上图中，客户端从 \(B\) 读取了 \((t_{1}, v_{1})\)，但从 \(A\) 接收到的是 \((t_{0}, v_{0})\)，而 \(C\) 没有回应。这个时候客户端使用原始的时间戳 \(t_{1}\) 将最新的值发送给 \(A\) 和 \(C\)，\(C\) 如果已经更新了，也不过只是浪费一点点带宽。这种复制模式的数据库通常称为 Dynamo-style。</p>
+<h3 id="replication-using-broadcast">Replication using broadcast</h3>
+<p>在 quorum 中，基本上使用了 best-effort 以及客户端辅助使其他副本数据一致的方法，但这些都是不可靠的，中途会发生丢失，并且排序无法保证。</p>
+<h4 id="state-machine-replication--smr">State machine replication (SMR)</h4>
+<p>FIFO-total order broadcast: 每个节点以​<strong>相同的顺序</strong>​传递​<strong>相同的消息</strong>​。</p>
+<ul>
+<li>FIFO-total order broadcast 将每次更新，更新到所有副本。</li>
+<li>副本通过传递的消息来确认自身状态</li>
+<li>更新具有确定性</li>
+<li>副本是一种状态机：开始于固定的初始状态，以相同的顺序经历相同序列状态的变换 \(\Longrightarrow\) 所有副本都以相同的状态结尾</li>
+</ul>
+<p>利用 FIFO-total order broadcast 很容易建立一个复制系统：将每个更新请求广播给副本，副本基于传递的每个消息更新其状态。副本作为一个状态机，其输入是消息的传递，这种就叫做 state machine replication (SMR)。只要更新逻辑是确定的：任何两个处于相同状态的复制体，被赋予相同的输入，最终必须处于相同的下一个状态。甚至错误也必须是确定的：如果一个副本的更新成功了，但在另一个副本上失败了，它们就会变得不一致。</p>
+<p>SMR 的一个优秀特点是，从一个状态到下一个状态只要是确定的，其中的逻辑可以任意复杂。例如，可以处理具有任意业务逻辑的整个数据库事务，而这个逻辑可以同时依赖于广播信息和数据库的当前状态。一些分布式数据库以每个副本独立执行相同的确定性交易代码（这被称为主动复制）来实现复制。这一原则也是区块链、加密货币和分布式账本的基础：区块链中的 &ldquo;区块链 &ldquo;无非是由 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 传递的消息序列，每个副本都确定性地执行这些区块中描述的交易，以确定账本的状态（例如，谁拥有哪些钱）。一个 &ldquo;智能合约 &ldquo;只是一个确定的程序，当一个特定的消息被传递时，副本会执行这个程序。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/state-machine-replication.svg"/> 
+</figure>
+
+<p>密切相关的概念：</p>
+<ul>
+<li>可序列化事务（按传递顺序执行）</li>
+<li>区块链、分布式账本、智能合约。</li>
+</ul>
+<p>限制：</p>
+<ul>
+<li>不能立即更新状态，必须等待广播传递。</li>
+<li>需要容错的 total order broadcast</li>
+</ul>
+<p>State machine replication 的缺点是 total order broadcast 的限制。当一个节点想通过 total order broadcast 来广播一个消息时，它不能立即将该消息传递给自己。之前讲过，传递给自己的消息也要遵从总秩序，所以当使用状态机复制时，想要更新其状态的副本要等待广播，与其他节点协调，并等待更新信息被传递给自己。状态机复制的容错性取决于底层 total order broadcast 的容错性。尽管如此，基于 total order replication 的复制还是被广泛使用。</p>
+<p>在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中提到过一种实现方法是指定一个节点作为 Leader，并将所有的消息通过它来路由，保证传递的顺序。这一原则也被广泛应用于数据库副本：许多数据库系统指定一个副本作为 leader，primary 或者 master。所有修改数据库的事务都需要在 leader 副本上执行。虽然 leader 会同时执行多个事务，但事务提交时会按照总的顺序提交。当事务提交后， leader 副本将数据变动广播给所有的 follow 副本，follow 副本按照之前提交的顺序在本地进行事务提交，这种方法被称为被动复制（passive replication）或者主从复制（primary-backup replication），这样的方式其实和 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 是等效的。</p>
+<p>至于之前提到的其他广播方式，也可以用作复制，但需要更加小心，保证副本之间数据的一致性。</p>
+<h2 id="the-raft-consensus-algorithm">The Raft consensus algorithm</h2>
+<p>为了实现容错的 FIFO-total order broadcast，Raft 的具体实现细节可以参见 <a href="/posts/main/20220623152601-raft_consensus_algorithm/">Raft consensus algorithm</a>，另外有个非常好的动画<a href="http://thesecretlivesofdata.com/raft/">示意网站</a>可以更加直观的观察整个过程。。</p>
+<p>集群内的节点都对选举出的领袖采取信任，因此 Raft 不是一种拜占庭容错算法。</p>
+<h2 id="replica-consistency">Replica consistency</h2>
+<p>事务的关键是原子性。当一个事务跨越多个节点时，希望整个事务仍然具有原子性：也就是说，要么所有节点都必须提交事务且具有持久性，要么所有节点都回滚。因此，各节点之间就事务应该终止回滚还是提交要达成一致。这里说的一致和 Raft 中的不太一样，细节上有很大不同。</p>
+<table>
+<thead>
+<tr>
+<th>Consensus</th>
+<th>Atomic commit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一个或多个节点提出一个值</td>
+<td>每个节点投票是否提交或中止</td>
+</tr>
+<tr>
+<td>任意一个提出的值都可以被承认</td>
+<td>如果所有的节点投票提交那么就必须提交；如果所有的节点都投票中止那么就必须中止。</td>
+</tr>
+<tr>
+<td>只要 quorum 数量的节点可以工作，崩溃的节点是可以被容忍的。</td>
+<td>如果不分的节点崩溃，必须中止。</td>
+</tr>
+</tbody>
+</table>
+<p>用来保证多个节点 atomic commitment 最常用的算法是 two-phase commit protocol (2PC)，也有 three-phase commit protocol，但这里不做研究。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/Two-phase%20commit%20%282PC%29.png"
+         alt="Figure 9: Two-phase commit (2PC)"/> <figcaption>
+            <p><span class="figure-number">Figure 9: </span>Two-phase commit (2PC)</p>
+        </figcaption>
+</figure>
+
+<p>当使用 two-phase 提交时，客户端首先在参与交易的每个副本上启动一个常规的单节点交易，并在这些交易中执行常规的读写操作。当客户端准备好提交交易时，它向交易协调者（一个管理 2PC 协议的指定节点）发送提交请求。(在一些系统中，协调器是客户端的一部分）。</p>
+<p>协调器首先向参与交易的每个副本发送一个准备消息，每个副本都会回复一个消息，表明它是否能够提交交易（这是协议的第一阶段）。副本实际上还没有提交交易，但它们必须确保在第二阶段中，当协调者发出指示，它们一定能够提交交易。这就意味着，副本必须将交易的所有内容更新写入磁盘，并在回复准备信息之前检查完整性约束，同时继续持有交易的任何锁。</p>
+<p>协调器收集响应，并决定是否实际提交交易。如果所有节点都回复 OK，协调者就决定提交；如果任何节点想放弃，或者任何节点未能在某个超时时间内回复，协调者就决定放弃。然后，协调者将其决定发送给每个副本，它们都按照指示提交或放弃（这是第二阶段）。如果决定是提交，每个副本保证能够提交其事务，因为之前的准备请求奠定了基础。如果决定放弃，副本就会回滚该事务。</p>
+<h2 id="reference">Reference</h2>
+<ul>
+<li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>
+</ul>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>if \(a \rVert b\) we could have either \(a \prec b\) or \(b \prec a\), so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>replication 翻译成「复制」，名词；replica 翻译成「副本」，名词。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>后面整理 TCP 相关内容时，可以加个链接。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>待学习&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="/posts/main/20220615143721-quorum/">基于 Quorum 投票的冗余控制算法</a>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p>向上去整&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
 </div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Causality and Happen-before relation</title>
+      <link>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</link>
+      <pubDate>Fri, 08 Mar 2024 10:06:39 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
+      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event \(a\) happens before event \(b\), written \(a \rightarrow b\). 那么在分布式，有三种情况，满足其中一条，则 \(a\) 是发生在 \(b\) 之前： \(a\) 和 \(b\) 发生在相同节</description>
+      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
+<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
+<p>event \(a\) <strong>happens before</strong> event \(b\), written \(a \rightarrow b\).</p>
+<p>那么在分布式，有三种情况，满足其中一条，则 \(a\) 是发生在 \(b\) 之前：</p>
 <ul>
-<li>Presenting this statement as a Theorem and attempting to prove it true requires you to check all possible x values
-<ul>
-<li>This emulates the look of the For loop being printed</li>
-</ul>
+<li>
+<p>\(a\) 和 \(b\) 发生在相同节点，并且按照本地节点的执行顺序，\(a\) 发生在 \(b\) 之前。</p>
+</li>
+<li>
+<p>事件 \(a\) 是发送消息 \(m\)，事件 \(b\) 是接收相同的消息 \(m\)（假定发送的消息都是唯一的）。</p>
+</li>
+<li>
+<p>有这么一个时间 \(c\) 满足，\(a \rightarrow c\) 且 \(c \rightarrow b\)。</p>
+<p>happens-before relation 是局部的顺序：有可能存在既不满足 \(a \rightarrow b\) 也不满足 \(b \rightarrow a\)，这样 \(a\) 和 \(b\) 就是并行的，写作 a || b。</p>
 </li>
 </ul>
+<h3 id="happen-before-relation-example">Happen-before relation example</h3>
+<figure>
+    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
+         alt="Figure 1: happens-before-example"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>\(a \rightarrow b\), \(c \rightarrow d\), and \(e \rightarrow f\) due to process order</li>
+<li>\(b \rightarrow c\) and \(d \rightarrow f\) due to messages \(m_{1}\) and \(m_{2}\)</li>
+<li>\(a \rightarrow c\), \(a \rightarrow d\), \(a \rightarrow f\), \(b \rightarrow d\), \(b \rightarrow f\), and \(c \rightarrow f\) due to transitivity</li>
+<li>\(a || e\), \(b || e\), \(c || e\), and \(d || e\)</li>
+</ul>
+<h2 id="causality">Causality</h2>
+<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
+<ul>
+<li>当 \(a \rightarrow b\), 那么 \(a\) 可能是 \(b\) 的因。</li>
+<li>当 \(a || b\), \(a\) 和 \(b\) 之间不存在因果关系。</li>
+</ul>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causality.png"
+         alt="Figure 2: causality"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>causality</p>
+        </figcaption>
+</figure>
+
+<p>Let \(\prec\) be a strict total order on events.</p>
+<p>如果 \((a \rightarrow b) \Rightarrow (a \prec b)\) 符号 \(\prec\) 就是所谓的因果顺序。</p>
+<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 \(a\) 和事件 \(b\) 在空间上相距很远，但是在时间上相距很近，那么从事件 \(a\) 发出的信号不可能在事件 \(b\) 之前到达 \(b\) 的位置，反之亦然。因此 \(a\) 和 \(b\) 是肯定没有因果关系的。</p>
+<p>一个在空间上离 \(a\) 很近，时间上距离 \(a\) 很远的事件 \(c\)，将在 \(a\) 的光锥内，也就是说 \(a\) 的信号有可能到达 \(c\)，因此 \(a\) 可能影响 \(c\)。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Causal broadcast</title>
+      <link>https://sheerwill.live/posts/main/20220616132407-causal_broadcast/</link>
+      <pubDate>Fri, 08 Mar 2024 10:04:06 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220616132407-causal_broadcast/</guid>
+      <description>Definition Causal broadcast 算法有点类似于 FIFO broadcast： 每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟</description>
+      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
+<p>Causal broadcast 算法有点类似于 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a>：</p>
+<p>每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟算法中，向量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，向量元素计算来自每个发送者的已发送的消息数量。</p>
+<p>如果节点 \(C\) 在 \(m_{1}\) 之前收到 \(m_{2}\)，\(C\) 的广播算法将不得不保留（延迟或缓冲）\(m_{2}\)，直到 \(m_{1}\) 被传递之后，以确保消息按因果顺序传递​。在下图的例子中，消息 \(m_{2}\) 和 \(m_{3}\) 是​<strong>同时广播</strong>​的。节点 \(A\) 和 \(C\) 按照 \(m_{1}\)、\(m_{3}\)、\(m_{2}\) 的顺序传递消息，而节点 \(B\) 按照 \(m_{1}\)、\(m_{2}\)、$m<sub>3</sub>$的顺序传递。这些传递顺序中的任何一个都是可以接受的，因为它们都与因果关系一致。</p>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causal-broadcast.png"
+         alt="Figure 1: causal-broadcast"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>causal-broadcast</p>
+        </figcaption>
+</figure>
+
+<p>有因果关系的信息必须按因果顺序传递。并行的消息可以按照任何顺序传递。</p>
+<p>上图：broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) and broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) and broadcast(\(m_{1}\)) broadcast(\(m_{3}\)) \(\Longrightarrow\) valid orders are: (\(m_{1}\), \(m_{2}\), \(m_{3}\)) or (\(m_{1}\), \(m_{3}\), \(m_{2}\))</p>
+<h2 id="causal-broadcast-algorithm">Causal broadcast algorithm</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/causal-broadcast-algorithm.svg"/> 
+</figure>
+
+<p>每个节点的本地状态由 \(sendSeq\)、\(delivered\) 和 \(buﬀer\) 组成，它们的含义与 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 算法中相同。当一个节点想要广播一个消息时，我们会附上发送节点的编号 \(i\) 和 \(deps\)（表示该消息因果关系的向量）。\(deps\) 就是节点本地 \(delivered\) 的复制，统计了每个节点发送消息并传递到该节点的数量。在这次广播之前，所有已经在本地交付的消息必须出现在广播消息的因果顺序之前。然后将发送节点自己的这个向量的元素更新为等于 \(sendSeq\)，这就​<strong>保证了这个节点所广播的每条消息都与同一节点所广播的前一条消息有因果关系</strong>​。</p>
+<p>当收到一个消息时，算法首先将其添加到 \(buﬀer\) 中，就像 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 一样，然后在 \(buﬀer\) 中搜索任何准备好的消息。比较 \(deps \leq delivered\)。如果这个节点已经交付了所有在因果顺序上必须在这个消息之前的消息，那么，任何在因果关系上准备好的消息都会被传递给 Application，并从 \(buﬀer\) 中移除，并且将 \(delivered\) 中的相应条目被递增。</p>
+<h2 id="summary">Summary</h2>
+<p>Causal broadcast 的保持因果顺序的原理和 <a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 很相似，向量中的每个条目，前者是消息发送者已发送消息的数量，后者是每个节点发生事件的数量。deps 取代 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 中的 sendSeq 附带在广播的信息中，这样通过在 <a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 中介绍的向量比较方法，可以确定消息之间的因果关系来控制消息传递的顺序。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Lamport clocks</title>
+      <link>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</link>
+      <pubDate>Fri, 08 Mar 2024 10:02:54 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</guid>
+      <description>Lamport clocks algorithm Lamport clocks in words Figure 1: lamport-example-simple 每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。 增长后的值设为 \(L(e)\) 发送消息时附带上当前的计数 \(t\) 消息</description>
+      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-clocks-algorithm.svg"/> 
+</figure>
+
+<h2 id="lamport-clocks-in-words">Lamport clocks in words</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
+         alt="Figure 1: lamport-example-simple"/> <figcaption>
+            <p><span class="figure-number">Figure 1: </span>lamport-example-simple</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。</li>
+<li>增长后的值设为 \(L(e)\)</li>
+<li>发送消息时附带上当前的计数 \(t\)</li>
+<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
+</ul>
+<p>Properties of this scheme:</p>
+<ul>
+<li>if \(a \rightarrow b\) then \(L(e) &lt; L(b)\)</li>
+<li>However, \(L(a) &lt; L(b)\) does not imply \(a \rightarrow b\)</li>
+<li>Possible that \(L(a) = L(b)\) for \(a \ne b\)</li>
+</ul>
+<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
+<h2 id="lamport-clocks-example">Lamport clocks example</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/lamport-example.png"
+         alt="Figure 2: lamport-example"/> <figcaption>
+            <p><span class="figure-number">Figure 2: </span>lamport-example</p>
+        </figcaption>
+</figure>
+
+<p>Let \(N(e)\) be the node at which event \(e\) occurred.</p>
+<p>Then the pair \((L(e), N(e))\) <strong>uniquely identiﬁes</strong> event \(e\).</p>
+<p>Deﬁne a <strong>total order</strong> \(\prec\) using Lamport timestamps:</p>
+<p>\((a \prec b) \iff (L(a) &lt; L(b) \vee (L(a) = L(b) \wedge N(a) &lt; N(b)))\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>This order is <strong>causal</strong>: \((a \rightarrow b) \longrightarrow (a \prec b)\)</p>
+<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
+<p>对于任何两个事件 \(a \ne b\)，那么既不是 \(a \prec b\) 也不是 \(b \prec a\)。只要 \(a \rightarrow b\)，我们就有 \(a \prec b\)，换句话说，\(\prec\) 是局部顺序 \(\rightarrow\) 的线性扩展。然而，如果 \(a \vert \vert b\)，我们可以有 \(a \prec b\) 或 \(b \prec a\)，所以两个事件的顺序是由算法任意决定的。 比如 \((1, A)\) 和 \((1, C)\) 两个事件是平行的，按照 Lamport 的算法，\((1, A)\) 必然是在 \((1, C)\) 之前的，但实际情况可能是 \((1, C)\) 在前。</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>\(\iff\) is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>\(\vee\) is logical or, \(\wedge\) is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
 ]]></content:encoded>
     </item>
     
     <item>
       <title>Raft consensus algorithm</title>
       <link>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</link>
-      <pubDate>Tue, 05 Mar 2024 13:44:50 +0800</pubDate>
+      <pubDate>Fri, 08 Mar 2024 09:59:11 +0800</pubDate>
       
       <guid>https://sheerwill.live/posts/main/20220623152601-raft_consensus_algorithm/</guid>
       <description>Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其</description>
@@ -724,32 +671,68 @@ B&amp;amp;=\{x \in A \mid 2x\}
 <p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
 <p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
 <h2 id="initialisation">Initialisation</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/initialisation.svg"/> 
+</figure>
+
 <p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
 <p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
 <p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
 <h2 id="voting-on-a-new-leader">Voting on a new leader</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/voting-on-a-new-leader.svg"/> 
+</figure>
+
 <p>如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。</p>
 <p>votedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及当前的 term。</p>
 <h2 id="collecting-votes">Collecting votes</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/collecting-svg.svg"/> 
+</figure>
+
 <p>回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。</p>
 <p>如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。</p>
 <p>sentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。</p>
 <h2 id="broadcasting-messages">Broadcasting messages</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/broadcasting-messages.svg"/> 
+</figure>
+
 <p>以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。</p>
 <p>leader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。</p>
 <h2 id="replicating-from-leader-to-followers">Replicating from leader to followers</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/replicating-from-leader-to-followers.svg"/> 
+</figure>
+
 <p>ReplicateLog 方法是从 leader 利用 followerId 发送任何新的 log 条目给 follower。prefixLen 是已经发送给 follower 消息的数量，suffix 就是还没有发送给 follower 的消息。所以当 sentLength[follower] = log.length 时，suffix 是一个空数组。</p>
 <h2 id="followers-receiving-messages">Followers receiving messages</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/followers-receiving-messages.svg"/> 
+</figure>
+
 <p>首先，如果消息的 term 比 follower 当前的 term 高，则更新当前的 term，并接受消息的发送者为 leader。相等的时候，也会和之前一样的逻辑，承认发送者为 leader。</p>
 <p>prefixLen 为 suffix 包含 log 条目之前的条目数量，follower 要求自己当前的 log 长度要大于等于 prefixLen，并且 prefixLen 长度前的最后一个 log 条目中的 term 要与 leader 的 prefixTerm 相同<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。Raft 算法保证两个节点相同下标对应的 log 条目中的 term 相同，那么在这之前的 log 都是相同。</p>
 <p>以上条件满足就会调用 AppendEntries 将 suffix 添加到自己的 log 当中。</p>
 <h2 id="updating-followers-logs">Updating followers&rsquo; logs</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/updating-followers-logs.svg"/> 
+</figure>
+
 <p>follower 利用该函数讲从 leader 那里收到的条目扩充到 log 当中。如果节点本地的 log 长度大于 leader 发来消息中的 prefixLen，那么我们就要检查差异的这部份 log 条目是否与 suffix 中的条目一致。如果不一致，我们则需要舍弃这部份差异，只保留 prefixLen 长度的 log。这种情况发生在前一个 leader 发送的 log 已经被合并到节点本地 log 当中，而同时因为一些原因新的 leader 发送来新的 log。</p>
 <p>然后，任何新的 log 都会被追加到 follower 本地的 log 当中，即便是消息重复的情况下，这个操作也是幂等的。follower 检查 leaderCommit 是否大于本地的 commitLength，满足条件则可以将 log 当中的 msg 传递给 application，并对本地 commitLength 更新。</p>
 <h2 id="leader-receiving-log-acknowledgements">Leader receiving log acknowledgements</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/leader-receiving-log-acknowledgements.svg"/> 
+</figure>
+
 <p>这里回到 leader 这边。leader 会检查发送者的 term：如果发送者的 term 大于接收者的 term，那么意味着新 leader 选举已经开始，所以当前的 leader 会变为 follower 的状态。</p>
 <p>如果 term 相同，并且详细中的 success 为 true，则更新 sendLength 和 ackedLength，记录 follower 确认过的 log 数量，然后调用 CommitLogEntries 函数。如果 success 为 false，则 follower 没有接收消息，这个时候 leader 会递减 sendLength，并嗲用 ReplicateLog 重新发送 LogRequest 消息<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
 <h2 id="leader-committing-log-entries">Leader committing log entries</h2>
+<figure>
+    <img loading="lazy" src="/ox-hugo/leader-committing-log-entries.svg"/> 
+</figure>
+
 <p>被 quorum 确认过的 log 条目就可以被 leader 提交，当 log 条目被提交，消息就被传递给 Application。</p>
 <div class="footnotes" role="doc-endnotes">
 <hr>
@@ -762,6 +745,102 @@ B&amp;amp;=\{x \in A \mid 2x\}
 </li>
 </ol>
 </div>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://sheerwill.live/posts/main/20220607104757-hugo/</link>
+      <pubDate>Wed, 06 Mar 2024 16:30:45 +0800</pubDate>
+      
+      <guid>https://sheerwill.live/posts/main/20220607104757-hugo/</guid>
+      <description>Install brew install hugo Add backlink 在 themes/xxx/layouts/partials/ 下新增 backlink.html​，内容如下。 {{ $re := $.File.BaseFileName }} {{ $backlinks := slice }} {{ range .Site.AllPages }} {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }} {{ $backlinks = $backlinks | append . }} {{ end }} {{ end }}</description>
+      <content:encoded><![CDATA[<h2 id="install">Install</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install hugo
+</span></span></code></pre></div><h2 id="add-backlink">Add backlink</h2>
+<p>在 <code>themes/xxx/layouts/partials/</code> 下新增 <code>backlink.html</code>​，内容如下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ $re := $.File.BaseFileName }}
+</span></span><span class="line"><span class="cl">{{ $backlinks := slice }}
+</span></span><span class="line"><span class="cl">{{ range .Site.AllPages }}
+</span></span><span class="line"><span class="cl">   {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }}
+</span></span><span class="line"><span class="cl">          {{ $backlinks = $backlinks | append . }}
+</span></span><span class="line"><span class="cl">   {{ end }}
+</span></span><span class="line"><span class="cl">{{ end }}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{{ if gt (len $backlinks) 0 }}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Links to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;backlinks&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">           {{ range $backlinks }}
+</span></span><span class="line"><span class="cl">                  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .RelPermalink }}&#34;</span><span class="p">&gt;</span>{{ .Title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">           {{ end }}
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{ else  }}
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>No notes link to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{ end }}
+</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/_default/single.html</code> 中增加下面代码，放到合适的地方。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;backlinks.html&#34; . }}
+</span></span></code></pre></div><p>放在文章下方的话可以插入如下位置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post-content&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {{- if not (.Param &#34;disableAnchoredHeadings&#34;) }}
+</span></span><span class="line"><span class="cl">    {{- partial &#34;anchored_headings.html&#34; .Content -}}
+</span></span><span class="line"><span class="cl">    {{- else }}{{ .Content }}{{ end }}
+</span></span><span class="line"><span class="cl">    {{ partial &#34;backlinks.html&#34; . }}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h2 id="mathjax-support">MathJax support</h2>
+<h3 id="方案1">方案1</h3>
+<p>在 <code>themes/xxx/layouts/_default/single.html</code> 中 <code>header</code> 中增加下面代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h3 id="方案2">方案2</h3>
+<p>增加 <code>themes/xxx/layouts/partials/mathjax.html</code> 文件，并在其中增加下面代码，实现即便是页面间的跳转，也可以实时渲染公式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">MathJax</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">tex</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">inlineMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\(&#39;</span><span class="p">,</span> <span class="s1">&#39;\\)&#39;</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">displayMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$$&#39;</span><span class="p">,</span><span class="s1">&#39;$$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\[&#39;</span><span class="p">,</span> <span class="s1">&#39;\\]&#39;</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">processEscapes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">processEnvironments</span><span class="o">:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">skipHtmlTags</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;noscript&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;pre&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&#34;mjx-container&#34;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">x</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">classList</span> <span class="o">+=</span> <span class="s1">&#39;has-jax&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://polyfill.io/v3/polyfill.min.js?features=es6&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;MathJax-script&#34;</span> <span class="na">async</span>
+</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">code</span><span class="p">.</span><span class="nc">has-jax</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="mh">#515151</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/partials/header.html</code> 中增加下面代码，放到合适的地方。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;mathjax.html&#34; . }}
+</span></span></code></pre></div><p>如果不想所有页面都加载 MathJax，就添加下面代码。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ if .Params.mathjax }}{{ partial &#34;mathjax.html&#34; . }}{{ end }}
+</span></span></code></pre></div><p>并通过 <a href="https://ox-hugo.scripter.co/doc/custom-front-matter/">Custom Front-matter Parameters</a> 设置 <code>mathjax: true</code>​。具体是添加下面代码到需要导出并用 MathJax 展示的 org 文件头部，导出后就是 <code>.md</code> 文件中的 metadata。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+HUGO_CUSTOM_FRONT_MATTER</span><span class="c">: :mathjax true</span>
+</span></span></code></pre></div><p>另外对于一些用到额外包以及复杂的块 Latex，MathJax 的支持并不是很好。可以将块导出为 svg，即在头部增加 <code>#+options: tex:dvisvgm</code> 就可以了。</p>
+<h3 id="增强">增强</h3>
+<p>MathJax 对于 algorithm2e 等一些算法包不支持，可以通过 <a href="https://github.com/SaswatPadhi/pseudocode.js">pseudocode.js</a> 支持页面渲染！</p>
 ]]></content:encoded>
     </item>
     
@@ -1343,100 +1422,6 @@ you may answer the next question with yes.</p>
       <guid>https://sheerwill.live/posts/main/20230211001746-covering_index/</guid>
       <description>即可以直接通过遍历聚簇索引获取到非主键列数据的场景，即不需要「回表（Table access by index rowid）」操作。覆盖索引一般出现在「联合索引」中，因</description>
       <content:encoded><![CDATA[<p>即可以直接通过遍历聚簇索引获取到非主键列数据的场景，即不需要「回表（<a href="/posts/main/20230211000136-table_access_by_index_rowid/">Table access by index rowid</a>）」操作。覆盖索引一般出现在「联合索引」中，因为叶节点中会存储「联合索引」所有列的数据（索引即数据）。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Hugo</title>
-      <link>https://sheerwill.live/posts/main/20220607104757-hugo/</link>
-      <pubDate>Thu, 23 Mar 2023 10:29:03 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220607104757-hugo/</guid>
-      <description>Install brew install hugo Add backlink 在 themes/xxx/layouts/partials/ 下新增 backlink.html​，内容如下。 {{ $re := $.File.BaseFileName }} {{ $backlinks := slice }} {{ range .Site.AllPages }} {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }} {{ $backlinks = $backlinks | append . }} {{ end }} {{ end }}</description>
-      <content:encoded><![CDATA[<h2 id="install">Install</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install hugo
-</span></span></code></pre></div><h2 id="add-backlink">Add backlink</h2>
-<p>在 <code>themes/xxx/layouts/partials/</code> 下新增 <code>backlink.html</code>​，内容如下。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ $re := $.File.BaseFileName }}
-</span></span><span class="line"><span class="cl">{{ $backlinks := slice }}
-</span></span><span class="line"><span class="cl">{{ range .Site.AllPages }}
-</span></span><span class="line"><span class="cl">   {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }}
-</span></span><span class="line"><span class="cl">	  {{ $backlinks = $backlinks | append . }}
-</span></span><span class="line"><span class="cl">   {{ end }}
-</span></span><span class="line"><span class="cl">{{ end }}
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">{{ if gt (len $backlinks) 0 }}
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Links to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;backlinks&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	   {{ range $backlinks }}
-</span></span><span class="line"><span class="cl">		  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .RelPermalink }}&#34;</span><span class="p">&gt;</span>{{ .Title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	   {{ end }}
-</span></span><span class="line"><span class="cl">	 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ else  }}
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bl-section&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>No notes link to this note<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ end }}
-</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/_default/single.html</code> 中增加下面代码，放到合适的地方。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;backlinks.html&#34; . }}
-</span></span></code></pre></div><p>放在文章下方的话可以插入如下位置</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;post-content&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    {{- if not (.Param &#34;disableAnchoredHeadings&#34;) }}
-</span></span><span class="line"><span class="cl">    {{- partial &#34;anchored_headings.html&#34; .Content -}}
-</span></span><span class="line"><span class="cl">    {{- else }}{{ .Content }}{{ end }}
-</span></span><span class="line"><span class="cl">    {{ partial &#34;backlinks.html&#34; . }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span></code></pre></div><h2 id="mathjax-support">MathJax support</h2>
-<h3 id="方案1">方案1</h3>
-<p>在 <code>themes/xxx/layouts/_default/single.html</code> 中 <code>header</code> 中增加下面代码。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span></code></pre></div><h3 id="方案2">方案2</h3>
-<p>增加 <code>themes/xxx/layouts/partials/mathjax.html</code> 文件，并在其中增加下面代码，实现即便是页面间的跳转，也可以实时渲染公式。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">MathJax</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">tex</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">inlineMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\(&#39;</span><span class="p">,</span> <span class="s1">&#39;\\)&#39;</span><span class="p">]],</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">displayMath</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;$$&#39;</span><span class="p">,</span><span class="s1">&#39;$$&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;\\[&#39;</span><span class="p">,</span> <span class="s1">&#39;\\]&#39;</span><span class="p">]],</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">processEscapes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">processEnvironments</span><span class="o">:</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">skipHtmlTags</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;noscript&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;pre&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&#34;mjx-container&#34;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">x</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">classList</span> <span class="o">+=</span> <span class="s1">&#39;has-jax&#39;</span><span class="p">})</span>
-</span></span><span class="line"><span class="cl">    <span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://polyfill.io/v3/polyfill.min.js?features=es6&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;MathJax-script&#34;</span> <span class="na">async</span>
-</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">code</span><span class="p">.</span><span class="nc">has-jax</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">font</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">border</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="mh">#515151</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span></code></pre></div><p>在 <code>themes/xxx/layouts/partials/header.html</code> 中增加下面代码，放到合适的地方。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ partial &#34;mathjax.html&#34; . }}
-</span></span></code></pre></div><p>如果不想所有页面都加载 MathJax，就添加下面代码。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{ if .Params.mathjax }}{{ partial &#34;mathjax.html&#34; . }}{{ end }}
-</span></span></code></pre></div><p>并通过 <a href="https://ox-hugo.scripter.co/doc/custom-front-matter/">Custom Front-matter Parameters</a> 设置 <code>mathjax: true</code>​。具体是添加下面代码到需要导出并用 MathJax 展示的 org 文件头部，导出后就是 <code>.md</code> 文件中的 metadata。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+HUGO_CUSTOM_FRONT_MATTER</span><span class="c">: :mathjax true</span>
-</span></span></code></pre></div><p>另外对于一些用到额外包以及复杂的块 Latex，MathJax 的支持并不是很好。可以将块导出为 svg，即在头部增加 <code>#+options: tex:dvisvgm</code> 就可以了。</p>
 ]]></content:encoded>
     </item>
     
@@ -5672,62 +5657,6 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
     </item>
     
     <item>
-      <title>Total order broadcast</title>
-      <link>https://sheerwill.live/posts/main/20220616135058-total_order_broadcast/</link>
-      <pubDate>Fri, 10 Feb 2023 14:17:59 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220616135058-total_order_broadcast/</guid>
-      <description>Definition 总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。FIFO broadcast 和 Causal broadcast 允许不同的节点以不同</description>
-      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
-<p>总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。<a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 和 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 允许不同的节点以不同的顺序传递信息，total order broadcast 在各节点之间强制执行一致性，确保所有节点以相同的顺序传递信息。精确的传递顺序没有规定，只要它在所有节点上都是一样的。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/total-order-broadcast-1.png"
-         alt="Figure 1: total-order-broadcast-1"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>total-order-broadcast-1</p>
-        </figcaption>
-</figure>
-
-<p>所有三个节点都按照 \(m_{1}\), \(m_{2}\), \(m_{3}\) 的顺序传递消息</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/total-order-broadcast-2.png"
-         alt="Figure 2: total-order-broadcast-2"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>total-order-broadcast-2</p>
-        </figcaption>
-</figure>
-
-<p>所有三个节点都按照 \(m_{1}\), \(m_{3}\), \(m_{2}\) 的顺序传递信息。只要节点同意，这两种执行方式都是有效的。</p>
-<p>与 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 一样，节点可能需要保留消息，等待其他需要首先传递的消息。例如，节点 \(C\) 可以按任一顺序接收消息 \(m_{2}\) 和 \(m_{3}\)。如果算法确定 \(m_{3}\) 应该在 \(m_{2}\) 之前传递，但如果节点 \(C\) 首先收到 \(m_{2}\)，那么 \(C\) 将需要保留 \(m_{2}\)，直到收到 \(m_{3}\) 之后。</p>
-<p>在这些图上可以看到另一个重要的细节：在 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 和 <a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 的情况下，当一个节点广播一个消息时，它可以立即将该消息传递给自己，而不必等待与任何其他节点的通信。这在全序广播中不再是这样：例如，在 图<sub>total-order-broadcast-1</sub> 上，\(m_{2}\) 需要在 \(m_{3}\) 之前被传递，所以节点 \(A\) 向自己传递 \(m_{3}\) 必须等到 \(A\) 从 \(B\) 那里收到 \(m_{2}\) 之后。</p>
-<p>最后，FIFO-total order broadcast 和 total order broadcast 很像，多了一个先进先出的要求，即同一节点广播的任何消息都按其发送的顺序交付。实际上图<sub>total-order-broadcast-1</sub> 和图<sub>total-order-broadcast-2</sub> 的例子就是有效的 FIFO-total order broadcast，因为 \(m_{1}\) 都是在 \(m_{3}\) 之前被传递的。</p>
-<h2 id="total-order-broadcast-algorithms">Total order broadcast algorithms</h2>
-<blockquote>
-<p><strong>Single leader</strong> approach:</p>
-<ul>
-<li>指定一个节点为 leader</li>
-<li>想要广播消息，将其发送给 leader，leader 再将其通过 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 广播给其他节点。</li>
-<li>Problem: leader 崩溃 \(\Longrightarrow\) 没有消息被传递</li>
-<li>安全地更换 leader 很困难</li>
-</ul>
-<p><a href="/posts/main/20220609201658-lamport_clocks/">Lamport clocks</a> approach:</p>
-<ul>
-<li>每条消息附带上 lamport 时间戳</li>
-<li>按照时间戳的总顺序传递消息</li>
-<li>Problem: 无法知道是否收到了所有时间戳小于 \(T\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 的消息，需要在缓存中缓存来自每个节点时间戳大于等于 \(T\) 的消息。</li>
-</ul>
-</blockquote>
-<p>上述两个方法，都不具有容错性。单个节点崩溃以及 leader 节点崩溃都会使得其他节点无法传递消息。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>当前节点的时间戳 \(T\)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Callback Hell</title>
       <link>https://sheerwill.live/posts/main/20220616092944-callback_hell/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:58 +0800</pubDate>
@@ -6524,93 +6453,6 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
     </item>
     
     <item>
-      <title>Causal broadcast</title>
-      <link>https://sheerwill.live/posts/main/20220616132407-causal_broadcast/</link>
-      <pubDate>Fri, 10 Feb 2023 14:17:58 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220616132407-causal_broadcast/</guid>
-      <description>Definition Causal broadcast 算法有点类似于 FIFO broadcast： 每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟</description>
-      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
-<p>Causal broadcast 算法有点类似于 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a>：</p>
-<p>每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟算法中，向量元素计算每个节点发生的事件数量，而在 causal broadcast 算法中，向量元素计算来自每个发送者的已发送的消息数量。</p>
-<p>如果节点 \(C\) 在 \(m_{1}\) 之前收到 \(m_{2}\)，\(C\) 的广播算法将不得不保留（延迟或缓冲）\(m_{2}\)，直到 \(m_{1}\) 被传递之后，以确保消息按因果顺序传递​。在下图的例子中，消息 \(m_{2}\) 和 \(m_{3}\) 是​<strong>同时广播</strong>​的。节点 \(A\) 和 \(C\) 按照 \(m_{1}\)、\(m_{3}\)、\(m_{2}\) 的顺序传递消息，而节点 \(B\) 按照 \(m_{1}\)、\(m_{2}\)、$m<sub>3</sub>$的顺序传递。这些传递顺序中的任何一个都是可以接受的，因为它们都与因果关系一致。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/causal-broadcast.png"
-         alt="Figure 1: causal-broadcast"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>causal-broadcast</p>
-        </figcaption>
-</figure>
-
-<p>有因果关系的信息必须按因果顺序传递。并行的消息可以按照任何顺序传递。</p>
-<p>上图：broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) and broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) and broadcast(\(m_{1}\)) broadcast(\(m_{3}\)) \(\Longrightarrow\) valid orders are: (\(m_{1}\), \(m_{2}\), \(m_{3}\)) or (\(m_{1}\), \(m_{3}\), \(m_{2}\))</p>
-<h2 id="causal-broadcast-algorithm">Causal broadcast algorithm</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/causal-broadcast-algorithm.svg"
-         alt="Figure 2: causal-broadcast-algorithm"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>causal-broadcast-algorithm</p>
-        </figcaption>
-</figure>
-
-<p>每个节点的本地状态由 \(sendSeq\)、\(delivered\) 和 \(buﬀer\) 组成，它们的含义与 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 算法中相同。当一个节点想要广播一个消息时，我们会附上发送节点的编号 \(i\) 和 \(deps\)（表示该消息因果关系的向量）。\(deps\) 就是节点本地 \(delivered\) 的复制，统计了每个节点发送消息并传递到该节点的数量。在这次广播之前，所有已经在本地交付的消息必须出现在广播消息的因果顺序之前。然后将发送节点自己的这个向量的元素更新为等于 \(sendSeq\)，这就​<strong>保证了这个节点所广播的每条消息都与同一节点所广播的前一条消息有因果关系</strong>​。</p>
-<p>当收到一个消息时，算法首先将其添加到 \(buﬀer\) 中，就像 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 一样，然后在 \(buﬀer\) 中搜索任何准备好的消息。比较 \(deps ≤ delivered\)。如果这个节点已经交付了所有在因果顺序上必须在这个消息之前的消息，那么，任何在因果关系上准备好的消息都会被传递给 Application，并从 \(buﬀer\) 中移除，并且将 \(delivered\) 中的相应条目被递增。</p>
-<h2 id="summary">Summary</h2>
-<p>Causal broadcast 的保持因果顺序的原理和 <a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 很相似，向量中的每个条目，前者是消息发送者已发送消息的数量，后者是每个节点发生事件的数量。deps 取代 <a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a> 中的 sendSeq 附带在广播的信息中，这样通过在 <a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 中介绍的向量比较方法，可以确定消息之间的因果关系来控制消息传递的顺序。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>FIFO broadcast</title>
-      <link>https://sheerwill.live/posts/main/20220616105609-fifo_broadcast/</link>
-      <pubDate>Fri, 10 Feb 2023 14:17:58 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220616105609-fifo_broadcast/</guid>
-      <description>Definition 最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之</description>
-      <content:encoded><![CDATA[<h2 id="definition">Definition</h2>
-<p>最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之前被传递，因为它们都是由 \(A\) 发送的。然而，\(m_{2}\) 可以在 \(m_{1}\) 和 \(m_{3}\) 之前、之间或之后的任何时间被传递。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/FIFO-broadcast.png"
-         alt="Figure 1: FIFO-broadcast"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>FIFO-broadcast</p>
-        </figcaption>
-</figure>
-
-<p>同一个节点发送的消息必须要按照发送的顺序传递，不同节点发送的消息可以是任意的顺序，比如 \((m_{2}, m_{1}, m_{3})\)，\((m_{1}, m_{2}, m_{3})\) 或者 \((m_{1}, m_{3}, m_{2})\)。</p>
-<p>关于这些广播协议的另一个细节：我们假设每当一个节点广播一个消息时，它也会将该消息传递给自己（在上图中用回环箭头表示）。一个节点知道它自己广播了什么消息，所以传递给自己看似没有必要，但在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中是需要这个步骤。</p>
-<p>上图中的执行示例是有效的先进先出「广播」，但它违反了因果性：虽然 \(B\) 在接收了 \(m_{1}\) 之后才广播的 \(m_{2}\)，但节点 \(C\) 在 \(m_{1}\) 之前就传递了 \(m_{2}\)。<a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a> 提供了一个比 FIFO broadcast  更严格的排序属性。顾名思义，它确保信息按因果顺序传递：也就是说，如果一条信息的广播发生在另一条信息的广播之前，那么所有节点必须按这个顺序传递这两条信息。如果两个消息是同时广播的，一个节点可以按任何一个顺序传递它们。</p>
-<h2 id="fifo-broadcast-algorithm">FIFO broadcast algorithm</h2>
-<blockquote>
-<p>\begin{document}
-\begin{algorithm}
-\caption{FIFO broadcast algorithm}
-\FnOn{\textsf{\upshape initialisation}}
-{sendSeq := 0\;
-delivered := \langle0, 0, &hellip;, 0\rangle\\
-buffer := \{\}}</p>
-<p>\FnOn{\textsf{\upshape request to broadcast $m$ at node $N_{i}$}}
-{\KwSend \textsf{\upshape $(i, sendSeq, m)$ via reliable broadcast}\;
-sendSeq := sendSeq + 1\;}</p>
-<p>\FnOn{\textsf{\upshape receiving $msg$[fn:1] from reliable broadcast at node $N_{i}$}}
-{buffer := buffer ∪ \{msg\}\;</p>
-<p>\FnOn{$∃sender, m. (sender, delivered[sender], m) \in buﬀer}
-{\KwDeliver \textsf{\upshape $m$ to the application}\;
-delivered[sender] := delivered[sender] + 1}}
-\end{algorithm}
-\end{document}</p>
-</blockquote>
-<figure>
-    <img loading="lazy" src="/ox-hugo/latex-FFIO-broadcast-algorithm.svg"
-         alt="Figure 2: latex-FFIO-broadcast-algorithm"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>latex-FFIO-broadcast-algorithm</p>
-        </figcaption>
-</figure>
-
-<p>节点 \(N_{i}\) 发送的每个 FIFO broadcast 消息都会附带发送节点编号 \(i\) 和一个序列号（该节点发送消息对应的序列号，第一条消息对应为 0，第二条消息对应为 1）。每个节点的本地状态由序列号 \(sendSeq\)（计算该节点广播的消息数量）、\(delivered\)（一个向量，每个节点有一个条目，统计了每个节点发送消息并传递到该节点的数量）和 \(buﬀer\)（一个缓存，用于保留消息直到它们准备好被传递给 Application，也就是 <a href="/posts/main/20220602202933-distribution_system/#receiving-versus-delivering">Receiving versus delivering</a> 中提到的 deliver 阶段）组成。该算法检查来自任何发送者的与预期的下一个序列号相匹配的消息，然后递增该序列号，确保来自每个特定发送者的消息按照序列号递增的顺序被传递。</p>
-<h2 id="summary">Summary</h2>
-<p>FIFO broadcast 的保持消息顺序的原理和 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport clocks</a> 很相似，都是用递增的整数来确定同一个节点上的消息传递的顺序，\(deliver\) 是个存放着所有节点 \(sendSeq\) 的向量，存放于每个节点，配合 \(sendSeq\) 控制来自同一个节点的消息传递的顺序。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Quorum</title>
       <link>https://sheerwill.live/posts/main/20220615143721-quorum/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:58 +0800</pubDate>
@@ -6636,71 +6478,6 @@ delivered[sender] := delivered[sender] + 1}}
     </item>
     
     <item>
-      <title>Lamport clocks</title>
-      <link>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</link>
-      <pubDate>Fri, 10 Feb 2023 14:17:57 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220609201658-lamport_clocks/</guid>
-      <description>Lamport clocks algorithm Figure 1: latex-lamport-clocks-algorithm Lamport clocks in words Figure 2: lamport-example-simple 每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。 增长后的值设为 \(L(e)\) 发送消息时附带上当前的计数</description>
-      <content:encoded><![CDATA[<h2 id="lamport-clocks-algorithm">Lamport clocks algorithm</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/latex-lamport-clocks-algorithm.svg"
-         alt="Figure 1: latex-lamport-clocks-algorithm"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>latex-lamport-clocks-algorithm</p>
-        </figcaption>
-</figure>
-
-<h2 id="lamport-clocks-in-words">Lamport clocks in words</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example-simple.png"
-         alt="Figure 2: lamport-example-simple"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>lamport-example-simple</p>
-        </figcaption>
-</figure>
-
-<ul>
-<li>每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。</li>
-<li>增长后的值设为 \(L(e)\)</li>
-<li>发送消息时附带上当前的计数 \(t\)</li>
-<li>消息接受者在消息中的时间戳和当前节点的时间戳之间取最大值后自增 1</li>
-</ul>
-<p>Properties of this scheme:</p>
-<ul>
-<li>if \(a \rightarrow b\) then \(L(e) &lt; L(b)\)</li>
-<li>However, \(L(a) &lt; L(b)\) does not imply \(a \rightarrow b\)</li>
-<li>Possible that \(L(a) = L(b)\) for \(a \ne b\)</li>
-</ul>
-<p>Lamport 时间戳本质上是一个整数，用来计算已发生事件的数量。因此，它与物理时间没有直接关系。在每个节点上，时间都会增加，因为每个事件的整数都会递增。该算法假设了一个 crash-stop 模型（如果时间戳被保持在稳定的存储中，即在磁盘上，则是 crash-recovery 模型）。</p>
-<h2 id="lamport-clocks-example">Lamport clocks example</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/lamport-example.png"
-         alt="Figure 3: lamport-example"/> <figcaption>
-            <p><span class="figure-number">Figure 3: </span>lamport-example</p>
-        </figcaption>
-</figure>
-
-<p>Let \(N(e)\) be the node at which event \(e\) occurred.</p>
-<p>Then the pair \((L(e), N(e))\) <strong>uniquely identiﬁes</strong> event \(e\).</p>
-<p>Deﬁne a <strong>total order</strong> \(\prec\) using Lamport timestamps:</p>
-<p>\((a \prec b) \iff (L(a) &lt; L(b) \vee (L(a) = L(b) \wedge N(a) &lt; N(b)))\)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> <sup>, </sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<p>This order is <strong>causal</strong>: \((a \rightarrow b) \longrightarrow (a \prec b)\)</p>
-<p>回顾之前的 happens-before relation 是局部顺序。利用 Lamport 时间戳可以将这种局部的顺序扩展到全局顺序。可以用（时间戳, 节点名称) 组合：首先比较时间戳，如果相同，则比较节点名称。</p>
-<p>对于任何两个事件 \(a \ne b\)，那么既不是 \(a \prec b\) 也不是 \(b \prec a\)。只要 \(a → b\)，我们就有 \(a \prec b\)，换句话说，\(\prec\) 是局部顺序 \(\rightarrow\) 的线性扩展。然而，如果 \(a \rVert b\)，我们可以有 \(a \prec b\) 或 \(b \prec a\)，所以两个事件的顺序是由算法任意决定的。 比如 \((1, A)\) 和 \((1, C)\) 两个事件是平行的，按照 Lamport 的算法，\((1, A)\) 必然是在 \((1, C)\) 之前的，但实际情况可能是 \((1, C)\) 在前。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>\(\iff\) is Logical biconditional，当且仅当的意思。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>\(\vee\) is logical or, \(\wedge\) is logical and.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Stub</title>
       <link>https://sheerwill.live/posts/main/20220604180341-stub/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:57 +0800</pubDate>
@@ -6711,349 +6488,6 @@ delivered[sender] := delivered[sender] + 1}}
 <li>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。</li>
 <li>在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端和服务端之间传递参数的一段代码。</li>
 </ol>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Distribution System</title>
-      <link>https://sheerwill.live/posts/main/20220602202933-distribution_system/</link>
-      <pubDate>Fri, 10 Feb 2023 14:17:56 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220602202933-distribution_system/</guid>
-      <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
-      <content:encoded><![CDATA[<h2 id="remote-procedure-call">Remote Procedure Call</h2>
-<p><a href="/posts/main/20220603220847-remote_procedure_call_rpc/">Remote Procedure Call (RPC)</a> 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎么办？</p>
-<ol>
-<li>如果在函数调用过程中，服务挂了？</li>
-<li>如果消息丢失了？</li>
-<li>如果消息延迟了？</li>
-<li>如果出了问题，回复消息是否安全？</li>
-</ol>
-<p>要解决这些问题，就需要将网络以及节点之间的情况抽象出来，以及时序的问题。在设计分布式算法时，需要更加抽象一点，以便更好的推理整个过程。</p>
-<h2 id="system-model">System model</h2>
-<h3 id="network-behaviour">Network behaviour</h3>
-<p><a href="/posts/main/20220602202247-the_two_generals_problem/">The two generals problem</a> 描述了网络通信丢失的场景。</p>
-<p>假设两个节点之是间双向的点对点的通信。</p>
-<h4 id="reliable-links">Reliable links</h4>
-<p>一条消息只会在被一个节点发送的时候才会收到，并且消息是可以重新排序的。</p>
-<p>中间没有伪造消息等行为，发送了就一定会被收到。</p>
-<h4 id="fair-loss-links">Fair-loss links</h4>
-<p>消息可能会丢失、重复或重新排序，如果你一直重新发送，消息终将会传递过去。</p>
-<p>每次发送消息成功的概率都是非零，这个时候只要一直重试，我们就假设消息一定会传递到另外一个节点。</p>
-<p><strong>Fair-lose links 其实可以通过不断的重试以及并且对重复收到的消息去重，就可以达到 Reliable links 的效果。</strong></p>
-<h4 id="arbitrary-links">Arbitrary links</h4>
-<p>可能传递过程中会有恶意的第三方对消息进行干预。</p>
-<p>比如公共场合的公共 WiFi 就会出现这种情况。</p>
-<p><strong>Arbitrary links 通过 TLS 的加持，就可以达到 Fair-loss links 的效果。</strong></p>
-<h3 id="nodes-behaviour">Nodes behaviour</h3>
-<p><a href="/posts/main/20220602202317-the_byzantine_generals_problem/">The Byzantine generals problem</a> 描述了节点出错，导致全体协作策略失败以及容错率的问题。</p>
-<p>假设每个节点都执行指定的算法，假设有以下情况。</p>
-<h4 id="crash-stop--fail-stop">Crash-stop (fail-stop)</h4>
-<p>如果一个节点出现问题挂了，并且在这之后永远停机。</p>
-<h4 id="crash-recovery--fail-recovery">Crash-recovery (fail-recovery)</h4>
-<p>一个节点挂了，并丢失了内存状态，但会在过段时间后恢复。</p>
-<h4 id="byzantine-fail-arbitrary">Byzantine （fail-arbitrary)</h4>
-<p>节点偏离了原本的算法，可能会发生任何事情，包括崩溃或者恶意的行为。</p>
-<h3 id="synchrony--timing--assumption">Synchrony (timing) assumption</h3>
-<h4 id="synchronous">Synchronous</h4>
-<p>消息延迟不超过已知的上限。到达这个上限后，消息要么被传递，要么丢失。节点以已知的速度执行算法。每一步代码的执行都有执行时间的上限。</p>
-<h4 id="partically-synchronous">Partically synchronous</h4>
-<p>系统中一部分时间内是异步的，另一部分是同步的。</p>
-<h4 id="asynchronous">Asynchronous</h4>
-<p>消息可以任意地被延迟，节点可以任意地暂停，并没有时序上的保证。</p>
-<h2 id="clocks-and-time-in-distributed-systems">Clocks and time in distributed systems</h2>
-<p>分布式系统中经常涉及到需要测量时间，比如：</p>
-<ul>
-<li>Schedulers, timeouts, failure detectors, retry timers</li>
-<li>Performance measurements, statistics, profiling (performance analysis 也称为 profiling)</li>
-<li>Log files &amp; databases: record when an event occurred</li>
-<li>Data with time-limited validity (e.g. cache entries)</li>
-<li><strong>Determining order of events across several nodes</strong></li>
-</ul>
-<p>分布式系统中会遇到两种类型的时钟：</p>
-<ul>
-<li>physical clocks: count number of seconds elapsed</li>
-<li>logical clocks: count events, e.g. messages sent</li>
-</ul>
-<h3 id="clock-synchronisation">Clock synchronisation</h3>
-<p>物理时钟会有时间上的偏移，通常是通过和电脑、手机、电视等相对准确的地方来校准物理时钟的时间，比如手表，老式的钟摆。</p>
-<p>电脑上的时间同样会有偏移，是通过 <a href="/posts/main/20220602202411-network_time_protocol_ntp/">Network Time Protocol(NTP)</a> 来校准电脑的时间，也就是物理时钟的校准。</p>
-<h2 id="broadcast-protocols-and-logical-time">Broadcast protocols and logical time</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/ordering-of-messages.png"
-         alt="Figure 1: ordering-of-messages"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>ordering-of-messages</p>
-        </figcaption>
-</figure>
-
-<p>\(m_{1}\) = &ldquo;A says: The moon is made of cheese!&rdquo;</p>
-<p>\(m_{2}\) = &ldquo;B says: Oh no it isn&rsquo;t!&rdquo;</p>
-<p>User C sees \(m_{2}\) first, \(m_{1}\) second, even though logically \(m_{1}\) <a href="/posts/main/20220602202832-causality_and_happen_before_relation/">happened before</a> \(m_{2}\).</p>
-<p><strong>Problem</strong>: even with synced clocks, \(t_{2 }&lt; t_{1}\) is possible. Timestamp order is inconsistent with expected order!</p>
-<p>即便我们已经通过 NTP 尽量保证物理时钟上的同步，但这个时候依旧会发生因果关系不一致的情况，所以这个时候就需要逻辑时钟。</p>
-<p>逻辑时钟是在分布式系统中专门用于捕获系统中发生事件之间的因果关系，因此逻辑时钟其实就是一种计数器，每次事件发生的时候都会往前递增，所以随着事件的发生它会随着时间向前移动，但它和物理时间并没有实际的关系。</p>
-<h3 id="logical-time">Logical time</h3>
-<p>Logical clocks: designed to <strong>capture causal dependencies</strong>.</p>
-<p>\((e_{1} \rightarrow e_{2}) \Longrightarrow (T(e_{1}) &lt; T(e_{2}))\)</p>
-<p>当事件1发生在事件2之前，那么事件1的时间戳应该小于事件2的时间戳，这是逻辑时钟要保证的最基本的原则。</p>
-<p>下面将研究一下两种逻辑时钟：</p>
-<ul>
-<li>
-<p><a href="/posts/main/20220609201658-lamport_clocks/">Lamprot clocks</a> 是在分布式系统中的每个节点都维护一个计数器，每一个当前节点事件 \(e\) 发生时自增 ；发送消息时，也会附带上当前节点的计数 \(t\) ，消息接收者收到消息后，取出消息中的计数器与当前节点计数器比较，去最大值后自增 1。</p>
-<p>这样可以实现局部顺序，再加上节点名称，形成(时间戳，节点名称)的组合后，就可以扩展为全局顺序。</p>
-<p>但这样也有缺点，算法在时间戳相同，节点名称不同的平行事件的顺序判定时，会出现与实际情况不符的情况。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-</li>
-<li>
-<p><a href="/posts/main/20220602235916-vector_clocks/">Vector clocks</a> 除了是向量之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目</p>
-<p>这样就可以弥补 Lamport 的缺点，可以完全确定每个事件的因果顺序。</p>
-</li>
-</ul>
-<h3 id="delivery-order-in-broadcast-protocols">Delivery order in broadcast protocols</h3>
-<p>许多网络提供点对点（单播）的信息传递，其中一个信息有一个特定的收件人。广播协议对网络进行了概括，使一条信息被发送到某个组的所有节点。组的成员可能是固定的，或者系统可能提供节点加入和离开组的机制。</p>
-<p>一些局域网在硬件层面提供组播或广播（例如，IP 组播），但互联网上的通信通常只允许单播。此外，硬件级的组播通常是在 best-effort 基础上提供的，允许消息被丢弃；要使其可靠，需要类似于这里讨论的重传协议。</p>
-<p>上面提到的 node behaviour 和 synchrony 的系统模型假设直接延伸到广播组。</p>
-<h4 id="broadcast-protocols">Broadcast protocols</h4>
-<p>Broadcast (multicast) is <strong>group communication</strong>:</p>
-<ul>
-<li>一个节点发送消息，所有组内节点传递。</li>
-<li>组内成为可以是固定的也可以是动态的</li>
-<li>如果一个节点发生错误，剩余的组内成员顶上。</li>
-<li>Note: 这个观念比 IP 组播更加普遍</li>
-</ul>
-<p>建立在之前讲到的系统模型上：</p>
-<ul>
-<li>可以是 <strong>best-effort</strong> (可能会丢失消息) 或者 <strong>reliable</strong> (非故障节点传递每条消息，重传丢失的消息。)</li>
-<li>Asynchronous / partially synchronous timing model \(\Longrightarrow\) 消息延迟​<strong>没有上限</strong></li>
-</ul>
-<h4 id="receiving-versus-delivering">Receiving versus delivering</h4>
-<figure>
-    <img loading="lazy" src="/ox-hugo/receive-versus-deliver.png"
-         alt="Figure 2: receive-versus-deliver"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>receive-versus-deliver</p>
-        </figcaption>
-</figure>
-
-<p>假定网络提供点对点的发送/接收，在广播算法​从网络中​<strong>收到</strong>​消息后，传递给应用前会在缓存或者队列当中。</p>
-<p>下面将研究三种不同形式的「广播」。所有这些都是可靠的：每条消息最终都会被传递到每个非故障节点，但没有时间上的保证。然而，它们在每个节点上传递信息的顺序方面存在差异。事实证明，这种顺序上的差异对实现广播的算法有非常根本的影响。</p>
-<h4 id="forms-of-reliable-broadcast">Forms of reliable broadcast</h4>
-<ul>
-<li>
-<p><a href="/posts/main/20220616105609-fifo_broadcast/">FIFO broadcast</a></p>
-<p>如果 \(m_{1}\) 和 \(m_{2}\) 从相同的节点广播，并且 broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\))，那么 \(m_{1}\) 必然在 \(m_{2}\) 之前被传递。</p>
-</li>
-<li>
-<p><a href="/posts/main/20220616132407-causal_broadcast/">Causal broadcast</a></p>
-<p>如果 broadcast(\(m_{1}\)) \(\longrightarrow\) broadcast(\(m_{2}\)) 那么 \(m_{1}\) 必然在 \(m_{2}\) 之前被传递。</p>
-</li>
-<li>
-<p><a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a></p>
-<p>如果在同一个节点 \(m_{1}\) 在 \(m_{2}\) 之前被传递，那么所有节点 \(m_{1}\) 必然在 \(m_{2}\) 之前被传递。</p>
-</li>
-<li>
-<p><strong>FIFO-total order broadcast</strong></p>
-<p>是 FIFO broadcast 和 Total order broadcast 的结合</p>
-</li>
-</ul>
-<h4 id="relationships-between-broadcast-models">Relationships between broadcast models</h4>
-<figure>
-    <img loading="lazy" src="/ox-hugo/broadcast-models-relationship.png"
-         alt="Figure 3: broadcast-models-relationship"/> <figcaption>
-            <p><span class="figure-number">Figure 3: </span>broadcast-models-relationship</p>
-        </figcaption>
-</figure>
-
-<p>FIFO-total order broadcast 是一个严格意义上比因果广播更强的模型；换句话说，每个有效的 FIFO-total order broadcast 协议也是一个有效的 causal broadcast 协议（反过来就不是了），其他协议也是如此。</p>
-<h3 id="broadcast-algorithms">Broadcast algorithms</h3>
-<p>实现广播算法，简单来说，涉及到两个步骤。</p>
-<ol>
-<li>确保每个节点都能收到每天消息</li>
-<li>以正确的顺序传递这些消息</li>
-</ol>
-<p>首先研究如何可靠地传递消息，当一个节点想要广播一条消息时，它就单独向其他每个节点发送消息，使用上面提到过的 reliable links。但很可能一条消息丢失，发送的节点在重新发送前就崩溃了，这种情况下，丢失的这条消息对应的节点就无法接收到这条消息。</p>
-<p>为了提高可靠性，可以让其他节点帮忙。例如，当一个节点第一次收到一个特定消息时，它就把消息转发给其他每个节点（这种被称为急性可靠广播（Eager reliable broadcast））。这种算法确保了即使一些节点崩溃，所有剩下的非故障的节点都会收到每条消息。然而，这种算法很低效：在没有故障的情况下，每条消息在由 \(n\) 个节点组成的小组中要发送 \(O(n^{2})\) 次，每个节点要收到每条消息 \(n-1\) 次，意味着占用了大量的带宽。</p>
-<p>eager reliable broadcast 的变体沿着不同维度（比如容错性、所有节点接收消息的时间和被使用的带宽）优化，其中最常见的是流言协议（Gossip protocols，也被叫做流行病协议（Epidemic protocols））。在这些协议中，一个想广播消息的节点将其发送给随机选择的少量固定数量的节点。第一次收到信息时，一个节点会将其转发给固定数量的随机选择的节点。这类似于流言、谣言或传染病在人群中的传播方式。</p>
-<p>Gossip protocols 并不能保证所有节点都能收到消息：在随机选择节点时，有可能总是遗漏了一些节点。然而，如果算法的参数选择得当，信息不被传递的概率很小。Gossip protocols 很有吸引力，在正确的参数下，对消息丢失和节点崩溃有很强的弹性，同时还能保持高效。其实核裂变的发生过程，也类似于这种协议。</p>
-<p>可以在 eager reliable broadcast 或 gossip protocol 的基础上，建立 FIFO、causal 或者 total order broadcast。</p>
-<ul>
-<li><a href="/posts/main/20220616105609-fifo_broadcast/#fifo-broadcast-algorithm">FIFO broadcast algorithm</a></li>
-<li><a href="/posts/main/20220616132407-causal_broadcast/#causal-broadcast-algorithm">Causal broadcast algorithm</a></li>
-<li><a href="/posts/main/20220616135058-total_order_broadcast/#total-order-broadcast-algorithms">Total order broadcast algorithms</a></li>
-</ul>
-<h2 id="replication">Replication</h2>
-<p>现在要讨论的是复制的问题，也就是在多个节点上维护相同数据的复制体，每个节点被称为副本。复制是许多分布式数据库、文件系统和其他存储系统的一个标准特征。它是我们实现容错的主要机制之一：如果一个副本出现故障，我们可以继续访问其他副本上的数据副本。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<ul>
-<li>在不同节点维护相同数据的副本</li>
-<li>数据库、文件系统、缓存等等</li>
-<li>维护相同数据的节点叫做副本</li>
-<li>如果一些副本出错，其他副本依旧是可访问的。</li>
-<li>将负载分散到多个副本</li>
-<li>如果数据没有变化，维护很简单，只需要复制。</li>
-<li>专注于数据变化</li>
-</ul>
-<p>相较于 <a href="https://zh.wikipedia.org/zh-cn/RAID">RAID</a> (Redundant Array of Independent Disks)：在单个计算机内复制。</p>
-<ul>
-<li>RAID 只有一个控制器；在分布式系统中，每个节点都是独立的。</li>
-<li>副本可以在全世界靠近用户的地方分布（CDN 本质其实是一种大规模分布式多级缓存系统）</li>
-</ul>
-<h3 id="manipulating-remote-state">Manipulating remote state</h3>
-<p>在更新不同节点数据时，丢失数据或者丢失 TCP 返回的 \(ACK\)<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> 时，就会使得不同节点之间的副本不一致，不满足幂等性（Idempotent）。为了解决这个问题，可以给每次更新操作都加上一个逻辑时间戳，并将其作为数据存储在数据库当中；当需要删除这条记录时，实际上并没有删除，而是写入一个特殊的值（称为墓碑 tombstone），将其标记为删除。（其实就类似于软删除）</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/reconciling-replicas.png"
-         alt="Figure 4: reconciling-replicas"/> <figcaption>
-            <p><span class="figure-number">Figure 4: </span>reconciling-replicas</p>
-        </figcaption>
-</figure>
-
-<p>在许多副本系统中，副本运行一个协议来检测和调和任何差异（这被称为反熵 anti-entropy），以便副本最终持有相同数据的一致副本。由于有了 tombstone，反熵过程可以分辨出已经被删除的记录和尚未被创建的记录之间的差异。由于有了逻辑时间戳，可以分辨出一条记录的哪个版本比较老，哪个版本比较新。然后，反熵过程会保留较新的记录并丢弃较旧的记录。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/concurrent-reconciling-replicas.png"
-         alt="Figure 5: concurrent-reconciling-replicas"/> <figcaption>
-            <p><span class="figure-number">Figure 5: </span>concurrent-reconciling-replicas</p>
-        </figcaption>
-</figure>
-
-<p>如果同时两个请求分别想把两个副本的 \(x\) 的值进行修改。</p>
-<ul>
-<li>
-<p><strong>Last writer wins</strong> (LWW):</p>
-<p>采用 Lamport clocks 时，$t<sub>2</sub> &gt; t<sub>1</sub>$则保留 \(v_{2}\) 丢弃 \(v_{1}\)。</p>
-</li>
-<li>
-<p><strong>Multi-value register</strong>:</p>
-<p>采用 Vector clocks 时，\(t_{2 } &gt; t_{1}\) 则保留 \(v_{2}\) 丢弃 \(v_{1}\); \(t_{2} \rVert t_{1}\) 则 \(\{v_{1}, v_{2}\}\) 都保留。</p>
-</li>
-</ul>
-<p>向量时钟的缺点是它们会变得很昂贵：每个客户端都需要在向量中输入一个条目，在有大量客户端的系统中（或者客户端每次重启都会有新的身份），这些向量会变得很大，可能会比数据本身占用更多内存。更多类型的逻辑时钟，如点状版本向量（Dotted version vectors）<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>，已经被开发出来以优化这种类型的系统。</p>
-<h3 id="quorums">Quorums</h3>
-<p>具体如何进行复制的细节对系统的可靠性有很大影响。如果没有容错，拥有多个副本会使可靠性变差：副本越多，任何一个副本在任何时候出现故障的概率就越大（假设故障不是完全相关的）。然而，如果系统在一些有问题的复制体中仍然继续工作，那么可靠性就会提高：所有副本在同一时间出现问题的概率要比一个副本出现问题的概率低很多。</p>
-<h4 id="read-after-write-consistency">Read-after-write consistency</h4>
-<figure>
-    <img loading="lazy" src="/ox-hugo/read-after-write-consistency.png"
-         alt="Figure 6: read-after-write-consistency"/> <figcaption>
-            <p><span class="figure-number">Figure 6: </span>read-after-write-consistency</p>
-        </figcaption>
-</figure>
-
-<p>一个副本写入了数据，从另外一个副本读取，用户并没有读取到他刚刚提交的内容。如果要保持读写一致性（read-after-write consistency），则要两个节点都同时写入和读取，一旦有一个不可访问就会破坏读写一致性，没有任何容错率可言。</p>
-<h4 id="quorum--2-out-of-3">Quorum (2 out of 3)</h4>
-<figure>
-    <img loading="lazy" src="/ox-hugo/quorum.png"
-         alt="Figure 7: quorum"/> <figcaption>
-            <p><span class="figure-number">Figure 7: </span>quorum</p>
-        </figcaption>
-</figure>
-
-<p>通过使用三个副本可以解决这个难题<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。将每个读写请求发送到所有三个副本，但只要收到 \(\geq2\) 个响应，就认为请求成功。在这个例子中，写在复制体 \(B\) 和 \(C\) 上成功，而读在副本 \(A\) 和 \(B\) 上成功。对读和写都采用 &ldquo;三选二 &ldquo;的策略，可以保证至少有一个对读的响应来自看到最近写的副本（在这个例子中，这是副本 \(B\)）。</p>
-<p>对于同一个请求，不同的副本可能会返回不同的响应：在上图中，\(A\) 处读取会返回初始值 \((t_{0}, v_{0})\)，而 \(B\) 处的读取会返回该客户端之前写入的 \((t_{1}, v_{1})\)。利用时间戳，客户端可以知道哪个响应是最近的，将 \(v_{1}\) 返回给 Application。</p>
-<p>在这个例子中，响应写请求的副本集合 \((B, C)\) 是一个 write quorum，而响应读请求的集合 \((A, B)\) 是一个 read quorum。一般来说，quorum 是一个最小的节点集合，它必须对某个请求作出响应才能成功。为了确保读写一致性，write quorum 和 read quorum 必须有一个非空的交集：换句话说，read quorum 必须包含至少一个已经被承认的 write quorum。</p>
-<p>在分布式系统中，常见的 majority quorum 是由超过半数的节点组成的任意子集。在三个节点的系统 \(\{A, B, C\}\) 中，majority quorum 可以是 \(\{A, B\}\)、\(\{A, C\}\) 和 \(\{B, C\}\)。通常来讲，奇数节点的系统，\(\frac{n+1}{2}\) 大小的任意子集就是 majority quorum，偶数节点的系统，需要四舍五入 \(\left \lceil \frac{n+1}{2} \right \rceil = \frac{n+2}{2}\)<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>。majority quorum 有个特性：任意两个 quorums 至少有一个共同的元素，也就是交集至少有一个节点。</p>
-<p>只要不超过 \(n-w\) 个副本不可用（\(w\) 是 write quorum 的数量），系统就可以正常的处理更新；同样的，只要不超过 \(n-r\) 个副本不可以（\(r\) 是 read quorum 的数量），系统就可以正常的处理读请求。对于 majority quorum 来说，三个副本的系统可以容错一个节点，五个副本的系统可以容错两个节点，以此类推。</p>
-<p>在这种基于 quorum 的方法下，一些副本会错过一些更新。上图中，副本 \(A\) 错过了 \((t_{1}, v_{1})\)。让副本互相同步使其数据一致的方法上面提到过，叫做反熵（anti-entropy）。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/read-repair.png"
-         alt="Figure 8: read-repair"/> <figcaption>
-            <p><span class="figure-number">Figure 8: </span>read-repair</p>
-        </figcaption>
-</figure>
-
-<p>另外一个方法是让客户端帮助完成传播更新的过程。例如上图中，客户端从 \(B\) 读取了 \((t_{1}, v_{1})\)，但从 \(A\) 接收到的是 \((t_{0}, v_{0})\)，而 \(C\) 没有回应。这个时候客户端使用原始的时间戳 \(t_{1}\) 将最新的值发送给 \(A\) 和 \(C\)，\(C\) 如果已经更新了，也不过只是浪费一点点带宽。这种复制模式的数据库通常称为 Dynamo-style。</p>
-<h3 id="replication-using-broadcast">Replication using broadcast</h3>
-<p>在 quorum 中，基本上使用了 best-effort 以及客户端辅助使其他副本数据一致的方法，但这些都是不可靠的，中途会发生丢失，并且排序无法保证。</p>
-<h4 id="state-machine-replication--smr">State machine replication (SMR)</h4>
-<p>FIFO-total order broadcast: 每个节点以​<strong>相同的顺序</strong>​传递​<strong>相同的消息</strong>​。</p>
-<ul>
-<li>FIFO-total order broadcast 将每次更新，更新到所有副本。</li>
-<li>副本通过传递的消息来确认自身状态</li>
-<li>更新具有确定性</li>
-<li>副本是一种状态机：开始于固定的初始状态，以相同的顺序经历相同序列状态的变换 \(\Longrightarrow\) 所有副本都以相同的状态结尾</li>
-</ul>
-<p>利用 FIFO-total order broadcast 很容易建立一个复制系统：将每个更新请求广播给副本，副本基于传递的每个消息更新其状态。副本作为一个状态机，其输入是消息的传递，这种就叫做 state machine replication (SMR)。只要更新逻辑是确定的：任何两个处于相同状态的复制体，被赋予相同的输入，最终必须处于相同的下一个状态。甚至错误也必须是确定的：如果一个副本的更新成功了，但在另一个副本上失败了，它们就会变得不一致。</p>
-<p>SMR 的一个优秀特点是，从一个状态到下一个状态只要是确定的，其中的逻辑可以任意复杂。例如，可以处理具有任意业务逻辑的整个数据库事务，而这个逻辑可以同时依赖于广播信息和数据库的当前状态。一些分布式数据库以每个副本独立执行相同的确定性交易代码（这被称为主动复制）来实现复制。这一原则也是区块链、加密货币和分布式账本的基础：区块链中的 &ldquo;区块链 &ldquo;无非是由 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 传递的消息序列，每个副本都确定性地执行这些区块中描述的交易，以确定账本的状态（例如，谁拥有哪些钱）。一个 &ldquo;智能合约 &ldquo;只是一个确定的程序，当一个特定的消息被传递时，副本会执行这个程序。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/state-machine-replication.svg"
-         alt="Figure 9: state-machine-replication"/> <figcaption>
-            <p><span class="figure-number">Figure 9: </span>state-machine-replication</p>
-        </figcaption>
-</figure>
-
-<p>密切相关的概念：</p>
-<ul>
-<li>可序列化事务（按传递顺序执行）</li>
-<li>区块链、分布式账本、智能合约。</li>
-</ul>
-<p>限制：</p>
-<ul>
-<li>不能立即更新状态，必须等待广播传递。</li>
-<li>需要容错的 total order broadcast</li>
-</ul>
-<p>State machine replication 的缺点是 total order broadcast 的限制。当一个节点想通过 total order broadcast 来广播一个消息时，它不能立即将该消息传递给自己。之前讲过，传递给自己的消息也要遵从总秩序，所以当使用状态机复制时，想要更新其状态的副本要等待广播，与其他节点协调，并等待更新信息被传递给自己。状态机复制的容错性取决于底层 total order broadcast 的容错性。尽管如此，基于 total order replication 的复制还是被广泛使用。</p>
-<p>在 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 中提到过一种实现方法是指定一个节点作为 Leader，并将所有的消息通过它来路由，保证传递的顺序。这一原则也被广泛应用于数据库副本：许多数据库系统指定一个副本作为 leader，primary 或者 master。所有修改数据库的事务都需要在 leader 副本上执行。虽然 leader 会同时执行多个事务，但事务提交时会按照总的顺序提交。当事务提交后， leader 副本将数据变动广播给所有的 follow 副本，follow 副本按照之前提交的顺序在本地进行事务提交，这种方法被称为被动复制（passive replication）或者主从复制（primary-backup replication），这样的方式其实和 <a href="/posts/main/20220616135058-total_order_broadcast/">Total order broadcast</a> 是等效的。</p>
-<p>至于之前提到的其他广播方式，也可以用作复制，但需要更加小心，保证副本之间数据的一致性。</p>
-<h2 id="the-raft-consensus-algorithm">The Raft consensus algorithm</h2>
-<p>为了实现容错的 FIFO-total order broadcast，Raft 的具体实现细节可以参见 <a href="/posts/main/20220623152601-raft_consensus_algorithm/">Raft consensus algorithm</a>，另外有个非常好的动画<a href="http://thesecretlivesofdata.com/raft/">示意网站</a>可以更加直观的观察整个过程。。</p>
-<p>集群内的节点都对选举出的领袖采取信任，因此 Raft 不是一种拜占庭容错算法。</p>
-<h2 id="replica-consistency">Replica consistency</h2>
-<p>事务的关键是原子性。当一个事务跨越多个节点时，希望整个事务仍然具有原子性：也就是说，要么所有节点都必须提交事务且具有持久性，要么所有节点都回滚。因此，各节点之间就事务应该终止回滚还是提交要达成一致。这里说的一致和 Raft 中的不太一样，细节上有很大不同。</p>
-<table>
-<thead>
-<tr>
-<th>Consensus</th>
-<th>Atomic commit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>一个或多个节点提出一个值</td>
-<td>每个节点投票是否提交或中止</td>
-</tr>
-<tr>
-<td>任意一个提出的值都可以被承认</td>
-<td>如果所有的节点投票提交那么就必须提交；如果所有的节点都投票中止那么就必须中止。</td>
-</tr>
-<tr>
-<td>只要 quorum 数量的节点可以工作，崩溃的节点是可以被容忍的。</td>
-<td>如果不分的节点崩溃，必须中止。</td>
-</tr>
-</tbody>
-</table>
-<p>用来保证多个节点 atomic commitment 最常用的算法是 two-phase commit protocol (2PC)，也有 three-phase commit protocol，但这里不做研究。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/Two-phase%20commit%20%282PC%29.png"
-         alt="Figure 10: Two-phase commit (2PC)"/> <figcaption>
-            <p><span class="figure-number">Figure 10: </span>Two-phase commit (2PC)</p>
-        </figcaption>
-</figure>
-
-<p>当使用 two-phase 提交时，客户端首先在参与交易的每个副本上启动一个常规的单节点交易，并在这些交易中执行常规的读写操作。当客户端准备好提交交易时，它向交易协调者（一个管理 2PC 协议的指定节点）发送提交请求。(在一些系统中，协调器是客户端的一部分）。</p>
-<p>协调器首先向参与交易的每个副本发送一个准备消息，每个副本都会回复一个消息，表明它是否能够提交交易（这是协议的第一阶段）。副本实际上还没有提交交易，但它们必须确保在第二阶段中，当协调者发出指示，它们一定能够提交交易。这就意味着，副本必须将交易的所有内容更新写入磁盘，并在回复准备信息之前检查完整性约束，同时继续持有交易的任何锁。</p>
-<p>协调器收集响应，并决定是否实际提交交易。如果所有节点都回复 OK，协调者就决定提交；如果任何节点想放弃，或者任何节点未能在某个超时时间内回复，协调者就决定放弃。然后，协调者将其决定发送给每个副本，它们都按照指示提交或放弃（这是第二阶段）。如果决定是提交，每个副本保证能够提交其事务，因为之前的准备请求奠定了基础。如果决定放弃，副本就会回滚该事务。</p>
-<h2 id="reference">Reference</h2>
-<ul>
-<li>Cachin, Guerraoui, Rodrigues (2011) Introduction to Reliable and Secure Distributed Programming (2. Ed.)., Springer.</li>
-</ul>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>if \(a \rVert b\) we could have either \(a \prec b\) or \(b \prec a\), so the order of the two events is determined arbitrarily by the algorithm.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>replication 翻译成「复制」，名词；replica 翻译成「副本」，名词。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>后面整理 TCP 相关内容时，可以加个链接。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4">
-<p>待学习&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:5">
-<p><a href="/posts/main/20220615143721-quorum/">基于 Quorum 投票的冗余控制算法</a>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:6">
-<p>向上去整&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
 ]]></content:encoded>
     </item>
     
@@ -7092,135 +6526,6 @@ delivered[sender] := delivered[sender] + 1}}
     );
 }
 </code></pre><p>头部是一些用于链接客户端和服务端的网络信息，RPC 发生在「会话层」中。接口部分才是 IDL 编译器建立客户端和服务器端存根的地方，以便客户端和服务端能够进行通讯，使得 RPC 正常工作。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Vector clocks</title>
-      <link>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</link>
-      <pubDate>Fri, 10 Feb 2023 14:17:56 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220602235916-vector_clocks/</guid>
-      <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \langle N_{1},</description>
-      <content:encoded><![CDATA[<p>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<p>要区分平行的这些事件，需要 <strong>vertor clocks</strong>:</p>
-<ul>
-<li>假定分布式系统中有 \(n\) 个节点，\(N = \langle N_{1}, N_{2},&hellip;, N_{n}\rangle\)</li>
-<li><strong>事件 \(a\)</strong> 的向量时间戳写成 \(V(a) = \langle t_{1}, t_{2},&hellip;, t_{n} \rangle\)</li>
-<li>\(t_{i}\) 是 \(N_{i}\) 节点发生时间的数量</li>
-<li>每个​<strong>节点</strong>​都有一个当前的向量时间戳 \(T\)</li>
-<li>节点 \(N_{i}\) 上的事件，向量时间戳 \(T[i]\) 递增。</li>
-<li>每个消息都附带上向量时间戳</li>
-<li>接收者将消息中的向量时间戳合并到本地</li>
-</ul>
-<p>除了标量和向量之间的区别之外，向量时钟算法与 Lamport 时钟非常相似。一个节点的向量时钟的初始值是系统中的每个节点的事件数，也就是 0。每当节点 \(N_{i}\) 发生事件时，它就会增加其向量钟中的第 \(i\) 个条目（它自己的条目）。(In practice, this vector is often implemented as a map from node IDs to integers rather than an array of integers. 在实践中，这里的向量通常是节点 ID 对应 Integer 的 map，而不是 Integer 的数组。)。当一个消息在网络上被发送时，发送者当前的向量时间戳被附加到该消息上。最后，当一个消息被接收时，接收者将消息中的向量时间戳与它的本地时间戳合并，方法是取两个向量的元素的最大值，然后接收者增加它自己的条目。</p>
-<h2 id="vector-clocks-algorithm">Vector clocks algorithm</h2>
-<figure>
-    <img loading="lazy" src="/ox-hugo/latex-vector-clocks-algorithm.svg"
-         alt="Figure 1: latex-vector-clocks-algorithm"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>latex-vector-clocks-algorithm</p>
-        </figcaption>
-</figure>
-
-<h2 id="vector-clocks-example">Vector clocks example</h2>
-<p>假定节点向量是 \(N = \langle A, B, C \rangle\):</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/vector-example.png"
-         alt="Figure 2: vector-example"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>vector-example</p>
-        </figcaption>
-</figure>
-
-<p>事件 \(e\) 的向量时间戳是一系列事件的集合， \(e\) 和它的因果以来：\({e} \cup {a | a \rightarrow e}\)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>​<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
-<p>比如，\(\langle2, 2, 0\rangle\)，第一个 2 是表示来自于 \(A\) 的两个事件，第二个 2 是表示来自于 \(B\) 的两个事件，并且没有来自于 \(C\) 的事件。</p>
-<h2 id="vector-clocks-ordering">Vector clocks ordering</h2>
-<p>Define the following order on vector timestamps(in a system with \(n\) nodes):</p>
-<ul>
-<li>\(T = T&rsquo; \iff T[i] = T&rsquo;[i]\) for all \(i \in {1, &hellip;, n}\)</li>
-<li>\(T \le T&rsquo; \iff T[i] \le T&rsquo;[i]\) for all \(\in {1, &hellip;, n}\)</li>
-<li>\(T &lt; T&rsquo; \iff T \le T&rsquo;\) and \(T \neq T&rsquo;\)</li>
-<li>\(T || T&rsquo; \iff T &gt; T&rsquo;\) and \(T&rsquo; &gt; T\)</li>
-</ul>
-<p>\(V(a) \le V(b) \iff ({a} \cup {e | e \rightarrow a}) \subseteq ({b} \cup{} {e | e \rightarrow b})\)</p>
-<p>Properties of this order:</p>
-<ul>
-<li>\((V(a) &lt; V(b)) \iff (a \rightarrow b)\)</li>
-<li>\((V(a) = V(b)) \iff (a = b)\)</li>
-<li>\((V(a) \rVert V(b)) \iff (a \rVert b)\)</li>
-</ul>
-<p>然后，我们对向量的时间戳进行部分排序。如果第一个向量的每个元素都小于或等于第二个向量的相应元素，我们就说一个向量小于或等于另一个向量。如果一个向量小于或等于另一个向量，并且它们至少有一个元素是不同的，那么这个向量就严格小于另一个向量。然而，如果一个向量在一个元素中的值较大，而另一个向量在另一个元素中的值较大，那么这两个向量是不可比的。例如，\(T = \langle2, 2, 0\rangle\) 和 \(T&rsquo; = \langle0, 0, 1\rangle\) 是不可比的，因为 \(T[1] &gt; T&rsquo;[1]\) 但 \(T[3] &lt; T&rsquo;[3]\)。</p>
-<p>向量时间戳的部分顺序与发生之前关系所定义的部分顺序完全对应。因此，向量时钟算法为我们提供了一种在实践中计算发生前关系的机制。</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>具体参考 <a href="/posts/main/20220609201658-lamport_clocks/">Lamport Clocks</a> 中的逻辑双条件。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>\(\cup\) 并集的意思，\(\cap\) 交集的意思。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>集合的描述方法，描述格式为 \({x | P(x), x \in \Omega}\)。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Causality and Happen-before relation</title>
-      <link>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</link>
-      <pubDate>Fri, 10 Feb 2023 14:17:54 +0800</pubDate>
-      
-      <guid>https://sheerwill.live/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
-      <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event \(a\) happens before event \(b\), written \(a \rightarrow b\). 那么在分布式，有三种情况，满足其中一条，则 \(a\) 是发生在 \(b\) 之前： \(a\) 和 \(b\) 发生在相同节</description>
-      <content:encoded><![CDATA[<h2 id="the-happens-before-relation">The Happens-before relation</h2>
-<p>An <strong>event</strong> is something happening at one node (sending or receiving a message, or a local execution step).</p>
-<p>event \(a\) <strong>happens before</strong> event \(b\), written \(a \rightarrow b\).</p>
-<p>那么在分布式，有三种情况，满足其中一条，则 \(a\) 是发生在 \(b\) 之前：</p>
-<ul>
-<li>
-<p>\(a\) 和 \(b\) 发生在相同节点，并且按照本地节点的执行顺序，\(a\) 发生在 \(b\) 之前。</p>
-</li>
-<li>
-<p>事件 \(a\) 是发送消息 \(m\)，事件 \(b\) 是接收相同的消息 \(m\)（假定发送的消息都是唯一的）。</p>
-</li>
-<li>
-<p>有这么一个时间 \(c\) 满足，\(a \rightarrow c\) 且 \(c \rightarrow b\)。</p>
-<p>happens-before relation 是局部的顺序：有可能存在既不满足 \(a \rightarrow b\) 也不满足 \(b \rightarrow a\)，这样 \(a\) 和 \(b\) 就是并行的，写作 a || b。</p>
-</li>
-</ul>
-<h3 id="happen-before-relation-example">Happen-before relation example</h3>
-<figure>
-    <img loading="lazy" src="/ox-hugo/happens-before-example.png"
-         alt="Figure 1: happens-before-example"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>happens-before-example</p>
-        </figcaption>
-</figure>
-
-<ul>
-<li>\(a \rightarrow b\), \(c \rightarrow d\), and \(e \rightarrow f\) due to process order</li>
-<li>\(b \rightarrow c\) and \(d \rightarrow f\) due to messages \(m_{1}\) and \(m_{2}\)</li>
-<li>\(a \rightarrow c\), \(a \rightarrow d\), \(a \rightarrow f\), \(b \rightarrow d\), \(b \rightarrow f\), and \(c \rightarrow f\) due to transitivity</li>
-<li>\(a || e\), \(b || e\), \(c || e\), and \(d || e\)</li>
-</ul>
-<h2 id="causality">Causality</h2>
-<p>Happens-before relation 和 Causality 在分布式系统中联系非常紧密</p>
-<ul>
-<li>当 \(a \rightarrow b\), 那么 \(a\) 可能是 \(b\) 的因。</li>
-<li>当 \(a || b\), \(a\) 和 \(b\) 之间不存在因果关系。</li>
-</ul>
-<figure>
-    <img loading="lazy" src="/ox-hugo/causality.png"
-         alt="Figure 2: causality"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>causality</p>
-        </figcaption>
-</figure>
-
-<p>Let \(\prec\) be a strict total order on events.</p>
-<p>如果 \((a \rightarrow b) \Rightarrow (a \prec b)\) 符号 \(\prec\) 就是所谓的因果顺序。</p>
-<p>因果关系的概念是从物理学中借鉴的，信息的传播速度不可能超过光速。因此如果事件 \(a\) 和事件 \(b\) 在空间上相距很远，但是在时间上相距很近，那么从事件 \(a\) 发出的信号不可能在事件 \(b\) 之前到达 \(b\) 的位置，反之亦然。因此 \(a\) 和 \(b\) 是肯定没有因果关系的。</p>
-<p>一个在空间上离 \(a\) 很近，时间上距离 \(a\) 很远的事件 \(c\)，将在 \(a\) 的光锥内，也就是说 \(a\) 的信号有可能到达 \(c\)，因此 \(a\) 可能影响 \(c\)。在分布式系统中，网络上的消息虽然不同于光束，但原理非常相似。</p>
 ]]></content:encoded>
     </item>
     

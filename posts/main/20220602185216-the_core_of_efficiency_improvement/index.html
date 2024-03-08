@@ -431,8 +431,6 @@ function toggleThemeListener() {
 
    
 
-   
-
 <hr>
 
   <div class="bl-section">
@@ -480,19 +478,19 @@ function toggleThemeListener() {
 </a>
 
 <script>
-  (function() {
-     
-    const disableThemeToggle = '' == '1';
-    if (disableThemeToggle) {
-      return;
-    }
+ (function() {
+    
+   const disableThemeToggle = '' == '1';
+   if (disableThemeToggle) {
+     return;
+   }
 
-    let button = document.getElementById("theme-toggle")
-    
-    button.removeEventListener('click', toggleThemeListener)
-    
-    button.addEventListener('click', toggleThemeListener)
-  })();
+   let button = document.getElementById("theme-toggle")
+   
+   button.removeEventListener('click', toggleThemeListener)
+   
+   button.addEventListener('click', toggleThemeListener)
+ })();
 </script>
 
 <script>
