@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Catalog on Lucius | Braindump</title>
-    <link>http://localhost:1313/tags/catalog/</link>
+    <link>https://sheerwill.xyz/tags/catalog/</link>
     <description>Recent content in Catalog on Lucius | Braindump</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Feb 2023 14:17:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/catalog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Feb 2023 14:17:53 +0800</lastBuildDate><atom:link href="https://sheerwill.xyz/tags/catalog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Database</title>
-      <link>http://localhost:1313/posts/main/20220530185321-database/</link>
+      <link>https://sheerwill.xyz/posts/main/20220530185321-database/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:53 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/main/20220530185321-database/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220530185321-database/</guid>
       <description>Index MVCC Troubleshoot Issues in MySQL </description>
       <content:encoded><![CDATA[<h2 id="index--20221008125127-index-dot-md"><a href="/posts/main/20221008125127-index/">Index</a></h2>
 <h2 id="mvcc--20221019183132-mvcc-dot-md"><a href="/posts/main/20221019183132-mvcc/">MVCC</a></h2>
@@ -22,10 +22,10 @@
     
     <item>
       <title>Refactoring Code</title>
-      <link>http://localhost:1313/posts/main/20220506193054-refactoring_code/</link>
+      <link>https://sheerwill.xyz/posts/main/20220506193054-refactoring_code/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:52 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/main/20220506193054-refactoring_code/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220506193054-refactoring_code/</guid>
       <description>How To Find Time Complexity Of An Algorithm
 Language JavaScript Refactoring </description>
       <content:encoded><![CDATA[<p><a href="/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/">How To Find Time Complexity Of An Algorithm</a></p>
