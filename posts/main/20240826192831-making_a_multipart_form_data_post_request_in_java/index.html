@@ -105,8 +105,8 @@
 <meta property="og:description" content="&lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt; &lt;artifactId&gt;httpclient&lt;/artifactId&gt; &lt;version&gt;4.4&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt; &lt;artifactId&gt;httpmime&lt;/artifactId&gt; &lt;version&gt;4.4&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; CloseableHttpClient httpClient = HttpClients.createDefault(); HttpPost uploadFile = new HttpPost(&#34;...&#34;); MultipartEntityBuilder builder = MultipartEntityBuilder.create(); builder.addTextBody(&#34;field1&#34;, &#34;yes&#34;, ContentType.TEXT_PLAIN); // This attaches the file to the POST: File f = new File(&#34;[/path/to/upload]&#34;); builder.addBinaryBody( &#34;file&#34;, new FileInputStream(f), ContentType.APPLICATION_OCTET_STREAM, f.getName() ); HttpEntity multipart = builder.build(); uploadFile.setEntity(multipart); CloseableHttpResponse response = httpClient.execute(uploadFile); HttpEntity responseEntity = response.getEntity(); 4.0 版本需要按照下面" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://sheerwill.xyz/posts/main/20240826192831-making_a_multipart_form_data_post_request_in_java/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-08-27T14:41:14+08:00" />
-<meta property="article:modified_time" content="2024-08-27T14:41:14+08:00" />
+<meta property="article:published_time" content="2024-08-27T19:17:23+08:00" />
+<meta property="article:modified_time" content="2024-08-27T19:17:23+08:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Making a Multipart/Form-Data POST Request in Java"/>
@@ -146,8 +146,8 @@
   "articleBody": " org.apache.httpcomponents httpclient 4.4 org.apache.httpcomponents httpmime 4.4 CloseableHttpClient httpClient = HttpClients.createDefault(); HttpPost uploadFile = new HttpPost(\"...\"); MultipartEntityBuilder builder = MultipartEntityBuilder.create(); builder.addTextBody(\"field1\", \"yes\", ContentType.TEXT_PLAIN); // This attaches the file to the POST: File f = new File(\"[/path/to/upload]\"); builder.addBinaryBody( \"file\", new FileInputStream(f), ContentType.APPLICATION_OCTET_STREAM, f.getName() ); HttpEntity multipart = builder.build(); uploadFile.setEntity(multipart); CloseableHttpResponse response = httpClient.execute(uploadFile); HttpEntity responseEntity = response.getEntity(); 4.0 版本需要按照下面的写法。\nHttpClient httpclient = new DefaultHttpClient(); HttpPost httppost = new HttpPost(url); FileBody bin = new FileBody(new File(fileName)); StringBody comment = new StringBody(\"Filename: \" + fileName); MultipartEntity reqEntity = new MultipartEntity(); reqEntity.addPart(\"bin\", bin); reqEntity.addPart(\"comment\", comment); httppost.setEntity(reqEntity); HttpResponse response = httpclient.execute(httppost); HttpEntity resEntity = response.getEntity(); 为什么需要这个呢，因为需要根据「江苏省危货平台与港口企业对接规范」调用接口，其中做了很多限制。\n文件需要单独按照 content-type 为 multipart/form-data 上传，其他的入参还是按照键值对的形式。 url 中用 ? 拼接参数 SM2 加签进行签名验证 时间戳防重复攻击 身份验证（企业唯一标识等） ",
   "wordCount" : "231",
   "inLanguage": "en",
-  "datePublished": "2024-08-27T14:41:14+08:00",
-  "dateModified": "2024-08-27T14:41:14+08:00",
+  "datePublished": "2024-08-27T19:17:23+08:00",
+  "dateModified": "2024-08-27T19:17:23+08:00",
   "author":[{
     "@type": "Person",
     "name": "Lucius Chen"
@@ -234,7 +234,7 @@
     <h1 class="post-title entry-hint-parent">
       Making a Multipart/Form-Data POST Request in Java
     </h1>
-    <div class="post-meta"><span title='2024-08-27 14:41:14 +0800 CST'>August 27, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;231 words&nbsp;·&nbsp;Lucius Chen
+    <div class="post-meta"><span title='2024-08-27 19:17:23 +0800 CST'>August 27, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;231 words&nbsp;·&nbsp;Lucius Chen
 
 </div>
   </header> 
@@ -286,7 +286,7 @@
 </span></span></span></code></pre></div><p>为什么需要这个呢，因为需要根据「江苏省危货平台与港口企业对接规范」调用接口，其中做了很多限制。</p>
 <ul>
 <li>文件需要单独按照 <code>content-type</code> 为 <code>multipart/form-data</code> 上传，其他的入参还是按照键值对的形式。</li>
-<li>url 中用 ? 拼接参数
+<li>url 中用 <code>?</code> 拼接参数
 <ul>
 <li>SM2 加签进行签名验证</li>
 <li>时间戳防重复攻击</li>
