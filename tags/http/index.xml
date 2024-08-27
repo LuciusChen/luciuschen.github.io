@@ -6,12 +6,12 @@
     <description>Recent content in Http on Lucius | Braindump</description>
     <generator>Hugo -- 0.133.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 27 Aug 2024 19:17:23 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 27 Aug 2024 19:48:28 +0800</lastBuildDate>
     <atom:link href="https://sheerwill.xyz/tags/http/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Making a Multipart/Form-Data POST Request in Java</title>
       <link>https://sheerwill.xyz/posts/main/20240826192831-making_a_multipart_form_data_post_request_in_java/</link>
-      <pubDate>Tue, 27 Aug 2024 19:17:23 +0800</pubDate>
+      <pubDate>Tue, 27 Aug 2024 19:48:28 +0800</pubDate>
       <guid>https://sheerwill.xyz/posts/main/20240826192831-making_a_multipart_form_data_post_request_in_java/</guid>
       <description>&amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.httpcomponents&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;httpclient&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.4&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.httpcomponents&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;httpmime&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.4&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; CloseableHttpClient httpClient = HttpClients.createDefault(); HttpPost uploadFile = new HttpPost(&amp;#34;...&amp;#34;); MultipartEntityBuilder builder = MultipartEntityBuilder.create(); builder.addTextBody(&amp;#34;field1&amp;#34;, &amp;#34;yes&amp;#34;, ContentType.TEXT_PLAIN); // This attaches the file to the POST: File f = new File(&amp;#34;[/path/to/upload]&amp;#34;); builder.addBinaryBody( &amp;#34;file&amp;#34;, new FileInputStream(f), ContentType.APPLICATION_OCTET_STREAM, f.getName() ); HttpEntity multipart = builder.build(); uploadFile.setEntity(multipart); CloseableHttpResponse response = httpClient.execute(uploadFile); HttpEntity responseEntity = response.getEntity(); 4.0 版本需要按照下面</description>
     </item>

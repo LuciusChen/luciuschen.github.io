@@ -243,7 +243,7 @@
   <div class="entry-content">
     <p>&lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt; &lt;artifactId&gt;httpclient&lt;/artifactId&gt; &lt;version&gt;4.4&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt; &lt;artifactId&gt;httpmime&lt;/artifactId&gt; &lt;version&gt;4.4&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; CloseableHttpClient httpClient = HttpClients.createDefault(); HttpPost uploadFile = new HttpPost(&#34;...&#34;); MultipartEntityBuilder builder = MultipartEntityBuilder.create(); builder.addTextBody(&#34;field1&#34;, &#34;yes&#34;, ContentType.TEXT_PLAIN); // This attaches the file to the POST: File f = new File(&#34;[/path/to/upload]&#34;); builder.addBinaryBody( &#34;file&#34;, new FileInputStream(f), ContentType.APPLICATION_OCTET_STREAM, f.getName() ); HttpEntity multipart = builder.build(); uploadFile.setEntity(multipart); CloseableHttpResponse response = httpClient.execute(uploadFile); HttpEntity responseEntity = response.getEntity(); 4.0 版本需要按照下面...</p>
   </div>
-  <footer class="entry-footer"><span title='2024-08-27 19:17:23 +0800 CST'>August 27, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;231 words&nbsp;·&nbsp;Lucius Chen</footer>
+  <footer class="entry-footer"><span title='2024-08-27 19:48:28 +0800 CST'>August 27, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;231 words&nbsp;·&nbsp;Lucius Chen</footer>
   <a class="entry-link" aria-label="post link to Making a Multipart/Form-Data POST Request in Java" href="https://sheerwill.xyz/posts/main/20240826192831-making_a_multipart_form_data_post_request_in_java/"></a>
 </article>
 
