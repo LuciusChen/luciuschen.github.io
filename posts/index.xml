@@ -2,447 +2,447 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on Lucius | Braindump</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://sheerwill.xyz/posts/</link>
     <description>Recent content in Posts on Lucius | Braindump</description>
     <generator>Hugo -- 0.133.1</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 27 Aug 2024 14:41:14 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sheerwill.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Making a Multipart/Form-Data POST Request in Java</title>
-      <link>http://localhost:1313/posts/main/20240826192831-making_a_multipart_form_data_post_request_in_java/</link>
+      <link>https://sheerwill.xyz/posts/main/20240826192831-making_a_multipart_form_data_post_request_in_java/</link>
       <pubDate>Tue, 27 Aug 2024 14:41:14 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20240826192831-making_a_multipart_form_data_post_request_in_java/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20240826192831-making_a_multipart_form_data_post_request_in_java/</guid>
       <description>&amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.httpcomponents&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;httpclient&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.4&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.httpcomponents&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;httpmime&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.4&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; CloseableHttpClient httpClient = HttpClients.createDefault(); HttpPost uploadFile = new HttpPost(&amp;#34;...&amp;#34;); MultipartEntityBuilder builder = MultipartEntityBuilder.create(); builder.addTextBody(&amp;#34;field1&amp;#34;, &amp;#34;yes&amp;#34;, ContentType.TEXT_PLAIN); // This attaches the file to the POST: File f = new File(&amp;#34;[/path/to/upload]&amp;#34;); builder.addBinaryBody( &amp;#34;file&amp;#34;, new FileInputStream(f), ContentType.APPLICATION_OCTET_STREAM, f.getName() ); HttpEntity multipart = builder.build(); uploadFile.setEntity(multipart); CloseableHttpResponse response = httpClient.execute(uploadFile); HttpEntity responseEntity = response.getEntity(); 4.0 版本需要按照下面</description>
     </item>
     <item>
       <title>Direct Invocation of YOLOv8 Trained Models in Java</title>
-      <link>http://localhost:1313/posts/main/20240826191654-direct_invocation_of_yolov8_trained_models_in_java/</link>
+      <link>https://sheerwill.xyz/posts/main/20240826191654-direct_invocation_of_yolov8_trained_models_in_java/</link>
       <pubDate>Tue, 27 Aug 2024 14:40:54 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20240826191654-direct_invocation_of_yolov8_trained_models_in_java/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20240826191654-direct_invocation_of_yolov8_trained_models_in_java/</guid>
       <description>pom.xml 文件中需要增加一些包。 &amp;lt;repositories&amp;gt; &amp;lt;repository&amp;gt; &amp;lt;id&amp;gt;opencv&amp;lt;/id&amp;gt; &amp;lt;url&amp;gt;https://mvnrepository.com/artifact/org.openpnp/opencv&amp;lt;/url&amp;gt; &amp;lt;/repository&amp;gt; &amp;lt;repository&amp;gt; &amp;lt;id&amp;gt;djl.ai&amp;lt;/id&amp;gt; &amp;lt;url&amp;gt;https://oss.sonatype.org/content/repositories/snapshots/&amp;lt;/url&amp;gt; &amp;lt;/repository&amp;gt; &amp;lt;/repositories&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;!-- DJL Core API --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;ai.djl&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;api&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${djl.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- DJL PyTorch Engine --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;ai.djl.pytorch&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;pytorch-engine&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${djl.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- DJL PyTorch Model Zoo --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;ai.djl.pytorch&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;pytorch-model-zoo&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${djl.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- DJL Basic Dataset --&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;ai.djl&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;basicdataset&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${djl.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- DJL Image Processing --&amp;gt; &amp;lt;dependency&amp;gt;</description>
     </item>
     <item>
       <title>Vector clocks</title>
-      <link>http://localhost:1313/posts/main/20220602235916-vector_clocks/</link>
+      <link>https://sheerwill.xyz/posts/main/20220602235916-vector_clocks/</link>
       <pubDate>Fri, 08 Mar 2024 10:14:03 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220602235916-vector_clocks/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220602235916-vector_clocks/</guid>
       <description>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &amp;lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \langle N_{1},</description>
     </item>
     <item>
       <title>FIFO broadcast</title>
-      <link>http://localhost:1313/posts/main/20220616105609-fifo_broadcast/</link>
+      <link>https://sheerwill.xyz/posts/main/20220616105609-fifo_broadcast/</link>
       <pubDate>Fri, 08 Mar 2024 10:13:14 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220616105609-fifo_broadcast/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220616105609-fifo_broadcast/</guid>
       <description>Definition 最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之</description>
     </item>
     <item>
       <title>Total order broadcast</title>
-      <link>http://localhost:1313/posts/main/20220616135058-total_order_broadcast/</link>
+      <link>https://sheerwill.xyz/posts/main/20220616135058-total_order_broadcast/</link>
       <pubDate>Fri, 08 Mar 2024 10:11:31 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220616135058-total_order_broadcast/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220616135058-total_order_broadcast/</guid>
       <description>Definition 总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。FIFO broadcast 和 Causal broadcast 允许不同的节点以不同</description>
     </item>
     <item>
       <title>Distribution System</title>
-      <link>http://localhost:1313/posts/main/20220602202933-distribution_system/</link>
+      <link>https://sheerwill.xyz/posts/main/20220602202933-distribution_system/</link>
       <pubDate>Fri, 08 Mar 2024 10:10:28 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220602202933-distribution_system/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220602202933-distribution_system/</guid>
       <description>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎</description>
     </item>
     <item>
       <title>Causality and Happen-before relation</title>
-      <link>http://localhost:1313/posts/main/20220602202832-causality_and_happen_before_relation/</link>
+      <link>https://sheerwill.xyz/posts/main/20220602202832-causality_and_happen_before_relation/</link>
       <pubDate>Fri, 08 Mar 2024 10:06:39 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220602202832-causality_and_happen_before_relation/</guid>
       <description>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event \(a\) happens before event \(b\), written \(a \rightarrow b\). 那么在分布式，有三种情况，满足其中一条，则 \(a\) 是发生在 \(b\) 之前： \(a\) 和 \(b\) 发生在相同节</description>
     </item>
     <item>
       <title>Causal broadcast</title>
-      <link>http://localhost:1313/posts/main/20220616132407-causal_broadcast/</link>
+      <link>https://sheerwill.xyz/posts/main/20220616132407-causal_broadcast/</link>
       <pubDate>Fri, 08 Mar 2024 10:04:06 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220616132407-causal_broadcast/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220616132407-causal_broadcast/</guid>
       <description>Definition Causal broadcast 算法有点类似于 FIFO broadcast： 每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟</description>
     </item>
     <item>
       <title>Lamport clocks</title>
-      <link>http://localhost:1313/posts/main/20220609201658-lamport_clocks/</link>
+      <link>https://sheerwill.xyz/posts/main/20220609201658-lamport_clocks/</link>
       <pubDate>Fri, 08 Mar 2024 10:02:54 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220609201658-lamport_clocks/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220609201658-lamport_clocks/</guid>
       <description>Lamport clocks algorithm Lamport clocks in words Figure 1: lamport-example-simple 每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。 增长后的值设为 \(L(e)\) 发送消息时附带上当前的计数 \(t\) 消息</description>
     </item>
     <item>
       <title>Raft consensus algorithm</title>
-      <link>http://localhost:1313/posts/main/20220623152601-raft_consensus_algorithm/</link>
+      <link>https://sheerwill.xyz/posts/main/20220623152601-raft_consensus_algorithm/</link>
       <pubDate>Fri, 08 Mar 2024 09:59:11 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220623152601-raft_consensus_algorithm/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220623152601-raft_consensus_algorithm/</guid>
       <description>Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其</description>
     </item>
     <item>
       <title>Hugo</title>
-      <link>http://localhost:1313/posts/main/20220607104757-hugo/</link>
+      <link>https://sheerwill.xyz/posts/main/20220607104757-hugo/</link>
       <pubDate>Wed, 06 Mar 2024 16:30:45 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220607104757-hugo/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220607104757-hugo/</guid>
       <description>Install brew install hugo Add backlink 在 themes/xxx/layouts/partials/ 下新增 backlink.html​，内容如下。 {{ $re := $.File.BaseFileName }} {{ $backlinks := slice }} {{ range .Site.AllPages }} {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }} {{ $backlinks = $backlinks | append . }} {{ end }} {{ end }}</description>
     </item>
     <item>
       <title>setting up pass on git with a gpg key</title>
-      <link>http://localhost:1313/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/</link>
+      <link>https://sheerwill.xyz/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/</link>
       <pubDate>Tue, 16 Jan 2024 09:15:17 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20240114084921-setting_up_pass_on_git_with_a_gpg_key/</guid>
       <description>References pass : 密码管理本不复杂 - Nayuki&amp;rsquo;s Archive Home · mssun/passforios Wiki · GitHub https://github.com/benthamite/dotfiles/blob/master/emacs/config.org#password-store Pass: The Standard Unix Password Manager Source: Setting up pass on git with a gpg key · GitHub Pass for iOS private repos 需要用 SSH Key 来访问。参考 Generating a new SSH key and adding it to the ssh-agent - GitHub Docs 生</description>
     </item>
     <item>
       <title>Importing Bookmark Files for Scanned PDFs</title>
-      <link>http://localhost:1313/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/</link>
+      <link>https://sheerwill.xyz/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/</link>
       <pubDate>Tue, 14 Nov 2023 09:14:48 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20231111222839-importing_bookmark_files_for_scanned_pdfs/</guid>
       <description>从 FreeMdict Forum 下载的扫描电子书，发帖人提到了书签文件可以用来查找，这个想法是我之前没有想到的。尝试用 pdftk-java 来导入书签文件。 brew install pdftk-java 书签文件如下的格式，相同</description>
     </item>
     <item>
       <title>Note-taking and GTD with Emacs</title>
-      <link>http://localhost:1313/posts/main/20230801192723-note_taking_and_gtd_with_emacs/</link>
+      <link>https://sheerwill.xyz/posts/main/20230801192723-note_taking_and_gtd_with_emacs/</link>
       <pubDate>Thu, 03 Aug 2023 17:26:45 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20230801192723-note_taking_and_gtd_with_emacs/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20230801192723-note_taking_and_gtd_with_emacs/</guid>
       <description>得益于 Emacs 的扩展性，丰富的插件生态，我构建的笔记和 GTD 流程是杂糅在一起的。并没有完全遵照「卡片笔记法」或 GTD 的流程，其中也有不完善的地方，在不断地</description>
     </item>
     <item>
       <title>Pinboard</title>
-      <link>http://localhost:1313/posts/main/20220506185941-pinboard/</link>
+      <link>https://sheerwill.xyz/posts/main/20220506185941-pinboard/</link>
       <pubDate>Thu, 03 Aug 2023 11:40:13 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220506185941-pinboard/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220506185941-pinboard/</guid>
       <description>Misc Templatemaker 制作各种纸盒的教程，可以选择对应的例子下载剪裁的 PDF。 Wi-Phi – Wireless Philosophy 很赞的网站：Wireless Philosophy，简称 Wi-Phi ，一个开放的哲学</description>
     </item>
     <item>
       <title>Clustered Indexes / Index Organized Tables (IOT)</title>
-      <link>http://localhost:1313/posts/main/20230210155015-clustered_indexes_index_organized_tables_iot/</link>
+      <link>https://sheerwill.xyz/posts/main/20230210155015-clustered_indexes_index_organized_tables_iot/</link>
       <pubDate>Sun, 14 May 2023 13:02:40 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20230210155015-clustered_indexes_index_organized_tables_iot/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20230210155015-clustered_indexes_index_organized_tables_iot/</guid>
       <description>Some databases can indeed use an index as primary table store. The Oracle database calls this concept index-organized tables (IOT), other databases use the term clustered index. In this section, both terms are used to either put the emphasis on the table or the index characteristics as needed. An index-organized table is thus a B-tree index without a heap table. This results in two benefits: (1) it saves the space</description>
     </item>
     <item>
       <title>Secondary Indexes</title>
-      <link>http://localhost:1313/posts/main/20230210235436-secondary_indexes/</link>
+      <link>https://sheerwill.xyz/posts/main/20230210235436-secondary_indexes/</link>
       <pubDate>Sun, 14 May 2023 12:55:24 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20230210235436-secondary_indexes/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20230210235436-secondary_indexes/</guid>
       <description>除主键外的其他列上新建的索引都是二级索引。 二级索引的排序与物理记录的排序不一致，存储的是该列本身排序后的值和主键。</description>
     </item>
     <item>
       <title>Table access by index rowid</title>
-      <link>http://localhost:1313/posts/main/20230211000136-table_access_by_index_rowid/</link>
+      <link>https://sheerwill.xyz/posts/main/20230211000136-table_access_by_index_rowid/</link>
       <pubDate>Sun, 14 May 2023 12:54:45 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20230211000136-table_access_by_index_rowid/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20230211000136-table_access_by_index_rowid/</guid>
       <description>遍历二级索引树找到对应的主键后，再从索引组织表中查找数据所在的叶节点叫做「回表」。在英文中没有特定的词表示这个过程，叫做 table access by index rowidi</description>
     </item>
     <item>
       <title>covering index</title>
-      <link>http://localhost:1313/posts/main/20230211001746-covering_index/</link>
+      <link>https://sheerwill.xyz/posts/main/20230211001746-covering_index/</link>
       <pubDate>Sun, 14 May 2023 12:54:40 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20230211001746-covering_index/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20230211001746-covering_index/</guid>
       <description>即可以直接通过遍历聚簇索引获取到非主键列数据的场景，即不需要「回表（Table access by index rowid）」操作。覆盖索引一般出现在「联合索引」中，因</description>
     </item>
     <item>
       <title>Vanilla Emacs with Purcell</title>
-      <link>http://localhost:1313/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
+      <link>https://sheerwill.xyz/posts/main/20220723211325-vanilla_emacs_with_purcell/</link>
       <pubDate>Tue, 28 Feb 2023 13:51:10 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220723211325-vanilla_emacs_with_purcell/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on UbuntuLucius&amp;rsquo;s Workflow git clone git://git.sv.gnu.org/emacs.git sudo apt install</description>
     </item>
     <item>
       <title>The Left-Prefix Index Rule is determined by the B&#43;tree structure</title>
-      <link>http://localhost:1313/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/</link>
+      <link>https://sheerwill.xyz/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/</link>
       <pubDate>Fri, 10 Feb 2023 14:55:12 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/</guid>
+      <guid>https://sheerwill.xyz/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/</guid>
       <description>联合索引遵循「最左匹配原则」，MySQL 联合索引创建的时候会对 (a, b) 其中的 a 先进行排序，再在 a 的基础上对 b 进行排序。如果是 (a, b, c) 也是一样的方式</description>
     </item>
     <item>
       <title>The difference between B-tree and B&#43;tree</title>
-      <link>http://localhost:1313/posts/main/clm-the_difference_between_b_tree_and_b&#43;tree/</link>
+      <link>https://sheerwill.xyz/posts/main/clm-the_difference_between_b_tree_and_b&#43;tree/</link>
       <pubDate>Fri, 10 Feb 2023 14:28:37 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/clm-the_difference_between_b_tree_and_b&#43;tree/</guid>
+      <guid>https://sheerwill.xyz/posts/main/clm-the_difference_between_b_tree_and_b&#43;tree/</guid>
       <description>B-Tree B+Tree All internal nodes and leaf nodes contain data pointers along with keys. Only leaf nodes contain data pointers along with keys, internal nodes contain keys only. There are no duplicate keys. Duplicate keys are present in this, all internal nodes are also present at leaves. Leaf nodes are not linked to each other. Leaf nodes are linked to each other. Sequential access of nodes is not possible. All</description>
     </item>
     <item>
       <title>Heap Table</title>
-      <link>http://localhost:1313/posts/main/evd-heap_table/</link>
+      <link>https://sheerwill.xyz/posts/main/evd-heap_table/</link>
       <pubDate>Fri, 10 Feb 2023 14:27:14 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/evd-heap_table/</guid>
+      <guid>https://sheerwill.xyz/posts/main/evd-heap_table/</guid>
       <description>Discourse context A heap is a table without a clustered index. One or more nonclustered indexes can be created on tables stored as a heap. Data is stored in the heap without specifying an order. Usually data is initially stored in the order in which is the rows are inserted into the table, but the Database Engine can move data around in the heap to store the rows efficiently; so</description>
     </item>
     <item>
       <title>Clustered Indexes / Index Organized Tables (IOT)</title>
-      <link>http://localhost:1313/posts/main/evd-clustered_indexes_index_organized_tables_iot/</link>
+      <link>https://sheerwill.xyz/posts/main/evd-clustered_indexes_index_organized_tables_iot/</link>
       <pubDate>Fri, 10 Feb 2023 14:27:06 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/evd-clustered_indexes_index_organized_tables_iot/</guid>
+      <guid>https://sheerwill.xyz/posts/main/evd-clustered_indexes_index_organized_tables_iot/</guid>
       <description>Some databases can indeed use an index as primary table store. The Oracle database calls this concept index-organized tables (IOT), other databases use the term clustered index. In this section, both terms are used to either put the emphasis on the table or the index characteristics as needed. An index-organized table is thus a B-tree index without a heap table. This results in two benefits: (1) it saves the space</description>
     </item>
     <item>
       <title>Lucius&#39;s Workflow</title>
-      <link>http://localhost:1313/posts/main/20221204112118-lucius_s_workflow/</link>
+      <link>https://sheerwill.xyz/posts/main/20221204112118-lucius_s_workflow/</link>
       <pubDate>Fri, 10 Feb 2023 14:21:52 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20221204112118-lucius_s_workflow/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20221204112118-lucius_s_workflow/</guid>
       <description>Figure 1: workflow 如上图所示，融合了笔记和 GTD 管理。 GTD Capture To-Dos 分为的来源分为六种： Habit Track: 即对于重复事件的循环，有利于习惯的养成。 Cyclic Tasks: 需要循环的任务。 生日提醒 周报</description>
     </item>
     <item>
       <title>Excalidraw</title>
-      <link>http://localhost:1313/posts/main/20221208143127-excalidraw/</link>
+      <link>https://sheerwill.xyz/posts/main/20221208143127-excalidraw/</link>
       <pubDate>Fri, 10 Feb 2023 14:19:40 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20221208143127-excalidraw/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20221208143127-excalidraw/</guid>
       <description>在 Obsidian 中可以通过 command palette 中搜索 Insert LaTeX formula 就可以弹出弹框输入 \(\textsc{LaTeX}\) 表达式了。其中的 \color{} 可以指定生成文本的颜色。</description>
     </item>
     <item>
       <title>JavaScript Refactoring</title>
-      <link>http://localhost:1313/posts/main/20230208145009-javascript_refactoring/</link>
+      <link>https://sheerwill.xyz/posts/main/20230208145009-javascript_refactoring/</link>
       <pubDate>Fri, 10 Feb 2023 14:19:11 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20230208145009-javascript_refactoring/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20230208145009-javascript_refactoring/</guid>
       <description>Refactoring Tips Refactoring Condition statements Converting callbacks to promises Refactoring Promise chains with async/await Refactoring Code examples Callback Hell </description>
     </item>
     <item>
       <title>Beancount</title>
-      <link>http://localhost:1313/posts/main/20220821223012-beancount/</link>
+      <link>https://sheerwill.xyz/posts/main/20220821223012-beancount/</link>
       <pubDate>Fri, 10 Feb 2023 14:18:16 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220821223012-beancount/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220821223012-beancount/</guid>
       <description>precision Beancount 会统计写过的每个货币的金额，然后选择最常见的作为显示格式，如果大多数时候都是整数，它就会用整数显示，所以最好尽量都写成你想要看到的精度，</description>
     </item>
     <item>
       <title>Karabiner-Elements</title>
-      <link>http://localhost:1313/posts/main/20220805101927-karabiner_elements/</link>
+      <link>https://sheerwill.xyz/posts/main/20220805101927-karabiner_elements/</link>
       <pubDate>Fri, 10 Feb 2023 14:18:16 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220805101927-karabiner_elements/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220805101927-karabiner_elements/</guid>
       <description>平时是使用苹果内置键盘以及 HHKB，因为键位有一些不同，设置上也会有一些区别。 Figure 1: Karabiner-Elements --- global: check_for_updates_on_startup: true show_in_menu_bar: true show_profile_name_in_menu_bar: true profiles: - complex_modifications: parameters: basic.simultaneous_threshold_milliseconds: 50 basic.to_delayed_action_delay_milliseconds: 500 basic.to_if_alone_timeout_milliseconds: 1000 basic.to_if_held_down_threshold_milliseconds: 500 mouse_motion_to_scroll.speed: 100 rules: - description: Change tab to</description>
     </item>
     <item>
       <title>Anki</title>
-      <link>http://localhost:1313/posts/main/20220706112803-anki/</link>
+      <link>https://sheerwill.xyz/posts/main/20220706112803-anki/</link>
       <pubDate>Fri, 10 Feb 2023 14:18:05 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220706112803-anki/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220706112803-anki/</guid>
       <description>Online Dictionary Helper Figure 1: online-dictionary-helper-result Chrome extension 在线词典助手 Settings Figure 2: online-dictionary-helper-setting Anki Template 模板的样式是根据卡片内容来设置的，其中 glossary 中本身就带了样式。 front &amp;lt;div class=&amp;#34;section&amp;#34;&amp;gt; &amp;lt;div id=&amp;#34;front&amp;#34; class=&amp;#34;items&amp;#34;&amp;gt; {{expression}}&amp;lt;span class=&amp;#34;audio&amp;#34;&amp;gt;{{audio}}&amp;lt;/span&amp;gt; &amp;lt;/div&amp;gt; {{#reading}} &amp;lt;hr /&amp;gt; &amp;lt;div id=&amp;#34;front-extra1&amp;#34; class=&amp;#34;items&amp;#34;&amp;gt; &amp;lt;span&amp;gt;{{reading}}&amp;amp;nbsp;&amp;lt;/span&amp;gt; &amp;lt;span&amp;gt;{{extrainfo}}&amp;lt;/span&amp;gt; &amp;lt;/div&amp;gt; {{/reading}} &amp;lt;/div&amp;gt; back</description>
     </item>
     <item>
       <title>Terminal</title>
-      <link>http://localhost:1313/posts/main/20220629204553-terminal/</link>
+      <link>https://sheerwill.xyz/posts/main/20220629204553-terminal/</link>
       <pubDate>Fri, 10 Feb 2023 14:18:05 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220629204553-terminal/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220629204553-terminal/</guid>
       <description>Starship brew install starship add eval &amp;quot;$(starship init zsh)&amp;quot; to .zshrc mkdir -p ~/.config &amp;amp;&amp;amp; touch ~/.config/starship.toml 默认配置 # 设置配置范例，开启编辑器的自动补全 &amp;#34;$schema&amp;#34; = &amp;#39;https://starship.rs/config-schema.json&amp;#39; # 在命令之间插入空行 add_newline = false # ~/.config/starship.toml # A minimal left prompt format = &amp;#34;&amp;#34;&amp;#34;$character&amp;#34;&amp;#34;&amp;#34; # move the rest of</description>
     </item>
     <item>
       <title>VSCode</title>
-      <link>http://localhost:1313/posts/main/20220629203733-vscode/</link>
+      <link>https://sheerwill.xyz/posts/main/20220629203733-vscode/</link>
       <pubDate>Fri, 10 Feb 2023 14:18:05 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220629203733-vscode/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220629203733-vscode/</guid>
       <description>Extensions ESLint Markdown All in One Markdown Preview Github MoonScript Language One Dark Pro Prettier - Code formatter Settings { &amp;#34;editor.fontFamily&amp;#34;: &amp;#34;&amp;#39;Iosevka&amp;#39;, LXGW WenKai Mono, Menlo, Monaco, &amp;#39;Courier New&amp;#39;, monospace&amp;#34;, &amp;#34;editor.fontLigatures&amp;#34;: true, &amp;#34;editor.fontSize&amp;#34;: 14, &amp;#34;security.workspace.trust.untrustedFiles&amp;#34;: &amp;#34;open&amp;#34;, &amp;#34;editor.bracketPairColorization.enabled&amp;#34;: true, &amp;#34;editor.renderWhitespace&amp;#34;: &amp;#34;boundary&amp;#34;, &amp;#34;workbench.colorCustomizations&amp;#34;: { &amp;#34;editorBracketHighlight.foreground1&amp;#34;: &amp;#34;#EFBB24&amp;#34;, &amp;#34;editorBracketHighlight.foreground2&amp;#34;: &amp;#34;#F8C3CD&amp;#34;, &amp;#34;editorBracketHighlight.foreground3&amp;#34;: &amp;#34;#A5DEE4&amp;#34;, &amp;#34;editorBracketHighlight.foreground4&amp;#34;: &amp;#34;#8A6BBE&amp;#34;, &amp;#34;editorBracketHighlight.foreground5&amp;#34;: &amp;#34;#90B44B&amp;#34;, &amp;#34;editorBracketHighlight.foreground6&amp;#34;: &amp;#34;#FFB11B&amp;#34;, &amp;#34;editorBracketHighlight.unexpectedBracket.foreground&amp;#34;: &amp;#34;#E83015&amp;#34;, &amp;#34;tab.activeBackground&amp;#34;: &amp;#34;#724832&amp;#34;, &amp;#34;scrollbarSlider.background&amp;#34;: &amp;#34;#91AD70&amp;#34;, &amp;#34;scrollbarSlider.hoverBackground&amp;#34;: &amp;#34;#91AD70&amp;#34;, &amp;#34;scrollbarSlider.activeBackground&amp;#34;: &amp;#34;#91AD70&amp;#34; }, &amp;#34;[javascript]&amp;#34;: { &amp;#34;editor.defaultFormatter&amp;#34;: &amp;#34;esbenp.prettier-vscode&amp;#34; }, &amp;#34;[html]&amp;#34;: { &amp;#34;editor.</description>
     </item>
     <item>
       <title>Latex</title>
-      <link>http://localhost:1313/posts/main/20220616162256-latex/</link>
+      <link>https://sheerwill.xyz/posts/main/20220616162256-latex/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:59 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220616162256-latex/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220616162256-latex/</guid>
       <description>语法 效果 \bar{x} \(\bar{x}\) \grave{\eta} \(\grave{\eta}\) \dot{x} \(\dot{x}\) \acute{\eta} \(\acute{\eta}\) \breve{a} \(\breve{a}\) \hat{\alpha} \(\hat{\alpha}\) \check{\alpha} \(\check{\alpha}\) \ddot{y} \(\ddot{y}\) \tilde{\iota} \(\tilde{\iota}\) 语法 效果 \sin\theta \(\sin\!\theta\) \arcsin\frac{L}{r} \(\arcsin\frac{L}{r}\) \sinh g \(\sinh\ g\) \operatorname{sh}j \(\operatorname{sh}j\) \operatorname{argch}l \(\operatorname{argch}l\) k&#39;(x)=\lim_{\Delta x\to 0}\frac{k(x)-k(x-\Delta x)}{\Deltax} \(k&amp;rsquo;(x)=\lim_{\Delta x\to0}\!\frac{k(x)-k(x-\Delta x)}{\Delta x}\) \max H \(\max\!H\) \sup t \(\sup t\) \lg X \(\lg\!X\) \ker x \(\ker x\) \Pr x \(\Pr x\) \arg x \(\arg x\) \lceil\frac{n+1}{2}\rceil \(\lceil\frac{n+1}{2}\rceil\)</description>
     </item>
     <item>
       <title>Callback Hell</title>
-      <link>http://localhost:1313/posts/main/20220616092944-callback_hell/</link>
+      <link>https://sheerwill.xyz/posts/main/20220616092944-callback_hell/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:58 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220616092944-callback_hell/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220616092944-callback_hell/</guid>
       <description>重构小程序前端校验接口返参处理 原本代码是通过嵌套回调，控制提示之间的前后依赖关系，形成了回调地狱，需要重构。 主要是用 Map (ES6+) 处理 if (code){} else if (cod</description>
     </item>
     <item>
       <title>Quorum</title>
-      <link>http://localhost:1313/posts/main/20220615143721-quorum/</link>
+      <link>https://sheerwill.xyz/posts/main/20220615143721-quorum/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:58 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220615143721-quorum/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220615143721-quorum/</guid>
       <description>Quorum 机制，是一种分布式系统中常用的，用来保证数据冗余和最终一致性的投票算法，其主要数学思想来源于鸽巢原理。 基于 Quorum 投票的冗余控制算法 在有冗余数据</description>
     </item>
     <item>
       <title>Stub</title>
-      <link>http://localhost:1313/posts/main/20220604180341-stub/</link>
+      <link>https://sheerwill.xyz/posts/main/20220604180341-stub/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:57 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220604180341-stub/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220604180341-stub/</guid>
       <description>在开发过程中，stub 很多时候就是针对不可控制的部分进行模拟，例如 Mock。 在分布式中，stub 就是用于转换远程过程调用（RPC）期间客户端</description>
     </item>
     <item>
       <title>Remote Procedure Call (RPC)</title>
-      <link>http://localhost:1313/posts/main/20220603220847-remote_procedure_call_rpc/</link>
+      <link>https://sheerwill.xyz/posts/main/20220603220847-remote_procedure_call_rpc/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:56 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220603220847-remote_procedure_call_rpc/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220603220847-remote_procedure_call_rpc/</guid>
       <description>Remote Procedure Call 是一种=软件通信协议=，程序可以在不了解网络细节的前提下，向位于网络上的另外一台计算机中的本地程序请求服务。PRC 被用来像本地系统一样</description>
     </item>
     <item>
       <title>Network Time Protocol (NTP)</title>
-      <link>http://localhost:1313/posts/main/20220602202411-network_time_protocol_ntp/</link>
+      <link>https://sheerwill.xyz/posts/main/20220602202411-network_time_protocol_ntp/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:54 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220602202411-network_time_protocol_ntp/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220602202411-network_time_protocol_ntp/</guid>
       <description>Network Time Protocol (NTP) is an internet protocol used to synchronize with computer clock time sources in a network. It belongs to and is one of the oldest parts of the TCP/IP suite. The term NTP applies to both the protocol and the client-server programs that run on computers. Mac 中可以在设置中找到 NTP 服务器的地址，比如下</description>
     </item>
     <item>
       <title>The Byzantine generals problem</title>
-      <link>http://localhost:1313/posts/main/20220602202317-the_byzantine_generals_problem/</link>
+      <link>https://sheerwill.xyz/posts/main/20220602202317-the_byzantine_generals_problem/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:54 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220602202317-the_byzantine_generals_problem/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220602202317-the_byzantine_generals_problem/</guid>
       <description>拜占庭将军问题（Byzantine Generals Problem），是由莱斯利·兰波特在其同名论文中提出的分布式对等网络通信容错问题。 在分布式计算中，不同</description>
     </item>
     <item>
       <title>Database</title>
-      <link>http://localhost:1313/posts/main/20220530185321-database/</link>
+      <link>https://sheerwill.xyz/posts/main/20220530185321-database/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:53 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220530185321-database/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220530185321-database/</guid>
       <description>Index MVCC Troubleshoot Issues in MySQL </description>
     </item>
     <item>
       <title>HammerSpoon</title>
-      <link>http://localhost:1313/posts/main/20220520185239-hammerspoon/</link>
+      <link>https://sheerwill.xyz/posts/main/20220520185239-hammerspoon/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:53 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220520185239-hammerspoon/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220520185239-hammerspoon/</guid>
       <description>配置的整体如下，通过不同的 Hyper key 在键盘上设置了两层功能，软件控制以及窗口管理。 ├── Spoons │ ├── Emojis.spoon │ ├── SpoonInstall.spoon │ └── TextClipboardHistory.spoon ├── conf.moon ├── control.moon ├── headphones.moon ├</description>
     </item>
     <item>
       <title>The core of efficiency improvement</title>
-      <link>http://localhost:1313/posts/main/20220602185216-the_core_of_efficiency_improvement/</link>
+      <link>https://sheerwill.xyz/posts/main/20220602185216-the_core_of_efficiency_improvement/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:53 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220602185216-the_core_of_efficiency_improvement/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220602185216-the_core_of_efficiency_improvement/</guid>
       <description>其实提高时间利用率，就是两点，事件所需时间的准确评估，另外一个就是牛逼的执行力。</description>
     </item>
     <item>
       <title>The two generals problem</title>
-      <link>http://localhost:1313/posts/main/20220602202247-the_two_generals_problem/</link>
+      <link>https://sheerwill.xyz/posts/main/20220602202247-the_two_generals_problem/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:53 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220602202247-the_two_generals_problem/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220602202247-the_two_generals_problem/</guid>
       <description>两军问题（英语：Two Generals&amp;rsquo; Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该</description>
     </item>
     <item>
       <title>Toolbox</title>
-      <link>http://localhost:1313/posts/main/20220508195206-toolbox/</link>
+      <link>https://sheerwill.xyz/posts/main/20220508195206-toolbox/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:53 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220508195206-toolbox/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220508195206-toolbox/</guid>
       <description>Hardware HHKB Logitech MX Master 3 for Mac MacBook Pro (15-inch, 2017) DELL U2417H Bose QC 35 NFAUDIO 二单元娄氏动铁 NF2u Sony A7M3 iPhone 11 Pro Kindle Paper White Software Git Git Skills Design Tools Figma Excalidraw Pinboard Workflow HammerSpoon Hugo Karabiner-Elements Vanilla Emacs with Purcell Beancount Latex Anki Editor VSCode Terminal Squirrel 输入法词库扩充 - 肥猫百万</description>
     </item>
     <item>
       <title>Troubleshoot Issues in MySQL</title>
-      <link>http://localhost:1313/posts/main/20220530180443-troubleshoot_issues_in_mysql/</link>
+      <link>https://sheerwill.xyz/posts/main/20220530180443-troubleshoot_issues_in_mysql/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:53 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220530180443-troubleshoot_issues_in_mysql/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220530180443-troubleshoot_issues_in_mysql/</guid>
       <description>Mysql 无法更新表 查询是否有锁表。 SHOW OPEN TABLES WHERE In_use &amp;gt; 0; 查询是否有正在执行的事务 SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX; Sort Chinese text fields alphabetically by first letter UTF8 default Proofing set is Utf8_general_ci, it is not in Chinese. You need to force MySQL to sort by Chinese. select * FROM MyTable ORDER</description>
     </item>
     <item>
       <title>Build Diagram</title>
-      <link>http://localhost:1313/posts/main/20220503145636-build_diagram/</link>
+      <link>https://sheerwill.xyz/posts/main/20220503145636-build_diagram/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:52 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220503145636-build_diagram/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220503145636-build_diagram/</guid>
       <description>Sankey diagram 使用软件：Figma Plugin: Sankey Connect 展现数据流动的利器 案例：工作流描述 初始的思路是按照流程图来画，用 Excalidraw 插件画起来很快，但不够明晰。工作流也是处理数</description>
     </item>
     <item>
       <title>Converting callbacks to promises</title>
-      <link>http://localhost:1313/posts/main/20220506193545-converting_callbacks_to_promises/</link>
+      <link>https://sheerwill.xyz/posts/main/20220506193545-converting_callbacks_to_promises/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:52 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220506193545-converting_callbacks_to_promises/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220506193545-converting_callbacks_to_promises/</guid>
       <description>这里用 setTimeout() 模仿异步请求。 const callbackFn = (firstName, callback) =&amp;gt; { setTimeout(() =&amp;gt; { if (!firstName) return callback(new Error(&amp;#34;no first name passed in!&amp;#34;)); // failed const fullName = `${firstName} Doe`; return callback(fullName); // succeed }, 2000); }; callbackFn(&amp;#34;John&amp;#34;, console.log); callbackFn(null, console.log); Promise 实现如下 const promiseFn = (firstName) =&amp;gt; { return new Promise((resolve, reject) =&amp;gt; { setTimeout(() =&amp;gt; { if (!firstName)</description>
     </item>
     <item>
       <title>Doom Emacs</title>
-      <link>http://localhost:1313/posts/main/20220505220832-doom_emacs/</link>
+      <link>https://sheerwill.xyz/posts/main/20220505220832-doom_emacs/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:52 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220505220832-doom_emacs/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220505220832-doom_emacs/</guid>
       <description>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs With Homebrew First, Doom’s dependencies: brew install git ripgrep brew install coreutils fd xcode-selected --install emacs-mac. It offers good integration</description>
     </item>
     <item>
       <title>Figma</title>
-      <link>http://localhost:1313/posts/main/20220503154744-figma/</link>
+      <link>https://sheerwill.xyz/posts/main/20220503154744-figma/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:52 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220503154744-figma/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220503154744-figma/</guid>
       <description>Plugin Scale Scale any frame, it’s contents, and all effects to any defined width or height. Sankey Connect Sankey Diagram Connect. </description>
     </item>
     <item>
       <title>Git Skills</title>
-      <link>http://localhost:1313/posts/main/20220503160055-git_skills/</link>
+      <link>https://sheerwill.xyz/posts/main/20220503160055-git_skills/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:52 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220503160055-git_skills/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220503160055-git_skills/</guid>
       <description>删除以往的提交记录 git checkout --orphan latest_branch git add -A git commit -am &amp;#34;commit message&amp;#34; git branch -D main git branch -m main git push -f origin main 发现上次提交的内容有误，需要再次修改，但不想重复提交，而是合并到上一次提</description>
     </item>
     <item>
       <title>How To Find Time Complexity Of An Algorithm</title>
-      <link>http://localhost:1313/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</link>
+      <link>https://sheerwill.xyz/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:52 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/</guid>
       <description>The most common metric for calculating time complexity is Big O notation. This removes all constant factors so that the running time can be estimated in relation to N as N approaches infinity. In general you can think of it like this:
 statement; Is constant. The running time of the statement will not change in relation to N.
 for (i = 0; i &amp;lt; N; i++) statement; Is linear. The running time of the loop is directly proportional to N.</description>
     </item>
     <item>
       <title>Refactoring Code</title>
-      <link>http://localhost:1313/posts/main/20220506193054-refactoring_code/</link>
+      <link>https://sheerwill.xyz/posts/main/20220506193054-refactoring_code/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:52 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220506193054-refactoring_code/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220506193054-refactoring_code/</guid>
       <description>How To Find Time Complexity Of An Algorithm
 Language JavaScript Refactoring </description>
     </item>
     <item>
       <title>Refactoring Condition statements</title>
-      <link>http://localhost:1313/posts/main/20220506193520-refactoring_condition_statements/</link>
+      <link>https://sheerwill.xyz/posts/main/20220506193520-refactoring_condition_statements/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:52 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220506193520-refactoring_condition_statements/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220506193520-refactoring_condition_statements/</guid>
       <description>前端网络请求回调中经常会根据后端返回的不同 code 进行不同的业务处理。 if (res.data.code === &amp;#34;0000&amp;#34;) { //do something } else if (res.data.code === &amp;#34;0001&amp;#34;) { //do something } else if (res.data.code === &amp;#34;0002&amp;#34;) { //do something } else { //do something } 简单应用 const statusCode =</description>
     </item>
     <item>
       <title>Refactoring Promise chains with async/await</title>
-      <link>http://localhost:1313/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</link>
+      <link>https://sheerwill.xyz/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</link>
       <pubDate>Fri, 10 Feb 2023 14:17:52 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20220506193624-refactoring_promise_chains_with_async_await/</guid>
       <description>const setDelay = (millisecond) =&amp;gt; { return new Promise((resolve, reject) =&amp;gt; { if (typeof millisecond != &amp;#34;number&amp;#34;) reject(new Error(&amp;#34;参数必须是number类型&amp;#34;)); setTimeout(() =&amp;gt; { resolve(`我延迟了${mi</description>
     </item>
     <item>
       <title>Blending Modes(Figma)</title>
-      <link>http://localhost:1313/posts/main/20221025101809-blending_modes_figma/</link>
+      <link>https://sheerwill.xyz/posts/main/20221025101809-blending_modes_figma/</link>
       <pubDate>Sun, 04 Dec 2022 11:09:01 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20221025101809-blending_modes_figma/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20221025101809-blending_modes_figma/</guid>
       <description>平时使用这个功能的时候都是逐个点击各个「混合模式（blending modes)」试看效果。下面就解释一下各个「混合模式」的工作原理。 Figure 1: DanHollick-1583080119068807168-20221020_205807-img1 简</description>
     </item>
     <item>
       <title>EasyUI</title>
-      <link>http://localhost:1313/posts/main/20221110154825-easyui/</link>
+      <link>https://sheerwill.xyz/posts/main/20221110154825-easyui/</link>
       <pubDate>Sun, 04 Dec 2022 11:09:01 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20221110154825-easyui/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20221110154825-easyui/</guid>
       <description>提交完成后关闭当前 Tab，刷新「父级」Tab。 增加如下方法在工具类中。 function reloadTabGrid(title){ if ($(&amp;#34;#frm_center&amp;#34; ).tabs(&amp;#39;exists&amp;#39;, title)) { $( &amp;#39;#frm_center&amp;#39;).tabs(&amp;#39;select&amp;#39; , title); window.top.reload_Abnormal_Monitor.call(); } } 在需要刷新的「父级」Tab 页面中添加。 window.top[&amp;#34;reload_Abnormal_Monitor&amp;#34;]=function(){ $(&amp;#39;#tt&amp;#39;).datagrid(</description>
     </item>
     <item>
       <title>Replace text in Calibre</title>
-      <link>http://localhost:1313/posts/main/20221123120104-replace_text_in_calibre/</link>
+      <link>https://sheerwill.xyz/posts/main/20221123120104-replace_text_in_calibre/</link>
       <pubDate>Sun, 04 Dec 2022 11:09:01 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20221123120104-replace_text_in_calibre/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20221123120104-replace_text_in_calibre/</guid>
       <description>Readwise Reader 中无法识别中文批注版本 Epub 中的行内批注，为了更好的在 Readwise Reader 中阅读，以及当初在 Calibre 中阅读时批注，不好将批注内容很好的分地复制出来，所以需要将批注</description>
     </item>
     <item>
       <title>Index</title>
-      <link>http://localhost:1313/posts/main/20221008125127-index/</link>
+      <link>https://sheerwill.xyz/posts/main/20221008125127-index/</link>
       <pubDate>Sun, 04 Dec 2022 11:09:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20221008125127-index/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20221008125127-index/</guid>
       <description>B-Tree 和 B+ Tree 的不同 B-Tree B+Tree All internal nodes and leaf nodes contain data pointers along with keys. Only leaf nodes contain data pointers along with keys, internal nodes contain keys only. There are no duplicate keys. Duplicate keys are present in this, all internal nodes are also present at leaves. Leaf nodes are not linked to each other. Leaf nodes are linked to each other. Sequential</description>
     </item>
     <item>
       <title>MVCC</title>
-      <link>http://localhost:1313/posts/main/20221019183132-mvcc/</link>
+      <link>https://sheerwill.xyz/posts/main/20221019183132-mvcc/</link>
       <pubDate>Sun, 04 Dec 2022 11:09:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20221019183132-mvcc/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20221019183132-mvcc/</guid>
       <description></description>
     </item>
     <item>
       <title>Photoshop Techniques</title>
-      <link>http://localhost:1313/posts/main/20221013221348-photoshop_techniques/</link>
+      <link>https://sheerwill.xyz/posts/main/20221013221348-photoshop_techniques/</link>
       <pubDate>Sun, 04 Dec 2022 11:09:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/main/20221013221348-photoshop_techniques/</guid>
+      <guid>https://sheerwill.xyz/posts/main/20221013221348-photoshop_techniques/</guid>
       <description>去除双下巴 钢笔将需要去除的双下巴以及下巴下方的脖子部分圈取出来 CMD+Enter 将路径转为选区。 根据实际情况适当羽化几个像素 CMD+j 复制两层 选中复制出的两个图层中</description>
     </item>
     <item>
       <title>How I Take Notes</title>
-      <link>http://localhost:1313/posts/article/20220505162419-how_i_take_notes/</link>
+      <link>https://sheerwill.xyz/posts/article/20220505162419-how_i_take_notes/</link>
       <pubDate>Tue, 08 Nov 2022 14:20:39 +0800</pubDate>
-      <guid>http://localhost:1313/posts/article/20220505162419-how_i_take_notes/</guid>
+      <guid>https://sheerwill.xyz/posts/article/20220505162419-how_i_take_notes/</guid>
       <description>ID: 46dfdbc7-24f6-4edc-9e61-dab01aa185a1 ROAM_REFS: https://jethrokuan.github.io/org-roam-guide/ Introduction 最先接触到 Zettlekasten (German: &amp;ldquo;slip box&amp;rdquo;, plural zettlekästen) 是从 @Tisoga 的推文中得知，如获至宝。在这之前用过 MWeb（内测用户）、iA Writer、B</description>
     </item>
     <item>
       <title>Implementation Intention GTD</title>
-      <link>http://localhost:1313/posts/article/20220503143427-gtd/</link>
+      <link>https://sheerwill.xyz/posts/article/20220503143427-gtd/</link>
       <pubDate>Wed, 19 Oct 2022 19:28:36 +0800</pubDate>
-      <guid>http://localhost:1313/posts/article/20220503143427-gtd/</guid>
+      <guid>https://sheerwill.xyz/posts/article/20220503143427-gtd/</guid>
       <description>ID: 1d28a46a-0a67-4633-863a-a0acf49b17c0 Introduction 2013年时，第一次接触到 GTD 是因为 Omnifocus 的美观，为此我还花了 $9.99 买了 iOS 的客户端。但从那个时候起，我一直没有用好 GTD 这套理论和各种工具，例如 Om</description>
     </item>
   </channel>

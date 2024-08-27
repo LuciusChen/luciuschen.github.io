@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.133.1"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.133.1"><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -10,18 +10,18 @@
 
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/">
+<link rel="canonical" href="https://sheerwill.xyz/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://sheerwill.xyz/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://sheerwill.xyz/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://sheerwill.xyz/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://sheerwill.xyz/apple-touch-icon.png">
+<link rel="mask-icon" href="https://sheerwill.xyz/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/index.xml">
-<link rel="alternate" type="application/json" href="http://localhost:1313/index.json">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/">
+<link rel="alternate" type="application/rss+xml" href="https://sheerwill.xyz/index.xml">
+<link rel="alternate" type="application/json" href="https://sheerwill.xyz/index.json">
+<link rel="alternate" hreflang="en" href="https://sheerwill.xyz/">
 <noscript>
     <style>
         #theme-toggle,
@@ -107,7 +107,7 @@
 <meta property="og:title" content="Lucius | Braindump" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://localhost:1313/" />
+<meta property="og:url" content="https://sheerwill.xyz/" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Lucius | Braindump"/>
@@ -118,9 +118,9 @@
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Lucius | Braindump",
-  "url": "http://localhost:1313/",
+  "url": "https://sheerwill.xyz/",
   "description": "",
-  "thumbnailUrl": "http://localhost:1313/favicon.ico",
+  "thumbnailUrl": "https://sheerwill.xyz/favicon.ico",
   "sameAs": [
       "https://twitter.com/Lucius_Chen", "https://www.instagram.com/lucius_chen/", "https://github.com/LuciusChen"
   ]
@@ -143,7 +143,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Lucius | Braindump (Alt + H)">Lucius | Braindump</a>
+            <a href="https://sheerwill.xyz/" accesskey="h" title="Lucius | Braindump (Alt + H)">Lucius | Braindump</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -169,17 +169,17 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://sheerwill.xyz/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/archives/" title="Archive">
+                <a href="https://sheerwill.xyz/archives/" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://sheerwill.xyz/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -244,7 +244,7 @@
     <p>&lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt; &lt;artifactId&gt;httpclient&lt;/artifactId&gt; &lt;version&gt;4.4&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt; &lt;artifactId&gt;httpmime&lt;/artifactId&gt; &lt;version&gt;4.4&lt;/version&gt; &lt;/dependency&gt; &lt;/dependencies&gt; CloseableHttpClient httpClient = HttpClients.createDefault(); HttpPost uploadFile = new HttpPost(&#34;...&#34;); MultipartEntityBuilder builder = MultipartEntityBuilder.create(); builder.addTextBody(&#34;field1&#34;, &#34;yes&#34;, ContentType.TEXT_PLAIN); // This attaches the file to the POST: File f = new File(&#34;[/path/to/upload]&#34;); builder.addBinaryBody( &#34;file&#34;, new FileInputStream(f), ContentType.APPLICATION_OCTET_STREAM, f.getName() ); HttpEntity multipart = builder.build(); uploadFile.setEntity(multipart); CloseableHttpResponse response = httpClient.execute(uploadFile); HttpEntity responseEntity = response.getEntity(); 4.0 版本需要按照下面...</p>
   </div>
   <footer class="entry-footer"><span title='2024-08-27 14:41:14 +0800 CST'>August 27, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;231 words&nbsp;·&nbsp;Lucius Chen</footer>
-  <a class="entry-link" aria-label="post link to Making a Multipart/Form-Data POST Request in Java" href="http://localhost:1313/posts/main/20240826192831-making_a_multipart_form_data_post_request_in_java/"></a>
+  <a class="entry-link" aria-label="post link to Making a Multipart/Form-Data POST Request in Java" href="https://sheerwill.xyz/posts/main/20240826192831-making_a_multipart_form_data_post_request_in_java/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -256,7 +256,7 @@
     <p>pom.xml 文件中需要增加一些包。 &lt;repositories&gt; &lt;repository&gt; &lt;id&gt;opencv&lt;/id&gt; &lt;url&gt;https://mvnrepository.com/artifact/org.openpnp/opencv&lt;/url&gt; &lt;/repository&gt; &lt;repository&gt; &lt;id&gt;djl.ai&lt;/id&gt; &lt;url&gt;https://oss.sonatype.org/content/repositories/snapshots/&lt;/url&gt; &lt;/repository&gt; &lt;/repositories&gt; &lt;dependencies&gt; &lt;!-- DJL Core API --&gt; &lt;dependency&gt; &lt;groupId&gt;ai.djl&lt;/groupId&gt; &lt;artifactId&gt;api&lt;/artifactId&gt; &lt;version&gt;${djl.version}&lt;/version&gt; &lt;/dependency&gt; &lt;!-- DJL PyTorch Engine --&gt; &lt;dependency&gt; &lt;groupId&gt;ai.djl.pytorch&lt;/groupId&gt; &lt;artifactId&gt;pytorch-engine&lt;/artifactId&gt; &lt;version&gt;${djl.version}&lt;/version&gt; &lt;/dependency&gt; &lt;!-- DJL PyTorch Model Zoo --&gt; &lt;dependency&gt; &lt;groupId&gt;ai.djl.pytorch&lt;/groupId&gt; &lt;artifactId&gt;pytorch-model-zoo&lt;/artifactId&gt; &lt;version&gt;${djl.version}&lt;/version&gt; &lt;/dependency&gt; &lt;!-- DJL Basic Dataset --&gt; &lt;dependency&gt; &lt;groupId&gt;ai.djl&lt;/groupId&gt; &lt;artifactId&gt;basicdataset&lt;/artifactId&gt; &lt;version&gt;${djl.version}&lt;/version&gt; &lt;/dependency&gt; &lt;!-- DJL Image Processing --&gt; &lt;dependency&gt;...</p>
   </div>
   <footer class="entry-footer"><span title='2024-08-27 14:40:54 +0800 CST'>August 27, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;628 words&nbsp;·&nbsp;Lucius Chen</footer>
-  <a class="entry-link" aria-label="post link to Direct Invocation of YOLOv8 Trained Models in Java" href="http://localhost:1313/posts/main/20240826191654-direct_invocation_of_yolov8_trained_models_in_java/"></a>
+  <a class="entry-link" aria-label="post link to Direct Invocation of YOLOv8 Trained Models in Java" href="https://sheerwill.xyz/posts/main/20240826191654-direct_invocation_of_yolov8_trained_models_in_java/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -268,7 +268,7 @@
     <p>给定的 Lamport 时间戳 \(L(a)\) 和 \(L(b)\) 并且 \(L(a) &lt; L(b)\)，我们推断不出 \(a \rightarrow b\) 或者 \(a || b\).1 要区分平行的这些事件，需要 vertor clocks: 假定分布式系统中有 \(n\) 个节点，\(N = \langle N_{1},...</p>
   </div>
   <footer class="entry-footer"><span title='2024-03-08 10:14:03 +0800 CST'>March 8, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;1076 words&nbsp;·&nbsp;Lucius Chen</footer>
-  <a class="entry-link" aria-label="post link to Vector clocks" href="http://localhost:1313/posts/main/20220602235916-vector_clocks/"></a>
+  <a class="entry-link" aria-label="post link to Vector clocks" href="https://sheerwill.xyz/posts/main/20220602235916-vector_clocks/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -280,7 +280,7 @@
     <p>Definition 最弱的广播类型称为先进先出（FIFO）广播。在这个模型中，由同一节点发送的信息按照发送的顺序传递。例如下图中，\(m_{1}\) 必须在 \(m_{3}\) 之...</p>
   </div>
   <footer class="entry-footer"><span title='2024-03-08 10:13:14 +0800 CST'>March 8, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;892 words&nbsp;·&nbsp;Lucius Chen</footer>
-  <a class="entry-link" aria-label="post link to FIFO broadcast" href="http://localhost:1313/posts/main/20220616105609-fifo_broadcast/"></a>
+  <a class="entry-link" aria-label="post link to FIFO broadcast" href="https://sheerwill.xyz/posts/main/20220616105609-fifo_broadcast/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -292,7 +292,7 @@
     <p>Definition 总秩序广播（total order broadcast），有时也被称为原子广播（atomic broadcast）。FIFO broadcast 和 Causal broadcast 允许不同的节点以不同...</p>
   </div>
   <footer class="entry-footer"><span title='2024-03-08 10:11:31 +0800 CST'>March 8, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;837 words&nbsp;·&nbsp;Lucius Chen</footer>
-  <a class="entry-link" aria-label="post link to Total order broadcast" href="http://localhost:1313/posts/main/20220616135058-total_order_broadcast/"></a>
+  <a class="entry-link" aria-label="post link to Total order broadcast" href="https://sheerwill.xyz/posts/main/20220616135058-total_order_broadcast/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -304,7 +304,7 @@
     <p>Remote Procedure Call Remote Procedure Call (RPC) 使得调用远程函数就像调用本地函数一样，这样就不需要关心资源的具体问题，实际上 RPC 是将方法调用转换成了网络通信。但是遇到通信失败怎...</p>
   </div>
   <footer class="entry-footer"><span title='2024-03-08 10:10:28 +0800 CST'>March 8, 2024</span>&nbsp;·&nbsp;16 min&nbsp;·&nbsp;7681 words&nbsp;·&nbsp;Lucius Chen</footer>
-  <a class="entry-link" aria-label="post link to Distribution System" href="http://localhost:1313/posts/main/20220602202933-distribution_system/"></a>
+  <a class="entry-link" aria-label="post link to Distribution System" href="https://sheerwill.xyz/posts/main/20220602202933-distribution_system/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -316,7 +316,7 @@
     <p>The Happens-before relation An event is something happening at one node (sending or receiving a message, or a local execution step). event \(a\) happens before event \(b\), written \(a \rightarrow b\). 那么在分布式，有三种情况，满足其中一条，则 \(a\) 是发生在 \(b\) 之前： \(a\) 和 \(b\) 发生在相同节...</p>
   </div>
   <footer class="entry-footer"><span title='2024-03-08 10:06:39 +0800 CST'>March 8, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;574 words&nbsp;·&nbsp;Lucius Chen</footer>
-  <a class="entry-link" aria-label="post link to Causality and Happen-before relation" href="http://localhost:1313/posts/main/20220602202832-causality_and_happen_before_relation/"></a>
+  <a class="entry-link" aria-label="post link to Causality and Happen-before relation" href="https://sheerwill.xyz/posts/main/20220602202832-causality_and_happen_before_relation/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -328,7 +328,7 @@
     <p>Definition Causal broadcast 算法有点类似于 FIFO broadcast： 每条被广播的消息附上的不是一个序列号，而是一个整数的向量。这种算法有时被称为向量时钟算法，向量时钟...</p>
   </div>
   <footer class="entry-footer"><span title='2024-03-08 10:04:06 +0800 CST'>March 8, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;980 words&nbsp;·&nbsp;Lucius Chen</footer>
-  <a class="entry-link" aria-label="post link to Causal broadcast" href="http://localhost:1313/posts/main/20220616132407-causal_broadcast/"></a>
+  <a class="entry-link" aria-label="post link to Causal broadcast" href="https://sheerwill.xyz/posts/main/20220616132407-causal_broadcast/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -340,7 +340,7 @@
     <p>Lamport clocks algorithm Lamport clocks in words Figure 1: lamport-example-simple 每个节点都维护一个计数器 \(t\)，每一个当前节点事件 \(e\) 发生时，自增 1。 增长后的值设为 \(L(e)\) 发送消息时附带上当前的计数 \(t\) 消息...</p>
   </div>
   <footer class="entry-footer"><span title='2024-03-08 10:02:54 +0800 CST'>March 8, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;617 words&nbsp;·&nbsp;Lucius Chen</footer>
-  <a class="entry-link" aria-label="post link to Lamport clocks" href="http://localhost:1313/posts/main/20220609201658-lamport_clocks/"></a>
+  <a class="entry-link" aria-label="post link to Lamport clocks" href="https://sheerwill.xyz/posts/main/20220609201658-lamport_clocks/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -352,18 +352,18 @@
     <p>Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其...</p>
   </div>
   <footer class="entry-footer"><span title='2024-03-08 09:59:11 +0800 CST'>March 8, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;2897 words&nbsp;·&nbsp;Lucius Chen</footer>
-  <a class="entry-link" aria-label="post link to Raft consensus algorithm" href="http://localhost:1313/posts/main/20220623152601-raft_consensus_algorithm/"></a>
+  <a class="entry-link" aria-label="post link to Raft consensus algorithm" href="https://sheerwill.xyz/posts/main/20220623152601-raft_consensus_algorithm/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="next" href="http://localhost:1313/page/2/">Next&nbsp;&nbsp;»
+    <a class="next" href="https://sheerwill.xyz/page/2/">Next&nbsp;&nbsp;»
     </a>
   </nav>
 </footer>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:1313/">Lucius | Braindump</a></span> · 
+        <span>&copy; 2024 <a href="https://sheerwill.xyz/">Lucius | Braindump</a></span> · 
 
     <span>
         Powered by
