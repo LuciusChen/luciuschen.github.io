@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,76 +9,53 @@
 <meta name="keywords" content="">
 <meta name="description" content="Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on UbuntuLucius&rsquo;s Workflow git clone git://git.sv.gnu.org/emacs.git sudo apt install">
 <meta name="author" content="Lucius Chen">
-<link rel="canonical" href="https://sheerwill.xyz/posts/main/20220723211325-vanilla_emacs_with_purcell/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.cf61dd8492036b42156ddaf10e673052e7b9d11a1c1d3513c6088debf5e42a88.css" integrity="sha256-z2HdhJIDa0IVbdrxDmcwUue50RocHTUTxgiN6/XkKog=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://sheerwill.xyz/favicon.ico">
-<link rel="apple-touch-icon" href="https://sheerwill.xyz/apple-touch-icon.png">
-<link rel="alternate" hreflang="en" href="https://sheerwill.xyz/posts/main/20220723211325-vanilla_emacs_with_purcell/">
-<script async defer data-website-id="f4e3ad0a-7fc1-4f18-b08c-9be77b60cdd5" src="https://oishii.reorx.com/oishii.js"></script>
+<link rel="canonical" href="http://localhost:1313/posts/main/20220723211325-vanilla_emacs_with_purcell/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/main/20220723211325-vanilla_emacs_with_purcell/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-<meta name="twitter:title" content="Vanilla Emacs with Purcell | Lucius | Braindump" />
-<meta name="twitter:description" content="Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on UbuntuLucius&rsquo;s Workflow git clone git://git.sv.gnu.org/emacs.git sudo apt install" />
-<meta property="og:title" content="Vanilla Emacs with Purcell | Lucius | Braindump" />
-<meta property="og:description" content="Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on UbuntuLucius&rsquo;s Workflow git clone git://git.sv.gnu.org/emacs.git sudo apt install" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://sheerwill.xyz/posts/main/20220723211325-vanilla_emacs_with_purcell/" />
-<meta property="article:section" content="posts" />
-  <meta property="article:published_time" content="2023-02-28T13:51:10&#43;08:00" />
-  <meta property="article:modified_time" content="2023-02-28T13:51:10&#43;08:00" />
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
 
+            .list {
+                background: var(--theme);
+            }
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://sheerwill.xyz/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Vanilla Emacs with Purcell",
-      "item": "https://sheerwill.xyz/posts/main/20220723211325-vanilla_emacs_with_purcell/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Vanilla Emacs with Purcell | Lucius | Braindump",
-  "name": "Vanilla Emacs with Purcell",
-  "description": "Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on UbuntuLucius\u0026rsquo;s Workflow git clone git://git.sv.gnu.org/emacs.git sudo apt install",
-  "keywords": [
-    
-  ],
-  "wordCount" : "12640",
-  "inLanguage": "en",
-  "datePublished": "2023-02-28T13:51:10+08:00",
-  "dateModified": "2023-02-28T13:51:10+08:00",
-  "author":[{
-    "@type": "Person",
-    "name": "Lucius Chen"
-  }],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://sheerwill.xyz/posts/main/20220723211325-vanilla_emacs_with_purcell/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Lucius | Braindump",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://sheerwill.xyz/favicon.ico"
-    }
-  }
-}
-</script><style>
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><style>
   #icons {
     display: flex;
     flex-wrap: wrap;
@@ -105,126 +82,116 @@
 </style>
 
 
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEASUREMENT_ID"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
         }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary-bg: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list-page {
-                background: var(--theme);
-            }
-
-            .list-page:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list-page:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-MEASUREMENT_ID');
         }
+      </script>
+    
+  
 
-    </style>
-</noscript>
+<meta property="og:title" content="Vanilla Emacs with Purcell" />
+<meta property="og:description" content="Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on UbuntuLucius&rsquo;s Workflow git clone git://git.sv.gnu.org/emacs.git sudo apt install" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/main/20220723211325-vanilla_emacs_with_purcell/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-28T13:51:10+08:00" />
+<meta property="article:modified_time" content="2023-02-28T13:51:10+08:00" />
 
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vanilla Emacs with Purcell"/>
+<meta name="twitter:description" content="Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on UbuntuLucius&rsquo;s Workflow git clone git://git.sv.gnu.org/emacs.git sudo apt install"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Vanilla Emacs with Purcell",
+      "item": "http://localhost:1313/posts/main/20220723211325-vanilla_emacs_with_purcell/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Vanilla Emacs with Purcell",
+  "name": "Vanilla Emacs with Purcell",
+  "description": "Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on UbuntuLucius\u0026rsquo;s Workflow git clone git://git.sv.gnu.org/emacs.git sudo apt install",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.\n– Neal Stephenson, In the Beginning was the Command Line (1998)\nInstall Emacs-plus With Homebrew brew tap d12frosted/emacs-plus brew install emacs-plus --with-native-comp --with-modern-vscode-icon ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications Build Emacs on UbuntuLucius’s Workflow git clone git://git.sv.gnu.org/emacs.git sudo apt install build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf cd emacs ./autogen.sh ./configure make -j8 sudo make install telega 中需要 svg 和 webp 的支持\nsudo apt-get install -y librsvg2-dev sudo apt-get install webp Ubuntu 上的 Dropbox 参考 Install - Dropbox，目前的情况是只有命令行启动的客户端才可以同步成功。\ncd ~ \u0026\u0026 wget -O - \"https://www.dropbox.com/download?plat=lnx.x86_64\" | tar xzf - ~/.dropbox-dist/dropboxd 为了使用方便使用，进行了改键，通过下面的命令把 CAPS(66) 和 LCTRL(37) 互换。\nsudo gedit /us r/share/X11/xkb/keycodes/evdev 输入法安装 fcitx-rime，和 MacOS 上的配置通用，放在 ~/.config/fcitx/rime​。\nsudo apt-get install fcitx-rime Personal Settings 目前在 purcell 中就增加或修改了这些文件。\n. ├── lisp ├── ligature.el ├── init-org.el ├── init-sis.el ├── init-rime.el ├── init-font.el ├── init-meow.el ├── beancount.el ├── init-elpa.el ├── init-local.el ├── init-latex.el ├── init-corfu.el ├── init-bibtex.el ├── init-themes.el ├── init-elfeed.el ├── init-telega.el ├── init-translate.el ├── init-org-modern.el ├── init-quick-menus.el ├── init-tree-sitter.el ├── init-org-enhance.el ├── telega-bridge-bot.el └── init-org-transclusion.el ligature.el GitHub - mickeynp/ligature.el: Display typographical ligatures in Emacs，这里是将其中的 ligature.el 下载到 .emacs.d/lisp/ 目录下，加上下列代码。\n;; Enable the www ligature in every possible major mode (ligature-set-ligatures 't '(\"www\")) ;; Enable ligatures in programming modes (ligature-set-ligatures 'prog-mode '(\"www\" \"**\" \"***\" \"**/\" \"*\u003e\" \"*/\" \"\\\\\\\\\" \"\\\\\\\\\\\\\" \"{-\" \"::\" \":::\" \":=\" \"!!\" \"!=\" \"!==\" \"-}\" \"----\" \"--\u003e\" \"-\u003e\" \"-\u003e\u003e\" \"-\u003c\" \"-\u003c\u003c\" \"-~\" \"#{\" \"#[\" \"##\" \"###\" \"####\" \"#(\" \"#?\" \"#_\" \"#_(\" \".-\" \".=\" \"..\" \"..\u003c\" \"...\" \"?=\" \"??\" \";;\" \"/*\" \"/**\" \"/=\" \"/==\" \"/\u003e\" \"//\" \"///\" \"\u0026\u0026\" \"||\" \"||=\" \"|=\" \"|\u003e\" \"^=\" \"$\u003e\" \"++\" \"+++\" \"+\u003e\" \"=:=\" \"==\" \"===\" \"==\u003e\" \"=\u003e\" \"=\u003e\u003e\" \"\u003c=\" \"=\u003c\u003c\" \"=/=\" \"\u003e-\" \"\u003e=\" \"\u003e=\u003e\" \"\u003e\u003e\" \"\u003e\u003e-\" \"\u003e\u003e=\" \"\u003e\u003e\u003e\" \"\u003c*\" \"\u003c*\u003e\" \"\u003c|\" \"\u003c|\u003e\" \"\u003c$\" \"\u003c$\u003e\" \" (defun telega-buffer-face-mode-variable () (interactive) (make-face 'my-telega-face) ;; (set-face-attribute 'my-telega-face nil :font \"M+ 1m\") (set-face-attribute 'my-telega-face nil :font \"Sarasa Mono SC Nerd 13\") (setq buffer-face-mode-face 'my-telega-face) (buffer-face-mode)) (add-hook 'telega-root-mode-hook 'telega-buffer-face-mode-variable) (add-hook 'telega-webpage-mode-hook 'telega-buffer-face-mode-variable) (add-hook 'telega-chat-mode-hook 'telega-buffer-face-mode-variable) 使用 (setf (alist-get 2 telega-avatar-factors-alist) '(0.5 . 0.1)) 来使得本来两行显示的头像缩小至一行显示（头像显示几乎废了）。 在基础字号的基础上（这里是 14）调整特殊字符/字体的缩放就可以完美解决头像裂开的问题了，完整代码如下。 contrib telega 中有个 contrib 的子目录，当中有一些挺实用的功能。这里启用了三种，过滤广告、代码高亮以及短链。\n原生的加载子目录。\n(push (expand-file-name \"contrib\" (file-name-directory (locate-library \"telega\"))) load-path) 使用 straight 的话如下。\n:straight (:host github :repo \"zevlg/telega.el\" :files (:defaults \"contrib\")) Animated Stickers git clone https://github.com/zevlg/tgs2png.git git submodule init git submodule update mkdir build cd build cmake .. make copy tgs2png somewhere into $PATH 这里我编译完就已经是可用的了。\ndisplay-buffer-alist 每次打开 telega 都是占了 emacs 窗口的一半（emacs 我都是全屏使用），需要手动去调整 telega 的窗口。这里设置了一下 display-buffer-alist 之后就可以固定 telega 的窗口在右侧，并且占据窗口的 35% 的宽度。\n(add-hook 'telega-mode-hook (lambda () (display-buffer (current-buffer) '((display-buffer-in-side-window))))) (setq display-buffer-alist '((\"\\\\*Telega Root\\\\*\" . ((display-buffer-in-side-window) (window-width . 0.35) (side . right) (slot . 0) (dedicated . nil))))) 上述代码除了 dedicated 属性，都是由 ChatGPT Plus 生成。不设置该字段为 nil 会导致从 Telega 列表进入聊天 buffer 后重新打开新的 buffer，具体原因参照 dedicated 字段的解释参见 Displaying Buffers in Side Windows (GNU Emacs Lisp Reference Manual)。\n最后总的配置如下。\n;;; init-telega.el --- Custom configuration ;;; Commentary (require-package 'telega) (require-package 'all-the-icons) ;; If language-detection is available, ;; then laguage could be detected automatically ;; for code blocks without language explicitly specified. (require-package 'language-detection) ;; 加载子文件夹 contrib (push (expand-file-name \"contrib\" (file-name-directory (locate-library \"telega\"))) load-path) (require 'telega-mnz) (global-telega-mnz-mode 1) (setq telega-debug t) ;; 自动播放 gif (telega-autoplay-mode 1) (define-key global-map (kbd \"C-c t\") telega-prefix-map) ;; 去除昵称、回复行的背景高亮 (defun my-telega-chat-mode () ;; telega-msg-inline-reply ⊆ telega-msg-heading ;; telega-msg-inline-forward ⊆ telega-msg-heading (set-face-attribute 'telega-msg-heading nil :underline nil :inherit nil ;; Warning: setting attribute ‘:background’ of face ‘telega-msg-heading’: nil value is invalid, use ‘unspecified’ instead. :background 'unspecified) (set-face-attribute 'telega-msg-inline-reply nil :foreground \"#86C166\") ;; 苗 NAE (set-face-attribute 'telega-msg-inline-forward nil :foreground \"#FFB11B\") (set-face-attribute 'telega-entity-type-mention nil :underline '(:style line) :weight 'bold) (set-face-attribute 'telega-msg-self-title nil :foreground \"#E2943B\") ;; 朽葉 KUCHIBA (set-face-attribute 'telega-msg-user-title nil :weight 'bold) (set-face-attribute 'telega-button nil :foreground \"#986DB2\" :box '(:line-width (-2 . -2) :color \"#986DB2\" :style nil)) (set-face-attribute 'telega-button-active nil :foreground \"#ffffff\" :background \"#986DB2\") ;; (setq telega-chat-prompt-format \"🏄🏻〉 \") ;; 缩小 emoji 及特殊字符/字体显示，防止头像裂开。 ;; (add-to-list 'face-font-rescale-alist '(\"Apple Color Emoji\" . 0.8)) (add-to-list 'face-font-rescale-alist '(\"HanaMinA\" . 0.9)) (add-to-list 'face-font-rescale-alist '(\"Noto Sans Egyptian Hieroglyphs\" . 0.675)) (add-to-list 'face-font-rescale-alist '(\"STIXGeneral\" . 0.675)) (add-to-list 'face-font-rescale-alist '(\"Apple Symbols\" . 0.675)) (add-to-list 'face-font-rescale-alist '(\"Noto Sans Kannada\" . 0.675)) (add-to-list 'face-font-rescale-alist '(\"Academy Engraved LET\" . 0.675)) (add-to-list 'face-font-rescale-alist '(\"Kohinoor Devanagari\" . 0.675)) (add-to-list 'face-font-rescale-alist '(\"Geneva\" . 0.675)) (add-to-list 'face-font-rescale-alist '(\"Noto Sans Oriya\" . 0.675))) (add-hook 'telega-chat-mode-hook 'my-telega-chat-mode) ;; 未读提示 (set-face-attribute 'telega-unmuted-count nil :foreground \"#FFB11B\" :weight 'bold) (set-face-attribute 'telega-mention-count nil :foreground \"#FE6DB3\") (set-face-attribute 'telega-muted-count nil :foreground \"#86C166\" :weight 'bold) ;; 多加一条横线在输入和聊天页面之间 (setq telega-symbol-underline-bar (propertize \" \" 'face 'telega-webpage-strike-through)) ;; 聊天列表高亮 (defun lg-telega-root-mode () (hl-line-mode 1)) (defun lg-telega-chat-update (chat) (with-telega-root-buffer (hl-line-highlight))) (add-hook 'telega-chat-update-hook 'lg-telega-chat-update) (add-hook 'telega-root-mode-hook 'lg-telega-root-mode) ;; Linux settings (when *IS-LINUX* (setq telega-root-show-avatars nil) (setq telega-user-show-avatars nil) (setq telega-chat-show-avatars nil) (setq telega-proxies (list '(:server \"127.0.0.1\" :port 7890 :enable t :type (:@type \"proxyTypeSocks5\" :username \"\" :password \"\")) ))) ;; Opening files using external programs (if *IS-MAC* (setcdr (assq t org-file-apps-gnu) 'browse-url-default-macosx-browser) (setcdr (assq t org-file-apps-gnu) 'browse-url-xdg-open)) (setq telega-open-file-function 'org-open-file) ;; 固定 telega 窗口在右侧 (add-hook 'telega-mode-hook (lambda () (display-buffer (current-buffer) '((display-buffer-in-side-window))))) (setq display-buffer-alist '((\"\\\\*Telega Root\\\\*\" . ((display-buffer-in-side-window) (window-width . 0.35) (side . right) (slot . 0) (dedicated . nil))))) (provide 'init-telega) ;;; init-telega.el ends here init-translate.el ;;; init-translate.el --- Custom configuration ;;; Commentary (require-package 'go-translate) (use-package go-translate :bind ((\"C-c t g\" . gts-do-translate) (\"C-c t p\" . go-translate-at-point) (\"C-c t s\" . go-translate-save-kill-ring)) :config (setq gts-translate-list '((\"en\" \"zh\"))) (setq gts-default-translator (gts-translator :picker (gts-prompt-picker) :engines (list (gts-bing-engine) (gts-google-engine)) :render (gts-buffer-render))) ;; Pick directly and use Google RPC API to translate (defun go-translate-at-point () (interactive) (gts-translate (gts-translator :picker (gts-noprompt-picker) :engines (gts-google-rpc-engine) :render (gts-buffer-render)))) ;; Pick directly and add the results into kill-ring (defun go-translate-save-kill-ring () (interactive) (gts-translate (gts-translator :picker (gts-noprompt-picker) :engines (gts-google-engine :parser (gts-google-summary-parser)) :render (gts-kill-ring-render)))) (set-face-attribute 'gts-render-buffer-me-header-backgroud-face nil :background \"#7BA23F\")) (provide 'init-translate) ;;; init-translate.el ends here init-org-modern.el ;;; init-org-modern.el --- Custom configuration ;;; Commentary (require-package 'org-modern) (use-package org-modern :after org :hook (org-mode . org-modern-mode) :init (menu-bar-mode -1) (tool-bar-mode -1) (scroll-bar-mode -1) (setq org-modern-star [\"➫\" \"✦\" \"✜\" \"✲\" \"✸\" \"❅\"] org-hide-emphasis-markers t org-tags-column 0 org-catch-invisible-edits 'show-and-error org-special-ctrl-a/e t org-insert-heading-respect-content t org-modern-table-horizontal 0.2 org-modern-list '((43 . \"➤\") (45 . \"▻\") (42 . \"►\")) org-ellipsis \"[+]\")) (modify-all-frames-parameters '((right-divider-width . 5) (left-divider-width . 5) (internal-border-width . 5))) (dolist (face '(window-divider window-divider-first-pixel window-divider-last-pixel)) (face-spec-reset-face face) (set-face-foreground face (face-attribute 'default :background))) (set-face-background 'fringe (face-attribute 'default :background)) (custom-set-faces '(org-ellipsis ((t (:foreground \"#90B44B\"))))) ;; 鶸萌黄 (provide 'init-org-modern) ;;; init-org-modern.el ends here init-quick-menus.el Daily Log 是按照每天的日期生成，并不是固定的文件名，因此这里写了自定义方法去跳转到今天/昨天的 Daily Log，方便用来回顾。\n;;; init-quick-menus.el --- Custom configuration ;;; Commentary ;; org-starter (require-package 'org-starter) (setq org-refile-use-outline-path 'file) (use-package org-starter :config ;; (add-hook! 'after-init-hook 'org-starter-load-all-files-in-path) (org-starter-def \"~/Dropbox/org\" :files (\"agenda/inbox.org\" :agenda t :key \"i\" :refile (:maxlevel . 2)) (\"agenda/work.org\" :agenda t :key \"w\" :refile (:maxlevel . 2)) (\"agenda/tech-debt.org\" :agenda t :key \"d\" :refile (:maxlevel . 2)) (\"agenda/personal.org\" :agenda t :key \"p\" :refile (:maxlevel . 2)) (\"agenda/books.org\" :agenda t :key \"b\" :refile (:maxlevel . 2)) (\"agenda/someday.org\" :agenda t :key \"s\" :refile (:maxlevel . 2)) (\"agenda/agenda.org\" :agenda t :key \"a\" :refile (:maxlevel . 2)) (\"agenda/note.org\" :agenda t :key \"n\" :refile (:maxlevel . 2)) (\"daily/journal.org\" :agenda t :key \"j\" :refile (:maxlevel . 2)) (\"beancount/2022.beancount\" :agenda nil :key \"c\") (\"beancount/account.beancount\" :agenda nil :key \"m\") (\"beancount/credit.beancount\" :agenda nil :key \"e\") (\"beancount/insurance.beancount\" :agenda nil :key \"u\") (\"beancount/salary.beancount\" :agenda nil :key \"l\") (\"beancount/house.beancount\" :agenda nil :key \"h\") ) ;; hydra (require-package 'hydra) ;; 打开当前日期对应的 daily log 文件 (defun open-today-journal-file () \"Open journal file for today.\" (interactive) (let* ((file-name (format-time-string \"%Y-%m-%d.org\")) (file-path (concat \"~/Dropbox/org/daily/\" file-name))) (if (file-exists-p file-path) (find-file file-path) (message \"Journal file not found for today.\")))) (defun open-yesterday-journal-file () \"Open journal file for yesterday.\" (interactive) (let* ((yesterday-time (time-subtract (current-time) (days-to-time 1))) (file-name (format-time-string \"%Y-%m-%d.org\" yesterday-time)) (file-path (concat \"~/Dropbox/org/daily/\" file-name))) (if (file-exists-p file-path) (find-file file-path) (message \"Journal file not found for yesterday.\")))) (defhydra hydra-org-agenda-menu (:color blue) \" [--\u003e Org-agenda-menu \u003c--] ^^^^------------------------------------------------ _i_: inbox _w_: work _b_: books _d_: tech-debt _a_: agenda _p_: personal _n_: note _s_: someday _j_: journal _t_: today _y_: yesterday [--\u003e Beancount-menu \u003c--] ^^^^------------------------------------------------ _c_: 2022 _m_: account _e_: credit _u_: insurance _l_: salary _h_: house \" (\"i\" org-starter-find-file:inbox) (\"w\" org-starter-find-file:work) (\"d\" org-starter-find-file:tech-debt) (\"p\" org-starter-find-file:personal) (\"b\" org-starter-find-file:books) (\"n\" org-starter-find-file:note) (\"s\" org-starter-find-file:someday) (\"a\" org-starter-find-file:agenda) (\"j\" org-starter-find-file:journal) (\"t\" (open-today-journal-file)) (\"y\" (open-yesterday-journal-file)) (\"c\" org-starter-find-file:2022) (\"m\" org-starter-find-file:account) (\"e\" org-starter-find-file:credit) (\"u\" org-starter-find-file:insurance) (\"l\" org-starter-find-file:salary) (\"h\" org-starter-find-file:house) ):bind(\"C-c e\" . hydra-org-agenda-menu/body)) (provide 'init-quick-menus) ;;; init-quick-menus.el ends here init-tree-sitter.el 其中 elisp 官方还未支持，需要自己编译后放入 tree-sitter-langs 下面。\ngit clone https://github.com/Wilfred/tree-sitter-elisp gcc ./src/parser.c -fPIC -I./ --shared -o elisp.so cp ./elisp.so ~/.tree-sitter-langs/bin 这里第二步的时候报错了\n./src/parser.c:1:10: error: 'tree_sitter/parser.h' file not found with include; use \"quotes\" instead #include ^~~~~~~~~~~~~~~~~~~~~~ \"tree_sitter/parser.h\" 1 error generated. 这里需要将 src/parser.c 头部按照提示修改一下。\n- #include + #include \"tree_sitter/parser.h\" 第三步，由于我是通过 MELPA 安装，路径为 .emacs.d/elpa-29.0/tree-sitter-langs-version/bin​，其中 version 为具体的版本号。\n;;; init-tree-sitter.el --- Configure for tree sitter ;;; Commentary: (require-package 'tree-sitter) (require-package 'tree-sitter-langs) (require 'tree-sitter) (require 'tree-sitter-langs) ;;; Code: (global-tree-sitter-mode) (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode) ;; Load the language definition for Rust, if it hasn't been loaded. ;; Return the language object. (tree-sitter-require 'rust) (tree-sitter-require 'python) (tree-sitter-require 'javascript) (provide 'init-tree-sitter) ;;; init-tree-sitter.el ends here init-org-enhance.el 一些增强 org 功能的函数，可以方便使用。\n;;; init-org-enhance.el --- Org-mode config -*- lexical-binding: t -*- ;;; Commentary: ;; ============================================================= ;; ============== Org-roam-backlinks-search ================== ;; ============================================================= ;; https://github.com/Vidianos-Giannitsis/Dotfiles/blob/master/emacs/.emacs.d/libs/zettelkasten.org#org-roam-backlinks-search (defcustom org-roam-backlinks-choices '(\"View Backlinks\" \"Go to Node\" \"Quit\") \"List of choices for `org-roam-backlinks-node-read'.\") (defun org-roam-backlinks-query* (NODE) \"Gets the backlinks of NODE with `org-roam-db-query'.\" (org-roam-db-query [:select [source dest] :from links :where (= dest $s1) :and (= type \"id\")] (org-roam-node-id NODE))) (defun org-roam-backlinks-p (SOURCE NODE) \"Predicate function that checks if NODE is a backlink of SOURCE.\" (let* ((source-id (org-roam-node-id SOURCE)) (backlinks (org-roam-backlinks-query* SOURCE)) (id (org-roam-node-id NODE)) (id-list (list id source-id))) (member id-list backlinks))) (defun org-roam-backlinks-poi-or-moc-p (NODE) \"Check if NODE has the tag POI or the tag MOC. Return t if it does.\" (or (string-equal (car (org-roam-node-tags NODE)) \"POI\") (string-equal (car (org-roam-node-tags NODE)) \"MOC\"))) (defun org-roam-backlinks--read-node-backlinks (source) \"Runs `org-roam-node-read' on the backlinks of SOURCE. The predicate used as `org-roam-node-read''s filter-fn is `org-roam-backlinks-p'.\" (org-roam-node-read nil (apply-partially #'org-roam-backlinks-p source))) (defun org-roam-backlinks-node-read (node) \"Read a NODE and run `org-roam-backlinks--read-node-backlinks'. Upon selecting a backlink, prompt the user for what to do with the backlink. The prompt is created with `completing-read' with valid options being everything in the list `org-roam-backlinks-choices'. If the user decides to view the selected node's backlinks, the function recursively runs itself with the selection as its argument. If they decide they want to go to the selected node, the function runs `find-file' and the file associated to that node. Lastly, if they choose to quit, the function exits silently.\" (let* ((backlink (org-roam-backlinks--read-node-backlinks node)) (choice (completing-read \"What to do with NODE: \" org-roam-backlinks-choices))) (cond ((string-equal choice (car org-roam-backlinks-choices)) (org-roam-backlinks-node-read backlink)) ((string-equal choice (cadr org-roam-backlinks-choices)) (find-file (org-roam-node-file backlink))) ((string-equal choice (caddr org-roam-backlinks-choices)))))) (defun org-roam-backlinks-search () \"Select an `org-roam-node' and recursively search its backlinks. This function is a starter function for `org-roam-backlinks-node-read' which gets the initial node selection from `org-roam-node-list'. For more information about this function, check `org-roam-backlinks-node-read'.\" (interactive) (let ((node (org-roam-node-read))) (org-roam-backlinks-node-read node))) (defun org-roam-backlinks-search-from-moc-or-poi () \"`org-roam-backlinks-search' with an initial selection filter. Since nodes tagged as \\\"MOC\\\" or \\\"POI\\\" are the entry points to my personal zettelkasten, I have this helper function which is identical to `org-roam-backlinks-search' but filters initial selection to only those notes. That way, they initial selection has a point as it will be on a node that has a decent amount of backlinks.\" (interactive) (let ((node (org-roam-node-read nil #'org-roam-backlinks-poi-or-moc-p))) (org-roam-backlinks-node-read node))) ;; ============================================================= ;; =========== Dynamic org-agenda with org-roam ============== ;; ============================================================= ;; https://gist.github.com/d12frosted/a60e8ccb9aceba031af243dff0d19b2e (defun vulpea-dynamic-p () \"Return non-nil if current buffer has any todo entry. TODO entries marked as done are ignored, meaning the this function returns nil if current buffer contains only completed tasks.\" (seq-find ; (3) (lambda (type) (eq type 'todo)) (org-element-map ; (2) (org-element-parse-buffer 'headline) ; (1) 'headline (lambda (h) (org-element-property :todo-type h))))) (defun vulpea-dynamic-update-tag () \"Update dynamic tag in the current buffer.\" (when (and (not (active-minibuffer-window)) (vulpea-buffer-p)) (save-excursion (goto-char (point-min)) (let* ((tags (vulpea-buffer-tags-get)) (original-tags tags)) (if (vulpea-dynamic-p) (setq tags (cons \"dynamic\" tags)) (setq tags (remove \"dynamic\" tags))) ;; cleanup duplicates (setq tags (seq-uniq tags)) ;; update tags if changed (when (or (seq-difference tags original-tags) (seq-difference original-tags tags)) (apply #'vulpea-buffer-tags-set tags)))))) (defun vulpea-buffer-p () \"Return non-nil if the currently visited buffer is a note.\" (and buffer-file-name (string-prefix-p (expand-file-name (file-name-as-directory org-roam-directory)) (file-name-directory buffer-file-name)))) (defun vulpea-dynamic-files () \"Return a list of note files containing 'dynamic' tag.\" ; (seq-uniq (seq-map #'car (org-roam-db-query [:select [nodes:file] :from tags :left-join nodes :on (= tags:node-id nodes:id) :where (like tag (quote \"%\\\"dynamic\\\"%\"))])))) (defun vulpea-agenda-files-update (\u0026rest _) \"Update the value of `org-agenda-files'.\" ;; (setq org-agenda-files (vulpea-dynamic-files))) (setq org-agenda-files (seq-uniq (append (vulpea-dynamic-files) (file-expand-wildcards \"~/Dropbox/org/agenda/*.org\"))))) (add-hook 'find-file-hook #'vulpea-dynamic-update-tag) (add-hook 'before-save-hook #'vulpea-dynamic-update-tag) (advice-add 'org-agenda :before #'vulpea-agenda-files-update) (advice-add 'org-todo-list :before #'vulpea-agenda-files-update) ;; functions borrowed from `vulpea' library ;; https://github.com/d12frosted/vulpea/blob/6a735c34f1f64e1f70da77989e9ce8da7864e5ff/vulpea-buffer.el (defun vulpea-buffer-tags-get () \"Return filetags value in current buffer.\" (vulpea-buffer-prop-get-list \"filetags\" \"[ :]\")) (defun vulpea-buffer-tags-set (\u0026rest tags) \"Set TAGS in current buffer. If filetags value is already set, replace it.\" (if tags (vulpea-buffer-prop-set \"filetags\" (concat \":\" (string-join tags \":\") \":\")) (vulpea-buffer-prop-remove \"filetags\"))) (defun vulpea-buffer-tags-add (tag) \"Add a TAG to filetags in current buffer.\" (let* ((tags (vulpea-buffer-tags-get)) (tags (append tags (list tag)))) (apply #'vulpea-buffer-tags-set tags))) (defun vulpea-buffer-tags-remove (tag) \"Remove a TAG from filetags in current buffer.\" (let* ((tags (vulpea-buffer-tags-get)) (tags (delete tag tags))) (apply #'vulpea-buffer-tags-set tags))) (defun vulpea-buffer-prop-set (name value) \"Set a file property called NAME to VALUE in buffer file. If the property is already set, replace its value.\" (setq name (downcase name)) (org-with-point-at 1 (let ((case-fold-search t)) (if (re-search-forward (concat \"^#\\\\+\" name \":\\\\(.*\\\\)\") (point-max) t) (replace-match (concat \"#+\" name \": \" value) 'fixedcase) (while (and (not (eobp)) (looking-at \"^[#:]\")) (if (save-excursion (end-of-line) (eobp)) (progn (end-of-line) (insert \"\\n\")) (forward-line) (beginning-of-line))) (insert \"#+\" name \": \" value \"\\n\"))))) (defun vulpea-buffer-prop-set-list (name values \u0026optional separators) \"Set a file property called NAME to VALUES in current buffer. VALUES are quoted and combined into single string using `combine-and-quote-strings'. If SEPARATORS is non-nil, it should be a regular expression matching text that separates, but is not part of, the substrings. If nil it defaults to `split-string-default-separators', normally \\\"[ \\f\\t\\n\\r\\v]+\\\", and OMIT-NULLS is forced to t. If the property is already set, replace its value.\" (vulpea-buffer-prop-set name (combine-and-quote-strings values separators))) (defun vulpea-buffer-prop-get (name) \"Get a buffer property called NAME as a string.\" (org-with-point-at 1 (when (re-search-forward (concat \"^#\\\\+\" name \": \\\\(.*\\\\)\") (point-max) t) (buffer-substring-no-properties (match-beginning 1) (match-end 1))))) (defun vulpea-buffer-prop-get-list (name \u0026optional separators) \"Get a buffer property NAME as a list using SEPARATORS. If SEPARATORS is non-nil, it should be a regular expression matching text that separates, but is not part of, the substrings. If nil it defaults to `split-string-default-separators', normally \\\"[ \\f\\t\\n\\r\\v]+\\\", and OMIT-NULLS is forced to t.\" (let ((value (vulpea-buffer-prop-get name))) (when (and value (not (string-empty-p value))) (split-string-and-unquote value separators)))) (defun vulpea-buffer-prop-remove (name) \"Remove a buffer property called NAME.\" (org-with-point-at 1 (when (re-search-forward (concat \"\\\\(^#\\\\+\" name \":.*\\n?\\\\)\") (point-max) t) (replace-match \"\")))) ;; ============================================================= ;; ====================== Archiving ========================== ;; ============================================================= ;; (setq org-archive-mark-done nil) ;; (setq org-archive-location \"%s_archive::* Archive\") ;; https://gist.github.com/kepi/2f4acc3cc93403c75fbba5684c5d852d ;; org-archive-subtree-hierarchical.el ;; ;; version 0.2 ;; modified from https://lists.gnu.org/archive/html/emacs-orgmode/2014-08/msg00109.html ;; modified from https://stackoverflow.com/a/35475878/259187 ;; In orgmode ;; * A ;; ** AA ;; *** AAA ;; ** AB ;; *** ABA ;; Archiving AA will remove the subtree from the original file and create ;; it like that in archive target: ;; * AA ;; ** AAA ;; And this give you ;; * A ;; ** AA ;; *** AAA ;; ;; Install file to your include path and include in your init file with: ;; ;; (require 'org-archive-subtree-hierarchical) ;; (setq org-archive-default-command 'org-archive-subtree-hierarchical) ;; (provide 'org-archive-subtree-hierarchical) (setq org-archive-default-command 'org-archive-subtree-hierarchical) (require 'org-archive) (defun org-archive-subtree-hierarchical--line-content-as-string () \"Returns the content of the current line as a string\" (save-excursion (beginning-of-line) (buffer-substring-no-properties (line-beginning-position) (line-end-position)))) (defun org-archive-subtree-hierarchical--org-child-list () \"This function returns all children of a heading as a list. \" (interactive) (save-excursion ;; this only works with org-version \u003e 8.0, since in previous ;; org-mode versions the function (org-outline-level) returns ;; gargabe when the point is not on a heading. (if (= (org-outline-level) 0) (outline-next-visible-heading 1) (org-goto-first-child)) (let ((child-list (list (org-archive-subtree-hierarchical--line-content-as-string)))) (while (org-goto-sibling) (setq child-list (cons (org-archive-subtree-hierarchical--line-content-as-string) child-list))) child-list))) (defun org-archive-subtree-hierarchical--org-struct-subtree () \"This function returns the tree structure in which a subtree belongs as a list.\" (interactive) (let ((archive-tree nil)) (save-excursion (while (org-up-heading-safe) (let ((heading (buffer-substring-no-properties (line-beginning-position) (line-end-position)))) (if (eq archive-tree nil) (setq archive-tree (list heading)) (setq archive-tree (cons heading archive-tree)))))) archive-tree)) (defun org-archive-subtree-hierarchical () \"This function archives a subtree hierarchical\" (interactive) (let ((org-tree (org-archive-subtree-hierarchical--org-struct-subtree)) (this-buffer (current-buffer)) (file (abbreviate-file-name (or (buffer-file-name (buffer-base-buffer)) (error \"No file associated to buffer\"))))) (save-excursion (setq location org-archive-location afile (car (org-archive--compute-location (or (org-entry-get nil \"ARCHIVE\" 'inherit) location))) ;; heading (org-extract-archive-heading location) infile-p (equal file (abbreviate-file-name (or afile \"\")))) (unless afile (error \"Invalid `org-archive-location'\")) (if (\u003e (length afile) 0) (setq newfile-p (not (file-exists-p afile)) visiting (find-buffer-visiting afile) buffer (or visiting (find-file-noselect afile))) (setq buffer (current-buffer))) (unless buffer (error \"Cannot access file \\\"%s\\\"\" afile)) (org-cut-subtree) (set-buffer buffer) (org-mode) (goto-char (point-min)) (while (not (equal org-tree nil)) (let ((child-list (org-archive-subtree-hierarchical--org-child-list))) (if (member (car org-tree) child-list) (progn (search-forward (car org-tree) nil t) (setq org-tree (cdr org-tree))) (progn (goto-char (point-max)) (newline) (org-insert-struct org-tree) (setq org-tree nil))))) (newline) (org-yank) (when (not (eq this-buffer buffer)) (save-buffer)) (message \"Subtree archived %s\" (concat \"in file: \" (abbreviate-file-name afile)))))) (defun org-insert-struct (struct) \"TODO\" (interactive) (when struct (insert (car struct)) (newline) (org-insert-struct (cdr struct)))) (defun org-archive-subtree () (org-archive-subtree-hierarchical) ) ;; ============================================================= ;; ============== Hierachy for title nodes =================== ;; ============================================================= ;; Codes blow are used to general a hierachy for title nodes that under a file (cl-defmethod org-roam-node-doom-filetitle ((node org-roam-node)) \"Return the value of \\\"#+title:\\\" (if any) from file that NODE resides in. If there's no file-level title in the file, return empty string.\" (or (if (= (org-roam-node-level node) 0) (org-roam-node-title node) (org-roam-get-keyword \"TITLE\" (org-roam-node-file node))) \"\")) (cl-defmethod org-roam-node-doom-hierarchy ((node org-roam-node)) \"Return hierarchy for NODE, constructed of its file title, OLP and direct title. If some elements are missing, they will be stripped out.\" (let ((title (org-roam-node-title node)) (olp (org-roam-node-olp node)) (level (org-roam-node-level node)) (filetitle (org-roam-node-doom-filetitle node)) (separator (propertize \" \u003e \" 'face 'shadow))) (cl-case level ;; node is a top-level file (0 filetitle) ;; node is a level 1 heading (1 (concat (propertize filetitle 'face '(shadow italic)) separator title)) ;; node is a heading with an arbitrary outline path (t (concat (propertize filetitle 'face '(shadow italic)) separator (propertize (string-join olp \" \u003e \") 'face '(shadow italic)) separator title))))) (setq org-roam-node-display-template (concat \"${type:10} ${doom-hierarchy:120} \" (propertize \"${tags:*}\" 'face 'org-tag))) ;; ============================================================= ;; ======================== iscroll ========================== ;; ============================================================= (require-package 'iscroll) (add-hook 'org-mode-hook (lambda () (iscroll-mode 1))) ;; ============================================================= ;; =================== dwim-shell-command ==================== ;; ============================================================= (require-package 'dwim-shell-command) (require 'dwim-shell-command) (defun dwim-shell-commands-macos-reveal-in-finder () \"Reveal selected files in macOS Finder.\" (interactive) (dwim-shell-command-on-marked-files \"Reveal in Finder\" \"import AppKit NSWorkspace.shared.activateFileViewerSelecting([\\\"\u003c\u003c*\u003e\u003e\\\"].map{URL(fileURLWithPath:$0)})\" :join-separator \", \" :silent-success t :shell-pipe \"swift -\")) (provide 'init-org-enhance) ;;; init-org-enhance.el ends here telega-bridge-bot.el 用来改善 Matrix 机器人在 TG 中转发的消息展示，包括头像、用户名等。具体源码参见 vendor/telega-bridge-bot.el · BlindingDark/BEmacs - Gitee.com。\ninit-org-transclusion.el 过滤的条件的具体细节见 Org-transclusion User Manual\n;;; init-org-transclusion.el --- Custom configuration ;;; Commentary (require-package 'org-transclusion) (use-package org-transclusion :after org :bind((\"C-c n t\" . org-transclusion-mode))) (defun trival/org-transclusion-select-source (beg end) \"Send transclusion information to kill-ring. See https://org-roam.discourse.group/t/alpha-org-transclusion/830/122\" (interactive \"r\") (let ((lbeg (line-number-at-pos beg)) (lend (line-number-at-pos end)) (filename (concat \"~/\"(string-remove-prefix (file-truename \"~/\") (buffer-file-name))))) (with-temp-buffer (progn (insert \"#+transclude: [[file:\") (insert filename) (insert (format \"]] :lines %d-%d\" lbeg lend)) (clipboard-kill-region (point-min) (point-max)))) (message \"A transcluded link has been sent to your kill-ring.\"))) (defun my/org-insert-link-transclusion (\u0026optional COMPLETE-FILE LINK-LOCATION DESCRIPTION) (interactive \"P\") (org-insert-link COMPLETE-FILE LINK-LOCATION DESCRIPTION) (org-transclusion-make-from-link)) (provide 'init-org-transclusion) ;;; init-org-transclusion.el ends here Export 对于只需要导出某个 header 下的内容的需求，只需要在 header 上加上 :export: 即可。\nMarkdown file brew install pandoc 这里用的是 ox-pandoc，需要先 M-x package-install ox-pandoc 进行安装，​M-x org-pandoc-export-as-gfm 算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。\nHugo 在文件头部添加\n#+HUGO_BASE_DIR: ~/Dropbox/hugo/ #+HUGO_SECTION: posts/main #+HUGO_WEIGHT: auto #+HUGO_AUTO_SET_LASTMOD: t 需要导出为 时1\n#+begin_mark marked text #+end_mark 需要导出为块级 时，也就是前后的空格不进行 trim。\n#+header: :trim-pre nil :trim-post nil #+begin_mark marked text #+end_mark Latex Dependency 需要安装 texlive\nbrew install texlive Latex 语法 Latex 语法\nPDF 导出报错 Unicode character 考 (U+8003) not set up for use with LaTeX. 是因为 Latex 本身不支持中文。 中文 PDF 导出设置 使用 ElegantPaper，需要将 elegantpaper.cls 文件放在 org 目录下。 安装依赖 代码块需要用到 minted​，需要用到 pygments 作为依赖。\nbrew install pygments 导出文件头部增加 #+LATEX_COMPILER: xelatex #+LATEX_CLASS: elegantpaper #+OPTIONS: prop:t Org Special Blocks ↩︎ ↩︎\n",
+  "wordCount" : "12640",
+  "inLanguage": "en",
+  "datePublished": "2023-02-28T13:51:10+08:00",
+  "dateModified": "2023-02-28T13:51:10+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "Lucius Chen"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/main/20220723211325-vanilla_emacs_with_purcell/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lucius | Braindump",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
-<body class=" type-posts kind-page layout-" id="top"><script data-no-instant>
-function switchTheme(theme) {
-  switch (theme) {
-    case 'light':
-      document.body.classList.remove('dark');
-      break;
-    case 'dark':
-      document.body.classList.add('dark');
-      break;
-    
-    default:
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-      }
-  }
-}
-
-function isDarkTheme() {
-  return document.body.className.includes("dark");
-}
-
-function getPrefTheme() {
-  return localStorage.getItem("pref-theme");
-}
-
-function setPrefTheme(theme) {
-  switchTheme(theme)
-  localStorage.setItem("pref-theme", theme);
-}
-
-const toggleThemeCallbacks = {}
-toggleThemeCallbacks['main'] = (isDark) => {
-  
-  if (isDark) {
-    setPrefTheme('light');
-  } else {
-    setPrefTheme('dark');
-  }
-}
-
-
-
-
-window.addEventListener('toggle-theme', function() {
-  
-  const isDark = isDarkTheme()
-  for (const key in toggleThemeCallbacks) {
-    toggleThemeCallbacks[key](isDark)
-  }
-});
-
-
-function toggleThemeListener() {
-  
-  window.dispatchEvent(new CustomEvent('toggle-theme'));
-}
-
-</script>
+<body class="" id="top">
 <script>
-  
-  (function() {
-    const defaultTheme = 'auto';
-    const prefTheme = getPrefTheme();
-    const theme = prefTheme ? prefTheme : defaultTheme;
+ if (localStorage.getItem("pref-theme") === "dark") {
+   document.body.classList.add('dark');
+ } else if (localStorage.getItem("pref-theme") === "light") {
+   document.body.classList.remove('dark')
+ } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+   document.body.classList.add('dark');
+ }
 
-    switchTheme(theme);
-  })();
 </script>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://sheerwill.xyz/" accesskey="h" title="Lucius | Braindump (Alt + H)">Lucius | Braindump</a>
-            <span class="logo-switches">
+            <a href="http://localhost:1313/" accesskey="h" title="Lucius | Braindump (Alt + H)">Lucius | Braindump</a>
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -238,44 +205,39 @@ function toggleThemeListener() {
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://sheerwill.xyz/tags/" title="Tags"
-                >Tags
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://sheerwill.xyz/archives/" title="Archive"
-                >Archive
+                <a href="http://localhost:1313/archives/" title="Archive">
+                    <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://sheerwill.xyz/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
-                >Search
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
                 </a>
             </li>
         </ul>
     </nav>
 </header>
-<main class="main post">
+<main class="main">
 
 <article class="post-single">
   <header class="post-header">
-    <h1 class="post-title">Vanilla Emacs with Purcell</h1>
-    <div class="post-meta"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>February 28, 2023</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>12640 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>26 min</span></span>
+    
+    <h1 class="post-title entry-hint-parent">
+      Vanilla Emacs with Purcell
+    </h1>
+    <div class="post-meta"><span title='2023-02-28 13:51:10 +0800 CST'>February 28, 2023</span>&nbsp;·&nbsp;26 min&nbsp;·&nbsp;12640 words&nbsp;·&nbsp;Lucius Chen
 
-      
-      
-    </div>
-  </header> <div class="toc side right">
+</div>
+  </header> <div class="toc">
     <details  open>
         <summary accesskey="c" title="(Alt + C)">
             <span class="details">Table of Contents</span>
@@ -287,7 +249,7 @@ function toggleThemeListener() {
                 <li>
                     <a href="#install-emacs-plus-with-homebrew" aria-label="Install Emacs-plus With Homebrew">Install Emacs-plus With Homebrew</a></li>
                 <li>
-                    <a href="#build-emacs-on-ubuntu-lucius-s-workflow--20221204112118-lucius-s-workflow-dot-md" aria-label="Build Emacs on UbuntuLucius&amp;rsquo;s Workflow">Build Emacs on Ubuntu<a href="/posts/main/20221204112118-lucius_s_workflow/">Lucius&rsquo;s Workflow</a></a></li>
+                    <a href="#build-emacs-on-ubuntu-lucius-s-workflow--20221204112118-lucius-s-workflow-dot-md" aria-label="Build Emacs on UbuntuLucius&rsquo;s Workflow">Build Emacs on UbuntuLucius&rsquo;s Workflow</a></li>
                 <li>
                     <a href="#personal-settings" aria-label="Personal Settings">Personal Settings</a><ul>
                         
@@ -396,16 +358,16 @@ function toggleThemeListener() {
     </details>
 </div>
 
-  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">¶</a></h2>
+  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
 <blockquote>
 <p>Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish.</p>
 <p>– Neal Stephenson, In the Beginning was the Command Line (1998)</p>
 </blockquote>
-<h2 id="install-emacs-plus-with-homebrew">Install Emacs-plus With Homebrew<a hidden class="anchor" aria-hidden="true" href="#install-emacs-plus-with-homebrew">¶</a></h2>
+<h2 id="install-emacs-plus-with-homebrew">Install Emacs-plus With Homebrew<a hidden class="anchor" aria-hidden="true" href="#install-emacs-plus-with-homebrew">#</a></h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap d12frosted/emacs-plus
 </span></span><span class="line"><span class="cl">brew install emacs-plus --with-native-comp --with-modern-vscode-icon
 </span></span><span class="line"><span class="cl">ln -s /usr/local/opt/emacs-plus@29/Emacs.app /Applications
-</span></span></code></pre></div><h2 id="build-emacs-on-ubuntu-lucius-s-workflow--20221204112118-lucius-s-workflow-dot-md">Build Emacs on Ubuntu<a href="/posts/main/20221204112118-lucius_s_workflow/">Lucius&rsquo;s Workflow</a><a hidden class="anchor" aria-hidden="true" href="#build-emacs-on-ubuntu-lucius-s-workflow--20221204112118-lucius-s-workflow-dot-md">¶</a></h2>
+</span></span></code></pre></div><h2 id="build-emacs-on-ubuntu-lucius-s-workflow--20221204112118-lucius-s-workflow-dot-md">Build Emacs on Ubuntu<a href="/posts/main/20221204112118-lucius_s_workflow/">Lucius&rsquo;s Workflow</a><a hidden class="anchor" aria-hidden="true" href="#build-emacs-on-ubuntu-lucius-s-workflow--20221204112118-lucius-s-workflow-dot-md">#</a></h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone git://git.sv.gnu.org/emacs.git
 </span></span><span class="line"><span class="cl">sudo apt install build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> emacs
@@ -423,7 +385,7 @@ function toggleThemeListener() {
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo gedit /us r/share/X11/xkb/keycodes/evdev
 </span></span></code></pre></div><p>输入法安装 fcitx-rime，和 MacOS 上的配置通用，放在 <code>~/.config/fcitx/rime</code>​。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt-get install fcitx-rime
-</span></span></code></pre></div><h2 id="personal-settings">Personal Settings<a hidden class="anchor" aria-hidden="true" href="#personal-settings">¶</a></h2>
+</span></span></code></pre></div><h2 id="personal-settings">Personal Settings<a hidden class="anchor" aria-hidden="true" href="#personal-settings">#</a></h2>
 <p>目前在 <a href="https://github.com/purcell/emacs.d">purcell</a> 中就增加或修改了这些文件。</p>
 <pre tabindex="0"><code class="language-nil" data-lang="nil">.
 ├── lisp
@@ -449,7 +411,7 @@ function toggleThemeListener() {
     ├── init-org-enhance.el
     ├── telega-bridge-bot.el
     └── init-org-transclusion.el
-</code></pre><h3 id="ligature-dot-el">ligature.el<a hidden class="anchor" aria-hidden="true" href="#ligature-dot-el">¶</a></h3>
+</code></pre><h3 id="ligature-dot-el">ligature.el<a hidden class="anchor" aria-hidden="true" href="#ligature-dot-el">#</a></h3>
 <p><a href="https://github.com/mickeynp/ligature.el">GitHub - mickeynp/ligature.el: Display typographical ligatures in Emacs</a>，这里是将其中的 <code>ligature.el</code> 下载到 <code>.emacs.d/lisp/</code> 目录下，加上下列代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Enable the www ligature in every possible major mode</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">ligature-set-ligatures</span> <span class="ss">&#39;t</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;www&#34;</span><span class="p">))</span>
@@ -467,7 +429,7 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">                                     <span class="s">&#34;&lt;~&#34;</span> <span class="s">&#34;&lt;~~&#34;</span> <span class="s">&#34;&lt;/&#34;</span> <span class="s">&#34;&lt;/&gt;&#34;</span> <span class="s">&#34;~@&#34;</span> <span class="s">&#34;~-&#34;</span> <span class="s">&#34;~&gt;&#34;</span> <span class="s">&#34;~~&#34;</span> <span class="s">&#34;~~&gt;&#34;</span> <span class="s">&#34;%%&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-ligature-mode</span> <span class="ss">&#39;t</span><span class="p">)</span>
-</span></span></code></pre></div><h3 id="init-org-dot-el">init-org.el<a hidden class="anchor" aria-hidden="true" href="#init-org-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="init-org-dot-el">init-org.el<a hidden class="anchor" aria-hidden="true" href="#init-org-dot-el">#</a></h3>
 <p>org-roam 和 Emacs 自带的 agenda 可以很方便的将笔记和 GTD 结合起来。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org.el --- Org-mode config -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
@@ -1093,10 +1055,10 @@ function toggleThemeListener() {
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Done!&#34;</span><span class="p">)))))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org.el ends here</span>
-</span></span></code></pre></div><h4 id="org-babel">Org-babel<a hidden class="anchor" aria-hidden="true" href="#org-babel">¶</a></h4>
+</span></span></code></pre></div><h4 id="org-babel">Org-babel<a hidden class="anchor" aria-hidden="true" href="#org-babel">#</a></h4>
 <p>输出 <code>:results</code> 有不同的选项，其中 <code>silent</code> 是指：Do not insert results in the Org mode buffer, but echo them in the minibuffer. Usage example: ‘:results output silent’.</p>
 <p>Rust 运行代码块，需要安装 <a href="https://github.com/brotzeit/rustic">GitHub - brotzeit/rustic: Rust development environment for Emacs</a>，具体执行的时候会提示需要安装 <code>lsp-mode</code>​，确定即可。</p>
-<h4 id="plantuml">PlantUML<a hidden class="anchor" aria-hidden="true" href="#plantuml">¶</a></h4>
+<h4 id="plantuml">PlantUML<a hidden class="anchor" aria-hidden="true" href="#plantuml">#</a></h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install graphviz
 </span></span></code></pre></div><table>
 <thead>
@@ -1136,7 +1098,7 @@ Entity07 |o--|| Entity08
     <img loading="lazy" src="/ox-hugo/ERD-example.jpg"/> 
 </figure>
 
-<h3 id="init-sis-dot-el">init-sis.el<a hidden class="anchor" aria-hidden="true" href="#init-sis-dot-el">¶</a></h3>
+<h3 id="init-sis-dot-el">init-sis.el<a hidden class="anchor" aria-hidden="true" href="#init-sis-dot-el">#</a></h3>
 <p>根据 meow 的 <code>insert mode</code> 切换，同时根据上下文来判断切换输入法；另外在特定 <code>mode</code> 下也切换输入法，使用更加顺滑。</p>
 <p>需要安装 <code>macism</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew tap laishulu/macism
@@ -1220,7 +1182,7 @@ macos 可以系统配置“自动切换到文稿的输入法”，
 macos 也会帮你主动地切输入法，就是不知道会不会也有延迟，导致同样的问题</p>
 <p>不过 sis 针对的是一般情况：非 MacOS 系统，或没系统设置“自动切换到文稿的输入法”，或用的是 Terminal Emacs 等等。</p>
 </blockquote>
-<h3 id="init-font-dot-el">init-font.el<a hidden class="anchor" aria-hidden="true" href="#init-font-dot-el">¶</a></h3>
+<h3 id="init-font-dot-el">init-font.el<a hidden class="anchor" aria-hidden="true" href="#init-font-dot-el">#</a></h3>
 <p>使用的是 <code>Iosevka</code> 和大多数中文字体配合，按照 1:1 缩放，偶数字号就可以做到等高等宽。这是选择 <code>LXGW WenKai Screen</code> 而不是 <code>LXGW WenKai Mono</code> 是因为后者的粗体非常不明显，作为文档文字不好区分。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-font.el --- Dired customisations -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
@@ -1274,7 +1236,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;face-font-rescale-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;Apple Color Emoji&#34;</span> <span class="o">.</span> <span class="mf">0.8</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-font</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-font.el ends here</span>
-</span></span></code></pre></div><h3 id="init-rime-dot-el">init-rime.el<a hidden class="anchor" aria-hidden="true" href="#init-rime-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="init-rime-dot-el">init-rime.el<a hidden class="anchor" aria-hidden="true" href="#init-rime-dot-el">#</a></h3>
 <p>需要安装 Squirrel 并下载与之对应版本的 librime。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -L -O https://github.com/rime/librime/releases/download/1.7.3/rime-1.7.3-osx.zip
 </span></span><span class="line"><span class="cl">unzip rime-1.7.3-osx.zip -d ~/.emacs.d/librime
@@ -1351,7 +1313,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 <li>中文后空格自动切换 inline 模式，输入大写字母自动切换 inline 模式。</li>
 </ul>
 <p>其中在 <code>Isearch</code> 中使用，切换为 Rime 后需要再按一次 <code>M-e</code> 才可以正常使用。</p>
-<h3 id="init-meow-dot-el">init-meow.el<a hidden class="anchor" aria-hidden="true" href="#init-meow-dot-el">¶</a></h3>
+<h3 id="init-meow-dot-el">init-meow.el<a hidden class="anchor" aria-hidden="true" href="#init-meow-dot-el">#</a></h3>
 <table>
 <thead>
 <tr>
@@ -1465,10 +1427,10 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">meow-expand-hint-remove-delay</span> <span class="mi">3</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-meow</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-meow.el ends here</span>
-</span></span></code></pre></div><h3 id="beancount-dot-el">beancount.el<a hidden class="anchor" aria-hidden="true" href="#beancount-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="beancount-dot-el">beancount.el<a hidden class="anchor" aria-hidden="true" href="#beancount-dot-el">#</a></h3>
 <p><a href="https://github.com/beancount/beancount-mode">GitHub - beancount/beancount-mode: Emacs major-mode to work with Beancount le&hellip;</a>，这里是将其中的 <code>beancount.el</code> 下载到 <code>.emacs.d/lisp/</code> 目录下，加上下列代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;auto-mode-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;\\.beancount\\&#39;&#34;</span> <span class="o">.</span> <span class="nv">beancount-mode</span><span class="p">))</span>
-</span></span></code></pre></div><h3 id="init-epla-dot-el">init-epla.el<a hidden class="anchor" aria-hidden="true" href="#init-epla-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="init-epla-dot-el">init-epla.el<a hidden class="anchor" aria-hidden="true" href="#init-epla-dot-el">#</a></h3>
 <p>增加 <code>use-package</code> 和 <code>straight</code> 的支持</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-elpa.el --- Settings and helpers for package.el -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
@@ -1619,12 +1581,12 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-elpa</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-elpa.el ends here</span>
-</span></span></code></pre></div><h3 id="init-local-dot-el">init-local.el<a hidden class="anchor" aria-hidden="true" href="#init-local-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="init-local-dot-el">init-local.el<a hidden class="anchor" aria-hidden="true" href="#init-local-dot-el">#</a></h3>
 <p>在 <code>init.el</code> 中有如下代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;; Allow users to provide an optional &#34;init-local&#34; containing personal settings</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;init-local</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
 </span></span></code></pre></div><p>默认没有 <code>init-local.org</code> 这个文件，创建一个，就可以往里面塞自己的配置了。</p>
-<h4 id="consult">Consult<a hidden class="anchor" aria-hidden="true" href="#consult">¶</a></h4>
+<h4 id="consult">Consult<a hidden class="anchor" aria-hidden="true" href="#consult">#</a></h4>
 <p>Purcell 中已经包含了这个 package，也有 <code>consult-ripgrep</code> 这个方法。需要安装 <code>ripgrep</code>​。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install ripgrep
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">defun</span> <span class="nv">bms/org-roam-rg-search</span> <span class="p">()</span>
@@ -1635,7 +1597,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-c rr&#34;</span><span class="p">)</span> <span class="ss">&#39;bms/org-roam-rg-search</span><span class="p">)</span>
 </span></span></code></pre></div><p>搜索 <code>org-roam-directory</code> 下的内容。</p>
-<h4 id="deft">Deft<a hidden class="anchor" aria-hidden="true" href="#deft">¶</a></h4>
+<h4 id="deft">Deft<a hidden class="anchor" aria-hidden="true" href="#deft">#</a></h4>
 <p>用作一些不想放在 <code>org-roam</code> 中的一些笔记的操作。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;deft</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">deft-extensions</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;md&#34;</span> <span class="s">&#34;tex&#34;</span> <span class="s">&#34;org&#34;</span> <span class="s">&#34;mw&#34;</span> <span class="s">&#34;conf&#34;</span><span class="p">))</span>
@@ -1665,7 +1627,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nb">if</span> <span class="nv">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="nv">string-trim</span> <span class="p">(</span><span class="nf">substring</span> <span class="nv">contents</span> <span class="nv">begin</span> <span class="p">(</span><span class="nf">match-end</span> <span class="mi">0</span><span class="p">))</span> <span class="s">&#34;#\\+[tT][iI][tT][lL][eE]: *&#34;</span> <span class="s">&#34;[\n\t ]+&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nv">deft-base-filename</span> <span class="nv">file</span><span class="p">))))</span>
-</span></span></code></pre></div><h4 id="ox-hugo">Ox-hugo<a hidden class="anchor" aria-hidden="true" href="#ox-hugo">¶</a></h4>
+</span></span></code></pre></div><h4 id="ox-hugo">Ox-hugo<a hidden class="anchor" aria-hidden="true" href="#ox-hugo">#</a></h4>
 <p>导出到 Hugo，方便与他人分享内容。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;ox-hugo</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">with-eval-after-load</span> <span class="ss">&#39;ox</span>
@@ -1680,7 +1642,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="c">#+begin_mark</span>
 </span></span><span class="line"><span class="cl">marked text
 </span></span><span class="line"><span class="cl"><span class="c">#+end_mark</span>
-</span></span></code></pre></div><h3 id="init-latex-dot-el">init-latex.el<a hidden class="anchor" aria-hidden="true" href="#init-latex-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="init-latex-dot-el">init-latex.el<a hidden class="anchor" aria-hidden="true" href="#init-latex-dot-el">#</a></h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-latex.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;auctex</span><span class="p">)</span>
@@ -1890,16 +1852,16 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 <p>需要安装 <code>texlive</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install texlive
 </span></span></code></pre></div><p>Latex 语法可以参考：<a href="/posts/main/20220616162256-latex/">Latex</a></p>
-<h4 id="导出">导出<a hidden class="anchor" aria-hidden="true" href="#导出">¶</a></h4>
+<h4 id="导出">导出<a hidden class="anchor" aria-hidden="true" href="#导出">#</a></h4>
 <p>导出含有中文时是需要配置 CJK，<a href="https://github.com/ElegantLaTeX/ElegantPaper/blob/master/elegantpaper.cls">ElegantPaper</a> 可以跨过这一步设置，只需要将 <code>elegantpaper.cls</code> 放到需要导出 PDF 的目录下，同时安装依赖。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install pygments
 </span></span></code></pre></div><p>在导出文件头部增加</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+LATEX_COMPILER</span><span class="c">: xelatex</span>
 </span></span><span class="line"><span class="cl"><span class="cs">#+LATEX_CLASS</span><span class="c">: elegantpaper</span>
 </span></span><span class="line"><span class="cl"><span class="cs">#+OPTIONS</span><span class="c">: prop:t</span>
-</span></span></code></pre></div><h4 id="预览">预览<a hidden class="anchor" aria-hidden="true" href="#预览">¶</a></h4>
+</span></span></code></pre></div><h4 id="预览">预览<a hidden class="anchor" aria-hidden="true" href="#预览">#</a></h4>
 <p>预览需要安装 <a href="https://github.com/firamath/firamath">firamath</a> 字体，可以有更好的展示效果。另外 <code>dvisvgm</code> 应该在 <code>texlive</code> 中已经包含才对，但是依旧找不到。这里我重新从<a href="https://github.com/mgieseki/dvisvgm">源码</a>编译了一份。</p>
-<h3 id="init-corfu-dot-el">init-corfu.el<a hidden class="anchor" aria-hidden="true" href="#init-corfu-dot-el">¶</a></h3>
+<h3 id="init-corfu-dot-el">init-corfu.el<a hidden class="anchor" aria-hidden="true" href="#init-corfu-dot-el">#</a></h3>
 <p>增加了 <code>kind-icon</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-corfu.el --- Interactive completion in buffers -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
@@ -1938,7 +1900,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-corfu</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-corfu.el ends here</span>
 </span></span></code></pre></div><p>在切换主题的时候，​<code>kind-icon</code> 会有残留，可以执行 <code>M-x kind-icon-reset-cache</code> 清除 cache 即可。</p>
-<h3 id="init-bibtex-dot-el">init-bibtex.el<a hidden class="anchor" aria-hidden="true" href="#init-bibtex-dot-el">¶</a></h3>
+<h3 id="init-bibtex-dot-el">init-bibtex.el<a hidden class="anchor" aria-hidden="true" href="#init-bibtex-dot-el">#</a></h3>
 <p>管理 Bibtex 可以方便在文章中引用，以及新增读书笔记，结合 agenda 更好的管理读书条目以及进度。</p>
 <p>其中自定义了笔记模板和读书列表模板，前者是增加了 citation key 作为 roam ref，org ID 的生成以及时间戳；后者则是将默认的 <code>TODO</code> 关键字换成了 <code>PROJECT</code> 关键字，并将 active timestamps 改为 inactive timestamps，方便计算每个 <code>PROJECT</code> 创建了多长时间展示在 agenda 当中。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-ebib.el  --- Custom configuration</span>
@@ -2028,7 +1990,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-bibtex</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-bibtex.el ends here</span>
 </span></span></code></pre></div><p>搜索条目可以用 <code>&amp;</code> 来搜索，参考 <a href="https://joostkremers.github.io/ebib/ebib-manual.html#filters">Ebib Manual</a>。</p>
-<h3 id="init-themes-dot-el">init-themes.el<a hidden class="anchor" aria-hidden="true" href="#init-themes-dot-el">¶</a></h3>
+<h3 id="init-themes-dot-el">init-themes.el<a hidden class="anchor" aria-hidden="true" href="#init-themes-dot-el">#</a></h3>
 <p>用的 <a href="https://protesilaos.com/emacs/ef-themes-pictures">Screen shots of the Ef themes for GNU Emacs | Protesilaos Stavrou</a>，​<code>ef-spring</code> 作为非编码时的主题，​<code>ef-night</code> 作为编码时的主题。另外设置背景透明以及光标所在代码块按照括号高亮的函数也在放在这里。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-themes.el --- Defaults for themes -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
@@ -2110,7 +2072,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="c1">;; (kb/toggle-window-transparency)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-themes</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-themes.el ends here</span>
-</span></span></code></pre></div><h3 id="init-elfeed-dot-el">init-elfeed.el<a hidden class="anchor" aria-hidden="true" href="#init-elfeed-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="init-elfeed-dot-el">init-elfeed.el<a hidden class="anchor" aria-hidden="true" href="#init-elfeed-dot-el">#</a></h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-elfeed.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;elfeed</span><span class="p">)</span>
@@ -2185,8 +2147,8 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">setq</span> <span class="nv">elfeed-search-print-entry-function</span> <span class="nf">#&#39;</span><span class="nv">my-search-print-fn</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-elfeed</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-elfeed.el ends here</span>
-</span></span></code></pre></div><h3 id="init-telega-dot-el">init-telega.el<a hidden class="anchor" aria-hidden="true" href="#init-telega-dot-el">¶</a></h3>
-<h4 id="building-tdlib">Building TDLib<a hidden class="anchor" aria-hidden="true" href="#building-tdlib">¶</a></h4>
+</span></span></code></pre></div><h3 id="init-telega-dot-el">init-telega.el<a hidden class="anchor" aria-hidden="true" href="#init-telega-dot-el">#</a></h3>
+<h4 id="building-tdlib">Building TDLib<a hidden class="anchor" aria-hidden="true" href="#building-tdlib">#</a></h4>
 <p><code>brew install tdlib</code> 的版本过低，需要自行编译，参考 <a href="https://tdlib.github.io/td/build.html?language=Swift">TDLib build instructions</a> 。这个之后需要 <code>M-x telega-server-build</code> 重新加载 telega-server。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">xcode-select --install
 </span></span><span class="line"><span class="cl">/bin/bash -c <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&#34;</span>
@@ -2202,7 +2164,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
 </span></span><span class="line"><span class="cl">ls -l /usr/local
 </span></span></code></pre></div><p>如果报错 <code>&quot;user-error: TDLib is not installed into &quot;/usr/local&quot;. Set ‘telega-server-libs-prefix’ to the TDLib installion path&quot;</code>​，则可以通过 <code>M-: (setq telega-server-libs-prefix “/path/to/tdlib/install/path”) RET</code> 然后 <code>M-x telega-server-build RET</code> 重新构建。</p>
-<h4 id="running-telega-server-in-docker">Running telega-server in docker<a hidden class="anchor" aria-hidden="true" href="#running-telega-server-in-docker">¶</a></h4>
+<h4 id="running-telega-server-in-docker">Running telega-server in docker<a hidden class="anchor" aria-hidden="true" href="#running-telega-server-in-docker">#</a></h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install --cask docker
 </span></span><span class="line"><span class="cl">brew install ffmpeg
 </span></span><span class="line"><span class="cl">docker pull zevlg/telega-server:latest
@@ -2266,14 +2228,14 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 <li>使用 <code>(setf (alist-get 2 telega-avatar-factors-alist) '(0.5 . 0.1))</code> 来使得本来两行显示的头像缩小至一行显示（头像显示几乎废了）。</li>
 <li>在基础字号的基础上（这里是 14）调整特殊字符/字体的缩放就可以完美解决头像裂开的问题了，完整代码如下。</li>
 </ol>
-<h4 id="contrib">contrib<a hidden class="anchor" aria-hidden="true" href="#contrib">¶</a></h4>
+<h4 id="contrib">contrib<a hidden class="anchor" aria-hidden="true" href="#contrib">#</a></h4>
 <p><code>telega</code> 中有个 <code>contrib</code> 的子目录，当中有一些挺实用的功能。这里启用了三种，过滤广告、代码高亮以及短链。</p>
 <p>原生的加载子目录。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">push</span> <span class="p">(</span><span class="nf">expand-file-name</span> <span class="s">&#34;contrib&#34;</span> <span class="p">(</span><span class="nf">file-name-directory</span> <span class="p">(</span><span class="nv">locate-library</span> <span class="s">&#34;telega&#34;</span><span class="p">)))</span> <span class="nv">load-path</span><span class="p">)</span>
 </span></span></code></pre></div><p>使用 <code>straight</code> 的话如下。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="nb">:straight</span> <span class="p">(</span><span class="nb">:host</span> <span class="nv">github</span> <span class="nb">:repo</span> <span class="s">&#34;zevlg/telega.el&#34;</span>
 </span></span><span class="line"><span class="cl">           <span class="nb">:files</span> <span class="p">(</span><span class="nb">:defaults</span> <span class="s">&#34;contrib&#34;</span><span class="p">))</span>
-</span></span></code></pre></div><h4 id="animated-stickers">Animated Stickers<a hidden class="anchor" aria-hidden="true" href="#animated-stickers">¶</a></h4>
+</span></span></code></pre></div><h4 id="animated-stickers">Animated Stickers<a hidden class="anchor" aria-hidden="true" href="#animated-stickers">#</a></h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/zevlg/tgs2png.git
 </span></span><span class="line"><span class="cl">git submodule init
 </span></span><span class="line"><span class="cl">git submodule update
@@ -2283,7 +2245,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">make
 </span></span><span class="line"><span class="cl">copy tgs2png somewhere into <span class="nv">$PATH</span>
 </span></span></code></pre></div><p>这里我编译完就已经是可用的了。</p>
-<h4 id="display-buffer-alist">display-buffer-alist<a hidden class="anchor" aria-hidden="true" href="#display-buffer-alist">¶</a></h4>
+<h4 id="display-buffer-alist">display-buffer-alist<a hidden class="anchor" aria-hidden="true" href="#display-buffer-alist">#</a></h4>
 <p>每次打开 telega 都是占了 emacs 窗口的一半（emacs 我都是全屏使用），需要手动去调整 telega 的窗口。这里设置了一下 <code>display-buffer-alist</code> 之后就可以固定 telega 的窗口在右侧，并且占据窗口的 35% 的宽度。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;telega-mode-hook</span>
 </span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
@@ -2403,7 +2365,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-telega</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-telega.el ends here</span>
-</span></span></code></pre></div><h3 id="init-translate-dot-el">init-translate.el<a hidden class="anchor" aria-hidden="true" href="#init-translate-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="init-translate-dot-el">init-translate.el<a hidden class="anchor" aria-hidden="true" href="#init-translate-dot-el">#</a></h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-translate.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;go-translate</span><span class="p">)</span>
@@ -2438,7 +2400,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;gts-render-buffer-me-header-backgroud-face</span> <span class="no">nil</span> <span class="nb">:background</span> <span class="s">&#34;#7BA23F&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-translate</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-translate.el ends here</span>
-</span></span></code></pre></div><h3 id="init-org-modern-dot-el">init-org-modern.el<a hidden class="anchor" aria-hidden="true" href="#init-org-modern-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="init-org-modern-dot-el">init-org-modern.el<a hidden class="anchor" aria-hidden="true" href="#init-org-modern-dot-el">#</a></h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org-modern.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nv">require-package</span> <span class="ss">&#39;org-modern</span><span class="p">)</span>
@@ -2474,7 +2436,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"> <span class="o">&#39;</span><span class="p">(</span><span class="nv">org-ellipsis</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="nb">:foreground</span> <span class="s">&#34;#90B44B&#34;</span><span class="p">)))))</span> <span class="c1">;; 鶸萌黄</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org-modern</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org-modern.el ends here</span>
-</span></span></code></pre></div><h3 id="init-quick-menus-dot-el">init-quick-menus.el<a hidden class="anchor" aria-hidden="true" href="#init-quick-menus-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="init-quick-menus-dot-el">init-quick-menus.el<a hidden class="anchor" aria-hidden="true" href="#init-quick-menus-dot-el">#</a></h3>
 <p>Daily Log 是按照每天的日期生成，并不是固定的文件名，因此这里写了自定义方法去跳转到今天/昨天的 Daily Log，方便用来回顾。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-quick-menus.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
@@ -2554,7 +2516,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="nb">:bind</span><span class="p">(</span><span class="s">&#34;C-c e&#34;</span> <span class="o">.</span> <span class="nv">hydra-org-agenda-menu/body</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-quick-menus</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-quick-menus.el ends here</span>
-</span></span></code></pre></div><h3 id="init-tree-sitter-dot-el">init-tree-sitter.el<a hidden class="anchor" aria-hidden="true" href="#init-tree-sitter-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="init-tree-sitter-dot-el">init-tree-sitter.el<a hidden class="anchor" aria-hidden="true" href="#init-tree-sitter-dot-el">#</a></h3>
 <p>其中 <code>elisp</code> 官方还未支持，需要自己编译后放入 <code>tree-sitter-langs</code> 下面。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/Wilfred/tree-sitter-elisp
 </span></span><span class="line"><span class="cl">gcc ./src/parser.c -fPIC -I./ --shared -o elisp.so
@@ -2589,7 +2551,7 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-tree-sitter</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-tree-sitter.el ends here</span>
-</span></span></code></pre></div><h3 id="init-org-enhance-dot-el">init-org-enhance.el<a hidden class="anchor" aria-hidden="true" href="#init-org-enhance-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="init-org-enhance-dot-el">init-org-enhance.el<a hidden class="anchor" aria-hidden="true" href="#init-org-enhance-dot-el">#</a></h3>
 <p>一些增强 org 功能的函数，可以方便使用。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org-enhance.el --- Org-mode config -*- lexical-binding: t -*-</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary:</span>
@@ -3023,9 +2985,9 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">   <span class="nb">:shell-pipe</span> <span class="s">&#34;swift -&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org-enhance</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org-enhance.el ends here</span>
-</span></span></code></pre></div><h3 id="telega-bridge-bot-dot-el">telega-bridge-bot.el<a hidden class="anchor" aria-hidden="true" href="#telega-bridge-bot-dot-el">¶</a></h3>
+</span></span></code></pre></div><h3 id="telega-bridge-bot-dot-el">telega-bridge-bot.el<a hidden class="anchor" aria-hidden="true" href="#telega-bridge-bot-dot-el">#</a></h3>
 <p>用来改善 Matrix 机器人在 TG 中转发的消息展示，包括头像、用户名等。具体源码参见 <a href="https://gitee.com/blindingdark/BEmacs/blob/master/vendor/telega-bridge-bot.el">vendor/telega-bridge-bot.el · BlindingDark/BEmacs - Gitee.com</a>。</p>
-<h3 id="init-org-transclusion-dot-el">init-org-transclusion.el<a hidden class="anchor" aria-hidden="true" href="#init-org-transclusion-dot-el">¶</a></h3>
+<h3 id="init-org-transclusion-dot-el">init-org-transclusion.el<a hidden class="anchor" aria-hidden="true" href="#init-org-transclusion-dot-el">#</a></h3>
 <p>过滤的条件的具体细节见 <a href="https://nobiot.github.io/org-transclusion/#Usage">Org-transclusion User Manual</a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elisp" data-lang="elisp"><span class="line"><span class="cl"><span class="c1">;;; init-org-transclusion.el  --- Custom configuration</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; Commentary</span>
@@ -3054,12 +3016,12 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nv">org-transclusion-make-from-link</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;init-org-transclusion</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="c1">;;; init-org-transclusion.el ends here</span>
-</span></span></code></pre></div><h2 id="export">Export<a hidden class="anchor" aria-hidden="true" href="#export">¶</a></h2>
+</span></span></code></pre></div><h2 id="export">Export<a hidden class="anchor" aria-hidden="true" href="#export">#</a></h2>
 <p>对于只需要导出某个 header 下的内容的需求，只需要在 header 上加上 <code>:export:</code> 即可。</p>
-<h3 id="markdown-file">Markdown file<a hidden class="anchor" aria-hidden="true" href="#markdown-file">¶</a></h3>
+<h3 id="markdown-file">Markdown file<a hidden class="anchor" aria-hidden="true" href="#markdown-file">#</a></h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install pandoc
 </span></span></code></pre></div><p>这里用的是 <a href="https://github.com/kawabata/ox-pandoc">ox-pandoc</a>，需要先 <code>M-x package-install &lt;RET&gt; ox-pandoc &lt;RET&gt;</code> 进行安装，​<code>M-x org-pandoc-export-as-gfm</code> 算是我找到最符合 MarkDown 语法的转换了，Emacs 自己的转换会将 Table 转换成 HTML 标签的格式。</p>
-<h3 id="hugo">Hugo<a hidden class="anchor" aria-hidden="true" href="#hugo">¶</a></h3>
+<h3 id="hugo">Hugo<a hidden class="anchor" aria-hidden="true" href="#hugo">#</a></h3>
 <p>在文件头部添加</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">#+HUGO_BASE_DIR: ~/Dropbox/hugo/
 </span></span><span class="line"><span class="cl">#+HUGO_SECTION: posts/main
@@ -3074,17 +3036,17 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </span></span><span class="line"><span class="cl"><span class="c">#+begin_mark</span>
 </span></span><span class="line"><span class="cl">marked text
 </span></span><span class="line"><span class="cl"><span class="c">#+end_mark</span>
-</span></span></code></pre></div><h3 id="latex">Latex<a hidden class="anchor" aria-hidden="true" href="#latex">¶</a></h3>
-<h4 id="dependency">Dependency<a hidden class="anchor" aria-hidden="true" href="#dependency">¶</a></h4>
+</span></span></code></pre></div><h3 id="latex">Latex<a hidden class="anchor" aria-hidden="true" href="#latex">#</a></h3>
+<h4 id="dependency">Dependency<a hidden class="anchor" aria-hidden="true" href="#dependency">#</a></h4>
 <p>需要安装 texlive</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install texlive
-</span></span></code></pre></div><h4 id="latex-语法">Latex 语法<a hidden class="anchor" aria-hidden="true" href="#latex-语法">¶</a></h4>
+</span></span></code></pre></div><h4 id="latex-语法">Latex 语法<a hidden class="anchor" aria-hidden="true" href="#latex-语法">#</a></h4>
 <p><a href="/posts/main/20220616162256-latex/">Latex 语法</a></p>
-<h4 id="pdf-导出报错">PDF 导出报错<a hidden class="anchor" aria-hidden="true" href="#pdf-导出报错">¶</a></h4>
+<h4 id="pdf-导出报错">PDF 导出报错<a hidden class="anchor" aria-hidden="true" href="#pdf-导出报错">#</a></h4>
 <ul>
 <li><code>Unicode character 考 (U+8003) not set up for use with LaTeX.</code> 是因为 Latex 本身不支持中文。</li>
 </ul>
-<h4 id="中文-pdf-导出设置">中文 PDF 导出设置<a hidden class="anchor" aria-hidden="true" href="#中文-pdf-导出设置">¶</a></h4>
+<h4 id="中文-pdf-导出设置">中文 PDF 导出设置<a hidden class="anchor" aria-hidden="true" href="#中文-pdf-导出设置">#</a></h4>
 <ol>
 <li>使用 <a href="https://github.com/ElegantLaTeX/ElegantPaper">ElegantPaper</a>，需要将 elegantpaper.cls 文件放在 org 目录下。</li>
 <li>安装依赖</li>
@@ -3107,423 +3069,224 @@ macos 也会帮你主动地切输入法，就是不知道会不会也有延迟�
 </ol>
 </div>
 
-
-    
-
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-	  
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-<hr>
-
-  <div class="bl-section">
-	<h4 style="color: var(--secondary);">Links to this note</h4>
-	<div class="backlinks">
-	  <ul>
-	   
-		  <li><a href="/posts/main/20220508195206-toolbox/">Toolbox</a></li>
-	   
-	 </ul>
-	</div>
+                                                                                                                                                                    
+<div class="bl-section">
+  <h4>Links to this note</h4>
+  <div class="backlinks">
+    <ul>
+      
+      <li><a href="/posts/main/20220508195206-toolbox/">Toolbox</a></li>
+      
+    </ul>
   </div>
+</div>
 
 
   </div>
 
   <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
 <nav class="paginav">
-  <a class="prev" href="https://sheerwill.xyz/posts/main/20230211001746-covering_index/">
-    <span class="title">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;Prev Page</span>
+  <a class="prev" href="http://localhost:1313/posts/main/20230211001746-covering_index/">
+    <span class="title">« Prev</span>
     <br>
     <span>covering index</span>
   </a>
-  <a class="next" href="https://sheerwill.xyz/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/">
-    <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
-    </span>
+  <a class="next" href="http://localhost:1313/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/">
+    <span class="title">Next »</span>
     <br>
     <span>The Left-Prefix Index Rule is determined by the B&#43;tree structure</span>
   </a>
 </nav>
 
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Vanilla Emacs with Purcell on x"
+            href="https://x.com/intent/tweet/?text=Vanilla%20Emacs%20with%20Purcell&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220723211325-vanilla_emacs_with_purcell%2f&amp;hashtags=">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Vanilla Emacs with Purcell on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220723211325-vanilla_emacs_with_purcell%2f&amp;title=Vanilla%20Emacs%20with%20Purcell&amp;summary=Vanilla%20Emacs%20with%20Purcell&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220723211325-vanilla_emacs_with_purcell%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Vanilla Emacs with Purcell on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220723211325-vanilla_emacs_with_purcell%2f&title=Vanilla%20Emacs%20with%20Purcell">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Vanilla Emacs with Purcell on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220723211325-vanilla_emacs_with_purcell%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Vanilla Emacs with Purcell on whatsapp"
+            href="https://api.whatsapp.com/send?text=Vanilla%20Emacs%20with%20Purcell%20-%20http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220723211325-vanilla_emacs_with_purcell%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Vanilla Emacs with Purcell on telegram"
+            href="https://telegram.me/share/url?text=Vanilla%20Emacs%20with%20Purcell&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220723211325-vanilla_emacs_with_purcell%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Vanilla Emacs with Purcell on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Vanilla%20Emacs%20with%20Purcell&u=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220723211325-vanilla_emacs_with_purcell%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
   </footer>
-    <div class="comments-separator"></div>
 </article>
     </main>
     
 <footer class="footer">
-  <span>&copy; 2024 <a href="https://sheerwill.xyz/">Lucius | Braindump</a></span><span style="display: inline-block; margin-left: 1em;">
-    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
-  </span>
-  <span style="display: inline-block; margin-left: 1em;">
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
-  </span>
+        <span>&copy; 2024 <a href="http://localhost:1313/">Lucius | Braindump</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-    <path d="M12 6H0l6-6z" />
-  </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
- (function() {
-    
-   const disableThemeToggle = '' == '1';
-   if (disableThemeToggle) {
-     return;
-   }
-
-   let button = document.getElementById("theme-toggle")
-   
-   button.removeEventListener('click', toggleThemeListener)
-   
-   button.addEventListener('click', toggleThemeListener)
- })();
-</script>
-
-<script>
-  (function () {
     let menu = document.getElementById('menu')
     if (menu) {
-      menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-      menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-      }
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
-    const disableSmoothScroll = '' == '1';
-    const enableInstantClick = '1' == '1';
-    
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || disableSmoothScroll || enableInstantClick) {
-      return;
-    }
-    
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function (e) {
-        e.preventDefault();
-        var id = this.getAttribute("href").substr(1);
-        document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-          behavior: "smooth"
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
         });
-        if (id === "top") {
-          history.replaceState(null, null, " ");
-        } else {
-          history.pushState(null, null, `#${id}`);
-        }
-      });
-    });
-  })();
-</script>
-<script>
-  var mybutton = document.getElementById("top-link");
-  window.onscroll = function () {
-    if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-      mybutton.style.visibility = "visible";
-      mybutton.style.opacity = "1";
-    } else {
-      mybutton.style.visibility = "hidden";
-      mybutton.style.opacity = "0";
-    }
-  };
-</script>
-<script>
-  if (window.scrollListeners) {
-    
-    for (const listener of scrollListeners) {
-      window.removeEventListener('scroll', listener)
-    }
-  }
-  window.scrollListeners = []
-</script>
-
-
-
-<script src="/js/medium-zoom.min.js" data-no-instant
-></script>
-<script>
-  document.querySelectorAll('pre > code').forEach((codeblock) => {
-    const container = codeblock.parentNode.parentNode;
-
-    const copybutton = document.createElement('button');
-    copybutton.classList.add('copy-code');
-    copybutton.innerText = 'copy';
-
-    function copyingDone() {
-      copybutton.innerText = 'copied!';
-      setTimeout(() => {
-        copybutton.innerText = 'copy';
-      }, 2000);
-    }
-
-    copybutton.addEventListener('click', (cb) => {
-      if ('clipboard' in navigator) {
-        navigator.clipboard.writeText(codeblock.textContent);
-        copyingDone();
-        return;
-      }
-
-      const range = document.createRange();
-      range.selectNodeContents(codeblock);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-      try {
-        document.execCommand('copy');
-        copyingDone();
-      } catch (e) { };
-      selection.removeRange(range);
     });
 
-    if (container.classList.contains("highlight")) {
-      container.appendChild(copybutton);
-    } else if (container.parentNode.firstChild == container) {
-      
-    } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-      
-      codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-    } else {
-      
-      codeblock.parentNode.appendChild(copybutton);
-    }
-  });
 </script>
-
-
-
-
 <script>
-  
-  
-  (function() {
-    const enableTocScroll = '1' == '1'
-    if (!enableTocScroll) {
-      return
-    }
-    if (!document.querySelector('.toc')) {
-      console.log('no toc found, ignore toc scroll')
-      return
-    }
-    
-
-    
-    const scrollListeners = window.scrollListeners
-    const headings = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id]');
-    const activeClass = 'active';
-
-    
-    let activeHeading = headings[0];
-    getLinkByHeading(activeHeading).classList.add(activeClass);
-
-    const onScroll = () => {
-      const passedHeadings = [];
-      for (const h of headings) {
-        
-        if (getOffsetTop(h) < 5) {
-          passedHeadings.push(h)
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
         } else {
-          break;
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
         }
-      }
-      if (passedHeadings.length > 0) {
-        newActiveHeading = passedHeadings[passedHeadings.length - 1];
-      } else {
-        newActiveHeading = headings[0];
-      }
-      if (activeHeading != newActiveHeading) {
-        getLinkByHeading(activeHeading).classList.remove(activeClass);
-        activeHeading = newActiveHeading;
-        getLinkByHeading(activeHeading).classList.add(activeClass);
-      }
-    }
+    };
 
-    let timer = null;
-    const scrollListener = () => {
-      if (timer !== null) {
-        clearTimeout(timer)
-      }
-      timer = setTimeout(onScroll, 50)
-    }
-    window.addEventListener('scroll', scrollListener, false);
-    scrollListeners.push(scrollListener)
-
-    function getLinkByHeading(heading) {
-      const id = encodeURI(heading.getAttribute('id')).toLowerCase();
-      return document.querySelector(`.toc ul li a[href="#${id}"]`);
-    }
-
-    function getOffsetTop(heading) {
-      if (!heading.getClientRects().length) {
-        return 0;
-      }
-      let rect = heading.getBoundingClientRect();
-      return rect.top
-    }
-  })();
-  </script>
-<script>
-  mediumZoom('.entry-cover img');
-  mediumZoom('.post-content img:not([no-zoom])');
 </script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
 
-<script src="/js/instantclick.min.js" data-no-instant
-></script>
-<script data-no-instant>
-  
-  
-  
-  
-  
-  
-  InstantClick.init();
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

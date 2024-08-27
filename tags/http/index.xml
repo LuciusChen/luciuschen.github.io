@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Http on Lucius | Braindump</title>
+    <link>http://localhost:1313/tags/http/</link>
+    <description>Recent content in Http on Lucius | Braindump</description>
+    <generator>Hugo -- 0.133.1</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 27 Aug 2024 14:41:14 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Making a Multipart/Form-Data POST Request in Java</title>
+      <link>http://localhost:1313/posts/main/20240826192831-making_a_multipart_form_data_post_request_in_java/</link>
+      <pubDate>Tue, 27 Aug 2024 14:41:14 +0800</pubDate>
+      <guid>http://localhost:1313/posts/main/20240826192831-making_a_multipart_form_data_post_request_in_java/</guid>
+      <description>&amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.httpcomponents&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;httpclient&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.4&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.httpcomponents&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;httpmime&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.4&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; CloseableHttpClient httpClient = HttpClients.createDefault(); HttpPost uploadFile = new HttpPost(&amp;#34;...&amp;#34;); MultipartEntityBuilder builder = MultipartEntityBuilder.create(); builder.addTextBody(&amp;#34;field1&amp;#34;, &amp;#34;yes&amp;#34;, ContentType.TEXT_PLAIN); // This attaches the file to the POST: File f = new File(&amp;#34;[/path/to/upload]&amp;#34;); builder.addBinaryBody( &amp;#34;file&amp;#34;, new FileInputStream(f), ContentType.APPLICATION_OCTET_STREAM, f.getName() ); HttpEntity multipart = builder.build(); uploadFile.setEntity(multipart); CloseableHttpResponse response = httpClient.execute(uploadFile); HttpEntity responseEntity = response.getEntity(); 4.0 版本需要按照下面</description>
+    </item>
+  </channel>
+</rss>

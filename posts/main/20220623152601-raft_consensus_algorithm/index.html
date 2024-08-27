@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,76 +9,53 @@
 <meta name="keywords" content="">
 <meta name="description" content="Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其">
 <meta name="author" content="Lucius Chen">
-<link rel="canonical" href="https://sheerwill.xyz/posts/main/20220623152601-raft_consensus_algorithm/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.cf61dd8492036b42156ddaf10e673052e7b9d11a1c1d3513c6088debf5e42a88.css" integrity="sha256-z2HdhJIDa0IVbdrxDmcwUue50RocHTUTxgiN6/XkKog=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://sheerwill.xyz/favicon.ico">
-<link rel="apple-touch-icon" href="https://sheerwill.xyz/apple-touch-icon.png">
-<link rel="alternate" hreflang="en" href="https://sheerwill.xyz/posts/main/20220623152601-raft_consensus_algorithm/">
-<script async defer data-website-id="f4e3ad0a-7fc1-4f18-b08c-9be77b60cdd5" src="https://oishii.reorx.com/oishii.js"></script>
+<link rel="canonical" href="http://localhost:1313/posts/main/20220623152601-raft_consensus_algorithm/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/main/20220623152601-raft_consensus_algorithm/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-<meta name="twitter:title" content="Raft consensus algorithm | Lucius | Braindump" />
-<meta name="twitter:description" content="Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其" />
-<meta property="og:title" content="Raft consensus algorithm | Lucius | Braindump" />
-<meta property="og:description" content="Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://sheerwill.xyz/posts/main/20220623152601-raft_consensus_algorithm/" />
-<meta property="article:section" content="posts" />
-  <meta property="article:published_time" content="2024-03-08T09:59:11&#43;08:00" />
-  <meta property="article:modified_time" content="2024-03-08T09:59:11&#43;08:00" />
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
 
+            .list {
+                background: var(--theme);
+            }
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://sheerwill.xyz/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Raft consensus algorithm",
-      "item": "https://sheerwill.xyz/posts/main/20220623152601-raft_consensus_algorithm/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Raft consensus algorithm | Lucius | Braindump",
-  "name": "Raft consensus algorithm",
-  "description": "Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其",
-  "keywords": [
-    
-  ],
-  "wordCount" : "2897",
-  "inLanguage": "en",
-  "datePublished": "2024-03-08T09:59:11+08:00",
-  "dateModified": "2024-03-08T09:59:11+08:00",
-  "author":[{
-    "@type": "Person",
-    "name": "Lucius Chen"
-  }],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://sheerwill.xyz/posts/main/20220623152601-raft_consensus_algorithm/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Lucius | Braindump",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://sheerwill.xyz/favicon.ico"
-    }
-  }
-}
-</script><style>
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><style>
   #icons {
     display: flex;
     flex-wrap: wrap;
@@ -105,157 +82,158 @@
 </style>
 
 
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEASUREMENT_ID"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
         }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary-bg: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list-page {
-                background: var(--theme);
-            }
-
-            .list-page:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list-page:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-MEASUREMENT_ID');
         }
+      </script>
+    
+  
 
-    </style>
-</noscript>
+<meta property="og:title" content="Raft consensus algorithm" />
+<meta property="og:description" content="Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/main/20220623152601-raft_consensus_algorithm/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-08T09:59:11+08:00" />
+<meta property="article:modified_time" content="2024-03-08T09:59:11+08:00" />
 
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Raft consensus algorithm"/>
+<meta name="twitter:description" content="Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Raft consensus algorithm",
+      "item": "http://localhost:1313/posts/main/20220623152601-raft_consensus_algorithm/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Raft consensus algorithm",
+  "name": "Raft consensus algorithm",
+  "description": "Figure 1: node-state-transitions-in-raft 一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其",
+  "keywords": [
+    
+  ],
+  "articleBody": " Figure 1: node-state-transitions-in-raft\n一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。\n当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。\n一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。\nInitialisation 根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）\nlog 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。\n当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。\nVoting on a new leader 如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。\nvotedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及当前的 term。\nCollecting votes 回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。\n如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。\nsentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。\nBroadcasting messages 以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。\nleader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。\nReplicating from leader to followers ReplicateLog 方法是从 leader 利用 followerId 发送任何新的 log 条目给 follower。prefixLen 是已经发送给 follower 消息的数量，suffix 就是还没有发送给 follower 的消息。所以当 sentLength[follower] = log.length 时，suffix 是一个空数组。\nFollowers receiving messages 首先，如果消息的 term 比 follower 当前的 term 高，则更新当前的 term，并接受消息的发送者为 leader。相等的时候，也会和之前一样的逻辑，承认发送者为 leader。\nprefixLen 为 suffix 包含 log 条目之前的条目数量，follower 要求自己当前的 log 长度要大于等于 prefixLen，并且 prefixLen 长度前的最后一个 log 条目中的 term 要与 leader 的 prefixTerm 相同1。Raft 算法保证两个节点相同下标对应的 log 条目中的 term 相同，那么在这之前的 log 都是相同。\n以上条件满足就会调用 AppendEntries 将 suffix 添加到自己的 log 当中。\nUpdating followers’ logs follower 利用该函数讲从 leader 那里收到的条目扩充到 log 当中。如果节点本地的 log 长度大于 leader 发来消息中的 prefixLen，那么我们就要检查差异的这部份 log 条目是否与 suffix 中的条目一致。如果不一致，我们则需要舍弃这部份差异，只保留 prefixLen 长度的 log。这种情况发生在前一个 leader 发送的 log 已经被合并到节点本地 log 当中，而同时因为一些原因新的 leader 发送来新的 log。\n然后，任何新的 log 都会被追加到 follower 本地的 log 当中，即便是消息重复的情况下，这个操作也是幂等的。follower 检查 leaderCommit 是否大于本地的 commitLength，满足条件则可以将 log 当中的 msg 传递给 application，并对本地 commitLength 更新。\nLeader receiving log acknowledgements 这里回到 leader 这边。leader 会检查发送者的 term：如果发送者的 term 大于接收者的 term，那么意味着新 leader 选举已经开始，所以当前的 leader 会变为 follower 的状态。\n如果 term 相同，并且详细中的 success 为 true，则更新 sendLength 和 ackedLength，记录 follower 确认过的 log 数量，然后调用 CommitLogEntries 函数。如果 success 为 false，则 follower 没有接收消息，这个时候 leader 会递减 sendLength，并嗲用 ReplicateLog 重新发送 LogRequest 消息2。\nLeader committing log entries 被 quorum 确认过的 log 条目就可以被 leader 提交，当 log 条目被提交，消息就被传递给 Application。\n参考上一个步骤中 prefixTerm 的来源 ↩︎\n这里算法是可以优化的，来减少重试次数。 ↩︎\n",
+  "wordCount" : "2897",
+  "inLanguage": "en",
+  "datePublished": "2024-03-08T09:59:11+08:00",
+  "dateModified": "2024-03-08T09:59:11+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "Lucius Chen"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/main/20220623152601-raft_consensus_algorithm/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lucius | Braindump",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
-<body class=" type-posts kind-page layout-" id="top"><script data-no-instant>
-function switchTheme(theme) {
-  switch (theme) {
-    case 'light':
-      document.body.classList.remove('dark');
-      break;
-    case 'dark':
-      document.body.classList.add('dark');
-      break;
-    
-    default:
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-      }
-  }
-}
-
-function isDarkTheme() {
-  return document.body.className.includes("dark");
-}
-
-function getPrefTheme() {
-  return localStorage.getItem("pref-theme");
-}
-
-function setPrefTheme(theme) {
-  switchTheme(theme)
-  localStorage.setItem("pref-theme", theme);
-}
-
-const toggleThemeCallbacks = {}
-toggleThemeCallbacks['main'] = (isDark) => {
-  
-  if (isDark) {
-    setPrefTheme('light');
-  } else {
-    setPrefTheme('dark');
-  }
-}
-
-
-
-
-window.addEventListener('toggle-theme', function() {
-  
-  const isDark = isDarkTheme()
-  for (const key in toggleThemeCallbacks) {
-    toggleThemeCallbacks[key](isDark)
-  }
-});
-
-
-function toggleThemeListener() {
-  
-  window.dispatchEvent(new CustomEvent('toggle-theme'));
-}
+<body class="" id="top">
+<script>
+ if (localStorage.getItem("pref-theme") === "dark") {
+   document.body.classList.add('dark');
+ } else if (localStorage.getItem("pref-theme") === "light") {
+   document.body.classList.remove('dark')
+ } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+   document.body.classList.add('dark');
+ }
 
 </script>
 <script>
-  
-  (function() {
-    const defaultTheme = 'auto';
-    const prefTheme = getPrefTheme();
-    const theme = prefTheme ? prefTheme : defaultTheme;
+  MathJax = {
+    tex: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"],
+      ],
+      displayMath: [
+        ["$$", "$$"],
+        ["\\[", "\\]"],
+      ],
+      processEscapes: true,
+      processEnvironments: true,
+    },
+    options: {
+      skipHtmlTags: ["script", "noscript", "style", "textarea", "pre"],
+    },
+  };
 
-    switchTheme(theme);
-  })();
-</script>
-<script>
- MathJax = {
-   tex: {
-     inlineMath: [['$', '$'], ['\\(', '\\)']],
-     displayMath: [['$$','$$'], ['\\[', '\\]']],
-     processEscapes: true,
-     processEnvironments: true
-   },
-   options: {
-     skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-   }
- };
-
- window.addEventListener('load', (event) => {
-   document.querySelectorAll("mjx-container").forEach(function(x){
-     x.parentElement.classList += 'has-jax'})
- });
-
+  window.addEventListener("load", (event) => {
+    document.querySelectorAll("mjx-container").forEach(function (x) {
+      x.parentElement.classList += "has-jax";
+    });
+  });
 </script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script type="text/javascript" id="MathJax-script" async
-        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script
+  type="text/javascript"
+  id="MathJax-script"
+  async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+></script>
+
 <style>
- code.has-jax {
-     font: inherit;
-     font-size: 100%;
-     background: inherit;
-     border: inherit;
-     color: #515151;
- }
+  code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+  }
 </style>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://sheerwill.xyz/" accesskey="h" title="Lucius | Braindump (Alt + H)">Lucius | Braindump</a>
-            <span class="logo-switches">
+            <a href="http://localhost:1313/" accesskey="h" title="Lucius | Braindump (Alt + H)">Lucius | Braindump</a>
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -269,44 +247,39 @@ function toggleThemeListener() {
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://sheerwill.xyz/tags/" title="Tags"
-                >Tags
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://sheerwill.xyz/archives/" title="Archive"
-                >Archive
+                <a href="http://localhost:1313/archives/" title="Archive">
+                    <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://sheerwill.xyz/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
-                >Search
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
                 </a>
             </li>
         </ul>
     </nav>
 </header>
-<main class="main post">
+<main class="main">
 
 <article class="post-single">
   <header class="post-header">
-    <h1 class="post-title">Raft consensus algorithm</h1>
-    <div class="post-meta"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>March 8, 2024</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>2897 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>6 min</span></span>
+    
+    <h1 class="post-title entry-hint-parent">
+      Raft consensus algorithm
+    </h1>
+    <div class="post-meta"><span title='2024-03-08 09:59:11 +0800 CST'>March 8, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;2897 words&nbsp;·&nbsp;Lucius Chen
 
-      
-      
-    </div>
-  </header> <div class="toc side right">
+</div>
+  </header> <div class="toc">
     <details  open>
         <summary accesskey="c" title="(Alt + C)">
             <span class="details">Table of Contents</span>
@@ -326,7 +299,7 @@ function toggleThemeListener() {
                 <li>
                     <a href="#followers-receiving-messages" aria-label="Followers receiving messages">Followers receiving messages</a></li>
                 <li>
-                    <a href="#updating-followers-logs" aria-label="Updating followers&amp;rsquo; logs">Updating followers&rsquo; logs</a></li>
+                    <a href="#updating-followers-logs" aria-label="Updating followers&rsquo; logs">Updating followers&rsquo; logs</a></li>
                 <li>
                     <a href="#leader-receiving-log-acknowledgements" aria-label="Leader receiving log acknowledgements">Leader receiving log acknowledgements</a></li>
                 <li>
@@ -347,7 +320,7 @@ function toggleThemeListener() {
 <p>一个节点有三种状态：leader，candidate 和 follower。当一个节点第一次运行，或者崩溃后恢复时，处于 follower 的状态并且等待其他节点。如果一定时间内没有从 leader 或者 candidate 处收到消息，follower 会怀疑 leader 已经不可用了，并试图成为新的 leader。检测 leader 不可用是随机的，这样可以减少几个节点同时成为 candidate 争取票数成为 leader 的可能。</p>
 <p>当一个节点怀疑 leader 不可用时，会转变自身状态为 candidate，递增 term，并在这个 term 中去争取其他节点的票数进行选举。在选举过程中，如果收到其他 candidate 或 leader 发出更高的 term，则会回归到 follower 的状态。如果从 quorum 数量的节点收到票数并选举成功，就会从 candidate 的状态变为 leader 状态。如果在一定时间内没有收到足够的票数，选举会过期，然后 candidate 递增 term 并开始新一轮选举。</p>
 <p>一个节点除非崩溃、关闭或者收到其他 leader 或 candidate 处发来的更高的 term，否则会始终处在 leader 状态。当 leader 因为网络原因使得它无法与其他节点沟通时，其他节点就会进行选举，选举出新的 leader，这个时候更高的 term 就产生了。当收到更高的 term 时，之前的 leader 就会变为 follower 的状态。</p>
-<h2 id="initialisation">Initialisation<a hidden class="anchor" aria-hidden="true" href="#initialisation">¶</a></h2>
+<h2 id="initialisation">Initialisation<a hidden class="anchor" aria-hidden="true" href="#initialisation">#</a></h2>
 <figure>
     <img loading="lazy" src="/ox-hugo/initialisation.svg"/> 
 </figure>
@@ -355,14 +328,14 @@ function toggleThemeListener() {
 <p>根据上面的伪代码，在初始化块中定义的变量构成了一个节点的状态。四个变量（currentTerm, votedFor, log, and commitLength）需要维护稳定的存储内（比如硬盘），来保证崩溃的时候状态不能丢失。其他变量在崩溃后恢复时会重置，所以可以存在内存当中。系统中有一个全局变量 nodes，并且每个节点都有一个唯一的 ID。（这边讲的算法没有包含 reconfiguration，也就是从系统中添加或移除节点。）</p>
 <p>log 是一个数组，每个条目有属性 msg 和 term。属性 msg 里面就是我们需要通过 total order broadcast 传递的消息，属性 term 包含了被广播的 term 编号。log 数组是以 0 作为下标开始，log 是以尾部 append 新的条目来增长的，Raft 算法在各节点复制 log。当一个日志条目（以及之前的条目）被复制到 quorum 数量节点时，就提交事务。当 log 条目（以及之前的条目）被提交时，就会把条目中的 msg 传递给 Application。在一个 log 条目被提交之前，它还可能发生变化，但 Raft 保证，一旦一个 log 条目被提交后它就是确定了，所有节点将提交相同的日志条目序列。因此，从已提交的 log 条目中按其 log 顺序传递消息，我们就实现了 FIFO-total order broadcast。</p>
 <p>当一个节点怀疑 leader 不可用时，增加 currentTerm，将自己的角色设置为 candidate，并通过将 votedFor 和 votesReceived 设置为自己的节点 ID 来为自己投票。然后，它向其他每个节点发送一个 VoteRequest 消息，要求它们投票决定 candidate 是否可以成为新 leader。该消息包含 candidate 的 nodeId、它的 currentTerm（增量后）、它的日志中的条目数，以及它最新一条日志条目。</p>
-<h2 id="voting-on-a-new-leader">Voting on a new leader<a hidden class="anchor" aria-hidden="true" href="#voting-on-a-new-leader">¶</a></h2>
+<h2 id="voting-on-a-new-leader">Voting on a new leader<a hidden class="anchor" aria-hidden="true" href="#voting-on-a-new-leader">#</a></h2>
 <figure>
     <img loading="lazy" src="/ox-hugo/voting-on-a-new-leader.svg"/> 
 </figure>
 
 <p>如果 candidate 的 term 是大于接收者的 term 时，接收者就会变为 follower（即便它在小的 term 里面是 leader）。然后，接收者会检查 candidate 的 log 至少和自己的 log 一样或者更新，防止 log 过期的 candidate 成为 leader，导致 log 丢失。candidate 的 log 最新条目的 term 要大于接收者 log 最新条目的 term；或者 term 相同，candidate 的 log 长度大于等于接收者的 log 长度。那么 candidate 的 log 就是可以接受的。在上面伪代码中的 logOk 可以看到这样的逻辑。</p>
 <p>votedFor 变量记录了当前节点在 currentTerm 中给谁投了票，如果 currentTerm 就是 candidate 的 term，candidate 的 log 是最新的（也就是 logOk 为 true），并且在当前这个 term 中没有给其他节点投过票，那么就将 candidate 的 nodeId 记录在 votedFor 中，并发送包含 true 的 VoteResponse 的消息给 candidate。否则，则发送包含 false 的 VoteResponse。除了成功和失败的标识外，还会附带上当前节点的 ID 以及当前的 term。</p>
-<h2 id="collecting-votes">Collecting votes<a hidden class="anchor" aria-hidden="true" href="#collecting-votes">¶</a></h2>
+<h2 id="collecting-votes">Collecting votes<a hidden class="anchor" aria-hidden="true" href="#collecting-votes">#</a></h2>
 <figure>
     <img loading="lazy" src="/ox-hugo/collecting-svg.svg"/> 
 </figure>
@@ -370,20 +343,20 @@ function toggleThemeListener() {
 <p>回到 candidate 这边，如果收到的消息中 term 高于 candidate 的 term，则会取消选举并过渡到 follower 状态；如果两者的 term 相等，则 candidate 就会讲投票者的 ID 加入到 votesReceived 集合中。</p>
 <p>如果投票构成了 quorum，那么 candidate 会过渡到 leader 状态。作为领导者的第一个动作，就是更新 sendLength 和 ackedLength 变量（解释见下文），然后为每个 follower 调用 ReplicateLog （定义见（Raft (5/9): replicating from leader to followers）函数。这样做的目的是向每个 follower 发送一条消息，告知他们新的 leader 的情况。</p>
 <p>sentLength 和 ackedLength 给每个节点 ID 映射了一个整数（非 leader 不需要这些变量）。对于每个 follower F，sentLength[F] 记录了从 log 开始有多少 log 条目发送给了 F；ackedLength[F] 记录了有多少 log 条目已经被 F 确认收到了。在成为 Leader 之前，节点会将 sentLength[F] 初始化为 log 的长度（这里是假设所有的 follower 都已经同步了所有的 log，这里的假设是有问题的，具体解决会在 Raft (8/9): leader receiving log acknowledgements），ackedLength 初始化为 0。</p>
-<h2 id="broadcasting-messages">Broadcasting messages<a hidden class="anchor" aria-hidden="true" href="#broadcasting-messages">¶</a></h2>
+<h2 id="broadcasting-messages">Broadcasting messages<a hidden class="anchor" aria-hidden="true" href="#broadcasting-messages">#</a></h2>
 <figure>
     <img loading="lazy" src="/ox-hugo/broadcasting-messages.svg"/> 
 </figure>
 
 <p>以上伪代码中，当 Application 希望通过 total order broadcast 广播消息时，只需要简单的添加一个新的 log 条目进 log 当中，并更新 ackedLength 为最新 log 的长度，然后对于其他每个节点都调用 ReplicateLog。</p>
 <p>leader 在即使没有新消息需要广播时，也会定期为其他每个节点调用 ReplicateLog，这样可以让其他 follower 知道 leader 一直处于可用状态以及让丢失的消息得到重传。</p>
-<h2 id="replicating-from-leader-to-followers">Replicating from leader to followers<a hidden class="anchor" aria-hidden="true" href="#replicating-from-leader-to-followers">¶</a></h2>
+<h2 id="replicating-from-leader-to-followers">Replicating from leader to followers<a hidden class="anchor" aria-hidden="true" href="#replicating-from-leader-to-followers">#</a></h2>
 <figure>
     <img loading="lazy" src="/ox-hugo/replicating-from-leader-to-followers.svg"/> 
 </figure>
 
 <p>ReplicateLog 方法是从 leader 利用 followerId 发送任何新的 log 条目给 follower。prefixLen 是已经发送给 follower 消息的数量，suffix 就是还没有发送给 follower 的消息。所以当 sentLength[follower] = log.length 时，suffix 是一个空数组。</p>
-<h2 id="followers-receiving-messages">Followers receiving messages<a hidden class="anchor" aria-hidden="true" href="#followers-receiving-messages">¶</a></h2>
+<h2 id="followers-receiving-messages">Followers receiving messages<a hidden class="anchor" aria-hidden="true" href="#followers-receiving-messages">#</a></h2>
 <figure>
     <img loading="lazy" src="/ox-hugo/followers-receiving-messages.svg"/> 
 </figure>
@@ -391,21 +364,21 @@ function toggleThemeListener() {
 <p>首先，如果消息的 term 比 follower 当前的 term 高，则更新当前的 term，并接受消息的发送者为 leader。相等的时候，也会和之前一样的逻辑，承认发送者为 leader。</p>
 <p>prefixLen 为 suffix 包含 log 条目之前的条目数量，follower 要求自己当前的 log 长度要大于等于 prefixLen，并且 prefixLen 长度前的最后一个 log 条目中的 term 要与 leader 的 prefixTerm 相同<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。Raft 算法保证两个节点相同下标对应的 log 条目中的 term 相同，那么在这之前的 log 都是相同。</p>
 <p>以上条件满足就会调用 AppendEntries 将 suffix 添加到自己的 log 当中。</p>
-<h2 id="updating-followers-logs">Updating followers&rsquo; logs<a hidden class="anchor" aria-hidden="true" href="#updating-followers-logs">¶</a></h2>
+<h2 id="updating-followers-logs">Updating followers&rsquo; logs<a hidden class="anchor" aria-hidden="true" href="#updating-followers-logs">#</a></h2>
 <figure>
     <img loading="lazy" src="/ox-hugo/updating-followers-logs.svg"/> 
 </figure>
 
 <p>follower 利用该函数讲从 leader 那里收到的条目扩充到 log 当中。如果节点本地的 log 长度大于 leader 发来消息中的 prefixLen，那么我们就要检查差异的这部份 log 条目是否与 suffix 中的条目一致。如果不一致，我们则需要舍弃这部份差异，只保留 prefixLen 长度的 log。这种情况发生在前一个 leader 发送的 log 已经被合并到节点本地 log 当中，而同时因为一些原因新的 leader 发送来新的 log。</p>
 <p>然后，任何新的 log 都会被追加到 follower 本地的 log 当中，即便是消息重复的情况下，这个操作也是幂等的。follower 检查 leaderCommit 是否大于本地的 commitLength，满足条件则可以将 log 当中的 msg 传递给 application，并对本地 commitLength 更新。</p>
-<h2 id="leader-receiving-log-acknowledgements">Leader receiving log acknowledgements<a hidden class="anchor" aria-hidden="true" href="#leader-receiving-log-acknowledgements">¶</a></h2>
+<h2 id="leader-receiving-log-acknowledgements">Leader receiving log acknowledgements<a hidden class="anchor" aria-hidden="true" href="#leader-receiving-log-acknowledgements">#</a></h2>
 <figure>
     <img loading="lazy" src="/ox-hugo/leader-receiving-log-acknowledgements.svg"/> 
 </figure>
 
 <p>这里回到 leader 这边。leader 会检查发送者的 term：如果发送者的 term 大于接收者的 term，那么意味着新 leader 选举已经开始，所以当前的 leader 会变为 follower 的状态。</p>
 <p>如果 term 相同，并且详细中的 success 为 true，则更新 sendLength 和 ackedLength，记录 follower 确认过的 log 数量，然后调用 CommitLogEntries 函数。如果 success 为 false，则 follower 没有接收消息，这个时候 leader 会递减 sendLength，并嗲用 ReplicateLog 重新发送 LogRequest 消息<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
-<h2 id="leader-committing-log-entries">Leader committing log entries<a hidden class="anchor" aria-hidden="true" href="#leader-committing-log-entries">¶</a></h2>
+<h2 id="leader-committing-log-entries">Leader committing log entries<a hidden class="anchor" aria-hidden="true" href="#leader-committing-log-entries">#</a></h2>
 <figure>
     <img loading="lazy" src="/ox-hugo/leader-committing-log-entries.svg"/> 
 </figure>
@@ -423,423 +396,224 @@ function toggleThemeListener() {
 </ol>
 </div>
 
-
-    
-
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-	  
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-<hr>
-
-  <div class="bl-section">
-	<h4 style="color: var(--secondary);">Links to this note</h4>
-	<div class="backlinks">
-	  <ul>
-	   
-		  <li><a href="/posts/main/20220602202933-distribution_system/">Distribution System</a></li>
-	   
-	 </ul>
-	</div>
+                                                                                                                                                                    
+<div class="bl-section">
+  <h4>Links to this note</h4>
+  <div class="backlinks">
+    <ul>
+      
+      <li><a href="/posts/main/20220602202933-distribution_system/">Distribution System</a></li>
+      
+    </ul>
   </div>
+</div>
 
 
   </div>
 
   <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
 <nav class="paginav">
-  <a class="prev" href="https://sheerwill.xyz/posts/main/20220609201658-lamport_clocks/">
-    <span class="title">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;Prev Page</span>
+  <a class="prev" href="http://localhost:1313/posts/main/20220609201658-lamport_clocks/">
+    <span class="title">« Prev</span>
     <br>
     <span>Lamport clocks</span>
   </a>
-  <a class="next" href="https://sheerwill.xyz/posts/main/20220607104757-hugo/">
-    <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
-    </span>
+  <a class="next" href="http://localhost:1313/posts/main/20220607104757-hugo/">
+    <span class="title">Next »</span>
     <br>
     <span>Hugo</span>
   </a>
 </nav>
 
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Raft consensus algorithm on x"
+            href="https://x.com/intent/tweet/?text=Raft%20consensus%20algorithm&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220623152601-raft_consensus_algorithm%2f&amp;hashtags=">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Raft consensus algorithm on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220623152601-raft_consensus_algorithm%2f&amp;title=Raft%20consensus%20algorithm&amp;summary=Raft%20consensus%20algorithm&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220623152601-raft_consensus_algorithm%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Raft consensus algorithm on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220623152601-raft_consensus_algorithm%2f&title=Raft%20consensus%20algorithm">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Raft consensus algorithm on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220623152601-raft_consensus_algorithm%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Raft consensus algorithm on whatsapp"
+            href="https://api.whatsapp.com/send?text=Raft%20consensus%20algorithm%20-%20http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220623152601-raft_consensus_algorithm%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Raft consensus algorithm on telegram"
+            href="https://telegram.me/share/url?text=Raft%20consensus%20algorithm&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220623152601-raft_consensus_algorithm%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Raft consensus algorithm on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Raft%20consensus%20algorithm&u=http%3a%2f%2flocalhost%3a1313%2fposts%2fmain%2f20220623152601-raft_consensus_algorithm%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
   </footer>
-    <div class="comments-separator"></div>
 </article>
     </main>
     
 <footer class="footer">
-  <span>&copy; 2024 <a href="https://sheerwill.xyz/">Lucius | Braindump</a></span><span style="display: inline-block; margin-left: 1em;">
-    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
-  </span>
-  <span style="display: inline-block; margin-left: 1em;">
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
-  </span>
+        <span>&copy; 2024 <a href="http://localhost:1313/">Lucius | Braindump</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-    <path d="M12 6H0l6-6z" />
-  </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
- (function() {
-    
-   const disableThemeToggle = '' == '1';
-   if (disableThemeToggle) {
-     return;
-   }
-
-   let button = document.getElementById("theme-toggle")
-   
-   button.removeEventListener('click', toggleThemeListener)
-   
-   button.addEventListener('click', toggleThemeListener)
- })();
-</script>
-
-<script>
-  (function () {
     let menu = document.getElementById('menu')
     if (menu) {
-      menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-      menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-      }
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
-    const disableSmoothScroll = '' == '1';
-    const enableInstantClick = '1' == '1';
-    
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || disableSmoothScroll || enableInstantClick) {
-      return;
-    }
-    
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function (e) {
-        e.preventDefault();
-        var id = this.getAttribute("href").substr(1);
-        document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-          behavior: "smooth"
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
         });
-        if (id === "top") {
-          history.replaceState(null, null, " ");
-        } else {
-          history.pushState(null, null, `#${id}`);
-        }
-      });
-    });
-  })();
-</script>
-<script>
-  var mybutton = document.getElementById("top-link");
-  window.onscroll = function () {
-    if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-      mybutton.style.visibility = "visible";
-      mybutton.style.opacity = "1";
-    } else {
-      mybutton.style.visibility = "hidden";
-      mybutton.style.opacity = "0";
-    }
-  };
-</script>
-<script>
-  if (window.scrollListeners) {
-    
-    for (const listener of scrollListeners) {
-      window.removeEventListener('scroll', listener)
-    }
-  }
-  window.scrollListeners = []
-</script>
-
-
-
-<script src="/js/medium-zoom.min.js" data-no-instant
-></script>
-<script>
-  document.querySelectorAll('pre > code').forEach((codeblock) => {
-    const container = codeblock.parentNode.parentNode;
-
-    const copybutton = document.createElement('button');
-    copybutton.classList.add('copy-code');
-    copybutton.innerText = 'copy';
-
-    function copyingDone() {
-      copybutton.innerText = 'copied!';
-      setTimeout(() => {
-        copybutton.innerText = 'copy';
-      }, 2000);
-    }
-
-    copybutton.addEventListener('click', (cb) => {
-      if ('clipboard' in navigator) {
-        navigator.clipboard.writeText(codeblock.textContent);
-        copyingDone();
-        return;
-      }
-
-      const range = document.createRange();
-      range.selectNodeContents(codeblock);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-      try {
-        document.execCommand('copy');
-        copyingDone();
-      } catch (e) { };
-      selection.removeRange(range);
     });
 
-    if (container.classList.contains("highlight")) {
-      container.appendChild(copybutton);
-    } else if (container.parentNode.firstChild == container) {
-      
-    } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-      
-      codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-    } else {
-      
-      codeblock.parentNode.appendChild(copybutton);
-    }
-  });
 </script>
-
-
-
-
 <script>
-  
-  
-  (function() {
-    const enableTocScroll = '1' == '1'
-    if (!enableTocScroll) {
-      return
-    }
-    if (!document.querySelector('.toc')) {
-      console.log('no toc found, ignore toc scroll')
-      return
-    }
-    
-
-    
-    const scrollListeners = window.scrollListeners
-    const headings = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id]');
-    const activeClass = 'active';
-
-    
-    let activeHeading = headings[0];
-    getLinkByHeading(activeHeading).classList.add(activeClass);
-
-    const onScroll = () => {
-      const passedHeadings = [];
-      for (const h of headings) {
-        
-        if (getOffsetTop(h) < 5) {
-          passedHeadings.push(h)
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
         } else {
-          break;
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
         }
-      }
-      if (passedHeadings.length > 0) {
-        newActiveHeading = passedHeadings[passedHeadings.length - 1];
-      } else {
-        newActiveHeading = headings[0];
-      }
-      if (activeHeading != newActiveHeading) {
-        getLinkByHeading(activeHeading).classList.remove(activeClass);
-        activeHeading = newActiveHeading;
-        getLinkByHeading(activeHeading).classList.add(activeClass);
-      }
-    }
+    };
 
-    let timer = null;
-    const scrollListener = () => {
-      if (timer !== null) {
-        clearTimeout(timer)
-      }
-      timer = setTimeout(onScroll, 50)
-    }
-    window.addEventListener('scroll', scrollListener, false);
-    scrollListeners.push(scrollListener)
-
-    function getLinkByHeading(heading) {
-      const id = encodeURI(heading.getAttribute('id')).toLowerCase();
-      return document.querySelector(`.toc ul li a[href="#${id}"]`);
-    }
-
-    function getOffsetTop(heading) {
-      if (!heading.getClientRects().length) {
-        return 0;
-      }
-      let rect = heading.getBoundingClientRect();
-      return rect.top
-    }
-  })();
-  </script>
-<script>
-  mediumZoom('.entry-cover img');
-  mediumZoom('.post-content img:not([no-zoom])');
 </script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
 
-<script src="/js/instantclick.min.js" data-no-instant
-></script>
-<script data-no-instant>
-  
-  
-  
-  
-  
-  
-  InstantClick.init();
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

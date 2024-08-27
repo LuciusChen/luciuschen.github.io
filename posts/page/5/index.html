@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,37 +9,54 @@
 <meta name="keywords" content="">
 <meta name="description" content="Posts - Lucius | Braindump">
 <meta name="author" content="">
-<link rel="canonical" href="https://sheerwill.xyz/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.cf61dd8492036b42156ddaf10e673052e7b9d11a1c1d3513c6088debf5e42a88.css" integrity="sha256-z2HdhJIDa0IVbdrxDmcwUue50RocHTUTxgiN6/XkKog=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://sheerwill.xyz/favicon.ico">
-<link rel="apple-touch-icon" href="https://sheerwill.xyz/apple-touch-icon.png">
-<link rel="alternate" type="application/rss+xml" href="https://sheerwill.xyz/posts/index.xml">
-<link rel="alternate" hreflang="en" href="https://sheerwill.xyz/posts/">
-<script async defer data-website-id="f4e3ad0a-7fc1-4f18-b08c-9be77b60cdd5" src="https://oishii.reorx.com/oishii.js"></script>
+<link rel="canonical" href="http://localhost:1313/posts/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/posts/index.xml">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-<meta name="twitter:title" content="Posts | Lucius | Braindump" />
-<meta name="twitter:description" content="" />
-<meta property="og:title" content="Posts | Lucius | Braindump" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://sheerwill.xyz/posts/" />
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
 
+            .list {
+                background: var(--theme);
+            }
 
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://sheerwill.xyz/posts/"
-    }
-  ]
-}
-</script><style>
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><style>
   #icons {
     display: flex;
     flex-wrap: wrap;
@@ -66,126 +83,75 @@
 </style>
 
 
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEASUREMENT_ID"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
         }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary-bg: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list-page {
-                background: var(--theme);
-            }
-
-            .list-page:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list-page:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-MEASUREMENT_ID');
         }
+      </script>
+    
+  
 
-    </style>
-</noscript>
+<meta property="og:title" content="Posts" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://localhost:1313/posts/" />
 
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:description" content=""/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }
+  ]
+}
+</script>
 </head>
 
-<body class="list-page type-posts kind-section layout-" id="top"><script data-no-instant>
-function switchTheme(theme) {
-  switch (theme) {
-    case 'light':
-      document.body.classList.remove('dark');
-      break;
-    case 'dark':
-      document.body.classList.add('dark');
-      break;
-    
-    default:
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-      }
-  }
-}
-
-function isDarkTheme() {
-  return document.body.className.includes("dark");
-}
-
-function getPrefTheme() {
-  return localStorage.getItem("pref-theme");
-}
-
-function setPrefTheme(theme) {
-  switchTheme(theme)
-  localStorage.setItem("pref-theme", theme);
-}
-
-const toggleThemeCallbacks = {}
-toggleThemeCallbacks['main'] = (isDark) => {
-  
-  if (isDark) {
-    setPrefTheme('light');
-  } else {
-    setPrefTheme('dark');
-  }
-}
-
-
-
-
-window.addEventListener('toggle-theme', function() {
-  
-  const isDark = isDarkTheme()
-  for (const key in toggleThemeCallbacks) {
-    toggleThemeCallbacks[key](isDark)
-  }
-});
-
-
-function toggleThemeListener() {
-  
-  window.dispatchEvent(new CustomEvent('toggle-theme'));
-}
-
-</script>
+<body class="list" id="top">
 <script>
-  
-  (function() {
-    const defaultTheme = 'auto';
-    const prefTheme = getPrefTheme();
-    const theme = prefTheme ? prefTheme : defaultTheme;
+ if (localStorage.getItem("pref-theme") === "dark") {
+   document.body.classList.add('dark');
+ } else if (localStorage.getItem("pref-theme") === "light") {
+   document.body.classList.remove('dark')
+ } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+   document.body.classList.add('dark');
+ }
 
-    switchTheme(theme);
-  })();
 </script>
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://sheerwill.xyz/" accesskey="h" title="Lucius | Braindump (Alt + H)">Lucius | Braindump</a>
-            <span class="logo-switches">
+            <a href="http://localhost:1313/" accesskey="h" title="Lucius | Braindump (Alt + H)">Lucius | Braindump</a>
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -199,22 +165,22 @@ function toggleThemeListener() {
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://sheerwill.xyz/tags/" title="Tags"
-                >Tags
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://sheerwill.xyz/archives/" title="Archive"
-                >Archive
+                <a href="http://localhost:1313/archives/" title="Archive">
+                    <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://sheerwill.xyz/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
-                >Search
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
                 </a>
             </li>
         </ul>
@@ -223,342 +189,208 @@ function toggleThemeListener() {
 <main class="main"> 
 <header class="page-header">
   <h1>
-    Posts</h1><div class="inline-links">
-  
-  
-  <span><a href="https://sheerwill.xyz/posts/index.xml" target="_blank">RSS</a></span></div>
+    Posts
+  </h1>
 </header>
 
-
-
-
-
-
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>The two generals problem
+    <h2 class="entry-hint-parent">HammerSpoon
     </h2>
   </header>
-  <section class="entry-content">
-    
-      <p>两军问题（英语：Two Generals’ Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该...</p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>February 10, 2023</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
-  <span class="post-tags"><a href="https://sheerwill.xyz/tags/distributed/">Distributed</a></span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>491 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>1 min</span></span>
-</footer>
-  <a class="entry-link" aria-label="post link to The two generals problem" href="https://sheerwill.xyz/posts/main/20220602202247-the_two_generals_problem/"></a>
+  <div class="entry-content">
+    <p>配置的整体如下，通过不同的 Hyper key 在键盘上设置了两层功能，软件控制以及窗口管理。 ├── Spoons │ ├── Emojis.spoon │ ├── SpoonInstall.spoon │ └── TextClipboardHistory.spoon ├── conf.moon ├── control.moon ├── headphones.moon ├...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-02-10 14:17:53 +0800 CST'>February 10, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;136 words&nbsp;·&nbsp;Lucius Chen</footer>
+  <a class="entry-link" aria-label="post link to HammerSpoon" href="http://localhost:1313/posts/main/20220520185239-hammerspoon/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Toolbox
+    <h2 class="entry-hint-parent">The core of efficiency improvement
     </h2>
   </header>
-  <section class="entry-content">
-    
-      <p>Hardware HHKB Logitech MX Master 3 for Mac MacBook Pro (15-inch, 2017) DELL U2417H Bose QC 35 NFAUDIO 二单元娄氏动铁 NF2u Sony A7M3 iPhone 11 Pro Kindle Paper White Software Git Git Skills Design Tools Figma Excalidraw Pinboard Workflow HammerSpoon Hugo Karabiner-Elements Vanilla Emacs with Purcell Beancount Latex Anki Editor VSCode Terminal Squirrel 输入法词库扩充 - 肥猫百万...</p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>February 10, 2023</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>1140 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>3 min</span></span>
-</footer>
-  <a class="entry-link" aria-label="post link to Toolbox" href="https://sheerwill.xyz/posts/main/20220508195206-toolbox/"></a>
+  <div class="entry-content">
+    <p>其实提高时间利用率，就是两点，事件所需时间的准确评估，另外一个就是牛逼的执行力。</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-02-10 14:17:53 +0800 CST'>February 10, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;40 words&nbsp;·&nbsp;Lucius Chen</footer>
+  <a class="entry-link" aria-label="post link to The core of efficiency improvement" href="http://localhost:1313/posts/main/20220602185216-the_core_of_efficiency_improvement/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Troubleshoot Issues in MySQL
+    <h2 class="entry-hint-parent">The two generals problem
     </h2>
   </header>
-  <section class="entry-content">
-    
-      <p>Mysql 无法更新表 查询是否有锁表。 SHOW OPEN TABLES WHERE In_use &gt; 0; 查询是否有正在执行的事务 SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX; Sort Chinese text fields alphabetically by first letter UTF8 default Proofing set is Utf8_general_ci, it is not in Chinese. You need to force MySQL to sort by Chinese. select * FROM MyTable ORDER...</p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>February 10, 2023</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>125 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>1 min</span></span>
-</footer>
-  <a class="entry-link" aria-label="post link to Troubleshoot Issues in MySQL" href="https://sheerwill.xyz/posts/main/20220530180443-troubleshoot_issues_in_mysql/"></a>
+  <div class="entry-content">
+    <p>两军问题（英语：Two Generals’ Problem）是计算机领域中的一个思想实验。两军问题显示，通过不可靠的通信通道交换信息并达成共识是难以实现的。在该...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-02-10 14:17:53 +0800 CST'>February 10, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;491 words&nbsp;·&nbsp;Lucius Chen</footer>
+  <a class="entry-link" aria-label="post link to The two generals problem" href="http://localhost:1313/posts/main/20220602202247-the_two_generals_problem/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Build Diagram
+    <h2 class="entry-hint-parent">Toolbox
     </h2>
   </header>
-  <section class="entry-content">
-    
-      <p>Sankey diagram 使用软件：Figma Plugin: Sankey Connect 展现数据流动的利器 案例：工作流描述 初始的思路是按照流程图来画，用 Excalidraw 插件画起来很快，但不够明晰。工作流也是处理数...</p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>February 10, 2023</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>206 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>1 min</span></span>
-</footer>
-  <a class="entry-link" aria-label="post link to Build Diagram" href="https://sheerwill.xyz/posts/main/20220503145636-build_diagram/"></a>
+  <div class="entry-content">
+    <p>Hardware HHKB Logitech MX Master 3 for Mac MacBook Pro (15-inch, 2017) DELL U2417H Bose QC 35 NFAUDIO 二单元娄氏动铁 NF2u Sony A7M3 iPhone 11 Pro Kindle Paper White Software Git Git Skills Design Tools Figma Excalidraw Pinboard Workflow HammerSpoon Hugo Karabiner-Elements Vanilla Emacs with Purcell Beancount Latex Anki Editor VSCode Terminal Squirrel 输入法词库扩充 - 肥猫百万...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-02-10 14:17:53 +0800 CST'>February 10, 2023</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;1140 words&nbsp;·&nbsp;Lucius Chen</footer>
+  <a class="entry-link" aria-label="post link to Toolbox" href="http://localhost:1313/posts/main/20220508195206-toolbox/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Converting callbacks to promises
+    <h2 class="entry-hint-parent">Troubleshoot Issues in MySQL
     </h2>
   </header>
-  <section class="entry-content">
-    
-      <p>这里用 setTimeout() 模仿异步请求。 const callbackFn = (firstName, callback) =&gt; { setTimeout(() =&gt; { if (!firstName) return callback(new Error(&#34;no first name passed in!&#34;)); // failed const fullName = `${firstName} Doe`; return callback(fullName); // succeed }, 2000); }; callbackFn(&#34;John&#34;, console.log); callbackFn(null, console.log); Promise 实现如下 const promiseFn = (firstName) =&gt; { return new Promise((resolve, reject) =&gt; { setTimeout(() =&gt; { if (!firstName)...</p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>February 10, 2023</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>663 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>2 min</span></span>
-</footer>
-  <a class="entry-link" aria-label="post link to Converting callbacks to promises" href="https://sheerwill.xyz/posts/main/20220506193545-converting_callbacks_to_promises/"></a>
+  <div class="entry-content">
+    <p>Mysql 无法更新表 查询是否有锁表。 SHOW OPEN TABLES WHERE In_use &gt; 0; 查询是否有正在执行的事务 SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX; Sort Chinese text fields alphabetically by first letter UTF8 default Proofing set is Utf8_general_ci, it is not in Chinese. You need to force MySQL to sort by Chinese. select * FROM MyTable ORDER...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-02-10 14:17:53 +0800 CST'>February 10, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;125 words&nbsp;·&nbsp;Lucius Chen</footer>
+  <a class="entry-link" aria-label="post link to Troubleshoot Issues in MySQL" href="http://localhost:1313/posts/main/20220530180443-troubleshoot_issues_in_mysql/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Doom Emacs
+    <h2 class="entry-hint-parent">Build Diagram
     </h2>
   </header>
-  <section class="entry-content">
-    
-      <p>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs With Homebrew First, Doom’s dependencies: brew install git ripgrep brew install coreutils fd xcode-selected --install emacs-mac. It offers good integration...</p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>February 10, 2023</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>1239 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>3 min</span></span>
-</footer>
-  <a class="entry-link" aria-label="post link to Doom Emacs" href="https://sheerwill.xyz/posts/main/20220505220832-doom_emacs/"></a>
+  <div class="entry-content">
+    <p>Sankey diagram 使用软件：Figma Plugin: Sankey Connect 展现数据流动的利器 案例：工作流描述 初始的思路是按照流程图来画，用 Excalidraw 插件画起来很快，但不够明晰。工作流也是处理数...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-02-10 14:17:52 +0800 CST'>February 10, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;206 words&nbsp;·&nbsp;Lucius Chen</footer>
+  <a class="entry-link" aria-label="post link to Build Diagram" href="http://localhost:1313/posts/main/20220503145636-build_diagram/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Figma
+    <h2 class="entry-hint-parent">Converting callbacks to promises
     </h2>
   </header>
-  <section class="entry-content">
-    
-      <p>Plugin Scale Scale any frame, it’s contents, and all effects to any defined width or height. Sankey Connect Sankey Diagram Connect. </p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>February 10, 2023</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>21 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>1 min</span></span>
-</footer>
-  <a class="entry-link" aria-label="post link to Figma" href="https://sheerwill.xyz/posts/main/20220503154744-figma/"></a>
+  <div class="entry-content">
+    <p>这里用 setTimeout() 模仿异步请求。 const callbackFn = (firstName, callback) =&gt; { setTimeout(() =&gt; { if (!firstName) return callback(new Error(&#34;no first name passed in!&#34;)); // failed const fullName = `${firstName} Doe`; return callback(fullName); // succeed }, 2000); }; callbackFn(&#34;John&#34;, console.log); callbackFn(null, console.log); Promise 实现如下 const promiseFn = (firstName) =&gt; { return new Promise((resolve, reject) =&gt; { setTimeout(() =&gt; { if (!firstName)...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-02-10 14:17:52 +0800 CST'>February 10, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;663 words&nbsp;·&nbsp;Lucius Chen</footer>
+  <a class="entry-link" aria-label="post link to Converting callbacks to promises" href="http://localhost:1313/posts/main/20220506193545-converting_callbacks_to_promises/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Git Skills
+    <h2 class="entry-hint-parent">Doom Emacs
     </h2>
   </header>
-  <section class="entry-content">
-    
-      <p>删除以往的提交记录 git checkout --orphan latest_branch git add -A git commit -am &#34;commit message&#34; git branch -D main git branch -m main git push -f origin main 发现上次提交的内容有误，需要再次修改，但不想重复提交，而是合并到上一次提...</p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>February 10, 2023</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>195 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>1 min</span></span>
-</footer>
-  <a class="entry-link" aria-label="post link to Git Skills" href="https://sheerwill.xyz/posts/main/20220503160055-git_skills/"></a>
+  <div class="entry-content">
+    <p>Introduction Emacs outshines all other editing software in approximately the same way that the noonday sun does the stars. It is not just bigger and brighter; it simply makes everything else vanish. – Neal Stephenson, In the Beginning was the Command Line (1998) Install Emacs With Homebrew First, Doom’s dependencies: brew install git ripgrep brew install coreutils fd xcode-selected --install emacs-mac. It offers good integration...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-02-10 14:17:52 +0800 CST'>February 10, 2023</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;1239 words&nbsp;·&nbsp;Lucius Chen</footer>
+  <a class="entry-link" aria-label="post link to Doom Emacs" href="http://localhost:1313/posts/main/20220505220832-doom_emacs/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>How To Find Time Complexity Of An Algorithm
+    <h2 class="entry-hint-parent">Figma
     </h2>
   </header>
-  <section class="entry-content">
-    
-      <p>The most common metric for calculating time complexity is Big O notation. This removes all constant factors so that the running time can be estimated in relation to N as N approaches infinity. In general you can think of it like this:
-statement; Is constant. The running time of the statement will not change in relation to N.
-for (i = 0; i &lt; N; i&#43;&#43;) statement; Is linear. The running time of the loop is directly proportional to N....</p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>February 10, 2023</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>420 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>2 min</span></span>
-</footer>
-  <a class="entry-link" aria-label="post link to How To Find Time Complexity Of An Algorithm" href="https://sheerwill.xyz/posts/main/20220506193205-how_to_find_time_complexity_of_an_algorithm/"></a>
+  <div class="entry-content">
+    <p>Plugin Scale Scale any frame, it’s contents, and all effects to any defined width or height. Sankey Connect Sankey Diagram Connect. </p>
+  </div>
+  <footer class="entry-footer"><span title='2023-02-10 14:17:52 +0800 CST'>February 10, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;21 words&nbsp;·&nbsp;Lucius Chen</footer>
+  <a class="entry-link" aria-label="post link to Figma" href="http://localhost:1313/posts/main/20220503154744-figma/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Refactoring Code
+    <h2 class="entry-hint-parent">Git Skills
     </h2>
   </header>
-  <section class="entry-content">
-    
-      <p>How To Find Time Complexity Of An Algorithm
-Language JavaScript Refactoring </p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>February 10, 2023</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
-  <span class="post-tags"><a href="https://sheerwill.xyz/tags/catalog/">Catalog</a></span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>11 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>1 min</span></span>
-</footer>
-  <a class="entry-link" aria-label="post link to Refactoring Code" href="https://sheerwill.xyz/posts/main/20220506193054-refactoring_code/"></a>
+  <div class="entry-content">
+    <p>删除以往的提交记录 git checkout --orphan latest_branch git add -A git commit -am &#34;commit message&#34; git branch -D main git branch -m main git push -f origin main 发现上次提交的内容有误，需要再次修改，但不想重复提交，而是合并到上一次提...</p>
+  </div>
+  <footer class="entry-footer"><span title='2023-02-10 14:17:52 +0800 CST'>February 10, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;195 words&nbsp;·&nbsp;Lucius Chen</footer>
+  <a class="entry-link" aria-label="post link to Git Skills" href="http://localhost:1313/posts/main/20220503160055-git_skills/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="prev" href="https://sheerwill.xyz/posts/page/4/">« Prev Page</a>
-    <a class="next" href="https://sheerwill.xyz/posts/page/6/">Next Page »</a>
+    <a class="prev" href="http://localhost:1313/posts/page/4/">
+      «&nbsp;Prev&nbsp;
+    </a>
+    <a class="next" href="http://localhost:1313/posts/page/6/">Next&nbsp;&nbsp;»
+    </a>
   </nav>
 </footer>
     </main>
     
 <footer class="footer">
-  <span>&copy; 2024 <a href="https://sheerwill.xyz/">Lucius | Braindump</a></span><span style="display: inline-block; margin-left: 1em;">
-    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
-  </span>
-  <span style="display: inline-block; margin-left: 1em;">
-    Powered by
-    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
-  </span>
+        <span>&copy; 2024 <a href="http://localhost:1313/">Lucius | Braindump</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-    <path d="M12 6H0l6-6z" />
-  </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
 </a>
 
 <script>
- (function() {
-    
-   const disableThemeToggle = '' == '1';
-   if (disableThemeToggle) {
-     return;
-   }
-
-   let button = document.getElementById("theme-toggle")
-   
-   button.removeEventListener('click', toggleThemeListener)
-   
-   button.addEventListener('click', toggleThemeListener)
- })();
-</script>
-
-<script>
-  (function () {
     let menu = document.getElementById('menu')
     if (menu) {
-      menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-      menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-      }
-    }
-
-    const disableSmoothScroll = '' == '1';
-    const enableInstantClick = '1' == '1';
-    
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || disableSmoothScroll || enableInstantClick) {
-      return;
-    }
-    
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function (e) {
-        e.preventDefault();
-        var id = this.getAttribute("href").substr(1);
-        document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-          behavior: "smooth"
-        });
-        if (id === "top") {
-          history.replaceState(null, null, " ");
-        } else {
-          history.pushState(null, null, `#${id}`);
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
         }
-      });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
     });
-  })();
+
 </script>
 <script>
-  var mybutton = document.getElementById("top-link");
-  window.onscroll = function () {
-    if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-      mybutton.style.visibility = "visible";
-      mybutton.style.opacity = "1";
-    } else {
-      mybutton.style.visibility = "hidden";
-      mybutton.style.opacity = "0";
-    }
-  };
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
 </script>
 <script>
-  if (window.scrollListeners) {
-    
-    for (const listener of scrollListeners) {
-      window.removeEventListener('scroll', listener)
-    }
-  }
-  window.scrollListeners = []
-</script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
 
-
-
-<script src="/js/medium-zoom.min.js" data-no-instant
-></script>
-<script src="/js/instantclick.min.js" data-no-instant
-></script>
-<script data-no-instant>
-  
-  
-  
-  
-  
-  
-  InstantClick.init();
 </script>
 </body>
 

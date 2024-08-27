@@ -2,96 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>CLM on Lucius | Braindump</title>
-    <link>https://sheerwill.xyz/tags/clm/</link>
+    <link>http://localhost:1313/tags/clm/</link>
     <description>Recent content in CLM on Lucius | Braindump</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.133.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Feb 2023 14:55:12 +0800</lastBuildDate><atom:link href="https://sheerwill.xyz/tags/clm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Feb 2023 14:55:12 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/clm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The Left-Prefix Index Rule is determined by the B&#43;tree structure</title>
-      <link>https://sheerwill.xyz/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/</link>
+      <link>http://localhost:1313/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/</link>
       <pubDate>Fri, 10 Feb 2023 14:55:12 +0800</pubDate>
-      
-      <guid>https://sheerwill.xyz/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/</guid>
+      <guid>http://localhost:1313/posts/main/clm-the_left_prefix_index_rule_is_determined_by_the_b&#43;tree_structure/</guid>
       <description>联合索引遵循「最左匹配原则」，MySQL 联合索引创建的时候会对 (a, b) 其中的 a 先进行排序，再在 a 的基础上对 b 进行排序。如果是 (a, b, c) 也是一样的方式</description>
-      <content:encoded><![CDATA[<p>联合索引遵循「最左匹配原则」，MySQL 联合索引创建的时候会对 (a, b) 其中的 a 先进行排序，再在 a 的基础上对 b 进行排序。如果是 (a, b, c) 也是一样的方式。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/concatenated-index.png"
-         alt="Figure 1: concatenated-indexes"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>concatenated-indexes</p>
-        </figcaption>
-</figure>
-
-<p>因此，判断是否符合「最左匹配原则」，是否能够使用索引，可以根据底层的索引实现逻辑来进行判断。即，按照创建索引时的顺序，联合索引中的第一个字段是有序的，一旦第一个字段确定值，那么第二个字段也是有序的，以此类推，有序即可用索引，否则不行。</p>
-<ul>
-<li><code>&lt;,&gt;</code> 和 <code>BETWEEN</code> 可以用索引，但是按照上述的逻辑，范围查询字段后的索引字段就无法用上索引，因为范围查询字段的值并没有确定，后续的字段就是无序的。</li>
-<li><code>LIKE</code> 在 <code>&quot;a%&quot;</code> 这种右匹配时，会在索引是按照字母排序的情况下用上索引（% 左侧字符合适的情况下也可以建立前缀索引）。至于左匹配和全匹配，按照上述的逻辑，完全是无序的，无法使用索引。</li>
-<li><code>WHERE b = ? AND a = ? AND c = ?</code> 这种颠倒了顺序的 SQL 是不影响「最左匹配原则」的，数据库执行前，解释器会对其重新排序优化。</li>
-</ul>
-<p>理解组合索引，需要先理解堆表和索引组织表结构。</p>
-<ul>
-<li><a href="/posts/main/evd-heap_table/">Heap Table</a></li>
-<li><a href="/posts/main/evd-clustered_indexes_index_organized_tables_iot/">Clustered Indexes / Index Organized Tables (IOT)</a></li>
-</ul>
-]]></content:encoded>
     </item>
-    
     <item>
       <title>The difference between B-tree and B&#43;tree</title>
-      <link>https://sheerwill.xyz/posts/main/clm-the_difference_between_b_tree_and_b&#43;tree/</link>
+      <link>http://localhost:1313/posts/main/clm-the_difference_between_b_tree_and_b&#43;tree/</link>
       <pubDate>Fri, 10 Feb 2023 14:28:37 +0800</pubDate>
-      
-      <guid>https://sheerwill.xyz/posts/main/clm-the_difference_between_b_tree_and_b&#43;tree/</guid>
+      <guid>http://localhost:1313/posts/main/clm-the_difference_between_b_tree_and_b&#43;tree/</guid>
       <description>B-Tree B+Tree All internal nodes and leaf nodes contain data pointers along with keys. Only leaf nodes contain data pointers along with keys, internal nodes contain keys only. There are no duplicate keys. Duplicate keys are present in this, all internal nodes are also present at leaves. Leaf nodes are not linked to each other. Leaf nodes are linked to each other. Sequential access of nodes is not possible. All</description>
-      <content:encoded><![CDATA[<table>
-<thead>
-<tr>
-<th>B-Tree</th>
-<th>B+Tree</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>All internal nodes and leaf nodes contain data pointers along with keys.</td>
-<td>Only leaf nodes contain data pointers along with keys, internal nodes contain keys only.</td>
-</tr>
-<tr>
-<td>There are no duplicate keys.</td>
-<td>Duplicate keys are present in this, all internal nodes are also present at leaves.</td>
-</tr>
-<tr>
-<td>Leaf nodes are not linked to each other.</td>
-<td>Leaf nodes are linked to each other.</td>
-</tr>
-<tr>
-<td>Sequential access of nodes is not possible.</td>
-<td>All nodes are present at leaves, so sequential access is possible just like a linked list.</td>
-</tr>
-<tr>
-<td>Searching for a key is slower.</td>
-<td>Searching is faster.</td>
-</tr>
-<tr>
-<td>For a particular number of entries, the height of the B-tree is larger.</td>
-<td>The height of the B+ tree is lesser than B-tree for the same number of entries.</td>
-</tr>
-</tbody>
-</table>
-<p>其实这几点区别都是根据 B-Tree 和 B+tree 的结构总结出来的。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/b-tree-structure.png"
-         alt="Figure 1: b-tree-structure"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>b-tree-structure</p>
-        </figcaption>
-</figure>
-
-<p>与上图中的 B+Tree 结构不同，B-Tree 每个节点中都存储者数据指针和 key，从上之下没有重复的 key，页节点之间也没有链接。</p>
-<ul>
-<li>B-Tree 中查找数据，需要遍历完第一个分支后回到根节点继续遍历第二个分支，以此类推查找。B+Tree 中除了页节点以外的节点只存储 key 值，一个 page 可以存储更多的 key，减少了树的高度，且 B+Tree 的叶节点间具有双向指针，呈双向链表的结构，查找起来更加迅速。</li>
-<li>B-Tree 呈树状，每个节点 key 都不重复，因此不存在顺序结构。B+tree 中所有数据都存在叶节点，按照 key 顺序排列，可以按照顺序访问。</li>
-</ul>
-]]></content:encoded>
     </item>
-    
   </channel>
 </rss>

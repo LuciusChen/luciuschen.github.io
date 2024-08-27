@@ -2,272 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Draft on Lucius | Braindump</title>
-    <link>https://sheerwill.xyz/tags/draft/</link>
+    <link>http://localhost:1313/tags/draft/</link>
     <description>Recent content in Draft on Lucius | Braindump</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.133.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Feb 2023 14:21:52 +0800</lastBuildDate><atom:link href="https://sheerwill.xyz/tags/draft/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Feb 2023 14:21:52 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/draft/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Lucius&#39;s Workflow</title>
-      <link>https://sheerwill.xyz/posts/main/20221204112118-lucius_s_workflow/</link>
+      <link>http://localhost:1313/posts/main/20221204112118-lucius_s_workflow/</link>
       <pubDate>Fri, 10 Feb 2023 14:21:52 +0800</pubDate>
-      
-      <guid>https://sheerwill.xyz/posts/main/20221204112118-lucius_s_workflow/</guid>
+      <guid>http://localhost:1313/posts/main/20221204112118-lucius_s_workflow/</guid>
       <description>Figure 1: workflow 如上图所示，融合了笔记和 GTD 管理。 GTD Capture To-Dos 分为的来源分为六种： Habit Track: 即对于重复事件的循环，有利于习惯的养成。 Cyclic Tasks: 需要循环的任务。 生日提醒 周报</description>
-      <content:encoded><![CDATA[<figure>
-    <img loading="lazy" src="/ox-hugo/workflow.png"
-         alt="Figure 1: workflow"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>workflow</p>
-        </figcaption>
-</figure>
-
-<p>如上图所示，融合了笔记和 GTD 管理。</p>
-<h2 id="gtd">GTD</h2>
-<h3 id="capture">Capture</h3>
-<p>To-Dos 分为的来源分为六种：</p>
-<ul>
-<li>Habit Track: 即对于重复事件的循环，有利于习惯的养成。</li>
-<li>Cyclic Tasks: 需要循环的任务。
-<ul>
-<li>生日提醒</li>
-<li>周报</li>
-<li>每日回顾</li>
-<li>稍后读</li>
-<li>etc.</li>
-</ul>
-</li>
-<li>Inbox: 用来收集各种 To-Dos，设置的快捷键为 <code>C-c c</code>​。每日回顾的时候分发到各自的分类，并行进行 Scheduled。
-<ul>
-<li>personal: 个人事宜</li>
-<li>someday: 存放一些不知道什么时候会做的 To-Dos，有时间回顾的时候再次分类。</li>
-<li>technical: 存放个人需要偿还的技术债</li>
-<li>work: 工作相关</li>
-</ul>
-</li>
-<li>books: 阅读的书籍，通过 ebib 的 <code>ebib-add-reading-list-item</code> 添加。</li>
-<li>Dynamic: 只要是 org 文件中的有 To-Dos，就会在保存文件时，自动给文件添加 <code>:dynamic:</code> 标签，纳入到 Agenda 文件中。</li>
-<li>note: 对一些地方的备注或者 To-Dos，后者和 Dynamic To-Dos 场景重复。</li>
-</ul>
-<h3 id="clarify">Clarify</h3>
-<p>对 Inbox 当中的 To-Dos 进行分发，并用关键字标记 To-Dos 的属性，比如 <code>PROJECT</code>, <code>DELEGRTED</code> 等。对于 <code>PROJECT</code> 这类还要继续分解。</p>
-<h3 id="organize">Organize</h3>
-<p>对明天需要做的或知道明确日期的 To-Dos 进行 Scheduled，对于 <code>DONE</code> 或 <code>CANCELLED</code> 的 To-Dos 会自动复制到今日的 Daily log 当中，这样呈现的结果，其实和 Logseq 中在 Journals 里面管理 To-Dos 是一致的。</p>
-<p>不过实现的过程，或者说内在逻辑是不一样的。在 Logseq 的 Journals 中管理 To-Dos 即便是通过查询汇聚展示 To-Dos 也没有 agenda 中这么灵活，另外前几天定下的需要后面完成的 To-Dos 有两种管理方式：1. 将 To-Dos 链接到需要做的某天，自动展示。这样的操作确实方便，但使得各种关联杂乱。2. 将 To-Dos 移动到对应需要做的某天。</p>
-<p>上面说的呈现结果一致，就是指的第二种，回顾起来也非常清晰。在 org-roam 配合 agenda 使用中，To-Dos 有了单独的收集仓库，整理分发。也可以通过自定义的函数在 agenda 和 org-roam 之间联动，比如对于 <code>DONE</code> 或 <code>CANCELLED</code> 的 To-Dos 会自动复制到今日的 Daily log 当中，比如 org-roam 中的 To-Dos 也会呈现在 agenda view 中，完成后也会自动复制到 Daily log 中。</p>
-<p>整体上来讲，内在逻辑 agenda 和 org-roam 配合起来更加清晰，灵活。</p>
-<h3 id="reflect">Reflect</h3>
-<p>回顾所有的 To-Dos，选取明天或者近期需要完成。对已完成或取消的 To-Dos 归档，是按照结构归档到同级别 <code>*.org</code> 文件的 <code>archive</code> 文件夹下的同名文件中。</p>
-<p>同时，要回顾一下 Notes 当中的对某处的笔记或设定的 To-Dos。</p>
-<h3 id="engage">Engage</h3>
-<p>按照重要，简单等因素顺序执行需要做的 To-Dos</p>
-<h2 id="note-taking">Note taking</h2>
-<p>输入源分为工作、书籍和文章（来自于 RSS、Newsletter、Twitter 等平台）。</p>
-<h3 id="book">Book</h3>
-<p>PDF 以及 Epub 格式的书籍或者论文通过 Ebib 管理 Bibtex，Ebib 的 <code>ebib-reading-list-file</code> 设置为 Agenda 中的 <code>books.org</code>​，这样就可以很方便新建任务到 <code>book.org</code> 在 Agenda View 中看到自己当前在阅读的书籍/论文，并查看进度。</p>
-<p>书籍/论文对应的笔记则是在 <code>references</code> 文件夹下，可以方便笔记中进行引用。</p>
-<p>书籍除了 ebib 管理的 bibtex 汇总可以查看，还通过 Dynamic Table 进行管理，这样可以更加直观的看到书籍的评价以及关联到读书笔记。（其实 ebib 那里也可以关联到笔记，毕竟笔记的创建就是利用 ebib 的命令，连接在 external note 这个字段中。）</p>
-<p>文件顶部这样设置即可，根据自己的情况进行修改适配，其中 <code>file</code> 是指数据源，这里就是将数据源放在与表格同一个文件。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="cs">#+title</span><span class="c">: Book reviews</span>
-</span></span><span class="line"><span class="cl"><span class="cs">#+COLUMNS</span><span class="c">: %25ITEM(Item) %10AUTHOR(Author) %10CATEGORY(Category) %15STATE(State) %15SCORE(Score) %10VERSION(Version) %15REMARK(Remark) %25NOTELINK(Notelink)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">#+BEGIN: </span><span class="cs">columnview</span><span class="c"> :hlines 1 :id &#34;file:~/Dropbox/org/references/Book-Reviews.org&#34; :skip-empty-rows t
-</span></span></span><span class="line"><span class="cl"><span class="c">#+END:</span>
-</span></span></code></pre></div><p>统计的 <code>COLUMNS</code> 来自与 Head 的 Properties，两者要一一对应，如此都设置好了之后在表格处（columnview 那里）按 <code>C-c C-c</code> 生成表格，即 Dynamic Table。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-org" data-lang="org"><span class="line"><span class="cl"><span class="c">:PROPERTIES:
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cs">:Author: 作者
-</span></span></span><span class="line"><span class="cl"><span class="cs">:Category: 分类
-</span></span></span><span class="line"><span class="cl"><span class="cs">:Score: 9.7
-</span></span></span><span class="line"><span class="cl"><span class="cs">:State: Reading
-</span></span></span><span class="line"><span class="cl"><span class="cs">:Version: 版本
-</span></span></span><span class="line"><span class="cl"><span class="cs">:Remark:
-</span></span></span><span class="line"><span class="cl"><span class="cs">:Notelink: [[id:xxx][笔记名称]]
-</span></span></span><span class="line"><span class="cl"><span class="cs"></span><span class="c">:END:</span>
-</span></span></code></pre></div><h3 id="daily-log">Daily log</h3>
-<p>每个 Daily log 文件头部都有 <code>#+ARCHIVE: journal.org::</code> 来控制归档的位置，每天回顾完当天的 log 就归档到 <code>journal.org</code> 文件中，如果后续这个文件太大，还可以按照年份来继续归档。</p>
-<p>而且在 <code>journal.org</code> 中通过 <code>C-c \</code> 可以查看所有的 tags，选择对应的 tag 就可以过滤出想要的内容，其他内容全部收缩。</p>
-<h3 id="articles-work">Articles/Work</h3>
-<p>文章的阅读笔记是放在 Daily log 当中的，在 What I read? 的标题下，打上对应的 tags。后期回顾的时候，或者积累一定数量的同类型、同话题文章，可能会 refile 到 org-roam 内进行总结，形成知识点。</p>
-<p>工作中的事情都是记在 Daily log 中，每条 log 有明确的时间。</p>
-<p>对于问题的解决，有详细的原因和解决方案，后续遇到同样的问题可以参考之前的思路；对于与他人沟通的内容，有详细的操作记录、数据记录以及邮件聊天等记录链接或截图，有背锅风险时可以轻松应对。</p>
-<p>同样的，工作中某个类型的知识点的笔记积累多了，会在 org-roam 中进行总结，形成知识点。</p>
-<h3 id="export">Export</h3>
-<p>输出是 org 的强项，Hugo 方便与人在线分享，PDF/Markdown 离线分享。</p>
-<h3 id="org-roam-ui">org-roam-ui</h3>
-<p>方便的查看笔记之间的关系，进行系统性回顾。</p>
-<h2 id="scanned-document-management">Scanned Document Management</h2>
-<p>扫描件都是通过 <code>org-attach</code> 包辅助管理，主要就是将扫描件的主要内容手工录入，便于后期文件搜索，源文件作为附件用 <code>org-attach</code> 管理，存放在文本同目录下的 <code>data</code> 文件夹下，按照 <code>org-attach</code> 生成的 ID 存放。</p>
-<p>Daily Log 当中一些很长的文件、执行脚本、代码等也可以通过相同的方式进行管理，减少 <code>Journal.org</code> 的体积，减少分割次数。</p>
-]]></content:encoded>
     </item>
-    
     <item>
       <title>Excalidraw</title>
-      <link>https://sheerwill.xyz/posts/main/20221208143127-excalidraw/</link>
+      <link>http://localhost:1313/posts/main/20221208143127-excalidraw/</link>
       <pubDate>Fri, 10 Feb 2023 14:19:40 +0800</pubDate>
-      
-      <guid>https://sheerwill.xyz/posts/main/20221208143127-excalidraw/</guid>
+      <guid>http://localhost:1313/posts/main/20221208143127-excalidraw/</guid>
       <description>在 Obsidian 中可以通过 command palette 中搜索 Insert LaTeX formula 就可以弹出弹框输入 \(\textsc{LaTeX}\) 表达式了。其中的 \color{} 可以指定生成文本的颜色。</description>
-      <content:encoded><![CDATA[<p>在 Obsidian 中可以通过 <code>command palette</code> 中搜索 <code>Insert LaTeX formula</code> 就可以弹出弹框输入 \(\textsc{LaTeX}\) 表达式了。其中的 <code>\color{}</code> 可以指定生成文本的颜色。</p>
-]]></content:encoded>
     </item>
-    
     <item>
       <title>Replace text in Calibre</title>
-      <link>https://sheerwill.xyz/posts/main/20221123120104-replace_text_in_calibre/</link>
+      <link>http://localhost:1313/posts/main/20221123120104-replace_text_in_calibre/</link>
       <pubDate>Sun, 04 Dec 2022 11:09:01 +0800</pubDate>
-      
-      <guid>https://sheerwill.xyz/posts/main/20221123120104-replace_text_in_calibre/</guid>
+      <guid>http://localhost:1313/posts/main/20221123120104-replace_text_in_calibre/</guid>
       <description>Readwise Reader 中无法识别中文批注版本 Epub 中的行内批注，为了更好的在 Readwise Reader 中阅读，以及当初在 Calibre 中阅读时批注，不好将批注内容很好的分地复制出来，所以需要将批注</description>
-      <content:encoded><![CDATA[<p>Readwise Reader 中无法识别中文批注版本 Epub 中的行内批注，为了更好的在 Readwise Reader 中阅读，以及当初在 Calibre 中阅读时批注，不好将批注内容很好的分地复制出来，所以需要将批注的格式进行修改。</p>
-<p>通过正则匹配替换内容，保留批注正文。</p>
-<p><a id="table--《金瓶梅》批注替换"></a></p>
-<table>
-<thead>
-<tr>
-<th>Find Regex</th>
-<th>Replace Regex</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>&lt;span class=&quot;xiu&quot;&gt;&lt;span class=&quot;ord&quot;&gt;绣&lt;span class=&quot;ord0&quot;&gt;旁&lt;\/span&gt;&lt;\/span&gt;(.*?)&lt;\/span&gt;</code></td>
-<td><code>「绣旁：\1」</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;xiu&quot;&gt;&lt;span class=&quot;ord&quot;&gt;绣&lt;span class=&quot;ord0&quot;&gt;眉&lt;\/span&gt;&lt;\/span&gt;(.*?)&lt;\/span&gt;</code></td>
-<td><code>「绣眉：\1」</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;xiu&quot;&gt;&lt;span class=&quot;ord&quot;&gt;绣&lt;span class=&quot;ord0&quot;&gt;夹&lt;\/span&gt;&lt;\/span&gt;(.*?)&lt;\/span&gt;</code></td>
-<td><code>「绣夹：\1」</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;jia&quot;&gt;&lt;span class=&quot;ord&quot;&gt;张&lt;span class=&quot;ord0&quot;&gt;旁&lt;\/span&gt;&lt;\/span&gt;(.*?)&lt;\/span&gt;</code></td>
-<td><code>「张旁：\1」</code></td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;jia&quot;&gt;&lt;span class=&quot;ord&quot;&gt;张&lt;span class=&quot;ord0&quot;&gt;眉&lt;\/span&gt;&lt;\/span&gt;(.*?)&lt;\/span&gt;</code></td>
-<td><code>「张眉：\1」</code></td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;jia&quot;&gt;&lt;span class=&quot;ord&quot;&gt;张&lt;span class=&quot;ord0&quot;&gt;夹&lt;\/span&gt;&lt;\/span&gt;(.*?)&lt;\/span&gt;</code></td>
-<td><code>「张夹：\1」</code></td>
-</tr>
-<tr>
-<td><code>&lt;div class=&quot;quote&quot;&gt;\s(&lt;p&gt;)&lt;span class=&quot;ord&quot;&gt;张&lt;span class=&quot;ord0&quot;&gt;回&lt;\/span&gt;&lt;\/span&gt;</code></td>
-<td><code>\1「张回：</code></td>
-</tr>
-<tr>
-<td><code>(&lt;\/p&gt;)\s&lt;\/div&gt;(\s&lt;p&gt;词曰)</code></td>
-<td><code>」\1\2</code></td>
-</tr>
-<tr>
-<td><code>(&lt;\/p&gt;)\s&lt;\/div&gt;(\s&lt;p&gt;诗曰)</code></td>
-<td><code>」\1\2</code></td>
-</tr>
-<tr>
-<td><code>&lt;div class=&quot;wenlong&quot;&gt;\s(&lt;p&gt;)&lt;span class=&quot;ord&quot;&gt;文&lt;span class=&quot;ord0&quot;&gt;回&lt;\/span&gt;&lt;\/span&gt;</code></td>
-<td><code>\1「文回：</code></td>
-</tr>
-<tr>
-<td><code>(&lt;\/p&gt;\s)&lt;\/div&gt;\s(&lt;\/body&gt;)</code></td>
-<td><code>」\1\2</code></td>
-</tr>
-</tbody>
-</table>
-<p>这里主要用到的就是 <code>()</code> 内的内容可以用 <code>\</code> 加上数字来表示，进行保留。</p>
-<p><a id="table--《红楼梦》批注替换"></a></p>
-<table>
-<thead>
-<tr>
-<th>Find Regex</th>
-<th>Replace Regex</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>&lt;span class=&quot;kt&quot;&gt;&lt;img alt=&quot;庚辰本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00844.gif&quot;/&gt;(.*?)&lt;/span&gt;</code></td>
-<td><code>「庚：\1」</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;kt&quot;&gt;&lt;img alt=&quot;甲戌本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00842.gif&quot;/&gt;(.*?)&lt;/span&gt;</code></td>
-<td><code>「甲：\1」</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;kt&quot;&gt;&lt;img alt=&quot;戚序本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00845.gif&quot;/&gt;(.*?)&lt;/span&gt;</code></td>
-<td><code>「戚：\1」</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;kt&quot;&gt;&lt;img alt=&quot;己卯本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00843.gif&quot;/&gt;(.*?)&lt;/span&gt;</code></td>
-<td><code>「己：\1」</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;kt&quot;&gt;&lt;span class=&quot;red&quot;&gt;&lt;img alt=&quot;庚辰本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00844.gif&quot;/&gt;(.*?)&lt;/span&gt;&lt;/span&gt;</code></td>
-<td><code>「庚：\1」</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;img alt=&quot;甲戌本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00842.gif&quot;/&gt;&lt;img alt=&quot;侧批&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00851.gif&quot;/&gt;((?!img).*?)(&lt;/span&gt;)</code></td>
-<td><code>「甲侧：\1」\2</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;img alt=&quot;庚辰本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00844.gif&quot;/&gt;&lt;img alt=&quot;侧批&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00851.gif&quot;/&gt;((?!img).*?)(&lt;/span&gt;)</code></td>
-<td><code>「庚侧：\1」\2</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;img alt=&quot;甲戌本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00842.gif&quot;/&gt;&lt;img alt=&quot;眉批&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00850.gif&quot;/&gt;((?!img).*?)(&lt;/span&gt;)</code></td>
-<td><code>「甲眉：\1」\2</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;img alt=&quot;甲戌本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00842.gif&quot;/&gt;&lt;img alt=&quot;夹批&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00852.gif&quot;/&gt;((?!img).*?)(&lt;/span&gt;)</code></td>
-<td><code>「甲夹：\1」\2</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;img alt=&quot;庚辰本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00844.gif&quot;/&gt;&lt;img alt=&quot;眉批&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00850.gif&quot;/&gt;((?!img).*?)(&lt;/span&gt;)</code></td>
-<td><code>「庚眉：\1」\2</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;img alt=&quot;蒙府本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00846.gif&quot;/&gt;&lt;img alt=&quot;侧批&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00851.gif&quot;/&gt;((?!img).*?)(&lt;/span&gt;)</code></td>
-<td><code>「蒙侧：\1」\2</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;img alt=&quot;庚辰本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00844.gif&quot;/&gt;&lt;img alt=&quot;夹批&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00852.gif&quot;/&gt;((?!img).*?)(&lt;/span&gt;)</code></td>
-<td><code>「庚夹：\1」\2</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;img alt=&quot;戚序本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00845.gif&quot;/&gt;&lt;img alt=&quot;夹批&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00852.gif&quot;/&gt;((?!img).*?)(&lt;/span&gt;)</code></td>
-<td><code>「戚夹：\1」\2</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;small kt red&quot;&gt;((?!span).*?)&lt;/span&gt;</code></td>
-<td><code>\1</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;x-small&quot;&gt;((?!span).*?)&lt;/span&gt;</code></td>
-<td><code>\1</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;small kt&quot;&gt;((?!span).*?)&lt;/span&gt;</code></td>
-<td><code>\1</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;span class=&quot;red&quot;&gt;((?!span).*?)&lt;/span&gt;</code></td>
-<td><code>\1</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;img alt=&quot;戚序本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00845.gif&quot;/&gt;&lt;img alt=&quot;夹批&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00852.gif&quot;/&gt;((?!img).*?)(&lt;/p&gt;)</code></td>
-<td><code>「戚夹：\1」\2</code>​</td>
-</tr>
-<tr>
-<td><code>&lt;img alt=&quot;甲辰本&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00849.gif&quot;/&gt;&lt;img alt=&quot;夹批&quot; class=&quot;font_patch&quot; src=&quot;../Images/image00852.gif&quot;/&gt;((?!img).*?)(&lt;/p&gt;)</code></td>
-<td><code>「甲夹：\1」\2</code>​</td>
-</tr>
-</tbody>
-</table>
-<p>这里的 <code>(?!span)</code> 是防止出现 <code>&lt;span&gt;&lt;/span&gt;</code> 相互嵌套，导致匹配的内容并不是一个成对 HTML 标签的情况，也就是不允许 <code>&lt;span&gt;&lt;/span&gt;</code> 中存在额外的 <code>&lt;span&gt;</code> 标签。</p>
-<p>红楼梦批注的 HTML 结构很乱，余者手动校对。</p>
-<p>正则参考：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions">正则表达式 - JavaScript | MDN</a></p>
-]]></content:encoded>
     </item>
-    
   </channel>
 </rss>

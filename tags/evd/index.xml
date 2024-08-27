@@ -2,88 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>EVD on Lucius | Braindump</title>
-    <link>https://sheerwill.xyz/tags/evd/</link>
+    <link>http://localhost:1313/tags/evd/</link>
     <description>Recent content in EVD on Lucius | Braindump</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.133.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Feb 2023 14:27:14 +0800</lastBuildDate><atom:link href="https://sheerwill.xyz/tags/evd/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Feb 2023 14:27:14 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/evd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Heap Table</title>
-      <link>https://sheerwill.xyz/posts/main/evd-heap_table/</link>
+      <link>http://localhost:1313/posts/main/evd-heap_table/</link>
       <pubDate>Fri, 10 Feb 2023 14:27:14 +0800</pubDate>
-      
-      <guid>https://sheerwill.xyz/posts/main/evd-heap_table/</guid>
+      <guid>http://localhost:1313/posts/main/evd-heap_table/</guid>
       <description>Discourse context A heap is a table without a clustered index. One or more nonclustered indexes can be created on tables stored as a heap. Data is stored in the heap without specifying an order. Usually data is initially stored in the order in which is the rows are inserted into the table, but the Database Engine can move data around in the heap to store the rows efficiently; so</description>
-      <content:encoded><![CDATA[<h2 id="discourse-context">Discourse context</h2>
-<blockquote>
-<p>A heap is a table without a clustered index. One or more nonclustered indexes can be created on tables stored as a heap. Data is stored in the heap without specifying an order. Usually data is initially stored in the order in which is the rows are inserted into the table, but the Database Engine can move data around in the heap to store the rows efficiently; so the data order cannot be predicted. To guarantee the order of rows returned from a heap, you must use the ORDER BY clause. To specify a permanent logical order for storing the rows, create a clustered index on the table, so that the table is not a heap.</p>
-</blockquote>
-<p>堆表就是含有一列或者多列无聚簇索引的表，其中的数据存储无序。通常数据是按照初始化的顺序存储，但数据库引擎会为了更高效的数据插入，将原有数据移动到别处来释放空间给新的数据。因此，数据的顺序是不确定的，为了保证数据的顺序，可以在查询的时候使用 <code>ORDER BY</code> 关键字进行排序。要保证数据物理存储的顺序，就需要建立聚簇索引，这个时候就不是堆表了。</p>
-<blockquote>
-<p>When a table is stored as a heap, individual rows are identified by reference to an 8-byte row identifier (RID) consisting of the file number, data page number, and slot on the page (FileID:PageID:SlotID). The row ID is a small and efficient structure.</p>
-</blockquote>
-<p>ROWID 是文件编号、数据页编号以及页面上的卡槽组成。(FileID:PageID:SlotID)</p>
-<h2 id="references">references</h2>
-<ul>
-<li><a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/heaps-tables-without-clustered-indexes?view=sql-server-ver16">Heaps (Tables without Clustered Indexes) - SQL Server | Microsoft Learn</a></li>
-</ul>
-]]></content:encoded>
     </item>
-    
     <item>
       <title>Clustered Indexes / Index Organized Tables (IOT)</title>
-      <link>https://sheerwill.xyz/posts/main/evd-clustered_indexes_index_organized_tables_iot/</link>
+      <link>http://localhost:1313/posts/main/evd-clustered_indexes_index_organized_tables_iot/</link>
       <pubDate>Fri, 10 Feb 2023 14:27:06 +0800</pubDate>
-      
-      <guid>https://sheerwill.xyz/posts/main/evd-clustered_indexes_index_organized_tables_iot/</guid>
+      <guid>http://localhost:1313/posts/main/evd-clustered_indexes_index_organized_tables_iot/</guid>
       <description>Some databases can indeed use an index as primary table store. The Oracle database calls this concept index-organized tables (IOT), other databases use the term clustered index. In this section, both terms are used to either put the emphasis on the table or the index characteristics as needed. An index-organized table is thus a B-tree index without a heap table. This results in two benefits: (1) it saves the space</description>
-      <content:encoded><![CDATA[<blockquote>
-<p>Some databases can indeed use an index as primary table store. The Oracle database calls this concept index-organized tables (IOT), other databases use the term clustered index. In this section, both terms are used to either put the emphasis on the table or the index characteristics as needed.</p>
-<p>An index-organized table is thus a B-tree index without a heap table. This results in two benefits: (1) it saves the space for the heap structure; (2) every access on a clustered index is automatically an index-only scan.</p>
-</blockquote>
-<p>索引组织表以主键顺序组织物理数据存储，索引结构中的每个叶节点（Leaf Nodes）都存储着完整的行数据。对应的主键被称为聚簇索引（Clustered Indexes），除此之外的索引称为二级索引（Secondary Indexes）。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/b-tree-structure.png"
-         alt="Figure 1: b-tree-structure"/> <figcaption>
-            <p><span class="figure-number">Figure 1: </span>b-tree-structure</p>
-        </figcaption>
-</figure>
-
-<figure>
-    <img loading="lazy" src="/ox-hugo/index-based-access-on-a-heap-table.png"
-         alt="Figure 2: index-based-access-on-a-heap-table"/> <figcaption>
-            <p><span class="figure-number">Figure 2: </span>index-based-access-on-a-heap-table</p>
-        </figcaption>
-</figure>
-
-<p>B-Tree 的上级 leaf nodes 存储的是下级 leaf nodes 中列值的最大值，可以从图中看出最底层的 leaf nodes 存储的是 ROWID，可以据此查找到堆表中的位置。</p>
-<figure>
-    <img loading="lazy" src="/ox-hugo/secondary-index-on-an-IOT.png"
-         alt="Figure 3: secondary-index-on-an-IOT"/> <figcaption>
-            <p><span class="figure-number">Figure 3: </span>secondary-index-on-an-IOT</p>
-        </figcaption>
-</figure>
-
-<h2 id="聚簇索引">聚簇索引</h2>
-<ul>
-<li>在 MySQL 中通常主键即为「聚簇索引」；若没有定义主键，则第一个 <code>NOT NULL UNIQUE</code> 列是聚集索引；若没有 <code>NOT NULL UNIQUE</code> 列，InnoDB 会创建一个隐藏的 row-id 作为聚集索引。</li>
-<li>聚簇索引是按照索引顺序对物理记录排序，存储完整的行记录。</li>
-</ul>
-<h2 id="二级索引">二级索引</h2>
-<ul>
-<li>除主键外的其他列上新建的索引都是二级索引。</li>
-<li>二级索引的排序与物理记录的排序不一致，存储的是该列本身排序后的值和主键。</li>
-</ul>
-<h2 id="索引组织表的缺点">索引组织表的缺点</h2>
-<p>图 <code>secondary-index-on-an-IOT</code> 就是索引组织表中，二级索引获取数据的流程。再次根据主键在索引组织表中遍历查找就叫做「回表」。</p>
-<h2 id="索引组织表的好处">索引组织表的好处</h2>
-<ul>
-<li>可以节省堆表占用的空间</li>
-<li>访问聚簇索引可以直接获取数据（即「覆盖索引」）</li>
-<li>二级索引需要回表，即需要根据二级索引的叶节点内的主键，再对主键形成的聚簇索引进行遍历，查找到具体的记录。</li>
-</ul>
-]]></content:encoded>
     </item>
-    
   </channel>
 </rss>
